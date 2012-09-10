@@ -10,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{07599B
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms", "ChameleonForms\ChameleonForms.csproj", "{854754FE-F40A-47EB-B32D-646E8F35C65F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Tests", "ChameleonForms.Tests\ChameleonForms.Tests.csproj", "{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,14 @@ Global
 		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
