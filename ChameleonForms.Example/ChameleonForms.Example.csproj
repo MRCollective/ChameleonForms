@@ -98,6 +98,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Forms\ChameleonForm.cs" />
     <Compile Include="Forms\HtmlHelperExtensions.cs" />
+    <Compile Include="Forms\HtmlHelpers.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HtmlHelpers.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -128,6 +133,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ExampleForms\Form1.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Forms\HtmlHelpers.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>HtmlHelpers.generated.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
