@@ -97,12 +97,14 @@
     <Compile Include="Controllers\ExampleFormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Forms\ChameleonForm.cs" />
+    <Compile Include="Forms\Components\Section.cs" />
     <Compile Include="Forms\HtmlHelperExtensions.cs" />
     <Compile Include="Forms\HtmlHelpers.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HtmlHelpers.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\IFormComponent.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
