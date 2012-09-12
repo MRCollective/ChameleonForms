@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Example.Forms.Templates;
 
@@ -14,12 +15,17 @@ namespace ChameleonForms.Example.Forms
         {
             HtmlHelper = helper;
             Template = new TTemplate();
-            HtmlHelper.ViewContext.Writer.Write(Template.BeginForm(action, method, enctype));
+            Write(Template.BeginForm(action, method, enctype));
+        }
+
+        public void Write(IHtmlString htmlString)
+        {
+            HtmlHelper.ViewContext.Writer.Write(htmlString);
         }
 
         public void Dispose()
         {
-            HtmlHelper.ViewContext.Writer.Write(Template.EndForm());
+            Write(Template.EndForm());
         }
     }
 

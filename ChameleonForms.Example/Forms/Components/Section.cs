@@ -10,12 +10,12 @@ namespace ChameleonForms.Example.Forms.Components
         public Section(ChameleonForm<TModel, TTemplate> form, string title)
         {
             Form = form;
-            Form.HtmlHelper.ViewContext.Writer.Write(Form.Template.BeginSection(title));
+            Form.Write(Form.Template.BeginSection(title));
         }
 
         public void Dispose()
         {
-            Form.HtmlHelper.ViewContext.Writer.Write(Form.Template.EndSection());
+            Form.Write(Form.Template.EndSection());
         }
     }
 
