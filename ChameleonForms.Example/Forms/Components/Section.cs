@@ -17,8 +17,6 @@ namespace ChameleonForms.Example.Forms.Components
         {
             Form.HtmlHelper.ViewContext.Writer.Write(Form.Template.EndSection());
         }
-
-        
     }
 
     public static class SectionExtensions

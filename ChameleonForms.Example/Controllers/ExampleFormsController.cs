@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace ChameleonForms.Example.Controllers
 {
@@ -6,7 +7,13 @@ namespace ChameleonForms.Example.Controllers
     {
         public ActionResult Form1()
         {
-            return View();
+            return View(new ViewModelExample());
         }
+    }
+
+    public class ViewModelExample
+    {
+        [Required]
+        public string RequiredStringField { get; set; }
     }
 }

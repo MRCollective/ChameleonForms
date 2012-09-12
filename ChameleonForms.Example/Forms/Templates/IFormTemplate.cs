@@ -9,5 +9,6 @@ namespace ChameleonForms.Example.Forms.Templates
         IHtmlString EndForm();
         IHtmlString BeginSection(string title);
         IHtmlString EndSection();
+        IHtmlString Field(IHtmlString elementHtml, IHtmlString labelHtml);
     }
 }

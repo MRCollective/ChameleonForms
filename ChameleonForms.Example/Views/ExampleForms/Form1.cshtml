@@ -1,7 +1,7 @@
 ﻿@using System.Net.Http
 @using ChameleonForms.Example.Forms
 @using ChameleonForms.Example.Forms.Components
-@model dynamic
+@model ChameleonForms.Example.Controllers.ViewModelExample
 
 @{
     ViewBag.Title = "Example Form 1";
@@ -9,11 +9,11 @@
 
 <h1>Example Form 1</h1>
 
-@using (var form = Html.BeginChameleonForm(Url.Action("Index", "Home"), HttpMethod.Post))
+@using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), HttpMethod.Post))
 {
-    using (var section = form.BeginSection("My Section!"))
+    using (var s = f.BeginSection("My Section!"))
     {
-        <p>Hello!</p>
+        @s.FieldFor(m => m.RequiredStringField)
     }
 }
 

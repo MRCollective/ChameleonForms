@@ -9,11 +9,20 @@
 @:    </form>
 }
 
+@* The @:'s are to stop compilation errors with the Razor engine due to unclosed HTML tags *@
 @helper BeginSection(string title) {
 @:    <fieldset>
-        <legend>@title</legend>
+@:        <legend>@title</legend>
+@:        <dl>
 }
 
+@* The @:'s are to stop compilation errors with the Razor engine due to unopened HTML tags *@
 @helper EndSection() {
+@:        </dl>
 @:    </fieldset>
+}
+
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml) {
+        <dt>@labelHtml</dt>
+        <dd>@elementHtml</dd>
 }
