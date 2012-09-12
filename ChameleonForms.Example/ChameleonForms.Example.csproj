@@ -42,6 +42,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Humanizer">
+      <HintPath>..\packages\Humanizer.0.2\lib\NET40\Humanizer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -105,6 +108,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HtmlHelpers.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\HumanizedLabels.cs" />
     <Compile Include="Forms\IFormComponent.cs" />
     <Compile Include="Forms\Templates\DefaultFormTemplate.cs" />
     <Compile Include="Forms\Templates\IFormTemplate.cs" />
