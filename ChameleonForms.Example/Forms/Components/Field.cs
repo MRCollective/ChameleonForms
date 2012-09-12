@@ -3,15 +3,16 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc.Html;
 using ChameleonForms.Example.Forms.Templates;
+using ChameleonForms.Templates;
 
 namespace ChameleonForms.Example.Forms.Components
 {
     public class Field<TModel, TTemplate, T> : IFormComponent<TModel, TTemplate>, IHtmlString where TTemplate : IFormTemplate, new()
     {
         private readonly Expression<Func<TModel, T>> _property;
-        public ChameleonForm<TModel, TTemplate> Form { get; private set; }
+        public Form<TModel, TTemplate> Form { get; private set; }
 
-        public Field(ChameleonForm<TModel, TTemplate> form, Expression<Func<TModel, T>> property)
+        public Field(Form<TModel, TTemplate> form, Expression<Func<TModel, T>> property)
         {
             _property = property;
             Form = form;

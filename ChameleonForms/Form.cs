@@ -2,16 +2,16 @@
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
-using ChameleonForms.Example.Forms.Templates;
+using ChameleonForms.Templates;
 
-namespace ChameleonForms.Example.Forms
+namespace ChameleonForms
 {
-    public class ChameleonForm<TModel, TTemplate> : IDisposable where TTemplate : IFormTemplate, new()
+    public class Form<TModel, TTemplate> : IDisposable where TTemplate : IFormTemplate, new()
     {
         public HtmlHelper<TModel> HtmlHelper { get; private set; }
         public TTemplate Template { get; private set; }
 
-        public ChameleonForm(HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype)
+        public Form(HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype)
         {
             HtmlHelper = helper;
             Template = new TTemplate();
@@ -31,9 +31,9 @@ namespace ChameleonForms.Example.Forms
 
     public static class ChameleonFormExtensions
     {
-        public static ChameleonForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype = null)
+        public static Form<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype = null)
         {
-            return new ChameleonForm<TModel, DefaultFormTemplate>(helper, action, method, enctype);
+            return new Form<TModel, DefaultFormTemplate>(helper, action, method, enctype);
         }
     }
 }

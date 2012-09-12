@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Web;
 
-namespace ChameleonForms.Example.Forms.Templates
+namespace ChameleonForms.Templates
 {
     public class DefaultFormTemplate : IFormTemplate
     {

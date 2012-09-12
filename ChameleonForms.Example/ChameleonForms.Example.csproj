@@ -99,19 +99,11 @@
   <ItemGroup>
     <Compile Include="Controllers\ExampleFormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Forms\ChameleonForm.cs" />
     <Compile Include="Forms\Components\Field.cs" />
     <Compile Include="Forms\Components\RandomComponent.cs" />
     <Compile Include="Forms\Components\Section.cs" />
-    <Compile Include="Forms\HtmlHelpers.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HtmlHelpers.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\HumanizedLabels.cs" />
     <Compile Include="Forms\IFormComponent.cs" />
-    <Compile Include="Forms\Templates\DefaultFormTemplate.cs" />
-    <Compile Include="Forms\Templates\IFormTemplate.cs" />
     <Compile Include="Forms\Templates\RandomFormTemplate.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -153,10 +145,10 @@
     <Content Include="Views\ExampleForms\Form1.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Forms\HtmlHelpers.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>HtmlHelpers.generated.cs</LastGenOutput>
-    </Content>
+    <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj">
+      <Project>{854754fe-f40a-47eb-b32d-646e8f35c65f}</Project>
+      <Name>ChameleonForms</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

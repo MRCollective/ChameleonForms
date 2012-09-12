@@ -10,9 +10,9 @@ namespace ChameleonForms.Example.Forms.Components
     /// </summary>
     public class RandomComponent<TModel> : IFormComponent<TModel, RandomFormTemplate>
     {
-        public ChameleonForm<TModel, RandomFormTemplate> Form { get; private set; }
+        public Form<TModel, RandomFormTemplate> Form { get; private set; }
 
-        public RandomComponent(ChameleonForm<TModel, RandomFormTemplate> form)
+        public RandomComponent(Form<TModel, RandomFormTemplate> form)
         {
             Form = form;
         }
@@ -28,9 +28,9 @@ namespace ChameleonForms.Example.Forms.Components
     /// </summary>
     public class RandomComponent2<TModel> : IFormComponent<TModel, RandomFormTemplate>, IHtmlString
     {
-        public ChameleonForm<TModel, RandomFormTemplate> Form { get; private set; }
+        public Form<TModel, RandomFormTemplate> Form { get; private set; }
 
-        public RandomComponent2(ChameleonForm<TModel, RandomFormTemplate> form)
+        public RandomComponent2(Form<TModel, RandomFormTemplate> form)
         {
             Form = form;
         }
@@ -43,17 +43,17 @@ namespace ChameleonForms.Example.Forms.Components
 
     public static class RandomComponentExtensions
     {
-        public static ChameleonForm<TModel, RandomFormTemplate> BeginRandomForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype = null)
+        public static Form<TModel, RandomFormTemplate> BeginRandomForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype = null)
         {
-            return new ChameleonForm<TModel, RandomFormTemplate>(helper, action, method, enctype);
+            return new Form<TModel, RandomFormTemplate>(helper, action, method, enctype);
         }
 
-        public static RandomComponent<TModel> RandomComponent<TModel>(this ChameleonForm<TModel, RandomFormTemplate>  form)
+        public static RandomComponent<TModel> RandomComponent<TModel>(this Form<TModel, RandomFormTemplate>  form)
         {
             return new RandomComponent<TModel>(form);
         }
 
-        public static RandomComponent2<TModel> RandomComponent2<TModel>(this ChameleonForm<TModel, RandomFormTemplate> form)
+        public static RandomComponent2<TModel> RandomComponent2<TModel>(this Form<TModel, RandomFormTemplate> form)
         {
             return new RandomComponent2<TModel>(form);
         }
