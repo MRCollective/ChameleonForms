@@ -25,9 +25,9 @@ namespace ChameleonForms.Example.Forms.Templates
             return HtmlHelpers.EndSection();
         }
 
-        public IHtmlString Field(IHtmlString elementHtml, IHtmlString labelHtml)
+        public IHtmlString Field(IHtmlString elementHtml, IHtmlString labelHtml, IHtmlString validationHtml)
         {
-            return HtmlHelpers.Field(elementHtml, labelHtml);
+            return HtmlHelpers.Field(elementHtml, labelHtml, validationHtml);
         }
     }
 }

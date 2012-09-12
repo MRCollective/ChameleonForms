@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web;
-using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using ChameleonForms.Example.Forms.Templates;
 
@@ -19,20 +18,27 @@ namespace ChameleonForms.Example.Forms.Components
         }
 
         // todo: Abstract this away so the template can be used in place of HtmlHelper?
-        public IHtmlString GetFieldHtml()
+        //  or possibly instead I could just let someone extend this class and provide a different extension method?
+        // Let's make them virtual for now :)
+        public virtual IHtmlString GetFieldHtml()
         {
             //var metadata = ModelMetadata.FromLambdaExpression(_property, Form.HtmlHelper.ViewData);
             return Form.HtmlHelper.TextBoxFor(_property);
         }
 
-        public IHtmlString GetLabelHtml()
+        public virtual IHtmlString GetLabelHtml()
         {
             return Form.HtmlHelper.LabelFor(_property);
         }
 
+        public virtual IHtmlString GetValidationHtml()
+        {
+            return Form.HtmlHelper.ValidationMessageFor(_property);
+        }
+
         public string ToHtmlString()
         {
-            return Form.Template.Field(GetLabelHtml(), GetFieldHtml()).ToHtmlString();
+            return Form.Template.Field(GetLabelHtml(), GetFieldHtml(), GetValidationHtml()).ToHtmlString();
         }
     }
 

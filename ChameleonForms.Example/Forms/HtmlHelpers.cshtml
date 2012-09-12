@@ -22,7 +22,7 @@
 @:    </fieldset>
 }
 
-@helper Field(IHtmlString labelHtml, IHtmlString elementHtml) {
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml) {
         <dt>@labelHtml</dt>
-        <dd>@elementHtml</dd>
+        <dd>@elementHtml @validationHtml</dd>
 }
