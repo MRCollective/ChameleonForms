@@ -16,6 +16,12 @@ namespace ChameleonForms.Example.Forms
     using System.IO;
     using System.Linq;
     using System.Net;
+    
+    #line 1 "..\..\Forms\HtmlHelpers.cshtml"
+    using System.Net.Http;
+    
+    #line default
+    #line hidden
     using System.Text;
     using System.Web;
     using System.Web.Helpers;
@@ -31,13 +37,52 @@ namespace ChameleonForms.Example.Forms
     public static class HtmlHelpers
     {
 
-public static System.Web.WebPages.HelperResult StartForm() {
+public static System.Web.WebPages.HelperResult BeginForm(string action, HttpMethod method, string enctype) {
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 
 
-#line 3 "..\..\Forms\HtmlHelpers.cshtml"
-                     
+#line 4 "..\..\Forms\HtmlHelpers.cshtml"
+                                                                     
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <form action=\"");
+
+
+
+#line 5 "..\..\Forms\HtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, action);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" method=\"");
+
+
+
+#line 5 "..\..\Forms\HtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, method.Method.ToLower());
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" enctype=\"");
+
+
+
+#line 5 "..\..\Forms\HtmlHelpers.cshtml"
+                             WebViewPage.WriteTo(@__razor_helper_writer, enctype);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">\r\n");
+
+
+
+#line 6 "..\..\Forms\HtmlHelpers.cshtml"
 
 #line default
 #line hidden
@@ -52,8 +97,81 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 
 
-#line 6 "..\..\Forms\HtmlHelpers.cshtml"
+#line 8 "..\..\Forms\HtmlHelpers.cshtml"
                    
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    </form>\r\n");
+
+
+
+#line 10 "..\..\Forms\HtmlHelpers.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult BeginSection(string title) {
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 12 "..\..\Forms\HtmlHelpers.cshtml"
+                                    
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <fieldset>\r\n");
+
+
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <legend>");
+
+
+
+#line 14 "..\..\Forms\HtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, title);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</legend>\r\n");
+
+
+
+#line 15 "..\..\Forms\HtmlHelpers.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult EndSection() {
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 17 "..\..\Forms\HtmlHelpers.cshtml"
+                      
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    </fieldset>\r\n");
+
+
+
+#line 19 "..\..\Forms\HtmlHelpers.cshtml"
 
 #line default
 #line hidden

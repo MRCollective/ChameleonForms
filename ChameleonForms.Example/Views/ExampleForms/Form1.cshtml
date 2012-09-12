@@ -1,4 +1,5 @@
-﻿@using ChameleonForms.Example.Forms
+﻿@using System.Net.Http
+@using ChameleonForms.Example.Forms
 @using ChameleonForms.Example.Forms.Components
 @model dynamic
 
@@ -8,10 +9,16 @@
 
 <h1>Example Form 1</h1>
 
-@using (var form = Html.BeginChameleonForm())
+@using (var form = Html.BeginChameleonForm(Url.Action("Index", "Home"), HttpMethod.Post))
 {
-    using (var section = form.BeginSection())
+    using (var section = form.BeginSection("My Section!"))
     {
-        
+        <p>Hello!</p>
     }
+}
+
+@using (var form = Html.BeginRandomForm("/random", HttpMethod.Get, "multipart/form-data"))
+{
+    @form.RandomComponent()
+    @form.RandomComponent2()
 }

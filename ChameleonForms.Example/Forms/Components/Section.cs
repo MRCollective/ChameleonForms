@@ -1,31 +1,31 @@
 ﻿using System;
-using System.Web.Mvc;
+using ChameleonForms.Example.Forms.Templates;
 
 namespace ChameleonForms.Example.Forms.Components
 {
-    public class Section<TModel> : IDisposable, IFormComponent<TModel>
+    public class Section<TModel, TTemplate> : IDisposable, IFormComponent<TModel, TTemplate> where TTemplate : IFormTemplate, new()
     {
-        public HtmlHelper<TModel> HtmlHelper { get; private set; }
+        public ChameleonForm<TModel, TTemplate> Form { get; private set; }
 
-        public Section(HtmlHelper<TModel> helper)
+        public Section(ChameleonForm<TModel, TTemplate> form, string title)
         {
-            HtmlHelper = helper;
-            // todo
-            HtmlHelper.ViewContext.Writer.Write("TEST");
+            Form = form;
+            Form.HtmlHelper.ViewContext.Writer.Write(Form.Template.BeginSection(title));
         }
 
         public void Dispose()
         {
-            // todo
-            HtmlHelper.ViewContext.Writer.Write("TEST2");
+            Form.HtmlHelper.ViewContext.Writer.Write(Form.Template.EndSection());
         }
+
+        
     }
 
     public static class SectionExtensions
     {
-        public static Section<TModel> BeginSection<TModel>(this ChameleonForm<TModel> form)
+        public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this ChameleonForm<TModel, TTemplate> form, string title) where TTemplate : IFormTemplate, new()
         {
-            return new Section<TModel>(form.HtmlHelper);
+            return new Section<TModel, TTemplate>(form, title);
         }
     }
 }

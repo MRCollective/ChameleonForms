@@ -1,7 +1,19 @@
-﻿@* Generator: MvcHelper *@
+﻿@using System.Net.Http
+@* Generator: MvcHelper *@
 
-@helper StartForm() {
+@helper BeginForm(string action, HttpMethod method, string enctype) {
+@:    <form action="@action" method="@method.Method.ToLower()" enctype="@enctype">
 }
 
 @helper EndForm() {
+@:    </form>
+}
+
+@helper BeginSection(string title) {
+@:    <fieldset>
+        <legend>@title</legend>
+}
+
+@helper EndSection() {
+@:    </fieldset>
 }

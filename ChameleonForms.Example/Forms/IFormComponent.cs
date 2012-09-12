@@ -1,9 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using ChameleonForms.Example.Forms.Templates;
 
 namespace ChameleonForms.Example.Forms
 {
-    public interface IFormComponent<TModel>
+    public interface IFormComponent<TModel, TTemplate> where TTemplate : IFormTemplate, new()
     {
-        HtmlHelper<TModel> HtmlHelper { get; }
+        ChameleonForm<TModel, TTemplate> Form { get; }
     }
 }
