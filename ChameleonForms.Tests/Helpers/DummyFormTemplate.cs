@@ -4,7 +4,7 @@ using ChameleonForms.Templates;
 
 namespace ChameleonForms.Tests.Helpers
 {
-    class DummyFormTemplate : IFormTemplate
+    public class DummyFormTemplate : IFormTemplate
     {
         public IHtmlString BeginForm(string action, HttpMethod method, string enctype)
         {
