@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ApprovalTests">
+      <HintPath>..\packages\ApprovalTests.2.0\lib\ApprovalTests.dll</HintPath>
+    </Reference>
+    <Reference Include="ApprovalUtilities">
+      <HintPath>..\packages\ApprovalTests.2.0\lib\ApprovalUtilities.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -81,6 +87,7 @@
     <Compile Include="FormTests.cs" />
     <Compile Include="Helpers\DummyFormTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates\DefaultFormTemplateTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj">

@@ -1,0 +1,74 @@
+﻿using System.Net.Http;
+using System.Web;
+using ApprovalTests.Html;
+using ApprovalTests.Reporters;
+using ChameleonForms.Templates;
+using NUnit.Framework;
+
+namespace ChameleonForms.Tests.Templates
+{
+    [TestFixture]
+    [UseReporter(typeof(DiffReporter))]
+    class DefaultFormTemplateShould
+    {
+        [Test]
+        public void Begin_form_with_enctype()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginForm("/", HttpMethod.Post, "multipart/form-data");
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Begin_form_without_enctype()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginForm("/", HttpMethod.Post, null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void End_form()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.EndForm();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Begin_section()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginSection("Section Title");
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void End_section()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.EndSection();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_field()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.Field(new HtmlString("<elementhtml>"), new HtmlString("<labelhtml>"), new HtmlString("<validationhtml>"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+    }
+}

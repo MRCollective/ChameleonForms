@@ -2,7 +2,7 @@
 @* Generator: MvcHelper *@
 
 @helper BeginForm(string action, HttpMethod method, string enctype) {
-@:    <form action="@action" method="@method.Method.ToLower()" enctype="@enctype">
+@:    <form action="@action" method="@method.Method.ToLower()"@(new HtmlString(enctype != null ? string.Format(" enctype=\"{0}\"", enctype) : ""))>
 }
 
 @helper EndForm() {

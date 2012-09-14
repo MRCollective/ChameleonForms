@@ -68,17 +68,17 @@ WebViewPage.WriteTo(@__razor_helper_writer, method.Method.ToLower());
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\" enctype=\"");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\"");
 
 
 
 #line 5 "..\..\Templates\HtmlHelpers.cshtml"
-                             WebViewPage.WriteTo(@__razor_helper_writer, enctype);
+                    WebViewPage.WriteTo(@__razor_helper_writer, new HtmlString(enctype != null ? string.Format(" enctype=\"{0}\"", enctype) : ""));
 
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">\r\n");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, ">\r\n");
 
 
 
