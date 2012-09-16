@@ -62,11 +62,51 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
+        public void Begin_nested_section()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginNestedSection("Section Title");
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void End_nested_section()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.EndNestedSection();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Output_field()
         {
             var t = new DefaultFormTemplate();
 
             var result = t.Field(new HtmlString("<elementhtml>"), new HtmlString("<labelhtml>"), new HtmlString("<validationhtml>"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_begin_field()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginField(new HtmlString("<elementhtml>"), new HtmlString("<labelhtml>"), new HtmlString("<validationhtml>"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_end_field()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.EndField();
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

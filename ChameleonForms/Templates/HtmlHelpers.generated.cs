@@ -243,7 +243,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line default
 #line hidden
 
-WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                <dl>\r\n");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                </dl>\r\n");
 
 
 
