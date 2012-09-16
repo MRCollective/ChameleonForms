@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc.Html;
+using ChameleonForms.Component;
 using ChameleonForms.Example.Forms.Templates;
 using ChameleonForms.Templates;
 

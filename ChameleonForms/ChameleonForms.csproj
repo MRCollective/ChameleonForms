@@ -67,6 +67,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component\FormComponent.cs" />
+    <Compile Include="Component\Section.cs" />
     <Compile Include="Form.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\DefaultFormTemplate.cs" />

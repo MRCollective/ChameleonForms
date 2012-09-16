@@ -1,6 +1,7 @@
 ﻿using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Component;
 using ChameleonForms.Example.Forms.Templates;
 
 namespace ChameleonForms.Example.Forms.Components
