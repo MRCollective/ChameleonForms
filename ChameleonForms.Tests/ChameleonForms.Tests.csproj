@@ -97,6 +97,7 @@
     <Compile Include="Components\SectionTests.cs" />
     <Compile Include="FormTests.cs" />
     <Compile Include="Helpers\AutoSubstituteHelper.cs" />
+    <Compile Include="HumanizedLabelsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\DefaultFormTemplateTests.cs" />
   </ItemGroup>

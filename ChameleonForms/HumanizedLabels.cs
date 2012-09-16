@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Humanizer;
 
-namespace ChameleonForms.Example.Forms
+namespace ChameleonForms
 {
+    // Of course it *should* be Humanised, but I'll keep consistency with the Humanizer library
     public class HumanizedLabels : DataAnnotationsModelMetadataProvider
     {
         public static void Register()
