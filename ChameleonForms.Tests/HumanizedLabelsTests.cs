@@ -11,9 +11,8 @@ namespace ChameleonForms.Tests
         public void Humanize_model_labels()
         {
             HumanizedLabels.Register();
-            var model = new NonHumanizedViewModel();
 
-            var m = ModelMetadataProviders.Current.GetMetadataForProperty(() => model, typeof(NonHumanizedViewModel), "SomeFieldName");
+            var m = ModelMetadataProviders.Current.GetMetadataForProperty(null, typeof(NonHumanizedViewModel), "SomeFieldName");
 
             Assert.That(m.DisplayName, Is.EqualTo("Some field name"));
         }
@@ -22,9 +21,8 @@ namespace ChameleonForms.Tests
         public void Respect_explicit_display_name()
         {
             HumanizedLabels.Register();
-            var model = new NonHumanizedViewModel();
 
-            var m = ModelMetadataProviders.Current.GetMetadataForProperty(() => model, typeof(NonHumanizedViewModel), "FieldWithDisplayNameAttribute");
+            var m = ModelMetadataProviders.Current.GetMetadataForProperty(null, typeof(NonHumanizedViewModel), "FieldWithDisplayNameAttribute");
 
             Assert.That(m.DisplayName, Is.EqualTo("Existing display name"));
         }
