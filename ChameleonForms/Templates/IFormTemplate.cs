@@ -10,5 +10,7 @@ namespace ChameleonForms.Templates
         IHtmlString BeginSection(string title);
         IHtmlString EndSection();
         IHtmlString Field(IHtmlString elementHtml, IHtmlString labelHtml, IHtmlString validationHtml);
+        IHtmlString BeginField(IHtmlString elementHtml, IHtmlString labelHtml, IHtmlString validationHtml);
+        IHtmlString EndField();
     }
 }

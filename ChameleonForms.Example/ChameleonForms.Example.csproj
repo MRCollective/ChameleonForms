@@ -99,7 +99,6 @@
   <ItemGroup>
     <Compile Include="Controllers\ExampleFormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Forms\Components\Field.cs" />
     <Compile Include="Forms\Components\RandomComponent.cs" />
     <Compile Include="Forms\Templates\RandomFormTemplate.cs" />
     <Compile Include="Global.asax.cs">

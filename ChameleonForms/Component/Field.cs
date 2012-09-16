@@ -2,25 +2,20 @@
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc.Html;
-using ChameleonForms.Component;
 using ChameleonForms.Templates;
 
-namespace ChameleonForms.Example.Forms.Components
+namespace ChameleonForms.Component
 {
-    public class Field<TModel, TTemplate, T> : IFormComponent<TModel, TTemplate>, IHtmlString where TTemplate : IFormTemplate
+    public class Field<TModel, TTemplate, T> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
     {
         private readonly Expression<Func<TModel, T>> _property;
-        public IForm<TModel, TTemplate> Form { get; private set; }
 
-        public Field(IForm<TModel, TTemplate> form, Expression<Func<TModel, T>> property)
+        public Field(IForm<TModel, TTemplate> form, bool isSelfClosing, Expression<Func<TModel, T>> property)
+            : base(form, isSelfClosing)
         {
             _property = property;
-            Form = form;
         }
-
-        // todo: Abstract this away so the template can be used in place of HtmlHelper?
-        //  or possibly instead I could just let someone extend this class and provide a different extension method?
-        // Let's make them virtual for now :)
+        
         public virtual IHtmlString GetFieldHtml()
         {
             //var metadata = ModelMetadata.FromLambdaExpression(_property, Form.HtmlHelper.ViewData);
@@ -37,9 +32,14 @@ namespace ChameleonForms.Example.Forms.Components
             return Form.HtmlHelper.ValidationMessageFor(_property);
         }
 
-        public string ToHtmlString()
+        public override IHtmlString Begin()
         {
-            return Form.Template.Field(GetLabelHtml(), GetFieldHtml(), GetValidationHtml()).ToHtmlString();
+            return IsSelfClosing ? Form.Template.Field(GetFieldHtml(), GetLabelHtml(), GetValidationHtml()) : Form.Template.BeginField(GetFieldHtml(), GetLabelHtml(), GetValidationHtml());
+        }
+
+        public override IHtmlString End()
+        {
+            return IsSelfClosing ? null : Form.Template.EndField();
         }
     }
 
@@ -47,7 +47,12 @@ namespace ChameleonForms.Example.Forms.Components
     {
         public static Field<TModel, TTemplate, T> FieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
         {
-            return new Field<TModel, TTemplate, T>(section.Form, property);
+            return new Field<TModel, TTemplate, T>(section.Form, true, property);
+        }
+
+        public static Field<TModel, TTemplate, T> BeginFieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        {
+            return new Field<TModel, TTemplate, T>(section.Form, false, property);
         }
     }
 }

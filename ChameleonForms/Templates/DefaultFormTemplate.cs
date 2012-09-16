@@ -29,5 +29,15 @@ namespace ChameleonForms.Templates
         {
             return HtmlHelpers.Field(elementHtml, labelHtml, validationHtml);
         }
+
+        public IHtmlString BeginField(IHtmlString elementHtml, IHtmlString labelHtml, IHtmlString validationHtml)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IHtmlString EndField()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
