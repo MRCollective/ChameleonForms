@@ -60,6 +60,7 @@
       <HintPath>..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Web" />
@@ -97,6 +98,7 @@
     <Compile Include="Components\FieldTests.cs" />
     <Compile Include="Components\FormComponentTests.cs" />
     <Compile Include="Components\SectionTests.cs" />
+    <Compile Include="FieldGenerator\DefaultFieldGeneratorTests.cs" />
     <Compile Include="FormTests.cs" />
     <Compile Include="Helpers\AutoSubstituteHelper.cs" />
     <Compile Include="HumanizedLabelsTests.cs" />

@@ -17,18 +17,18 @@ namespace ChameleonForms.FieldGenerator
             _property = property;
         }
 
-        public virtual IHtmlString GetFieldHtml()
+        public IHtmlString GetFieldHtml()
         {
             //var metadata = ModelMetadata.FromLambdaExpression(_property, Form.HtmlHelper.ViewData);
             return _helper.TextBoxFor(_property);
         }
 
-        public virtual IHtmlString GetLabelHtml()
+        public IHtmlString GetLabelHtml()
         {
             return _helper.LabelFor(_property);
         }
 
-        public virtual IHtmlString GetValidationHtml()
+        public IHtmlString GetValidationHtml()
         {
             return _helper.ValidationMessageFor(_property);
         }
