@@ -25,19 +25,19 @@ namespace ChameleonForms.Templates
             return HtmlHelpers.EndSection();
         }
 
-        public IHtmlString Field(IHtmlString elementHtml, IHtmlString labelHtml, IHtmlString validationHtml)
+        public IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml)
         {
-            return HtmlHelpers.Field(elementHtml, labelHtml, validationHtml);
+            return HtmlHelpers.Field(labelHtml, elementHtml, validationHtml);
         }
 
-        public IHtmlString BeginField(IHtmlString elementHtml, IHtmlString labelHtml, IHtmlString validationHtml)
+        public IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml)
         {
-            throw new System.NotImplementedException();
+            return HtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml);
         }
 
         public IHtmlString EndField()
         {
-            throw new System.NotImplementedException();
+            return HtmlHelpers.EndField();
         }
     }
 }

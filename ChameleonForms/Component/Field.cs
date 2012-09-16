@@ -34,12 +34,12 @@ namespace ChameleonForms.Component
 
         public override IHtmlString Begin()
         {
-            return IsSelfClosing ? Form.Template.Field(GetFieldHtml(), GetLabelHtml(), GetValidationHtml()) : Form.Template.BeginField(GetFieldHtml(), GetLabelHtml(), GetValidationHtml());
+            return IsSelfClosing ? Form.Template.Field(GetLabelHtml(), GetFieldHtml(), GetValidationHtml()) : Form.Template.BeginField(GetLabelHtml(), GetFieldHtml(), GetValidationHtml());
         }
 
         public override IHtmlString End()
         {
-            return IsSelfClosing ? null : Form.Template.EndField();
+            return IsSelfClosing ? new HtmlString(string.Empty) : Form.Template.EndField();
         }
     }
 
