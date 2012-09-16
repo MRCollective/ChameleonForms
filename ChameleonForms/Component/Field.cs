@@ -1,64 +1,53 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web;
-using System.Web.Mvc.Html;
+using ChameleonForms.FieldGenerator;
 using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component
 {
-    public class Field<TModel, TTemplate, T> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
+    public class Field<TModel, TTemplate> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
     {
-        private readonly Expression<Func<TModel, T>> _property;
+        private readonly IFieldGenerator _fieldGenerator;
+        private bool IsParent { get { return !IsSelfClosing; } }
 
-        public Field(IForm<TModel, TTemplate> form, bool isSelfClosing, Expression<Func<TModel, T>> property)
-            : base(form, isSelfClosing)
+        public Field(IForm<TModel, TTemplate> form, bool isParent, IFieldGenerator fieldGenerator)
+            : base(form, !isParent)
         {
-            _property = property;
+            _fieldGenerator = fieldGenerator;
             Initialise();
         }
         
-        public virtual IHtmlString GetFieldHtml()
-        {
-            //var metadata = ModelMetadata.FromLambdaExpression(_property, Form.HtmlHelper.ViewData);
-            return Form.HtmlHelper.TextBoxFor(_property);
-        }
-
-        public virtual IHtmlString GetLabelHtml()
-        {
-            return Form.HtmlHelper.LabelFor(_property);
-        }
-
-        public virtual IHtmlString GetValidationHtml()
-        {
-            return Form.HtmlHelper.ValidationMessageFor(_property);
-        }
-
         public override IHtmlString Begin()
         {
-            return IsSelfClosing ? Form.Template.Field(GetLabelHtml(), GetFieldHtml(), GetValidationHtml()) : Form.Template.BeginField(GetLabelHtml(), GetFieldHtml(), GetValidationHtml());
+            return !IsParent
+                ? Form.Template.Field(_fieldGenerator.GetLabelHtml(), _fieldGenerator.GetFieldHtml(), _fieldGenerator.GetValidationHtml())
+                : Form.Template.BeginField(_fieldGenerator.GetLabelHtml(), _fieldGenerator.GetFieldHtml(), _fieldGenerator.GetValidationHtml());
         }
 
         public override IHtmlString End()
         {
-            return IsSelfClosing ? new HtmlString(string.Empty) : Form.Template.EndField();
+            return !IsParent
+                ? new HtmlString(string.Empty)
+                : Form.Template.EndField();
         }
     }
 
     public static class FieldExtensions
     {
-        public static Field<TModel, TTemplate, T> FieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static Field<TModel, TTemplate> FieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
         {
-            return new Field<TModel, TTemplate, T>(section.Form, true, property);
+            return new Field<TModel, TTemplate>(section.Form, false, new DefaultFieldGenerator<TModel, T>(section.Form.HtmlHelper, property));
         }
 
-        public static Field<TModel, TTemplate, T> BeginFieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static Field<TModel, TTemplate> BeginFieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
         {
-            return new Field<TModel, TTemplate, T>(section.Form, false, property);
+            return new Field<TModel, TTemplate>(section.Form, true, new DefaultFieldGenerator<TModel, T>(section.Form.HtmlHelper, property));
         }
 
-        public static Field<TModel, TTemplate, T> FieldFor<TModel, TTemplate, T, T2>(this Field<TModel, TTemplate, T2> field, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static Field<TModel, TTemplate> FieldFor<TModel, TTemplate, T>(this Field<TModel, TTemplate> field, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
         {
-            return new Field<TModel, TTemplate, T>(field.Form, true, property);
+            return new Field<TModel, TTemplate>(field.Form, false, new DefaultFieldGenerator<TModel, T>(field.Form.HtmlHelper, property));
         }
     }
 }

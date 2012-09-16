@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\FieldTests.cs" />
     <Compile Include="Components\FormComponentTests.cs" />
     <Compile Include="Components\SectionTests.cs" />
     <Compile Include="FormTests.cs" />

@@ -73,6 +73,8 @@
     <Compile Include="Component\Field.cs" />
     <Compile Include="Component\FormComponent.cs" />
     <Compile Include="Component\Section.cs" />
+    <Compile Include="FieldGenerator\DefaultFieldGenerator.cs" />
+    <Compile Include="FieldGenerator\IFieldGenerator.cs" />
     <Compile Include="Form.cs" />
     <Compile Include="HumanizedLabels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
