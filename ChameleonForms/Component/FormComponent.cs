@@ -18,9 +18,12 @@ namespace ChameleonForms.Component
         {
             Form = form;
             _isSelfClosing = isSelfClosing;
+        }
 
+        public void Initialise()
+        {
             if (!_isSelfClosing)
-                form.Write(Begin());
+                Form.Write(Begin());
         }
 
         public abstract IHtmlString Begin();

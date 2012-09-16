@@ -11,24 +11,18 @@ namespace ChameleonForms.Tests.Components
         public static readonly bool Closing = true;
     }
 
-    class MockFormComponent : FormComponent<object, IFormTemplate>
-    {
-        public readonly IHtmlString BeginHtml = new HtmlString("begin");
-        public readonly IHtmlString EndHtml = new HtmlString("end");
-
-        public MockFormComponent(IForm<object, IFormTemplate> form, bool isSelfClosing) : base(form, isSelfClosing) {}
-
-        public override IHtmlString Begin() { return BeginHtml; }
-        public override IHtmlString End() { return EndHtml; }
-    }
-
     [TestFixture]
     class FormComponentShould
     {
+       private readonly IHtmlString _beginHtml = new HtmlString("");
+       private readonly IHtmlString _endHtml = new HtmlString("");
 
-        public MockFormComponent Arrange(bool selfClosing)
+        public FormComponent<object, IFormTemplate> Arrange(bool selfClosing)
         {
-            return new MockFormComponent(Substitute.For<IForm<object, IFormTemplate>>(), selfClosing);
+            var f = Substitute.For<FormComponent<object, IFormTemplate>>(Substitute.For<IForm<object, IFormTemplate>>(), selfClosing);
+            f.Begin().Returns(_beginHtml);
+            f.End().Returns(_endHtml);
+            return f;
         }
 
         [Test]
@@ -36,8 +30,10 @@ namespace ChameleonForms.Tests.Components
         {
             var f = Arrange(!Self.Closing);
 
-            f.Form.Received(1).Write(f.BeginHtml);
-            f.Form.DidNotReceive().Write(Arg.Is<IHtmlString>(h => h != f.BeginHtml));
+            f.Initialise();
+
+            f.Form.Received(1).Write(_beginHtml);
+            f.Form.DidNotReceive().Write(Arg.Is<IHtmlString>(h => h != _beginHtml));
         }
 
         [Test]
@@ -47,15 +43,16 @@ namespace ChameleonForms.Tests.Components
 
             f.Dispose();
 
-            f.Form.Received(1).Write(f.BeginHtml);
-            f.Form.Received(1).Write(f.EndHtml);
+            f.Form.DidNotReceive().Write(Arg.Is<IHtmlString>(h => h != _endHtml));
+            f.Form.Received(1).Write(_endHtml);
         }
 
         [Test]
         public void Not_write_begin_or_end_html_when_constructing_and_disposing_if_self_closing()
         {
             var f = Arrange(Self.Closing);
-            
+
+            f.Initialise();
             f.Dispose();
 
             f.Form.DidNotReceive().Write(Arg.Any<IHtmlString>());
@@ -74,7 +71,7 @@ namespace ChameleonForms.Tests.Components
         {
             var f = Arrange(Self.Closing);
 
-            Assert.That(f.ToHtmlString(), Is.EqualTo(f.BeginHtml.ToHtmlString() + f.EndHtml.ToHtmlString()));
+            Assert.That(f.ToHtmlString(), Is.EqualTo(_beginHtml.ToHtmlString() + _endHtml.ToHtmlString()));
         }
     }
 }

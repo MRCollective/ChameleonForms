@@ -7,9 +7,10 @@ namespace ChameleonForms.Component
     {
         private readonly string _title;
 
-        public Section(IForm<TModel, TTemplate> form, bool isSelfClosing, string title) : base(form, isSelfClosing)
+        public Section(IForm<TModel, TTemplate> form, string title) : base(form, false)
         {
             _title = title;
+            Initialise();
         }
 
         public override IHtmlString Begin()
@@ -25,9 +26,9 @@ namespace ChameleonForms.Component
 
     public static class SectionExtensions
     {
-        public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this Form<TModel, TTemplate> form, string title) where TTemplate : IFormTemplate
+        public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this IForm<TModel, TTemplate> form, string title) where TTemplate : IFormTemplate
         {
-            return new Section<TModel, TTemplate>(form, false, title);
+            return new Section<TModel, TTemplate>(form, title);
         }
     }
 }
