@@ -25,6 +25,16 @@ namespace ChameleonForms.Templates
             return HtmlHelpers.EndSection();
         }
 
+        public IHtmlString BeginNestedSection(string title)
+        {
+            return HtmlHelpers.BeginNestedSection(title);
+        }
+
+        public IHtmlString EndNestedSection()
+        {
+            return HtmlHelpers.EndNestedSection();
+        }
+
         public IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml)
         {
             return HtmlHelpers.Field(labelHtml, elementHtml, validationHtml);

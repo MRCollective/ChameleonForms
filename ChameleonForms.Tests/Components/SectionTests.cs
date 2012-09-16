@@ -24,7 +24,7 @@ namespace ChameleonForms.Tests.Components
 
         private Section<object, IFormTemplate> Arrange()
         {
-            return new Section<object, IFormTemplate>(_f, Title);
+            return new Section<object, IFormTemplate>(_f, Title, false);
         }
 
         [Test]

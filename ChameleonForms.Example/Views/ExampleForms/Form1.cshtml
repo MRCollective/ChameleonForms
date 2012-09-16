@@ -19,6 +19,10 @@
         {
             @ff.FieldFor(m => m.NestedField)
         }
+        using (var ss = s.BeginSection("Nested section"))
+        {
+            @ss.FieldFor(m => m.NestedField)
+        }
     }
 }
 
