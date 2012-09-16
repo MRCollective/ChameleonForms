@@ -11,6 +11,8 @@ namespace ChameleonForms.Tests.Components
     {
         private readonly IHtmlString _beginHtml = new HtmlString("");
         private readonly IHtmlString _endHtml = new HtmlString("");
+        private readonly IHtmlString _nestedBeginHtml = new HtmlString("");
+        private readonly IHtmlString _nestedEndHtml = new HtmlString("");
         private IForm<object, IFormTemplate> _f;
         private const string Title = "title";
 
@@ -20,17 +22,19 @@ namespace ChameleonForms.Tests.Components
             _f = Substitute.For<IForm<object, IFormTemplate>>();
             _f.Template.BeginSection(Title).Returns(_beginHtml);
             _f.Template.EndSection().Returns(_endHtml);
+            _f.Template.BeginNestedSection(Title).Returns(_nestedBeginHtml);
+            _f.Template.EndNestedSection().Returns(_nestedEndHtml);
         }
 
-        private Section<object, IFormTemplate> Arrange()
+        private Section<object, IFormTemplate> Arrange(bool isNested)
         {
-            return new Section<object, IFormTemplate>(_f, Title, false);
+            return new Section<object, IFormTemplate>(_f, Title, isNested);
         }
 
         [Test]
         public void Use_section_begin_from_template_for_begin_html()
         {
-            var s = Arrange();
+            var s = Arrange(false);
 
             Assert.That(s.Begin(), Is.EqualTo(_beginHtml));
         }
@@ -38,9 +42,25 @@ namespace ChameleonForms.Tests.Components
         [Test]
         public void Use_section_end_from_template_for_end_html()
         {
-            var s = Arrange();
+            var s = Arrange(false);
 
             Assert.That(s.End(), Is.EqualTo(_endHtml));
+        }
+
+        [Test]
+        public void Use_nested_section_begin_from_template_for_nested_begin_html()
+        {
+            var s = Arrange(true);
+
+            Assert.That(s.Begin(), Is.EqualTo(_nestedBeginHtml));
+        }
+
+        [Test]
+        public void Use_nested_section_end_from_template_for_nested_end_html()
+        {
+            var s = Arrange(true);
+
+            Assert.That(s.End(), Is.EqualTo(_nestedEndHtml));
         }
 
         [Test]
@@ -50,6 +70,17 @@ namespace ChameleonForms.Tests.Components
 
             Assert.That(s, Is.Not.Null);
             _f.Received().Write(_beginHtml);
+        }
+
+        [Test]
+        public void Construct_nested_section_via_extension_method()
+        {
+            var s = _f.BeginSection(Title);
+            _f.ClearReceivedCalls();
+            var ss = s.BeginSection(Title);
+
+            Assert.That(ss, Is.Not.Null);
+            _f.Received().Write(_nestedBeginHtml);
         }
     }
 }
