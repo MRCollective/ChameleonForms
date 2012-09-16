@@ -15,5 +15,7 @@ namespace ChameleonForms.Example.Controllers
     {
         [Required]
         public string RequiredStringField { get; set; }
+
+        public string NestedField { get; set; }
     }
 }

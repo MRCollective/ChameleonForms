@@ -14,6 +14,7 @@ namespace ChameleonForms.Component
             : base(form, isSelfClosing)
         {
             _property = property;
+            Initialise();
         }
         
         public virtual IHtmlString GetFieldHtml()
@@ -53,6 +54,11 @@ namespace ChameleonForms.Component
         public static Field<TModel, TTemplate, T> BeginFieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
         {
             return new Field<TModel, TTemplate, T>(section.Form, false, property);
+        }
+
+        public static Field<TModel, TTemplate, T> FieldFor<TModel, TTemplate, T, T2>(this Field<TModel, TTemplate, T2> field, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        {
+            return new Field<TModel, TTemplate, T>(field.Form, true, property);
         }
     }
 }

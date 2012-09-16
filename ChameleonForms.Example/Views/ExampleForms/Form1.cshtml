@@ -15,6 +15,10 @@
     using (var s = f.BeginSection("My Section!"))
     {
         @s.FieldFor(m => m.RequiredStringField)
+        using (var ff = s.BeginFieldFor(m => m.RequiredStringField))
+        {
+            @ff.FieldFor(m => m.NestedField)
+        }
     }
 }
 

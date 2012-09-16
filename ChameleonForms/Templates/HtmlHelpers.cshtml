@@ -24,7 +24,7 @@
 
 @* The @:'s are to stop compilation errors with the Razor engine due to unopened HTML tags *@
 @helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml) {
-@:        <dt>@labelHtml</dt>
+@:            <dt>@labelHtml</dt>
 @:            <dd>
 @:                @elementHtml @validationHtml
 }
@@ -36,10 +36,10 @@
 
 @helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml) {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml)
-@:          <dl>
+@:                <dl>
 }
 
 @helper EndField() {
-@:          </dl>
-@:      </dd>
+@:                </dl>
+@:            </dd>
 }
