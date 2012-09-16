@@ -6,19 +6,26 @@ using ChameleonForms.Templates;
 
 namespace ChameleonForms
 {
-    public class Form<TModel, TTemplate> : IDisposable where TTemplate : IFormTemplate, new()
+    public interface IForm<TModel, out TTemplate> where TTemplate : IFormTemplate
+    {
+        HtmlHelper<TModel> HtmlHelper { get; }
+        TTemplate Template { get; }
+        void Write(IHtmlString htmlString);
+    }
+
+    public class Form<TModel, TTemplate> : IForm<TModel, TTemplate>, IDisposable where TTemplate : IFormTemplate
     {
         public HtmlHelper<TModel> HtmlHelper { get; private set; }
         public TTemplate Template { get; private set; }
 
-        public Form(HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype)
+        public Form(HtmlHelper<TModel> helper, TTemplate template, string action, HttpMethod method, string enctype)
         {
             HtmlHelper = helper;
-            Template = new TTemplate();
+            Template = template;
             Write(Template.BeginForm(action, method, enctype));
         }
 
-        public void Write(IHtmlString htmlString)
+        public virtual void Write(IHtmlString htmlString)
         {
             HtmlHelper.ViewContext.Writer.Write(htmlString);
         }
@@ -33,7 +40,7 @@ namespace ChameleonForms
     {
         public static Form<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype = null)
         {
-            return new Form<TModel, DefaultFormTemplate>(helper, action, method, enctype);
+            return new Form<TModel, DefaultFormTemplate>(helper, new DefaultFormTemplate(), action, method, enctype);
         }
     }
 }

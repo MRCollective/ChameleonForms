@@ -11,9 +11,9 @@ namespace ChameleonForms.Example.Forms.Components
     /// </summary>
     public class RandomComponent<TModel> : IFormComponent<TModel, RandomFormTemplate>
     {
-        public Form<TModel, RandomFormTemplate> Form { get; private set; }
+        public IForm<TModel, RandomFormTemplate> Form { get; private set; }
 
-        public RandomComponent(Form<TModel, RandomFormTemplate> form)
+        public RandomComponent(IForm<TModel, RandomFormTemplate> form)
         {
             Form = form;
         }
@@ -29,9 +29,9 @@ namespace ChameleonForms.Example.Forms.Components
     /// </summary>
     public class RandomComponent2<TModel> : IFormComponent<TModel, RandomFormTemplate>, IHtmlString
     {
-        public Form<TModel, RandomFormTemplate> Form { get; private set; }
+        public IForm<TModel, RandomFormTemplate> Form { get; private set; }
 
-        public RandomComponent2(Form<TModel, RandomFormTemplate> form)
+        public RandomComponent2(IForm<TModel, RandomFormTemplate> form)
         {
             Form = form;
         }
@@ -46,7 +46,7 @@ namespace ChameleonForms.Example.Forms.Components
     {
         public static Form<TModel, RandomFormTemplate> BeginRandomForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype = null)
         {
-            return new Form<TModel, RandomFormTemplate>(helper, action, method, enctype);
+            return new Form<TModel, RandomFormTemplate>(helper, new RandomFormTemplate(), action, method, enctype);
         }
 
         public static RandomComponent<TModel> RandomComponent<TModel>(this Form<TModel, RandomFormTemplate>  form)

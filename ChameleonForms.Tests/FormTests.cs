@@ -1,7 +1,8 @@
-﻿using System.IO;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using Autofac;
+using AutofacContrib.NSubstitute;
 using ChameleonForms.Templates;
 using ChameleonForms.Tests.Helpers;
 using NSubstitute;
@@ -13,60 +14,71 @@ namespace ChameleonForms.Tests
     class FormShould
     {
         #region Setup
-        private Form<object, DummyFormTemplate> _f;
-        private HtmlHelper<object> _helper;
-        private ViewContext _viewContext;
+        private AutoSubstitute _autoSubstitute;
+        private HtmlHelper<object> _h;
+        private IFormTemplate _t;
+
+        private readonly IHtmlString _beginHtml = new HtmlString("");
+        private readonly IHtmlString _endHtml = new HtmlString("");
+
+        private readonly string _action = "/";
+        private readonly HttpMethod _method = HttpMethod.Post;
+        private readonly string _enctype = "";
 
         [SetUp]
         public void Setup()
         {
-            _viewContext = Substitute.For<ViewContext>();
-            _viewContext.Writer = Substitute.For<TextWriter>();
-            _helper = new HtmlHelper<object>(_viewContext, new ViewPage());
+            _autoSubstitute = AutoSubstituteContainer.Create();
+            // todo: Update AutoSubstitute and change these to ResolveAndSubstituteFor calls
+            _h = _autoSubstitute.Provide(_autoSubstitute.Resolve<HtmlHelper<object>>());
+            _t = _autoSubstitute.Resolve<IFormTemplate>();
+            _t.BeginForm(_action, _method, _enctype).Returns(_beginHtml);
+            _t.EndForm().Returns(_endHtml);
         }
 
-        private void CreateForm()
+        private Form<object, IFormTemplate> CreateForm()
         {
-            _f = new Form<object, DummyFormTemplate>(_helper, string.Empty, HttpMethod.Get, string.Empty);
+            return _autoSubstitute.Resolve<Form<object, IFormTemplate>>(
+                new NamedParameter("action", _action),
+                new NamedParameter("method", _method),
+                new NamedParameter("enctype", _enctype)
+            );
         }
         #endregion
 
         [Test]
         public void Store_html_helper()
         {
-            CreateForm();
+            var f = CreateForm();
 
-            Assert.That(_f.HtmlHelper, Is.EqualTo(_helper));
+            Assert.That(f.HtmlHelper, Is.EqualTo(_h));
         }
 
         [Test]
         public void Store_template()
         {
-            CreateForm();
+            var f = CreateForm();
 
-            Assert.That(_f.Template, Is.Not.Null);
+            Assert.That(f.Template, Is.EqualTo(_t));
         }
 
         [Test]
         public void Write_start_of_form_on_construction()
         {
-            var t = new DummyFormTemplate();
-
             CreateForm();
 
-            _viewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToString() == t.BeginForm(string.Empty, HttpMethod.Get, string.Empty).ToString()));
-            _viewContext.Writer.DidNotReceive().Write(Arg.Is<IHtmlString>(h => h.ToString() == t.EndForm().ToString()));
+            _h.ViewContext.Writer.Received().Write(_beginHtml);
+            _h.ViewContext.Writer.DidNotReceive().Write(_endHtml);
         }
 
         [Test]
         public void Write_end_of_form_on_disposal()
         {
-            var t = new DummyFormTemplate();
-            CreateForm();
+            var f = CreateForm();
 
-            _f.Dispose();
+            f.Dispose();
 
-            _viewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToString() == t.EndForm().ToString()));
+            _h.ViewContext.Writer.Received().Write(_endHtml);
         }
 
         [Test]
@@ -74,10 +86,10 @@ namespace ChameleonForms.Tests
         {
             var t = new DefaultFormTemplate();
 
-            var f2 = _helper.BeginChameleonForm("action", HttpMethod.Post, "enctype");
+            var f2 = _h.BeginChameleonForm(_action, _method, _enctype);
 
             Assert.That(f2, Is.Not.Null);
-            _viewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToString() == t.BeginForm("action", HttpMethod.Post, "enctype").ToString()));
+            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(_action, _method, _enctype).ToHtmlString()));
         }
     }
 }

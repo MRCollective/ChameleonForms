@@ -39,6 +39,15 @@
     <Reference Include="ApprovalUtilities">
       <HintPath>..\packages\ApprovalTests.2.0\lib\ApprovalUtilities.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.2.5.2.830\lib\NET40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration">
+      <HintPath>..\packages\Autofac.2.5.2.830\lib\NET40\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="AutofacContrib.NSubstitute">
+      <HintPath>..\packages\AutofacContrib.NSubstitute.3.0.0\lib\NET40\AutofacContrib.NSubstitute.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -84,8 +93,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\FormComponentTests.cs" />
+    <Compile Include="Components\SectionTests.cs" />
     <Compile Include="FormTests.cs" />
-    <Compile Include="Helpers\DummyFormTemplate.cs" />
+    <Compile Include="Helpers\AutoSubstituteHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\DefaultFormTemplateTests.cs" />
   </ItemGroup>
@@ -96,6 +107,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
