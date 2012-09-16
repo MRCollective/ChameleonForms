@@ -6,14 +6,14 @@ using ChameleonForms.Templates;
 
 namespace ChameleonForms
 {
-    public interface IForm<TModel, out TTemplate> where TTemplate : IFormTemplate
+    public interface IForm<TModel, out TTemplate> : IDisposable where TTemplate : IFormTemplate
     {
         HtmlHelper<TModel> HtmlHelper { get; }
         TTemplate Template { get; }
         void Write(IHtmlString htmlString);
     }
 
-    public class Form<TModel, TTemplate> : IForm<TModel, TTemplate>, IDisposable where TTemplate : IFormTemplate
+    public class Form<TModel, TTemplate> : IForm<TModel, TTemplate> where TTemplate : IFormTemplate
     {
         public HtmlHelper<TModel> HtmlHelper { get; private set; }
         public TTemplate Template { get; private set; }
@@ -38,7 +38,7 @@ namespace ChameleonForms
 
     public static class ChameleonFormExtensions
     {
-        public static Form<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype = null)
+        public static IForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype = null)
         {
             return new Form<TModel, DefaultFormTemplate>(helper, new DefaultFormTemplate(), action, method, enctype);
         }
