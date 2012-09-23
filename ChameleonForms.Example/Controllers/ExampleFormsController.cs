@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using System.Web.Mvc;
 
 namespace ChameleonForms.Example.Controllers
@@ -9,6 +10,12 @@ namespace ChameleonForms.Example.Controllers
         public ActionResult Form1()
         {
             return View(new ViewModelExample());
+        }
+
+        [HttpPost]
+        public ActionResult Form1Submit(ViewModelExample vm)
+        {
+            return View(vm.FileUpload.ContentLength);
         }
     }
 
@@ -20,6 +27,8 @@ namespace ChameleonForms.Example.Controllers
         public string NestedField { get; set; }
 
         public SomeEnum SomeEnum { get; set; }
+
+        public HttpPostedFileBase FileUpload { get; set; }
     }
 
     public enum SomeEnum

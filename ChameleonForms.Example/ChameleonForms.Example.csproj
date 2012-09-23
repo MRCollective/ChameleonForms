@@ -121,6 +121,7 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\ExampleForms\Form1Submit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

@@ -14,21 +14,21 @@
 
 <h1>Example Form 1</h1>
 
-@using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), FormMethod.Post, EncType.Plain))
+@using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), FormMethod.Post, EncType.Multipart))
 {
     using (var s = f.BeginSection("My Section!", InstructionalText()))
     {
-        @s.FieldFor(m => m.RequiredStringField)
         using (var ff = s.BeginFieldFor(m => m.RequiredStringField))
         {
             @ff.FieldFor(m => m.NestedField)
         }
         using (var ss = s.BeginSection("Nested section"))
         {
-            @ss.FieldFor(m => m.NestedField)
+            @ss.FieldFor(m => m.FileUpload)
         }
         @s.FieldFor(m => m.SomeEnum)
     }
+    <input type="submit" value="Submit" />
 }
 
 @using (var form = Html.BeginRandomForm("/random", FormMethod.Get, EncType.Multipart))
