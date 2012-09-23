@@ -2,6 +2,8 @@
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Enums;
+using Humanizer;
 
 namespace ChameleonForms.Templates
 {
@@ -16,13 +18,13 @@ namespace ChameleonForms.Templates
             return new HtmlString(string.Format(" {0}=\"{1}\"", name, value));
         }
 
-        public static IHtmlString BuildFormTag(string action, FormMethod method, object htmlAttributes = null, string encType = null)
+        public static IHtmlString BuildFormTag(string action, FormMethod method, object htmlAttributes = null, EncType? encType = null)
         {
             var tagBuilder = new TagBuilder("form");
             tagBuilder.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
             tagBuilder.MergeAttribute("action", action);
             tagBuilder.MergeAttribute("method", HtmlHelper.GetFormMethodString(method), true);
-            if (!string.IsNullOrEmpty(encType))
+            if (encType.HasValue)
             {
                 tagBuilder.MergeAttribute("enctype", encType.Humanize());
             }
