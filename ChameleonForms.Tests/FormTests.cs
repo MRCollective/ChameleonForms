@@ -30,8 +30,7 @@ namespace ChameleonForms.Tests
         public void Setup()
         {
             _autoSubstitute = AutoSubstituteContainer.Create();
-            // todo: Update AutoSubstitute and change these to ResolveAndSubstituteFor calls
-            _h = _autoSubstitute.Provide(_autoSubstitute.Resolve<HtmlHelper<object>>());
+            _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<object>>();
             _t = _autoSubstitute.Resolve<IFormTemplate>();
             _t.BeginForm(_action, _method, _enctype).Returns(_beginHtml);
             _t.EndForm().Returns(_endHtml);
