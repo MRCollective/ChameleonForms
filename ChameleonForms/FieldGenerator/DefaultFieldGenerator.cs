@@ -36,6 +36,7 @@ namespace ChameleonForms.FieldGenerator
         public IHtmlString GetFieldHtml()
         {
             var metadata = ModelMetadata.FromLambdaExpression(_property, _helper.ViewData);
+            var typeAttribute = default(string);
 
             if (metadata.ModelType.IsEnum)
                 return GetEnumHtml(_property.Compile().Invoke((TModel) _helper.ViewData.ModelMetadata.Model));
@@ -46,7 +47,14 @@ namespace ChameleonForms.FieldGenerator
             if (metadata.DataTypeName == DataType.MultilineText.ToString())
                 return _helper.TextAreaFor(_property);
 
-            return _helper.TextBoxFor(_property);
+            if (typeof(HttpPostedFileBase).IsAssignableFrom(metadata.ModelType))
+                typeAttribute = "file";
+
+            if (typeAttribute == default(string))
+                typeAttribute = "text";
+
+            var attrs = new { type = typeAttribute};
+            return _helper.TextBoxFor(_property, attrs);
         }
         #endregion
 

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
@@ -32,6 +33,8 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         [DataType(DataType.MultilineText)]
         public string Textarea { get; set; }
+
+        public HttpPostedFileBase FileUpload { get; set; }
     }
 
     [TestFixture]
@@ -112,6 +115,16 @@ namespace ChameleonForms.Tests.FieldGenerator
         public void Use_correct_html_for_enum_field()
         {
             var g = Arrange(m => m.TestEnum, m => m.TestEnum = TestEnum.ValueWithDescriptionAttribute);
+
+            var result = g.GetFieldHtml();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_file_upload()
+        {
+            var g = Arrange(m => m.FileUpload);
 
             var result = g.GetFieldHtml();
 
