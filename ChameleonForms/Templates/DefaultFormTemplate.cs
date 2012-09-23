@@ -1,11 +1,12 @@
 ﻿using System.Net.Http;
 using System.Web;
+using ChameleonForms.Enums;
 
 namespace ChameleonForms.Templates
 {
     public class DefaultFormTemplate : IFormTemplate
     {
-        public IHtmlString BeginForm(string action, HttpMethod method, string enctype)
+        public IHtmlString BeginForm(string action, HttpMethod method, EncType? enctype)
         {
             return HtmlHelpers.BeginForm(action, method, enctype);
         }

@@ -3,6 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using Autofac;
 using AutofacContrib.NSubstitute;
+using ChameleonForms.Enums;
 using ChameleonForms.Templates;
 using ChameleonForms.Tests.Helpers;
 using NSubstitute;
@@ -23,7 +24,7 @@ namespace ChameleonForms.Tests
 
         private readonly string _action = "/";
         private readonly HttpMethod _method = HttpMethod.Post;
-        private readonly string _enctype = "";
+        private readonly EncType _enctype = EncType.Multipart;
 
         [SetUp]
         public void Setup()
@@ -86,10 +87,10 @@ namespace ChameleonForms.Tests
         {
             var t = new DefaultFormTemplate();
 
-            var f2 = _h.BeginChameleonForm(_action, _method, _enctype);
+            var f2 = _h.BeginChameleonForm(_action, _method);
 
             Assert.That(f2, Is.Not.Null);
-            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(_action, _method, _enctype).ToHtmlString()));
+            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(_action, _method, null).ToHtmlString()));
         }
     }
 }

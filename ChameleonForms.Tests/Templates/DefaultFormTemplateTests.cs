@@ -2,6 +2,7 @@
 using System.Web;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
+using ChameleonForms.Enums;
 using ChameleonForms.Templates;
 using NUnit.Framework;
 
@@ -16,7 +17,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginForm("/", HttpMethod.Post, "multipart/form-data");
+            var result = t.BeginForm("/", HttpMethod.Post, EncType.Multipart);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

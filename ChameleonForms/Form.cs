@@ -2,7 +2,9 @@
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Enums;
 using ChameleonForms.Templates;
+using Humanizer;
 
 namespace ChameleonForms
 {
@@ -18,7 +20,7 @@ namespace ChameleonForms
         public HtmlHelper<TModel> HtmlHelper { get; private set; }
         public TTemplate Template { get; private set; }
 
-        public Form(HtmlHelper<TModel> helper, TTemplate template, string action, HttpMethod method, string enctype)
+        public Form(HtmlHelper<TModel> helper, TTemplate template, string action, HttpMethod method, EncType? enctype)
         {
             HtmlHelper = helper;
             Template = template;
@@ -38,7 +40,7 @@ namespace ChameleonForms
 
     public static class ChameleonFormExtensions
     {
-        public static IForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, string enctype = null)
+        public static IForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, EncType? enctype = null)
         {
             return new Form<TModel, DefaultFormTemplate>(helper, new DefaultFormTemplate(), action, method, enctype);
         }

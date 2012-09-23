@@ -1,6 +1,7 @@
 ﻿@using System.Net.Http
 @using ChameleonForms
 @using ChameleonForms.Component
+@using ChameleonForms.Enums
 @using ChameleonForms.Example.Forms.Components
 @model ChameleonForms.Example.Controllers.ViewModelExample
 
@@ -10,7 +11,7 @@
 
 <h1>Example Form 1</h1>
 
-@using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), HttpMethod.Post))
+@using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), HttpMethod.Post, EncType.Plain))
 {
     using (var s = f.BeginSection("My Section!"))
     {
@@ -27,7 +28,7 @@
     }
 }
 
-@using (var form = Html.BeginRandomForm("/random", HttpMethod.Get, "multipart/form-data"))
+@using (var form = Html.BeginRandomForm("/random", HttpMethod.Get))
 {
     @form.RandomComponent()
     @form.RandomComponent2()

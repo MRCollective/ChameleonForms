@@ -73,6 +73,7 @@
     <Compile Include="Component\Field.cs" />
     <Compile Include="Component\FormComponent.cs" />
     <Compile Include="Component\Section.cs" />
+    <Compile Include="Enums\EncType.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator.cs" />
     <Compile Include="FieldGenerator\IFieldGenerator.cs" />
     <Compile Include="Form.cs" />
