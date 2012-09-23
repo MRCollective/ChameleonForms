@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Enums;
 
@@ -50,6 +49,16 @@ namespace ChameleonForms.Templates
         public IHtmlString EndField()
         {
             return HtmlHelpers.EndField();
+        }
+
+        public IHtmlString BeginNavigation()
+        {
+            return HtmlHelpers.BeginNavigation();
+        }
+
+        public IHtmlString EndNavigation()
+        {
+            return HtmlHelpers.EndNavigation();
         }
     }
 }

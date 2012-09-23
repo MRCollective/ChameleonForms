@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net.Http;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Enums;
 using Humanizer;
@@ -29,6 +27,21 @@ namespace ChameleonForms.Templates
                 tagBuilder.MergeAttribute("enctype", encType.Humanize());
             }
             return new HtmlString(tagBuilder.ToString(TagRenderMode.StartTag));
+        }
+
+        public static IHtmlString BuildSubmitButton(string value, string type = "submit", string id = null, object htmlAttributes = null)
+        {
+            var t = new TagBuilder("input");
+            t.Attributes.Add("value", value);
+            t.Attributes.Add("type", type);
+            if (id != null)
+            {
+                t.Attributes.Add("id", id);
+                t.Attributes.Add("name", id);
+            }
+            t.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes), true);
+
+            return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
         }
     }
 }

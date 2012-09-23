@@ -71,6 +71,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Component\Navigation.cs" />
     <Compile Include="Component\Field.cs" />
     <Compile Include="Component\FormComponent.cs" />
     <Compile Include="Component\Section.cs" />

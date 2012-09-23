@@ -444,6 +444,56 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            </dd>\r\n");
 }
 
 
+public static System.Web.WebPages.HelperResult BeginNavigation() {
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 60 "..\..\Templates\HtmlHelpers.cshtml"
+                           
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <div class=\"form_navigation\">\r\n");
+
+
+
+#line 62 "..\..\Templates\HtmlHelpers.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult EndNavigation() {
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 64 "..\..\Templates\HtmlHelpers.cshtml"
+                         
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </div>\r\n");
+
+
+
+#line 66 "..\..\Templates\HtmlHelpers.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
     }
 }
 #pragma warning restore 1591

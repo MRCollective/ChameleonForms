@@ -113,5 +113,25 @@ namespace ChameleonForms.Tests.Templates
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
+
+        [Test]
+        public void Output_begin_navigation()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginNavigation();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_end_navigation()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.EndNavigation();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
     }
 }

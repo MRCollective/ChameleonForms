@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using System.Web;
+﻿using System.Web;
 using ChameleonForms.Enums;
 using System.Web.Mvc;
 
@@ -16,5 +15,7 @@ namespace ChameleonForms.Templates
         IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml);
         IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml);
         IHtmlString EndField();
+        IHtmlString BeginNavigation();
+        IHtmlString EndNavigation();
     }
 }

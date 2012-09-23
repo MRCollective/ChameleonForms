@@ -95,6 +95,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\NavigationTests.cs" />
     <Compile Include="Components\FieldTests.cs" />
     <Compile Include="Components\FormComponentTests.cs" />
     <Compile Include="Components\SectionTests.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="HumanizedLabelsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\DefaultFormTemplateTests.cs" />
+    <Compile Include="Templates\HtmlHelperExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj">

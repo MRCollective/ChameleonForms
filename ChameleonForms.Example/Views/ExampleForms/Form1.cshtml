@@ -28,7 +28,11 @@
         }
         @s.FieldFor(m => m.SomeEnum)
     }
-    <input type="submit" value="Submit" />
+    using (var n = f.BeginNavigation())
+    {
+        @n.Submit("Submit")
+        @n.Reset("Reset")
+    }
 }
 
 @using (var form = Html.BeginRandomForm("/random", FormMethod.Get, EncType.Multipart))
