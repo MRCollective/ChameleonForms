@@ -39,6 +39,9 @@ namespace ChameleonForms.FieldGenerator
             if (metadata.ModelType.IsEnum)
                 return GetEnumHtml(_property.Compile().Invoke((TModel) _helper.ViewData.ModelMetadata.Model));
 
+            if (metadata.DataTypeName == "Password")
+                return _helper.PasswordFor(_property);
+
             return _helper.TextBoxFor(_property);
         }
         #endregion

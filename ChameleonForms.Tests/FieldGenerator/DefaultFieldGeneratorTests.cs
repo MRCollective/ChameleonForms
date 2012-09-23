@@ -26,6 +26,9 @@ namespace ChameleonForms.Tests.FieldGenerator
         public string SomeProperty { get; set; }
 
         public TestEnum TestEnum { get; set; }
+
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
     }
 
     [TestFixture]
@@ -76,6 +79,16 @@ namespace ChameleonForms.Tests.FieldGenerator
         public void Use_correct_html_for_text_field()
         {
             var g = Arrange(m => m.SomeProperty);
+
+            var result = g.GetFieldHtml();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_password_field()
+        {
+            var g = Arrange(m => m.Password);
 
             var result = g.GetFieldHtml();
 
