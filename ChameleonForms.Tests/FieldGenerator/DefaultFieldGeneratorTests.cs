@@ -29,6 +29,9 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Textarea { get; set; }
     }
 
     [TestFixture]
@@ -89,6 +92,16 @@ namespace ChameleonForms.Tests.FieldGenerator
         public void Use_correct_html_for_password_field()
         {
             var g = Arrange(m => m.Password);
+
+            var result = g.GetFieldHtml();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_textarea()
+        {
+            var g = Arrange(m => m.Textarea);
 
             var result = g.GetFieldHtml();
 

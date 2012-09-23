@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -39,8 +40,11 @@ namespace ChameleonForms.FieldGenerator
             if (metadata.ModelType.IsEnum)
                 return GetEnumHtml(_property.Compile().Invoke((TModel) _helper.ViewData.ModelMetadata.Model));
 
-            if (metadata.DataTypeName == "Password")
+            if (metadata.DataTypeName == DataType.Password.ToString())
                 return _helper.PasswordFor(_property);
+
+            if (metadata.DataTypeName == DataType.MultilineText.ToString())
+                return _helper.TextAreaFor(_property);
 
             return _helper.TextBoxFor(_property);
         }
