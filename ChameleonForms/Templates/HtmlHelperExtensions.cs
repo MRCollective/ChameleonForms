@@ -9,6 +9,7 @@ namespace ChameleonForms.Templates
             if (value == null)
                 return new HtmlString(string.Empty);
 
+            //Todo: encode the values here
             return new HtmlString(string.Format(" {0}=\"{1}\"", name, value));
         }
     }
