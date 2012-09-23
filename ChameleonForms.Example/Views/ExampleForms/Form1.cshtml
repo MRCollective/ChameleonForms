@@ -9,11 +9,15 @@
     ViewBag.Title = "Example Form 1";
 }
 
+@helper InstructionalText() {
+    <p>Leading instructional text.</p>
+}
+
 <h1>Example Form 1</h1>
 
 @using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), HttpMethod.Post, EncType.Plain))
 {
-    using (var s = f.BeginSection("My Section!"))
+    using (var s = f.BeginSection("My Section!", InstructionalText()))
     {
         @s.FieldFor(m => m.RequiredStringField)
         using (var ff = s.BeginFieldFor(m => m.RequiredStringField))

@@ -13,15 +13,17 @@
 @:    </form>
 }
 
-@helper BeginSection(string title) {
+@helper BeginSection(string title, IHtmlString leadingHtml) {
 @:    <fieldset>
 @:        <legend>@title</legend>
+@:        @leadingHtml
 @:        <dl>
 }
     
-@helper BeginNestedSection(string title) {
+@helper BeginNestedSection(string title, IHtmlString leadingHtml) {
 @:            <dt>@title</dt>
 @:            <dd>
+@:                @leadingHtml
 @:                <dl>
 }
 

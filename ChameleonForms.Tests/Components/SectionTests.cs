@@ -20,9 +20,9 @@ namespace ChameleonForms.Tests.Components
         public void Setup()
         {
             _f = Substitute.For<IForm<object, IFormTemplate>>();
-            _f.Template.BeginSection(Title).Returns(_beginHtml);
+            _f.Template.BeginSection(Title, null).Returns(_beginHtml);
             _f.Template.EndSection().Returns(_endHtml);
-            _f.Template.BeginNestedSection(Title).Returns(_nestedBeginHtml);
+            _f.Template.BeginNestedSection(Title, null).Returns(_nestedBeginHtml);
             _f.Template.EndNestedSection().Returns(_nestedEndHtml);
         }
 
