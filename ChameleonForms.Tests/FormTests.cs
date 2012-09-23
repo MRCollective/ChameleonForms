@@ -23,8 +23,9 @@ namespace ChameleonForms.Tests
         private readonly IHtmlString _endHtml = new HtmlString("");
 
         private readonly string _action = "/";
-        private readonly HttpMethod _method = HttpMethod.Post;
+        private readonly FormMethod _method = FormMethod.Post;
         private readonly EncType _enctype = EncType.Multipart;
+        private readonly object _htmlAttributes = new object();
 
         [SetUp]
         public void Setup()
@@ -32,7 +33,7 @@ namespace ChameleonForms.Tests
             _autoSubstitute = AutoSubstituteContainer.Create();
             _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<object>>();
             _t = _autoSubstitute.Resolve<IFormTemplate>();
-            _t.BeginForm(_action, _method, _enctype).Returns(_beginHtml);
+            _t.BeginForm(_action, _method, _htmlAttributes, _enctype).Returns(_beginHtml);
             _t.EndForm().Returns(_endHtml);
         }
 
@@ -41,6 +42,7 @@ namespace ChameleonForms.Tests
             return _autoSubstitute.Resolve<Form<object, IFormTemplate>>(
                 new NamedParameter("action", _action),
                 new NamedParameter("method", _method),
+                new NamedParameter("htmlAttributes", _htmlAttributes),
                 new NamedParameter("enctype", _enctype)
             );
         }
@@ -86,10 +88,10 @@ namespace ChameleonForms.Tests
         {
             var t = new DefaultFormTemplate();
 
-            var f2 = _h.BeginChameleonForm(_action, _method);
+            var f2 = _h.BeginChameleonForm(_action, _method, _htmlAttributes, _enctype);
 
             Assert.That(f2, Is.Not.Null);
-            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(_action, _method, null).ToHtmlString()));
+            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(_action, _method, _htmlAttributes, _enctype).ToHtmlString()));
         }
     }
 }

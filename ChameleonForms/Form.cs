@@ -20,11 +20,11 @@ namespace ChameleonForms
         public HtmlHelper<TModel> HtmlHelper { get; private set; }
         public TTemplate Template { get; private set; }
 
-        public Form(HtmlHelper<TModel> helper, TTemplate template, string action, HttpMethod method, EncType? enctype)
+        public Form(HtmlHelper<TModel> helper, TTemplate template, string action, FormMethod method, object htmlAttributes, EncType? enctype)
         {
             HtmlHelper = helper;
             Template = template;
-            Write(Template.BeginForm(action, method, enctype));
+            Write(Template.BeginForm(action, method, htmlAttributes, enctype));
         }
 
         public virtual void Write(IHtmlString htmlString)
@@ -40,9 +40,9 @@ namespace ChameleonForms
 
     public static class ChameleonFormExtensions
     {
-        public static IForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action, HttpMethod method, EncType? enctype = null)
+        public static IForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action, FormMethod method = FormMethod.Post, object htmlAttributes = null, EncType? enctype = null)
         {
-            return new Form<TModel, DefaultFormTemplate>(helper, new DefaultFormTemplate(), action, method, enctype);
+            return new Form<TModel, DefaultFormTemplate>(helper, new DefaultFormTemplate(), action, method, htmlAttributes, enctype);
         }
     }
 }

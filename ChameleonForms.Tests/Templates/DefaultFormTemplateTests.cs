@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Web;
+using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Enums;
@@ -17,7 +18,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginForm("/", HttpMethod.Post, EncType.Multipart);
+            var result = t.BeginForm("/", FormMethod.Post, new {}, EncType.Multipart);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -27,7 +28,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginForm("/", HttpMethod.Post, null);
+            var result = t.BeginForm("/", FormMethod.Post, null, null);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -41,6 +42,7 @@ namespace ChameleonForms.Tests.Templates
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
+        
 
         [Test]
         public void Begin_section()

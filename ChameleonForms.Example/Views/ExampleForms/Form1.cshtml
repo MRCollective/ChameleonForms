@@ -1,5 +1,4 @@
-﻿@using System.Net.Http
-@using ChameleonForms
+﻿@using ChameleonForms
 @using ChameleonForms.Component
 @using ChameleonForms.Enums
 @using ChameleonForms.Example.Forms.Components
@@ -15,7 +14,7 @@
 
 <h1>Example Form 1</h1>
 
-@using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), HttpMethod.Post, EncType.Plain))
+@using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), FormMethod.Post, EncType.Plain))
 {
     using (var s = f.BeginSection("My Section!", InstructionalText()))
     {
@@ -32,7 +31,19 @@
     }
 }
 
-@using (var form = Html.BeginRandomForm("/random", HttpMethod.Get))
+@using (var form = Html.BeginRandomForm("/random", FormMethod.Get, EncType.Multipart))
+{
+    @form.RandomComponent()
+    @form.RandomComponent2()
+}
+
+@using (var form = Html.BeginRandomForm("/random", FormMethod.Post, new {test = "testValue"}))
+{
+    @form.RandomComponent()
+    @form.RandomComponent2()
+}
+
+@using (var form = Html.BeginRandomForm("/random", FormMethod.Post, new {@class = "fish"}, EncType.Multipart))
 {
     @form.RandomComponent()
     @form.RandomComponent2()

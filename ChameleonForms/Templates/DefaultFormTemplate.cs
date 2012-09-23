@@ -1,14 +1,15 @@
 ﻿using System.Net.Http;
 using System.Web;
+using System.Web.Mvc;
 using ChameleonForms.Enums;
 
 namespace ChameleonForms.Templates
 {
     public class DefaultFormTemplate : IFormTemplate
     {
-        public IHtmlString BeginForm(string action, HttpMethod method, EncType? enctype)
+        public IHtmlString BeginForm(string action, FormMethod method, object htmlAttributes, EncType? encType)
         {
-            return HtmlHelpers.BeginForm(action, method, enctype);
+            return HtmlHelpers.BeginForm(action, method, htmlAttributes, encType);
         }
 
         public IHtmlString EndForm()

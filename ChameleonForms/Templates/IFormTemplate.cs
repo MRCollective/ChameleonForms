@@ -1,12 +1,13 @@
 ﻿using System.Net.Http;
 using System.Web;
 using ChameleonForms.Enums;
+using System.Web.Mvc;
 
 namespace ChameleonForms.Templates
 {
     public interface IFormTemplate
     {
-        IHtmlString BeginForm(string action, HttpMethod method, EncType? enctype);
+        IHtmlString BeginForm(string action, FormMethod method, object htmlAttributes, EncType? encType);
         IHtmlString EndForm();
         IHtmlString BeginSection(string title, IHtmlString leadingHtml);
         IHtmlString EndSection();
