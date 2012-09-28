@@ -67,7 +67,7 @@ namespace ChameleonForms.Tests.Components
 
             var h = s.Paragraph("aerg&%^\"esrg'");
 
-            Assert.That(h.ToString(), Is.EqualTo("<p>aerg&amp;%^&quot;esrg&#39;</p>"));
+            Assert.That(h.ToString(), Is.EqualTo("<p>aerg&amp;%^&quot;esrg&#39;</p>\r\n"));
         }
     }
 }
