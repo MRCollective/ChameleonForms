@@ -51,6 +51,16 @@ namespace ChameleonForms.Templates
             return HtmlHelpers.EndField();
         }
 
+        public IHtmlString BeginMessage(MessageType messageType, string heading)
+        {
+            return HtmlHelpers.BeginMessage(messageType, heading);
+        }
+
+        public IHtmlString EndMessage()
+        {
+            return HtmlHelpers.EndMessage();
+        }
+
         public IHtmlString BeginNavigation()
         {
             return HtmlHelpers.BeginNavigation();

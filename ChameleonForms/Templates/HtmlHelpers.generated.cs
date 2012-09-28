@@ -494,6 +494,88 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </div>\r\n");
 }
 
 
+public static System.Web.WebPages.HelperResult BeginMessage(MessageType messageType, string heading) {
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 68 "..\..\Templates\HtmlHelpers.cshtml"
+                                                               
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "      <div class=\"");
+
+
+
+#line 69 "..\..\Templates\HtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, string.Format("{0}{1}", messageType.ToString().ToLower(), "_message"));
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">\r\n");
+
+
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <h3>");
+
+
+
+#line 70 "..\..\Templates\HtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, heading);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</h3>\r\n");
+
+
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "          <div class=\"message\">\r\n");
+
+
+
+#line 72 "..\..\Templates\HtmlHelpers.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult EndMessage() {
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 74 "..\..\Templates\HtmlHelpers.cshtml"
+                      
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "          </div>\r\n");
+
+
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "      </div>\r\n");
+
+
+
+#line 77 "..\..\Templates\HtmlHelpers.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
     }
 }
 #pragma warning restore 1591

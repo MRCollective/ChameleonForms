@@ -51,4 +51,9 @@
 {
     @form.RandomComponent()
     @form.RandomComponent2()
+
+    using (var m = form.BeginMessage(MessageType.Success, "Success!"))
+    {
+        @m.Paragraph("Hello!!!!!!!!")
+    }
 }

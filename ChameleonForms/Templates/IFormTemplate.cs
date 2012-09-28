@@ -17,5 +17,7 @@ namespace ChameleonForms.Templates
         IHtmlString EndField();
         IHtmlString BeginNavigation();
         IHtmlString EndNavigation();
+        IHtmlString BeginMessage(MessageType messageType, string heading);
+        IHtmlString EndMessage();
     }
 }
