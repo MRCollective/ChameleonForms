@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Enums;
 using Humanizer;
@@ -42,6 +43,27 @@ namespace ChameleonForms.Templates
             t.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes), true);
 
             return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
+        }
+
+        public static string OutputAttributes(params object[] attributesList)
+        {
+            if (attributesList == null)
+                return string.Empty;
+
+            var t = new TagBuilder("p");
+            foreach (var attrs in attributesList)
+            {
+                t.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(attrs));
+            }
+            var sb = new StringBuilder();
+            foreach (var attr in t.Attributes)
+            {
+                sb.Append(string.Format(" {0}=\"{1}\"",
+                    HttpUtility.HtmlEncode(attr.Key),
+                    HttpUtility.HtmlEncode(attr.Value))
+                );
+            }
+            return sb.ToString();
         }
     }
 }
