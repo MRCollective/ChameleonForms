@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
-using Humanizer;
 
 namespace ChameleonForms
 {

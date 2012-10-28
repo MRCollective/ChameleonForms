@@ -49,7 +49,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginSection("Section Title", new HtmlString("<p>hello</p>"));
+            var result = t.BeginSection("Section Title", new HtmlString("<p>hello</p>"), new {@class = "asdf"});
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -69,7 +69,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginNestedSection("Section Title", new HtmlString("<p>Hello</p>"));
+            var result = t.BeginNestedSection("Section Title", new HtmlString("<p>Hello</p>"), new {@class = "asdf"});
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

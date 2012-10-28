@@ -6,7 +6,7 @@ using Humanizer;
 
 namespace ChameleonForms.Templates
 {
-    public static class Html
+    public static class HtmlWriter
     {
         public static IHtmlString Attribute(string name, string value)
         {
@@ -45,10 +45,10 @@ namespace ChameleonForms.Templates
             return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
         }
 
-        public static string OutputAttributes(params object[] attributesList)
+        public static IHtmlString OutputAttributes(params object[] attributesList)
         {
             if (attributesList == null)
-                return string.Empty;
+                return new HtmlString(string.Empty);
 
             var t = new TagBuilder("p");
             foreach (var attrs in attributesList)
@@ -63,7 +63,7 @@ namespace ChameleonForms.Templates
                     HttpUtility.HtmlEncode(attr.Value))
                 );
             }
-            return sb.ToString();
+            return new HtmlString(sb.ToString());
         }
     }
 }

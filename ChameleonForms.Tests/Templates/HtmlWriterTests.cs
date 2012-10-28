@@ -12,7 +12,7 @@ namespace ChameleonForms.Tests.Templates
         [Test]
         public void Generate_submit_button_with_default_options()
         {
-            var h = Html.BuildSubmitButton("value");
+            var h = HtmlWriter.BuildSubmitButton("value");
 
             HtmlApprovals.VerifyHtml(h.ToHtmlString());
         }
@@ -20,7 +20,7 @@ namespace ChameleonForms.Tests.Templates
         [Test]
         public void Generate_submit_button_with_non_default_options()
         {
-            var h = Html.BuildSubmitButton("thevalue", "reset", "myId", new {onclick = "return false;", @class = "a&^&*FGdf"});
+            var h = HtmlWriter.BuildSubmitButton("thevalue", "reset", "myId", new {onclick = "return false;", @class = "a&^&*FGdf"});
 
             HtmlApprovals.VerifyHtml(h.ToHtmlString());
         }
@@ -33,33 +33,33 @@ namespace ChameleonForms.Tests.Templates
         [Test]
         public void Output_nothing_if_null()
         {
-            var h = Html.OutputAttributes(null);
+            var h = HtmlWriter.OutputAttributes(null);
 
-            Assert.That(h, Is.Empty);
+            Assert.That(h.ToString(), Is.Empty);
         }
 
         [Test]
         public void Output_nothing_if_empty_object()
         {
-            var h = Html.OutputAttributes(new {});
+            var h = HtmlWriter.OutputAttributes(new {});
 
-            Assert.That(h, Is.Empty);
+            Assert.That(h.ToString(), Is.Empty);
         }
 
         [Test]
         public void Output_attributes_from_single_object()
         {
-            var h = Html.OutputAttributes(new { src = "http://someurl/", @class = "asdf asdf", data_attribute = "some&^\"thing" });
+            var h = HtmlWriter.OutputAttributes(new { src = "http://someurl/", @class = "asdf asdf", data_attribute = "some&^\"thing" });
 
-            HtmlApprovals.VerifyHtml(h);
+            HtmlApprovals.VerifyHtml(h.ToString());
         }
 
         [Test]
         public void Merge_attributes_from_multiple_objects()
         {
-            var h = Html.OutputAttributes(new { id = "oldid", @class = "class" }, new { id = "newid", data_new_attr = "newattr" });
+            var h = HtmlWriter.OutputAttributes(new { id = "oldid", @class = "class" }, new { id = "newid", data_new_attr = "newattr" });
 
-            HtmlApprovals.VerifyHtml(h);
+            HtmlApprovals.VerifyHtml(h.ToString());
         }
     }
 }

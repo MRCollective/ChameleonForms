@@ -8,9 +8,9 @@ namespace ChameleonForms.Templates
     {
         IHtmlString BeginForm(string action, FormMethod method, object htmlAttributes, EncType? encType);
         IHtmlString EndForm();
-        IHtmlString BeginSection(string title, IHtmlString leadingHtml);
+        IHtmlString BeginSection(string title, IHtmlString leadingHtml, object htmlAttributes);
         IHtmlString EndSection();
-        IHtmlString BeginNestedSection(string title, IHtmlString leadingHtml);
+        IHtmlString BeginNestedSection(string title, IHtmlString leadingHtml, object htmlAttributes);
         IHtmlString EndNestedSection();
         IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml);
         IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml);
