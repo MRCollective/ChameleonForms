@@ -98,7 +98,8 @@ HTML output (using default template that comes with Chameleon)
     </fieldset>
         <div class="form_navigation">
 	<input type="submit" value="Submit" /><input type="reset" value="Reset" />        </div>
-    </form>
+    </form>
+
 Contributions
 -------------
 

@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='UTF-8'?> 
+<package>
+  <metadata>
+    <id>
+       Chameleon Forms
+    </id>
+    <version>
+       0.1.0.0
+    </version>
+    <authors>
+       Robert Moore, Matthew Davies
+    </authors>
+    <description>
+      This library will shape-shift your forms experience in ASP.NET MVC.
+      It makes it really easy to tersely output a form and easily apply a different template with a single line of code.
+    </description>
+    <projectUrl>
+      https://github.com/MRCollective/ChameleonForms
+    </projectUrl>
+    <licenseUrl>
+      https://github.com/MRCollective/ChameleonForms/blob/master/LICENSE
+    </licenseUrl>
+    <iconUrl>
+      https://github.com/MRCollective/ChameleonForms/master/logo.png
+    </iconUrl>
+    <tags>
+       asp.net, mvc, forms, html, template
+    </tags>
+    <language>
+       en-US 
+    </language>
+    <dependencies>
+      <dependency id="Microsoft.AspNet.Mvc" version="4.0" />
+      <dependency id="Humanizer" version="0.2" />
+    </dependencies>
+  </metadata>
+  <files>
+     <file src="bin\Release\ChameleonForms.dll" target="lib\NET40" />
+     <file src="bin\Release\ChameleonForms.pdb" target="lib\NET40" />
+     <file src="bin\Release\ChameleonForms.XML" target="lib\NET40" />
+  </files>
+</package>

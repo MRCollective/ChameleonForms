@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\ChameleonForms.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\ChameleonForms.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Humanizer">
@@ -93,6 +95,7 @@
     <Compile Include="Templates\IFormTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ChameleonForms.nuspec" />
     <None Include="packages.config" />
     <Content Include="Templates\HtmlHelpers.cshtml">
       <Generator>RazorGenerator</Generator>
