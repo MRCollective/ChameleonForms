@@ -5,7 +5,7 @@ This library will shape-shift your forms experience in ASP.NET MVC.
 
 It makes it really easy to tersely output a form and easily apply a different template with a single line of code. The library is built with extensibility and flexibility in mind and at any point if you have a usecase that is too complex for what the library handles you can easy drop back into plain Razor / HTML for that part and utilise this library for the bulk of the form that is more standard.
 
-This library is in the very early stages of development and can be considered Beta quality software. We are very confident that the code is comprehensively tested, however it only takes of the very simple cases at the moment.
+This library is in the very early stages of development and can be considered Beta quality software. We are very confident that the code is comprehensively tested, however it only takes care of the very simple cases at the moment.
 
 Following is an example of what you can do.
 
