@@ -57,7 +57,7 @@ namespace ChameleonForms.Tests.Templates
         [Test]
         public void Merge_attributes_from_multiple_objects()
         {
-            var h = HtmlWriter.OutputAttributes(new { id = "oldid", @class = "class" }, new { id = "newid", data_new_attr = "newattr" });
+            var h = HtmlWriter.OutputAttributes(new { id = "oldid", @class = "class", data_random = "random" }, new { id = "newid", data_new_attr = "newattr", @class = "class2 class3" });
 
             HtmlApprovals.VerifyHtml(h.ToString());
         }

@@ -53,7 +53,13 @@ namespace ChameleonForms.Templates
             var t = new TagBuilder("p");
             foreach (var attrs in attributesList)
             {
-                t.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(attrs));
+                var attrDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(attrs);
+                if (attrDictionary.ContainsKey("class"))
+                {
+                    t.AddCssClass(attrDictionary["class"].ToString());
+                    attrDictionary.Remove("class");
+                }
+                t.MergeAttributes(attrDictionary);
             }
             var sb = new StringBuilder();
             foreach (var attr in t.Attributes)
