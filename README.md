@@ -108,4 +108,4 @@ If you would like to contribute to this project then feel free to communicate wi
 Roadmap
 -------
 
-Feel free to check out our Trello board. It gives some idea as to the eventual goals we have for the project and the current backlog we are working against. Beware that it's pretty rough around the edges at the moment.
+Feel free to check out our [Trello board](https://trello.com/board/chameleonforms/504df3392ad570121c36c3f7). It gives some idea as to the eventual goals we have for the project and the current backlog we are working against. Beware that it's pretty rough around the edges at the moment.
