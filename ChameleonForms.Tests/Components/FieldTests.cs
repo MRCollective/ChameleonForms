@@ -24,6 +24,7 @@ namespace ChameleonForms.Tests.Components
         private readonly IHtmlString _label = new HtmlString("l");
         private readonly IHtmlString _field = new HtmlString("f");
         private readonly IHtmlString _validation = new HtmlString("v");
+        private readonly ModelMetadata _metadata = new ModelMetadata(new EmptyModelMetadataProvider(), null, null, typeof(object), null);
         private IForm<TestFieldViewModel, IFormTemplate> _f;
         private IFieldGenerator _g;
 
@@ -31,8 +32,8 @@ namespace ChameleonForms.Tests.Components
         public void Setup()
         {
             _f = Substitute.For<IForm<TestFieldViewModel, IFormTemplate>>();
-            _f.Template.BeginField(_label, _field, _validation).Returns(_beginHtml);
-            _f.Template.Field(_label, _field, _validation).Returns(_html);
+            _f.Template.BeginField(_label, _field, _validation, _metadata).Returns(_beginHtml);
+            _f.Template.Field(_label, _field, _validation, _metadata).Returns(_html);
             _f.Template.EndField().Returns(_endHtml);
 
             var autoSubstitute = AutoSubstituteContainer.Create();
@@ -43,6 +44,7 @@ namespace ChameleonForms.Tests.Components
             _g.GetLabelHtml().Returns(_label);
             _g.GetFieldHtml().Returns(_field);
             _g.GetValidationHtml().Returns(_validation);
+            _g.Metadata.Returns(_metadata);
         }
 
         private Field<TestFieldViewModel, IFormTemplate> Arrange(bool isParent)
@@ -113,7 +115,7 @@ namespace ChameleonForms.Tests.Components
         {
             var h = new HtmlString("");
             var s = new Section<TestFieldViewModel, IFormTemplate>(_f, "", false);
-            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>()).Returns(h);
+            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>()).Returns(h);
             _f.ClearReceivedCalls();
 
             var f = s.BeginFieldFor(m => m.SomeProperty);

@@ -29,10 +29,14 @@ namespace ChameleonForms.FieldGenerator
         {
             _helper = helper;
             _property = property;
+            Metadata = ModelMetadata.FromLambdaExpression(_property, _helper.ViewData);
         }
         #endregion
 
         #region IFieldGenerator Methods
+
+        public ModelMetadata Metadata { get; private set; }
+
         public IHtmlString GetLabelHtml()
         {
             return _helper.LabelFor(_property);
@@ -45,19 +49,18 @@ namespace ChameleonForms.FieldGenerator
 
         public IHtmlString GetFieldHtml()
         {
-            var metadata = ModelMetadata.FromLambdaExpression(_property, _helper.ViewData);
             var typeAttribute = default(string);
 
-            if (metadata.ModelType.IsEnum)
+            if (Metadata.ModelType.IsEnum)
                 return GetEnumHtml(_property.Compile().Invoke((TModel) _helper.ViewData.ModelMetadata.Model));
 
-            if (metadata.DataTypeName == DataType.Password.ToString())
+            if (Metadata.DataTypeName == DataType.Password.ToString())
                 return _helper.PasswordFor(_property);
 
-            if (metadata.DataTypeName == DataType.MultilineText.ToString())
+            if (Metadata.DataTypeName == DataType.MultilineText.ToString())
                 return _helper.TextAreaFor(_property);
 
-            if (typeof(HttpPostedFileBase).IsAssignableFrom(metadata.ModelType))
+            if (typeof(HttpPostedFileBase).IsAssignableFrom(Metadata.ModelType))
                 typeAttribute = "file";
 
             if (typeAttribute == default(string))

@@ -43,12 +43,12 @@
 @:                @elementHtml @validationHtml
 }
 
-@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml) {
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata) {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml)
 @:            </dd>
 }
 
-@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml) {
+@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata) {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml)
 @:                <dl>
 }

@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using System.Web.Mvc;
 
 namespace ChameleonForms.FieldGenerator
 {
@@ -7,6 +8,11 @@ namespace ChameleonForms.FieldGenerator
     /// </summary>
     public interface IFieldGenerator
     {
+        /// <summary>
+        /// The metadata for the form field.
+        /// </summary>
+        ModelMetadata Metadata { get; }
+
         /// <summary>
         /// Creates the HTML for the field control.
         /// </summary>

@@ -39,14 +39,14 @@ namespace ChameleonForms.Templates
             return HtmlHelpers.EndNestedSection();
         }
 
-        public IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml)
+        public IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata)
         {
-            return HtmlHelpers.Field(labelHtml, elementHtml, validationHtml);
+            return HtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata);
         }
 
-        public IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml)
+        public IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata)
         {
-            return HtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml);
+            return HtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata);
         }
 
         public IHtmlString EndField()
