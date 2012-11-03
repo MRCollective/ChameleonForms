@@ -9,12 +9,22 @@ using Humanizer;
 
 namespace ChameleonForms.FieldGenerator
 {
+    /// <summary>
+    /// The default field HTML generator.
+    /// </summary>
+    /// <typeparam name="TModel">The type of the view model for the form</typeparam>
+    /// <typeparam name="T">The type of the field being generated</typeparam>
     public class DefaultFieldGenerator<TModel, T> : IFieldGenerator
     {
         #region Setup
         private readonly HtmlHelper<TModel> _helper;
         private readonly Expression<Func<TModel, T>> _property;
 
+        /// <summary>
+        /// Constructs the field generator.
+        /// </summary>
+        /// <param name="helper">The HTML helper for the current view</param>
+        /// <param name="property">An expression to identify the property to generate the field for</param>
         public DefaultFieldGenerator(HtmlHelper<TModel> helper, Expression<Func<TModel, T>> property)
         {
             _helper = helper;
@@ -59,6 +69,11 @@ namespace ChameleonForms.FieldGenerator
         #endregion
 
         #region Helpers
+        /// <summary>
+        /// Creates the HTML for a drop down list that wraps an enumeration field.
+        /// </summary>
+        /// <param name="value">The current value of the field</param>
+        /// <returns>The HTML for the drop down list</returns>
         public virtual IHtmlString GetEnumHtml(T value)
         {
             var selectList = Enum.GetValues(typeof(T)).OfType<T>().Select(i => new SelectListItem { Text = (i as Enum).Humanize(), Value = i.ToString(), Selected = i.Equals(value)});
