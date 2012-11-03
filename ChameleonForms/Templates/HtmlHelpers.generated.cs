@@ -64,7 +64,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    ");
 
 
 #line 9 "..\..\Templates\HtmlHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, HtmlWriter.BuildFormTag(action, method, htmlAttributes, enctype));
+WebViewPage.WriteTo(@__razor_helper_writer, HtmlCreator.BuildFormTag(action, method, htmlAttributes, enctype));
 
 #line default
 #line hidden
@@ -156,7 +156,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <dl");
 
 
 #line 20 "..\..\Templates\HtmlHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, HtmlWriter.OutputAttributes(htmlAttributes));
+WebViewPage.WriteTo(@__razor_helper_writer, HtmlCreator.BuildAttributes(htmlAttributes));
 
 #line default
 #line hidden
@@ -223,7 +223,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                <dl");
 
 
 #line 27 "..\..\Templates\HtmlHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, HtmlWriter.OutputAttributes(htmlAttributes));
+WebViewPage.WriteTo(@__razor_helper_writer, HtmlCreator.BuildAttributes(htmlAttributes));
 
 #line default
 #line hidden

@@ -22,12 +22,12 @@ namespace ChameleonForms.Component
 
         public IHtmlString Submit(string value, string id = null, object htmlAttributes = null)
         {
-            return HtmlWriter.BuildSubmitButton(value, "submit", id, htmlAttributes);
+            return HtmlCreator.BuildSubmitButton(value, "submit", id, htmlAttributes);
         }
 
         public IHtmlString Reset(string value, string id = null, object htmlAttributes = null)
         {
-            return HtmlWriter.BuildSubmitButton(value, "reset", id, htmlAttributes);
+            return HtmlCreator.BuildSubmitButton(value, "reset", id, htmlAttributes);
         }
     }
 

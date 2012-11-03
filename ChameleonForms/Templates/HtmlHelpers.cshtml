@@ -6,7 +6,7 @@
 @* The @:'s are to stop compilation errors with the Razor engine due to unclosed HTML tags *@
 
 @helper BeginForm(string action, FormMethod method, object htmlAttributes, EncType? enctype) {
-@:    @HtmlWriter.BuildFormTag(action, method, htmlAttributes, enctype)
+@:    @HtmlCreator.BuildFormTag(action, method, htmlAttributes, enctype)
 }
 
 @helper EndForm() {
@@ -17,14 +17,14 @@
 @:    <fieldset>
 @:        <legend>@title</legend>
 @:        @leadingHtml
-@:        <dl@(HtmlWriter.OutputAttributes(htmlAttributes))>
+@:        <dl@(HtmlCreator.BuildAttributes(htmlAttributes))>
 }
     
 @helper BeginNestedSection(string title, IHtmlString leadingHtml, object htmlAttributes) {
 @:            <dt>@title</dt>
 @:            <dd>
 @:                @leadingHtml
-@:                <dl@(HtmlWriter.OutputAttributes(htmlAttributes))>
+@:                <dl@(HtmlCreator.BuildAttributes(htmlAttributes))>
 }
 
 @helper EndSection() {

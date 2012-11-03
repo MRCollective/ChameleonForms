@@ -7,9 +7,9 @@ using Humanizer;
 namespace ChameleonForms.Templates
 {
     /// <summary>
-    /// Helper class that outputs HTML for a view.
+    /// Helper class that creates HTML for a view.
     /// </summary>
-    public static class HtmlWriter
+    public static class HtmlCreator
     {
         /// <summary>
         /// Creates the HTML for a form tag.
@@ -64,7 +64,7 @@ namespace ChameleonForms.Templates
         /// </remarks>
         /// <param name="attributesList">The attribute specification objects</param>
         /// <returns>The HTML for the attributes</returns>
-        public static IHtmlString OutputAttributes(params object[] attributesList)
+        public static IHtmlString BuildAttributes(params object[] attributesList)
         {
             if (attributesList == null)
                 return new HtmlString(string.Empty);
