@@ -10,7 +10,7 @@ namespace ChameleonForms
     /// Interface for a Chameleon Form.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    /// <typeparam name="TTemplate">The type of the HTML template the form is using</typeparam>
+    /// <typeparam name="TTemplate">The type of HTML template render the form is using</typeparam>
     public interface IForm<TModel, out TTemplate> : IDisposable where TTemplate : IFormTemplate
     {
         /// <summary>
