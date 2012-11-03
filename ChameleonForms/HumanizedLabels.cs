@@ -6,8 +6,15 @@ using Humanizer;
 namespace ChameleonForms
 {
     // Of course it *should* be Humanised, but I'll keep consistency with the Humanizer library
+    /// <summary>
+    /// Data Annotations Model Metadata Provider that defaultly transforms camel-case view model property
+    /// names to sentence case for their display name.
+    /// </summary>
     public class HumanizedLabels : DataAnnotationsModelMetadataProvider
     {
+        /// <summary>
+        /// Register the HumanizedLabels metadata provider as the current Model Metadata Provider.
+        /// </summary>
         public static void Register()
         {
             ModelMetadataProviders.Current = new HumanizedLabels();

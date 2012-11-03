@@ -4,6 +4,9 @@ using ChameleonForms.Enums;
 
 namespace ChameleonForms.Templates
 {
+    /// <summary>
+    /// The default Chameleon Forms form template renderer.
+    /// </summary>
     public class DefaultFormTemplate : IFormTemplate
     {
         public IHtmlString BeginForm(string action, FormMethod method, object htmlAttributes, EncType? encType)
