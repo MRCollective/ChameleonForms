@@ -134,6 +134,36 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
+        public void Output_begin_information_message()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginMessage(MessageType.Information, "Heading");
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_begin_failure_message()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginMessage(MessageType.Failure, "Heading");
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_end_message()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.EndMessage();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Output_message_paragraph()
         {
             var t = new DefaultFormTemplate();
