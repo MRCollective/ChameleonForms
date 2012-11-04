@@ -64,6 +64,11 @@ namespace ChameleonForms.Templates
             return HtmlHelpers.EndMessage();
         }
 
+        public IHtmlString MessageParagraph(IHtmlString paragraph)
+        {
+            return HtmlHelpers.MessageParagraph(paragraph);
+        }
+
         public IHtmlString BeginNavigation()
         {
             return HtmlHelpers.BeginNavigation();

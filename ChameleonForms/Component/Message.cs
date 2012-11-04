@@ -45,7 +45,17 @@ namespace ChameleonForms.Component
         /// <returns>The HTML for the paragraph</returns>
         public virtual IHtmlString Paragraph(string paragraph)
         {
-            return new HtmlString(string.Format("<p>{0}</p>{1}", HttpUtility.HtmlEncode(paragraph), Environment.NewLine));
+            return Form.Template.MessageParagraph(new HtmlString(HttpUtility.HtmlEncode(paragraph)));
+        }
+
+        /// <summary>
+        /// Creates the HTML for a paragraph in the message.
+        /// </summary>
+        /// <param name="paragraph">The paragraph to output</param>
+        /// <returns>The HTML for the paragraph</returns>
+        public virtual IHtmlString Paragraph(IHtmlString paragraph)
+        {
+            return Form.Template.MessageParagraph(paragraph);
         }
     }
 

@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
@@ -130,6 +129,16 @@ namespace ChameleonForms.Tests.Templates
             var t = new DefaultFormTemplate();
 
             var result = t.EndNavigation();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_message_paragraph()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.MessageParagraph(new HtmlString("<strong>asdf</strong>"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

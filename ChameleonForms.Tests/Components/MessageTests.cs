@@ -61,13 +61,29 @@ namespace ChameleonForms.Tests.Components
         }
 
         [Test]
-        public void Wrap_message_in_a_paragraph_html_tag()
+        public void Create_a_paragraph_with_a_string()
         {
+            var html = Substitute.For<IHtmlString>();
             var s = Arrange(MessageType.Success);
+            _f.Template.MessageParagraph(Arg.Is<IHtmlString>(h => h.ToHtmlString() == "aerg&amp;%^&quot;esrg&#39;"))
+                .Returns(html);
 
-            var h = s.Paragraph("aerg&%^\"esrg'");
+            var paragraph = s.Paragraph("aerg&%^\"esrg'");
 
-            Assert.That(h.ToString(), Is.EqualTo("<p>aerg&amp;%^&quot;esrg&#39;</p>\r\n"));
+            Assert.That(paragraph, Is.EqualTo(html));
+        }
+
+        [Test]
+        public void Create_a_paragraph_with_html()
+        {
+            var inputHtml = Substitute.For<IHtmlString>();
+            var outputHtml = Substitute.For<IHtmlString>();
+            var s = Arrange(MessageType.Success);
+            _f.Template.MessageParagraph(inputHtml).Returns(outputHtml);
+
+            var paragraph = s.Paragraph(inputHtml);
+
+            Assert.That(paragraph, Is.EqualTo(outputHtml));
         }
     }
 }

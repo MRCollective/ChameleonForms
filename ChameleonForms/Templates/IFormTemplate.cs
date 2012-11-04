@@ -106,5 +106,12 @@ namespace ChameleonForms.Templates
         /// </summary>
         /// <returns>The ending HTML for the message</returns>
         IHtmlString EndMessage();
+
+        /// <summary>
+        /// Creates the HTML for a paragraph in a message.
+        /// </summary>
+        /// <param name="paragraph">The paragraph HTML</param>
+        /// <returns>The HTML for the message paragraph</returns>
+        IHtmlString MessageParagraph(IHtmlString paragraph);
     }
 }
