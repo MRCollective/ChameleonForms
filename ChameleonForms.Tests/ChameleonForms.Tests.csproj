@@ -114,7 +114,7 @@
     <Compile Include="HumanizedLabelsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\DefaultFormTemplateTests.cs" />
-    <Compile Include="Templates\HtmlWriterTests.cs" />
+    <Compile Include="Templates\HtmlCreatorTests.cs" />
     <Compile Include="Templates\HtmlAttributesTests.cs" />
   </ItemGroup>
   <ItemGroup>
