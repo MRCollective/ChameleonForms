@@ -52,6 +52,9 @@ namespace ChameleonForms.Component
         /// <summary>
         /// Creates a single form field as a child of a form section.
         /// </summary>
+        /// <example>
+        /// @s.FieldFor(m => m.FirstName)
+        /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
@@ -66,6 +69,11 @@ namespace ChameleonForms.Component
         /// <summary>
         /// Creates a single form field as a child of a form section that can have other form fields nested within it.
         /// </summary>
+        /// <example>
+        /// @using (var f = s.BeginFieldFor(m => m.Company)) {
+        ///     @f.FieldFor(m => m.PositionTitle)
+        /// }
+        /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
@@ -80,6 +88,11 @@ namespace ChameleonForms.Component
         /// <summary>
         /// Creates a single form field as a child of another form field.
         /// </summary>
+        /// <example>
+        /// @using (var f = s.BeginFieldFor(m => m.Company)) {
+        ///     @f.FieldFor(m => m.PositionTitle)
+        /// }
+        /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>

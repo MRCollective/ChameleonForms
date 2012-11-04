@@ -67,6 +67,11 @@ namespace ChameleonForms.Component
         /// <summary>
         /// Creates a message.
         /// </summary>
+        /// <example>
+        /// @using (var m = f.BeginMessage(MessageType.Success, "Your submission was successful")) {
+        ///     @m.Paragraph(string.Format("Your item was successfully created with id {0}", Model.Id))
+        /// }
+        /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <param name="form">The form the message is being created in</param>
