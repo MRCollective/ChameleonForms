@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using ChameleonForms.Component.Config;
 using Humanizer;
 
 namespace ChameleonForms.FieldGenerator
@@ -37,28 +38,29 @@ namespace ChameleonForms.FieldGenerator
 
         public ModelMetadata Metadata { get; private set; }
 
-        public IHtmlString GetLabelHtml()
+        public IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
         {
             return _helper.LabelFor(_property);
         }
 
-        public IHtmlString GetValidationHtml()
+        public IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)
         {
             return _helper.ValidationMessageFor(_property);
         }
 
-        public IHtmlString GetFieldHtml()
+        public IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration)
         {
+            fieldConfiguration = fieldConfiguration ?? new FieldConfiguration();
             var typeAttribute = default(string);
 
             if (Metadata.ModelType.IsEnum)
                 return GetEnumHtml(_property.Compile().Invoke((TModel) _helper.ViewData.ModelMetadata.Model));
 
             if (Metadata.DataTypeName == DataType.Password.ToString())
-                return _helper.PasswordFor(_property);
+                return _helper.PasswordFor(_property, fieldConfiguration.Attributes.ToDictionary());
 
             if (Metadata.DataTypeName == DataType.MultilineText.ToString())
-                return _helper.TextAreaFor(_property);
+                return _helper.TextAreaFor(_property, fieldConfiguration.Attributes.ToDictionary());
 
             if (typeof(HttpPostedFileBase).IsAssignableFrom(Metadata.ModelType))
                 typeAttribute = "file";
@@ -66,8 +68,8 @@ namespace ChameleonForms.FieldGenerator
             if (typeAttribute == default(string))
                 typeAttribute = "text";
 
-            var attrs = new { type = typeAttribute};
-            return _helper.TextBoxFor(_property, attrs);
+            fieldConfiguration.Attributes.Attr(type => typeAttribute);
+            return _helper.TextBoxFor(_property, fieldConfiguration.Attributes.ToDictionary());
         }
         #endregion
 

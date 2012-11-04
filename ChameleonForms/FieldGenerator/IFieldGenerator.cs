@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Component.Config;
 
 namespace ChameleonForms.FieldGenerator
 {
@@ -17,18 +18,18 @@ namespace ChameleonForms.FieldGenerator
         /// Creates the HTML for the field control.
         /// </summary>
         /// <returns>The HTML for the field control</returns>
-        IHtmlString GetFieldHtml();
+        IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field label.
         /// </summary>
         /// <returns>The HTML for the field label</returns>
-        IHtmlString GetLabelHtml();
+        IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field's validation messages
         /// </summary>
         /// <returns>The HTML for the field's validation messages</returns>
-        IHtmlString GetValidationHtml();
+        IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration);
     }
 }

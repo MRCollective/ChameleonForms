@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component;
+using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerator;
 using ChameleonForms.Templates;
 using ChameleonForms.Tests.Helpers;
@@ -41,15 +42,15 @@ namespace ChameleonForms.Tests.Components
             _f.HtmlHelper.Returns(helper);
 
             _g = Substitute.For<IFieldGenerator>();
-            _g.GetLabelHtml().Returns(_label);
-            _g.GetFieldHtml().Returns(_field);
-            _g.GetValidationHtml().Returns(_validation);
+            _g.GetLabelHtml(Arg.Any<IFieldConfiguration>()).Returns(_label);
+            _g.GetFieldHtml(Arg.Any<IFieldConfiguration>()).Returns(_field);
+            _g.GetValidationHtml(Arg.Any<IFieldConfiguration>()).Returns(_validation);
             _g.Metadata.Returns(_metadata);
         }
 
         private Field<TestFieldViewModel, IFormTemplate> Arrange(bool isParent)
         {
-            return new Field<TestFieldViewModel, IFormTemplate>(_f, isParent, _g);
+            return new Field<TestFieldViewModel, IFormTemplate>(_f, isParent, _g, null);
         }
         #endregion
 
@@ -100,7 +101,7 @@ namespace ChameleonForms.Tests.Components
         [Test]
         public void Construct_nested_field_via_extension_method()
         {
-            var s = new Field<TestFieldViewModel, IFormTemplate>(_f, false, _g);
+            var s = new Field<TestFieldViewModel, IFormTemplate>(_f, false, _g, null);
             _f.ClearReceivedCalls();
 
             var f = s.FieldFor(m => m.SomeProperty);

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
+using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerator;
+using ChameleonForms.Templates;
 using ChameleonForms.Tests.Helpers;
 using NUnit.Framework;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
@@ -65,7 +66,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         {
             var g = Arrange(m => m.SomeProperty);
 
-            var result = g.GetLabelHtml();
+            var result = g.GetLabelHtml(null);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -77,7 +78,7 @@ namespace ChameleonForms.Tests.FieldGenerator
             _h.ViewContext.ViewData.ModelState.AddModelError("SomeProperty", "asdf");
             var g = Arrange(m => m.SomeProperty);
 
-            var result = g.GetValidationHtml();
+            var result = g.GetValidationHtml(null);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -87,7 +88,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         {
             var g = Arrange(m => m.SomeProperty);
 
-            var result = g.GetFieldHtml();
+            var result = g.GetFieldHtml(new FieldConfiguration {Attributes = new HtmlAttributes(data_attr => "value")});
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -97,7 +98,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         {
             var g = Arrange(m => m.Password);
 
-            var result = g.GetFieldHtml();
+            var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -107,7 +108,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         {
             var g = Arrange(m => m.Textarea);
 
-            var result = g.GetFieldHtml();
+            var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -117,7 +118,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         {
             var g = Arrange(m => m.TestEnum, m => m.TestEnum = TestEnum.ValueWithDescriptionAttribute);
 
-            var result = g.GetFieldHtml();
+            var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -127,7 +128,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         {
             var g = Arrange(m => m.FileUpload);
 
-            var result = g.GetFieldHtml();
+            var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

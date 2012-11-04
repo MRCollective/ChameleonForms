@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web;
+using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerator;
 using ChameleonForms.Templates;
 
@@ -14,6 +15,7 @@ namespace ChameleonForms.Component
     public class Field<TModel, TTemplate> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
     {
         private readonly IFieldGenerator _fieldGenerator;
+        private readonly IFieldConfiguration _config;
         private bool IsParent { get { return !IsSelfClosing; } }
 
         /// <summary>
@@ -22,18 +24,20 @@ namespace ChameleonForms.Component
         /// <param name="form">The form the field is being created in</param>
         /// <param name="isParent">Whether or not the field has other fields nested within it</param>
         /// <param name="fieldGenerator">A field HTML generator class</param>
-        public Field(IForm<TModel, TTemplate> form, bool isParent, IFieldGenerator fieldGenerator)
+        /// <param name="config"> </param>
+        public Field(IForm<TModel, TTemplate> form, bool isParent, IFieldGenerator fieldGenerator, IFieldConfiguration config)
             : base(form, !isParent)
         {
             _fieldGenerator = fieldGenerator;
+            _config = config;
             Initialise();
         }
         
         public override IHtmlString Begin()
         {
             return !IsParent
-                ? Form.Template.Field(_fieldGenerator.GetLabelHtml(), _fieldGenerator.GetFieldHtml(), _fieldGenerator.GetValidationHtml(), _fieldGenerator.Metadata)
-                : Form.Template.BeginField(_fieldGenerator.GetLabelHtml(), _fieldGenerator.GetFieldHtml(), _fieldGenerator.GetValidationHtml(), _fieldGenerator.Metadata);
+                ? Form.Template.Field(_fieldGenerator.GetLabelHtml(_config), _fieldGenerator.GetFieldHtml(_config), _fieldGenerator.GetValidationHtml(_config), _fieldGenerator.Metadata)
+                : Form.Template.BeginField(_fieldGenerator.GetLabelHtml(_config), _fieldGenerator.GetFieldHtml(_config), _fieldGenerator.GetValidationHtml(_config), _fieldGenerator.Metadata);
         }
 
         public override IHtmlString End()
@@ -60,10 +64,11 @@ namespace ChameleonForms.Component
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
+        /// <param name="config">Any configuration information for the field</param>
         /// <returns>The form field</returns>
-        public static Field<TModel, TTemplate> FieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static Field<TModel, TTemplate> FieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null) where TTemplate : IFormTemplate
         {
-            return new Field<TModel, TTemplate>(section.Form, false, new DefaultFieldGenerator<TModel, T>(section.Form.HtmlHelper, property));
+            return new Field<TModel, TTemplate>(section.Form, false, new DefaultFieldGenerator<TModel, T>(section.Form.HtmlHelper, property), config);
         }
 
         /// <summary>
@@ -79,10 +84,11 @@ namespace ChameleonForms.Component
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
+        /// <param name="config">Any configuration information for the field</param>
         /// <returns></returns>
-        public static Field<TModel, TTemplate> BeginFieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static Field<TModel, TTemplate> BeginFieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null) where TTemplate : IFormTemplate
         {
-            return new Field<TModel, TTemplate>(section.Form, true, new DefaultFieldGenerator<TModel, T>(section.Form.HtmlHelper, property));
+            return new Field<TModel, TTemplate>(section.Form, true, new DefaultFieldGenerator<TModel, T>(section.Form.HtmlHelper, property), config);
         }
 
         /// <summary>
@@ -98,10 +104,11 @@ namespace ChameleonForms.Component
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="field">The parent field the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
+        /// <param name="config">Any configuration information for the field</param>
         /// <returns></returns>
-        public static Field<TModel, TTemplate> FieldFor<TModel, TTemplate, T>(this Field<TModel, TTemplate> field, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static Field<TModel, TTemplate> FieldFor<TModel, TTemplate, T>(this Field<TModel, TTemplate> field, Expression<Func<TModel, T>> property, FieldConfiguration config = null) where TTemplate : IFormTemplate
         {
-            return new Field<TModel, TTemplate>(field.Form, false, new DefaultFieldGenerator<TModel, T>(field.Form.HtmlHelper, property));
+            return new Field<TModel, TTemplate>(field.Form, false, new DefaultFieldGenerator<TModel, T>(field.Form.HtmlHelper, property), config);
         }
     }
 }

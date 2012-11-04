@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
@@ -154,6 +155,15 @@ namespace ChameleonForms.Templates
                 );
             }
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Returns the HTML attributes as a dictionary.
+        /// </summary>
+        /// <returns>A dictionary of HTML attributes compatible with the standard ASP.NET MVC method signatures</returns>
+        public IDictionary<string, object> ToDictionary()
+        {
+            return _tagBuilder.Attributes.ToDictionary<KeyValuePair<string, string>, string, object>(attribute => attribute.Key, attribute => attribute.Value);
         }
     }
 
