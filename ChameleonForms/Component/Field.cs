@@ -7,8 +7,10 @@ using ChameleonForms.Templates;
 namespace ChameleonForms.Component
 {
     /// <summary>
-    /// Wraps around the output of a single form field.
+    /// Wraps the output of a single form field.
     /// </summary>
+    /// <typeparam name="TModel">The view model type for the current view</typeparam>
+    /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
     public class Field<TModel, TTemplate> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
     {
         private readonly IFieldGenerator _fieldGenerator;
