@@ -14,21 +14,21 @@ namespace ChameleonForms.Tests.Components
         private readonly IHtmlString _nestedBeginHtml = new HtmlString("");
         private readonly IHtmlString _nestedEndHtml = new HtmlString("");
         private IForm<object, IFormTemplate> _f;
-        private const string Title = "title";
+        private readonly IHtmlString _title = new HtmlString("title");
 
         [SetUp]
         public void Setup()
         {
             _f = Substitute.For<IForm<object, IFormTemplate>>();
-            _f.Template.BeginSection(Title, null, null).Returns(_beginHtml);
+            _f.Template.BeginSection(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _title.ToHtmlString()), Arg.Any<IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_beginHtml);
             _f.Template.EndSection().Returns(_endHtml);
-            _f.Template.BeginNestedSection(Title, null, null).Returns(_nestedBeginHtml);
+            _f.Template.BeginNestedSection(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _title.ToHtmlString()), Arg.Any<IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_nestedBeginHtml);
             _f.Template.EndNestedSection().Returns(_nestedEndHtml);
         }
 
         private Section<object, IFormTemplate> Arrange(bool isNested)
         {
-            return new Section<object, IFormTemplate>(_f, Title, isNested);
+            return new Section<object, IFormTemplate>(_f, _title, isNested);
         }
 
         [Test]
@@ -66,7 +66,7 @@ namespace ChameleonForms.Tests.Components
         [Test]
         public void Construct_section_via_extension_method()
         {
-            var s = _f.BeginSection(Title);
+            var s = _f.BeginSection(_title.ToHtmlString());
 
             Assert.That(s, Is.Not.Null);
             _f.Received().Write(_beginHtml);
@@ -75,9 +75,9 @@ namespace ChameleonForms.Tests.Components
         [Test]
         public void Construct_nested_section_via_extension_method()
         {
-            var s = _f.BeginSection(Title);
+            var s = _f.BeginSection(_title.ToHtmlString());
             _f.ClearReceivedCalls();
-            var ss = s.BeginSection(Title);
+            var ss = s.BeginSection(_title.ToHtmlString());
 
             Assert.That(ss, Is.Not.Null);
             _f.Received().Write(_nestedBeginHtml);

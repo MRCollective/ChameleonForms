@@ -46,7 +46,7 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use expressed as an anonymous object</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
-        public Form(HtmlHelper<TModel> helper, TTemplate template, string action, FormMethod method, object htmlAttributes, EncType? enctype)
+        public Form(HtmlHelper<TModel> helper, TTemplate template, string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
         {
             HtmlHelper = helper;
             Template = template;
@@ -88,6 +88,26 @@ namespace ChameleonForms
         /// <param name="enctype">The encoding type the form submission should use</param>
         /// <returns>A <see cref="Form{TModel,TTemplate}"/> object with an instance of the default form template renderer.</returns>
         public static IForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, object htmlAttributes = null, EncType? enctype = null)
+        {
+            return helper.BeginChameleonForm(action, method, htmlAttributes.ToHtmlAttributes(), enctype);
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="Form{TModel,TTemplate}"/> object with the default Chameleon form template renderer.
+        /// </summary>
+        /// <example>
+        /// @using (var f = Html.BeginChameleonForm(...)) {
+        ///     ...
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>
+        /// <param name="helper">The HTML Helper for the current view</param>
+        /// <param name="action">The action the form should submit to</param>
+        /// <param name="method">The HTTP method the form submission should use</param>
+        /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
+        /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <returns>A <see cref="Form{TModel,TTemplate}"/> object with an instance of the default form template renderer.</returns>
+        public static IForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             return new Form<TModel, DefaultFormTemplate>(helper, new DefaultFormTemplate(), action, method, htmlAttributes, enctype);
         }

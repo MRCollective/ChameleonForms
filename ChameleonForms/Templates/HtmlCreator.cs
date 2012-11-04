@@ -1,5 +1,4 @@
-﻿using System.Text;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Enums;
 using Humanizer;
@@ -19,10 +18,11 @@ namespace ChameleonForms.Templates
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the form; specified as an anonymous object</param>
         /// <param name="encType">The encoding type the form uses</param>
         /// <returns>The HTML for the form</returns>
-        public static IHtmlString BuildFormTag(string action, FormMethod method, object htmlAttributes = null, EncType? encType = null)
+        public static IHtmlString BuildFormTag(string action, FormMethod method, HtmlAttributes htmlAttributes = null, EncType? encType = null)
         {
             var tagBuilder = new TagBuilder("form");
-            tagBuilder.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            if (htmlAttributes != null)
+                tagBuilder.MergeAttributes(htmlAttributes.Attributes);
             tagBuilder.MergeAttribute("action", action);
             tagBuilder.MergeAttribute("method", HtmlHelper.GetFormMethodString(method), true);
             if (encType.HasValue)
@@ -53,42 +53,6 @@ namespace ChameleonForms.Templates
             t.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes), true);
 
             return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
-        }
-
-        /// <summary>
-        /// Creates the HTML for a list of HTML attributes as specified by one or more anonymous objects representing attribute values.
-        /// </summary>
-        /// <remarks>
-        /// Precedence is given to the earlier objects passed into the method.
-        /// Classes are culmulative between attribute objects.
-        /// </remarks>
-        /// <param name="attributesList">The attribute specification objects</param>
-        /// <returns>The HTML for the attributes</returns>
-        public static IHtmlString BuildAttributes(params object[] attributesList)
-        {
-            if (attributesList == null)
-                return new HtmlString(string.Empty);
-
-            var t = new TagBuilder("p");
-            foreach (var attrs in attributesList)
-            {
-                var attrDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(attrs);
-                if (attrDictionary.ContainsKey("class"))
-                {
-                    t.AddCssClass(attrDictionary["class"].ToString());
-                    attrDictionary.Remove("class");
-                }
-                t.MergeAttributes(attrDictionary);
-            }
-            var sb = new StringBuilder();
-            foreach (var attr in t.Attributes)
-            {
-                sb.Append(string.Format(" {0}=\"{1}\"",
-                    HttpUtility.HtmlEncode(attr.Key),
-                    HttpUtility.HtmlEncode(attr.Value))
-                );
-            }
-            return new HtmlString(sb.ToString());
         }
     }
 }

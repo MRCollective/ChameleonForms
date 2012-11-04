@@ -15,9 +15,9 @@ namespace ChameleonForms.Templates
         /// <param name="action">The form action</param>
         /// <param name="method">The form method</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use; specified as an anonymous object</param>
-        /// <param name="encType">The encoding type for the form</param>
+        /// <param name="enctype">The encoding type for the form</param>
         /// <returns>The starting HTML for a form</returns>
-        IHtmlString BeginForm(string action, FormMethod method, object htmlAttributes, EncType? encType);
+        IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype);
 
         /// <summary>
         /// Creates the ending HTML for a form.
@@ -32,7 +32,7 @@ namespace ChameleonForms.Templates
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes the section container should use; specified as an anonymous object</param>
         /// <returns>The beginning HTML for a section</returns>
-        IHtmlString BeginSection(string title, IHtmlString leadingHtml, object htmlAttributes);
+        IHtmlString BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes);
 
         /// <summary>
         /// Creates the ending HTML for a section.
@@ -47,7 +47,7 @@ namespace ChameleonForms.Templates
         /// <param name="leadingHtml">Any HTML to output at the start of the nested section</param>
         /// <param name="htmlAttributes">Any HTML attributes the nested section container should use; specified as an anaonymous object</param>
         /// <returns>The beginning HTML for a nested section</returns>
-        IHtmlString BeginNestedSection(string title, IHtmlString leadingHtml, object htmlAttributes);
+        IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes);
 
         /// <summary>
         /// Creates the ending HTML for a section that is nested within another section.
@@ -99,7 +99,7 @@ namespace ChameleonForms.Templates
         /// <param name="messageType">The type of message being displayed</param>
         /// <param name="heading">The heading for the message</param>
         /// <returns>The beginning HTML for the message</returns>
-        IHtmlString BeginMessage(MessageType messageType, string heading);
+        IHtmlString BeginMessage(MessageType messageType, IHtmlString heading);
 
         /// <summary>
         /// Creates the ending HTML for a message.

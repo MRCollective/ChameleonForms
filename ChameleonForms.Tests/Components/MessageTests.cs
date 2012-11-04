@@ -1,9 +1,7 @@
 ﻿using System.Web;
-using System.Web.Mvc;
 using ChameleonForms.Component;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
-using ChameleonForms.Tests.Helpers;
 using FizzWare.NBuilder;
 using NSubstitute;
 using NUnit.Framework;
@@ -13,7 +11,7 @@ namespace ChameleonForms.Tests.Components
     [TestFixture]
     public class MessageShould
     {
-        private const string TestHeading = "TestHeading";
+        private readonly IHtmlString _testHeading = new HtmlString("TestHeading");
         private readonly IHtmlString _beginHtml = new HtmlString("");
         private readonly IHtmlString _endHtml = new HtmlString("");
         private IForm<object, IFormTemplate> _f;
@@ -22,13 +20,13 @@ namespace ChameleonForms.Tests.Components
         public void Setup()
         {
             _f = Substitute.For<IForm<object, IFormTemplate>>();
-            _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any<string>()).Returns(_beginHtml);
+            _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any<IHtmlString>()).Returns(_beginHtml);
             _f.Template.EndMessage().Returns(_endHtml);
         }
 
         private Message<object, IFormTemplate> Arrange(MessageType messageType)
         {
-            return new Message<object, IFormTemplate>(_f, messageType, TestHeading);
+            return new Message<object, IFormTemplate>(_f, messageType, _testHeading);
         }
 
         private static readonly MessageType[] MessageTypes = EnumHelper.GetValues<MessageType>();
@@ -39,7 +37,7 @@ namespace ChameleonForms.Tests.Components
             var s = Arrange(messageType);
 
             Assert.That(s.Begin(), Is.EqualTo(_beginHtml));
-            _f.Template.Received().BeginMessage(messageType, TestHeading);
+            _f.Template.Received().BeginMessage(messageType, _testHeading);
         }
         
         [Test]
@@ -54,7 +52,7 @@ namespace ChameleonForms.Tests.Components
         [Test]
         public void Construct_section_via_extension_method([ValueSource("MessageTypes")] MessageType messageType)
         {
-            var s = _f.BeginMessage(messageType, TestHeading);
+            var s = _f.BeginMessage(messageType, _testHeading.ToHtmlString());
 
             Assert.That(s, Is.Not.Null);
             _f.Received().Write(_beginHtml);

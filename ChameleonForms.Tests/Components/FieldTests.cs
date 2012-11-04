@@ -88,7 +88,7 @@ namespace ChameleonForms.Tests.Components
         [Test]
         public void Construct_field_via_extension_method()
         {
-            var s = new Section<TestFieldViewModel, IFormTemplate>(_f, "", false);
+            var s = new Section<TestFieldViewModel, IFormTemplate>(_f, new HtmlString(""), false);
             _f.ClearReceivedCalls();
 
             var f = s.FieldFor(m => m.SomeProperty);
@@ -114,7 +114,7 @@ namespace ChameleonForms.Tests.Components
         public void Construct_parent_field_via_extension_method()
         {
             var h = new HtmlString("");
-            var s = new Section<TestFieldViewModel, IFormTemplate>(_f, "", false);
+            var s = new Section<TestFieldViewModel, IFormTemplate>(_f, new HtmlString(""), false);
             _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>()).Returns(h);
             _f.ClearReceivedCalls();
 

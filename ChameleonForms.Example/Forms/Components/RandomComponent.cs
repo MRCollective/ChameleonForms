@@ -1,9 +1,9 @@
-﻿using System.Net.Http;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component;
 using ChameleonForms.Enums;
 using ChameleonForms.Example.Forms.Templates;
+using ChameleonForms.Templates;
 
 namespace ChameleonForms.Example.Forms.Components
 {
@@ -47,7 +47,7 @@ namespace ChameleonForms.Example.Forms.Components
     {
         public static Form<TModel, RandomFormTemplate> BeginRandomForm<TModel>(this HtmlHelper<TModel> helper, string action, FormMethod method, object htmlAttributes = null, EncType? enctype = null)
         {
-            return new Form<TModel, RandomFormTemplate>(helper, new RandomFormTemplate(), action, method, htmlAttributes, enctype);
+            return new Form<TModel, RandomFormTemplate>(helper, new RandomFormTemplate(), action, method, htmlAttributes.ToHtmlAttributes(), enctype);
         }
 
         public static RandomComponent<TModel> RandomComponent<TModel>(this Form<TModel, RandomFormTemplate>  form)

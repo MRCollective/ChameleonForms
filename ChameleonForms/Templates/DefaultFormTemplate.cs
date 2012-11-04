@@ -9,9 +9,9 @@ namespace ChameleonForms.Templates
     /// </summary>
     public class DefaultFormTemplate : IFormTemplate
     {
-        public IHtmlString BeginForm(string action, FormMethod method, object htmlAttributes, EncType? encType)
+        public IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
         {
-            return HtmlHelpers.BeginForm(action, method, htmlAttributes, encType);
+            return HtmlCreator.BuildFormTag(action, method, htmlAttributes, enctype);
         }
 
         public IHtmlString EndForm()
@@ -19,7 +19,7 @@ namespace ChameleonForms.Templates
             return HtmlHelpers.EndForm();
         }
 
-        public IHtmlString BeginSection(string title, IHtmlString leadingHtml, object htmlAttributes)
+        public IHtmlString BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
             return HtmlHelpers.BeginSection(title, leadingHtml, htmlAttributes);
         }
@@ -29,7 +29,7 @@ namespace ChameleonForms.Templates
             return HtmlHelpers.EndSection();
         }
 
-        public IHtmlString BeginNestedSection(string title, IHtmlString leadingHtml, object htmlAttributes)
+        public IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
             return HtmlHelpers.BeginNestedSection(title, leadingHtml, htmlAttributes);
         }
@@ -54,7 +54,7 @@ namespace ChameleonForms.Templates
             return HtmlHelpers.EndField();
         }
 
-        public IHtmlString BeginMessage(MessageType messageType, string heading)
+        public IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
         {
             return HtmlHelpers.BeginMessage(messageType, heading);
         }

@@ -13,7 +13,7 @@ namespace ChameleonForms.Component
     public class Message<TModel, TTemplate> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
     {
         private readonly MessageType _messageType;
-        private readonly string _heading;
+        private readonly IHtmlString _heading;
 
         /// <summary>
         /// Creates a message.
@@ -21,7 +21,7 @@ namespace ChameleonForms.Component
         /// <param name="form">The form the message is being created in</param>
         /// <param name="messageType">The type of message to display</param>
         /// <param name="heading">The heading for the message</param>
-        public Message(IForm<TModel, TTemplate> form, MessageType messageType, string heading) : base(form, false)
+        public Message(IForm<TModel, TTemplate> form, MessageType messageType, IHtmlString heading) : base(form, false)
         {
             _messageType = messageType;
             _heading = heading;
@@ -80,7 +80,7 @@ namespace ChameleonForms.Component
         /// <returns>The message</returns>
         public static Message<TModel, TTemplate> BeginMessage<TModel, TTemplate>(this IForm<TModel, TTemplate> form, MessageType messageType, string heading) where TTemplate : IFormTemplate
         {
-            return new Message<TModel, TTemplate>(form, messageType, heading);
+            return new Message<TModel, TTemplate>(form, messageType, new HtmlString(HttpUtility.HtmlEncode(heading)));
         }
     }
 }

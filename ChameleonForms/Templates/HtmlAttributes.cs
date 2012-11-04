@@ -14,6 +14,11 @@ namespace ChameleonForms.Templates
         private readonly TagBuilder _tagBuilder = new TagBuilder("p");
 
         /// <summary>
+        /// Dictionary of the attributes currently stored in the object.
+        /// </summary>
+        public IDictionary<string, string> Attributes { get { return _tagBuilder.Attributes; } }
+
+        /// <summary>
         /// Constructs a <see cref="HtmlAttributes"/> object using lambda methods to express the attributes.
         /// </summary>
         /// <example>

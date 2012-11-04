@@ -17,7 +17,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginForm("/", FormMethod.Post, new {}, EncType.Multipart);
+            var result = t.BeginForm("/", FormMethod.Post, new HtmlAttributes(data_attr => "value"), EncType.Multipart);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -48,7 +48,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginSection("Section Title", new HtmlString("<p>hello</p>"), new {@class = "asdf"});
+            var result = t.BeginSection(new HtmlString("Section Title"), new HtmlString("<p>hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -68,7 +68,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginNestedSection("Section Title", new HtmlString("<p>Hello</p>"), new {@class = "asdf"});
+            var result = t.BeginNestedSection(new HtmlString("Section Title"), new HtmlString("<p>Hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -138,7 +138,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Information, "Heading");
+            var result = t.BeginMessage(MessageType.Information, new HtmlString("Heading"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -148,7 +148,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Failure, "Heading");
+            var result = t.BeginMessage(MessageType.Failure, new HtmlString("Heading"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
