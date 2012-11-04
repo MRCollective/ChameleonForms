@@ -8,6 +8,21 @@ using ChameleonForms.Templates;
 namespace ChameleonForms.Component
 {
     /// <summary>
+    /// Helper for field configuration.
+    /// </summary>
+    public static class Field
+    {
+        /// <summary>
+        /// Returns a field configuration object.
+        /// </summary>
+        /// <returns>A field configuration</returns>
+        public static FieldConfiguration Configure()
+        {
+            return new FieldConfiguration();
+        }
+    }
+
+    /// <summary>
     /// Wraps the output of a single form field.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
@@ -17,7 +32,7 @@ namespace ChameleonForms.Component
         private readonly IFieldGenerator _fieldGenerator;
         private readonly IFieldConfiguration _config;
         private bool IsParent { get { return !IsSelfClosing; } }
-
+        
         /// <summary>
         /// Creates a form field.
         /// </summary>
