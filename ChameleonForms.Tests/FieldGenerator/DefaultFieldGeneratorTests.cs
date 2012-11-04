@@ -71,9 +71,10 @@ namespace ChameleonForms.Tests.FieldGenerator
         }
 
         [Test]
-        [Ignore("Can't figure out a good way to test this properly.")]
         public void Use_correct_html_for_field_validation()
         {
+            _h.ViewContext.ClientValidationEnabled = true;
+            _h.ViewContext.ViewData.ModelState.AddModelError("SomeProperty", "asdf");
             var g = Arrange(m => m.SomeProperty);
 
             var result = g.GetValidationHtml();
