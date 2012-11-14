@@ -59,7 +59,7 @@ namespace ChameleonForms.Tests.Components
         {
             var s = Arrange();
 
-            var h = s.Submit("value", "id", new {@class = "someclass"});
+            var h = s.Submit("value", "id", new HtmlAttributes(new {@class = "someclass"}));
 
             HtmlApprovals.VerifyHtml(h.ToHtmlString());
         }

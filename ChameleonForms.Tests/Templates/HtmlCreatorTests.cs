@@ -20,7 +20,7 @@ namespace ChameleonForms.Tests.Templates
         [Test]
         public void Generate_submit_button_with_non_default_options()
         {
-            var h = HtmlCreator.BuildSubmitButton("thevalue", "reset", "myId", new {onclick = "return false;", @class = "a&^&*FGdf"});
+            var h = HtmlCreator.BuildSubmitButton("thevalue", "reset", "myId", new HtmlAttributes(new {onclick = "return false;", @class = "a&^&*FGdf"}));
 
             HtmlApprovals.VerifyHtml(h.ToHtmlString());
         }

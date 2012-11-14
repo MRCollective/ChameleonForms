@@ -38,9 +38,9 @@ namespace ChameleonForms.Templates
         /// <param name="value">The text to display for the button</param>
         /// <param name="type">The type of submit button; submit (default) or reset</param>
         /// <param name="id">The id/name to use for the button</param>
-        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button; specified as an anonymous object</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
-        public static IHtmlString BuildSubmitButton(string value, string type = "submit", string id = null, object htmlAttributes = null)
+        public static IHtmlString BuildSubmitButton(string value, string type = "submit", string id = null, HtmlAttributes htmlAttributes = null)
         {
             var t = new TagBuilder("input");
             t.Attributes.Add("value", value);
@@ -50,7 +50,8 @@ namespace ChameleonForms.Templates
                 t.Attributes.Add("id", id);
                 t.Attributes.Add("name", id);
             }
-            t.MergeAttributes(HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes), true);
+            if (htmlAttributes != null)
+                t.MergeAttributes(htmlAttributes.Attributes, true);
 
             return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
         }

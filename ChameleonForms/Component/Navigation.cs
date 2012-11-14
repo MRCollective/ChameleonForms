@@ -37,7 +37,7 @@ namespace ChameleonForms.Component
         /// <param name="id">The id/name of the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
-        public IHtmlString Submit(string value, string id = null, object htmlAttributes = null)
+        public IHtmlString Submit(string value, string id = null, HtmlAttributes htmlAttributes = null)
         {
             return HtmlCreator.BuildSubmitButton(value, "submit", id, htmlAttributes);
         }
@@ -49,7 +49,7 @@ namespace ChameleonForms.Component
         /// <param name="id">The id/name of the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the reset button</returns>
-        public IHtmlString Reset(string value, string id = null, object htmlAttributes = null)
+        public IHtmlString Reset(string value, string id = null, HtmlAttributes htmlAttributes = null)
         {
             return HtmlCreator.BuildSubmitButton(value, "reset", id, htmlAttributes);
         }
