@@ -29,6 +29,9 @@ namespace ChameleonForms.Example.Controllers
         public SomeEnum SomeEnum { get; set; }
 
         public HttpPostedFileBase FileUpload { get; set; }
+        
+        [DataType(DataType.MultilineText)]
+        public string TextAreaField { get; set; }
     }
 
     public enum SomeEnum

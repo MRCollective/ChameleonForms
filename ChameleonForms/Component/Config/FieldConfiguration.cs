@@ -62,6 +62,20 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Attrs(object attributes);
 
         /// <summary>
+        /// Sets the number of rows for a textarea to use.
+        /// </summary>
+        /// <param name="numRows">The number of rows for the textarea</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Rows(int numRows);
+
+        /// <summary>
+        /// Sets the number of cols for a textarea to use.
+        /// </summary>
+        /// <param name="numCols">The number of cols for the textarea</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Cols(int numCols);
+
+        /// <summary>
         /// Sets the field that the field configuration is wrapping so that
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
@@ -119,6 +133,18 @@ namespace ChameleonForms.Component.Config
         public IFieldConfiguration Attrs(object attributes)
         {
             Attributes.Attrs(attributes);
+            return this;
+        }
+
+        public IFieldConfiguration Rows(int numRows)
+        {
+            Attr("rows", numRows);
+            return this;
+        }
+
+        public IFieldConfiguration Cols(int numCols)
+        {
+            Attr("cols", numCols);
             return this;
         }
 

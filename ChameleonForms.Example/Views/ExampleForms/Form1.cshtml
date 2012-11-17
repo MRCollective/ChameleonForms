@@ -27,6 +27,7 @@
             @ss.FieldFor(m => m.FileUpload).Attr("data-attr1", "value")
         }
         @s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
+        @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5)
     }
     using (var n = f.BeginNavigation())
     {

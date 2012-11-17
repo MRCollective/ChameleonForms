@@ -22,6 +22,9 @@ View Model
         public SomeEnum SomeEnum { get; set; }
 
         public HttpPostedFileBase FileUpload { get; set; }
+		
+        [DataType(DataType.MultilineText)]
+        public string TextAreaField { get; set; }
     }
 
 Razor view
@@ -44,6 +47,7 @@ Razor view
 				@ss.FieldFor(m => m.FileUpload).Attr("data-attr1", "value")
 			}
 			@s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
+			@s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5)
 		}
 		using (var n = f.BeginNavigation())
 		{
@@ -93,6 +97,11 @@ HTML output (using default template that comes with Chameleon)
 	<option value="ValueWithDescription">Fiendly name</option>
 	<option value="SomeOtherValue">Some other value</option>
 	</select> <span class="field-validation-valid" data-valmsg-for="SomeEnum" data-valmsg-replace="true"></span>
+            </dd>
+            <dt><label for="TextAreaField">Text area field</label></dt>
+            <dd>
+                <textarea cols="60" id="TextAreaField" name="TextAreaField" rows="5">
+</textarea> <span class="field-validation-valid" data-valmsg-for="TextAreaField" data-valmsg-replace="true"></span>
             </dd>
         </dl>
     </fieldset>

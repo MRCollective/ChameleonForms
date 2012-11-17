@@ -11,7 +11,7 @@ namespace ChameleonForms.Tests.Component.Config
     class FieldConfigurationShould
     {
         [Test]
-        public void ProxyHtmlAttributes()
+        public void Proxy_html_attributes()
         {
             var fc = Field.Configure()
                 .Attr("data-attr1", "value")
@@ -20,6 +20,16 @@ namespace ChameleonForms.Tests.Component.Config
                 .Attrs(new {data_attr4 = "value"})
                 .Attrs(data_attr5 => "value")
                 .AddClass("someclass");
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
+        public void Set_textarea_attributes()
+        {
+            var fc = Field.Configure()
+                .Rows(5)
+                .Cols(60);
 
             HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
         }
