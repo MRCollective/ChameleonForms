@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
@@ -54,7 +55,7 @@ namespace ChameleonForms.FieldGenerator
             var typeAttribute = default(string);
 
             if (Metadata.ModelType.IsEnum)
-                return GetEnumHtml(_property.Compile().Invoke((TModel) _helper.ViewData.ModelMetadata.Model));
+                return GetEnumHtml(_property.Compile().Invoke((TModel)_helper.ViewData.ModelMetadata.Model), fieldConfiguration.Attributes.ToDictionary());
 
             if (Metadata.DataTypeName == DataType.Password.ToString())
                 return _helper.PasswordFor(_property, fieldConfiguration.Attributes.ToDictionary());
@@ -79,10 +80,10 @@ namespace ChameleonForms.FieldGenerator
         /// </summary>
         /// <param name="value">The current value of the field</param>
         /// <returns>The HTML for the drop down list</returns>
-        public virtual IHtmlString GetEnumHtml(T value)
+        public virtual IHtmlString GetEnumHtml(T value, IDictionary<string, object> htmlAttributes)
         {
             var selectList = Enum.GetValues(typeof(T)).OfType<T>().Select(i => new SelectListItem { Text = (i as Enum).Humanize(), Value = i.ToString(), Selected = i.Equals(value)});
-            return _helper.DropDownListFor(_property, selectList);
+            return _helper.DropDownListFor(_property, selectList, htmlAttributes);
         }
         #endregion
     }
