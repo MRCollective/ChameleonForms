@@ -45,6 +45,8 @@ namespace ChameleonForms.Component
         {
             _fieldGenerator = fieldGenerator;
             _config = config;
+            if (_config != null)
+                _config.SetField(this);
             Initialise();
         }
         

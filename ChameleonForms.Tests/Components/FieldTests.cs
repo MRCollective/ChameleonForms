@@ -48,9 +48,9 @@ namespace ChameleonForms.Tests.Components
             _g.Metadata.Returns(_metadata);
         }
 
-        private Field<TestFieldViewModel, IFormTemplate> Arrange(bool isParent)
+        private Field<TestFieldViewModel, IFormTemplate> Arrange(bool isParent, FieldConfiguration config = null)
         {
-            return new Field<TestFieldViewModel, IFormTemplate>(_f, isParent, _g, null);
+            return new Field<TestFieldViewModel, IFormTemplate>(_f, isParent, _g, config);
         }
         #endregion
 
@@ -123,6 +123,15 @@ namespace ChameleonForms.Tests.Components
 
             Assert.That(f, Is.Not.Null);
             _f.Received().Write(h);
+        }
+
+        [Test]
+        public void Pass_field_into_field_configuration()
+        {
+            var fieldConfig = new FieldConfiguration();
+            var field = Arrange(false, fieldConfig);
+
+            Assert.That(fieldConfig.ToHtmlString(), Is.EqualTo(field.ToHtmlString()));
         }
     }
 }
