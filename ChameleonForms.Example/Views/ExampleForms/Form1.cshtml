@@ -18,15 +18,15 @@
 {
     using (var s = f.BeginSection("My Section!", InstructionalText()))
     {
-        using (var ff = s.BeginFieldFor(m => m.RequiredStringField))
+        using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value")))
         {
-            @ff.FieldFor(m => m.NestedField)
+            @ff.FieldFor(m => m.NestedField).Attr("data-attr1", "value")
         }
         using (var ss = s.BeginSection("Nested section"))
         {
-            @ss.FieldFor(m => m.FileUpload)
+            @ss.FieldFor(m => m.FileUpload).Attr("data-attr1", "value")
         }
-        @s.FieldFor(m => m.SomeEnum)
+        @s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
     }
     using (var n = f.BeginNavigation())
     {

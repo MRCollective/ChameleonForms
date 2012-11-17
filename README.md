@@ -35,15 +35,15 @@ Razor view
 		}
 		using (var s = f.BeginSection("My Section!", InstructionalText()))
 		{
-			using (var ff = s.BeginFieldFor(m => m.RequiredStringField))
+			using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value")))
 			{
-				@ff.FieldFor(m => m.NestedField)
+				@ff.FieldFor(m => m.NestedField).Attr("data-attr1", "value")
 			}
 			using (var ss = s.BeginSection("Nested section"))
 			{
-				@ss.FieldFor(m => m.FileUpload)
+				@ss.FieldFor(m => m.FileUpload).Attr("data-attr1", "value")
 			}
-			@s.FieldFor(m => m.SomeEnum)
+			@s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
 		}
 		using (var n = f.BeginNavigation())
 		{
@@ -69,11 +69,11 @@ HTML output (using default template that comes with Chameleon)
         <dl>
             <dt><label for="RequiredStringField">Required string field</label></dt>
             <dd>
-                <input data-val="true" data-val-required="The Required string field field is required." id="RequiredStringField" name="RequiredStringField" type="text" value="" /> <span class="field-validation-valid" data-valmsg-for="RequiredStringField" data-valmsg-replace="true"></span>
+                <input data-attr1="value" data-val="true" data-val-required="The Required string field field is required." id="RequiredStringField" name="RequiredStringField" type="text" value="" /> <span class="field-validation-valid" data-valmsg-for="RequiredStringField" data-valmsg-replace="true"></span>
                 <dl>
             <dt><label for="NestedField">Nested field</label></dt>
             <dd>
-                <input id="NestedField" name="NestedField" type="text" value="" /> <span class="field-validation-valid" data-valmsg-for="NestedField" data-valmsg-replace="true"></span>
+                <input data-attr1="value" id="NestedField" name="NestedField" type="text" value="" /> <span class="field-validation-valid" data-valmsg-for="NestedField" data-valmsg-replace="true"></span>
             </dd>
                 </dl>
             </dd>
@@ -83,13 +83,13 @@ HTML output (using default template that comes with Chameleon)
                 <dl>
             <dt><label for="FileUpload">File upload</label></dt>
             <dd>
-                <input id="FileUpload" name="FileUpload" type="file" value="" /> <span class="field-validation-valid" data-valmsg-for="FileUpload" data-valmsg-replace="true"></span>
+                <input data-attr1="value" id="FileUpload" name="FileUpload" type="file" value="" /> <span class="field-validation-valid" data-valmsg-for="FileUpload" data-valmsg-replace="true"></span>
             </dd>
                 </dl>
             </dd>
             <dt><label for="SomeEnum">Some enum</label></dt>
             <dd>
-                <select data-val="true" data-val-required="The Some enum field is required." id="SomeEnum" name="SomeEnum"><option selected="selected" value="Value1">Value 1</option>
+                <select data-attr1="value" data-val="true" data-val-required="The Some enum field is required." id="SomeEnum" name="SomeEnum"><option selected="selected" value="Value1">Value 1</option>
 	<option value="ValueWithDescription">Fiendly name</option>
 	<option value="SomeOtherValue">Some other value</option>
 	</select> <span class="field-validation-valid" data-valmsg-for="SomeEnum" data-valmsg-replace="true"></span>
