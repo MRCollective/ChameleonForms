@@ -53,6 +53,8 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         private DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, Action<TestFieldViewModel> vmSetter = null)
         {
+            _h.ViewContext.ClientValidationEnabled = true;
+            _h.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(property), "asdf");
             var vm = new TestFieldViewModel();
             if (vmSetter != null)
                 vmSetter(vm);
@@ -74,8 +76,6 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_field_validation()
         {
-            _h.ViewContext.ClientValidationEnabled = true;
-            _h.ViewContext.ViewData.ModelState.AddModelError("SomeProperty", "asdf");
             var g = Arrange(m => m.SomeProperty);
 
             var result = g.GetValidationHtml(null);
