@@ -104,7 +104,7 @@ HTML output (using default template that comes with Chameleon)
             <dt><label for="TextAreaField">Text area field</label></dt>
             <dd>
                 <textarea cols="60" id="TextAreaField" name="TextAreaField" rows="5">
-</textarea> <span class="field-validation-valid" data-valmsg-for="TextAreaField" data-valmsg-replace="true"></span>
+	</textarea> <span class="field-validation-valid" data-valmsg-for="TextAreaField" data-valmsg-replace="true"></span>
             </dd>
 			<dt><label for="SomeCheckbox">Some checkbox</label></dt>
             <dd>
