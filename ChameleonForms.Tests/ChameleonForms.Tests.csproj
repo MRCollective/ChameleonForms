@@ -103,6 +103,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Config\FieldConfigurationTests.cs" />
     <Compile Include="Components\NavigationTests.cs" />
     <Compile Include="Components\MessageTests.cs" />
     <Compile Include="Components\FieldTests.cs" />
