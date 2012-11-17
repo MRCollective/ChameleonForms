@@ -28,10 +28,13 @@ namespace ChameleonForms.Tests.Component
         private readonly ModelMetadata _metadata = new ModelMetadata(new EmptyModelMetadataProvider(), null, null, typeof(object), null);
         private IForm<TestFieldViewModel, IFormTemplate> _f;
         private IFieldGenerator _g;
+        private IFieldConfiguration _fc;
 
         [SetUp]
         public void Setup()
         {
+            _fc = Substitute.For<IFieldConfiguration>();
+
             _f = Substitute.For<IForm<TestFieldViewModel, IFormTemplate>>();
             _f.Template.BeginField(_label, _field, _validation, _metadata).Returns(_beginHtml);
             _f.Template.Field(_label, _field, _validation, _metadata).Returns(_html);
@@ -42,15 +45,15 @@ namespace ChameleonForms.Tests.Component
             _f.HtmlHelper.Returns(helper);
 
             _g = Substitute.For<IFieldGenerator>();
-            _g.GetLabelHtml(Arg.Any<IFieldConfiguration>()).Returns(_label);
-            _g.GetFieldHtml(Arg.Any<IFieldConfiguration>()).Returns(_field);
-            _g.GetValidationHtml(Arg.Any<IFieldConfiguration>()).Returns(_validation);
+            _g.GetLabelHtml(_fc).Returns(_label);
+            _g.GetFieldHtml(_fc).Returns(_field);
+            _g.GetValidationHtml(_fc).Returns(_validation);
             _g.Metadata.Returns(_metadata);
         }
 
-        private Field<TestFieldViewModel, IFormTemplate> Arrange(bool isParent, FieldConfiguration config = null)
+        private Field<TestFieldViewModel, IFormTemplate> Arrange(bool isParent)
         {
-            return new Field<TestFieldViewModel, IFormTemplate>(_f, isParent, _g, config);
+            return new Field<TestFieldViewModel, IFormTemplate>(_f, isParent, _g, _fc);
         }
         #endregion
 
@@ -128,10 +131,10 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Pass_field_into_field_configuration()
         {
-            var fieldConfig = new FieldConfiguration();
-            var field = Arrange(false, fieldConfig);
+            _fc = new FieldConfiguration();
+            var field = Arrange(false);
 
-            Assert.That(fieldConfig.ToHtmlString(), Is.EqualTo(field.ToHtmlString()));
+            Assert.That(_fc.ToHtmlString(), Is.EqualTo(field.ToHtmlString()));
         }
     }
 }
