@@ -36,6 +36,8 @@ namespace ChameleonForms.Tests.FieldGenerator
         public string Textarea { get; set; }
 
         public HttpPostedFileBase FileUpload { get; set; }
+
+        public bool BooleanField { get; set; }
     }
 
     [TestFixture]
@@ -129,6 +131,36 @@ namespace ChameleonForms.Tests.FieldGenerator
             var g = Arrange(m => m.FileUpload);
 
             var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_single_checkbox_with_default_label()
+        {
+            var g = Arrange(m => m.BooleanField);
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_checked_single_checkbox_with_default_label()
+        {
+            var g = Arrange(m => m.BooleanField, m => m.BooleanField = true);
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_single_checkbox_with_custom_label()
+        {
+            var g = Arrange(m => m.BooleanField);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().InlineLabel("Some label"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
