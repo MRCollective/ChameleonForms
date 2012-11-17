@@ -6,7 +6,7 @@ using ChameleonForms.Templates;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Components
+namespace ChameleonForms.Tests.Component
 {
     [TestFixture]
     [UseReporter(typeof(DiffReporter))]

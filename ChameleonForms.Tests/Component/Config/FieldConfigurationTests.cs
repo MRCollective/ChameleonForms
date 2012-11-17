@@ -4,7 +4,7 @@ using ApprovalTests.Reporters;
 using ChameleonForms.Component;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Components.Config
+namespace ChameleonForms.Tests.Component.Config
 {
     [TestFixture]
     [UseReporter(typeof(DiffReporter))]

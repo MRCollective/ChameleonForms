@@ -8,7 +8,7 @@ using ChameleonForms.Tests.Helpers;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Components
+namespace ChameleonForms.Tests.Component
 {
     public class TestFieldViewModel
     {

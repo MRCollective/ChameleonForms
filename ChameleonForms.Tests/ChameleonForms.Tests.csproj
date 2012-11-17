@@ -103,12 +103,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Config\FieldConfigurationTests.cs" />
-    <Compile Include="Components\NavigationTests.cs" />
-    <Compile Include="Components\MessageTests.cs" />
-    <Compile Include="Components\FieldTests.cs" />
-    <Compile Include="Components\FormComponentTests.cs" />
-    <Compile Include="Components\SectionTests.cs" />
+    <Compile Include="Component\Config\FieldConfigurationTests.cs" />
+    <Compile Include="Component\NavigationTests.cs" />
+    <Compile Include="Component\MessageTests.cs" />
+    <Compile Include="Component\FieldTests.cs" />
+    <Compile Include="Component\FormComponentTests.cs" />
+    <Compile Include="Component\SectionTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGeneratorTests.cs" />
     <Compile Include="FormTests.cs" />
     <Compile Include="Helpers\AutoSubstituteHelper.cs" />

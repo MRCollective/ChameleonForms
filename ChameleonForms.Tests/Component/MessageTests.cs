@@ -6,7 +6,7 @@ using FizzWare.NBuilder;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Components
+namespace ChameleonForms.Tests.Component
 {
     [TestFixture]
     public class MessageShould
