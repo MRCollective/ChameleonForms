@@ -81,11 +81,14 @@ namespace ChameleonForms.Component
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
-        /// <param name="config">Any configuration information for the field</param>
-        /// <returns>The form field</returns>
-        public static Field<TModel, TTemplate> FieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null) where TTemplate : IFormTemplate
+        /// <returns>A field configuration object that allows you to configure the field</returns>
+        public static FieldConfiguration FieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
         {
-            return new Field<TModel, TTemplate>(section.Form, false, new DefaultFieldGenerator<TModel, T>(section.Form.HtmlHelper, property), config);
+            var fc = new FieldConfiguration();
+            // ReSharper disable ObjectCreationAsStatement
+            new Field<TModel, TTemplate>(section.Form, false, new DefaultFieldGenerator<TModel, T>(section.Form.HtmlHelper, property), fc);
+            // ReSharper restore ObjectCreationAsStatement
+            return fc;
         }
 
         /// <summary>
