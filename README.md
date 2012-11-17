@@ -25,6 +25,8 @@ View Model
 		
         [DataType(DataType.MultilineText)]
         public string TextAreaField { get; set; }
+
+        public bool SomeCheckbox { get; set; }
     }
 
 Razor view
@@ -48,6 +50,7 @@ Razor view
 			}
 			@s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
 			@s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5)
+			@s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label")
 		}
 		using (var n = f.BeginNavigation())
 		{
@@ -102,6 +105,10 @@ HTML output (using default template that comes with Chameleon)
             <dd>
                 <textarea cols="60" id="TextAreaField" name="TextAreaField" rows="5">
 </textarea> <span class="field-validation-valid" data-valmsg-for="TextAreaField" data-valmsg-replace="true"></span>
+            </dd>
+			<dt><label for="SomeCheckbox">Some checkbox</label></dt>
+            <dd>
+                <input data-val="true" data-val-required="The Some checkbox field is required." id="SomeCheckbox" name="SomeCheckbox" type="checkbox" value="true" /> <label for="SomeCheckbox">Some label</label> <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span>
             </dd>
         </dl>
     </fieldset>

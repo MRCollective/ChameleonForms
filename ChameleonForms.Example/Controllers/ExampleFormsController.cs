@@ -32,6 +32,8 @@ namespace ChameleonForms.Example.Controllers
         
         [DataType(DataType.MultilineText)]
         public string TextAreaField { get; set; }
+
+        public bool SomeCheckbox { get; set; }
     }
 
     public enum SomeEnum

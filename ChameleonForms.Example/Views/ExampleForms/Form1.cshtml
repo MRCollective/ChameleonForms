@@ -28,6 +28,7 @@
         }
         @s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
         @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5)
+        @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label")
     }
     using (var n = f.BeginNavigation())
     {
