@@ -33,5 +33,14 @@ namespace ChameleonForms.Tests.Component.Config
 
             HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
         }
+
+        [Test]
+        public void Set_inline_label()
+        {
+            var fc = Field.Configure()
+                .InlineLabel("Some label text");
+
+            Assert.That(fc.InlineLabelText, Is.EqualTo("Some label text"));
+        }
     }
 }

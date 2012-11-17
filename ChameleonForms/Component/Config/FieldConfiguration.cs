@@ -76,6 +76,18 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Cols(int numCols);
 
         /// <summary>
+        /// Gets any text that has been set for an inline label.
+        /// </summary>
+        string InlineLabelText { get; }
+
+        /// <summary>
+        /// Sets an inline label for a checkbox.
+        /// </summary>
+        /// <param name="labelText">The text to use for the label</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration InlineLabel(string labelText);
+
+        /// <summary>
         /// Sets the field that the field configuration is wrapping so that
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
@@ -145,6 +157,14 @@ namespace ChameleonForms.Component.Config
         public IFieldConfiguration Cols(int numCols)
         {
             Attr("cols", numCols);
+            return this;
+        }
+
+        public string InlineLabelText { get; private set; }
+
+        public IFieldConfiguration InlineLabel(string labelText)
+        {
+            InlineLabelText = labelText;
             return this;
         }
 
