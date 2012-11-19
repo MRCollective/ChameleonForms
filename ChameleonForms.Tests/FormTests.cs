@@ -87,7 +87,7 @@ namespace ChameleonForms.Tests
         {
             var t = new DefaultFormTemplate();
 
-            var f2 = _h.BeginChameleonForm(Action, Method, new {}, Enctype);
+            var f2 = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
 
             Assert.That(f2, Is.Not.Null);
             _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(Action, Method, _htmlAttributes, Enctype).ToHtmlString()));
