@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using System.Web.Mvc;
 using ChameleonForms.Component;
 using ChameleonForms.Templates;
 using NSubstitute;
@@ -81,6 +82,22 @@ namespace ChameleonForms.Tests.Component
 
             Assert.That(ss, Is.Not.Null);
             _f.Received().Write(_nestedBeginHtml);
+        }
+
+        [Test]
+        public void Output_a_field()
+        {
+            var labelHtml = Substitute.For<IHtmlString>();
+            var elementHtml = Substitute.For<IHtmlString>();
+            var validationHtml = Substitute.For<IHtmlString>();
+            var metadata = new ModelMetadata(Substitute.For<ModelMetadataProvider>(), null, null, typeof(string), null);
+            var expectedOutput = Substitute.For<IHtmlString>();
+            _f.Template.Field(labelHtml, elementHtml, validationHtml, metadata).Returns(expectedOutput);
+            var s = Arrange(false);
+
+            var actualOutput = s.Field(labelHtml, elementHtml, validationHtml, metadata);
+
+            Assert.That(actualOutput, Is.EqualTo(expectedOutput));
         }
     }
 }

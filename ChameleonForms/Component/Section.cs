@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using System.Web.Mvc;
 using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component
@@ -30,6 +31,19 @@ namespace ChameleonForms.Component
             _leadingHtml = leadingHtml;
             _htmlAttributes = htmlAttributes;
             Initialise();
+        }
+
+        /// <summary>
+        /// Outputs a field with passed in HTML.
+        /// </summary>
+        /// <param name="labelHtml">The HTML for the label part of the field</param>
+        /// <param name="elementHtml">The HTML for the field element part of the field</param>
+        /// <param name="validationHtml">The HTML for the validation markup part of the field</param>
+        /// <param name="metadata">Any field metadata</param>
+        /// <returns>The HTML for the field using the current template</returns>
+        public IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml = null, ModelMetadata metadata = null)
+        {
+            return Form.Template.Field(labelHtml, elementHtml, validationHtml, metadata);
         }
 
         public override IHtmlString Begin()
