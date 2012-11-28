@@ -88,6 +88,18 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration InlineLabel(string labelText);
 
         /// <summary>
+        /// Gets any text that has been set for the label.
+        /// </summary>
+        string LabelText { get; }
+
+        /// <summary>
+        /// Override the default label for the field.
+        /// </summary>
+        /// <param name="labelText">The text to use for the label</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Label(string labelText);
+
+        /// <summary>
         /// Sets the field that the field configuration is wrapping so that
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
@@ -165,6 +177,14 @@ namespace ChameleonForms.Component.Config
         public IFieldConfiguration InlineLabel(string labelText)
         {
             InlineLabelText = labelText;
+            return this;
+        }
+
+        public string LabelText { get; private set; }
+
+        public IFieldConfiguration Label(string labelText)
+        {
+            LabelText = labelText;
             return this;
         }
 

@@ -42,5 +42,14 @@ namespace ChameleonForms.Tests.Component.Config
 
             Assert.That(fc.InlineLabelText, Is.EqualTo("Some label text"));
         }
+
+        [Test]
+        public void Set_label()
+        {
+            var fc = Field.Configure()
+                .Label("Some label text");
+
+            Assert.That(fc.LabelText, Is.EqualTo("Some label text"));
+        }
     }
 }
