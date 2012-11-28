@@ -66,11 +66,31 @@ namespace ChameleonForms.Tests.FieldGenerator
         }
 
         [Test]
-        public void Use_correct_html_for_field_label()
+        public void Use_correct_html_for_field_label_without_config()
         {
             var g = Arrange(m => m.SomeProperty);
 
             var result = g.GetLabelHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_field_label_with_null_label()
+        {
+            var g = Arrange(m => m.SomeProperty);
+
+            var result = g.GetLabelHtml(new FieldConfiguration());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_field_label_with_overridden_label()
+        {
+            var g = Arrange(m => m.SomeProperty);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().Label("asdf"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

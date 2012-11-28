@@ -42,7 +42,7 @@ namespace ChameleonForms.FieldGenerator
 
         public IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
         {
-            return _helper.LabelFor(_property);
+            return _helper.LabelFor(_property, fieldConfiguration == null ? null : fieldConfiguration.LabelText);
         }
 
         public IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)
@@ -116,9 +116,7 @@ namespace ChameleonForms.FieldGenerator
 
             var fieldhtml = HtmlCreator.BuildSingleCheckbox(fullName, GetValue() as bool? ?? false, fieldConfiguration.Attributes);
 
-            var labelHtml = !string.IsNullOrEmpty(fieldConfiguration.InlineLabelText)
-                ? _helper.LabelFor(_property, fieldConfiguration.InlineLabelText)
-                : _helper.LabelFor(_property);
+            var labelHtml = _helper.LabelFor(_property, fieldConfiguration.InlineLabelText);
 
             return new HtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
         }
