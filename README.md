@@ -38,6 +38,7 @@ Razor view
 		{
 			@m.Paragraph("Hello!!!!!!!!")
 		}
+		<p>@f.LabelFor(m => m.SomeCheckbox).Label("Are you ready for: ") @f.FieldFor(m => m.SomeCheckbox) @f.ValidationMessageFor(m => m.SomeCheckbox)</p>
 		using (var s = f.BeginSection("My Section!", InstructionalText()))
 		{
 			using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value")))
@@ -69,6 +70,7 @@ HTML output (using default template that comes with Chameleon)
 	<p>Hello!!!!!!!!</p>
           </div>
     </div>
+	<p><label for="SomeCheckbox">Are you ready for: </label> <input data-val="true" data-val-required="The Some checkbox field is required." id="SomeCheckbox" name="SomeCheckbox" type="checkbox" value="true" /> <label for="SomeCheckbox">Some checkbox</label> <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span></p>
     <fieldset>
         <legend>My Section!</legend>
             <p>Leading instructional text.</p>

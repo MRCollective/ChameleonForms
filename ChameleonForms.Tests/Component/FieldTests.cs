@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System;
+using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
@@ -40,15 +42,16 @@ namespace ChameleonForms.Tests.Component
             _f.Template.Field(_label, _field, _validation, _metadata).Returns(_html);
             _f.Template.EndField().Returns(_endHtml);
 
-            var autoSubstitute = AutoSubstituteContainer.Create();
-            var helper = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
-            _f.HtmlHelper.Returns(helper);
-
             _g = Substitute.For<IFieldGenerator>();
             _g.GetLabelHtml(_fc).Returns(_label);
             _g.GetFieldHtml(_fc).Returns(_field);
             _g.GetValidationHtml(_fc).Returns(_validation);
             _g.Metadata.Returns(_metadata);
+
+            var autoSubstitute = AutoSubstituteContainer.Create();
+            var helper = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            _f.HtmlHelper.Returns(helper);
+            _f.GetFieldGenerator(Arg.Any<Expression<Func<TestFieldViewModel, string>>>()).Returns(_g);
         }
 
         private Field<TestFieldViewModel, IFormTemplate> Arrange(bool isParent)
@@ -135,6 +138,43 @@ namespace ChameleonForms.Tests.Component
             var field = Arrange(false);
 
             Assert.That(_fc.ToHtmlString(), Is.EqualTo(field.ToHtmlString()));
+        }
+
+        [Test]
+        public void Pass_lazy_initialised_field_into_field_configuration()
+        {
+            _fc = new FieldConfiguration();
+            var field = Arrange(false);
+            _fc.SetField(() => field);
+
+            Assert.That(_fc.ToHtmlString(), Is.EqualTo(field.ToHtmlString()));
+        }
+
+        [Test]
+        public void Construct_field_from_form()
+        {
+            var fieldHtml = _f.FieldFor(m => m.SomeProperty);
+            
+            _g.GetFieldHtml(fieldHtml).Returns(_field);
+            Assert.That(fieldHtml.ToHtmlString(), Is.EqualTo(_field.ToHtmlString()));
+        }
+
+        [Test]
+        public void Construct_label_from_form()
+        {
+            var fieldHtml = _f.LabelFor(m => m.SomeProperty);
+
+            _g.GetLabelHtml(fieldHtml).Returns(_label);
+            Assert.That(fieldHtml.ToHtmlString(), Is.EqualTo(_label.ToHtmlString()));
+        }
+
+        [Test]
+        public void Construct_validation_from_form()
+        {
+            var fieldHtml = _f.ValidationMessageFor(m => m.SomeProperty);
+
+            _g.GetValidationHtml(fieldHtml).Returns(_validation);
+            Assert.That(fieldHtml.ToHtmlString(), Is.EqualTo(_validation.ToHtmlString()));
         }
     }
 }

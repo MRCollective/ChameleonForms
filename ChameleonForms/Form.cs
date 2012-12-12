@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Enums;
+using ChameleonForms.FieldGenerator;
 using ChameleonForms.Templates;
 
 namespace ChameleonForms
@@ -26,6 +28,12 @@ namespace ChameleonForms
         /// </summary>
         /// <param name="htmlString">The HTML to write to the view's output</param>
         void Write(IHtmlString htmlString);
+
+        /// <summary>
+        /// The field generator for the given field.
+        /// </summary>
+        /// <param name="property">The property to return the field generator for</param>
+        IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property);
     }
 
     /// <summary>
@@ -59,6 +67,11 @@ namespace ChameleonForms
         public virtual void Write(IHtmlString htmlString)
         {
             HtmlHelper.ViewContext.Writer.Write(htmlString);
+        }
+
+        public IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property)
+        {
+            return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property);
         }
 
         public void Dispose()

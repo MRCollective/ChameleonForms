@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Autofac;
 using AutofacContrib.NSubstitute;
 using ChameleonForms.Enums;
+using ChameleonForms.FieldGenerator;
 using ChameleonForms.Templates;
 using ChameleonForms.Tests.Helpers;
 using NSubstitute;
@@ -13,9 +14,14 @@ namespace ChameleonForms.Tests
     [TestFixture]
     class FormShould
     {
+        public class TestFieldViewModel
+        {
+            public string SomeProperty { get; set; }
+        }
+
         #region Setup
         private AutoSubstitute _autoSubstitute;
-        private HtmlHelper<object> _h;
+        private HtmlHelper<TestFieldViewModel> _h;
         private IFormTemplate _t;
 
         private readonly IHtmlString _beginHtml = new HtmlString("");
@@ -30,15 +36,15 @@ namespace ChameleonForms.Tests
         public void Setup()
         {
             _autoSubstitute = AutoSubstituteContainer.Create();
-            _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<object>>();
+            _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<TestFieldViewModel>>();
             _t = _autoSubstitute.Resolve<IFormTemplate>();
             _t.BeginForm(Action, Method, _htmlAttributes, Enctype).Returns(_beginHtml);
             _t.EndForm().Returns(_endHtml);
         }
 
-        private Form<object, IFormTemplate> CreateForm()
+        private Form<TestFieldViewModel, IFormTemplate> CreateForm()
         {
-            return _autoSubstitute.Resolve<Form<object, IFormTemplate>>(
+            return _autoSubstitute.Resolve<Form<TestFieldViewModel, IFormTemplate>>(
                 new NamedParameter("action", Action),
                 new NamedParameter("method", Method),
                 new NamedParameter("htmlAttributes", _htmlAttributes),
@@ -91,6 +97,16 @@ namespace ChameleonForms.Tests
 
             Assert.That(f2, Is.Not.Null);
             _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(Action, Method, _htmlAttributes, Enctype).ToHtmlString()));
+        }
+
+        [Test]
+        public void Give_a_field_generator()
+        {
+            var f = CreateForm();
+
+            var g = f.GetFieldGenerator(m => m.SomeProperty);
+
+            Assert.That(g, Is.TypeOf<DefaultFieldGenerator<TestFieldViewModel, string>>());
         }
     }
 }

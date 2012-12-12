@@ -100,6 +100,13 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Label(string labelText);
 
         /// <summary>
+        /// Sets a lambda expression to get the field that the field configuration is wrapping so that
+        ///     a call to ToHtmlString() will output the given field.
+        /// </summary>
+        /// <param name="field">A lambda returning the HTML to output</param>
+        void SetField(Func<IHtmlString> field);
+
+        /// <summary>
         /// Sets the field that the field configuration is wrapping so that
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
@@ -112,7 +119,7 @@ namespace ChameleonForms.Component.Config
     /// </summary>
     public class FieldConfiguration : IFieldConfiguration
     {
-        private IHtmlString _field;
+        private Func<IHtmlString> _field;
 
         /// <summary>
         /// Constructs a field configuration.
@@ -190,12 +197,17 @@ namespace ChameleonForms.Component.Config
 
         public void SetField(IHtmlString field)
         {
-            _field = field;
+            _field = () => field;
         }
 
+        public void SetField(Func<IHtmlString> field)
+        {
+            _field = field;
+        }
+        
         public string ToHtmlString()
         {
-            return _field.ToHtmlString();
+            return _field().ToHtmlString();
         }
     }
 }
