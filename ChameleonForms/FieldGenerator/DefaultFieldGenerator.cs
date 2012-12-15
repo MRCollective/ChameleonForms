@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
+using ChameleonForms.Enums;
 using ChameleonForms.Templates;
 using Humanizer;
 
@@ -99,7 +100,7 @@ namespace ChameleonForms.FieldGenerator
         public virtual IHtmlString GetEnumHtml(IFieldConfiguration fieldConfiguration)
         {
             var selectList = Enum.GetValues(typeof(T)).OfType<T>().Select(i => new SelectListItem { Text = (i as Enum).Humanize(), Value = i.ToString(), Selected = i.Equals(GetValue())});
-            return _helper.DropDownListFor(_property, selectList, fieldConfiguration.Attributes.ToDictionary());
+            return GetDropDown(selectList, fieldConfiguration);
         }
 
         /// <summary>
@@ -109,16 +110,51 @@ namespace ChameleonForms.FieldGenerator
         /// <returns>The HTML for the single checkbox</returns>
         public virtual IHtmlString GetSingleCheckboxHtml(IFieldConfiguration fieldConfiguration)
         {
+            var value = GetValue() as bool? ?? false;
             var name = ExpressionHelper.GetExpressionText(_property);
             var fullName = _helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
+            var selectList = GetBooleanSelectList(fieldConfiguration, value);
+            if (fieldConfiguration.DisplayType == FieldDisplayType.DropDown)
+                return GetDropDown(selectList, fieldConfiguration);
+            if (fieldConfiguration.DisplayType == FieldDisplayType.List)
+                return HtmlHelpers.List(GetList(fullName, selectList, fieldConfiguration));
+
             AdjustHtmlForModelState(fieldConfiguration.Attributes);
 
-            var fieldhtml = HtmlCreator.BuildSingleCheckbox(fullName, GetValue() as bool? ?? false, fieldConfiguration.Attributes);
+            var fieldhtml = HtmlCreator.BuildSingleCheckbox(fullName, value, fieldConfiguration.Attributes);
 
             var labelHtml = _helper.LabelFor(_property, fieldConfiguration.InlineLabelText);
 
             return new HtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
+        }
+
+        private IEnumerable<IHtmlString> GetList(string baseId, IEnumerable<SelectListItem> selectList, IFieldConfiguration fieldConfiguration)
+        {
+            var count = 0;
+            foreach (var item in selectList)
+            {
+                var id = string.Format("{0}_{1}", baseId, ++count);
+                var attrs = new HtmlAttributes(fieldConfiguration.Attributes.ToDictionary());
+                if (item.Selected)
+                    attrs.Attr("checked", "checked");
+                attrs.Attr("id", id);
+                yield return new HtmlString(string.Format("{0} {1}",
+                    _helper.RadioButtonFor(_property, item.Value, attrs.ToDictionary()),
+                    _helper.Label(id, item.Text)
+                ));
+            }
+        }
+
+        private IHtmlString GetDropDown(IEnumerable<SelectListItem> selectList, IFieldConfiguration fieldConfiguration)
+        {
+            return _helper.DropDownListFor(_property, selectList, fieldConfiguration.Attributes.ToDictionary());
+        }
+
+        private static IEnumerable<SelectListItem> GetBooleanSelectList(IFieldConfiguration fieldConfiguration, bool value)
+        {
+            yield return new SelectListItem{Value = "true", Text = fieldConfiguration.TrueString, Selected = value};
+            yield return new SelectListItem{Value = "false", Text = fieldConfiguration.FalseString, Selected = !value};
         }
 
         private void AdjustHtmlForModelState(HtmlAttributes attributes)

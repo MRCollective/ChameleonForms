@@ -79,3 +79,11 @@
 @:        @paragraph
 @:    </p>
 }
+
+@helper List(IEnumerable<IHtmlString> items) {
+@:    <ul>
+foreach(var i in items) {
+@:        <li>@i</li>
+}
+@:    </ul>
+}

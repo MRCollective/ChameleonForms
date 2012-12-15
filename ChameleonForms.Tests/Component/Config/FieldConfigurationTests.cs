@@ -2,6 +2,8 @@
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component;
+using ChameleonForms.Component.Config;
+using ChameleonForms.Enums;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Component.Config
@@ -50,6 +52,63 @@ namespace ChameleonForms.Tests.Component.Config
                 .Label("Some label text");
 
             Assert.That(fc.LabelText, Is.EqualTo("Some label text"));
+        }
+
+        [Test]
+        public void Use_default_display_by_default()
+        {
+            var fc = Field.Configure();
+            Assert.That(fc.DisplayType, Is.EqualTo(FieldDisplayType.Default));
+        }
+
+        [Test]
+        public void Set_list_display()
+        {
+            var fc = Field.Configure()
+                .AsList();
+
+            Assert.That(fc.DisplayType, Is.EqualTo(FieldDisplayType.List));
+        }
+
+        [Test]
+        public void Set_select_display()
+        {
+            var fc = Field.Configure()
+                .AsDropDown();
+
+            Assert.That(fc.DisplayType, Is.EqualTo(FieldDisplayType.DropDown));
+        }
+
+        [Test]
+        public void Use_yes_as_true_string_by_default()
+        {
+            var fc = Field.Configure();
+            
+            Assert.That(fc.TrueString, Is.EqualTo("Yes"));
+        }
+
+        [Test]
+        public void Allow_override_for_true_string()
+        {
+            var fc = Field.Configure().WithTrueAs("Hello");
+
+            Assert.That(fc.TrueString, Is.EqualTo("Hello"));
+        }
+
+        [Test]
+        public void Use_no_as_false_string_By_default()
+        {
+            var fc = Field.Configure();
+
+            Assert.That(fc.FalseString, Is.EqualTo("No"));
+        }
+
+        [Test]
+        public void Allow_override_for_false_string()
+        {
+            var fc = Field.Configure().WithTrueAs("World!");
+
+            Assert.That(fc.TrueString, Is.EqualTo("World!"));
         }
     }
 }

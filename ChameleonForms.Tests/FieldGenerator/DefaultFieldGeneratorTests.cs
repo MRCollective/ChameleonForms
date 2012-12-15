@@ -184,5 +184,55 @@ namespace ChameleonForms.Tests.FieldGenerator
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
+
+        [Test]
+        public void Use_correct_html_for_boolean_list_and_false_value()
+        {
+            var g = Arrange(m => m.BooleanField);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_boolean_list_and_true_value()
+        {
+            var g = Arrange(m => m.BooleanField, m => m.BooleanField = true);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_boolean_list_and_custom_labels()
+        {
+            var g = Arrange(m => m.BooleanField);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList().WithTrueAs("True").WithFalseAs("False"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_boolean_dropdown_list_and_false_value()
+        {
+            var g = Arrange(m => m.BooleanField);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_boolean_dropdown_list_and_true_value()
+        {
+            var g = Arrange(m => m.BooleanField, m => m.BooleanField = true);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
+using ChameleonForms.Enums;
 using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component.Config
@@ -100,6 +101,49 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Label(string labelText);
 
         /// <summary>
+        /// Returns the display type for the field.
+        /// </summary>
+        FieldDisplayType DisplayType { get; }
+
+        /// <summary>
+        /// Renders the field as a list of radio or checkbox items.
+        /// Use for a list or boolean value.
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration AsList();
+
+        /// <summary>
+        /// Renders the field as a drop-down control.
+        /// Use for a list or boolean value.
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration AsDropDown();
+
+        /// <summary>
+        /// The label that represents true.
+        /// </summary>
+        string TrueString { get; }
+
+        /// <summary>
+        /// Change the label that represents true.
+        /// </summary>
+        /// <param name="trueString">The label to use as true</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithTrueAs(string trueString);
+
+        /// <summary>
+        /// The label that represents false.
+        /// </summary>
+        string FalseString { get; }
+
+        /// <summary>
+        /// Change the label that represents false.
+        /// </summary>
+        /// <param name="falseString">The label to use as false</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithFalseAs(string falseString);
+
+        /// <summary>
         /// Sets a lambda expression to get the field that the field configuration is wrapping so that
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
@@ -127,6 +171,9 @@ namespace ChameleonForms.Component.Config
         public FieldConfiguration()
         {
             Attributes = new HtmlAttributes();
+            DisplayType = FieldDisplayType.Default;
+            TrueString = "Yes";
+            FalseString = "No";
         }
 
         public HtmlAttributes Attributes { get; set; }
@@ -192,6 +239,35 @@ namespace ChameleonForms.Component.Config
         public IFieldConfiguration Label(string labelText)
         {
             LabelText = labelText;
+            return this;
+        }
+
+        public FieldDisplayType DisplayType { get; private set; }
+
+        public IFieldConfiguration AsList()
+        {
+            DisplayType = FieldDisplayType.List;
+            return this;
+        }
+
+        public IFieldConfiguration AsDropDown()
+        {
+            DisplayType = FieldDisplayType.DropDown;
+            return this;
+        }
+
+        public string TrueString { get; private set; }
+        public IFieldConfiguration WithTrueAs(string trueString)
+        {
+            TrueString = trueString;
+            return this;
+        }
+
+        public string FalseString { get; private set; }
+
+        public IFieldConfiguration WithFalseAs(string falseString)
+        {
+            FalseString = falseString;
             return this;
         }
 

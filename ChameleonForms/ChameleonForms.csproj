@@ -83,6 +83,7 @@
     <Compile Include="Component\Field.cs" />
     <Compile Include="Component\FormComponent.cs" />
     <Compile Include="Component\Message.cs" />
+    <Compile Include="Enums\DisplayType.cs" />
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Component\Section.cs" />
     <Compile Include="Enums\EncType.cs" />
