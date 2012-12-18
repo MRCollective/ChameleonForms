@@ -69,7 +69,7 @@ namespace ChameleonForms
             HtmlHelper.ViewContext.Writer.Write(htmlString);
         }
 
-        public IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property)
+        public virtual IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property)
         {
             return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property);
         }
