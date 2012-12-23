@@ -65,7 +65,7 @@ Razor view
 HTML output (using default template that comes with Chameleon)
 ------------------------------------
 
-<form action="/" enctype="multipart/form-data" method="post">
+	<form action="/" enctype="multipart/form-data" method="post">
 	<div class="success_message">
         <h3>Success!</h3>
           <div class="message">
