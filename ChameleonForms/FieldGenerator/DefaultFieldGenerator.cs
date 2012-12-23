@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
@@ -72,6 +74,10 @@ namespace ChameleonForms.FieldGenerator
             if (typeof(HttpPostedFileBase).IsAssignableFrom(Metadata.ModelType))
                 typeAttribute = "file";
 
+            if (Metadata.AdditionalValues.ContainsKey(ExistsInAttribute.ExistsKey) &&
+                    Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? == true)
+                return GetListHtml(fieldConfiguration);
+
             if (typeAttribute == default(string))
                 typeAttribute = "text";
 
@@ -89,7 +95,12 @@ namespace ChameleonForms.FieldGenerator
         /// <returns>The current value</returns>
         private T GetValue()
         {
-            return _property.Compile().Invoke((TModel) _helper.ViewData.ModelMetadata.Model);
+            return _property.Compile().Invoke(GetModel());
+        }
+
+        private TModel GetModel()
+        {
+            return (TModel) _helper.ViewData.ModelMetadata.Model;
         }
 
         /// <summary>
@@ -155,6 +166,32 @@ namespace ChameleonForms.FieldGenerator
         {
             yield return new SelectListItem{Value = "true", Text = fieldConfiguration.TrueString, Selected = value};
             yield return new SelectListItem{Value = "false", Text = fieldConfiguration.FalseString, Selected = !value};
+        }
+
+        private IHtmlString GetListHtml(IFieldConfiguration fieldConfiguration)
+        {
+            var name = ExpressionHelper.GetExpressionText(_property);
+            var fullName = _helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+
+            var model = GetModel();
+            var listProperty = model.GetType().GetProperty((string)Metadata.AdditionalValues[ExistsInAttribute.PropertyKey]);
+            var listValue = (IEnumerable) listProperty.GetValue(model, null);
+            var selectList = GetSelectList(listValue, (string)Metadata.AdditionalValues[ExistsInAttribute.NameKey], (string)Metadata.AdditionalValues[ExistsInAttribute.ValueKey], GetValue());
+
+            if (fieldConfiguration.DisplayType == FieldDisplayType.List)
+                return HtmlHelpers.List(GetList(fullName, selectList, fieldConfiguration));
+
+            return GetDropDown(selectList, fieldConfiguration);
+        }
+
+        private IEnumerable<SelectListItem> GetSelectList(IEnumerable listValue, string nameProperty, string valueProperty, object selectedValue)
+        {
+            foreach (var item in listValue)
+            {
+                var name = item.GetType().GetProperty(nameProperty).GetValue(item, null);
+                var value = item.GetType().GetProperty(valueProperty).GetValue(item, null);
+                yield return new SelectListItem { Selected = value.Equals(selectedValue), Value = value.ToString(), Text = name.ToString() };
+            }
         }
 
         private void AdjustHtmlForModelState(HtmlAttributes attributes)

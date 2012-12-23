@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
+using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerator;
 using ChameleonForms.Templates;
@@ -38,6 +40,26 @@ namespace ChameleonForms.Tests.FieldGenerator
         public HttpPostedFileBase FileUpload { get; set; }
 
         public bool BooleanField { get; set; }
+
+        public List<IntListItem> IntList { get; set; }
+        [ExistsIn("IntList", "Id", "Name")]
+        public int IntListId { get; set; }
+
+        public List<StringListItem> StringList { get; set; }
+        [ExistsIn("StringList", "Value", "Label")]
+        public string StringListId { get; set; }
+    }
+
+    public class IntListItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class StringListItem
+    {
+        public string Value { get; set; }
+        public string Label { get; set; }
     }
 
     [TestFixture]
@@ -53,13 +75,15 @@ namespace ChameleonForms.Tests.FieldGenerator
             _h = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
         }
 
-        private DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, Action<TestFieldViewModel> vmSetter = null)
+        private DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, params Action<TestFieldViewModel>[] vmSetter)
         {
             _h.ViewContext.ClientValidationEnabled = true;
             _h.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(property), "asdf");
             var vm = new TestFieldViewModel();
-            if (vmSetter != null)
-                vmSetter(vm);
+            foreach (var action in vmSetter)
+            {
+                action(vm);
+            }
             _h.ViewData.ModelMetadata.Model = vm;
 
             return new DefaultFieldGenerator<TestFieldViewModel, T>(_h, property);
@@ -231,6 +255,28 @@ namespace ChameleonForms.Tests.FieldGenerator
             var g = Arrange(m => m.BooleanField, m => m.BooleanField = true);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_int_list_id()
+        {
+            var list = new List<IntListItem> { new IntListItem {Id = 1, Name = "A"}, new IntListItem {Id = 2, Name = "B"}};
+            var g = Arrange(m => m.IntListId, m => m.IntListId = 2, m => m.IntList = list);
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_string_list_id_as_list()
+        {
+            var list = new List<StringListItem> { new StringListItem { Value = "1", Label = "A" }, new StringListItem { Value = "2", Label = "B" } };
+            var g = Arrange(m => m.StringListId, m => m.StringListId = "2", m => m.StringList = list);
+            
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
