@@ -38,8 +38,8 @@ namespace ChameleonForms.Tests.Component
             _fc = Substitute.For<IFieldConfiguration>();
 
             _f = Substitute.For<IForm<TestFieldViewModel, IFormTemplate>>();
-            _f.Template.BeginField(_label, _field, _validation, _metadata).Returns(_beginHtml);
-            _f.Template.Field(_label, _field, _validation, _metadata).Returns(_html);
+            _f.Template.BeginField(_label, _field, _validation, _metadata, _fc).Returns(_beginHtml);
+            _f.Template.Field(_label, _field, _validation, _metadata, _fc).Returns(_html);
             _f.Template.EndField().Returns(_endHtml);
 
             _g = Substitute.For<IFieldGenerator>();
@@ -122,7 +122,7 @@ namespace ChameleonForms.Tests.Component
         {
             var h = new HtmlString("");
             var s = new Section<TestFieldViewModel, IFormTemplate>(_f, new HtmlString(""), false);
-            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>()).Returns(h);
+            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>()).Returns(h);
             _f.ClearReceivedCalls();
 
             var f = s.BeginFieldFor(m => m.SomeProperty);

@@ -33,12 +33,18 @@ namespace ChameleonForms.Templates
     using System.Web.WebPages;
     
     #line 2 "..\..\Templates\HtmlHelpers.cshtml"
-    using Enums;
+    using Component.Config;
     
     #line default
     #line hidden
     
     #line 3 "..\..\Templates\HtmlHelpers.cshtml"
+    using Enums;
+    
+    #line default
+    #line hidden
+    
+    #line 4 "..\..\Templates\HtmlHelpers.cshtml"
     using Templates;
     
     #line default
@@ -48,13 +54,13 @@ namespace ChameleonForms.Templates
     public static class HtmlHelpers
     {
 
-#line 8 "..\..\Templates\HtmlHelpers.cshtml"
+#line 10 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult EndForm() {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 8 "..\..\Templates\HtmlHelpers.cshtml"
+#line 10 "..\..\Templates\HtmlHelpers.cshtml"
                    
 
 
@@ -63,25 +69,25 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "    </form>\r\n");
 
 
-#line 10 "..\..\Templates\HtmlHelpers.cshtml"
+#line 12 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 10 "..\..\Templates\HtmlHelpers.cshtml"
+#line 12 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 12 "..\..\Templates\HtmlHelpers.cshtml"
+#line 14 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 12 "..\..\Templates\HtmlHelpers.cshtml"
+#line 14 "..\..\Templates\HtmlHelpers.cshtml"
                                                                                                  
 
 
@@ -92,7 +98,7 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "    <fieldset>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "        <legend>");
 
 
-#line 14 "..\..\Templates\HtmlHelpers.cshtml"
+#line 16 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, title);
 
 
@@ -103,7 +109,7 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "</legend>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "        ");
 
 
-#line 15 "..\..\Templates\HtmlHelpers.cshtml"
+#line 17 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, leadingHtml);
 
 
@@ -114,7 +120,7 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "        <dl");
 
 
-#line 16 "..\..\Templates\HtmlHelpers.cshtml"
+#line 18 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, htmlAttributes);
 
 
@@ -123,26 +129,26 @@ WebViewPage.WriteTo(__razor_helper_writer, htmlAttributes);
 WebViewPage.WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 
-#line 17 "..\..\Templates\HtmlHelpers.cshtml"
+#line 19 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 17 "..\..\Templates\HtmlHelpers.cshtml"
+#line 19 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 19 "..\..\Templates\HtmlHelpers.cshtml"
+#line 21 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
 {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 20 "..\..\Templates\HtmlHelpers.cshtml"
+#line 22 "..\..\Templates\HtmlHelpers.cshtml"
  
 
 
@@ -151,7 +157,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "            <dt>");
 
 
-#line 21 "..\..\Templates\HtmlHelpers.cshtml"
+#line 23 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, title);
 
 
@@ -164,7 +170,7 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "            <dd>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 23 "..\..\Templates\HtmlHelpers.cshtml"
+#line 25 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, leadingHtml);
 
 
@@ -175,7 +181,7 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "                <dl");
 
 
-#line 24 "..\..\Templates\HtmlHelpers.cshtml"
+#line 26 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, htmlAttributes);
 
 
@@ -184,25 +190,25 @@ WebViewPage.WriteTo(__razor_helper_writer, htmlAttributes);
 WebViewPage.WriteLiteralTo(__razor_helper_writer, ">\r\n");
 
 
-#line 25 "..\..\Templates\HtmlHelpers.cshtml"
+#line 27 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 25 "..\..\Templates\HtmlHelpers.cshtml"
+#line 27 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 27 "..\..\Templates\HtmlHelpers.cshtml"
+#line 29 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult EndSection() {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 27 "..\..\Templates\HtmlHelpers.cshtml"
+#line 29 "..\..\Templates\HtmlHelpers.cshtml"
                       
 
 
@@ -213,25 +219,25 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "        </dl>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "    </fieldset>\r\n");
 
 
-#line 30 "..\..\Templates\HtmlHelpers.cshtml"
+#line 32 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 30 "..\..\Templates\HtmlHelpers.cshtml"
+#line 32 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 32 "..\..\Templates\HtmlHelpers.cshtml"
+#line 34 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult EndNestedSection() {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 32 "..\..\Templates\HtmlHelpers.cshtml"
+#line 34 "..\..\Templates\HtmlHelpers.cshtml"
                             
 
 
@@ -242,26 +248,68 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "                </dl>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "            </dd>\r\n");
 
 
-#line 35 "..\..\Templates\HtmlHelpers.cshtml"
+#line 37 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 35 "..\..\Templates\HtmlHelpers.cshtml"
+#line 37 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 37 "..\..\Templates\HtmlHelpers.cshtml"
-public static System.Web.WebPages.HelperResult BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml) {
+#line 39 "..\..\Templates\HtmlHelpers.cshtml"
+public static System.Web.WebPages.HelperResult GetHint(IFieldConfiguration fieldConfiguration) {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 37 "..\..\Templates\HtmlHelpers.cshtml"
-                                                                                                        
+#line 39 "..\..\Templates\HtmlHelpers.cshtml"
+                                                         
+    if (fieldConfiguration != null && fieldConfiguration.Hint != null) {
+
+
+#line default
+#line hidden
+WebViewPage.WriteLiteralTo(__razor_helper_writer, "<div");
+
+WebViewPage.WriteLiteralTo(__razor_helper_writer, " class=\"hint\"");
+
+WebViewPage.WriteLiteralTo(__razor_helper_writer, ">");
+
+
+#line 41 "..\..\Templates\HtmlHelpers.cshtml"
+WebViewPage.WriteTo(__razor_helper_writer, fieldConfiguration.Hint);
+
+
+#line default
+#line hidden
+WebViewPage.WriteLiteralTo(__razor_helper_writer, "</div>\r\n");
+
+
+#line 42 "..\..\Templates\HtmlHelpers.cshtml"
+    }
+
+
+#line default
+#line hidden
+});
+
+#line 43 "..\..\Templates\HtmlHelpers.cshtml"
+}
+#line default
+#line hidden
+
+#line 45 "..\..\Templates\HtmlHelpers.cshtml"
+public static System.Web.WebPages.HelperResult BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldConfiguration fieldConfiguration) {
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 45 "..\..\Templates\HtmlHelpers.cshtml"
+                                                                                                                                                
 
 
 #line default
@@ -269,7 +317,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "            <dt>");
 
 
-#line 38 "..\..\Templates\HtmlHelpers.cshtml"
+#line 46 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, labelHtml);
 
 
@@ -282,7 +330,7 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "            <dd>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "                ");
 
 
-#line 40 "..\..\Templates\HtmlHelpers.cshtml"
+#line 48 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, elementHtml);
 
 
@@ -291,8 +339,15 @@ WebViewPage.WriteTo(__razor_helper_writer, elementHtml);
 WebViewPage.WriteLiteralTo(__razor_helper_writer, " ");
 
 
-#line 40 "..\..\Templates\HtmlHelpers.cshtml"
-WebViewPage.WriteTo(__razor_helper_writer, validationHtml);
+#line 48 "..\..\Templates\HtmlHelpers.cshtml"
+WebViewPage.WriteTo(__razor_helper_writer, GetHint(fieldConfiguration));
+
+
+#line default
+#line hidden
+
+#line 48 "..\..\Templates\HtmlHelpers.cshtml"
+                 WebViewPage.WriteTo(__razor_helper_writer, validationHtml);
 
 
 #line default
@@ -300,40 +355,40 @@ WebViewPage.WriteTo(__razor_helper_writer, validationHtml);
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "\r\n");
 
 
-#line 41 "..\..\Templates\HtmlHelpers.cshtml"
+#line 49 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 41 "..\..\Templates\HtmlHelpers.cshtml"
+#line 49 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 43 "..\..\Templates\HtmlHelpers.cshtml"
-public static System.Web.WebPages.HelperResult Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata) {
+#line 51 "..\..\Templates\HtmlHelpers.cshtml"
+public static System.Web.WebPages.HelperResult Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration) {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 43 "..\..\Templates\HtmlHelpers.cshtml"
-                                                                                                                        
+#line 51 "..\..\Templates\HtmlHelpers.cshtml"
+                                                                                                                                                                
 
 
 #line default
 #line hidden
 
-#line 44 "..\..\Templates\HtmlHelpers.cshtml"
-WebViewPage.WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml));
+#line 52 "..\..\Templates\HtmlHelpers.cshtml"
+WebViewPage.WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration));
 
 
 #line default
 #line hidden
 
-#line 44 "..\..\Templates\HtmlHelpers.cshtml"
-                                                           
+#line 52 "..\..\Templates\HtmlHelpers.cshtml"
+                                                                               
 
 
 #line default
@@ -341,40 +396,41 @@ WebViewPage.WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, element
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "            </dd>\r\n");
 
 
-#line 46 "..\..\Templates\HtmlHelpers.cshtml"
+#line 54 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 46 "..\..\Templates\HtmlHelpers.cshtml"
+#line 54 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 48 "..\..\Templates\HtmlHelpers.cshtml"
-public static System.Web.WebPages.HelperResult BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata) {
+#line 56 "..\..\Templates\HtmlHelpers.cshtml"
+public static System.Web.WebPages.HelperResult BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
+{
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 48 "..\..\Templates\HtmlHelpers.cshtml"
-                                                                                                                             
+#line 57 "..\..\Templates\HtmlHelpers.cshtml"
+ 
 
 
 #line default
 #line hidden
 
-#line 49 "..\..\Templates\HtmlHelpers.cshtml"
-WebViewPage.WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml));
+#line 58 "..\..\Templates\HtmlHelpers.cshtml"
+WebViewPage.WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration));
 
 
 #line default
 #line hidden
 
-#line 49 "..\..\Templates\HtmlHelpers.cshtml"
-                                                           
+#line 58 "..\..\Templates\HtmlHelpers.cshtml"
+                                                                               
 
 
 #line default
@@ -382,25 +438,25 @@ WebViewPage.WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, element
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "                <dl>\r\n");
 
 
-#line 51 "..\..\Templates\HtmlHelpers.cshtml"
+#line 60 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 51 "..\..\Templates\HtmlHelpers.cshtml"
+#line 60 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 53 "..\..\Templates\HtmlHelpers.cshtml"
+#line 62 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult EndField() {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 53 "..\..\Templates\HtmlHelpers.cshtml"
+#line 62 "..\..\Templates\HtmlHelpers.cshtml"
                     
 
 
@@ -411,25 +467,25 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "                </dl>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "            </dd>\r\n");
 
 
-#line 56 "..\..\Templates\HtmlHelpers.cshtml"
+#line 65 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 56 "..\..\Templates\HtmlHelpers.cshtml"
+#line 65 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 58 "..\..\Templates\HtmlHelpers.cshtml"
+#line 67 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult BeginNavigation() {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 58 "..\..\Templates\HtmlHelpers.cshtml"
+#line 67 "..\..\Templates\HtmlHelpers.cshtml"
                            
 
 
@@ -438,25 +494,25 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "        <div class=\"form_navigation\">\r\n");
 
 
-#line 60 "..\..\Templates\HtmlHelpers.cshtml"
+#line 69 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 60 "..\..\Templates\HtmlHelpers.cshtml"
+#line 69 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 62 "..\..\Templates\HtmlHelpers.cshtml"
+#line 71 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult EndNavigation() {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 62 "..\..\Templates\HtmlHelpers.cshtml"
+#line 71 "..\..\Templates\HtmlHelpers.cshtml"
                          
 
 
@@ -465,25 +521,25 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "        </div>\r\n");
 
 
-#line 64 "..\..\Templates\HtmlHelpers.cshtml"
+#line 73 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 64 "..\..\Templates\HtmlHelpers.cshtml"
+#line 73 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 66 "..\..\Templates\HtmlHelpers.cshtml"
+#line 75 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult BeginMessage(MessageType messageType, IHtmlString heading) {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 66 "..\..\Templates\HtmlHelpers.cshtml"
+#line 75 "..\..\Templates\HtmlHelpers.cshtml"
                                                                     
 
 
@@ -492,7 +548,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "      <div class=\"");
 
 
-#line 67 "..\..\Templates\HtmlHelpers.cshtml"
+#line 76 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, string.Format("{0}{1}", messageType.ToString().ToLower(), "_message"));
 
 
@@ -503,7 +559,7 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "\">\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "          <h3>");
 
 
-#line 68 "..\..\Templates\HtmlHelpers.cshtml"
+#line 77 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, heading);
 
 
@@ -514,25 +570,25 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "</h3>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "          <div class=\"message\">\r\n");
 
 
-#line 70 "..\..\Templates\HtmlHelpers.cshtml"
+#line 79 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 70 "..\..\Templates\HtmlHelpers.cshtml"
+#line 79 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 72 "..\..\Templates\HtmlHelpers.cshtml"
+#line 81 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult EndMessage() {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 72 "..\..\Templates\HtmlHelpers.cshtml"
+#line 81 "..\..\Templates\HtmlHelpers.cshtml"
                       
 
 
@@ -543,25 +599,25 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "          </div>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "      </div>\r\n");
 
 
-#line 75 "..\..\Templates\HtmlHelpers.cshtml"
+#line 84 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 75 "..\..\Templates\HtmlHelpers.cshtml"
+#line 84 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 77 "..\..\Templates\HtmlHelpers.cshtml"
+#line 86 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult MessageParagraph(IHtmlString paragraph) {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 77 "..\..\Templates\HtmlHelpers.cshtml"
+#line 86 "..\..\Templates\HtmlHelpers.cshtml"
                                                  
 
 
@@ -572,7 +628,7 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "    <p>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "        ");
 
 
-#line 79 "..\..\Templates\HtmlHelpers.cshtml"
+#line 88 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, paragraph);
 
 
@@ -583,25 +639,25 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "    </p>\r\n");
 
 
-#line 81 "..\..\Templates\HtmlHelpers.cshtml"
+#line 90 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 81 "..\..\Templates\HtmlHelpers.cshtml"
+#line 90 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden
 
-#line 83 "..\..\Templates\HtmlHelpers.cshtml"
+#line 92 "..\..\Templates\HtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult List(IEnumerable<IHtmlString> items) {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 83 "..\..\Templates\HtmlHelpers.cshtml"
+#line 92 "..\..\Templates\HtmlHelpers.cshtml"
                                               
 
 
@@ -610,7 +666,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "    <ul>\r\n");
 
 
-#line 85 "..\..\Templates\HtmlHelpers.cshtml"
+#line 94 "..\..\Templates\HtmlHelpers.cshtml"
 foreach(var i in items) {
 
 
@@ -619,7 +675,7 @@ foreach(var i in items) {
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "        <li>");
 
 
-#line 86 "..\..\Templates\HtmlHelpers.cshtml"
+#line 95 "..\..\Templates\HtmlHelpers.cshtml"
 WebViewPage.WriteTo(__razor_helper_writer, i);
 
 
@@ -628,7 +684,7 @@ WebViewPage.WriteTo(__razor_helper_writer, i);
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 
 
-#line 87 "..\..\Templates\HtmlHelpers.cshtml"
+#line 96 "..\..\Templates\HtmlHelpers.cshtml"
 }
 
 
@@ -637,14 +693,14 @@ WebViewPage.WriteLiteralTo(__razor_helper_writer, "</li>\r\n");
 WebViewPage.WriteLiteralTo(__razor_helper_writer, "    </ul>\r\n");
 
 
-#line 89 "..\..\Templates\HtmlHelpers.cshtml"
+#line 98 "..\..\Templates\HtmlHelpers.cshtml"
 
 
 #line default
 #line hidden
 });
 
-#line 89 "..\..\Templates\HtmlHelpers.cshtml"
+#line 98 "..\..\Templates\HtmlHelpers.cshtml"
 }
 #line default
 #line hidden

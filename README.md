@@ -32,7 +32,7 @@ View Model
 Razor view
 ----------
 
-	@using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), FormMethod.Post, EncType.Multipart))
+	@using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), FormMethod.Post, enctype: EncType.Multipart))
 	{
 		using (var m = form.BeginMessage(MessageType.Success, "Success!"))
 		{
@@ -51,7 +51,9 @@ Razor view
 			}
 			@s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
 			@s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label")
-			@s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label")
+			@s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
+			@s.FieldFor(m => m.SomeCheckbox).AsList().WithTrueAs("True").WithFalseAs("False")
+			@s.FieldFor(m => m.SomeCheckbox).AsDropDown()
 		}
 		using (var n = f.BeginNavigation())
 		{
@@ -63,7 +65,7 @@ Razor view
 HTML output (using default template that comes with Chameleon)
 ------------------------------------
 
-    <form action="/" method="post">
+<form action="/" enctype="multipart/form-data" method="post">
 	<div class="success_message">
         <h3>Success!</h3>
           <div class="message">
@@ -78,7 +80,7 @@ HTML output (using default template that comes with Chameleon)
         <dl>
             <dt><label for="RequiredStringField">Required string field</label></dt>
             <dd>
-                <input data-attr1="value" data-val="true" data-val-required="The Required string field field is required." id="RequiredStringField" name="RequiredStringField" type="text" value="" /> <span class="field-validation-valid" data-valmsg-for="RequiredStringField" data-valmsg-replace="true"></span>
+                <input data-some-attr="value" data-val="true" data-val-required="The Required string field field is required." id="RequiredStringField" name="RequiredStringField" type="text" value="" /> <span class="field-validation-valid" data-valmsg-for="RequiredStringField" data-valmsg-replace="true"></span>
                 <dl>
             <dt><label for="NestedField">Nested field</label></dt>
             <dd>
@@ -108,15 +110,30 @@ HTML output (using default template that comes with Chameleon)
                 <textarea cols="60" id="TextAreaField" name="TextAreaField" rows="5">
 	</textarea> <span class="field-validation-valid" data-valmsg-for="TextAreaField" data-valmsg-replace="true"></span>
             </dd>
-			<dt><label for="SomeCheckbox">Some checkbox</label></dt>
+            <dt><label for="SomeCheckbox">Some checkbox</label></dt>
             <dd>
-                <input data-val="true" data-val-required="The Some checkbox field is required." id="SomeCheckbox" name="SomeCheckbox" type="checkbox" value="true" /> <label for="SomeCheckbox">Some label</label> <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span>
+                <input id="SomeCheckbox" name="SomeCheckbox" type="checkbox" value="true" /> <label for="SomeCheckbox">Some label</label> <div class="hint">Format: XXX</div>
+    <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span>
+            </dd>
+            <dt><label for="SomeCheckbox">Some checkbox</label></dt>
+            <dd>
+                    <ul>
+        <li><input id="SomeCheckbox_1" name="SomeCheckbox" type="radio" value="true" /> <label for="SomeCheckbox_1">True</label></li>
+        <li><input checked="checked" id="SomeCheckbox_2" name="SomeCheckbox" type="radio" value="false" /> <label for="SomeCheckbox_2">False</label></li>
+    </ul>
+    <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span>
+            </dd>
+            <dt><label for="SomeCheckbox">Some checkbox</label></dt>
+            <dd>
+                <select id="SomeCheckbox" name="SomeCheckbox"><option value="true">Yes</option>
+    <option selected="selected" value="false">No</option>
+    </select> <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span>
             </dd>
         </dl>
     </fieldset>
         <div class="form_navigation">
-	<input type="submit" value="Submit" /><input type="reset" value="Reset" />        </div>
-    </form>
+    <input type="submit" value="Submit" /><input type="reset" value="Reset" />        </div>
+    </form>
 
 Contributions
 -------------

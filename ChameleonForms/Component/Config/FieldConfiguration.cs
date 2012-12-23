@@ -156,6 +156,23 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <param name="field">The field being configured</param>
         void SetField(IHtmlString field);
+
+        /// <summary>
+        /// Supply a string hint to display along with the field.
+        /// </summary>
+        /// <param name="hint">The hint string</param>
+        IFieldConfiguration WithHint(string hint);
+
+        /// <summary>
+        /// Supply a HTML hint to display along with the field.
+        /// </summary>
+        /// <param name="hint">The hint markup</param>
+        IFieldConfiguration WithHint(IHtmlString hint);
+
+        /// <summary>
+        /// Get the hint to display with the field.
+        /// </summary>
+        IHtmlString Hint { get; }
     }
 
     /// <summary>
@@ -275,6 +292,20 @@ namespace ChameleonForms.Component.Config
         {
             _field = () => field;
         }
+
+        public IFieldConfiguration WithHint(string hint)
+        {
+            Hint = new HtmlString(HttpUtility.HtmlEncode(hint));
+            return this;
+        }
+
+        public IFieldConfiguration WithHint(IHtmlString hint)
+        {
+            Hint = hint;
+            return this;
+        }
+
+        public IHtmlString Hint { get; private set; }
 
         public void SetField(Func<IHtmlString> field)
         {

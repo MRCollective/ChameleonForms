@@ -1,4 +1,5 @@
 ﻿using System.Web;
+using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using System.Web.Mvc;
 
@@ -62,8 +63,9 @@ namespace ChameleonForms.Templates
         /// <param name="elementHtml">The HTML that comprieses the field itself</param>
         /// <param name="validationHtml">The HTML that comprises the field's validation messages</param>
         /// <param name="fieldMetadata">The metadata for the field being created</param>
+        /// <param name="fieldConfiguration">Configuration for the field</param>
         /// <returns>The HTML for the field</returns>
-        IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata);
+        IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the beginning HTML for a single form field that contains other fields nested within it.
@@ -72,8 +74,9 @@ namespace ChameleonForms.Templates
         /// <param name="elementHtml">The HTML that comprieses the field itself</param>
         /// <param name="validationHtml">The HTML that comprises the field's validation messages</param>
         /// <param name="fieldMetadata">The metadata for the field being created</param>
+        /// <param name="fieldConfiguration">Configuration for the field</param>
         /// <returns>The beginning HTML for the parent field</returns>
-        IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata);
+        IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the ending HTML for a single form field that contains other fields nested within it.

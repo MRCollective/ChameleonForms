@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Web;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component;
-using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using NUnit.Framework;
 
@@ -109,6 +109,23 @@ namespace ChameleonForms.Tests.Component.Config
             var fc = Field.Configure().WithTrueAs("World!");
 
             Assert.That(fc.TrueString, Is.EqualTo("World!"));
+        }
+
+        [Test]
+        public void Set_and_encode_non_html_hint()
+        {
+            var fc = Field.Configure().WithHint("Some hint with <html> & characters");
+
+            Assert.That(fc.Hint.ToHtmlString(), Is.EqualTo("Some hint with &lt;html&gt; &amp; characters"));
+        }
+
+        [Test]
+        public void Set_html_hint()
+        {
+            var htmlHint = new HtmlString("");
+            var fc = Field.Configure().WithHint(htmlHint);
+
+            Assert.That(fc.Hint, Is.EqualTo(htmlHint));
         }
     }
 }

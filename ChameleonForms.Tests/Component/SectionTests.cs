@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component;
+using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
 using NSubstitute;
 using NUnit.Framework;
@@ -83,7 +84,7 @@ namespace ChameleonForms.Tests.Component
             Assert.That(ss, Is.Not.Null);
             _f.Received().Write(_nestedBeginHtml);
         }
-
+        
         [Test]
         public void Output_a_field()
         {
@@ -91,13 +92,13 @@ namespace ChameleonForms.Tests.Component
             var elementHtml = Substitute.For<IHtmlString>();
             var validationHtml = Substitute.For<IHtmlString>();
             var metadata = new ModelMetadata(Substitute.For<ModelMetadataProvider>(), null, null, typeof(string), null);
-            var expectedOutput = Substitute.For<IHtmlString>();
-            _f.Template.Field(labelHtml, elementHtml, validationHtml, metadata).Returns(expectedOutput);
+            var expectedOutput = new HtmlString("output");
+            _f.Template.Field(labelHtml, elementHtml, validationHtml, metadata, Arg.Any<IFieldConfiguration>()).Returns(expectedOutput);
             var s = Arrange(false);
 
-            var actualOutput = s.Field(labelHtml, elementHtml, validationHtml, metadata);
+            var config = s.Field(labelHtml, elementHtml, validationHtml, metadata);
 
-            Assert.That(actualOutput, Is.EqualTo(expectedOutput));
+            Assert.That(config.ToHtmlString(), Is.EqualTo(expectedOutput.ToHtmlString()));
         }
     }
 }

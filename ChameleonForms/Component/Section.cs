@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component
@@ -40,10 +41,12 @@ namespace ChameleonForms.Component
         /// <param name="elementHtml">The HTML for the field element part of the field</param>
         /// <param name="validationHtml">The HTML for the validation markup part of the field</param>
         /// <param name="metadata">Any field metadata</param>
-        /// <returns>The HTML for the field using the current template</returns>
-        public IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml = null, ModelMetadata metadata = null)
+        /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
+        public IFieldConfiguration Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml = null, ModelMetadata metadata = null)
         {
-            return Form.Template.Field(labelHtml, elementHtml, validationHtml, metadata);
+            var fc = new FieldConfiguration();
+            fc.SetField(() => Form.Template.Field(labelHtml, elementHtml, validationHtml, metadata, fc));
+            return fc;
         }
 
         public override IHtmlString Begin()

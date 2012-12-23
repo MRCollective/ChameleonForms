@@ -54,8 +54,8 @@ namespace ChameleonForms.Component
         public override IHtmlString Begin()
         {
             return !IsParent
-                ? Form.Template.Field(_fieldGenerator.GetLabelHtml(_config), _fieldGenerator.GetFieldHtml(_config), _fieldGenerator.GetValidationHtml(_config), _fieldGenerator.Metadata)
-                : Form.Template.BeginField(_fieldGenerator.GetLabelHtml(_config), _fieldGenerator.GetFieldHtml(_config), _fieldGenerator.GetValidationHtml(_config), _fieldGenerator.Metadata);
+                ? Form.Template.Field(_fieldGenerator.GetLabelHtml(_config), _fieldGenerator.GetFieldHtml(_config), _fieldGenerator.GetValidationHtml(_config), _fieldGenerator.Metadata, _config)
+                : Form.Template.BeginField(_fieldGenerator.GetLabelHtml(_config), _fieldGenerator.GetFieldHtml(_config), _fieldGenerator.GetValidationHtml(_config), _fieldGenerator.Metadata, _config);
         }
 
         public override IHtmlString End()

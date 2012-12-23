@@ -1,6 +1,8 @@
 ﻿@using System.Web.Mvc
+@using Component.Config
 @using Enums
 @using Templates
+
 @* Generator: MvcHelper *@
 
 @* The @:'s are to stop compilation errors with the Razor engine due to unclosed HTML tags *@
@@ -34,19 +36,26 @@
 @:            </dd>
 }
 
-@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml) {
-@:            <dt>@labelHtml</dt>
-@:            <dd>
-@:                @elementHtml @validationHtml
+@helper GetHint(IFieldConfiguration fieldConfiguration) {
+    if (fieldConfiguration != null && fieldConfiguration.Hint != null) {
+<div class="hint">@fieldConfiguration.Hint</div>
+    }
 }
 
-@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata) {
-@BeginFieldInternal(labelHtml, elementHtml, validationHtml)
+@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldConfiguration fieldConfiguration) {
+@:            <dt>@labelHtml</dt>
+@:            <dd>
+@:                @elementHtml @GetHint(fieldConfiguration)@validationHtml
+}
+
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration) {
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration)
 @:            </dd>
 }
 
-@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata) {
-@BeginFieldInternal(labelHtml, elementHtml, validationHtml)
+@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
+{
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration)
 @:                <dl>
 }
 

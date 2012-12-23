@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 
 namespace ChameleonForms.Templates
@@ -39,14 +40,14 @@ namespace ChameleonForms.Templates
             return HtmlHelpers.EndNestedSection();
         }
 
-        public IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata)
+        public IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
         {
-            return HtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata);
+            return HtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
         }
 
-        public IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata)
+        public IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
         {
-            return HtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata);
+            return HtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
         }
 
         public IHtmlString EndField()
