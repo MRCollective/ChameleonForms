@@ -14,6 +14,12 @@ View Model
 
     public class ViewModelExample
     {
+        public ViewModelExample()
+        {
+            // This could be set using a model binder if it's populated from a database or similar
+            List = new List<ListItem> {new ListItem{Id = 1, Name = "A"}, new ListItem{Id = 2, Name = "B"}};
+        }
+
         [Required]
         public string RequiredStringField { get; set; }
 
@@ -27,6 +33,16 @@ View Model
         public string TextAreaField { get; set; }
 
         public bool SomeCheckbox { get; set; }
+
+        public List<ListItem> List { get; set; }
+        [ExistsIn("List", "Id", "Name")]
+        public int ListId { get; set; }
+    }
+
+    public class ListItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 
 Razor view
@@ -54,6 +70,8 @@ Razor view
 			@s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
 			@s.FieldFor(m => m.SomeCheckbox).AsList().WithTrueAs("True").WithFalseAs("False")
 			@s.FieldFor(m => m.SomeCheckbox).AsDropDown()
+			@s.FieldFor(m => m.ListId)
+			@s.FieldFor(m => m.ListId).AsList()
 		}
 		using (var n = f.BeginNavigation())
 		{
@@ -129,6 +147,20 @@ HTML output (using default template that comes with Chameleon)
     <option selected="selected" value="false">No</option>
     </select> <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span>
             </dd>
+            <dt><label for="ListId">List id</label></dt>
+            <dd>
+                <select data-val="true" data-val-number="The field List id must be a number." data-val-required="The List id field is required." id="ListId" name="ListId"><option value="1">A</option>
+    <option value="2">B</option>
+    </select> <span class="field-validation-valid" data-valmsg-for="ListId" data-valmsg-replace="true"></span>
+            </dd>
+            <dt><label for="ListId">List id</label></dt>
+            <dd>
+                    <ul>
+        <li><input id="ListId_1" name="ListId" type="radio" value="1" /> <label for="ListId_1">A</label></li>
+        <li><input id="ListId_2" name="ListId" type="radio" value="2" /> <label for="ListId_2">B</label></li>
+    </ul>
+    <span class="field-validation-valid" data-valmsg-for="ListId" data-valmsg-replace="true"></span>
+            </dd>
         </dl>
     </fieldset>
         <div class="form_navigation">

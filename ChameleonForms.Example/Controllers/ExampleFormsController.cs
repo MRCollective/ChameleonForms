@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Attributes;
 
 namespace ChameleonForms.Example.Controllers
 {
@@ -21,6 +23,12 @@ namespace ChameleonForms.Example.Controllers
 
     public class ViewModelExample
     {
+        public ViewModelExample()
+        {
+            // This could be set using a model binder if it's populated from a database or similar
+            List = new List<ListItem> {new ListItem{Id = 1, Name = "A"}, new ListItem{Id = 2, Name = "B"}};
+        }
+
         [Required]
         public string RequiredStringField { get; set; }
 
@@ -34,6 +42,16 @@ namespace ChameleonForms.Example.Controllers
         public string TextAreaField { get; set; }
 
         public bool SomeCheckbox { get; set; }
+
+        public List<ListItem> List { get; set; }
+        [ExistsIn("List", "Id", "Name")]
+        public int ListId { get; set; }
+    }
+
+    public class ListItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 
     public enum SomeEnum

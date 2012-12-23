@@ -32,6 +32,8 @@
         @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
         @s.FieldFor(m => m.SomeCheckbox).AsList().WithTrueAs("True").WithFalseAs("False")
         @s.FieldFor(m => m.SomeCheckbox).AsDropDown()
+        @s.FieldFor(m => m.ListId)
+        @s.FieldFor(m => m.ListId).AsList()
     }
     using (var n = f.BeginNavigation())
     {
