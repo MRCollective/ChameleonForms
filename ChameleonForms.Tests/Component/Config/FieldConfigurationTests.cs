@@ -127,5 +127,15 @@ namespace ChameleonForms.Tests.Component.Config
 
             Assert.That(fc.Hint, Is.EqualTo(htmlHint));
         }
+
+        [Test]
+        public void Allow_for_custom_extension()
+        {
+            var fc = Field.Configure();
+
+            fc.Bag.SomeConfigItem = "Hello!";
+
+            Assert.That(fc.Bag.SomeConfigItem, Is.EqualTo("Hello!"));
+        }
     }
 }

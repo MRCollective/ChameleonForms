@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Web;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
@@ -11,6 +12,11 @@ namespace ChameleonForms.Component.Config
     /// </summary>
     public interface IFieldConfiguration : IHtmlString
     {
+        /// <summary>
+        /// A dynamic bag to allow for custom extensions using the field configuration.
+        /// </summary>
+        dynamic Bag { get; }
+
         /// <summary>
         /// Attributes to add to the form element's HTML.
         /// </summary>
@@ -191,8 +197,10 @@ namespace ChameleonForms.Component.Config
             DisplayType = FieldDisplayType.Default;
             TrueString = "Yes";
             FalseString = "No";
+            Bag = new ExpandoObject();
         }
 
+        public dynamic Bag { get; private set; }
         public HtmlAttributes Attributes { get; set; }
 
         public IFieldConfiguration AddClass(string @class)
