@@ -112,6 +112,22 @@ namespace ChameleonForms.Tests.Component.Config
         }
 
         [Test]
+        public void Use_empty_string_as_none_string_By_default()
+        {
+            var fc = Field.Configure();
+
+            Assert.That(fc.NoneString, Is.EqualTo(string.Empty));
+        }
+
+        [Test]
+        public void Allow_override_for_none_string()
+        {
+            var fc = Field.Configure().WithNoneAs("None!");
+
+            Assert.That(fc.NoneString, Is.EqualTo("None!"));
+        }
+
+        [Test]
         public void Set_and_encode_non_html_hint()
         {
             var fc = Field.Configure().WithHint("Some hint with <html> & characters");

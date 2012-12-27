@@ -29,7 +29,9 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Required]
         public string SomeProperty { get; set; }
 
-        public TestEnum TestEnum { get; set; }
+        public TestEnum RequiredTestEnum { get; set; }
+
+        public TestEnum? OptionalTestEnum { get; set; }
 
         [DataType(DataType.Password)]
         public string Password { get; set; }
@@ -169,9 +171,19 @@ namespace ChameleonForms.Tests.FieldGenerator
         }
 
         [Test]
-        public void Use_correct_html_for_enum_field()
+        public void Use_correct_html_for_required_enum_field()
         {
-            var g = Arrange(m => m.TestEnum, m => m.TestEnum = TestEnum.ValueWithDescriptionAttribute);
+            var g = Arrange(m => m.RequiredTestEnum, m => m.RequiredTestEnum = TestEnum.ValueWithDescriptionAttribute);
+
+            var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_enum_field()
+        {
+            var g = Arrange(m => m.OptionalTestEnum, m => m.OptionalTestEnum = null);
 
             var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
 
@@ -272,7 +284,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         public void Use_correct_html_for_optional_int_list_id()
         {
             var list = new List<IntListItem> { new IntListItem {Id = 1, Name = "A"}, new IntListItem {Id = 2, Name = "B"}};
-            var g = Arrange(m => m.OptionalIntListId, m => m.OptionalIntListId = 2, m => m.IntList = list);
+            var g = Arrange(m => m.OptionalIntListId, m => m.OptionalIntListId = null, m => m.IntList = list);
 
             var result = g.GetFieldHtml(null);
 
@@ -283,9 +295,31 @@ namespace ChameleonForms.Tests.FieldGenerator
         public void Use_correct_html_for_optional_string_list_id_as_list()
         {
             var list = new List<StringListItem> { new StringListItem { Value = "1", Label = "A" }, new StringListItem { Value = "2", Label = "B" } };
-            var g = Arrange(m => m.OptionalStringListId, m => m.OptionalStringListId = "2", m => m.StringList = list);
+            var g = Arrange(m => m.OptionalStringListId, m => m.OptionalStringListId = "", m => m.StringList = list);
             
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_int_list_id_with_none_string_override()
+        {
+            var list = new List<IntListItem> { new IntListItem { Id = 1, Name = "A" }, new IntListItem { Id = 2, Name = "B" } };
+            var g = Arrange(m => m.OptionalIntListId, m => m.OptionalIntListId = null, m => m.IntList = list);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().WithNoneAs("-- Select Item"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_string_list_id_as_list_with_none_string_override()
+        {
+            var list = new List<StringListItem> { new StringListItem { Value = "1", Label = "A" }, new StringListItem { Value = "2", Label = "B" } };
+            var g = Arrange(m => m.OptionalStringListId, m => m.OptionalStringListId = "2", m => m.StringList = list);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList().WithNoneAs("No Value"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

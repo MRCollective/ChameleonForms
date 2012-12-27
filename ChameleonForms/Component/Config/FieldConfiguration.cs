@@ -143,12 +143,24 @@ namespace ChameleonForms.Component.Config
         string FalseString { get; }
 
         /// <summary>
+        /// Change the label that represents none.
+        /// </summary>
+        /// <param name="noneString">The label to use as none</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithNoneAs(string noneString);
+        
+        /// <summary>
+        /// The label that represents none.
+        /// </summary>
+        string NoneString { get; set; }
+
+        /// <summary>
         /// Change the label that represents false.
         /// </summary>
         /// <param name="falseString">The label to use as false</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithFalseAs(string falseString);
-
+        
         /// <summary>
         /// Sets a lambda expression to get the field that the field configuration is wrapping so that
         ///     a call to ToHtmlString() will output the given field.
@@ -197,6 +209,7 @@ namespace ChameleonForms.Component.Config
             DisplayType = FieldDisplayType.Default;
             TrueString = "Yes";
             FalseString = "No";
+            NoneString = "";
             Bag = new ExpandoObject();
         }
 
@@ -289,10 +302,16 @@ namespace ChameleonForms.Component.Config
         }
 
         public string FalseString { get; private set; }
-
         public IFieldConfiguration WithFalseAs(string falseString)
         {
             FalseString = falseString;
+            return this;
+        }
+
+        public string NoneString { get; set; }
+        public IFieldConfiguration WithNoneAs(string noneString)
+        {
+            NoneString = noneString;
             return this;
         }
 

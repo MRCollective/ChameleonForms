@@ -15,7 +15,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override HandleAction Handle()
         {
-            if (!FieldGenerator.Metadata.ModelType.IsEnum)
+            if (!IsEnum())
                 return HandleAction.Continue;
 
             var selectList = GetSelectList(FieldGenerator.GetValue());
@@ -23,9 +23,23 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return HandleAction.Return(html);
         }
 
+        public bool IsEnum()
+        {
+            var enumType = GetEnumType();
+            return enumType != null && enumType.IsEnum;
+        }
+
+        public Type GetEnumType()
+        {
+            if (FieldGenerator.Metadata.ModelType.IsEnum)
+                return FieldGenerator.Metadata.ModelType;
+
+            return Nullable.GetUnderlyingType(FieldGenerator.Metadata.ModelType);
+        }
+
         private IEnumerable<SelectListItem> GetSelectList(T value)
         {
-            return Enum.GetValues(typeof (T))
+            return Enum.GetValues(GetEnumType())
                 .OfType<T>()
                 .Select(i => new SelectListItem
                 {

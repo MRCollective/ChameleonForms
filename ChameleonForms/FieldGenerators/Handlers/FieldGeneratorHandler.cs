@@ -6,6 +6,7 @@ using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
+using System.Linq;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -16,8 +17,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         protected FieldGeneratorHandler(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
         {
-            this.FieldGenerator = fieldGenerator;
-            this.FieldConfiguration = fieldConfiguration;
+            FieldGenerator = fieldGenerator;
+            FieldConfiguration = fieldConfiguration;
         }
 
         public abstract HandleAction Handle();
@@ -33,6 +34,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         protected IHtmlString GetSelectListHtml(IEnumerable<SelectListItem> selectList)
         {
+            if (!FieldGenerator.Metadata.IsRequired)
+                selectList = new []{GetEmptySelectListItem()}.Union(selectList);
+
             switch (FieldConfiguration.DisplayType)
             {
                 case FieldDisplayType.List:
@@ -47,6 +51,22 @@ namespace ChameleonForms.FieldGenerators.Handlers
             }
 
             return null;
+        }
+
+        private SelectListItem GetEmptySelectListItem()
+        {
+            var selected = FieldGenerator.GetValue() == null;
+            if (typeof (T) == typeof (string))
+                selected = string.IsNullOrEmpty(FieldGenerator.GetValue() as string);
+            return new SelectListItem
+            {
+                Selected = selected,
+                Value = "",
+                Text = string.IsNullOrEmpty(FieldConfiguration.NoneString)
+                        && FieldConfiguration.DisplayType == FieldDisplayType.List
+                    ? "None"
+                    : FieldConfiguration.NoneString
+            };
         }
 
         private IEnumerable<IHtmlString> SelectListToRadioList(IEnumerable<SelectListItem> selectList)
