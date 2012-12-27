@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Autofac;
 using AutofacContrib.NSubstitute;
 using ChameleonForms.Enums;
-using ChameleonForms.FieldGenerator;
+using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
 using ChameleonForms.Tests.Helpers;
 using NSubstitute;

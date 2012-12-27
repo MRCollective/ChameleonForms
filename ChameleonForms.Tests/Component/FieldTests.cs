@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
-using ChameleonForms.FieldGenerator;
+using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
 using ChameleonForms.Tests.Helpers;
 using NSubstitute;

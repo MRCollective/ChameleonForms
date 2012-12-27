@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Enums;
-using ChameleonForms.FieldGenerator;
+using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
 
 namespace ChameleonForms

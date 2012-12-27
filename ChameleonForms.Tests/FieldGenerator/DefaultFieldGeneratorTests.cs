@@ -8,7 +8,7 @@ using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
-using ChameleonForms.FieldGenerator;
+using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
 using ChameleonForms.Tests.Helpers;
 using NUnit.Framework;

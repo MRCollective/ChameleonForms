@@ -13,7 +13,7 @@ using ChameleonForms.Enums;
 using ChameleonForms.Templates;
 using Humanizer;
 
-namespace ChameleonForms.FieldGenerator
+namespace ChameleonForms.FieldGenerators
 {
     /// <summary>
     /// The default field HTML generator.

@@ -88,8 +88,8 @@
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Component\Section.cs" />
     <Compile Include="Enums\EncType.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator.cs" />
-    <Compile Include="FieldGenerator\IFieldGenerator.cs" />
+    <Compile Include="FieldGenerators\DefaultFieldGenerator.cs" />
+    <Compile Include="FieldGenerators\IFieldGenerator.cs" />
     <Compile Include="Form.cs" />
     <Compile Include="HumanizedLabels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

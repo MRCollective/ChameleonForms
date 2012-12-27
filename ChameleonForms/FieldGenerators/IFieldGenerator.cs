@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 
-namespace ChameleonForms.FieldGenerator
+namespace ChameleonForms.FieldGenerators
 {
     /// <summary>
     /// Generates the HTML for a single form field.
