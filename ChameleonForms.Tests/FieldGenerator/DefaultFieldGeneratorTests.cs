@@ -41,7 +41,9 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         public HttpPostedFileBase FileUpload { get; set; }
 
-        public bool BooleanField { get; set; }
+        public bool RequiredBooleanField { get; set; }
+
+        public bool? OptionalBooleanField { get; set; }
 
         public List<IntListItem> IntList { get; set; }
         public List<StringListItem> StringList { get; set; }
@@ -203,7 +205,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_single_checkbox_with_default_label()
         {
-            var g = Arrange(m => m.BooleanField);
+            var g = Arrange(m => m.RequiredBooleanField);
 
             var result = g.GetFieldHtml(null);
 
@@ -213,7 +215,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_checked_single_checkbox_with_default_label()
         {
-            var g = Arrange(m => m.BooleanField, m => m.BooleanField = true);
+            var g = Arrange(m => m.RequiredBooleanField, m => m.RequiredBooleanField = true);
 
             var result = g.GetFieldHtml(null);
 
@@ -223,7 +225,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_single_checkbox_with_custom_label()
         {
-            var g = Arrange(m => m.BooleanField);
+            var g = Arrange(m => m.RequiredBooleanField);
 
             var result = g.GetFieldHtml(new FieldConfiguration().InlineLabel("Some label"));
 
@@ -233,7 +235,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_boolean_list_and_false_value()
         {
-            var g = Arrange(m => m.BooleanField);
+            var g = Arrange(m => m.RequiredBooleanField);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
@@ -243,7 +245,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_boolean_list_and_true_value()
         {
-            var g = Arrange(m => m.BooleanField, m => m.BooleanField = true);
+            var g = Arrange(m => m.RequiredBooleanField, m => m.RequiredBooleanField = true);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
@@ -251,9 +253,39 @@ namespace ChameleonForms.Tests.FieldGenerator
         }
 
         [Test]
+        public void Use_correct_html_for_optional_boolean_list_and_no_value()
+        {
+            var g = Arrange(m => m.OptionalBooleanField);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_boolean_dropdown_and_no_value()
+        {
+            var g = Arrange(m => m.OptionalBooleanField);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_boolean_and_no_value()
+        {
+            var g = Arrange(m => m.OptionalBooleanField);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_boolean_list_and_custom_labels()
         {
-            var g = Arrange(m => m.BooleanField);
+            var g = Arrange(m => m.RequiredBooleanField);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList().WithTrueAs("True").WithFalseAs("False"));
 
@@ -263,7 +295,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_boolean_dropdown_list_and_false_value()
         {
-            var g = Arrange(m => m.BooleanField);
+            var g = Arrange(m => m.RequiredBooleanField);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
 
@@ -273,7 +305,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_boolean_dropdown_list_and_true_value()
         {
-            var g = Arrange(m => m.BooleanField, m => m.BooleanField = true);
+            var g = Arrange(m => m.RequiredBooleanField, m => m.RequiredBooleanField = true);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
 

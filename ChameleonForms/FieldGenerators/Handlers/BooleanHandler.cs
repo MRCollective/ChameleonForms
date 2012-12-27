@@ -16,10 +16,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override HandleAction Handle()
         {
-            if (FieldGenerator.Metadata.ModelType != typeof(bool))
+            if (FieldGenerator.Metadata.ModelType != typeof(bool) && FieldGenerator.Metadata.ModelType != typeof(bool?))
                 return HandleAction.Continue;
 
-            if (FieldConfiguration.DisplayType == FieldDisplayType.Default)
+            if (FieldConfiguration.DisplayType == FieldDisplayType.Default && FieldGenerator.Metadata.IsRequired)
                 return HandleAction.Return(GetSingleCheckboxHtml());
 
             var selectList = GetBooleanSelectList();
@@ -27,16 +27,16 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return HandleAction.Return(html);
         }
 
-        private bool GetValue()
+        private bool? GetValue()
         {
-            return FieldGenerator.GetValue() as bool? ?? false;
+            return FieldGenerator.GetValue() as bool?;
         }
 
         private IHtmlString GetSingleCheckboxHtml()
         {
             AdjustHtmlForModelState();
 
-            var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue(), FieldConfiguration.Attributes);
+            var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue() ?? false, FieldConfiguration.Attributes);
             var labelHtml = FieldGenerator.HtmlHelper.LabelFor(FieldGenerator.FieldProperty, FieldConfiguration.InlineLabelText);
 
             return new HtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
@@ -45,8 +45,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
         private IEnumerable<SelectListItem> GetBooleanSelectList()
         {
             var value = GetValue();
-            yield return new SelectListItem { Value = "true", Text = FieldConfiguration.TrueString, Selected = value };
-            yield return new SelectListItem { Value = "false", Text = FieldConfiguration.FalseString, Selected = !value };
+            if (FieldGenerator.Metadata.IsRequired && value == null)
+                value = false;
+            yield return new SelectListItem { Value = "true", Text = FieldConfiguration.TrueString, Selected = value == true };
+            yield return new SelectListItem { Value = "false", Text = FieldConfiguration.FalseString, Selected = value == false };
         }
     }
 }
