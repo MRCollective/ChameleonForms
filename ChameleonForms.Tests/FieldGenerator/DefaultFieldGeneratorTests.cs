@@ -42,12 +42,20 @@ namespace ChameleonForms.Tests.FieldGenerator
         public bool BooleanField { get; set; }
 
         public List<IntListItem> IntList { get; set; }
-        [ExistsIn("IntList", "Id", "Name")]
-        public int IntListId { get; set; }
-
         public List<StringListItem> StringList { get; set; }
+
+        [ExistsIn("IntList", "Id", "Name")]
+        public int? OptionalIntListId { get; set; }
+
         [ExistsIn("StringList", "Value", "Label")]
-        public string StringListId { get; set; }
+        public string OptionalStringListId { get; set; }
+
+        [ExistsIn("IntList", "Id", "Name")]
+        public int RequiredIntListId { get; set; }
+
+        [Required]
+        [ExistsIn("StringList", "Value", "Label")]
+        public string RequiredStringListId { get; set; }
     }
 
     public class IntListItem
@@ -77,6 +85,7 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         private DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, params Action<TestFieldViewModel>[] vmSetter)
         {
+            _h.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             _h.ViewContext.ClientValidationEnabled = true;
             _h.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(property), "asdf");
             var vm = new TestFieldViewModel();
@@ -260,10 +269,10 @@ namespace ChameleonForms.Tests.FieldGenerator
         }
 
         [Test]
-        public void Use_correct_html_for_int_list_id()
+        public void Use_correct_html_for_optional_int_list_id()
         {
             var list = new List<IntListItem> { new IntListItem {Id = 1, Name = "A"}, new IntListItem {Id = 2, Name = "B"}};
-            var g = Arrange(m => m.IntListId, m => m.IntListId = 2, m => m.IntList = list);
+            var g = Arrange(m => m.OptionalIntListId, m => m.OptionalIntListId = 2, m => m.IntList = list);
 
             var result = g.GetFieldHtml(null);
 
@@ -271,11 +280,33 @@ namespace ChameleonForms.Tests.FieldGenerator
         }
 
         [Test]
-        public void Use_correct_html_for_string_list_id_as_list()
+        public void Use_correct_html_for_optional_string_list_id_as_list()
         {
             var list = new List<StringListItem> { new StringListItem { Value = "1", Label = "A" }, new StringListItem { Value = "2", Label = "B" } };
-            var g = Arrange(m => m.StringListId, m => m.StringListId = "2", m => m.StringList = list);
+            var g = Arrange(m => m.OptionalStringListId, m => m.OptionalStringListId = "2", m => m.StringList = list);
             
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_required_int_list_id()
+        {
+            var list = new List<IntListItem> { new IntListItem { Id = 1, Name = "A" }, new IntListItem { Id = 2, Name = "B" } };
+            var g = Arrange(m => m.RequiredIntListId, m => m.RequiredIntListId = 2, m => m.IntList = list);
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_required_string_list_id_as_list()
+        {
+            var list = new List<StringListItem> { new StringListItem { Value = "1", Label = "A" }, new StringListItem { Value = "2", Label = "B" } };
+            var g = Arrange(m => m.RequiredStringListId, m => m.RequiredStringListId = "2", m => m.StringList = list);
+
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
