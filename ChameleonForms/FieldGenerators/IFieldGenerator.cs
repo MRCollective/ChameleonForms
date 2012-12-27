@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using System;
+using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 
@@ -7,8 +9,25 @@ namespace ChameleonForms.FieldGenerators
     /// <summary>
     /// Generates the HTML for a single form field.
     /// </summary>
+    public interface IFieldGenerator<TModel, T> : IFieldGenerator
+    {
+        /// <summary>
+        /// A HTML helper for the model.
+        /// </summary>
+        HtmlHelper<TModel> HtmlHelper { get; }
+
+        /// <summary>
+        /// The expression that identifies the property in the model being output.
+        /// </summary>
+        Expression<Func<TModel, T>> FieldProperty { get; }
+    }
+
+    /// <summary>
+    /// Generates the HTML for a single form field.
+    /// </summary>
     public interface IFieldGenerator
     {
+
         /// <summary>
         /// The metadata for the form field.
         /// </summary>

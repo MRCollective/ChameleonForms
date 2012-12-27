@@ -20,37 +20,32 @@ namespace ChameleonForms.FieldGenerators
     /// </summary>
     /// <typeparam name="TModel">The type of the view model for the form</typeparam>
     /// <typeparam name="T">The type of the field being generated</typeparam>
-    public class DefaultFieldGenerator<TModel, T> : IFieldGenerator
+    public class DefaultFieldGenerator<TModel, T> : IFieldGenerator<TModel, T>
     {
-        #region Setup
-        private readonly HtmlHelper<TModel> _helper;
-        private readonly Expression<Func<TModel, T>> _property;
-
         /// <summary>
         /// Constructs the field generator.
         /// </summary>
-        /// <param name="helper">The HTML helper for the current view</param>
-        /// <param name="property">An expression to identify the property to generate the field for</param>
-        public DefaultFieldGenerator(HtmlHelper<TModel> helper, Expression<Func<TModel, T>> property)
+        /// <param name="htmlHelper">The HTML helper for the current view</param>
+        /// <param name="fieldProperty">Expression to identify the property to generate the field for</param>
+        public DefaultFieldGenerator(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, T>> fieldProperty)
         {
-            _helper = helper;
-            _property = property;
-            Metadata = ModelMetadata.FromLambdaExpression(_property, _helper.ViewData);
+            HtmlHelper = htmlHelper;
+            FieldProperty = fieldProperty;
+            Metadata = ModelMetadata.FromLambdaExpression(FieldProperty, HtmlHelper.ViewData);
         }
-        #endregion
-
-        #region IFieldGenerator Methods
 
         public ModelMetadata Metadata { get; private set; }
+        public HtmlHelper<TModel> HtmlHelper { get; private set; }
+        public Expression<Func<TModel, T>> FieldProperty { get; private set; }
 
         public IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
         {
-            return _helper.LabelFor(_property, fieldConfiguration == null ? null : fieldConfiguration.LabelText);
+            return HtmlHelper.LabelFor(FieldProperty, fieldConfiguration == null ? null : fieldConfiguration.LabelText);
         }
 
         public IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)
         {
-            return _helper.ValidationMessageFor(_property);
+            return HtmlHelper.ValidationMessageFor(FieldProperty);
         }
 
         public IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration)
@@ -63,10 +58,10 @@ namespace ChameleonForms.FieldGenerators
                 return GetEnumHtml(fieldConfiguration);
 
             if (Metadata.DataTypeName == DataType.Password.ToString())
-                return _helper.PasswordFor(_property, fieldConfiguration.Attributes.ToDictionary());
+                return HtmlHelper.PasswordFor(FieldProperty, fieldConfiguration.Attributes.ToDictionary());
 
             if (Metadata.DataTypeName == DataType.MultilineText.ToString())
-                return _helper.TextAreaFor(_property, fieldConfiguration.Attributes.ToDictionary());
+                return HtmlHelper.TextAreaFor(FieldProperty, fieldConfiguration.Attributes.ToDictionary());
 
             if (Metadata.ModelType == typeof(bool))
                 return GetSingleCheckboxHtml(fieldConfiguration);
@@ -82,10 +77,8 @@ namespace ChameleonForms.FieldGenerators
                 typeAttribute = "text";
 
             fieldConfiguration.Attributes.Attr(type => typeAttribute);
-            return _helper.TextBoxFor(_property, fieldConfiguration.Attributes.ToDictionary());
+            return HtmlHelper.TextBoxFor(FieldProperty, fieldConfiguration.Attributes.ToDictionary());
         }
-
-        #endregion
 
         #region Helpers
 
@@ -95,12 +88,12 @@ namespace ChameleonForms.FieldGenerators
         /// <returns>The current value</returns>
         private T GetValue()
         {
-            return _property.Compile().Invoke(GetModel());
+            return FieldProperty.Compile().Invoke(GetModel());
         }
 
         private TModel GetModel()
         {
-            return (TModel) _helper.ViewData.ModelMetadata.Model;
+            return (TModel) HtmlHelper.ViewData.ModelMetadata.Model;
         }
 
         /// <summary>
@@ -122,8 +115,8 @@ namespace ChameleonForms.FieldGenerators
         public virtual IHtmlString GetSingleCheckboxHtml(IFieldConfiguration fieldConfiguration)
         {
             var value = GetValue() as bool? ?? false;
-            var name = ExpressionHelper.GetExpressionText(_property);
-            var fullName = _helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+            var name = ExpressionHelper.GetExpressionText(FieldProperty);
+            var fullName = HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
             var selectList = GetBooleanSelectList(fieldConfiguration, value);
             if (fieldConfiguration.DisplayType == FieldDisplayType.DropDown)
@@ -135,7 +128,7 @@ namespace ChameleonForms.FieldGenerators
 
             var fieldhtml = HtmlCreator.BuildSingleCheckbox(fullName, value, fieldConfiguration.Attributes);
 
-            var labelHtml = _helper.LabelFor(_property, fieldConfiguration.InlineLabelText);
+            var labelHtml = HtmlHelper.LabelFor(FieldProperty, fieldConfiguration.InlineLabelText);
 
             return new HtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
         }
@@ -151,15 +144,15 @@ namespace ChameleonForms.FieldGenerators
                     attrs.Attr("checked", "checked");
                 attrs.Attr("id", id);
                 yield return new HtmlString(string.Format("{0} {1}",
-                    _helper.RadioButtonFor(_property, item.Value, attrs.ToDictionary()),
-                    _helper.Label(id, item.Text)
+                    HtmlHelper.RadioButtonFor(FieldProperty, item.Value, attrs.ToDictionary()),
+                    HtmlHelper.Label(id, item.Text)
                 ));
             }
         }
 
         private IHtmlString GetDropDown(IEnumerable<SelectListItem> selectList, IFieldConfiguration fieldConfiguration)
         {
-            return _helper.DropDownListFor(_property, selectList, fieldConfiguration.Attributes.ToDictionary());
+            return HtmlHelper.DropDownListFor(FieldProperty, selectList, fieldConfiguration.Attributes.ToDictionary());
         }
 
         private static IEnumerable<SelectListItem> GetBooleanSelectList(IFieldConfiguration fieldConfiguration, bool value)
@@ -170,8 +163,8 @@ namespace ChameleonForms.FieldGenerators
 
         private IHtmlString GetListHtml(IFieldConfiguration fieldConfiguration)
         {
-            var name = ExpressionHelper.GetExpressionText(_property);
-            var fullName = _helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+            var name = ExpressionHelper.GetExpressionText(FieldProperty);
+            var fullName = HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
             var model = GetModel();
             var listProperty = model.GetType().GetProperty((string)Metadata.AdditionalValues[ExistsInAttribute.PropertyKey]);
@@ -196,19 +189,19 @@ namespace ChameleonForms.FieldGenerators
 
         private void AdjustHtmlForModelState(HtmlAttributes attributes)
         {
-            var name = ExpressionHelper.GetExpressionText(_property);
-            var fullName = _helper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+            var name = ExpressionHelper.GetExpressionText(FieldProperty);
+            var fullName = HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
             ModelState modelState;
-            if (_helper.ViewContext.ViewData.ModelState.TryGetValue(fullName, out modelState))
+            if (HtmlHelper.ViewContext.ViewData.ModelState.TryGetValue(fullName, out modelState))
             {
                 if (modelState.Errors.Count > 0)
                 {
-                    attributes.AddClass(HtmlHelper.ValidationInputCssClassName);
+                    attributes.AddClass(System.Web.Mvc.HtmlHelper.ValidationInputCssClassName);
                 }
             }
 
-            attributes.Attrs(_helper.GetUnobtrusiveValidationAttributes(name, ModelMetadata.FromLambdaExpression(_property, _helper.ViewData)));
+            attributes.Attrs(HtmlHelper.GetUnobtrusiveValidationAttributes(name, ModelMetadata.FromLambdaExpression(FieldProperty, HtmlHelper.ViewData)));
         }
         #endregion
     }
