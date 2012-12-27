@@ -88,16 +88,6 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
             FieldConfiguration.Attributes.Attrs(FieldGenerator.HtmlHelper.GetUnobtrusiveValidationAttributes(name, ModelMetadata.FromLambdaExpression(FieldGenerator.FieldProperty, FieldGenerator.HtmlHelper.ViewData)));
         }
-
-        protected IEnumerable<SelectListItem> GetSelectList(IEnumerable listValues, string nameProperty, string valueProperty, object selectedValue)
-        {
-            foreach (var item in listValues)
-            {
-                var name = item.GetType().GetProperty(nameProperty).GetValue(item, null);
-                var value = item.GetType().GetProperty(valueProperty).GetValue(item, null);
-                yield return new SelectListItem { Selected = value.Equals(selectedValue), Value = value.ToString(), Text = name.ToString() };
-            }
-        }
     }
 
 }

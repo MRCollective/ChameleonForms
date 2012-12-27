@@ -28,12 +28,22 @@ namespace ChameleonForms.FieldGenerators.Handlers
             var model = FieldGenerator.GetModel();
             var listProperty = model.GetType().GetProperty((string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey]);
             var listValue = (IEnumerable)listProperty.GetValue(model, null);
-            return GetSelectList(
+            return GetSelectListUsingPropertyReflection(
                 listValue,
                 (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.NameKey],
                 (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ValueKey],
                 FieldGenerator.GetValue()
             );
+        }
+
+        private IEnumerable<SelectListItem> GetSelectListUsingPropertyReflection(IEnumerable listValues, string nameProperty, string valueProperty, object selectedValue)
+        {
+            foreach (var item in listValues)
+            {
+                var name = item.GetType().GetProperty(nameProperty).GetValue(item, null);
+                var value = item.GetType().GetProperty(valueProperty).GetValue(item, null);
+                yield return new SelectListItem { Selected = value.Equals(selectedValue), Value = value.ToString(), Text = name.ToString() };
+            }
         }
     }
 }
