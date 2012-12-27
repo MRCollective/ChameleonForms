@@ -20,6 +20,18 @@ namespace ChameleonForms.FieldGenerators
         /// The expression that identifies the property in the model being output.
         /// </summary>
         Expression<Func<TModel, T>> FieldProperty { get; }
+
+        /// <summary>
+        /// Returns the current value of the field.
+        /// </summary>
+        /// <returns>The current field value</returns>
+        T GetValue();
+
+        /// <summary>
+        /// Returns a <see cref="TModel"/> with the current values for the form.
+        /// </summary>
+        /// <returns>The current model</returns>
+        TModel GetModel();
     }
 
     /// <summary>

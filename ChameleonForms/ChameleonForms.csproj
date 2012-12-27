@@ -88,8 +88,20 @@
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Component\Section.cs" />
     <Compile Include="Enums\EncType.cs" />
+    <Compile Include="Enums\TextInputType.cs" />
     <Compile Include="FieldGenerators\DefaultFieldGenerator.cs" />
-    <Compile Include="FieldGenerators\Handlers\EnumListHandler.cs" />
+    <Compile Include="FieldGenerators\Handlers\DefaultHandler.cs" />
+    <Compile Include="FieldGenerators\Handlers\EnumListHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FieldGenerators\Handlers\FieldGeneratorHandler.cs" />
+    <Compile Include="FieldGenerators\FieldGeneratorHandlersRouter.cs" />
+    <Compile Include="FieldGenerators\Handlers\FileHandler.cs" />
+    <Compile Include="FieldGenerators\HandleAction.cs" />
+    <Compile Include="FieldGenerators\Handlers\ListHandler.cs" />
+    <Compile Include="FieldGenerators\Handlers\PasswordHandler.cs" />
+    <Compile Include="FieldGenerators\Handlers\BooleanHandler.cs" />
+    <Compile Include="FieldGenerators\Handlers\TextAreaHandler.cs" />
     <Compile Include="FieldGenerators\IFieldGenerator.cs" />
     <Compile Include="Form.cs" />
     <Compile Include="HumanizedLabels.cs" />
