@@ -45,8 +45,6 @@ namespace ChameleonForms.FieldGenerators.Handlers
         private IEnumerable<SelectListItem> GetBooleanSelectList()
         {
             var value = GetValue();
-            if (FieldGenerator.Metadata.IsRequired && value == null)
-                value = false;
             yield return new SelectListItem { Value = "true", Text = FieldConfiguration.TrueString, Selected = value == true };
             yield return new SelectListItem { Value = "false", Text = FieldConfiguration.FalseString, Selected = value == false };
         }

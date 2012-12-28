@@ -31,6 +31,9 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         public TestEnum RequiredTestEnum { get; set; }
 
+        [Required]
+        public TestEnum? RequiredNullableEnum { get; set; }
+
         public TestEnum? OptionalTestEnum { get; set; }
 
         [DataType(DataType.Password)]
@@ -43,6 +46,9 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         public bool RequiredBooleanField { get; set; }
 
+        [Required]
+        public bool? RequiredNullableBooleanField { get; set; }
+
         public bool? OptionalBooleanField { get; set; }
 
         public List<IntListItem> IntList { get; set; }
@@ -50,6 +56,10 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         [ExistsIn("IntList", "Id", "Name")]
         public int? OptionalIntListId { get; set; }
+
+        [Required]
+        [ExistsIn("IntList", "Id", "Name")]
+        public int? RequiredNullableIntListId { get; set; }
 
         [ExistsIn("StringList", "Value", "Label")]
         public string OptionalStringListId { get; set; }
@@ -193,6 +203,16 @@ namespace ChameleonForms.Tests.FieldGenerator
         }
 
         [Test]
+        public void Use_correct_html_for_nullable_required_enum_field()
+        {
+            var g = Arrange(m => m.RequiredNullableEnum);
+
+            var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_file_upload()
         {
             var g = Arrange(m => m.FileUpload);
@@ -313,10 +333,51 @@ namespace ChameleonForms.Tests.FieldGenerator
         }
 
         [Test]
+        public void Use_correct_html_for_nullable_required_boolean_checkbox_with_no_value()
+        {
+            var g = Arrange(m => m.RequiredNullableBooleanField);
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_nullable_required_boolean_list_with_no_value()
+        {
+            var g = Arrange(m => m.RequiredNullableBooleanField);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_nullable_required_boolean_dropdown_with_no_value()
+        {
+            var g = Arrange(m => m.RequiredNullableBooleanField);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_optional_int_list_id()
         {
             var list = new List<IntListItem> { new IntListItem {Id = 1, Name = "A"}, new IntListItem {Id = 2, Name = "B"}};
             var g = Arrange(m => m.OptionalIntListId, m => m.OptionalIntListId = null, m => m.IntList = list);
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_required_nullable_int_list_id()
+        {
+            var list = new List<IntListItem> { new IntListItem { Id = 1, Name = "A" }, new IntListItem { Id = 2, Name = "B" } };
+            var g = Arrange(m => m.RequiredNullableIntListId, m => m.RequiredNullableIntListId = null, m => m.IntList = list);
 
             var result = g.GetFieldHtml(null);
 
@@ -329,6 +390,17 @@ namespace ChameleonForms.Tests.FieldGenerator
             var list = new List<StringListItem> { new StringListItem { Value = "1", Label = "A" }, new StringListItem { Value = "2", Label = "B" } };
             var g = Arrange(m => m.OptionalStringListId, m => m.OptionalStringListId = "", m => m.StringList = list);
             
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_null_required_string_list_id_as_list()
+        {
+            var list = new List<StringListItem> { new StringListItem { Value = "1", Label = "A" }, new StringListItem { Value = "2", Label = "B" } };
+            var g = Arrange(m => m.RequiredStringListId, m => m.RequiredStringListId = null, m => m.StringList = list);
+
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
