@@ -26,7 +26,7 @@ Say you had the following view model:
 
 And assuming for a moment you used definition lists to wrap your HTML fields then you might end up with something like this in your Razor view:
 
-```
+```html
 @using (Html.BeginForm())
 {
     <fieldset>
@@ -55,7 +55,7 @@ There are a number of problems with this:
 
 The same HTML output can be achieved with Chameleon Forms out of the box with the following code:
 
-```
+```c#
 @using (var f = Html.BeginChameleonForm()) {
     using (var s = f.BeginSection("A form")) {
         @s.FieldFor(m => m.RequiredString).Label("Some string")
