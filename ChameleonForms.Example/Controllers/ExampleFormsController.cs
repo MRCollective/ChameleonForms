@@ -14,11 +14,26 @@ namespace ChameleonForms.Example.Controllers
             return View(new ViewModelExample());
         }
 
+        public ActionResult BasicExample()
+        {
+            return View(new BasicViewModel());
+        }
+
         [HttpPost]
         public ActionResult Form1Submit(ViewModelExample vm)
         {
             return View(vm.FileUpload.ContentLength);
         }
+    }
+
+    public class BasicViewModel
+    {
+        [Required]
+        public string RequiredString { get; set; }
+
+        public SomeEnum SomeEnum { get; set; }
+
+        public bool SomeCheckbox { get; set; }
     }
 
     public class ViewModelExample

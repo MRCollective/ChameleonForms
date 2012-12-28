@@ -124,6 +124,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\ExampleForms\Form1Submit.cshtml" />
+    <Content Include="Views\ExampleForms\BasicExample.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

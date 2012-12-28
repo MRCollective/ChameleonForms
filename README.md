@@ -7,7 +7,68 @@ It makes it really easy to tersely output a form and easily apply a different te
 
 This library is in the very early stages of development and can be considered Beta quality software. We are very confident that the code is comprehensively tested, however it only takes care of the very simple cases at the moment.
 
-Following is an example of what you can do.
+Basic Example
+-------------
+
+Say you had the following view model:
+
+```c#
+    public class BasicViewModel
+    {
+        [Required]
+        public string RequiredString { get; set; }
+
+        public SomeEnum SomeEnum { get; set; }
+
+        public bool SomeCheckbox { get; set; }
+    }
+```
+
+And assuming for a moment you used definition lists to wrap your HTML fields then you might end up with something like this in your Razor view:
+
+```
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>A form</legend>
+        <dl>
+            <dt>@Html.LabelFor(m => m.RequiredString, "Some string")</dt>
+            <dd>@Html.TextBoxFor(m => m.RequiredString) @Html.ValidationMessageFor(m => m.RequiredString)</dd>
+            <dt>@Html.LabelFor(m => m.SomeEnum)</dt>
+            <dd>@Html.DropDownListFor(m => m.SomeEnum, Enum.GetNames(typeof(SomeEnum)).Select(x => new SelectListItem {Text = ((SomeEnum)Enum.Parse(typeof(SomeEnum), x)).Humanize(), Value = x})) @Html.ValidationMessageFor(m => m.SomeEnum)</dd>
+            <dt>@Html.LabelFor(m => m.SomeCheckbox)</dt>
+            <dd>@Html.CheckBoxFor(m => m.SomeCheckbox) @Html.LabelFor(m => m.SomeCheckbox, "Are you sure?") @Html.ValidationMessageFor(m => m.SomeCheckbox)</dd>
+        </dl>
+    </fieldset>
+    <div class="form_navigation">
+        <input type="submit" value="Submit" />
+    </div>
+}
+```
+
+There are a number of problems with this:
+
+* It's tedious to write
+* There is a lot of repetition (each field essentially has the same structure - label in a dt and field and validation in a dd)
+* It's easy to miss out something (e.g. validation HTML) and this results in inconsistency
+* If you want to change the HTML template that you use for your forms (in a small or big way) across the whole site then you need to go into every single `.cshtml` file and change them - i.e. it's a maintenance _nightmare_!
+
+The same HTML output can be achieved with Chameleon Forms out of the box with the following code:
+
+```
+@using (var f = Html.BeginChameleonForm()) {
+    using (var s = f.BeginSection("A form")) {
+        @s.FieldFor(m => m.RequiredString).Label("Some string")
+        @s.FieldFor(m => m.SomeEnum)
+        @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Are you sure?")
+    }
+    using (var n = f.BeginNavigation()) {
+        @n.Submit("Submit")
+    }
+}
+```
+
+Here is a more complex example:
 
 View Model
 ----------
