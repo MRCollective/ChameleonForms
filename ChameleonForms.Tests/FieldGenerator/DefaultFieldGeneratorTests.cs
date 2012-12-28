@@ -27,14 +27,14 @@ namespace ChameleonForms.Tests.FieldGenerator
     public class TestFieldViewModel
     {
         [Required]
-        public string SomeProperty { get; set; }
+        public string RequiredString { get; set; }
 
-        public TestEnum RequiredTestEnum { get; set; }
+        public TestEnum RequiredEnum { get; set; }
 
         [Required]
         public TestEnum? RequiredNullableEnum { get; set; }
 
-        public TestEnum? OptionalTestEnum { get; set; }
+        public TestEnum? OptionalEnum { get; set; }
 
         [DataType(DataType.Password)]
         public string Password { get; set; }
@@ -44,10 +44,10 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         public HttpPostedFileBase FileUpload { get; set; }
 
-        public bool RequiredBooleanField { get; set; }
+        public bool RequiredBoolean { get; set; }
 
         [Required]
-        public bool? RequiredNullableBooleanField { get; set; }
+        public bool? RequiredNullableBoolean { get; set; }
 
         public bool? OptionalBooleanField { get; set; }
 
@@ -115,7 +115,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_field_label_without_config()
         {
-            var g = Arrange(m => m.SomeProperty);
+            var g = Arrange(m => m.RequiredString);
 
             var result = g.GetLabelHtml(null);
 
@@ -125,7 +125,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_field_label_with_null_label()
         {
-            var g = Arrange(m => m.SomeProperty);
+            var g = Arrange(m => m.RequiredString);
 
             var result = g.GetLabelHtml(new FieldConfiguration());
 
@@ -135,7 +135,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_field_label_with_overridden_label()
         {
-            var g = Arrange(m => m.SomeProperty);
+            var g = Arrange(m => m.RequiredString);
 
             var result = g.GetLabelHtml(new FieldConfiguration().Label("asdf"));
 
@@ -145,7 +145,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_field_validation()
         {
-            var g = Arrange(m => m.SomeProperty);
+            var g = Arrange(m => m.RequiredString);
 
             var result = g.GetValidationHtml(null);
 
@@ -155,7 +155,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_text_field()
         {
-            var g = Arrange(m => m.SomeProperty);
+            var g = Arrange(m => m.RequiredString);
 
             var result = g.GetFieldHtml(new FieldConfiguration {Attributes = new HtmlAttributes(data_attr => "value")});
 
@@ -185,7 +185,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_required_enum_field()
         {
-            var g = Arrange(m => m.RequiredTestEnum, m => m.RequiredTestEnum = TestEnum.ValueWithDescriptionAttribute);
+            var g = Arrange(m => m.RequiredEnum, m => m.RequiredEnum = TestEnum.ValueWithDescriptionAttribute);
 
             var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
 
@@ -195,7 +195,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_optional_enum_field()
         {
-            var g = Arrange(m => m.OptionalTestEnum, m => m.OptionalTestEnum = null);
+            var g = Arrange(m => m.OptionalEnum, m => m.OptionalEnum = null);
 
             var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
 
@@ -225,7 +225,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_single_checkbox_with_default_label()
         {
-            var g = Arrange(m => m.RequiredBooleanField);
+            var g = Arrange(m => m.RequiredBoolean);
 
             var result = g.GetFieldHtml(null);
 
@@ -235,7 +235,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_checked_single_checkbox_with_default_label()
         {
-            var g = Arrange(m => m.RequiredBooleanField, m => m.RequiredBooleanField = true);
+            var g = Arrange(m => m.RequiredBoolean, m => m.RequiredBoolean = true);
 
             var result = g.GetFieldHtml(null);
 
@@ -245,7 +245,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_single_checkbox_with_custom_label()
         {
-            var g = Arrange(m => m.RequiredBooleanField);
+            var g = Arrange(m => m.RequiredBoolean);
 
             var result = g.GetFieldHtml(new FieldConfiguration().InlineLabel("Some label"));
 
@@ -255,7 +255,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_boolean_list_and_false_value()
         {
-            var g = Arrange(m => m.RequiredBooleanField);
+            var g = Arrange(m => m.RequiredBoolean);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
@@ -265,7 +265,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_boolean_list_and_true_value()
         {
-            var g = Arrange(m => m.RequiredBooleanField, m => m.RequiredBooleanField = true);
+            var g = Arrange(m => m.RequiredBoolean, m => m.RequiredBoolean = true);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
@@ -305,7 +305,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_boolean_list_and_custom_labels()
         {
-            var g = Arrange(m => m.RequiredBooleanField);
+            var g = Arrange(m => m.RequiredBoolean);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList().WithTrueAs("True").WithFalseAs("False"));
 
@@ -315,7 +315,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_boolean_dropdown_list_and_false_value()
         {
-            var g = Arrange(m => m.RequiredBooleanField);
+            var g = Arrange(m => m.RequiredBoolean);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
 
@@ -325,7 +325,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_boolean_dropdown_list_and_true_value()
         {
-            var g = Arrange(m => m.RequiredBooleanField, m => m.RequiredBooleanField = true);
+            var g = Arrange(m => m.RequiredBoolean, m => m.RequiredBoolean = true);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
 
@@ -335,7 +335,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_nullable_required_boolean_checkbox_with_no_value()
         {
-            var g = Arrange(m => m.RequiredNullableBooleanField);
+            var g = Arrange(m => m.RequiredNullableBoolean);
 
             var result = g.GetFieldHtml(null);
 
@@ -345,7 +345,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_nullable_required_boolean_list_with_no_value()
         {
-            var g = Arrange(m => m.RequiredNullableBooleanField);
+            var g = Arrange(m => m.RequiredNullableBoolean);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
@@ -355,7 +355,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Test]
         public void Use_correct_html_for_nullable_required_boolean_dropdown_with_no_value()
         {
-            var g = Arrange(m => m.RequiredNullableBooleanField);
+            var g = Arrange(m => m.RequiredNullableBoolean);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsDropDown());
 
