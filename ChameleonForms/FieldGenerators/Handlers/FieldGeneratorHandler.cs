@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
@@ -23,6 +24,34 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public abstract HandleAction Handle();
 
+        protected bool HasMultipleValues()
+        {
+            return FieldGenerator.Metadata.ModelType.IsGenericType
+                && typeof(IEnumerable).IsAssignableFrom(FieldGenerator.Metadata.ModelType);
+        }
+
+        protected IEnumerable<object> GetValues()
+        {
+            return (((IEnumerable)FieldGenerator.GetValue()) ?? new object[]{}).Cast<object>();
+        }
+
+        protected bool IsSelected(object value)
+        {
+            return HasMultipleValues()
+                ? GetValues().Contains(value)
+                : FieldGenerator.GetValue().Equals(value);
+        }
+
+        public Type GetUnderlyingType()
+        {
+            var type = FieldGenerator.Metadata.ModelType;
+
+            if (HasMultipleValues())
+                type = type.GetGenericArguments()[0];
+
+            return Nullable.GetUnderlyingType(type) ?? type;
+        }
+
         protected IHtmlString GetInputHtml(TextInputType inputType)
         {
             if (inputType == TextInputType.Password)
@@ -34,7 +63,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         protected IHtmlString GetSelectListHtml(IEnumerable<SelectListItem> selectList)
         {
-            if (!FieldGenerator.Metadata.IsRequired)
+            if (!FieldGenerator.Metadata.IsRequired && !(FieldConfiguration.DisplayType == FieldDisplayType.List && HasMultipleValues()))
                 selectList = new []{GetEmptySelectListItem()}.Union(selectList);
 
             switch (FieldConfiguration.DisplayType)
@@ -44,6 +73,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
                     return HtmlHelpers.List(list);
                 case FieldDisplayType.DropDown:
                 case FieldDisplayType.Default:
+                    if (HasMultipleValues())
+                        FieldConfiguration.Attr("multiple", "multiple");
                     return FieldGenerator.HtmlHelper.DropDownListFor(
                         FieldGenerator.FieldProperty, selectList,
                         FieldConfiguration.Attributes.ToDictionary()
@@ -63,7 +94,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 Selected = selected,
                 Value = "",
                 Text = string.IsNullOrEmpty(FieldConfiguration.NoneString)
-                        && FieldConfiguration.DisplayType == FieldDisplayType.List
+                        &&
+                        (FieldConfiguration.DisplayType == FieldDisplayType.List && !HasMultipleValues())
+                        ||
+                        (FieldConfiguration.DisplayType != FieldDisplayType.List && HasMultipleValues())
                     ? "None"
                     : FieldConfiguration.NoneString
             };
@@ -79,8 +113,12 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 if (item.Selected)
                     attrs.Attr("checked", "checked");
                 attrs.Attr("id", id);
+                if (HasMultipleValues())
+                    AdjustHtmlForModelState(attrs);
                 yield return new HtmlString(string.Format("{0} {1}",
-                    FieldGenerator.HtmlHelper.RadioButtonFor(FieldGenerator.FieldProperty, item.Value, attrs.ToDictionary()),
+                    HasMultipleValues()
+                        ? HtmlCreator.BuildSingleCheckbox(GetFieldName(), item.Selected, attrs, item.Value)
+                        : FieldGenerator.HtmlHelper.RadioButtonFor(FieldGenerator.FieldProperty, item.Value, attrs.ToDictionary()),
                     FieldGenerator.HtmlHelper.Label(id, item.Text)
                 ));
             }
@@ -92,7 +130,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
         }
         
-        protected void AdjustHtmlForModelState()
+        protected void AdjustHtmlForModelState(HtmlAttributes attrs)
         {
             var name = ExpressionHelper.GetExpressionText(FieldGenerator.FieldProperty);
             var fullName = FieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
@@ -102,11 +140,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
             {
                 if (modelState.Errors.Count > 0)
                 {
-                    FieldConfiguration.Attributes.AddClass(HtmlHelper.ValidationInputCssClassName);
+                    attrs.AddClass(HtmlHelper.ValidationInputCssClassName);
                 }
             }
 
-            FieldConfiguration.Attributes.Attrs(FieldGenerator.HtmlHelper.GetUnobtrusiveValidationAttributes(name, ModelMetadata.FromLambdaExpression(FieldGenerator.FieldProperty, FieldGenerator.HtmlHelper.ViewData)));
+            attrs.Attrs(FieldGenerator.HtmlHelper.GetUnobtrusiveValidationAttributes(name, ModelMetadata.FromLambdaExpression(FieldGenerator.FieldProperty, FieldGenerator.HtmlHelper.ViewData)));
         }
     }
 

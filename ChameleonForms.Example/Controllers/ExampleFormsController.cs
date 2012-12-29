@@ -51,6 +51,9 @@ namespace ChameleonForms.Example.Controllers
 
         public SomeEnum SomeEnum { get; set; }
 
+        public List<SomeEnum> SomeEnums { get; set; }
+        public List<SomeEnum> SomeEnumsList { get; set; }
+
         public HttpPostedFileBase FileUpload { get; set; }
         
         [DataType(DataType.MultilineText)]

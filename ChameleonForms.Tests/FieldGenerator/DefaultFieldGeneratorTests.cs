@@ -36,6 +36,16 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         public TestEnum? OptionalEnum { get; set; }
 
+        [Required]
+        public IEnumerable<TestEnum> RequiredEnumList { get; set; }
+
+        [Required]
+        public IList<TestEnum?> RequiredNullableEnumList { get; set; }
+        
+        public List<TestEnum> OptionalEnumList { get; set; }
+
+        public ICollection<TestEnum?> OptionalNullableEnumList { get; set; }
+
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

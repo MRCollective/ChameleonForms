@@ -63,12 +63,13 @@ namespace ChameleonForms.Templates
         /// <param name="isChecked">Whether or not the checkbox is currently checked</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the checkbox</param>
         /// <returns>The HTML for the checkbox</returns>
-        public static IHtmlString BuildSingleCheckbox(string name, bool isChecked, HtmlAttributes htmlAttributes)
+        public static IHtmlString BuildSingleCheckbox(string name, bool isChecked, HtmlAttributes htmlAttributes, string value = "true")
         {
             var t = new TagBuilder("input");
-            t.Attributes.Add("value", "true");
+            t.Attributes.Add("value", value);
             t.Attributes.Add("type", "checkbox");
-            t.GenerateId(name);
+            if (value == "true")
+                t.GenerateId(name);
             t.Attributes.Add("name", name);
             if (isChecked)
                 t.Attributes.Add("checked", "checked");

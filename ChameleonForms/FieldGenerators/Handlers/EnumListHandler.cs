@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 using Humanizer;
@@ -15,39 +14,26 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override HandleAction Handle()
         {
-            if (!IsEnum())
+            if (!GetUnderlyingType().IsEnum)
                 return HandleAction.Continue;
 
-            var selectList = GetSelectList(FieldGenerator.GetValue());
+            var selectList = GetSelectList();
             var html = GetSelectListHtml(selectList);
             return HandleAction.Return(html);
         }
 
-        public bool IsEnum()
+        private IEnumerable<SelectListItem> GetSelectList()
         {
-            var enumType = GetEnumType();
-            return enumType != null && enumType.IsEnum;
-        }
-
-        public Type GetEnumType()
-        {
-            if (FieldGenerator.Metadata.ModelType.IsEnum)
-                return FieldGenerator.Metadata.ModelType;
-
-            return Nullable.GetUnderlyingType(FieldGenerator.Metadata.ModelType);
-        }
-
-        private IEnumerable<SelectListItem> GetSelectList(T value)
-        {
-            return Enum.GetValues(GetEnumType())
-                .OfType<T>()
-                .Select(i => new SelectListItem
+            var enumValues = Enum.GetValues(GetUnderlyingType());
+            foreach (var i in enumValues)
+            {
+                yield return new SelectListItem
                 {
                     Text = (i as Enum).Humanize(),
                     Value = i.ToString(),
-                    Selected = i.Equals(value)
-                }
-            );
+                    Selected = IsSelected(i)
+                };
+            }
         } 
     }
 }

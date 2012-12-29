@@ -34,6 +34,8 @@
         @s.FieldFor(m => m.SomeCheckbox).AsDropDown()
         @s.FieldFor(m => m.ListId)
         @s.FieldFor(m => m.ListId).AsList()
+        @s.FieldFor(m => m.SomeEnums)
+        @s.FieldFor(m => m.SomeEnumsList).AsList()
     }
     using (var n = f.BeginNavigation())
     {
