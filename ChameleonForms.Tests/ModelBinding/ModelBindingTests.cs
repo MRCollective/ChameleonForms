@@ -17,6 +17,7 @@ namespace ChameleonForms.Tests.ModelBinding
         }
 
         [Test]
+        [Ignore("Not yet completed")]
         public void Function_correctly()
         {
             var enteredViewModel = GetViewModel();
