@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -19,7 +20,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             if (FieldGenerator.Metadata.ModelType != typeof(bool) && FieldGenerator.Metadata.ModelType != typeof(bool?))
                 return HandleAction.Continue;
 
-            if (FieldConfiguration.DisplayType == FieldDisplayType.Default && FieldGenerator.Metadata.IsRequired)
+            if (FieldConfiguration.DisplayType == FieldDisplayType.Default && FieldGenerator.Metadata.ModelType == typeof(bool))
                 return HandleAction.Return(GetSingleCheckboxHtml());
 
             var selectList = GetBooleanSelectList();

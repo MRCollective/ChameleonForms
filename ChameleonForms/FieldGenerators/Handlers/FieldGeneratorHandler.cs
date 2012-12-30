@@ -61,9 +61,36 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldGenerator.HtmlHelper.TextBoxFor(FieldGenerator.FieldProperty, FieldConfiguration.Attributes.ToDictionary());
         }
 
+        private bool HasEmptySelectListItem()
+        {
+            // If it's a checkbox list then it
+            //  shouldn't since you can uncheck everything
+            if (FieldConfiguration.DisplayType == FieldDisplayType.List && HasMultipleValues())
+                return false;
+
+            // If it's a radio list for a required field then it
+            //  shouldn't since no value is not a valid value and
+            //  an initial null value translates to none of the radio
+            //  boxes being selected
+            if (FieldConfiguration.DisplayType == FieldDisplayType.List)
+                return !FieldGenerator.Metadata.IsRequired;
+
+            // If it's a multi-select dropdown and required then
+            //  there shouldn't be an empty item
+            if (HasMultipleValues())
+                return !FieldGenerator.Metadata.IsRequired;
+
+            // Dropdown lists for nullable types should have an empty item
+            if (!FieldGenerator.Metadata.ModelType.IsValueType
+                    || Nullable.GetUnderlyingType(FieldGenerator.Metadata.ModelType) != null)
+                return true;
+
+            return false;
+        }
+
         protected IHtmlString GetSelectListHtml(IEnumerable<SelectListItem> selectList)
         {
-            if (!FieldGenerator.Metadata.IsRequired && !(FieldConfiguration.DisplayType == FieldDisplayType.List && HasMultipleValues()))
+            if (HasEmptySelectListItem())
                 selectList = new []{GetEmptySelectListItem()}.Union(selectList);
 
             switch (FieldConfiguration.DisplayType)
@@ -84,6 +111,23 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return null;
         }
 
+        private string GetEmptySelectListItemText()
+        {
+            if (!string.IsNullOrEmpty(FieldConfiguration.NoneString))
+                return FieldConfiguration.NoneString;
+
+            if (GetUnderlyingType() == typeof (bool) && !FieldGenerator.Metadata.IsRequired)
+                return "Neither";
+
+            if (FieldConfiguration.DisplayType == FieldDisplayType.List)
+                return "None";
+
+            if (HasMultipleValues())
+                return "None";
+
+            return string.Empty;
+        }
+
         private SelectListItem GetEmptySelectListItem()
         {
             var selected = FieldGenerator.GetValue() == null;
@@ -93,13 +137,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             {
                 Selected = selected,
                 Value = "",
-                Text = string.IsNullOrEmpty(FieldConfiguration.NoneString)
-                        &&
-                        (FieldConfiguration.DisplayType == FieldDisplayType.List && !HasMultipleValues())
-                        ||
-                        (FieldConfiguration.DisplayType != FieldDisplayType.List && HasMultipleValues())
-                    ? "None"
-                    : FieldConfiguration.NoneString
+                Text = GetEmptySelectListItemText()
             };
         }
 
