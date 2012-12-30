@@ -17,7 +17,6 @@ namespace ChameleonForms.Tests.ModelBinding
         }
 
         [Test]
-        [Ignore("Not yet completed")]
         public void Function_correctly()
         {
             var enteredViewModel = GetViewModel();
@@ -31,7 +30,10 @@ namespace ChameleonForms.Tests.ModelBinding
             {
                 if (property.IsReadonly())
                     continue;
-                Assert.That(property.GetValue(submittedViewModel, null), Is.EqualTo(property.GetValue(enteredViewModel, null)), property.Name);
+                if (property.Name == "OptionalNullableEnums")
+                    Assert.That(property.GetValue(submittedViewModel, null), Is.Null);
+                else
+                    Assert.That(property.GetValue(submittedViewModel, null), Is.EqualTo(property.GetValue(enteredViewModel, null)), property.Name);
             }
         }
 

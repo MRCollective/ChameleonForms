@@ -100,12 +100,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
                     return HtmlHelpers.List(list);
                 case FieldDisplayType.DropDown:
                 case FieldDisplayType.Default:
-                    if (HasMultipleValues())
-                        FieldConfiguration.Attr("multiple", "multiple");
-                    return FieldGenerator.HtmlHelper.DropDownListFor(
-                        FieldGenerator.FieldProperty, selectList,
-                        FieldConfiguration.Attributes.ToDictionary()
-                    );
+                    return HasMultipleValues()
+                        ? FieldGenerator.HtmlHelper.ListBoxFor(
+                            FieldGenerator.FieldProperty, selectList,
+                            FieldConfiguration.Attributes.ToDictionary())
+                        : FieldGenerator.HtmlHelper.DropDownListFor(
+                            FieldGenerator.FieldProperty, selectList,
+                            FieldConfiguration.Attributes.ToDictionary());
             }
 
             return null;
