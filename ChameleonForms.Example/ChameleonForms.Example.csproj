@@ -125,6 +125,7 @@
     </Content>
     <Content Include="Views\ExampleForms\Form1Submit.cshtml" />
     <Content Include="Views\ExampleForms\BasicExample.cshtml" />
+    <Content Include="Views\ExampleForms\ModelBindingExample.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

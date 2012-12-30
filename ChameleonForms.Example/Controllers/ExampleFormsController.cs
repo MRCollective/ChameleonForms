@@ -14,16 +14,65 @@ namespace ChameleonForms.Example.Controllers
             return View(new ViewModelExample());
         }
 
-        public ActionResult BasicExample()
-        {
-            return View(new BasicViewModel());
-        }
-
         [HttpPost]
         public ActionResult Form1Submit(ViewModelExample vm)
         {
             return View(vm.FileUpload.ContentLength);
         }
+
+        public ActionResult BasicExample()
+        {
+            return View(new BasicViewModel());
+        }
+
+        public ActionResult ModelBindingExample()
+        {
+            return View(new ModelBindingViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult ModelBindingExample(ModelBindingViewModel vm)
+        {
+            return View(vm);
+        }
+    }
+
+    public class ModelBindingViewModel
+    {
+        public ModelBindingViewModel()
+        {
+            List = new List<ListItem> { new ListItem { Id = 1, Name = "A" }, new ListItem { Id = 2, Name = "B" } };
+        }
+
+        [Required]
+        public string RequiredString { get; set; }
+
+        public int RequiredInt { get; set; }
+        public int? OptionalInt { get; set; }
+
+        public bool RequiredBool { get; set; }
+        [Required]
+        public bool? RequiredNullableBool { get; set; }
+        public bool? OptionalBool { get; set; }
+        public bool? OptionalBool2 { get; set; }
+        public bool? OptionalBool3 { get; set; }
+
+        public SomeEnum RequiredEnum { get; set; }
+        [Required]
+        public SomeEnum? RequiredNullableEnum { get; set; }
+        public SomeEnum? OptionalEnum { get; set; }
+
+        [Required]
+        public IEnumerable<SomeEnum> RequiredEnums { get; set; }
+        [Required]
+        public IEnumerable<SomeEnum?> RequiredNullableEnums { get; set; }
+        public IEnumerable<SomeEnum> OptionalEnums { get; set; }
+        public IEnumerable<SomeEnum?> OptionalNullableEnums { get; set; }
+
+        [ReadOnly(true)]
+        public List<ListItem> List { get; set; }
+        [ExistsIn("List", "Id", "Name")]
+        public int RequiredListId { get; set; }
     }
 
     public class BasicViewModel
