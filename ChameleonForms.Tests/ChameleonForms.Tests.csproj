@@ -130,6 +130,8 @@
     <Compile Include="FieldGenerator\DefaultFieldGenerator\ListTests.cs" />
     <Compile Include="FormTests.cs" />
     <Compile Include="Helpers\AutoSubstituteHelper.cs" />
+    <Compile Include="Helpers\ObjectMother.cs" />
+    <Compile Include="Helpers\ViewModelEqualsConstraint.cs" />
     <Compile Include="HumanizedLabelsTests.cs" />
     <Compile Include="ModelBinding\ModelBindingTests.cs" />
     <Compile Include="ModelBinding\Pages\ChameleonFormsPage.cs" />

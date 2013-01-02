@@ -1,0 +1,50 @@
+﻿using System.Collections;
+using System.Reflection;
+using ChameleonForms.Example.Controllers;
+using ChameleonForms.Tests.ModelBinding.Pages;
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
+
+namespace ChameleonForms.Tests.Helpers
+{
+    public static class IsSame
+    {
+        public static Constraint ViewModelAs(object expectedViewModel)
+        {
+            return new ViewModelEqualsConstraint(expectedViewModel);
+        }
+    }
+
+    public class ViewModelEqualsConstraint : Constraint
+    {
+        private readonly object _expectedViewModel;
+
+        public ViewModelEqualsConstraint(object expectedViewModel)
+        {
+            _expectedViewModel = expectedViewModel;
+        }
+
+        public override bool Matches(object actualViewModel)
+        {
+            foreach (var property in typeof(ModelBindingViewModel).GetProperties(BindingFlags.Instance | BindingFlags.Public))
+            {
+                if (property.IsReadonly())
+                    continue;
+                var expectedValue = property.GetValue(_expectedViewModel, null);
+                var actualValue = property.GetValue(actualViewModel, null);
+
+                if (expectedValue is IEnumerable && !(expectedValue as IEnumerable).GetEnumerator().MoveNext())
+                    Assert.That(actualValue, Is.Null.Or.Empty);
+                else
+                    Assert.That(actualValue, Is.EqualTo(expectedValue), property.Name);
+            }
+
+            return true;
+        }
+
+        public override void WriteDescriptionTo(MessageWriter writer)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}
