@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Attributes;
+using ChameleonForms.Component.Config;
 
 namespace ChameleonForms.Example.Controllers
 {
@@ -35,13 +36,41 @@ namespace ChameleonForms.Example.Controllers
         {
             return View(vm);
         }
+
+        public ActionResult ModelBindingExample2()
+        {
+            var vm = new ModelBindingViewModel();
+            vm.AsList();
+            return View("ModelBindingExample", vm);
+        }
+
+        [HttpPost]
+        public ActionResult ModelBindingExample2(ModelBindingViewModel vm)
+        {
+            vm.AsList();
+            return View("ModelBindingExample", vm);
+        }
     }
 
     public class ModelBindingViewModel
     {
+        private bool _aslist;
+
         public ModelBindingViewModel()
         {
             List = new List<ListItem> { new ListItem { Id = 1, Name = "A" }, new ListItem { Id = 2, Name = "B" } };
+        }
+
+        public void AsList()
+        {
+            _aslist = true;
+        }
+
+        public IFieldConfiguration ModifyConfig(IFieldConfiguration config)
+        {
+            if (_aslist)
+                config.AsList();
+            return config;
         }
 
         [Required]
