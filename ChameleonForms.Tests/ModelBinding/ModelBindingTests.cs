@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using ChameleonForms.Example.Controllers;
 using ChameleonForms.Tests.ModelBinding.Pages;
@@ -30,8 +32,11 @@ namespace ChameleonForms.Tests.ModelBinding
             {
                 if (property.IsReadonly())
                     continue;
-                if (property.Name == "OptionalNullableEnums")
-                    Assert.That(property.GetValue(submittedViewModel, null), Is.Null);
+                var entered = property.GetValue(enteredViewModel, null);
+                var submitted = property.GetValue(submittedViewModel, null);
+
+                if (entered is IEnumerable && !(entered as IEnumerable).GetEnumerator().MoveNext())
+                    Assert.That(submitted, Is.Null.Or.Empty);
                 else
                     Assert.That(property.GetValue(submittedViewModel, null), Is.EqualTo(property.GetValue(enteredViewModel, null)), property.Name);
             }
