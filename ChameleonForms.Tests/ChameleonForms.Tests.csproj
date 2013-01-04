@@ -59,6 +59,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\packages\NSubstitute.1.4.3.0\lib\NET40\NSubstitute.dll</HintPath>
     </Reference>
@@ -135,8 +138,16 @@
     <Compile Include="HumanizedLabelsTests.cs" />
     <Compile Include="ModelBinding\ModelBindingTests.cs" />
     <Compile Include="ModelBinding\Pages\ChameleonFormsPage.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\BinaryInputField.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\FieldFactory.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\IField.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\SelectField.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\TextInputField.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\MultipleFields.cs" />
     <Compile Include="ModelBinding\Pages\ModelBindingExamplePage.cs" />
     <Compile Include="ModelBinding\Pages\HomePage.cs" />
+    <Compile Include="ModelBinding\Pages\ModelFieldType.cs" />
+    <Compile Include="ModelBinding\Pages\ModelFieldValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\DefaultFormTemplateTests.cs" />
     <Compile Include="Templates\HtmlCreatorTests.cs" />

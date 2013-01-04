@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Reflection;
 using ChameleonForms.Example.Controllers;
 using ChameleonForms.Tests.ModelBinding.Pages;
@@ -33,7 +34,7 @@ namespace ChameleonForms.Tests.Helpers
                 var expectedValue = property.GetValue(_expectedViewModel, null);
                 var actualValue = property.GetValue(actualViewModel, null);
 
-                if (expectedValue is IEnumerable && !(expectedValue as IEnumerable).GetEnumerator().MoveNext())
+                if (expectedValue is IEnumerable && !(expectedValue as IEnumerable).Cast<object>().Any())
                     Assert.That(actualValue, Is.Null.Or.Empty);
                 else
                     Assert.That(actualValue, Is.EqualTo(expectedValue), property.Name);
