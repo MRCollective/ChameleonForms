@@ -93,7 +93,7 @@ namespace ChameleonForms.Tests.FieldGenerator
 
     [TestFixture]
     [UseReporter(typeof(DiffReporter))]
-    class DefaultFieldGeneratorShould
+    abstract class DefaultFieldGeneratorShould
     {
         private HtmlHelper<TestFieldViewModel> _h;
 
