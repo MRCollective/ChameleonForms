@@ -119,6 +119,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyFixture.cs" />
     <Compile Include="Component\Config\FieldConfigurationTests.cs" />
     <Compile Include="Component\NavigationTests.cs" />
     <Compile Include="Component\MessageTests.cs" />
