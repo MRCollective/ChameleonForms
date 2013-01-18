@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
@@ -152,6 +153,80 @@ namespace ChameleonForms.Tests.Component.Config
             fc.Bag.SomeConfigItem = "Hello!";
 
             Assert.That(fc.Bag.SomeConfigItem, Is.EqualTo("Hello!"));
+        }
+
+        [Test]
+        public void Return_empty_enumeration_for_prepended_html_if_none_set()
+        {
+            var fc = Field.Configure();
+
+            Assert.That(fc.PrependedHtml, Is.Empty);
+        }
+
+        [Test]
+        public void Return_empty_enumeration_for_appended_html_if_none_set()
+        {
+            var fc = Field.Configure();
+
+            Assert.That(fc.AppendedHtml, Is.Empty);
+        }
+
+        [Test]
+        public void Return_html_for_prepended_html_if_one_set()
+        {
+            var x = new HtmlString("");
+            var fc = Field.Configure().Prepend(x);
+
+            Assert.That(fc.PrependedHtml, Is.EquivalentTo(new[]{x}));
+        }
+
+        [Test]
+        public void Return_html_for_appended_html_if_one_set()
+        {
+            var x = new HtmlString("");
+            var fc = Field.Configure().Append(x);
+
+            Assert.That(fc.AppendedHtml, Is.EquivalentTo(new[] { x }));
+        }
+
+        [Test]
+        public void Return_encoded_html_for_prepended_string_if_one_set()
+        {
+            const string x = "asdf<&>asdf\"";
+            var fc = Field.Configure().Prepend(x);
+
+            Assert.That(fc.PrependedHtml.Single().ToHtmlString(), Is.EqualTo("asdf&lt;&amp;&gt;asdf&quot;"));
+        }
+
+        [Test]
+        public void Return_encoded_html_for_appended_string_if_one_set()
+        {
+            const string x = "asdf<&>asdf\"";
+            var fc = Field.Configure().Append(x);
+
+            Assert.That(fc.AppendedHtml.Single().ToHtmlString(), Is.EqualTo("asdf&lt;&amp;&gt;asdf&quot;"));
+        }
+
+        [Test]
+        public void Return_ltr_html_for_prepended_html_if_multiple_set()
+        {
+            var x = new HtmlString("x");
+            var y = new HtmlString("y");
+            var z = new HtmlString("z");
+            var fc = Field.Configure().Prepend(x).Prepend(y).Prepend(z);
+
+            Assert.That(fc.PrependedHtml, Is.EquivalentTo(new[] { z, y, x }));
+        }
+
+        [Test]
+        public void Return_ltr_html_for_appended_html_if_multiple_set()
+        {
+            var x = new HtmlString("x");
+            var y = new HtmlString("y");
+            var z = new HtmlString("z");
+            var fc = Field.Configure().Append(x).Append(y).Append(z);
+
+            Assert.That(fc.AppendedHtml, Is.EquivalentTo(new[] { x, y, z }));
         }
     }
 }

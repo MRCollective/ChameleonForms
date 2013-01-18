@@ -179,18 +179,58 @@ namespace ChameleonForms.Component.Config
         /// Supply a string hint to display along with the field.
         /// </summary>
         /// <param name="hint">The hint string</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithHint(string hint);
 
         /// <summary>
         /// Supply a HTML hint to display along with the field.
         /// </summary>
         /// <param name="hint">The hint markup</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithHint(IHtmlString hint);
 
         /// <summary>
         /// Get the hint to display with the field.
         /// </summary>
         IHtmlString Hint { get; }
+
+        /// <summary>
+        /// Prepends the given HTML to the form field.
+        /// </summary>
+        /// <param name="html">The HTML to prepend</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Prepend(IHtmlString html);
+
+        /// <summary>
+        /// Prepends the given string to the form field.
+        /// </summary>
+        /// <param name="str">The string to prepend</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Prepend(string str);
+
+        /// <summary>
+        /// A list of HTML to be prepended to the form field in ltr order.
+        /// </summary>
+        IEnumerable<IHtmlString> PrependedHtml { get; }
+
+        /// <summary>
+        /// Appends the given HTML to the form field.
+        /// </summary>
+        /// <param name="html">The HTML to append</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Append(IHtmlString html);
+
+        /// <summary>
+        /// Appends the given string to the form field.
+        /// </summary>
+        /// <param name="str">The string to prepend</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Append(string str);
+
+        /// <summary>
+        /// A list of HTML to be appended to the form field in ltr order.
+        /// </summary>
+        IEnumerable<IHtmlString> AppendedHtml { get; }
     }
 
     /// <summary>
@@ -199,6 +239,8 @@ namespace ChameleonForms.Component.Config
     public class FieldConfiguration : IFieldConfiguration
     {
         private Func<IHtmlString> _field;
+        private readonly List<IHtmlString> _prependedHtml = new List<IHtmlString>();
+        private readonly List<IHtmlString> _appendedHtml = new List<IHtmlString>();
 
         /// <summary>
         /// Constructs a field configuration.
@@ -333,6 +375,34 @@ namespace ChameleonForms.Component.Config
         }
 
         public IHtmlString Hint { get; private set; }
+        
+        public IFieldConfiguration Prepend(IHtmlString html)
+        {
+            _prependedHtml.Add(html);
+            return this;
+        }
+
+        public IFieldConfiguration Prepend(string str)
+        {
+            _prependedHtml.Add(new HtmlString(HttpUtility.HtmlEncode(str)));
+            return this;
+        }
+
+        public IEnumerable<IHtmlString> PrependedHtml { get { var html = _prependedHtml.ToArray(); Array.Reverse(html); return html; } }
+        
+        public IFieldConfiguration Append(IHtmlString html)
+        {
+            _appendedHtml.Add(html);
+            return this;
+        }
+
+        public IFieldConfiguration Append(string str)
+        {
+            _appendedHtml.Add(new HtmlString(HttpUtility.HtmlEncode(str)));
+            return this;
+        }
+
+        public IEnumerable<IHtmlString> AppendedHtml { get { return _appendedHtml.ToArray(); } }
 
         public void SetField(Func<IHtmlString> field)
         {
