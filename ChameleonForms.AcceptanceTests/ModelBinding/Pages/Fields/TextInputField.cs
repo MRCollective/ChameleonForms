@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using TestStack.Seleno.Extensions;
 
-namespace ChameleonForms.Tests.ModelBinding.Pages.Fields
+namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
 {
     internal class TextInputField : IField
     {

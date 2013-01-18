@@ -2,7 +2,7 @@
 using TestStack.Seleno.Configuration;
 using TestStack.Seleno.PageObjects;
 
-namespace ChameleonForms.Tests.ModelBinding.Pages
+namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
 {
     public class HomePage : Page
     {

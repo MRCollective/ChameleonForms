@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}</ProjectGuid>
+    <ProjectGuid>{67A08E34-2498-404D-9869-E13F4F496B3E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChameleonForms.Tests</RootNamespace>
-    <AssemblyName>ChameleonForms.Tests</AssemblyName>
+    <RootNamespace>ChameleonForms.AcceptanceTests</RootNamespace>
+    <AssemblyName>ChameleonForms.AcceptanceTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,49 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ApprovalTests">
-      <HintPath>..\packages\ApprovalTests.2.0\lib\ApprovalTests.dll</HintPath>
-    </Reference>
-    <Reference Include="ApprovalUtilities">
-      <HintPath>..\packages\ApprovalTests.2.0\lib\ApprovalUtilities.dll</HintPath>
-    </Reference>
-    <Reference Include="Autofac">
-      <HintPath>..\packages\Autofac.2.5.2.830\lib\NET40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Autofac.Configuration">
-      <HintPath>..\packages\Autofac.2.5.2.830\lib\NET40\Autofac.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="AutofacContrib.NSubstitute, Version=3.0.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutofacContrib.NSubstitute.3.0.2\lib\NET40\AutofacContrib.NSubstitute.dll</HintPath>
-    </Reference>
-    <Reference Include="FizzWare.NBuilder">
-      <HintPath>..\packages\NBuilder.3.0.1.1\lib\FizzWare.NBuilder.dll</HintPath>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.Mvc">
-      <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="NSubstitute">
-      <HintPath>..\packages\NSubstitute.1.4.3.0\lib\NET40\NSubstitute.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
@@ -105,45 +74,46 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TestStack.Seleno">
+      <HintPath>..\packages\TestStack.Seleno.0.3.2\lib\NET40\TestStack.Seleno.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver">
+      <HintPath>..\packages\Selenium.WebDriver.2.28.0\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support">
+      <HintPath>..\packages\Selenium.Support.2.28.0\lib\net40\WebDriver.Support.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Component\Config\FieldConfigurationTests.cs" />
-    <Compile Include="Component\NavigationTests.cs" />
-    <Compile Include="Component\MessageTests.cs" />
-    <Compile Include="Component\FieldTests.cs" />
-    <Compile Include="Component\FormComponentTests.cs" />
-    <Compile Include="Component\SectionTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGeneratorTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\BooleanTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\EnumTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\LabelTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\InputTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\ListTests.cs" />
-    <Compile Include="FormTests.cs" />
-    <Compile Include="Helpers\AutoSubstituteHelper.cs" />
-    <Compile Include="HumanizedLabelsTests.cs" />
+    <Compile Include="AssemblyFixture.cs" />
+    <Compile Include="Helpers\ObjectMother.cs" />
+    <Compile Include="Helpers\ViewModelEqualsConstraint.cs" />
+    <Compile Include="ModelBinding\ModelBindingTests.cs" />
+    <Compile Include="ModelBinding\Pages\ChameleonFormsPage.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\BinaryInputField.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\FieldFactory.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\IField.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\MultipleFields.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\SelectField.cs" />
+    <Compile Include="ModelBinding\Pages\Fields\TextInputField.cs" />
+    <Compile Include="ModelBinding\Pages\HomePage.cs" />
+    <Compile Include="ModelBinding\Pages\ModelBindingExamplePage.cs" />
+    <Compile Include="ModelBinding\Pages\ModelFieldType.cs" />
+    <Compile Include="ModelBinding\Pages\ModelFieldValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Templates\DefaultFormTemplateTests.cs" />
-    <Compile Include="Templates\HtmlCreatorTests.cs" />
-    <Compile Include="Templates\HtmlAttributesTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj">
-      <Project>{67A08E34-2498-404D-9869-E13F4F496B3E}</Project>
-      <Name>ChameleonForms.AcceptanceTests</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ChameleonForms.Example\ChameleonForms.Example.csproj">
-      <Project>{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}</Project>
+      <Project>{a51a9fa4-12d6-4980-bef9-d1ded004f16c}</Project>
       <Name>ChameleonForms.Example</Name>
     </ProjectReference>
     <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj">
       <Project>{854754fe-f40a-47eb-b32d-646e8f35c65f}</Project>
       <Name>ChameleonForms</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

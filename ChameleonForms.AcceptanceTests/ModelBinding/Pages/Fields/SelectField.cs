@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace ChameleonForms.Tests.ModelBinding.Pages.Fields
+namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
 {
     internal class SelectField : IField
     {

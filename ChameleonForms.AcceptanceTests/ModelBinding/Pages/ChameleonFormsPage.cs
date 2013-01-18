@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
-using ChameleonForms.Tests.ModelBinding.Pages.Fields;
+using ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields;
 using TestStack.Seleno.PageObjects;
 
-namespace ChameleonForms.Tests.ModelBinding.Pages
+namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
 {
     public abstract class ChameleonFormsPage<T> : Page<T> where T : class, new()
     {

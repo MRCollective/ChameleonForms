@@ -2,7 +2,7 @@
 using System.Linq;
 using OpenQA.Selenium;
 
-namespace ChameleonForms.Tests.ModelBinding.Pages.Fields
+namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
 {
     internal class BinaryInputField : IField
     {

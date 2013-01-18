@@ -1,8 +1,8 @@
-﻿using ChameleonForms.Tests.Helpers;
-using ChameleonForms.Tests.ModelBinding.Pages;
+﻿using ChameleonForms.AcceptanceTests.Helpers;
+using ChameleonForms.AcceptanceTests.ModelBinding.Pages;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.ModelBinding
+namespace ChameleonForms.AcceptanceTests.ModelBinding
 {
     [TestFixture]
     class ModelBindingShould

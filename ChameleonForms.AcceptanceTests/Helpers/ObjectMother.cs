@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ChameleonForms.Example.Controllers;
 
-namespace ChameleonForms.Tests.Helpers
+namespace ChameleonForms.AcceptanceTests.Helpers
 {
     public static class ObjectMother
     {

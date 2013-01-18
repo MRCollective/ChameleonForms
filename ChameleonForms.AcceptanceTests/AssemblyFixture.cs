@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using TestStack.Seleno.Configuration;
 
-namespace ChameleonForms.Tests
+namespace ChameleonForms.AcceptanceTests
 {
     [SetUpFixture]
     public class AssemblyFixture

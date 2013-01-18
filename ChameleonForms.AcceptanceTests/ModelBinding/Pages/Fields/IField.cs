@@ -1,4 +1,4 @@
-﻿namespace ChameleonForms.Tests.ModelBinding.Pages.Fields
+﻿namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
 {
     internal interface IField
     {
