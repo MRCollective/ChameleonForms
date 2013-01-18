@@ -36,16 +36,26 @@
 @:            </dd>
 }
 
-@helper GetHint(IFieldConfiguration fieldConfiguration) {
-    if (fieldConfiguration != null && fieldConfiguration.Hint != null) {
-<div class="hint">@fieldConfiguration.Hint</div>
+@helper GetPrependedHtml(IFieldConfiguration fieldConfiguration) {
+    if (fieldConfiguration != null) {
+        foreach (var html in fieldConfiguration.PrependedHtml) {@html}
     }
+}
+
+@helper GetAppendedHtml(IFieldConfiguration fieldConfiguration) {
+    if (fieldConfiguration != null) {
+        foreach (var html in fieldConfiguration.AppendedHtml) {@html}
+    }
+}
+
+@helper GetHint(IFieldConfiguration fieldConfiguration) {
+    if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="hint">@fieldConfiguration.Hint</div>}
 }
 
 @helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldConfiguration fieldConfiguration) {
 @:            <dt>@labelHtml</dt>
 @:            <dd>
-@:                @elementHtml @GetHint(fieldConfiguration)@validationHtml
+@:                @GetPrependedHtml(fieldConfiguration)@elementHtml@GetAppendedHtml(fieldConfiguration)@GetHint(fieldConfiguration) @validationHtml
 }
 
 @helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration) {

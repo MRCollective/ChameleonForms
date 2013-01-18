@@ -42,7 +42,6 @@ namespace ChameleonForms.Tests.Templates
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
-        
 
         [Test]
         public void Begin_section()
@@ -100,6 +99,19 @@ namespace ChameleonForms.Tests.Templates
             var t = new DefaultFormTemplate();
 
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().WithHint("hello"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_field_with_prepended_and_appended_html()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration()
+                .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
+                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
+            );
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
