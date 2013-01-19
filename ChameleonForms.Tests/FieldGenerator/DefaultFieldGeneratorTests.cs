@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Reporters;
@@ -27,6 +25,9 @@ namespace ChameleonForms.Tests.FieldGenerator
     {
         [Required]
         public string RequiredString { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
+        public Decimal DecimalWithFormatStringAttribute { get; set; }
 
         public Decimal Decimal { get; set; }
 

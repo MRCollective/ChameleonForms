@@ -162,7 +162,7 @@ namespace ChameleonForms.Example.Controllers
         [ExistsIn("List", "Id", "Name")]
         public int ListId { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:2F}")]
+        [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
         public decimal DecimalWithFormatStringAttribute { get; set; }
 
         public decimal Decimal { get; set; }
