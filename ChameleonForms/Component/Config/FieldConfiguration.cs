@@ -231,6 +231,18 @@ namespace ChameleonForms.Component.Config
         /// A list of HTML to be appended to the form field in ltr order.
         /// </summary>
         IEnumerable<IHtmlString> AppendedHtml { get; }
+        
+        /// <summary>
+        /// Uses the given format string when outputting the field value.
+        /// </summary>
+        /// <param name="formatString">The format string to use</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithFormatString(string formatString);
+
+        /// <summary>
+        /// The format string to use for the field
+        /// </summary>
+        string FormatString { get; }
     }
 
     /// <summary>
@@ -403,6 +415,14 @@ namespace ChameleonForms.Component.Config
         }
 
         public IEnumerable<IHtmlString> AppendedHtml { get { return _appendedHtml.ToArray(); } }
+
+        public IFieldConfiguration WithFormatString(string formatString)
+        {
+            FormatString = formatString;
+            return this;
+        }
+
+        public string FormatString { get; private set; }
 
         public void SetField(Func<IHtmlString> field)
         {

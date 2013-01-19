@@ -228,5 +228,21 @@ namespace ChameleonForms.Tests.Component.Config
 
             Assert.That(fc.AppendedHtml, Is.EquivalentTo(new[] { x, y, z }));
         }
+
+        [Test]
+        public void Return_null_if_no_format_string_set()
+        {
+            var fc = Field.Configure();
+
+            Assert.That(fc.FormatString, Is.Null);
+        }
+
+        [Test]
+        public void Return_format_string_if_set()
+        {
+            var fc = Field.Configure().WithFormatString("{0}");
+
+            Assert.That(fc.FormatString, Is.EqualTo("{0}"));
+        }
     }
 }

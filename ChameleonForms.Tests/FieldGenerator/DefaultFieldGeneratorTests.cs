@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Reporters;
@@ -25,6 +27,8 @@ namespace ChameleonForms.Tests.FieldGenerator
     {
         [Required]
         public string RequiredString { get; set; }
+
+        public Decimal Decimal { get; set; }
 
         public TestEnum RequiredEnum { get; set; }
 
@@ -128,6 +132,7 @@ namespace ChameleonForms.Tests.FieldGenerator
             {
                 action(vm);
             }
+            _h.ViewData.Model = vm;
             _h.ViewData.ModelMetadata.Model = vm;
 
             return new DefaultFieldGenerator<TestFieldViewModel, T>(_h, property);

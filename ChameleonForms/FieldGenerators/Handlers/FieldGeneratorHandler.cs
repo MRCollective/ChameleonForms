@@ -63,7 +63,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 return FieldGenerator.HtmlHelper.PasswordFor(FieldGenerator.FieldProperty, FieldConfiguration.Attributes.ToDictionary());
 
             FieldConfiguration.Attributes.Attr(type => inputType.ToString().ToLower());
-            return FieldGenerator.HtmlHelper.TextBoxFor(FieldGenerator.FieldProperty, FieldConfiguration.Attributes.ToDictionary());
+            return !string.IsNullOrEmpty(FieldConfiguration.FormatString)
+                ? FieldGenerator.HtmlHelper.TextBoxFor(FieldGenerator.FieldProperty, FieldConfiguration.FormatString, FieldConfiguration.Attributes.ToDictionary())
+                : FieldGenerator.HtmlHelper.TextBoxFor(FieldGenerator.FieldProperty, FieldConfiguration.Attributes.ToDictionary());
         }
 
         private bool HasEmptySelectListItem()

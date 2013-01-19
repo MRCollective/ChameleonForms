@@ -25,22 +25,31 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.AcceptanceTe
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CodeAnalysis|Any CPU = CodeAnalysis|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
+		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
 		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854754FE-F40A-47EB-B32D-646E8F35C65F}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
+		{854754FE-F40A-47EB-B32D-646E8F35C65F}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
 		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
+		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
 		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67A08E34-2498-404D-9869-E13F4F496B3E}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
+		{67A08E34-2498-404D-9869-E13F4F496B3E}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
