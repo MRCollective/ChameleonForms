@@ -45,6 +45,8 @@ namespace ChameleonForms.FieldGenerators
             fieldConfiguration = fieldConfiguration ?? new FieldConfiguration();
             if (!string.IsNullOrEmpty(Metadata.EditFormatString) && string.IsNullOrEmpty(fieldConfiguration.FormatString))
                 fieldConfiguration.WithFormatString(Metadata.EditFormatString);
+            if (!string.IsNullOrEmpty(Metadata.NullDisplayText) && string.IsNullOrEmpty(fieldConfiguration.NoneString))
+                fieldConfiguration.WithNoneAs(Metadata.NullDisplayText);
             return FieldGeneratorHandlersRouter<TModel, T>.GetFieldHtml(this, fieldConfiguration);
         }
 

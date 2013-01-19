@@ -19,6 +19,26 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Use_correct_html_for_optional_enum_field_with_null_string_attribute()
+        {
+            var g = Arrange(m => m.OptionalEnumWithNullStringAttribute, m => m.OptionalEnumWithNullStringAttribute = null);
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_enum_field_with_overridden_null_string_attribute()
+        {
+            var g = Arrange(m => m.OptionalEnumWithNullStringAttribute, m => m.OptionalEnumWithNullStringAttribute = null);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().WithNoneAs("Overridden"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_optional_enum_field()
         {
             var g = Arrange(m => m.OptionalEnum, m => m.OptionalEnum = null);

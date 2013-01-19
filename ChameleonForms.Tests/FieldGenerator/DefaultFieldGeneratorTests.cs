@@ -36,6 +36,9 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Required]
         public TestEnum? RequiredNullableEnum { get; set; }
 
+        [DisplayFormat(NullDisplayText = "Nothing to see here")]
+        public TestEnum? OptionalEnumWithNullStringAttribute { get; set; }
+
         public TestEnum? OptionalEnum { get; set; }
 
         [Required]
