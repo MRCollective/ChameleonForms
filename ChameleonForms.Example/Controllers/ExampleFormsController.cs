@@ -137,6 +137,8 @@ namespace ChameleonForms.Example.Controllers
         {
             // This could be set using a model binder if it's populated from a database or similar
             List = new List<ListItem> {new ListItem{Id = 1, Name = "A"}, new ListItem{Id = 2, Name = "B"}};
+            DecimalWithFormatStringAttribute = 1.2300m;
+            Decimal = 1.2300m;
         }
 
         [Required]
@@ -159,6 +161,11 @@ namespace ChameleonForms.Example.Controllers
         public List<ListItem> List { get; set; }
         [ExistsIn("List", "Id", "Name")]
         public int ListId { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:2F}")]
+        public decimal DecimalWithFormatStringAttribute { get; set; }
+
+        public decimal Decimal { get; set; }
     }
 
     public class ListItem

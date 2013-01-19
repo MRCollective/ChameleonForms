@@ -36,6 +36,8 @@
         @s.FieldFor(m => m.ListId).AsList()
         @s.FieldFor(m => m.SomeEnums)
         @s.FieldFor(m => m.SomeEnumsList).AsList()
+        @s.FieldFor(m => m.Decimal).WithFormatString("{0:F2}")
+        @s.FieldFor(m => m.DecimalWithFormatStringAttribute)
     }
     using (var n = f.BeginNavigation())
     {
