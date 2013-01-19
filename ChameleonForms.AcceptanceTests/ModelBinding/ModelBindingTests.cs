@@ -12,12 +12,12 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
         {
             var enteredViewModel = ObjectMother.ModelBindingViewModels.BasicValid;
 
-            var submittedViewModel = new HomePage()
+            var page = new HomePage()
                 .GoToModelBindingExamplePage()
-                .Submit(enteredViewModel)
-                .GetFormValues();
+                .Submit(enteredViewModel);
 
-            Assert.That(submittedViewModel, IsSame.ViewModelAs(enteredViewModel));
+            Assert.That(page.GetFormValues(), IsSame.ViewModelAs(enteredViewModel));
+            Assert.That(page.HasValidationErrors(), Is.False, "There is validation errors on the page");
         }
 
         [Test]
@@ -25,12 +25,13 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
         {
             var enteredViewModel = ObjectMother.ModelBindingViewModels.BasicValid;
 
-            var submittedViewModel = new HomePage()
+            var page = new HomePage()
                 .GoToModelBindingExamplePage2()
-                .Submit(enteredViewModel)
-                .GetFormValues();
+                .Submit(enteredViewModel);
 
-            Assert.That(submittedViewModel, IsSame.ViewModelAs(enteredViewModel));
+            Assert.That(page.GetFormValues(), IsSame.ViewModelAs(enteredViewModel));
+            // This next assertion currently fails due to some tricky interaction with the default validation in MVC
+            Assert.That(page.HasValidationErrors(), Is.False, "There is validation errors on the page");
         }
     }
 }

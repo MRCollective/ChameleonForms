@@ -1,6 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using TestStack.Seleno.PageObjects;
 
 namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
@@ -31,6 +35,15 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
                 property.SetValue(vm, FieldFactory.Create(elements).Get(new ModelFieldType(property.PropertyType)), null);
             }
             return vm;
+        }
+
+        public bool HasValidationErrors()
+        {
+            return new WebDriverWait(Browser, TimeSpan.FromSeconds(1))
+                .Until(d => d.FindElements(
+                    By.CssSelector(".field-validation-error span")
+                ))
+                .Any();
         }
     }
 

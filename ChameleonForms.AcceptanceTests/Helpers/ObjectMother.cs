@@ -28,7 +28,13 @@ namespace ChameleonForms.AcceptanceTests.Helpers
                         RequiredNullableEnums = new List<SomeEnum?> { SomeEnum.Value1 },
                         OptionalEnums = null,
                         OptionalNullableEnums = new List<SomeEnum?>(),
-                        RequiredListId = 1
+                        RequiredListId = 1,
+                        OptionalListId = null,
+                        RequiredNullableListId = 1,
+                        RequiredListIds = new List<int> {1},
+                        RequiredNullableListIds = new List<int?> {1},
+                        OptionalListIds = null,
+                        OptionalNullableListIds = null
                     };
                 }
             }

@@ -100,8 +100,25 @@ namespace ChameleonForms.Example.Controllers
 
         [ReadOnly(true)]
         public List<ListItem> List { get; set; }
+
         [ExistsIn("List", "Id", "Name")]
         public int RequiredListId { get; set; }
+        [Required]
+        [ExistsIn("List", "Id", "Name")]
+        public int? RequiredNullableListId { get; set; }
+        [ExistsIn("List", "Id", "Name")]
+        public int? OptionalListId { get; set; }
+
+        [ExistsIn("List", "Id", "Name")]
+        [Required]
+        public IEnumerable<int> RequiredListIds { get; set; }
+        [Required]
+        [ExistsIn("List", "Id", "Name")]
+        public IEnumerable<int?> RequiredNullableListIds { get; set; }
+        [ExistsIn("List", "Id", "Name")]
+        public IEnumerable<int> OptionalListIds { get; set; }
+        [ExistsIn("List", "Id", "Name")]
+        public IEnumerable<int?> OptionalNullableListIds { get; set; }
     }
 
     public class BasicViewModel
@@ -153,7 +170,7 @@ namespace ChameleonForms.Example.Controllers
     public enum SomeEnum
     {
         Value1,
-        [Description("Fiendly name")]
+        [Description("Friendly name")]
         ValueWithDescription,
         SomeOtherValue
     }

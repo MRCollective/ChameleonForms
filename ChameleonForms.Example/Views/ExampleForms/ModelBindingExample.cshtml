@@ -22,6 +22,12 @@
         @Model.ModifyConfig(s.FieldFor(m => m.OptionalEnums))
         @Model.ModifyConfig(s.FieldFor(m => m.OptionalNullableEnums))
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredListId))
+        @Model.ModifyConfig(s.FieldFor(m => m.RequiredNullableListId))
+        @Model.ModifyConfig(s.FieldFor(m => m.OptionalListId))
+        @Model.ModifyConfig(s.FieldFor(m => m.RequiredListIds))
+        @Model.ModifyConfig(s.FieldFor(m => m.RequiredNullableListIds))
+        @Model.ModifyConfig(s.FieldFor(m => m.OptionalListIds))
+        @Model.ModifyConfig(s.FieldFor(m => m.OptionalNullableListIds))
     }
     using (var n = f.BeginNavigation())
     {
