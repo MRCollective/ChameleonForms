@@ -37,9 +37,14 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         protected bool IsSelected(object value)
         {
-            return HasMultipleValues()
-                ? GetValues().Contains(value)
-                : FieldGenerator.GetValue().Equals(value);
+            if (HasMultipleValues())
+                return GetValues().Contains(value);
+
+            var val = FieldGenerator.GetValue();
+            if (val != null)
+                return val.Equals(value);
+
+            return value == null;
         }
 
         public Type GetUnderlyingType()

@@ -31,18 +31,17 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return GetSelectListUsingPropertyReflection(
                 listValue,
                 (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.NameKey],
-                (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ValueKey],
-                FieldGenerator.GetValue()
+                (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ValueKey]
             );
         }
 
-        private IEnumerable<SelectListItem> GetSelectListUsingPropertyReflection(IEnumerable listValues, string nameProperty, string valueProperty, object selectedValue)
+        private IEnumerable<SelectListItem> GetSelectListUsingPropertyReflection(IEnumerable listValues, string nameProperty, string valueProperty)
         {
             foreach (var item in listValues)
             {
                 var name = item.GetType().GetProperty(nameProperty).GetValue(item, null);
                 var value = item.GetType().GetProperty(valueProperty).GetValue(item, null);
-                yield return new SelectListItem { Selected = value.Equals(selectedValue), Value = value.ToString(), Text = name.ToString() };
+                yield return new SelectListItem { Selected = IsSelected(value), Value = value.ToString(), Text = name.ToString() };
             }
         }
     }

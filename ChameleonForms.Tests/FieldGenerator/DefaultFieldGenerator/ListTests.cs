@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
 using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
 using NUnit.Framework;
@@ -19,35 +22,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
             new StringListItem { Value = "2", Label = "B" }
         };
 
-        private FieldGenerators.DefaultFieldGenerator<TestFieldViewModel, int?> ArrangeOptionalIntList(int? value)
+        private FieldGenerators.DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel, T>> property, T value)
         {
-            return Arrange(m => m.OptionalIntListId, m => m.OptionalIntListId = value, m => m.IntList = IntList);
-        }
-
-        private FieldGenerators.DefaultFieldGenerator<TestFieldViewModel, int?> ArrangeRequiredNullableIntList(int? value)
-        {
-            return Arrange(m => m.RequiredNullableIntListId, m => m.RequiredNullableIntListId = value, m => m.IntList = IntList);
-        }
-
-        private FieldGenerators.DefaultFieldGenerator<TestFieldViewModel, int> ArrangeRequiredIntList(int value)
-        {
-            return Arrange(m => m.RequiredIntListId, m => m.RequiredIntListId = value, m => m.IntList = IntList);
-        }
-
-        private FieldGenerators.DefaultFieldGenerator<TestFieldViewModel, string> ArrangeOptionalStringList(string value)
-        {
-            return Arrange(m => m.OptionalStringListId, m => m.OptionalStringListId = value, m => m.StringList = StringList);
-        }
-
-        private FieldGenerators.DefaultFieldGenerator<TestFieldViewModel, string> ArrangeRequiredStringList(string value)
-        {
-            return Arrange(m => m.RequiredStringListId, m => m.RequiredStringListId = value, m => m.StringList = StringList);
+            var propInfo = (PropertyInfo)((MemberExpression)property.Body).Member;
+            return Arrange(property, m => propInfo.SetValue(m, value, null), m => m.IntList = IntList, m => m.StringList = StringList);
         }
 
         [Test]
         public void Use_correct_html_for_optional_int_list_id()
         {
-            var g = ArrangeOptionalIntList(null);
+            var g = Arrange(m => m.OptionalIntListId, null);
 
             var result = g.GetFieldHtml(null);
 
@@ -57,7 +41,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         [Test]
         public void Use_correct_html_for_required_nullable_int_list_id()
         {
-            var g = ArrangeRequiredNullableIntList(null);
+            var g = Arrange(m => m.RequiredNullableIntListId, null);
 
             var result = g.GetFieldHtml(null);
 
@@ -67,7 +51,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         [Test]
         public void Use_correct_html_for_optional_string_list_id_as_list()
         {
-            var g = ArrangeOptionalStringList("");
+            var g = Arrange(m => m.OptionalStringListId, string.Empty);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
@@ -77,7 +61,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         [Test]
         public void Use_correct_html_for_null_required_string_list_id_as_list()
         {
-            var g = ArrangeRequiredStringList(null);
+            var g = Arrange(m => m.RequiredStringListId, null);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
@@ -87,7 +71,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         [Test]
         public void Use_correct_html_for_optional_int_list_id_with_none_string_override()
         {
-            var g = ArrangeOptionalIntList(null);
+            var g = Arrange(m => m.OptionalIntListId, null);
 
             var result = g.GetFieldHtml(new FieldConfiguration().WithNoneAs("-- Select Item"));
 
@@ -97,7 +81,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         [Test]
         public void Use_correct_html_for_optional_string_list_id_as_list_with_none_string_override()
         {
-            var g = ArrangeOptionalStringList("2");
+            var g = Arrange(m => m.OptionalStringListId, "2");
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList().WithNoneAs("No Value"));
 
@@ -107,7 +91,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         [Test]
         public void Use_correct_html_for_required_int_list_id()
         {
-            var g = ArrangeRequiredIntList(2);
+            var g = Arrange(m => m.RequiredIntListId, 2);
 
             var result = g.GetFieldHtml(null);
 
@@ -117,7 +101,77 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         [Test]
         public void Use_correct_html_for_required_string_list_id_as_list()
         {
-            var g = ArrangeRequiredStringList("2");
+            var g = Arrange(m => m.RequiredStringListId, "2");
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+        
+        [Test]
+        public void Use_correct_html_for_required_int_list_ids()
+        {
+            var g = Arrange(m => m.RequiredIntListIds, new List<int>{ 1 , 2 });
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_required_int_list_ids_as_list()
+        {
+            var g = Arrange(m => m.RequiredIntListIds, new List<int> { 1, 2 });
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_required_nullable_int_list_ids()
+        {
+            var g = Arrange(m => m.RequiredNullableIntListIds, null);
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_int_list_ids()
+        {
+            var g = Arrange(m => m.OptionalIntListIds, new List<int> { 1, 2 });
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_int_list_ids_as_list()
+        {
+            var g = Arrange(m => m.OptionalIntListIds, new List<int> { 1, 2 });
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_nullable_int_list_ids()
+        {
+            var g = Arrange(m => m.OptionalNullableIntListIds, null);
+
+            var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_nullable_int_list_ids_as_list()
+        {
+            var g = Arrange(m => m.OptionalNullableIntListIds, null);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 

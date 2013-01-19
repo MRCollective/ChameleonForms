@@ -77,6 +77,20 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Required]
         [ExistsIn("StringList", "Value", "Label")]
         public string RequiredStringListId { get; set; }
+
+        [ExistsIn("IntList", "Id", "Name")]
+        [Required]
+        public IEnumerable<int> RequiredIntListIds { get; set; }
+
+        [Required]
+        [ExistsIn("IntList", "Id", "Name")]
+        public IList<int?> RequiredNullableIntListIds { get; set; }
+        
+        [ExistsIn("IntList", "Id", "Name")]
+        public List<int> OptionalIntListIds { get; set; }
+
+        [ExistsIn("IntList", "Id", "Name")]
+        public ICollection<int?> OptionalNullableIntListIds { get; set; }
     }
 
     public class IntListItem
