@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
@@ -78,6 +79,11 @@ namespace ChameleonForms.Example.Controllers
 
         public int RequiredInt { get; set; }
         public int? OptionalInt { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateTime { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? NullableDateTime { get; set; }
 
         public bool RequiredBool { get; set; }
         [Required]

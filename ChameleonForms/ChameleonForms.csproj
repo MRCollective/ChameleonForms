@@ -105,6 +105,7 @@
     <Compile Include="FieldGenerators\IFieldGenerator.cs" />
     <Compile Include="Form.cs" />
     <Compile Include="HumanizedLabels.cs" />
+    <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\DefaultFormTemplate.cs" />
     <Compile Include="Templates\HtmlAttributes.cs" />

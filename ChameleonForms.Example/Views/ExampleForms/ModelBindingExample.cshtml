@@ -8,6 +8,8 @@
     {
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredString))
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredInt))
+        @Model.ModifyConfig(s.FieldFor(m => m.DateTime))
+        @Model.ModifyConfig(s.FieldFor(m => m.NullableDateTime))
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredBool))
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredNullableBool))
         @Model.ModifyConfig(s.FieldFor(m => m.OptionalBool))
