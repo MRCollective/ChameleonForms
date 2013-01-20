@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
+using ChameleonForms.Enums;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -17,6 +18,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
             if (!FieldGenerator.Metadata.AdditionalValues.ContainsKey(ExistsInAttribute.ExistsKey) ||
                     FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? != true)
                 return HandleAction.Continue;
+
+            // There is a bug in the unobtrusive validation for numeric fields that are a radio button
+            //  when there is a radio button for "no value selected" i.e. value="" then it can't be selected
+            //  as an option since it tries to validate the empty string as a number.
+            // This turns off unobtrusive validation in that circumstance
+            if (FieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && IsNumeric() && !HasMultipleValues())
+                FieldConfiguration.Attr("data-val", "false");
 
             var selectList = GetSelectList();
             var html = GetSelectListHtml(selectList);

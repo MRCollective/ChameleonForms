@@ -79,6 +79,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Use_correct_html_for_optional_int_list_id_as_list()
+        {
+            var g = Arrange(m => m.OptionalIntListId, null);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_optional_string_list_id_as_list_with_none_string_override()
         {
             var g = Arrange(m => m.OptionalStringListId, "2");

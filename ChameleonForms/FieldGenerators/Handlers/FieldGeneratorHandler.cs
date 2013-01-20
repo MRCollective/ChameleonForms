@@ -13,6 +13,21 @@ namespace ChameleonForms.FieldGenerators.Handlers
 {
     internal abstract class FieldGeneratorHandler<TModel, T>
     {
+        private static readonly List<Type> NumericTypes = new List<Type>
+        {
+            typeof (byte),
+            typeof (sbyte),
+            typeof (short),
+            typeof (ushort),
+            typeof (int),
+            typeof (uint),
+            typeof (long),
+            typeof (ulong),
+            typeof (float),
+            typeof (double),
+            typeof (decimal)
+        };
+
         protected readonly IFieldGenerator<TModel, T> FieldGenerator;
         protected readonly IFieldConfiguration FieldConfiguration;
 
@@ -55,6 +70,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 type = type.GetGenericArguments()[0];
 
             return Nullable.GetUnderlyingType(type) ?? type;
+        }
+
+        public bool IsNumeric()
+        {
+            return NumericTypes.Contains(GetUnderlyingType());
         }
 
         protected IHtmlString GetInputHtml(TextInputType inputType)
