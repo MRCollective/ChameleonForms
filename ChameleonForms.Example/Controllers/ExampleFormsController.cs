@@ -16,9 +16,9 @@ namespace ChameleonForms.Example.Controllers
         }
 
         [HttpPost]
-        public ActionResult Form1Submit(ViewModelExample vm)
+        public ActionResult Form1(ViewModelExample vm)
         {
-            return View(vm.FileUpload.ContentLength);
+            return View(vm);
         }
 
         public ActionResult BasicExample()
@@ -166,6 +166,8 @@ namespace ChameleonForms.Example.Controllers
         public decimal DecimalWithFormatStringAttribute { get; set; }
 
         public decimal Decimal { get; set; }
+
+        public int? NullableInt { get; set; }
     }
 
     public class ListItem
