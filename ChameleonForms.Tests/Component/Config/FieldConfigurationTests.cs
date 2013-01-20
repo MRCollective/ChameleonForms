@@ -177,7 +177,7 @@ namespace ChameleonForms.Tests.Component.Config
             var x = new HtmlString("");
             var fc = Field.Configure().Prepend(x);
 
-            Assert.That(fc.PrependedHtml, Is.EquivalentTo(new[]{x}));
+            Assert.That(fc.PrependedHtml, Is.EqualTo(new[]{x}));
         }
 
         [Test]
@@ -186,7 +186,7 @@ namespace ChameleonForms.Tests.Component.Config
             var x = new HtmlString("");
             var fc = Field.Configure().Append(x);
 
-            Assert.That(fc.AppendedHtml, Is.EquivalentTo(new[] { x }));
+            Assert.That(fc.AppendedHtml, Is.EqualTo(new[] { x }));
         }
 
         [Test]
@@ -215,7 +215,7 @@ namespace ChameleonForms.Tests.Component.Config
             var z = new HtmlString("z");
             var fc = Field.Configure().Prepend(x).Prepend(y).Prepend(z);
 
-            Assert.That(fc.PrependedHtml, Is.EquivalentTo(new[] { z, y, x }));
+            Assert.That(fc.PrependedHtml, Is.EqualTo(new[] { z, y, x }));
         }
 
         [Test]
@@ -226,7 +226,7 @@ namespace ChameleonForms.Tests.Component.Config
             var z = new HtmlString("z");
             var fc = Field.Configure().Append(x).Append(y).Append(z);
 
-            Assert.That(fc.AppendedHtml, Is.EquivalentTo(new[] { x, y, z }));
+            Assert.That(fc.AppendedHtml, Is.EqualTo(new[] { x, y, z }));
         }
 
         [Test]
