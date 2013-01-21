@@ -39,6 +39,6 @@
      <file src="bin\Release\ChameleonForms.dll" target="lib\NET40" />
      <file src="bin\Release\ChameleonForms.pdb" target="lib\NET40" />
      <file src="bin\Release\ChameleonForms.XML" target="lib\NET40" />
-     <file src="..\AppStart.cs.pp" target="content\App_Start\RegisterChameleonFormsComponents.cc.pp" />
+     <file src="..\AppStart.cs.pp" target="content\App_Start\RegisterChameleonFormsComponents.cs.pp" />
   </files>
 </package>
