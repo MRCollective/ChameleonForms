@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using TestStack.Seleno.PageObjects;
 
@@ -18,7 +19,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
                 if (property.IsReadonly())
                     continue;
 
-                var elements = Browser.FindElementsByName(property.Name);
+                var elements = ((RemoteWebDriver)Browser).FindElementsByName(property.Name);
                 FieldFactory.Create(elements).Set(new ModelFieldValue(property.GetValue(model, null)));
             }
         }
@@ -31,7 +32,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
                 if (property.IsReadonly())
                     continue;
 
-                var elements = Browser.FindElementsByName(property.Name);
+                var elements = ((RemoteWebDriver)Browser).FindElementsByName(property.Name);
                 property.SetValue(vm, FieldFactory.Create(elements).Get(new ModelFieldType(property.PropertyType)), null);
             }
             return vm;

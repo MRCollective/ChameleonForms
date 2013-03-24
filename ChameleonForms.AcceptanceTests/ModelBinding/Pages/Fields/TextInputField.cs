@@ -14,7 +14,8 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
 
         public void Set(IModelFieldValue value)
         {
-            _element.ClearAndSendKeys(value.Value);
+            _element.Clear();
+            _element.SendKeys(value.Value);
         }
 
         public object Get(IModelFieldType fieldType)

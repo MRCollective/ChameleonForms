@@ -1,6 +1,7 @@
 ﻿using ChameleonForms.AcceptanceTests.Helpers;
 using ChameleonForms.AcceptanceTests.ModelBinding.Pages;
 using NUnit.Framework;
+using TestStack.Seleno.Configuration;
 
 namespace ChameleonForms.AcceptanceTests.ModelBinding
 {
@@ -12,7 +13,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
         {
             var enteredViewModel = ObjectMother.ModelBindingViewModels.BasicValid;
 
-            var page = new HomePage()
+            var page = SelenoHost.NavigateToInitialPage<HomePage>()
                 .GoToModelBindingExamplePage()
                 .Submit(enteredViewModel);
 
@@ -25,7 +26,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
         {
             var enteredViewModel = ObjectMother.ModelBindingViewModels.BasicValid;
 
-            var page = new HomePage()
+            var page = SelenoHost.NavigateToInitialPage<HomePage>()
                 .GoToModelBindingExamplePage2()
                 .Submit(enteredViewModel);
 

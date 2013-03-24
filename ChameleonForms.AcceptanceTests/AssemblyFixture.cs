@@ -9,7 +9,7 @@ namespace ChameleonForms.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            SelenoApplicationRunner.Run("ChameleonForms.Example", 12345);
+            SelenoHost.Run("ChameleonForms.Example", 12345);
         }
     }
 }
