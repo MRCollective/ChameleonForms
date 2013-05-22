@@ -42,8 +42,8 @@ namespace ChameleonForms.Templates
         /// <returns>The HTML for the submit button</returns>
         public static IHtmlString BuildSubmitButton(string value, string type = "submit", string id = null, HtmlAttributes htmlAttributes = null)
         {
-            var t = new TagBuilder("input");
-            t.Attributes.Add("value", value);
+            var t = new TagBuilder("button");
+            t.SetInnerText(value);
             t.Attributes.Add("type", type);
             if (id != null)
             {
@@ -53,7 +53,7 @@ namespace ChameleonForms.Templates
             if (htmlAttributes != null)
                 t.MergeAttributes(htmlAttributes.Attributes, true);
 
-            return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
+            return new HtmlString(t.ToString(TagRenderMode.Normal));
         }
 
         /// <summary>
