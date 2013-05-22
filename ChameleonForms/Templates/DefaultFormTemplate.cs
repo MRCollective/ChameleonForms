@@ -10,72 +10,72 @@ namespace ChameleonForms.Templates
     /// </summary>
     public class DefaultFormTemplate : IFormTemplate
     {
-        public IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        public virtual IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
         {
             return HtmlCreator.BuildFormTag(action, method, htmlAttributes, enctype);
         }
 
-        public IHtmlString EndForm()
+        public virtual IHtmlString EndForm()
         {
             return HtmlHelpers.EndForm();
         }
 
-        public IHtmlString BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+        public virtual IHtmlString BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
             return HtmlHelpers.BeginSection(title, leadingHtml, htmlAttributes);
         }
 
-        public IHtmlString EndSection()
+        public virtual IHtmlString EndSection()
         {
             return HtmlHelpers.EndSection();
         }
 
-        public IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+        public virtual IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
             return HtmlHelpers.BeginNestedSection(title, leadingHtml, htmlAttributes);
         }
 
-        public IHtmlString EndNestedSection()
+        public virtual IHtmlString EndNestedSection()
         {
             return HtmlHelpers.EndNestedSection();
         }
 
-        public IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
+        public virtual IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
         {
             return HtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
         }
 
-        public IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
+        public virtual IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
         {
             return HtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
         }
 
-        public IHtmlString EndField()
+        public virtual IHtmlString EndField()
         {
             return HtmlHelpers.EndField();
         }
 
-        public IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
+        public virtual IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
         {
             return HtmlHelpers.BeginMessage(messageType, heading);
         }
 
-        public IHtmlString EndMessage()
+        public virtual IHtmlString EndMessage()
         {
             return HtmlHelpers.EndMessage();
         }
 
-        public IHtmlString MessageParagraph(IHtmlString paragraph)
+        public virtual IHtmlString MessageParagraph(IHtmlString paragraph)
         {
             return HtmlHelpers.MessageParagraph(paragraph);
         }
 
-        public IHtmlString BeginNavigation()
+        public virtual IHtmlString BeginNavigation()
         {
             return HtmlHelpers.BeginNavigation();
         }
 
-        public IHtmlString EndNavigation()
+        public virtual IHtmlString EndNavigation()
         {
             return HtmlHelpers.EndNavigation();
         }
