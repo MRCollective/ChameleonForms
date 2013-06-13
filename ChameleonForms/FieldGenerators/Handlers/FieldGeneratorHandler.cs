@@ -90,6 +90,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         private bool HasEmptySelectListItem()
         {
+            if (FieldConfiguration.EmptyItemHidden)
+                return false;
+
             // If it's a checkbox list then it
             //  shouldn't since you can uncheck everything
             if (FieldConfiguration.DisplayType == FieldDisplayType.List && HasMultipleValues())

@@ -59,6 +59,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Use_correct_html_for_optional_string_list_id_with_empty_item_hidden()
+        {
+            var g = Arrange(m => m.OptionalStringListId, string.Empty);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().HideEmptyItem());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_null_required_string_list_id_as_list()
         {
             var g = Arrange(m => m.RequiredStringListId, null);
@@ -154,6 +164,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
             var g = Arrange(m => m.OptionalIntListIds, new List<int> { 1, 2 });
 
             var result = g.GetFieldHtml(null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_optional_int_list_ids_with_empty_item_hidden()
+        {
+            var g = Arrange(m => m.OptionalIntListIds, new List<int> { 1, 2 });
+
+            var result = g.GetFieldHtml(new FieldConfiguration().HideEmptyItem());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

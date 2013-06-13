@@ -240,9 +240,20 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration WithFormatString(string formatString);
 
         /// <summary>
-        /// The format string to use for the field
+        /// The format string to use for the field.
         /// </summary>
         string FormatString { get; }
+
+        /// <summary>
+        /// Hide the empty item that would normally display for the field.
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration HideEmptyItem();
+
+        /// <summary>
+        /// Whether or not the empty item is hidden.
+        /// </summary>
+        bool EmptyItemHidden { get; }
     }
 
     /// <summary>
@@ -423,6 +434,14 @@ namespace ChameleonForms.Component.Config
         }
 
         public string FormatString { get; private set; }
+
+        public IFieldConfiguration HideEmptyItem()
+        {
+            EmptyItemHidden = true;
+            return this;
+        }
+
+        public bool EmptyItemHidden { get; private set; }
 
         public void SetField(Func<IHtmlString> field)
         {
