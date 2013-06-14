@@ -1,0 +1,17 @@
+﻿@using ChameleonForms
+@using ChameleonForms.Component
+@model ChameleonForms.Example.Controllers.ViewModelExample
+
+@{
+    ViewBag.Title = "Null Model";
+}
+
+<h1>Null Model</h1>
+
+@using (var f = Html.BeginChameleonForm())
+{
+    using (var s = f.BeginSection("Test"))
+    {
+        @s.FieldFor(m => m.Boolean)
+    }
+}

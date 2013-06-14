@@ -141,5 +141,15 @@ namespace ChameleonForms.Tests.FieldGenerator
 
             return new DefaultFieldGenerator<TestFieldViewModel, T>(_h, property);
         }
+
+        [Test]
+        public void Throw_exception_when_view_model_is_null()
+        {
+            var generator = Arrange(m => m.Decimal);
+            _h.ViewData.Model = null;
+            _h.ViewData.ModelMetadata.Model = null;
+
+            var ex = Assert.Throws<ModelNullException>(() => generator.GetModel());
+        }
     }
 }

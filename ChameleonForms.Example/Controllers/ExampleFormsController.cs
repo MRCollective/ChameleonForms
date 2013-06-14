@@ -51,6 +51,11 @@ namespace ChameleonForms.Example.Controllers
             vm.AsList();
             return View("ModelBindingExample", vm);
         }
+
+        public ActionResult NullModel()
+        {
+            return View();
+        }
     }
 
     public class ModelBindingViewModel
@@ -174,6 +179,8 @@ namespace ChameleonForms.Example.Controllers
         public decimal Decimal { get; set; }
 
         public int? NullableInt { get; set; }
+
+        public bool Boolean { get; set; }
     }
 
     public class ListItem

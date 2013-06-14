@@ -57,7 +57,21 @@ namespace ChameleonForms.FieldGenerators
 
         public TModel GetModel()
         {
-            return (TModel)HtmlHelper.ViewData.ModelMetadata.Model;
+            var model = (TModel) HtmlHelper.ViewData.ModelMetadata.Model;
+            if (model == null)
+                throw new ModelNullException();
+            return model;
         }
+    }
+
+    /// <summary>
+    /// Exception that denotes the model in the page is null.
+    /// </summary>
+    public class ModelNullException : Exception
+    {
+        /// <summary>
+        /// Creates a <see cref="ModelNullException"/>.
+        /// </summary>
+        public ModelNullException() : base("The page model is null; please specify a model.") { }
     }
 }
