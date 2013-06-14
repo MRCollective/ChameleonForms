@@ -12,10 +12,10 @@
 }
 
 @helper BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
-@:    <fieldset>
+@:    <fieldset@(htmlAttributes)>
 @:        <legend>@title</legend>
 @:        @leadingHtml
-@:        <dl@(htmlAttributes)>
+@:        <dl>
 }
     
 @helper BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
