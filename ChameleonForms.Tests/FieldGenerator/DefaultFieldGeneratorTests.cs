@@ -151,5 +151,15 @@ namespace ChameleonForms.Tests.FieldGenerator
 
             var ex = Assert.Throws<ModelNullException>(() => generator.GetModel());
         }
+
+        [Test]
+        public void Return_property_name()
+        {
+            var generator = Arrange(m => m.DecimalWithFormatStringAttribute);
+
+            var name = generator.GetPropertyName();
+
+            Assert.That(name, Is.EqualTo("DecimalWithFormatStringAttribute"));
+        }
     }
 }

@@ -56,6 +56,11 @@ namespace ChameleonForms.Example.Controllers
         {
             return View();
         }
+
+        public ActionResult NullList()
+        {
+            return View(new ViewModelExample {List = null});
+        }
     }
 
     public class ModelBindingViewModel

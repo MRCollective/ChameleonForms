@@ -55,6 +55,11 @@ namespace ChameleonForms.FieldGenerators
             return FieldProperty.Compile().Invoke(GetModel());
         }
 
+        public string GetPropertyName()
+        {
+            return ((MemberExpression) FieldProperty.Body).Member.Name;
+        }
+
         public TModel GetModel()
         {
             var model = (TModel) HtmlHelper.ViewData.ModelMetadata.Model;
