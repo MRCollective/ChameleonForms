@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Autofac;
 using AutofacContrib.NSubstitute;
+using ChameleonForms.Example;
 using NSubstitute;
 
 namespace ChameleonForms.Tests.Helpers
@@ -19,7 +20,9 @@ namespace ChameleonForms.Tests.Helpers
 
         public static AutoSubstitute Create(Action<ContainerBuilder> createAction)
         {
-            var autoSubstitute = createAction == null ? new AutoSubstitute() : new AutoSubstitute(createAction);
+            AutoSubstitute autoSubstitute = createAction != null
+                ? new AutoSubstitute(createAction)
+                : new AutoSubstitute();
 
             var httpContext = Substitute.For<HttpContextBase>();
             autoSubstitute.Provide(httpContext);
@@ -34,14 +37,14 @@ namespace ChameleonForms.Tests.Helpers
             request.Form.Returns(formParameters);
             var qsParameters = new NameValueCollection();
             request.QueryString.Returns(qsParameters);
-            var headers = new NameValueCollection();
-            headers.Add("Host", "localhost");
+            var headers = new NameValueCollection { { "Host", "localhost" } };
             request.Headers.Returns(headers);
             request.AppRelativeCurrentExecutionFilePath.Returns("~/");
             request.ApplicationPath.Returns("/");
             request.Url.Returns(new Uri("http://localhost/"));
             request.Cookies.Returns(new HttpCookieCollection());
             request.ServerVariables.Returns(new NameValueCollection());
+            request.UserHostAddress.Returns("127.0.0.1");
             autoSubstitute.Provide(request);
             httpContext.Request.Returns(request);
 
@@ -104,7 +107,22 @@ namespace ChameleonForms.Tests.Helpers
             };
             autoSubstitute.Provide(viewContext);
 
+            var htmlHelper = new HtmlHelper(viewContext, new ViewPage());
+            autoSubstitute.Provide(htmlHelper);
+
+            RouteTable.Routes.Clear();
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            autoSubstitute.Provide(new UrlHelper(autoSubstitute.Resolve<RequestContext>(), RouteTable.Routes));
+
             return autoSubstitute;
+        }
+
+        public static T GetController<T>(this AutoSubstitute autoSubstitute) where T : Controller
+        {
+            var controller = autoSubstitute.Resolve<T>();
+            controller.ControllerContext = autoSubstitute.Resolve<ControllerContext>();
+            controller.Url = autoSubstitute.Resolve<UrlHelper>();
+            return controller;
         }
     }
 }
