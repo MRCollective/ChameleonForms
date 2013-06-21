@@ -42,7 +42,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
         {
             return new WebDriverWait(Browser, TimeSpan.FromSeconds(1))
                 .Until(d => d.FindElements(
-                    By.CssSelector(".field-validation-error span")
+                    By.CssSelector(".field-validation-error")
                 ))
                 .Any();
         }
