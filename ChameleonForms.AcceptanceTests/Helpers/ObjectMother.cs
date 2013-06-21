@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ChameleonForms.Example.Controllers;
 
 namespace ChameleonForms.AcceptanceTests.Helpers
@@ -34,7 +35,8 @@ namespace ChameleonForms.AcceptanceTests.Helpers
                         RequiredListIds = new List<int> {1},
                         RequiredNullableListIds = new List<int?> {1},
                         OptionalListIds = null,
-                        OptionalNullableListIds = null
+                        OptionalNullableListIds = null,
+                        DateTime = new DateTime(2010, 1, 13)
                     };
                 }
             }
