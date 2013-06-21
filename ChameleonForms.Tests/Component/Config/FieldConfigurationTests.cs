@@ -38,6 +38,51 @@ namespace ChameleonForms.Tests.Component.Config
         }
 
         [Test]
+        public void Set_disabled_attribute()
+        {
+            var fc = Field.Configure()
+                .Disabled();
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
+        public void Not_set_disabled_attribute_when_false()
+        {
+            var fc = Field.Configure()
+                .Disabled(false);
+
+            Assert.That(fc.Attributes.ToHtmlString(), Is.Empty);
+        }
+
+        [Test]
+        public void Set_readonly_attribute()
+        {
+            var fc = Field.Configure()
+                .Readonly();
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
+        public void Not_set_readonly_attribute_when_false()
+        {
+            var fc = Field.Configure()
+                .Readonly(false);
+
+            Assert.That(fc.Attributes.ToHtmlString(), Is.Empty);
+        }
+
+        [Test]
+        public void Set_placeholder_attribute()
+        {
+            var fc = Field.Configure()
+                .Placeholder("Some placeholder text");
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
         public void Set_inline_label()
         {
             var fc = Field.Configure()
