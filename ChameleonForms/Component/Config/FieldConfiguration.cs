@@ -83,6 +83,25 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Cols(int numCols);
 
         /// <summary>
+        /// Sets the field to be disabled (value not submitted, can not click).
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Disabled(bool disabled = true);
+
+        /// <summary>
+        /// Sets the field to be readonly (value can not be modified).
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Readonly(bool @readonly = true);
+
+        /// <summary>
+        /// Sets a hint to the user of what can be entered in the field.
+        /// </summary>
+        /// <param name="placeholderText">The text to use for the placeholder</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Placeholder(string placeholderText);
+
+        /// <summary>
         /// Gets any text that has been set for an inline label.
         /// </summary>
         string InlineLabelText { get; }
@@ -326,6 +345,26 @@ namespace ChameleonForms.Component.Config
         public IFieldConfiguration Cols(int numCols)
         {
             Attr("cols", numCols);
+            return this;
+        }
+
+        public IFieldConfiguration Disabled(bool disabled = true)
+        {
+            if (disabled)
+                Attr("disabled", "disabled");
+            return this;
+        }
+
+        public IFieldConfiguration Readonly(bool @readonly = true)
+        {
+            if (@readonly)
+                Attr("readonly", "readonly");
+            return this;
+        }
+
+        public IFieldConfiguration Placeholder(string placeholderText)
+        {
+            Attr("placeholder", placeholderText);
             return this;
         }
 
