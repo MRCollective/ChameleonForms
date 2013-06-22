@@ -28,6 +28,15 @@ namespace ChameleonForms.Tests.Component.Config
         }
 
         [Test]
+        public void Set_id_attribute()
+        {
+            var fc = Field.Configure()
+                .Id("DifferentId");
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
         public void Set_textarea_attributes()
         {
             var fc = Field.Configure()
