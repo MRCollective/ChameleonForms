@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
@@ -32,7 +33,12 @@ namespace ChameleonForms.FieldGenerators
 
         public IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
         {
-            return HtmlHelper.LabelFor(FieldProperty, fieldConfiguration == null ? null : fieldConfiguration.LabelText);
+            var htmlAttributes = fieldConfiguration != null && fieldConfiguration.Attributes.Attributes.ContainsKey("id")
+                ? new Dictionary<string, object> { { "for", fieldConfiguration.Attributes.Attributes["id"] } }
+                : null;
+            var labelText = fieldConfiguration == null ? null : fieldConfiguration.LabelText;
+
+            return HtmlHelper.LabelFor(FieldProperty, labelText, htmlAttributes);
         }
 
         public IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)
