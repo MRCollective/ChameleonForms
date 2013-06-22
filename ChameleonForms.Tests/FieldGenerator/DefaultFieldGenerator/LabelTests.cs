@@ -47,6 +47,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Use_correct_html_for_field_label_with_overridden_id_2()
+        {
+            var g = Arrange(m => m.RequiredString);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().Id("DifferentId"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_field_validation()
         {
             var g = Arrange(m => m.RequiredString);

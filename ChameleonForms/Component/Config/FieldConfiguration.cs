@@ -23,6 +23,13 @@ namespace ChameleonForms.Component.Config
         HtmlAttributes Attributes { get; set; }
 
         /// <summary>
+        /// Override the default id for the field.
+        /// </summary>
+        /// <param name="id">The text to use for the id</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Id(string id);
+
+        /// <summary>
         /// Adds a CSS class (or a number of CSS classes) to the attributes.
         /// </summary>
         /// <param name="class">The CSS class(es) to add</param>
@@ -299,6 +306,12 @@ namespace ChameleonForms.Component.Config
 
         public dynamic Bag { get; private set; }
         public HtmlAttributes Attributes { get; set; }
+
+        public IFieldConfiguration Id(string id)
+        {
+            Attributes.Attr("id", id);
+            return this;
+        }
 
         public IFieldConfiguration AddClass(string @class)
         {
