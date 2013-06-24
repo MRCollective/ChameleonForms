@@ -118,6 +118,7 @@
     <Compile Include="Component\SectionTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGeneratorTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\BooleanTests.cs" />
+    <Compile Include="FieldGenerator\DefaultFieldGenerator\DateTimeTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\EnumTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\LabelTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\InputTests.cs" />

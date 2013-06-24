@@ -31,6 +31,15 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         public Decimal Decimal { get; set; }
 
+        public DateTime DateTime { get; set; }
+        public DateTime? NullableDateTime { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateTimeWithFormat { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? NullableDateTimeWithFormat { get; set; }
+
         public TestEnum RequiredEnum { get; set; }
 
         [Required]
