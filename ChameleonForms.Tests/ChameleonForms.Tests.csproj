@@ -127,6 +127,7 @@
     <Compile Include="Helpers\AutoSubstituteHelper.cs" />
     <Compile Include="HumanizedLabelsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\fixtures\DateTimeValidationFixtures.js" />
     <Compile Include="Templates\DefaultFormTemplateTests.cs" />
     <Compile Include="Templates\HtmlCreatorTests.cs" />
     <Compile Include="Templates\HtmlAttributesTests.cs" />
@@ -166,6 +167,7 @@
     <Content Include="Scripts\lib\jasmine-1.3.1\jasmine-html.js" />
     <Content Include="Scripts\lib\jasmine-1.3.1\jasmine.css" />
     <Content Include="Scripts\lib\jasmine-1.3.1\jasmine.js" />
+    <Content Include="Scripts\lib\jasmine.using.js" />
     <Content Include="Scripts\SpecRunner.html" />
     <Content Include="Scripts\spec\DateTimeValidationSpec.js" />
   </ItemGroup>
