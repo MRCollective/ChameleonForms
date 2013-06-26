@@ -19,7 +19,7 @@ describe("When validating a date field", function () {
         return jQuery.validator.methods.date.call(validatorContext, value, element);
     };
 
-    describe("input with no value", function () {
+    describe("that has no value", function () {
         
         beforeEach(function() {
             spyOn(validatorContext, "optional").andReturn(true);
@@ -30,7 +30,7 @@ describe("When validating a date field", function () {
         });
     });
 
-    describe("input with value", function () {
+    describe("that has a value", function () {
 
         var formatString;
 
@@ -43,7 +43,7 @@ describe("When validating a date field", function () {
             });
         });
 
-        describe("input with no format", function () {
+        describe("with no format", function () {
 
             beforeEach(function() {
                 formatString = "";
@@ -54,7 +54,7 @@ describe("When validating a date field", function () {
             });
             
             it("should return false if the date is a JavaScript parsable date string for an invalid date", function () {
-                expect(invoke("13/12/2000")).toBe(false);
+                expect(invoke("2000-13-12")).toBe(false);
             });
             
             it("should return false if the date is not a JavaScript parsable date string for an invalid date", function () {
@@ -62,7 +62,7 @@ describe("When validating a date field", function () {
             });
         });
         
-        describe("input with date-only format", function () {
+        describe("against a date-only format", function () {
             using("valid format and value", ObjectMother.DateTimeFormats.Valid, function (format, value) {
                 it("should return true", function () {
                     formatString = format;
@@ -70,7 +70,7 @@ describe("When validating a date field", function () {
                 });
             });
             
-            using("invalid format and value", ObjectMother.DateTimeFormats.Invalid, function (format, value) {
+            using("valid format and invalid value", ObjectMother.DateTimeFormats.Invalid, function (format, value) {
                 it("should return false", function () {
                     formatString = format;
                     expect(invoke(value)).toBe(false);

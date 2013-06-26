@@ -62,7 +62,7 @@
         case "MM-dd-yyyy":
             dateParser = getDateParser(/^(\d{2})-(\d{2})-(\d{4})$/, 2, 1, 3);
             break;
-        case "MM/ddyy":
+        case "MM/dd/yy":
             dateParser = getDateParser(/^(\d{2})\/(\d{2})\/(\d{2})$/, 2, 1, 3);
             break;
         case "MM-dd-yy":
@@ -88,15 +88,18 @@
     if (match == null)
         return false;
 
-    var year = match[dateParser.yearIndex]*1;
+    var year = match[dateParser.yearIndex] * 1;
+    var month = match[dateParser.monthIndex] * 1;
+    var day = match[dateParser.dayIndex] * 1;
     if (year < 50)
         year += 2000;
     if (year < 100)
         year += 1900;
 
-    var date = new Date(year, match[dateParser.monthIndex]*1-1, match[dateParser.dayIndex]*1);
+    var date = new Date(year, month-1, day);
 
-    if (!/Invalid|NaN/.test(date.toString()))
+    // http://stackoverflow.com/questions/8098202/javascript-detecting-valid-dates
+    if (date.getFullYear() != year || date.getMonth()+1 != month || date.getDate() != day)
         return false;
 
     return true;
