@@ -61,8 +61,42 @@ describe("When validating a date field", function () {
                 expect(invoke("notadate")).toBe(false);
             });
         });
+
+        // Multiple spaces not currently supported so always return true to allow the submission
+        describe("against a format with multiple spaces", function() {
+            it("should return true", function () {
+                formatString = "d/M/yyyy HH mm ss";
+                expect(invoke("asdf")).toBe(true);
+            });
+        });
         
         describe("against a date-only format", function () {
+            using("valid format and value", ObjectMother.DateFormats.Valid, function (format, value) {
+                it("should return true", function () {
+                    formatString = format;
+                    expect(invoke(value)).toBe(true);
+                });
+            });
+            
+            using("valid format and invalid value", ObjectMother.DateFormats.Invalid, function (format, value) {
+                it("should return false", function () {
+                    formatString = format;
+                    expect(invoke(value)).toBe(false);
+                });
+            });
+
+            it("should return false if the value has a space in it", function() {
+                formatString = "d/M/yyyy";
+                expect(invoke("12/12/2000 ")).toBe(false);
+            });
+            
+            it("should return true if the format is unknown", function () {
+                formatString = "asdf";
+                expect(invoke("asdf")).toBe(true);
+            });
+        });
+
+        describe("against a date and time format", function () {
             using("valid format and value", ObjectMother.DateTimeFormats.Valid, function (format, value) {
                 it("should return true", function () {
                     formatString = format;
@@ -70,11 +104,35 @@ describe("When validating a date field", function () {
                 });
             });
             
-            using("valid format and invalid value", ObjectMother.DateTimeFormats.Invalid, function (format, value) {
+            using("valid format and invalid date", ObjectMother.DateTimeFormats.InvalidDate, function (format, value) {
                 it("should return false", function () {
                     formatString = format;
                     expect(invoke(value)).toBe(false);
                 });
+            });
+            
+            using("valid format and invalid time", ObjectMother.DateTimeFormats.InvalidTime, function (format, value) {
+                it("should return false", function () {
+                    formatString = format;
+                    expect(invoke(value)).toBe(false);
+                });
+            });
+            
+            using("valid format and invalid date and time", ObjectMother.DateTimeFormats.InvalidDateAndTime, function (format, value) {
+                it("should return false", function () {
+                    formatString = format;
+                    expect(invoke(value)).toBe(false);
+                });
+            });
+            
+            it("should return false if the value doesn't have a space in it", function () {
+                formatString = "d/M/yyyy HH:mm:ss";
+                expect(invoke("12/12/2000")).toBe(false);
+            });
+            
+            it("should return true if the format is unknown", function () {
+                formatString = "asdf asdf";
+                expect(invoke("asdf asdf")).toBe(true);
             });
         });
     });

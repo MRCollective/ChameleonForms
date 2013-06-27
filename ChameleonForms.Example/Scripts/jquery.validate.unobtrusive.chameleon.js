@@ -97,20 +97,91 @@
         return true;
     };
 
+    var isValidTime = function (value, format) {
+
+        var getTimeParser = function (regex, hourIndex, minuteIndex, secondIndex, is12HourTime) {
+            return {
+                regex: regex,
+                hourIndex: hourIndex,
+                minuteIndex: minuteIndex,
+                secondIndex: secondIndex,
+                is12HourTime: is12HourTime
+            };
+        };
+        
+        var timeParser;
+        switch (format) {
+            case "h:mmtt":
+                timeParser = getTimeParser(/(\d{1,2}):(\d{2})(am|pm)/, 1, 2, -1, true);
+                break;
+            case "h:mm:sstt":
+                timeParser = getTimeParser(/(\d{1,2}):(\d{2}):(\d{2})(am|pm)/, 1, 2, 3, true);
+                break;
+            case "hh:mmtt":
+                timeParser = getTimeParser(/(\d{2}):(\d{2})(am|pm)/, 1, 2, -1, true);
+                break;
+            case "hh:mm:sstt":
+                timeParser = getTimeParser(/(\d{2}):(\d{2}):(\d{2})(am|pm)/, 1, 2, 3, true);
+                break;
+            case "H:mm":
+                timeParser = getTimeParser(/(\d{1,2}):(\d{2})/, 1, 2, -1, false);
+                break;
+            case "H:mm:ss":
+                timeParser = getTimeParser(/(\d{1,2}):(\d{2}):(\d{2})/, 1, 2, 3, false);
+                break;
+            case "HH:mm":
+                timeParser = getTimeParser(/(\d{2}):(\d{2})/, 1, 2, -1, false);
+                break;
+            case "HH:mm:ss":
+                timeParser = getTimeParser(/(\d{2}):(\d{2}):(\d{2})/, 1, 2, 3, false);
+                break;
+            default:
+                return true;
+        }
+
+        var match = value.match(timeParser.regex);
+        if (match == null)
+            return false;
+        
+        var hour = match[timeParser.hourIndex] * 1;
+        var minute = match[timeParser.minuteIndex] * 1;
+        var is12Hour = timeParser.is12HourTime;
+
+        if (hour < 1)
+            return false;
+        if (is12Hour && hour > 12)
+            return false;
+        if (!is12Hour && hour > 23)
+            return false;
+        if (minute < 0 || minute > 59)
+            return false;
+        if (timeParser.secondIndex > 0) {
+            var second = match[timeParser.secondIndex] * 1;
+            if (second < 0 || second > 59)
+                return false;
+        }
+
+        return true;
+    };
+
     jQuery.validator.methods.date = function(value, element) {
         if (this.optional(element))
             return true;
 
         var format = jQuery(element).data("val-format");
-        var formatSplitBySpaces = format.split(" ");
-        if (format == "" || formatSplitBySpaces.length > 2)
+        if (format == "")
             return !/Invalid|NaN/.test(new Date(value).toString());
+        
+        var formatSplitBySpaces = format.split(" ");
+        if (formatSplitBySpaces.length > 2)
+            return true;
 
         var valueSplitBySpaces = value.split(" ");
         if (formatSplitBySpaces.length != valueSplitBySpaces.length)
             return false;
 
-        return isValidDate(valueSplitBySpaces[0], formatSplitBySpaces[0]);
+        return isValidDate(valueSplitBySpaces[0], formatSplitBySpaces[0])
+            && (formatSplitBySpaces.length == 1 || isValidTime(valueSplitBySpaces[1], formatSplitBySpaces[1]));
     };
 
 })(jQuery);
