@@ -112,16 +112,16 @@
         var timeParser;
         switch (format) {
             case "h:mmtt":
-                timeParser = getTimeParser(/(\d{1,2}):(\d{2})(am|pm)/, 1, 2, -1, true);
+                timeParser = getTimeParser(/(\d{1,2}):(\d{2})(am|pm)/i, 1, 2, -1, true);
                 break;
             case "h:mm:sstt":
-                timeParser = getTimeParser(/(\d{1,2}):(\d{2}):(\d{2})(am|pm)/, 1, 2, 3, true);
+                timeParser = getTimeParser(/(\d{1,2}):(\d{2}):(\d{2})(am|pm)/i, 1, 2, 3, true);
                 break;
             case "hh:mmtt":
-                timeParser = getTimeParser(/(\d{2}):(\d{2})(am|pm)/, 1, 2, -1, true);
+                timeParser = getTimeParser(/(\d{2}):(\d{2})(am|pm)/i, 1, 2, -1, true);
                 break;
             case "hh:mm:sstt":
-                timeParser = getTimeParser(/(\d{2}):(\d{2}):(\d{2})(am|pm)/, 1, 2, 3, true);
+                timeParser = getTimeParser(/(\d{2}):(\d{2}):(\d{2})(am|pm)/i, 1, 2, 3, true);
                 break;
             case "H:mm":
                 timeParser = getTimeParser(/(\d{1,2}):(\d{2})/, 1, 2, -1, false);

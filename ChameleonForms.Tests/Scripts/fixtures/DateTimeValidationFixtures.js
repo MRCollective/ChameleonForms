@@ -2,10 +2,10 @@
 
 ObjectMother.TimeFormats = {
     Valid: [
-        ["h:mmtt", "1:59pm"],
+        ["h:mmtt", "1:59am"],
         ["h:mm:sstt", "1:59:59pm"],
-        ["hh:mmtt", "01:59pm"],
-        ["hh:mm:sstt", "01:59:59pm"],
+        ["hh:mmtt", "01:59AM"],
+        ["hh:mm:sstt", "01:59:59PM"],
         ["H:mm", "13:59"],
         ["H:mm:ss", "13:59:59"],
         ["HH:mm", "13:59"],
