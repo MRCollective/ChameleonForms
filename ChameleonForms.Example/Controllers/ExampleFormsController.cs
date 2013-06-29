@@ -90,7 +90,7 @@ namespace ChameleonForms.Example.Controllers
         public int RequiredInt { get; set; }
         public int? OptionalInt { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:sstt}", ApplyFormatInEditMode = true)]
         public DateTime DateTime { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? NullableDateTime { get; set; }

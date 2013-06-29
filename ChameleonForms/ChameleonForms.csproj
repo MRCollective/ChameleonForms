@@ -89,6 +89,7 @@
     <Compile Include="Component\Section.cs" />
     <Compile Include="Enums\EncType.cs" />
     <Compile Include="Enums\TextInputType.cs" />
+    <Compile Include="FieldGenerators\DateTimeHandler.cs" />
     <Compile Include="FieldGenerators\DefaultFieldGenerator.cs" />
     <Compile Include="FieldGenerators\Handlers\DefaultHandler.cs" />
     <Compile Include="FieldGenerators\Handlers\EnumListHandler.cs">
