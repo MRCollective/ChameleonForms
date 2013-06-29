@@ -120,7 +120,7 @@
     <Compile Include="FieldGenerator\DefaultFieldGenerator\BooleanTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\DateTimeTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\EnumTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\LabelTests.cs" />
+    <Compile Include="FieldGenerator\DefaultFieldGenerator\FieldGeneratorTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\InputTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\ListTests.cs" />
     <Compile Include="Form\FormIntegrationTests.cs" />

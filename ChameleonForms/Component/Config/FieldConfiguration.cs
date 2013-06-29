@@ -257,6 +257,22 @@ namespace ChameleonForms.Component.Config
         /// A list of HTML to be appended to the form field in ltr order.
         /// </summary>
         IEnumerable<IHtmlString> AppendedHtml { get; }
+
+        /// <summary>
+        /// Override the HTML of the form field.
+        /// 
+        /// This gives you ultimate flexibility with your field HTML when it's
+        /// not quite what you want, but you still want the form template
+        /// (e.g. label, surrounding html and validation message).
+        /// </summary>
+        /// <param name="html">The HTML for the field</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration OverrideFieldHtml(IHtmlString html);
+
+        /// <summary>
+        /// The HTML to be used as the field html.
+        /// </summary>
+        IHtmlString FieldHtml { get; }
         
         /// <summary>
         /// Uses the given format string when outputting the field value.
@@ -290,6 +306,7 @@ namespace ChameleonForms.Component.Config
         private Func<IHtmlString> _field;
         private readonly List<IHtmlString> _prependedHtml = new List<IHtmlString>();
         private readonly List<IHtmlString> _appendedHtml = new List<IHtmlString>();
+        private IHtmlString _fieldHtml;
 
         /// <summary>
         /// Constructs a field configuration.
@@ -494,6 +511,14 @@ namespace ChameleonForms.Component.Config
         }
 
         public bool EmptyItemHidden { get; private set; }
+
+        public IFieldConfiguration OverrideFieldHtml(IHtmlString html)
+        {
+            _fieldHtml = html;
+            return this;
+        }
+
+        public IHtmlString FieldHtml { get { return _fieldHtml; } }
 
         public void SetField(Func<IHtmlString> field)
         {
