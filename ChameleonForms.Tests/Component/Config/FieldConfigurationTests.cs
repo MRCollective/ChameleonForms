@@ -284,6 +284,15 @@ namespace ChameleonForms.Tests.Component.Config
         }
 
         [Test]
+        public void Return_html_for_field_html_if_one_set()
+        {
+            var x = new HtmlString("");
+            var fc = Field.Configure().OverrideFieldHtml(x);
+
+            Assert.That(fc.FieldHtml, Is.EqualTo(x));
+        }
+
+        [Test]
         public void Return_null_if_no_format_string_set()
         {
             var fc = Field.Configure();
