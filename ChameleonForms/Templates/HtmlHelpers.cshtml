@@ -52,20 +52,20 @@
     if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="hint">@fieldConfiguration.Hint</div>}
 }
 
-@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldConfiguration fieldConfiguration) {
-@:            <dt>@labelHtml</dt>
+@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata) {
+@:            <dt>@labelHtml@(new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? " <em class=\"required\">*</em>" : ""))</dt>
 @:            <dd>
 @:                @GetPrependedHtml(fieldConfiguration)@elementHtml@GetAppendedHtml(fieldConfiguration)@GetHint(fieldConfiguration) @validationHtml
 }
 
 @helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration) {
-@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration)
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata)
 @:            </dd>
 }
 
 @helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
 {
-@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration)
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata)
 @:                <dl>
 }
 

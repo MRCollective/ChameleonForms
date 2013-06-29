@@ -372,13 +372,13 @@ WriteLiteralTo(__razor_helper_writer, "</div>");
 #line hidden
 
 #line 55 "..\..\Templates\HtmlHelpers.cshtml"
-public static System.Web.WebPages.HelperResult BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldConfiguration fieldConfiguration) {
+public static System.Web.WebPages.HelperResult BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata) {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 55 "..\..\Templates\HtmlHelpers.cshtml"
-                                                                                                                                                
+                                                                                                                                                                             
 
 
 #line default
@@ -388,6 +388,13 @@ WriteLiteralTo(__razor_helper_writer, "            <dt>");
 
 #line 56 "..\..\Templates\HtmlHelpers.cshtml"
 WriteTo(__razor_helper_writer, labelHtml);
+
+
+#line default
+#line hidden
+
+#line 56 "..\..\Templates\HtmlHelpers.cshtml"
+WriteTo(__razor_helper_writer, new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? " <em class=\"required\">*</em>" : ""));
 
 
 #line default
@@ -464,14 +471,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 
 #line 62 "..\..\Templates\HtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration));
+WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata));
 
 
 #line default
 #line hidden
 
 #line 62 "..\..\Templates\HtmlHelpers.cshtml"
-                                                                               
+                                                                                              
 
 
 #line default
@@ -506,14 +513,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 
 #line 68 "..\..\Templates\HtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration));
+WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata));
 
 
 #line default
 #line hidden
 
 #line 68 "..\..\Templates\HtmlHelpers.cshtml"
-                                                                               
+                                                                                              
 
 
 #line default
