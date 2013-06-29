@@ -27,6 +27,7 @@
         {
             @ss.FieldFor(m => m.FileUpload).Attr("data-attr1", "value")
         }
+        @s.FieldFor(m => m.RequiredStringField).OverrideFieldHtml(new MvcHtmlString("Custom html <b>she-yeah</b>!"))
         @s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
         @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label")
         @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
