@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 		logo.png = logo.png
 		README.md = README.md
+		web.config.transform = web.config.transform
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.AcceptanceTests", "ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj", "{67A08E34-2498-404D-9869-E13F4F496B3E}"
