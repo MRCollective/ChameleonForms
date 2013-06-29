@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
 {
     internal interface IModelFieldType
     {
+        string Format { get; }
         object GetValueFromString(string stringValue);
         object GetValueFromStrings(IEnumerable<string> stringValues);
         object Cast(IEnumerable<object> values);
@@ -19,10 +21,12 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
     internal class ModelFieldType : IModelFieldType
     {
         private readonly Type _fieldType;
+        public string Format { get; private set; }
 
-        public ModelFieldType(Type fieldType)
+        public ModelFieldType(Type fieldType, string format)
         {
             _fieldType = fieldType;
+            Format = format.Replace("{0:", "").Replace("}", "");
         }
 
         public object GetValueFromString(string stringValue)
@@ -62,6 +66,10 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
             if (string.IsNullOrEmpty(value))
                 return DefaultValue;
             var underlyingType = UnderlyingType;
+
+            if (underlyingType == typeof (DateTime) && !string.IsNullOrEmpty(Format))
+                return DateTime.ParseExact(value, Format, new DateTimeFormatInfo(), DateTimeStyles.None);
+
             return underlyingType.IsEnum
                 ? Enum.Parse(underlyingType, value)
                 : Convert.ChangeType(value, underlyingType);

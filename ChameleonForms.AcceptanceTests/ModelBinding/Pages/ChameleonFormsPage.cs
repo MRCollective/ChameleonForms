@@ -21,10 +21,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
                     continue;
 
                 var elements = ((RemoteWebDriver)Browser).FindElementsByName(property.Name);
-                var displayFormatAttr = property.GetCustomAttributes(typeof (DisplayFormatAttribute), false);
-                var format = "{0}";
-                if (displayFormatAttr.Any())
-                    format = displayFormatAttr.Cast<DisplayFormatAttribute>().First().DataFormatString;
+                var format = GetFormatStringForProperty(property);
                 FieldFactory.Create(elements).Set(new ModelFieldValue(property.GetValue(model, null), format));
             }
         }
@@ -38,7 +35,8 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
                     continue;
 
                 var elements = ((RemoteWebDriver)Browser).FindElementsByName(property.Name);
-                property.SetValue(vm, FieldFactory.Create(elements).Get(new ModelFieldType(property.PropertyType)), null);
+                var format = GetFormatStringForProperty(property);
+                property.SetValue(vm, FieldFactory.Create(elements).Get(new ModelFieldType(property.PropertyType, format)), null);
             }
             return vm;
         }
@@ -50,6 +48,15 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
                     By.CssSelector(".field-validation-error")
                 ))
                 .Any();
+        }
+
+        private static string GetFormatStringForProperty(PropertyInfo property)
+        {
+            var displayFormatAttr = property.GetCustomAttributes(typeof(DisplayFormatAttribute), false);
+            var format = "{0}";
+            if (displayFormatAttr.Any())
+                format = displayFormatAttr.Cast<DisplayFormatAttribute>().First().DataFormatString;
+            return format;
         }
     }
 
