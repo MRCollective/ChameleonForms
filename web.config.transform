@@ -1,0 +1,11 @@
+<configuration>
+  <system.web.webPages.razor>
+    <pages>
+      <namespaces>
+        <add namespace="ChameleonForms" />
+        <add namespace="ChameleonForms.Component" />
+        <add namespace="ChameleonForms.Enums" />
+      </namespaces>
+    </pages>
+  </system.web.webPages.razor>
+</configuration>
