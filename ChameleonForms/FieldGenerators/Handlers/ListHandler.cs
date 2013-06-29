@@ -19,8 +19,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             var model = FieldGenerator.GetModel();
 
             if (!FieldGenerator.Metadata.AdditionalValues.ContainsKey(ExistsInAttribute.ExistsKey) ||
-                    FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? != true ||
-                    model == null)
+                    FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? != true)
                 return HandleAction.Continue;
 
             // There is a bug in the unobtrusive validation for numeric fields that are a radio button
@@ -38,7 +37,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
         private IEnumerable<SelectListItem> GetSelectList(TModel model)
         {
             var propertyName = (string) FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey];
-            var listProperty = model.GetType().GetProperty(propertyName);
+            var listProperty = typeof(TModel).GetProperty(propertyName);
+            if (model == null)
+                throw new ModelNullException(FieldGenerator.GetPropertyName());
             var listValue = (IEnumerable)listProperty.GetValue(model, null);
             if (listValue == null)
                 throw new ListPropertyNullException(propertyName, FieldGenerator.GetPropertyName());
@@ -70,6 +71,18 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// </summary>
         /// <param name="listPropertyName">The name of the list property that is null</param>
         /// <param name="propertyName">The name of the property that had the [ExistsIn] pointing to the list property</param>
-        public ListPropertyNullException(string listPropertyName, string propertyName) : base(string.Format("The list property ({0}) specified in the [ExistsIn] on {1} is null", listPropertyName, propertyName)) {}
+        public ListPropertyNullException(string listPropertyName, string propertyName) : base(string.Format("The list property ({0}) specified in the [ExistsIn] on {1} is null.", listPropertyName, propertyName)) {}
+    }
+
+    /// <summary>
+    /// Exception that denotes the model in the page is null when it was needed.
+    /// </summary>
+    public class ModelNullException : Exception
+    {
+        /// <summary>
+        /// Creates a <see cref="ModelNullException"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that had the [ExistsIn] pointing to the list property</param>
+        public ModelNullException(string propertyName) : base(string.Format("The page model is null; please specify a model because it's needed to generate the list for property {0}.", propertyName)) { }
     }
 }

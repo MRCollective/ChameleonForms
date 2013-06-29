@@ -3,15 +3,15 @@
 @model ChameleonForms.Example.Controllers.ViewModelExample
 
 @{
-    ViewBag.Title = "Null Model";
+    ViewBag.Title = "Null Model With List";
 }
 
-<h1>Null Model</h1>
+<h1>Null Model With List</h1>
 
 @using (var f = Html.BeginChameleonForm())
 {
     using (var s = f.BeginSection("Test"))
     {
-        @s.FieldFor(m => m.Boolean)
+        @s.FieldFor(m => m.ListId)
     }
 }
