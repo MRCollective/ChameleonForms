@@ -1,15 +1,12 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
-using ChameleonForms.FieldGenerators;
 using ChameleonForms.Tests.FieldGenerator;
 using ChameleonForms.Tests.Helpers;
 using NUnit.Framework;
 using ChameleonForms.Component;
 
-namespace ChameleonForms.Tests
+namespace ChameleonForms.Tests.Form
 {
     [TestFixture]
     [UseReporter(typeof(DiffReporter))]
@@ -40,6 +37,36 @@ namespace ChameleonForms.Tests
             var form = _h.BeginChameleonForm();
 
             var html = form.LabelFor(m => m.Decimal).Label("LABEL").ToHtmlString();
+
+            HtmlApprovals.VerifyHtml(html);
+        }
+
+        [Test]
+        public void Output_required_field_using_default_template()
+        {
+            string html;
+            using (var f = _h.BeginChameleonForm())
+            {
+                using (var s = f.BeginSection("Section"))
+                {
+                    html = s.FieldFor(m => m.Decimal).AddClass("a-class").Label("LABEL").ToHtmlString();
+                }
+            }
+
+            HtmlApprovals.VerifyHtml(html);
+        }
+
+        [Test]
+        public void Output_optional_field_using_default_template()
+        {
+            string html;
+            using (var f = _h.BeginChameleonForm())
+            {
+                using (var s = f.BeginSection("Section"))
+                {
+                    html = s.FieldFor(m => m.NullableDateTime).ToHtmlString();
+                }
+            }
 
             HtmlApprovals.VerifyHtml(html);
         }
