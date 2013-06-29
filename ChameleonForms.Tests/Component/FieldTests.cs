@@ -21,6 +21,7 @@ namespace ChameleonForms.Tests.Component
     public class FieldShould
     {
         #region Setup
+        private const string FieldId = "FieldId";
         private readonly IHtmlString _beginHtml = new HtmlString("b");
         private readonly IHtmlString _endHtml = new HtmlString("e");
         private readonly IHtmlString _html = new HtmlString("h");
@@ -38,8 +39,8 @@ namespace ChameleonForms.Tests.Component
             _fc = Substitute.For<IFieldConfiguration>();
 
             _f = Substitute.For<IForm<TestFieldViewModel, IFormTemplate>>();
-            _f.Template.BeginField(_label, _field, _validation, _metadata, _fc).Returns(_beginHtml);
-            _f.Template.Field(_label, _field, _validation, _metadata, _fc).Returns(_html);
+            _f.Template.BeginField(_label, _field, _validation, _metadata, _fc, Arg.Any<bool>()).Returns(_beginHtml);
+            _f.Template.Field(_label, _field, _validation, _metadata, _fc, Arg.Any<bool>()).Returns(_html);
             _f.Template.EndField().Returns(_endHtml);
 
             _g = Substitute.For<IFieldGenerator>();
@@ -47,6 +48,7 @@ namespace ChameleonForms.Tests.Component
             _g.GetFieldHtml(_fc).Returns(_field);
             _g.GetValidationHtml(_fc).Returns(_validation);
             _g.Metadata.Returns(_metadata);
+            _g.GetFieldId().Returns(FieldId);
 
             var autoSubstitute = AutoSubstituteContainer.Create();
             var helper = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
@@ -59,6 +61,56 @@ namespace ChameleonForms.Tests.Component
             return new Field<TestFieldViewModel, IFormTemplate>(_f, isParent, _g, _fc);
         }
         #endregion
+
+        [Test]
+        public void Passthrough_true_to_template_for_valid_child_field()
+        {
+            var f = Arrange(false);
+
+            f.Begin();
+
+            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>(),
+                true
+            );
+        }
+
+        [Test]
+        public void Passthrough_false_to_template_for_valid_child_field()
+        {
+            var f = Arrange(false);
+            _f.HtmlHelper.ViewData.ModelState.AddModelError(FieldId, "Error");
+
+            f.Begin();
+
+            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>(),
+                false
+            );
+        }
+
+        [Test]
+        public void Passthrough_true_to_template_for_valid_parent_field()
+        {
+            var f = Arrange(true);
+
+            f.Begin();
+
+            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>(),
+                true
+            );
+        }
+
+        [Test]
+        public void Passthrough_false_to_template_for_valid_parent_field()
+        {
+            var f = Arrange(true);
+            _f.HtmlHelper.ViewData.ModelState.AddModelError(FieldId, "Error");
+
+            f.Begin();
+
+            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>(),
+                false
+            );
+        }
 
         [Test]
         public void Use_field_from_template_for_begin_html()
@@ -122,7 +174,7 @@ namespace ChameleonForms.Tests.Component
         {
             var h = new HtmlString("");
             var s = new Section<TestFieldViewModel, IFormTemplate>(_f, new HtmlString(""), false);
-            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>()).Returns(h);
+            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>(), Arg.Any<bool>()).Returns(h);
             _f.ClearReceivedCalls();
 
             var f = s.BeginFieldFor(m => m.SomeProperty);

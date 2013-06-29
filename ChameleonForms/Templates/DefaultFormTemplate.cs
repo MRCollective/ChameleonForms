@@ -40,12 +40,12 @@ namespace ChameleonForms.Templates
             return HtmlHelpers.EndNestedSection();
         }
 
-        public virtual IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
+        public virtual IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration, bool isValid)
         {
             return HtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
         }
 
-        public virtual IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
+        public virtual IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration, bool isValid)
         {
             return HtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
         }
