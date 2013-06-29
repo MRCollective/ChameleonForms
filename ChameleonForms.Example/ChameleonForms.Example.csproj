@@ -128,6 +128,7 @@
     <Content Include="Views\ExampleForms\ModelBindingExample.cshtml" />
     <Content Include="Views\ExampleForms\NullModel.cshtml" />
     <Content Include="Views\ExampleForms\NullList.cshtml" />
+    <Content Include="Views\ExampleForms\NullModelWithList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
