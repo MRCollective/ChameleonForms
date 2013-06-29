@@ -1,6 +1,7 @@
 ﻿using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
+using ChameleonForms.Tests.Helpers;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
@@ -10,11 +11,14 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         [Test]
         public void Use_correct_html_for_datetime_field()
         {
-            var g = Arrange(m => m.DateTime);
+            using (ChangeCulture.To("en-AU"))
+            {
+                var g = Arrange(m => m.DateTime);
 
-            var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
+                var result = g.GetFieldHtml(new FieldConfiguration { Attributes = new HtmlAttributes(data_attr => "value") });
 
-            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+                HtmlApprovals.VerifyHtml(result.ToHtmlString());
+            }
         }
 
         [Test]
