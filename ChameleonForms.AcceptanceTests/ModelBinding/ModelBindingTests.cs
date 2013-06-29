@@ -31,7 +31,6 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
                 .Submit(enteredViewModel);
 
             Assert.That(page.GetFormValues(), IsSame.ViewModelAs(enteredViewModel));
-            // This next assertion currently fails due to some tricky interaction with the default validation in MVC
             Assert.That(page.HasValidationErrors(), Is.False, "There are validation errors on the page");
         }
     }

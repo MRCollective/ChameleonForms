@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using ChameleonForms.Attributes;
@@ -34,8 +35,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
         private IEnumerable<SelectListItem> GetSelectList()
         {
             var model = FieldGenerator.GetModel();
-            var listProperty = model.GetType().GetProperty((string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey]);
+            var propertyName = (string) FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey];
+            var listProperty = model.GetType().GetProperty(propertyName);
             var listValue = (IEnumerable)listProperty.GetValue(model, null);
+            if (listValue == null)
+                throw new ListPropertyNullException(propertyName, FieldGenerator.GetPropertyName());
             return GetSelectListUsingPropertyReflection(
                 listValue,
                 (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.NameKey],
@@ -52,5 +56,18 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 yield return new SelectListItem { Selected = IsSelected(value), Value = value.ToString(), Text = name.ToString() };
             }
         }
+    }
+    
+    /// <summary>
+    /// Exception for when the list property for an [ExistsIn] is null.
+    /// </summary>
+    public class ListPropertyNullException : Exception
+    {
+        /// <summary>
+        /// Creates a <see cref="ListPropertyNullException"/>.
+        /// </summary>
+        /// <param name="listPropertyName">The name of the list property that is null</param>
+        /// <param name="propertyName">The name of the property that had the [ExistsIn] pointing to the list property</param>
+        public ListPropertyNullException(string listPropertyName, string propertyName) : base(string.Format("The list property ({0}) specified in the [ExistsIn] on {1} is null", listPropertyName, propertyName)) {}
     }
 }

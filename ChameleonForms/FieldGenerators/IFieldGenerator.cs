@@ -28,6 +28,12 @@ namespace ChameleonForms.FieldGenerators
         T GetValue();
 
         /// <summary>
+        /// Returns the name of the property behind the field being generated.
+        /// </summary>
+        /// <returns>The property name</returns>
+        string GetPropertyName();
+
+        /// <summary>
         /// Returns a <see cref="TModel"/> with the current values for the form.
         /// </summary>
         /// <returns>The current model</returns>

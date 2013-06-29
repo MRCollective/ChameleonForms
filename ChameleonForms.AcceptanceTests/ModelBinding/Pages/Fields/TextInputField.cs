@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using TestStack.Seleno.Extensions;
 
 namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
 {

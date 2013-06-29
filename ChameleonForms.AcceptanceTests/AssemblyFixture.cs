@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using TestStack.Seleno.Configuration;
 
 namespace ChameleonForms.AcceptanceTests
@@ -9,7 +10,9 @@ namespace ChameleonForms.AcceptanceTests
         [SetUp]
         public void SetUp()
         {
-            SelenoHost.Run("ChameleonForms.Example", 12345);
+            SelenoHost.Run("ChameleonForms.Example", 12345, c => c
+                .WithMinimumWaitTimeoutOf(TimeSpan.FromSeconds(1))
+            );
         }
     }
 }
