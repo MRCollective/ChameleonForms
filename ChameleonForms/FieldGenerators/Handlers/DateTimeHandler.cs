@@ -1,9 +1,8 @@
 ﻿using System;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
-using ChameleonForms.FieldGenerators.Handlers;
 
-namespace ChameleonForms.FieldGenerators
+namespace ChameleonForms.FieldGenerators.Handlers
 {
     internal class DateTimeHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
