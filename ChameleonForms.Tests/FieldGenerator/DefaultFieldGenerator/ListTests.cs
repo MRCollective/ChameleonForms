@@ -210,13 +210,25 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Throw_exception_when_model_containing_list_property_is_null()
+        {
+            var g = Arrange(m => m.RequiredIntListId);
+            _h.ViewData.Model = null;
+            _h.ViewData.ModelMetadata.Model = null;
+
+            var ex = Assert.Throws<ModelNullException>(() => g.GetFieldHtml(null));
+
+            Assert.That(ex.Message, Is.EqualTo("The page model is null; please specify a model because it's needed to generate the list for property RequiredIntListId."));
+        }
+
+        [Test]
         public void Throw_exception_when_the_list_property_value_is_null()
         {
             var g = Arrange(m => m.OptionalIntListId, v => v.IntList = null);
 
             var ex = Assert.Throws<ListPropertyNullException>(() => g.GetFieldHtml(null));
 
-            Assert.That(ex.Message, Is.EqualTo("The list property (IntList) specified in the [ExistsIn] on OptionalIntListId is null"));
+            Assert.That(ex.Message, Is.EqualTo("The list property (IntList) specified in the [ExistsIn] on OptionalIntListId is null."));
         }
     }
 }

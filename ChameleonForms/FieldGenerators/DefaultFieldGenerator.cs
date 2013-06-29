@@ -58,7 +58,9 @@ namespace ChameleonForms.FieldGenerators
 
         public T GetValue()
         {
-            return FieldProperty.Compile().Invoke(GetModel());
+            var model = GetModel();
+
+            return model == null ? default(T) : FieldProperty.Compile().Invoke(model);
         }
 
         public string GetPropertyName()
@@ -68,21 +70,7 @@ namespace ChameleonForms.FieldGenerators
 
         public TModel GetModel()
         {
-            var model = (TModel) HtmlHelper.ViewData.ModelMetadata.Model;
-            if (model == null)
-                throw new ModelNullException();
-            return model;
+            return (TModel) HtmlHelper.ViewData.ModelMetadata.Model;
         }
-    }
-
-    /// <summary>
-    /// Exception that denotes the model in the page is null.
-    /// </summary>
-    public class ModelNullException : Exception
-    {
-        /// <summary>
-        /// Creates a <see cref="ModelNullException"/>.
-        /// </summary>
-        public ModelNullException() : base("The page model is null; please specify a model.") { }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Reporters;
@@ -126,7 +127,7 @@ namespace ChameleonForms.Tests.FieldGenerator
     [UseReporter(typeof(DiffReporter))]
     abstract class DefaultFieldGeneratorShould
     {
-        private HtmlHelper<TestFieldViewModel> _h;
+        protected HtmlHelper<TestFieldViewModel> _h;
 
         [SetUp]
         public void Setup()
@@ -152,15 +153,25 @@ namespace ChameleonForms.Tests.FieldGenerator
         }
 
         [Test]
-        public void Throw_exception_when_view_model_is_null()
+        public void Not_throw_exception_getting_model_when_view_model_is_null()
+        {
+            var generator = Arrange(m => m.Decimal);
+            _h.ViewData.Model = null;
+            _h.ViewData.ModelMetadata.Model = null;
+            
+            generator.GetModel();
+        }
+
+        [Test]
+        public void Not_throw_exception_getting_value_when_view_model_is_null()
         {
             var generator = Arrange(m => m.Decimal);
             _h.ViewData.Model = null;
             _h.ViewData.ModelMetadata.Model = null;
 
-            var ex = Assert.Throws<ModelNullException>(() => generator.GetModel());
+            generator.GetValue();
         }
-
+        
         [Test]
         public void Return_property_name()
         {
