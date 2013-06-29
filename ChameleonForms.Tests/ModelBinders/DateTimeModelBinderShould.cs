@@ -54,13 +54,16 @@ namespace ChameleonForms.Tests.ModelBinders
         [Test]
         public void Use_default_model_binder_when_there_is_no_display_format()
         {
-            _formCollection[PropertyName] = "01/13/2013";
-            var context = ArrangeBindingContext();
+            using (ChangeCulture.To("en-AU"))
+            {
+                _formCollection[PropertyName] = "01/13/2013";
+                var context = ArrangeBindingContext();
 
-            var model = BindModel(context);
+                var model = BindModel(context);
 
-            Assert.That(model, Is.EqualTo(default(T)));
-            Assert.That(context.ModelState.IsValid, Is.False);
+                Assert.That(model, Is.EqualTo(default(T)));
+                Assert.That(context.ModelState.IsValid, Is.False);
+            }
         }
 
         [Test]

@@ -24,7 +24,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
         public object Get(IModelFieldType fieldType)
         {
             var values = _elements
-                .Select(e => FieldFactory.Create(new[] {e}).Get(new ModelFieldType(fieldType.BaseType)))
+                .Select(e => FieldFactory.Create(new[] {e}).Get(new ModelFieldType(fieldType.BaseType, fieldType.Format)))
                 .Where(e => e != null);
 
             if (fieldType.HasMultipleValues)
