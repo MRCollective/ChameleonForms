@@ -16,10 +16,12 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
     internal class ModelFieldValue : IModelFieldValue
     {
         private readonly object _value;
+        private readonly string _format;
 
-        public ModelFieldValue(object value)
+        public ModelFieldValue(object value, string format)
         {
             _value = value;
+            _format = format;
         }
 
         public bool HasMultipleValues { get { return _value as IEnumerable != null && _value.GetType() != typeof(string); } }
@@ -31,7 +33,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
                 if (!HasMultipleValues)
                     throw new InvalidOperationException("Field does not have multiple values!");
                 return (_value as IEnumerable).Cast<object>()
-                    .Select(o => new ModelFieldValue(o))
+                    .Select(o => new ModelFieldValue(o, _format))
                     .Select(v => v.Value);
             }
         }
@@ -44,7 +46,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
                 if (HasMultipleValues)
                     val = string.Join(",", Values);
                 else if (_value != null)
-                    val = _value is bool ? _value.ToString().ToLower() : _value.ToString();
+                    val = _value is bool ? _value.ToString().ToLower() : string.Format(_format, _value);
                 return val;
             }
         }

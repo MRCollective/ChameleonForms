@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields;
@@ -20,7 +21,11 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
                     continue;
 
                 var elements = ((RemoteWebDriver)Browser).FindElementsByName(property.Name);
-                FieldFactory.Create(elements).Set(new ModelFieldValue(property.GetValue(model, null)));
+                var displayFormatAttr = property.GetCustomAttributes(typeof (DisplayFormatAttribute), false);
+                var format = "{0}";
+                if (displayFormatAttr.Any())
+                    format = displayFormatAttr.Cast<DisplayFormatAttribute>().First().DataFormatString;
+                FieldFactory.Create(elements).Set(new ModelFieldValue(property.GetValue(model, null), format));
             }
         }
 
@@ -42,7 +47,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
         {
             return new WebDriverWait(Browser, TimeSpan.FromSeconds(1))
                 .Until(d => d.FindElements(
-                    By.CssSelector(".field-validation-error span")
+                    By.CssSelector(".field-validation-error")
                 ))
                 .Any();
         }

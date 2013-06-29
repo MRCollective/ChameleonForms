@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
+using ChameleonForms.FieldGenerators.Handlers;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
@@ -206,6 +207,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
             var result = g.GetFieldHtml(new FieldConfiguration().AsList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Throw_exception_when_the_list_property_value_is_null()
+        {
+            var g = Arrange(m => m.OptionalIntListId, v => v.IntList = null);
+
+            var ex = Assert.Throws<ListPropertyNullException>(() => g.GetFieldHtml(null));
+
+            Assert.That(ex.Message, Is.EqualTo("The list property (IntList) specified in the [ExistsIn] on OptionalIntListId is null"));
         }
     }
 }
