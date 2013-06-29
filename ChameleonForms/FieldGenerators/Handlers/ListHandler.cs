@@ -16,8 +16,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override HandleAction Handle()
         {
+            var model = FieldGenerator.GetModel();
+
             if (!FieldGenerator.Metadata.AdditionalValues.ContainsKey(ExistsInAttribute.ExistsKey) ||
-                    FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? != true)
+                    FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? != true ||
+                    model == null)
                 return HandleAction.Continue;
 
             // There is a bug in the unobtrusive validation for numeric fields that are a radio button
@@ -27,14 +30,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
             if (FieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && IsNumeric() && !HasMultipleValues())
                 FieldConfiguration.Attr("data-val", "false");
 
-            var selectList = GetSelectList();
+            var selectList = GetSelectList(model);
             var html = GetSelectListHtml(selectList);
             return HandleAction.Return(html);
         }
 
-        private IEnumerable<SelectListItem> GetSelectList()
+        private IEnumerable<SelectListItem> GetSelectList(TModel model)
         {
-            var model = FieldGenerator.GetModel();
             var propertyName = (string) FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey];
             var listProperty = model.GetType().GetProperty(propertyName);
             var listValue = (IEnumerable)listProperty.GetValue(model, null);

@@ -12,6 +12,7 @@
 {
     using (var s = f.BeginSection("Test"))
     {
+        @s.FieldFor(m => m.ListId).AsList()
         @s.FieldFor(m => m.Boolean)
     }
 }

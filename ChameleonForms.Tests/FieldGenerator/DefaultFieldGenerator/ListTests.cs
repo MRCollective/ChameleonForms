@@ -210,6 +210,18 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Not_throw_exception_when_model_containing_list_property_is_null()
+        {
+            var g = Arrange(m => m.RequiredIntListId);
+            _h.ViewData.Model = null;
+            _h.ViewData.ModelMetadata.Model = null;
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Throw_exception_when_the_list_property_value_is_null()
         {
             var g = Arrange(m => m.OptionalIntListId, v => v.IntList = null);
