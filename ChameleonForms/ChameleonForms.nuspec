@@ -27,7 +27,7 @@
        asp.net, mvc, forms, html, template
     </tags>
     <language>
-       en-US 
+       en-US
     </language>
     <dependencies>
       <dependency id="Microsoft.AspNet.Mvc" version="4.0" />
@@ -40,5 +40,6 @@
      <file src="bin\Release\ChameleonForms.pdb" target="lib\NET40" />
      <file src="bin\Release\ChameleonForms.XML" target="lib\NET40" />
      <file src="..\AppStart.cs.pp" target="content\App_Start\RegisterChameleonFormsComponents.cs.pp" />
+     <file src="..\ChameleonForms.Example\Scripts\jquery.validate.unobtrusive.chameleon.js" target="content\Scripts\jquery.validate.unobtrusive.chameleon.js" />
   </files>
 </package>
