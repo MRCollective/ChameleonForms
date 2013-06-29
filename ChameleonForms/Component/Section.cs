@@ -41,11 +41,12 @@ namespace ChameleonForms.Component
         /// <param name="elementHtml">The HTML for the field element part of the field</param>
         /// <param name="validationHtml">The HTML for the validation markup part of the field</param>
         /// <param name="metadata">Any field metadata</param>
+        /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
-        public IFieldConfiguration Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml = null, ModelMetadata metadata = null)
+        public IFieldConfiguration Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml = null, ModelMetadata metadata = null, bool isValid = true)
         {
             var fc = new FieldConfiguration();
-            fc.SetField(() => Form.Template.Field(labelHtml, elementHtml, validationHtml, metadata, fc));
+            fc.SetField(() => Form.Template.Field(labelHtml, elementHtml, validationHtml, metadata, fc, isValid));
             return fc;
         }
 

@@ -39,10 +39,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
             var propertyName = (string) FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey];
             var listProperty = typeof(TModel).GetProperty(propertyName);
             if (model == null)
-                throw new ModelNullException(FieldGenerator.GetPropertyName());
+                throw new ModelNullException(FieldGenerator.GetFieldId());
             var listValue = (IEnumerable)listProperty.GetValue(model, null);
             if (listValue == null)
-                throw new ListPropertyNullException(propertyName, FieldGenerator.GetPropertyName());
+                throw new ListPropertyNullException(propertyName, FieldGenerator.GetFieldId());
             return GetSelectListUsingPropertyReflection(
                 listValue,
                 (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.NameKey],

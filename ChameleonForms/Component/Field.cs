@@ -52,9 +52,10 @@ namespace ChameleonForms.Component
         
         public override IHtmlString Begin()
         {
+            var isValid = Form.HtmlHelper.ViewData.ModelState.IsValidField(_fieldGenerator.GetFieldId());
             return !IsParent
-                ? Form.Template.Field(_fieldGenerator.GetLabelHtml(_config), _fieldGenerator.GetFieldHtml(_config), _fieldGenerator.GetValidationHtml(_config), _fieldGenerator.Metadata, _config)
-                : Form.Template.BeginField(_fieldGenerator.GetLabelHtml(_config), _fieldGenerator.GetFieldHtml(_config), _fieldGenerator.GetValidationHtml(_config), _fieldGenerator.Metadata, _config);
+                ? Form.Template.Field(_fieldGenerator.GetLabelHtml(_config), _fieldGenerator.GetFieldHtml(_config), _fieldGenerator.GetValidationHtml(_config), _fieldGenerator.Metadata, _config, isValid)
+                : Form.Template.BeginField(_fieldGenerator.GetLabelHtml(_config), _fieldGenerator.GetFieldHtml(_config), _fieldGenerator.GetValidationHtml(_config), _fieldGenerator.Metadata, _config, isValid);
         }
 
         public override IHtmlString End()

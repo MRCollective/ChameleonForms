@@ -177,7 +177,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         {
             var generator = Arrange(m => m.DecimalWithFormatStringAttribute);
 
-            var name = generator.GetPropertyName();
+            var name = generator.GetFieldId();
 
             Assert.That(name, Is.EqualTo("DecimalWithFormatStringAttribute"));
         }

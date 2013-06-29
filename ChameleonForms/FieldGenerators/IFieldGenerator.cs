@@ -28,12 +28,6 @@ namespace ChameleonForms.FieldGenerators
         T GetValue();
 
         /// <summary>
-        /// Returns the name of the property behind the field being generated.
-        /// </summary>
-        /// <returns>The property name</returns>
-        string GetPropertyName();
-
-        /// <summary>
         /// Returns a <see cref="TModel"/> with the current values for the form.
         /// </summary>
         /// <returns>The current model</returns>
@@ -68,5 +62,11 @@ namespace ChameleonForms.FieldGenerators
         /// </summary>
         /// <returns>The HTML for the field's validation messages</returns>
         IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration);
+
+        /// <summary>
+        /// Returns the id of the field being generated.
+        /// </summary>
+        /// <returns>The id</returns>
+        string GetFieldId();
     }
 }

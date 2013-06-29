@@ -65,7 +65,7 @@ namespace ChameleonForms.FieldGenerators
             return model == null ? default(T) : FieldProperty.Compile().Invoke(model);
         }
 
-        public string GetPropertyName()
+        public string GetFieldId()
         {
             return ((MemberExpression) FieldProperty.Body).Member.Name;
         }
