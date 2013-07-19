@@ -31,27 +31,89 @@ namespace ChameleonForms.Component
         }
 
         /// <summary>
-        /// Creates the HTML for a submit button.
+        /// Creates the HTML for a submit &lt;button&gt;.
         /// </summary>
-        /// <param name="value">The text to display for the button</param>
-        /// <param name="id">The id/name of the button</param>
+        /// <param name="text">The text to display in the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
-        public IHtmlString Submit(string value, string id = null, HtmlAttributes htmlAttributes = null)
+        public IHtmlString Submit(string text, HtmlAttributes htmlAttributes = null)
         {
-            return HtmlCreator.BuildSubmitButton(value, "submit", id, htmlAttributes);
+            return HtmlCreator.BuildButton(text, "submit", htmlAttributes: htmlAttributes);
         }
 
         /// <summary>
-        /// Creates the HTML for a reset button.
+        /// Creates the HTML for a submit &lt;button&gt;.
         /// </summary>
-        /// <param name="value">The text to display for the button</param>
-        /// <param name="id">The id/name of the button</param>
+        /// <param name="content">The content to display in the button</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
+        /// <returns>The HTML for the submit button</returns>
+        public IHtmlString Submit(IHtmlString content, HtmlAttributes htmlAttributes = null)
+        {
+            return HtmlCreator.BuildButton(content, "submit", htmlAttributes: htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates the HTML for a submit &lt;input&gt; (or optionally &lt;button&gt;) that submits a value in the form post when clicked.
+        /// </summary>
+        /// <remarks>
+        /// Uses an &lt;input&gt; by default so the submitted value works in IE7.
+        /// <see cref="http://rommelsantor.com/clog/2012/03/12/fixing-the-ie7-submit-value/"/>
+        /// </remarks>
+        /// <param name="name">The name (and id - use htmlAttributes to overwrite) of the element</param>
+        /// <param name="value">The value to submit with the form</param>
+        /// <param name="buttonText">If you want to use a &lt;button&gt; rather than &lt;input&gt; then specify this to set the text the user sees</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
+        /// <returns>The HTML for the submit button</returns>
+        public IHtmlString Submit(string name, string value, IHtmlString buttonText = null, HtmlAttributes htmlAttributes = null)
+        {
+            if (buttonText != null)
+                return HtmlCreator.BuildButton(buttonText, "submit", name, value, htmlAttributes);
+
+            return HtmlCreator.BuildInput(name, value, "submit", htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates the HTML for a &lt;button&gt;.
+        /// </summary>
+        /// <param name="text">The text to display in the button</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
+        /// <returns>The HTML for the button</returns>
+        public IHtmlString Button(string text, HtmlAttributes htmlAttributes = null)
+        {
+            return HtmlCreator.BuildButton(text, htmlAttributes: htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates the HTML for a &lt;button&gt;.
+        /// </summary>
+        /// <param name="content">The content to display in the button</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
+        /// <returns>The HTML for the button</returns>
+        public IHtmlString Button(IHtmlString content, HtmlAttributes htmlAttributes = null)
+        {
+            return HtmlCreator.BuildButton(content, htmlAttributes: htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates the HTML for a reset &lt;button&gt;.
+        /// </summary>
+        /// <param name="content">The content to display for the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the reset button</returns>
-        public IHtmlString Reset(string value, string id = null, HtmlAttributes htmlAttributes = null)
+        public IHtmlString Reset(IHtmlString content, HtmlAttributes htmlAttributes = null)
         {
-            return HtmlCreator.BuildSubmitButton(value, "reset", id, htmlAttributes);
+            return HtmlCreator.BuildButton(content, "reset", htmlAttributes: htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates the HTML for a reset &lt;button&gt;.
+        /// </summary>
+        /// <param name="text">The text to display for the button</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
+        /// <returns>The HTML for the reset button</returns>
+        public IHtmlString Reset(string text, HtmlAttributes htmlAttributes = null)
+        {
+            return HtmlCreator.BuildButton(text, "reset", htmlAttributes: htmlAttributes);
         }
     }
 
