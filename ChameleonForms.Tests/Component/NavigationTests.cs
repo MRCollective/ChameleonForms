@@ -15,6 +15,7 @@ namespace ChameleonForms.Tests.Component
         private readonly IHtmlString _beginHtml = new HtmlString("");
         private readonly IHtmlString _endHtml = new HtmlString("");
         private IForm<object, IFormTemplate> _f;
+        private readonly HtmlAttributes _attrs = new HtmlAttributes(new { @class = "someclass" });
 
         [SetUp]
         public void Setup()
@@ -59,7 +60,37 @@ namespace ChameleonForms.Tests.Component
         {
             var s = Arrange();
 
-            var h = s.Submit("value", "id", new HtmlAttributes(new {@class = "someclass"}));
+            var h = s.Submit("Text&", _attrs);
+
+            HtmlApprovals.VerifyHtml(h.ToHtmlString());
+        }
+
+        [Test]
+        public void Construct_submit_button_with_value()
+        {
+            var s = Arrange();
+
+            var h = s.Submit("name", "value&", new HtmlString("<strong>value</strong>"), _attrs);
+
+            HtmlApprovals.VerifyHtml(h.ToHtmlString());
+        }
+
+        [Test]
+        public void Construct_submit_input_with_value()
+        {
+            var s = Arrange();
+
+            var h = s.Submit("name", "value&", htmlAttributes: _attrs);
+
+            HtmlApprovals.VerifyHtml(h.ToHtmlString());
+        }
+
+        [Test]
+        public void Construct_submit_button_with_html_contents()
+        {
+            var s = Arrange();
+
+            var h = s.Submit(new HtmlString("<strong>hello</strong>"), _attrs);
 
             HtmlApprovals.VerifyHtml(h.ToHtmlString());
         }
@@ -69,7 +100,37 @@ namespace ChameleonForms.Tests.Component
         {
             var s = Arrange();
 
-            var h = s.Reset("value");
+            var h = s.Reset("value&", _attrs);
+
+            HtmlApprovals.VerifyHtml(h.ToHtmlString());
+        }
+
+        [Test]
+        public void Construct_reset_button_with_html_contents()
+        {
+            var s = Arrange();
+
+            var h = s.Reset(new HtmlString("<strong>value</strong>"), _attrs);
+
+            HtmlApprovals.VerifyHtml(h.ToHtmlString());
+        }
+
+        [Test]
+        public void Construct_button()
+        {
+            var s = Arrange();
+
+            var h = s.Button("value&", _attrs);
+
+            HtmlApprovals.VerifyHtml(h.ToHtmlString());
+        }
+
+        [Test]
+        public void Construct_button_with_html_contents()
+        {
+            var s = Arrange();
+
+            var h = s.Button(new HtmlString("<strong>value</strong>"), _attrs);
 
             HtmlApprovals.VerifyHtml(h.ToHtmlString());
         }
