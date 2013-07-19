@@ -33,18 +33,35 @@ namespace ChameleonForms.Templates
         }
 
         /// <summary>
-        /// Creates the HTML for a submit button.
+        /// Creates the HTML for a submit &lt;button&gt;.
         /// </summary>
-        /// <param name="value">The text to display for the button</param>
+        /// <param name="text">The text to display for the button</param>
         /// <param name="type">The type of submit button; submit (default) or reset</param>
+        /// <param name="value">The value to submit with the button</param>
         /// <param name="id">The id/name to use for the button</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
-        public static IHtmlString BuildSubmitButton(string value, string type = "submit", string id = null, HtmlAttributes htmlAttributes = null)
+        public static IHtmlString BuildButton(string text, string type = null, string id = null, string value = null, HtmlAttributes htmlAttributes = null)
         {
-            var t = new TagBuilder("button");
-            t.SetInnerText(value);
-            t.Attributes.Add("type", type);
+            return BuildButton(new HtmlString(HttpUtility.HtmlEncode(text)), type, id, value, htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates the HTML for a submit &lt;button&gt;.
+        /// </summary>
+        /// <param name="content">The content to display for the button</param>
+        /// <param name="type">The type of submit button; submit (default) or reset</param>
+        /// <param name="value">The value to submit with the button</param>
+        /// <param name="id">The id/name to use for the button</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
+        /// <returns>The HTML for the submit button</returns>
+        public static IHtmlString BuildButton(IHtmlString content, string type = null, string id = null, string value = null, HtmlAttributes htmlAttributes = null)
+        {
+            var t = new TagBuilder("button") {InnerHtml = content.ToHtmlString()};
+            if (value != null)
+                t.Attributes.Add("value", value);
+            if (type != null)
+                t.Attributes.Add("type", type);
             if (id != null)
             {
                 t.Attributes.Add("id", id);
@@ -62,6 +79,7 @@ namespace ChameleonForms.Templates
         /// <param name="name">The name/id for the checkbox</param>
         /// <param name="isChecked">Whether or not the checkbox is currently checked</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the checkbox</param>
+        /// <param name="value">The value to submit when the checkbox is ticked</param>
         /// <returns>The HTML for the checkbox</returns>
         public static IHtmlString BuildSingleCheckbox(string name, bool isChecked, HtmlAttributes htmlAttributes, string value = "true")
         {
@@ -75,6 +93,27 @@ namespace ChameleonForms.Templates
                 t.Attributes.Add("checked", "checked");
             if (htmlAttributes != null)
                 t.MergeAttributes(htmlAttributes.Attributes, false);
+
+            return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
+        }
+
+        /// <summary>
+        /// Creates the HTML for an input.
+        /// </summary>
+        /// <param name="name">The name/id of the input</param>
+        /// <param name="value">The value of the input</param>
+        /// <param name="type">The type of the input</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
+        /// <returns>The HTML for the input</returns>
+        public static IHtmlString BuildInput(string name, string value, string type, HtmlAttributes htmlAttributes)
+        {
+            var t = new TagBuilder("input");
+            t.Attributes.Add("name", name);
+            t.GenerateId(name);
+            t.Attributes.Add("value", value);
+            t.Attributes.Add("type", type);
+            if (htmlAttributes != null)
+                t.MergeAttributes(htmlAttributes.Attributes, true);
 
             return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
         }
