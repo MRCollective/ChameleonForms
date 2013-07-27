@@ -36,9 +36,12 @@ namespace ChameleonForms.FieldGenerators.Handlers
         private IHtmlString GetSingleCheckboxHtml()
         {
             AdjustHtmlForModelState(FieldConfiguration.Attributes);
-
+            
             var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue() ?? false, FieldConfiguration.Attributes);
-            var labelHtml = FieldGenerator.HtmlHelper.LabelFor(FieldGenerator.FieldProperty, FieldConfiguration.InlineLabelText);
+            var labelHtml = FieldConfiguration.InlineLabelText == null
+                ? FieldGenerator.HtmlHelper.LabelFor(FieldGenerator.FieldProperty, FieldConfiguration.InlineLabelText)
+                : HtmlCreator.BuildLabel(GetFieldName(), FieldConfiguration.InlineLabelText, null)
+                ;
 
             return new HtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
         }

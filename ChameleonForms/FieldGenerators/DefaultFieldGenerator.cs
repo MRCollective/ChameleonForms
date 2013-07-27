@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
+using ChameleonForms.Templates;
 
 namespace ChameleonForms.FieldGenerators
 {
@@ -33,12 +35,29 @@ namespace ChameleonForms.FieldGenerators
 
         public IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
         {
-            var htmlAttributes = fieldConfiguration != null && fieldConfiguration.Attributes.Attributes.ContainsKey("id")
-                ? new Dictionary<string, object> { { "for", fieldConfiguration.Attributes.Attributes["id"] } }
-                : null;
-            var labelText = fieldConfiguration == null ? null : fieldConfiguration.LabelText;
+            string @for;
+            if (fieldConfiguration != null && fieldConfiguration.Attributes.Attributes.ContainsKey("id"))
+            {
+                @for = fieldConfiguration.Attributes.Attributes["id"];
+            }
+            else
+            {
+                @for =
+                    HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
+                        ExpressionHelper.GetExpressionText(FieldProperty));
+            }
 
-            return HtmlHelper.LabelFor(FieldProperty, labelText, htmlAttributes);
+            var labelText = (fieldConfiguration == null ? null : fieldConfiguration.LabelText)
+                ?? new HtmlString(GetFieldDisplayName());
+
+            return HtmlCreator.BuildLabel(@for, labelText, null);
+        }
+
+        private string GetFieldDisplayName()
+        {
+            return Metadata.DisplayName
+                ?? Metadata.PropertyName
+                ?? ExpressionHelper.GetExpressionText(FieldProperty).Split('.').Last();
         }
 
         public IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)

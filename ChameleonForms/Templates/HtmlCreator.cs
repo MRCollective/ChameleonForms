@@ -117,5 +117,24 @@ namespace ChameleonForms.Templates
 
             return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
         }
+
+        /// <summary>
+        /// Creates the HTML for a label.
+        /// </summary>
+        /// <param name="for">The name/id for the checkbox</param>
+        /// <param name="labelText">The text inside the label</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the checkbox</param>
+        /// <returns>The HTML for the checkbox</returns>
+        public static IHtmlString BuildLabel(string @for, IHtmlString labelText, HtmlAttributes htmlAttributes)
+        {
+            var t = new TagBuilder("label");
+            t.Attributes.Add("for", TagBuilder.CreateSanitizedId(@for));
+            t.InnerHtml = labelText.ToHtmlString();
+
+            if (htmlAttributes != null)
+                t.MergeAttributes(htmlAttributes.Attributes, false);
+
+            return new HtmlString(t.ToString(TagRenderMode.Normal));
+        }
     }
 }

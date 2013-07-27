@@ -111,7 +111,7 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// Gets any text that has been set for an inline label.
         /// </summary>
-        string InlineLabelText { get; }
+        IHtmlString InlineLabelText { get; }
 
         /// <summary>
         /// Sets an inline label for a checkbox.
@@ -121,9 +121,16 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration InlineLabel(string labelText);
 
         /// <summary>
+        /// Sets an inline label for a checkbox.
+        /// </summary>
+        /// <param name="labelHtml">The html to use for the label</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration InlineLabel(IHtmlString labelHtml);
+
+        /// <summary>
         /// Gets any text that has been set for the label.
         /// </summary>
-        string LabelText { get; }
+        IHtmlString LabelText { get; }
 
         /// <summary>
         /// Override the default label for the field.
@@ -131,6 +138,13 @@ namespace ChameleonForms.Component.Config
         /// <param name="labelText">The text to use for the label</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Label(string labelText);
+
+        /// <summary>
+        /// Override the default label for the field.
+        /// </summary>
+        /// <param name="labelHtml">The text to use for the label</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Label(IHtmlString labelHtml);
 
         /// <summary>
         /// Returns the display type for the field.
@@ -398,19 +412,31 @@ namespace ChameleonForms.Component.Config
             return this;
         }
 
-        public string InlineLabelText { get; private set; }
+        public IHtmlString InlineLabelText { get; private set; }
 
         public IFieldConfiguration InlineLabel(string labelText)
         {
-            InlineLabelText = labelText;
+            InlineLabelText = new HtmlString(HttpUtility.HtmlEncode(labelText));
             return this;
         }
 
-        public string LabelText { get; private set; }
+        public IFieldConfiguration InlineLabel(IHtmlString labelHtml)
+        {
+            InlineLabelText = labelHtml;
+            return this;
+        }
+
+        public IHtmlString LabelText { get; private set; }
 
         public IFieldConfiguration Label(string labelText)
         {
-            LabelText = labelText;
+            LabelText = new HtmlString(HttpUtility.HtmlEncode(labelText)); ;
+            return this;
+        }
+
+        public IFieldConfiguration Label(IHtmlString labelHtml)
+        {
+            LabelText = labelHtml;
             return this;
         }
 

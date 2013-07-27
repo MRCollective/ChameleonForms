@@ -100,18 +100,36 @@ namespace ChameleonForms.Tests.Component.Config
         public void Set_inline_label()
         {
             var fc = Field.Configure()
-                .InlineLabel("Some label text");
+                .InlineLabel(_someTextWithHtmlCharacters);
 
-            Assert.That(fc.InlineLabelText, Is.EqualTo("Some label text"));
+            Assert.That(fc.InlineLabelText.ToHtmlString(), Is.EqualTo(_someTextWithHtmlCharactersEscaped));
+        }
+
+        [Test]
+        public void Set_inline_label_html()
+        {
+            var fc = Field.Configure()
+                .InlineLabel(_someHtmlString);
+
+            Assert.That(fc.InlineLabelText, Is.EqualTo(_someHtmlString));
         }
 
         [Test]
         public void Set_label()
         {
             var fc = Field.Configure()
-                .Label("Some label text");
+                .Label(_someTextWithHtmlCharacters);
 
-            Assert.That(fc.LabelText, Is.EqualTo("Some label text"));
+            Assert.That(fc.LabelText.ToHtmlString(), Is.EqualTo(_someTextWithHtmlCharactersEscaped));
+        }
+
+        [Test]
+        public void Set_label_html()
+        {
+            var fc = Field.Configure()
+                .Label(_someHtmlString);
+
+            Assert.That(fc.LabelText, Is.EqualTo(_someHtmlString));
         }
 
         [Test]
