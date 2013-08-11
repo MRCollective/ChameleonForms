@@ -34,7 +34,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalIntListId, null);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -44,7 +44,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredNullableIntListId, null);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -114,7 +114,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredIntListId, 2);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -134,7 +134,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredIntListIds, new List<int>{ 1 , 2 });
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -154,7 +154,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredNullableIntListIds, null);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -164,7 +164,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalIntListIds, new List<int> { 1, 2 });
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -194,7 +194,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalNullableIntListIds, null);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -216,7 +216,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
             _h.ViewData.Model = null;
             _h.ViewData.ModelMetadata.Model = null;
 
-            var ex = Assert.Throws<ModelNullException>(() => g.GetFieldHtml(null));
+            var ex = Assert.Throws<ModelNullException>(() => g.GetFieldHtml(default(IFieldConfiguration)));
 
             Assert.That(ex.Message, Is.EqualTo("The page model is null; please specify a model because it's needed to generate the list for property RequiredIntListId."));
         }
@@ -226,7 +226,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalIntListId, v => v.IntList = null);
 
-            var ex = Assert.Throws<ListPropertyNullException>(() => g.GetFieldHtml(null));
+            var ex = Assert.Throws<ListPropertyNullException>(() => g.GetFieldHtml(default(IFieldConfiguration)));
 
             Assert.That(ex.Message, Is.EqualTo("The list property (IntList) specified in the [ExistsIn] on OptionalIntListId is null."));
         }

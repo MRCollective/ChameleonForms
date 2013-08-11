@@ -31,7 +31,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.Decimal, m => m.Decimal = 1.2000m);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -41,7 +41,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.DecimalWithFormatStringAttribute, m => m.DecimalWithFormatStringAttribute = 1.2000m);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

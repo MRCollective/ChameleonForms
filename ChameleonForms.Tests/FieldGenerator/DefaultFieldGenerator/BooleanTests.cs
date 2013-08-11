@@ -11,7 +11,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredBoolean);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -21,7 +21,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredBoolean, m => m.RequiredBoolean = true);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -121,7 +121,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredNullableBoolean);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

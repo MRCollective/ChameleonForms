@@ -22,7 +22,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalEnumWithNullStringAttribute, m => m.OptionalEnumWithNullStringAttribute = null);
 
-            var result = g.GetFieldHtml(null);
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
