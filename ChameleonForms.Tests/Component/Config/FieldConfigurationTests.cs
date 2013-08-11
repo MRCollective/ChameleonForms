@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component;
@@ -13,6 +14,10 @@ namespace ChameleonForms.Tests.Component.Config
     [UseReporter(typeof(DiffReporter))]
     class FieldConfigurationShould
     {
+        private HtmlString _someHtmlString = new HtmlString("");
+        private const string _someTextWithHtmlCharacters = "Some text with <html> & characters";
+        private const string _someTextWithHtmlCharactersEscaped = "Some text with &lt;html&gt; &amp; characters";
+
         [Test]
         public void Proxy_html_attributes()
         {
@@ -95,18 +100,36 @@ namespace ChameleonForms.Tests.Component.Config
         public void Set_inline_label()
         {
             var fc = Field.Configure()
-                .InlineLabel("Some label text");
+                .InlineLabel(_someTextWithHtmlCharacters);
 
-            Assert.That(fc.InlineLabelText, Is.EqualTo("Some label text"));
+            Assert.That(fc.InlineLabelText.ToHtmlString(), Is.EqualTo(_someTextWithHtmlCharactersEscaped));
+        }
+
+        [Test]
+        public void Set_inline_label_html()
+        {
+            var fc = Field.Configure()
+                .InlineLabel(_someHtmlString);
+
+            Assert.That(fc.InlineLabelText, Is.EqualTo(_someHtmlString));
         }
 
         [Test]
         public void Set_label()
         {
             var fc = Field.Configure()
-                .Label("Some label text");
+                .Label(_someTextWithHtmlCharacters);
 
-            Assert.That(fc.LabelText, Is.EqualTo("Some label text"));
+            Assert.That(fc.LabelText.ToHtmlString(), Is.EqualTo(_someTextWithHtmlCharactersEscaped));
+        }
+
+        [Test]
+        public void Set_label_html()
+        {
+            var fc = Field.Configure()
+                .Label(_someHtmlString);
+
+            Assert.That(fc.LabelText, Is.EqualTo(_someHtmlString));
         }
 
         [Test]
@@ -185,18 +208,17 @@ namespace ChameleonForms.Tests.Component.Config
         [Test]
         public void Set_and_encode_non_html_hint()
         {
-            var fc = Field.Configure().WithHint("Some hint with <html> & characters");
+            var fc = Field.Configure().WithHint(_someTextWithHtmlCharacters);
 
-            Assert.That(fc.Hint.ToHtmlString(), Is.EqualTo("Some hint with &lt;html&gt; &amp; characters"));
+            Assert.That(fc.Hint.ToHtmlString(), Is.EqualTo(_someTextWithHtmlCharactersEscaped));
         }
 
         [Test]
         public void Set_html_hint()
         {
-            var htmlHint = new HtmlString("");
-            var fc = Field.Configure().WithHint(htmlHint);
+            var fc = Field.Configure().WithHint(_someHtmlString);
 
-            Assert.That(fc.Hint, Is.EqualTo(htmlHint));
+            Assert.That(fc.Hint, Is.EqualTo(_someHtmlString));
         }
 
         [Test]

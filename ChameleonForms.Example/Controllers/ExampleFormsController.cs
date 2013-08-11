@@ -27,6 +27,11 @@ namespace ChameleonForms.Example.Controllers
             return View(new BasicViewModel());
         }
 
+        public ActionResult Labels()
+        {
+            return View(new BasicViewModel());
+        }
+
         public ActionResult ModelBindingExample()
         {
             return View(new ModelBindingViewModel());

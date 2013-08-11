@@ -39,11 +39,31 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Use_correct_html_for_field_label_with_display_name()
+        {
+            var g = Arrange(m => m.StringWithDisplayAttribute);
+
+            var result = g.GetLabelHtml(new FieldConfiguration());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_field_label_with_overridden_label()
         {
             var g = Arrange(m => m.RequiredString);
 
             var result = g.GetLabelHtml(new FieldConfiguration().Label("asdf"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_field_label_with_overridden_html_label()
+        {
+            var g = Arrange(m => m.RequiredString);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().Label(new HtmlString("<em>lay</em>bell")));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

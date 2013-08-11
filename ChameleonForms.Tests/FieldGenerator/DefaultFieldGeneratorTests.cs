@@ -27,6 +27,9 @@ namespace ChameleonForms.Tests.FieldGenerator
         [Required]
         public string RequiredString { get; set; }
 
+        [Display(Name = "Use this display name")]
+        public string StringWithDisplayAttribute { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:F2}", ApplyFormatInEditMode = true)]
         public Decimal DecimalWithFormatStringAttribute { get; set; }
 
