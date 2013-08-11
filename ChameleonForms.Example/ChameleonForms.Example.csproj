@@ -130,6 +130,7 @@
     <Content Include="Views\ExampleForms\NullList.cshtml" />
     <Content Include="Views\ExampleForms\NullModelWithList.cshtml" />
     <Content Include="Views\ExampleForms\Buttons.cshtml" />
+    <Content Include="Views\ExampleForms\Labels.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

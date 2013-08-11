@@ -1,0 +1,29 @@
+﻿@using ChameleonForms.Example.Controllers
+@using ChameleonForms
+@using ChameleonForms.Component
+@model BasicViewModel
+
+<h1>Labels for fields and checkboxes</h1>
+@using (var f = Html.BeginChameleonForm()) {
+    using (var s = f.BeginSection("Default")) {
+        @s.FieldFor(m => m.RequiredString)
+        @s.FieldFor(m => m.SomeCheckbox)
+    }
+}
+
+@using (var f = Html.BeginChameleonForm()) {
+    using (var s = f.BeginSection("Different id")) {
+        @s.FieldFor(m => m.RequiredString).Id("Alterative")
+        @s.FieldFor(m => m.SomeCheckbox).Id("Alterative2")
+    }
+    
+    using (var s = f.BeginSection("String label")) {
+        @s.FieldFor(m => m.RequiredString).Label("string label")
+        @s.FieldFor(m => m.SomeCheckbox).InlineLabel("string label")
+    }
+    
+    using (var s = f.BeginSection("Html label")) {
+        @s.FieldFor(m => m.RequiredString).Label(new MvcHtmlString("<em>em</em>phasis"))
+        @s.FieldFor(m => m.SomeCheckbox).InlineLabel(new MvcHtmlString("<em>em</em>phasis"))
+    }
+}
