@@ -98,7 +98,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().WithHint("hello"), false);
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().WithHint("hello").ToReadonly(), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -110,7 +110,8 @@ namespace ChameleonForms.Tests.Templates
 
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration()
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
-                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>")),
+                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
+                .ToReadonly(),
                 false
             );
 

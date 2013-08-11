@@ -66,7 +66,7 @@ namespace ChameleonForms.Templates
         /// <param name="fieldConfiguration">Configuration for the field</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>The HTML for the field</returns>
-        IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration, bool isValid);
+        IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
 
         /// <summary>
         /// Creates the beginning HTML for a single form field that contains other fields nested within it.
@@ -78,7 +78,7 @@ namespace ChameleonForms.Templates
         /// <param name="fieldConfiguration">Configuration for the field</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>The beginning HTML for the parent field</returns>
-        IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration, bool isValid);
+        IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
 
         /// <summary>
         /// Creates the ending HTML for a single form field that contains other fields nested within it.

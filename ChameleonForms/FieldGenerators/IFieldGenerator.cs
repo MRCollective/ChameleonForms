@@ -45,26 +45,50 @@ namespace ChameleonForms.FieldGenerators
     /// </summary>
     public interface IFieldGenerator
     {
-
         /// <summary>
         /// The metadata for the form field.
         /// </summary>
         ModelMetadata Metadata { get; }
 
         /// <summary>
+        /// Turns the given <see cref="IFieldConfiguration"/> into a <see cref="ReadonlyFieldConfiguration"/> ready to use for generating the form field.
+        /// </summary>
+        /// <param name="fieldConfiguration">The field configuration to modify</param>
+        /// <returns>The readonly field configuration; ready for generating the form field</returns>
+        IReadonlyFieldConfiguration PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration);
+
+        /// <summary>
         /// Creates the HTML for the field control.
         /// </summary>
         /// <returns>The HTML for the field control</returns>
-        IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration);
+        IHtmlString GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field label.
         /// </summary>
         /// <returns>The HTML for the field label</returns>
-        IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration);
+        IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field's validation messages
+        /// </summary>
+        /// <returns>The HTML for the field's validation messages</returns>
+        IHtmlString GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration);
+
+        /// <summary>
+        /// Creates the HTML for the field control after preparing the given field configuration.
+        /// </summary>
+        /// <returns>The HTML for the field control</returns>
+        IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration);
+
+        /// <summary>
+        /// Creates the HTML for the field label after preparing the given field configuration.
+        /// </summary>
+        /// <returns>The HTML for the field label</returns>
+        IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration);
+
+        /// <summary>
+        /// Creates the HTML for the field's validation messages after preparing the given field configuration.
         /// </summary>
         /// <returns>The HTML for the field's validation messages</returns>
         IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration);

@@ -29,15 +29,17 @@ namespace ChameleonForms.FieldGenerators.Handlers
         };
 
         protected readonly IFieldGenerator<TModel, T> FieldGenerator;
-        protected readonly IFieldConfiguration FieldConfiguration;
+        protected readonly IReadonlyFieldConfiguration FieldConfiguration;
 
-        protected FieldGeneratorHandler(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        protected FieldGeneratorHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
         {
             FieldGenerator = fieldGenerator;
             FieldConfiguration = fieldConfiguration;
         }
 
-        public abstract HandleAction Handle();
+        public abstract bool CanHandle();
+        public abstract IHtmlString GenerateFieldHtml();
+        public virtual void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration) {}
 
         protected bool HasMultipleValues()
         {
@@ -80,12 +82,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
         protected IHtmlString GetInputHtml(TextInputType inputType)
         {
             if (inputType == TextInputType.Password)
-                return FieldGenerator.HtmlHelper.PasswordFor(FieldGenerator.FieldProperty, FieldConfiguration.Attributes.ToDictionary());
+                return FieldGenerator.HtmlHelper.PasswordFor(FieldGenerator.FieldProperty, FieldConfiguration.HtmlAttributes);
 
-            FieldConfiguration.Attributes.Attr(type => inputType.ToString().ToLower());
+            var attrs = new HtmlAttributes(FieldConfiguration.HtmlAttributes);
+            attrs.Attr(type => inputType.ToString().ToLower());
             return !string.IsNullOrEmpty(FieldConfiguration.FormatString)
-                ? FieldGenerator.HtmlHelper.TextBoxFor(FieldGenerator.FieldProperty, FieldConfiguration.FormatString, FieldConfiguration.Attributes.ToDictionary())
-                : FieldGenerator.HtmlHelper.TextBoxFor(FieldGenerator.FieldProperty, FieldConfiguration.Attributes.ToDictionary());
+                ? FieldGenerator.HtmlHelper.TextBoxFor(FieldGenerator.FieldProperty, FieldConfiguration.FormatString, attrs.ToDictionary())
+                : FieldGenerator.HtmlHelper.TextBoxFor(FieldGenerator.FieldProperty, attrs.ToDictionary());
         }
 
         private bool HasEmptySelectListItem()
@@ -133,10 +136,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
                     return HasMultipleValues()
                         ? FieldGenerator.HtmlHelper.ListBoxFor(
                             FieldGenerator.FieldProperty, selectList,
-                            FieldConfiguration.Attributes.ToDictionary())
+                            FieldConfiguration.HtmlAttributes)
                         : FieldGenerator.HtmlHelper.DropDownListFor(
                             FieldGenerator.FieldProperty, selectList,
-                            FieldConfiguration.Attributes.ToDictionary());
+                            FieldConfiguration.HtmlAttributes);
             }
 
             return null;
@@ -178,7 +181,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             foreach (var item in selectList)
             {
                 var id = string.Format("{0}_{1}", GetFieldName(), ++count);
-                var attrs = new HtmlAttributes(FieldConfiguration.Attributes.ToDictionary());
+                var attrs = new HtmlAttributes(FieldConfiguration.HtmlAttributes);
                 if (item.Selected)
                     attrs.Attr("checked", "checked");
                 attrs.Attr("id", id);

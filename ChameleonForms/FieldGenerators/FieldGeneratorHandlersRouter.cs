@@ -8,7 +8,7 @@ namespace ChameleonForms.FieldGenerators
 {
     internal static class FieldGeneratorHandlersRouter<TModel, T>
     {
-        private static IEnumerable<FieldGeneratorHandler<TModel, T>> GetHandlers(IFieldGenerator<TModel, T> g, IFieldConfiguration c)
+        private static IEnumerable<FieldGeneratorHandler<TModel, T>> GetHandlers(IFieldGenerator<TModel, T> g, IReadonlyFieldConfiguration c)
         {
             yield return new EnumListHandler<TModel, T>(g, c);
             yield return new PasswordHandler<TModel, T>(g, c);
@@ -20,11 +20,18 @@ namespace ChameleonForms.FieldGenerators
             yield return new DefaultHandler<TModel, T>(g, c);
         }
 
-        public static IHtmlString GetFieldHtml(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public static IHtmlString GetFieldHtml(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
         {
             return GetHandlers(fieldGenerator, fieldConfiguration)
-                .Select(h => h.Handle())
-                .First(h => h.HasReturnValue).ReturnValue;
+                .First(h => h.CanHandle())
+                .GenerateFieldHtml();
+        }
+
+        public static void PrepareFieldConfiguration(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        {
+            GetHandlers(fieldGenerator, new ReadonlyFieldConfiguration(fieldConfiguration))
+                .First(h => h.CanHandle())
+                .PrepareFieldConfiguration(fieldConfiguration);
         }
     }
 }

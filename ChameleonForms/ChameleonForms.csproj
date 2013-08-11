@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ExistsInAttribute.cs" />
     <Compile Include="Component\Config\FieldConfiguration.cs" />
+    <Compile Include="Component\Config\ReadonlyFieldConfiguration.cs" />
     <Compile Include="Component\Navigation.cs" />
     <Compile Include="Component\Field.cs" />
     <Compile Include="Component\FormComponent.cs" />
@@ -98,7 +99,6 @@
     <Compile Include="FieldGenerators\Handlers\FieldGeneratorHandler.cs" />
     <Compile Include="FieldGenerators\FieldGeneratorHandlersRouter.cs" />
     <Compile Include="FieldGenerators\Handlers\FileHandler.cs" />
-    <Compile Include="FieldGenerators\HandleAction.cs" />
     <Compile Include="FieldGenerators\Handlers\ListHandler.cs" />
     <Compile Include="FieldGenerators\Handlers\PasswordHandler.cs" />
     <Compile Include="FieldGenerators\Handlers\BooleanHandler.cs" />

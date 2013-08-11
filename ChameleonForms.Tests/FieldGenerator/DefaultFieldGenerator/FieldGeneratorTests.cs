@@ -23,7 +23,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredString);
 
-            var result = g.GetLabelHtml(null);
+            var result = g.GetLabelHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -93,7 +93,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredString);
 
-            var result = g.GetValidationHtml(null);
+            var result = g.GetValidationHtml(default(IFieldConfiguration));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

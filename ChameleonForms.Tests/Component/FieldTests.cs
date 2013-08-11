@@ -39,14 +39,14 @@ namespace ChameleonForms.Tests.Component
             _fc = Substitute.For<IFieldConfiguration>();
 
             _f = Substitute.For<IForm<TestFieldViewModel, IFormTemplate>>();
-            _f.Template.BeginField(_label, _field, _validation, _metadata, _fc, Arg.Any<bool>()).Returns(_beginHtml);
-            _f.Template.Field(_label, _field, _validation, _metadata, _fc, Arg.Any<bool>()).Returns(_html);
+            _f.Template.BeginField(_label, _field, _validation, _metadata, Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(_beginHtml);
+            _f.Template.Field(_label, _field, _validation, _metadata, Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(_html);
             _f.Template.EndField().Returns(_endHtml);
 
             _g = Substitute.For<IFieldGenerator>();
-            _g.GetLabelHtml(_fc).Returns(_label);
-            _g.GetFieldHtml(_fc).Returns(_field);
-            _g.GetValidationHtml(_fc).Returns(_validation);
+            _g.GetLabelHtml(Arg.Any<IReadonlyFieldConfiguration>()).Returns(_label);
+            _g.GetFieldHtml(Arg.Any<IReadonlyFieldConfiguration>()).Returns(_field);
+            _g.GetValidationHtml(Arg.Any<IReadonlyFieldConfiguration>()).Returns(_validation);
             _g.Metadata.Returns(_metadata);
             _g.GetFieldId().Returns(FieldId);
 
@@ -69,7 +69,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>(),
+            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 true
             );
         }
@@ -82,7 +82,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>(),
+            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 false
             );
         }
@@ -94,7 +94,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>(),
+            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 true
             );
         }
@@ -107,7 +107,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>(),
+            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 false
             );
         }
@@ -174,7 +174,7 @@ namespace ChameleonForms.Tests.Component
         {
             var h = new HtmlString("");
             var s = new Section<TestFieldViewModel, IFormTemplate>(_f, new HtmlString(""), false);
-            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IFieldConfiguration>(), Arg.Any<bool>()).Returns(h);
+            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(h);
             _f.ClearReceivedCalls();
 
             var f = s.BeginFieldFor(m => m.SomeProperty);

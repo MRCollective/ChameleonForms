@@ -20,7 +20,7 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// Attributes to add to the form element's HTML.
         /// </summary>
-        HtmlAttributes Attributes { get; set; }
+        HtmlAttributes Attributes { get; }
 
         /// <summary>
         /// Override the default id for the field.
@@ -192,7 +192,7 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// The label that represents none.
         /// </summary>
-        string NoneString { get; set; }
+        string NoneString { get; }
 
         /// <summary>
         /// Change the label that represents false.
@@ -310,6 +310,12 @@ namespace ChameleonForms.Component.Config
         /// Whether or not the empty item is hidden.
         /// </summary>
         bool EmptyItemHidden { get; }
+
+        /// <summary>
+        /// Returns readonly field configuration from the current field configuration.
+        /// </summary>
+        /// <returns>A readonly field configuration</returns>
+        IReadonlyFieldConfiguration ToReadonly();
     }
 
     /// <summary>
@@ -336,7 +342,7 @@ namespace ChameleonForms.Component.Config
         }
 
         public dynamic Bag { get; private set; }
-        public HtmlAttributes Attributes { get; set; }
+        public HtmlAttributes Attributes { get; private set; }
 
         public IFieldConfiguration Id(string id)
         {
@@ -468,7 +474,7 @@ namespace ChameleonForms.Component.Config
             return this;
         }
 
-        public string NoneString { get; set; }
+        public string NoneString { get; private set; }
         public IFieldConfiguration WithNoneAs(string noneString)
         {
             NoneString = noneString;
@@ -554,6 +560,11 @@ namespace ChameleonForms.Component.Config
         public string ToHtmlString()
         {
             return _field().ToHtmlString();
+        }
+
+        public IReadonlyFieldConfiguration ToReadonly()
+        {
+            return new ReadonlyFieldConfiguration(this);
         }
     }
 }
