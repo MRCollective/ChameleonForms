@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Reporters;
 using ChameleonForms.Attributes;
+using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Tests.Helpers;
 using NUnit.Framework;
@@ -131,12 +131,14 @@ namespace ChameleonForms.Tests.FieldGenerator
     abstract class DefaultFieldGeneratorShould
     {
         protected HtmlHelper<TestFieldViewModel> _h;
+        protected IFieldConfiguration ExampleFieldConfiguration;
 
         [SetUp]
         public void Setup()
         {
             var autoSubstitute = AutoSubstituteContainer.Create();
             _h = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            ExampleFieldConfiguration = new FieldConfiguration().Attr("data-attr", "value");
         }
 
         protected DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, params Action<TestFieldViewModel>[] vmSetter)
