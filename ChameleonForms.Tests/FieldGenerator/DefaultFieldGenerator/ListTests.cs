@@ -11,13 +11,13 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
 {
     class ListTests : DefaultFieldGeneratorShould
     {
-        private readonly List<IntListItem> IntList = new List<IntListItem>
+        private readonly List<IntListItem> _intList = new List<IntListItem>
         {
             new IntListItem {Id = 1, Name = "A"},
             new IntListItem {Id = 2, Name = "B"}
         };
 
-        private readonly List<StringListItem> StringList = new List<StringListItem>
+        private readonly List<StringListItem> _stringList = new List<StringListItem>
         {
             new StringListItem { Value = "1", Label = "A" },
             new StringListItem { Value = "2", Label = "B" }
@@ -26,7 +26,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         private FieldGenerators.DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel, T>> property, T value)
         {
             var propInfo = (PropertyInfo)((MemberExpression)property.Body).Member;
-            return Arrange(property, m => propInfo.SetValue(m, value, null), m => m.IntList = IntList, m => m.StringList = StringList);
+            return Arrange(property, m => propInfo.SetValue(m, value, null), m => m.IntList = _intList, m => m.StringList = _stringList);
         }
 
         [Test]
@@ -213,8 +213,8 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         public void Throw_exception_when_model_containing_list_property_is_null()
         {
             var g = Arrange(m => m.RequiredIntListId);
-            _h.ViewData.Model = null;
-            _h.ViewData.ModelMetadata.Model = null;
+            H.ViewData.Model = null;
+            H.ViewData.ModelMetadata.Model = null;
 
             var ex = Assert.Throws<ModelNullException>(() => g.GetFieldHtml(default(IFieldConfiguration)));
 

@@ -130,39 +130,39 @@ namespace ChameleonForms.Tests.FieldGenerator
     [UseReporter(typeof(DiffReporter))]
     abstract class DefaultFieldGeneratorShould
     {
-        protected HtmlHelper<TestFieldViewModel> _h;
+        protected HtmlHelper<TestFieldViewModel> H;
         protected IFieldConfiguration ExampleFieldConfiguration;
 
         [SetUp]
         public void Setup()
         {
             var autoSubstitute = AutoSubstituteContainer.Create();
-            _h = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            H = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
             ExampleFieldConfiguration = new FieldConfiguration().Attr("data-attr", "value");
         }
 
         protected DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, params Action<TestFieldViewModel>[] vmSetter)
         {
-            _h.ViewContext.UnobtrusiveJavaScriptEnabled = true;
-            _h.ViewContext.ClientValidationEnabled = true;
-            _h.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(property), "asdf");
+            H.ViewContext.UnobtrusiveJavaScriptEnabled = true;
+            H.ViewContext.ClientValidationEnabled = true;
+            H.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(property), "asdf");
             var vm = new TestFieldViewModel();
             foreach (var action in vmSetter)
             {
                 action(vm);
             }
-            _h.ViewData.Model = vm;
-            _h.ViewData.ModelMetadata.Model = vm;
+            H.ViewData.Model = vm;
+            H.ViewData.ModelMetadata.Model = vm;
 
-            return new DefaultFieldGenerator<TestFieldViewModel, T>(_h, property);
+            return new DefaultFieldGenerator<TestFieldViewModel, T>(H, property);
         }
 
         [Test]
         public void Not_throw_exception_getting_model_when_view_model_is_null()
         {
             var generator = Arrange(m => m.Decimal);
-            _h.ViewData.Model = null;
-            _h.ViewData.ModelMetadata.Model = null;
+            H.ViewData.Model = null;
+            H.ViewData.ModelMetadata.Model = null;
             
             generator.GetModel();
         }
@@ -171,8 +171,8 @@ namespace ChameleonForms.Tests.FieldGenerator
         public void Not_throw_exception_getting_value_when_view_model_is_null()
         {
             var generator = Arrange(m => m.Decimal);
-            _h.ViewData.Model = null;
-            _h.ViewData.ModelMetadata.Model = null;
+            H.ViewData.Model = null;
+            H.ViewData.ModelMetadata.Model = null;
 
             generator.GetValue();
         }
