@@ -23,7 +23,13 @@
     }
     
     using (var s = f.BeginSection("Html label")) {
-        @s.FieldFor(m => m.RequiredString).Label(new MvcHtmlString("<em>em</em>phasis"))
-        @s.FieldFor(m => m.SomeCheckbox).InlineLabel(new MvcHtmlString("<em>em</em>phasis"))
+        @s.FieldFor(m => m.RequiredString).Label(new HtmlString("<em>em</em>phasis"))
+        @s.FieldFor(m => m.SomeCheckbox).InlineLabel(new HtmlString("<em>em</em>phasis"))
+    }
+    
+    using (var s = f.BeginSection("No label")) {
+        @s.FieldFor(m => m.RequiredString).Label(new HtmlString("<strong>look at my html skillz</strong>")).WithoutLabel()
+        @s.FieldFor(m => m.RequiredString).Label("Label string").WithoutLabel()
+        @s.FieldFor(m => m.RequiredString).WithoutLabel()
     }
 }

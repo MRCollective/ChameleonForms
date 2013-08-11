@@ -312,6 +312,17 @@ namespace ChameleonForms.Component.Config
         bool EmptyItemHidden { get; }
 
         /// <summary>
+        /// Don't use a &lt;label&gt;, but still include the label text for the field.
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithoutLabel();
+
+        /// <summary>
+        /// Whether or not to use a &lt;label&gt;.
+        /// </summary>
+        bool HasLabel { get; }
+
+        /// <summary>
         /// Returns readonly field configuration from the current field configuration.
         /// </summary>
         /// <returns>A readonly field configuration</returns>
@@ -338,6 +349,7 @@ namespace ChameleonForms.Component.Config
             TrueString = "Yes";
             FalseString = "No";
             NoneString = "";
+            HasLabel = true;
             Bag = new ExpandoObject();
         }
 
@@ -436,7 +448,7 @@ namespace ChameleonForms.Component.Config
 
         public IFieldConfiguration Label(string labelText)
         {
-            LabelText = new HtmlString(HttpUtility.HtmlEncode(labelText)); ;
+            LabelText = new HtmlString(HttpUtility.HtmlEncode(labelText));
             return this;
         }
 
@@ -543,6 +555,14 @@ namespace ChameleonForms.Component.Config
         }
 
         public bool EmptyItemHidden { get; private set; }
+
+        public IFieldConfiguration WithoutLabel()
+        {
+            HasLabel = false;
+            return this;
+        }
+
+        public bool HasLabel { get; private set; }
 
         public IFieldConfiguration OverrideFieldHtml(IHtmlString html)
         {

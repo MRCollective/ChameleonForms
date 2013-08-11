@@ -89,6 +89,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Use_label_text_when_without_label()
+        {
+            var g = Arrange(m => m.RequiredString);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().WithoutLabel());
+
+            Assert.That(result.ToHtmlString(), Is.EqualTo("RequiredString"));
+        }
+
+        [Test]
         public void Use_correct_html_for_field_validation()
         {
             var g = Arrange(m => m.RequiredString);
