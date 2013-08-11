@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 using Humanizer;
@@ -8,18 +9,19 @@ namespace ChameleonForms.FieldGenerators.Handlers
 {
     internal class EnumListHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
-        public EnumListHandler(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public EnumListHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
             : base(fieldGenerator, fieldConfiguration)
         {}
 
-        public override HandleAction Handle()
+        public override bool CanHandle()
         {
-            if (!GetUnderlyingType().IsEnum)
-                return HandleAction.Continue;
+            return GetUnderlyingType().IsEnum;
+        }
 
+        public override IHtmlString GenerateFieldHtml()
+        {
             var selectList = GetSelectList();
-            var html = GetSelectListHtml(selectList);
-            return HandleAction.Return(html);
+            return GetSelectListHtml(selectList);
         }
 
         private IEnumerable<SelectListItem> GetSelectList()
@@ -34,6 +36,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                     Selected = IsSelected(i)
                 };
             }
-        } 
+        }
+
     }
 }

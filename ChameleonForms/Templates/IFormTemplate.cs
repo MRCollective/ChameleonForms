@@ -8,6 +8,7 @@ namespace ChameleonForms.Templates
     /// <summary>
     /// A Chameleon Forms form template renderer.
     /// </summary>
+    // todo: change to use IReadonlyFieldConfiguration and add the Bag
     public interface IFormTemplate
     {
         /// <summary>

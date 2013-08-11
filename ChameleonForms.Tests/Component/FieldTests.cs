@@ -44,9 +44,9 @@ namespace ChameleonForms.Tests.Component
             _f.Template.EndField().Returns(_endHtml);
 
             _g = Substitute.For<IFieldGenerator>();
-            _g.GetLabelHtml(_fc).Returns(_label);
-            _g.GetFieldHtml(_fc).Returns(_field);
-            _g.GetValidationHtml(_fc).Returns(_validation);
+            _g.GetLabelHtml(Arg.Any<IReadonlyFieldConfiguration>()).Returns(_label);
+            _g.GetFieldHtml(Arg.Any<IReadonlyFieldConfiguration>()).Returns(_field);
+            _g.GetValidationHtml(Arg.Any<IReadonlyFieldConfiguration>()).Returns(_validation);
             _g.Metadata.Returns(_metadata);
             _g.GetFieldId().Returns(FieldId);
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -33,18 +32,17 @@ namespace ChameleonForms.FieldGenerators
         public HtmlHelper<TModel> HtmlHelper { get; private set; }
         public Expression<Func<TModel, T>> FieldProperty { get; private set; }
 
-        public IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
+        public IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             string @for;
-            if (fieldConfiguration != null && fieldConfiguration.Attributes.Attributes.ContainsKey("id"))
+            if (fieldConfiguration != null && fieldConfiguration.HtmlAttributes.ContainsKey("id"))
             {
-                @for = fieldConfiguration.Attributes.Attributes["id"];
+                @for = fieldConfiguration.HtmlAttributes["id"].ToString();
             }
             else
             {
-                @for =
-                    HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
-                        ExpressionHelper.GetExpressionText(FieldProperty));
+                @for = HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
+                    ExpressionHelper.GetExpressionText(FieldProperty));
             }
 
             var labelText = (fieldConfiguration == null ? null : fieldConfiguration.LabelText)
@@ -60,20 +58,45 @@ namespace ChameleonForms.FieldGenerators
                 ?? ExpressionHelper.GetExpressionText(FieldProperty).Split('.').Last();
         }
 
-        public IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)
+        public IHtmlString GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return HtmlHelper.ValidationMessageFor(FieldProperty);
         }
 
         public IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration)
         {
+            return GetFieldHtml(PrepareFieldConfiguration(fieldConfiguration));
+        }
+
+        public IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
+        {
+            return GetLabelHtml(PrepareFieldConfiguration(fieldConfiguration));
+        }
+
+        public IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)
+        {
+            return GetValidationHtml(PrepareFieldConfiguration(fieldConfiguration));
+        }
+
+        public IReadonlyFieldConfiguration PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
+        {
             fieldConfiguration = fieldConfiguration ?? new FieldConfiguration();
-            if (fieldConfiguration.FieldHtml != null)
-                return fieldConfiguration.FieldHtml;
             if (!string.IsNullOrEmpty(Metadata.EditFormatString) && string.IsNullOrEmpty(fieldConfiguration.FormatString))
                 fieldConfiguration.WithFormatString(Metadata.EditFormatString);
             if (!string.IsNullOrEmpty(Metadata.NullDisplayText) && string.IsNullOrEmpty(fieldConfiguration.NoneString))
                 fieldConfiguration.WithNoneAs(Metadata.NullDisplayText);
+
+            FieldGeneratorHandlersRouter<TModel, T>.PrepareFieldConfiguration(this, fieldConfiguration);
+
+            return new ReadonlyFieldConfiguration(fieldConfiguration);
+        }
+
+        public IHtmlString GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        {
+            fieldConfiguration = fieldConfiguration ?? new ReadonlyFieldConfiguration(new FieldConfiguration());
+            if (fieldConfiguration.FieldHtml != null)
+                return fieldConfiguration.FieldHtml;
+            
             return FieldGeneratorHandlersRouter<TModel, T>.GetFieldHtml(this, fieldConfiguration);
         }
 

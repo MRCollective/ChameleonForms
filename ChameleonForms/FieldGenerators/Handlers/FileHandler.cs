@@ -6,17 +6,18 @@ namespace ChameleonForms.FieldGenerators.Handlers
 {
     internal class FileHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
-        public FileHandler(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public FileHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
             : base(fieldGenerator, fieldConfiguration)
         {}
 
-        public override HandleAction Handle()
+        public override bool CanHandle()
         {
-            if (!typeof(HttpPostedFileBase).IsAssignableFrom(FieldGenerator.Metadata.ModelType))
-                return HandleAction.Continue;
+            return typeof(HttpPostedFileBase).IsAssignableFrom(FieldGenerator.Metadata.ModelType);
+        }
 
-            var html = GetInputHtml(TextInputType.File);
-            return HandleAction.Return(html);
+        public override IHtmlString GenerateFieldHtml()
+        {
+            return GetInputHtml(TextInputType.File);
         }
     }
 }

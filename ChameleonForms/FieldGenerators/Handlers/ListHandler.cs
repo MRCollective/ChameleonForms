@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
@@ -10,33 +11,36 @@ namespace ChameleonForms.FieldGenerators.Handlers
 {
     internal class ListHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
-        public ListHandler(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public ListHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
             : base(fieldGenerator, fieldConfiguration)
         {}
 
-        public override HandleAction Handle()
+        public override bool CanHandle()
+        {
+            return FieldGenerator.Metadata.AdditionalValues.ContainsKey(ExistsInAttribute.ExistsKey)
+                && FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? == true;
+        }
+
+        public override IHtmlString GenerateFieldHtml()
         {
             var model = FieldGenerator.GetModel();
+            var selectList = GetSelectList(model);
+            return GetSelectListHtml(selectList);
+        }
 
-            if (!FieldGenerator.Metadata.AdditionalValues.ContainsKey(ExistsInAttribute.ExistsKey) ||
-                    FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? != true)
-                return HandleAction.Continue;
-
+        public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
+        {
             // There is a bug in the unobtrusive validation for numeric fields that are a radio button
             //  when there is a radio button for "no value selected" i.e. value="" then it can't be selected
             //  as an option since it tries to validate the empty string as a number.
             // This turns off unobtrusive validation in that circumstance
-            if (FieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && IsNumeric() && !HasMultipleValues())
-                FieldConfiguration.Attr("data-val", "false");
-
-            var selectList = GetSelectList(model);
-            var html = GetSelectListHtml(selectList);
-            return HandleAction.Return(html);
+            if (fieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && IsNumeric() && !HasMultipleValues())
+                fieldConfiguration.Attr("data-val", "false");
         }
 
         private IEnumerable<SelectListItem> GetSelectList(TModel model)
         {
-            var propertyName = (string) FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey];
+            var propertyName = (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey];
             var listProperty = typeof(TModel).GetProperty(propertyName);
             if (model == null)
                 throw new ModelNullException(FieldGenerator.GetFieldId());
@@ -59,6 +63,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 yield return new SelectListItem { Selected = IsSelected(value), Value = value.ToString(), Text = name.ToString() };
             }
         }
+
     }
     
     /// <summary>
