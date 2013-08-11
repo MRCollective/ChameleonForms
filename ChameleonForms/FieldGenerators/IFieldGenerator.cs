@@ -32,6 +32,12 @@ namespace ChameleonForms.FieldGenerators
         /// </summary>
         /// <returns>The current model</returns>
         TModel GetModel();
+
+        /// <summary>
+        /// Returns the displayable name of the field being generated.
+        /// </summary>
+        /// <returns>The id</returns>
+        string GetFieldDisplayName();
     }
 
     /// <summary>

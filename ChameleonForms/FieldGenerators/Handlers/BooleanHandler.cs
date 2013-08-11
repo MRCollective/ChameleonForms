@@ -38,10 +38,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
             AdjustHtmlForModelState(FieldConfiguration.Attributes);
             
             var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue() ?? false, FieldConfiguration.Attributes);
-            var labelHtml = FieldConfiguration.InlineLabelText == null
-                ? FieldGenerator.HtmlHelper.LabelFor(FieldGenerator.FieldProperty, FieldConfiguration.InlineLabelText)
-                : HtmlCreator.BuildLabel(GetFieldName(), FieldConfiguration.InlineLabelText, null)
-                ;
+            var labelHtml = HtmlCreator.BuildLabel(
+                GetFieldName(),
+                FieldConfiguration.InlineLabelText ?? new HtmlString(FieldGenerator.GetFieldDisplayName()),
+                null
+            );
 
             return new HtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
         }

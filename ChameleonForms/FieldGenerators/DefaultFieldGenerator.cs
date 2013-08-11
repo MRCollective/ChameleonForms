@@ -53,7 +53,7 @@ namespace ChameleonForms.FieldGenerators
             return HtmlCreator.BuildLabel(@for, labelText, null);
         }
 
-        private string GetFieldDisplayName()
+        public string GetFieldDisplayName()
         {
             return Metadata.DisplayName
                 ?? Metadata.PropertyName
