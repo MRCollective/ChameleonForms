@@ -310,6 +310,12 @@ namespace ChameleonForms.Component.Config
         /// Whether or not the empty item is hidden.
         /// </summary>
         bool EmptyItemHidden { get; }
+
+        /// <summary>
+        /// Returns readonly field configuration from the current field configuration.
+        /// </summary>
+        /// <returns>A readonly field configuration</returns>
+        IReadonlyFieldConfiguration ToReadonly();
     }
 
     /// <summary>
@@ -554,6 +560,11 @@ namespace ChameleonForms.Component.Config
         public string ToHtmlString()
         {
             return _field().ToHtmlString();
+        }
+
+        public IReadonlyFieldConfiguration ToReadonly()
+        {
+            return new ReadonlyFieldConfiguration(this);
         }
     }
 }

@@ -10,6 +10,11 @@ namespace ChameleonForms.Component.Config
     public interface IReadonlyFieldConfiguration
     {
         /// <summary>
+        /// A dynamic bag to allow for custom extensions using the field configuration.
+        /// </summary>
+        dynamic Bag { get; }
+
+        /// <summary>
         /// Attributes to add to the form element's HTML.
         /// </summary>
         // todo: consider making this a readonly dictionary
@@ -90,6 +95,11 @@ namespace ChameleonForms.Component.Config
         public ReadonlyFieldConfiguration(IFieldConfiguration fieldConfiguration)
         {
             _fieldConfiguration = fieldConfiguration ?? new FieldConfiguration();
+        }
+
+        public dynamic Bag
+        {
+            get { return _fieldConfiguration.Bag; }
         }
 
         public IDictionary<string, object> HtmlAttributes

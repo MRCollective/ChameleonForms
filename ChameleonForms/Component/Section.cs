@@ -46,7 +46,7 @@ namespace ChameleonForms.Component
         public IFieldConfiguration Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml = null, ModelMetadata metadata = null, bool isValid = true)
         {
             var fc = new FieldConfiguration();
-            fc.SetField(() => Form.Template.Field(labelHtml, elementHtml, validationHtml, metadata, fc, isValid));
+            fc.SetField(() => Form.Template.Field(labelHtml, elementHtml, validationHtml, metadata, new ReadonlyFieldConfiguration(fc), isValid));
             return fc;
         }
 

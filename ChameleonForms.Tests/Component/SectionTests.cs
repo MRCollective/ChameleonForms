@@ -93,7 +93,7 @@ namespace ChameleonForms.Tests.Component
             var validationHtml = Substitute.For<IHtmlString>();
             var metadata = new ModelMetadata(Substitute.For<ModelMetadataProvider>(), null, null, typeof(string), null);
             var expectedOutput = new HtmlString("output");
-            _f.Template.Field(labelHtml, elementHtml, validationHtml, metadata, Arg.Any<IFieldConfiguration>(), isValid).Returns(expectedOutput);
+            _f.Template.Field(labelHtml, elementHtml, validationHtml, metadata, Arg.Any<IReadonlyFieldConfiguration>(), isValid).Returns(expectedOutput);
             var s = Arrange(false);
 
             var config = s.Field(labelHtml, elementHtml, validationHtml, metadata, isValid: isValid);
