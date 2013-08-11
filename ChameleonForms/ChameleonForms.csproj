@@ -129,6 +129,7 @@
     <Compile Include="HumanizedLabels.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates\TwitterBootstrapFormTemplate.cs" />
     <Compile Include="Templates\DefaultFormTemplate.cs" />
     <Compile Include="HtmlAttributes.cs" />
     <Compile Include="Templates\HtmlCreator.cs" />
@@ -139,6 +140,11 @@
     </Compile>
     <Compile Include="Templates\IFormTemplate.cs" />
     <Compile Include="Templates\LazyHtmlAttributes.cs" />
+    <Compile Include="Templates\TwitterBootstrapHtmlHelpers.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TwitterBootstrapHtmlHelpers.cshtml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ChameleonForms.nuspec" />
@@ -146,6 +152,10 @@
     <Content Include="Templates\HtmlHelpers.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>HtmlHelpers.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Templates\TwitterBootstrapHtmlHelpers.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>TwitterBootstrapHtmlHelpers.generated.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup />

@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>@ViewBag.Title</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="@Url.Content("~/Content/bootstrap/css/bootstrap.min.css")" rel="stylesheet" media="screen">
+    </head>
+    <body>
+        <!-- JavaScript plugins (requires jQuery) -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="@Url.Content("~/Content/bootstrap/js/bootstrap.min.js")"></script>
+
+        <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+        <script src="@Url.Content("~/Content/bootstrap/js/respond.js")"></script>
+        
+        <div class="container">
+            @RenderBody()
+        </div>
+    </body>
+</html>

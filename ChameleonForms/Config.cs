@@ -11,7 +11,7 @@ namespace ChameleonForms
         /// Setup the default:
         /// - FormTemplate
         /// </summary>
-        public Config()
+        static Config()
         {
             Container = new Container();
             Container.Register<IFormTemplate>(r => new DefaultFormTemplate());

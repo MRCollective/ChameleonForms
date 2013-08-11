@@ -1,0 +1,98 @@
+﻿@using System.Web.Mvc
+@using Component.Config
+@using Enums
+@using Templates
+
+@* Generator: MvcHelper *@
+
+@* The @:'s are to stop compilation errors with the Razor engine due to unclosed HTML tags *@
+
+@helper EndForm() {
+@:    </form>
+}
+
+@helper BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
+@:    <fieldset@(htmlAttributes)>
+@:        <legend>@title</legend>
+@:        @leadingHtml
+}
+    
+@helper BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+{
+}
+
+@helper EndSection() {
+@:    </fieldset>
+}
+
+@helper EndNestedSection() {
+}
+
+@helper GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
+    if (fieldConfiguration != null) {
+        foreach (var html in fieldConfiguration.PrependedHtml) {@html}
+    }
+}
+
+@helper GetAppendedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
+    if (fieldConfiguration != null) {
+        foreach (var html in fieldConfiguration.AppendedHtml) {@html}
+    }
+}
+
+@helper GetHint(IReadonlyFieldConfiguration fieldConfiguration) {
+    if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<span class="help-block">@fieldConfiguration.Hint</span>}
+}
+
+@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata) {
+@:            <div class="form-group">
+@:            @labelHtml@(new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? " <em class=\"required\">*</em>" : ""))
+@:            @GetPrependedHtml(fieldConfiguration)@elementHtml@GetAppendedHtml(fieldConfiguration)@GetHint(fieldConfiguration) @validationHtml
+}
+
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration) {
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata)
+@:            </div>
+}
+
+@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration)
+{
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata)
+}
+
+@helper EndField() {
+@:            </div>
+}
+
+@helper BeginNavigation() {
+@:        <div class="form_navigation">
+}
+
+@helper EndNavigation() {
+@:        </div>
+}
+
+@helper BeginMessage(MessageType messageType, IHtmlString heading) {
+@:      <div class="@string.Format("{0}{1}", messageType.ToString().ToLower(), "_message")">
+@:          <h3>@heading</h3>
+@:          <div class="message">
+}
+
+@helper EndMessage() {
+@:          </div>
+@:      </div>
+}
+
+@helper MessageParagraph(IHtmlString paragraph) {
+@:    <p>
+@:        @paragraph
+@:    </p>
+}
+
+@helper List(IEnumerable<IHtmlString> items) {
+@:    <ul>
+foreach(var i in items) {
+@:        <li>@i</li>
+}
+@:    </ul>
+}

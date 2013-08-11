@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.AcceptanceTests", "ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj", "{67A08E34-2498-404D-9869-E13F4F496B3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Example.TwitterBootstrap", "ChameleonForms.Example.TwitterBootstrap\ChameleonForms.Example.TwitterBootstrap.csproj", "{01FD1029-CA36-4D6D-9FA6-1B340D50B57E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeAnalysis|Any CPU = CodeAnalysis|Any CPU
@@ -60,6 +62,12 @@ Global
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01FD1029-CA36-4D6D-9FA6-1B340D50B57E}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
+		{01FD1029-CA36-4D6D-9FA6-1B340D50B57E}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
+		{01FD1029-CA36-4D6D-9FA6-1B340D50B57E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01FD1029-CA36-4D6D-9FA6-1B340D50B57E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01FD1029-CA36-4D6D-9FA6-1B340D50B57E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01FD1029-CA36-4D6D-9FA6-1B340D50B57E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
