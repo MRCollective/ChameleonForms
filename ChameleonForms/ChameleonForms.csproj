@@ -39,6 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Humanizer.0.5\lib\NET40\Humanizer.dll</HintPath>
     </Reference>
+    <Reference Include="container">
+      <HintPath>..\packages\container.1.1.1\lib\net40\container.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -101,6 +104,7 @@
     <Compile Include="Component\Field.cs" />
     <Compile Include="Component\FormComponent.cs" />
     <Compile Include="Component\Message.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="Enums\DisplayType.cs" />
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Component\Section.cs" />
