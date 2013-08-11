@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Component\Config\FieldConfigurationTests.cs" />
+    <Compile Include="Component\Config\ReadonlyFieldConfigurationTests.cs" />
     <Compile Include="Component\NavigationTests.cs" />
     <Compile Include="Component\MessageTests.cs" />
     <Compile Include="Component\FieldTests.cs" />
