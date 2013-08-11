@@ -79,6 +79,11 @@ namespace ChameleonForms.Component.Config
         /// Whether or not the empty item is hidden.
         /// </summary>
         bool EmptyItemHidden { get; }
+
+        /// <summary>
+        /// Whether or not to use a &lt;label&gt;.
+        /// </summary>
+        bool HasLabel { get; }
     }
 
     /// <summary>
@@ -165,6 +170,11 @@ namespace ChameleonForms.Component.Config
         public bool EmptyItemHidden
         {
             get { return _fieldConfiguration.EmptyItemHidden; }
+        }
+
+        public bool HasLabel
+        {
+            get { return _fieldConfiguration.HasLabel; }
         }
     }
 }

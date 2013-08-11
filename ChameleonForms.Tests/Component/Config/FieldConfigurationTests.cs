@@ -329,5 +329,21 @@ namespace ChameleonForms.Tests.Component.Config
 
             Assert.That(fc.FormatString, Is.EqualTo("{0}"));
         }
+
+        [Test]
+        public void Have_label_by_default()
+        {
+            var fc = Field.Configure();
+
+            Assert.That(fc.HasLabel, Is.True);
+        }
+
+        [Test]
+        public void Set_no_label()
+        {
+            var fc = Field.Configure().WithoutLabel();
+
+            Assert.That(fc.HasLabel, Is.False);
+        }
     }
 }
