@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 
@@ -6,17 +7,18 @@ namespace ChameleonForms.FieldGenerators.Handlers
 {
     internal class PasswordHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
-        public PasswordHandler(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public PasswordHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
             : base(fieldGenerator, fieldConfiguration)
         {}
 
-        public override HandleAction Handle()
+        public override bool CanHandle()
         {
-            if (FieldGenerator.Metadata.DataTypeName != DataType.Password.ToString())
-                return HandleAction.Continue;
-            
-            var html = GetInputHtml(TextInputType.Password);
-            return HandleAction.Return(html);
+            return FieldGenerator.Metadata.DataTypeName == DataType.Password.ToString();
+        }
+
+        public override IHtmlString GenerateFieldHtml()
+        {
+            return GetInputHtml(TextInputType.Password);
         }
     }
 }

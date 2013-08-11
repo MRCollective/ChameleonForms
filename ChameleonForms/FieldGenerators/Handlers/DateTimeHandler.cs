@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 
@@ -6,20 +7,24 @@ namespace ChameleonForms.FieldGenerators.Handlers
 {
     internal class DateTimeHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
-        public DateTimeHandler(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public DateTimeHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
             : base(fieldGenerator, fieldConfiguration)
         { }
 
-        public override HandleAction Handle()
+        public override bool CanHandle()
         {
-            if (typeof(T) != typeof(DateTime) && typeof(T) != typeof(DateTime?))
-                return HandleAction.Continue;
+            return GetUnderlyingType() == typeof (DateTime);
+        }
 
+        public override IHtmlString GenerateFieldHtml()
+        {
+            return GetInputHtml(TextInputType.Text);
+        }
+
+        public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
+        {
             if (!string.IsNullOrEmpty(FieldGenerator.Metadata.DisplayFormatString))
-                FieldConfiguration.Attr("data-val-format", FieldGenerator.Metadata.DisplayFormatString.Replace("{0:", "").Replace("}", ""));
-
-            var html = GetInputHtml(TextInputType.Text);
-            return HandleAction.Return(html);
+                fieldConfiguration.Attr("data-val-format", FieldGenerator.Metadata.DisplayFormatString.Replace("{0:", "").Replace("}", ""));
         }
     }
 }

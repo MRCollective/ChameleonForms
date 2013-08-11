@@ -36,34 +36,34 @@
 @:            </dd>
 }
 
-@helper GetPrependedHtml(IFieldConfiguration fieldConfiguration) {
+@helper GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
     if (fieldConfiguration != null) {
         foreach (var html in fieldConfiguration.PrependedHtml) {@html}
     }
 }
 
-@helper GetAppendedHtml(IFieldConfiguration fieldConfiguration) {
+@helper GetAppendedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
     if (fieldConfiguration != null) {
         foreach (var html in fieldConfiguration.AppendedHtml) {@html}
     }
 }
 
-@helper GetHint(IFieldConfiguration fieldConfiguration) {
+@helper GetHint(IReadonlyFieldConfiguration fieldConfiguration) {
     if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="hint">@fieldConfiguration.Hint</div>}
 }
 
-@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata) {
+@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata) {
 @:            <dt>@labelHtml@(new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? " <em class=\"required\">*</em>" : ""))</dt>
 @:            <dd>
 @:                @GetPrependedHtml(fieldConfiguration)@elementHtml@GetAppendedHtml(fieldConfiguration)@GetHint(fieldConfiguration) @validationHtml
 }
 
-@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration) {
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration) {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata)
 @:            </dd>
 }
 
-@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IFieldConfiguration fieldConfiguration)
+@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration)
 {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata)
 @:                <dl>

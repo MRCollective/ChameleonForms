@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web;
 using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
 
@@ -6,17 +7,21 @@ namespace ChameleonForms.FieldGenerators.Handlers
 {
     internal class TextAreaHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
-        public TextAreaHandler(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public TextAreaHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
             : base(fieldGenerator, fieldConfiguration)
         {}
 
-        public override HandleAction Handle()
+        public override bool CanHandle()
         {
-            if (FieldGenerator.Metadata.DataTypeName != DataType.MultilineText.ToString())
-                return HandleAction.Continue;
+            return FieldGenerator.Metadata.DataTypeName == DataType.MultilineText.ToString();
+        }
 
-            var html = FieldGenerator.HtmlHelper.TextAreaFor(FieldGenerator.FieldProperty, FieldConfiguration.Attributes.ToDictionary());
-            return HandleAction.Return(html);
+        public override IHtmlString GenerateFieldHtml()
+        {
+            return FieldGenerator.HtmlHelper.TextAreaFor(
+                FieldGenerator.FieldProperty,
+                FieldConfiguration.HtmlAttributes
+            );
         }
     }
 }

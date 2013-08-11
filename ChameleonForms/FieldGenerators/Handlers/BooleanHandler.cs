@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -11,21 +10,22 @@ namespace ChameleonForms.FieldGenerators.Handlers
 {
     internal class BooleanHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
-        public BooleanHandler(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public BooleanHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
             : base(fieldGenerator, fieldConfiguration)
         {}
 
-        public override HandleAction Handle()
+        public override bool CanHandle()
         {
-            if (FieldGenerator.Metadata.ModelType != typeof(bool) && FieldGenerator.Metadata.ModelType != typeof(bool?))
-                return HandleAction.Continue;
+            return GetUnderlyingType() == typeof(bool);
+        }
 
+        public override IHtmlString GenerateFieldHtml()
+        {
             if (FieldConfiguration.DisplayType == FieldDisplayType.Default && FieldGenerator.Metadata.ModelType == typeof(bool))
-                return HandleAction.Return(GetSingleCheckboxHtml());
+                return GetSingleCheckboxHtml();
 
             var selectList = GetBooleanSelectList();
-            var html = GetSelectListHtml(selectList);
-            return HandleAction.Return(html);
+            return GetSelectListHtml(selectList);
         }
 
         private bool? GetValue()
@@ -35,9 +35,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         private IHtmlString GetSingleCheckboxHtml()
         {
-            AdjustHtmlForModelState(FieldConfiguration.Attributes);
-            
-            var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue() ?? false, FieldConfiguration.Attributes);
+            var attrs = new HtmlAttributes(FieldConfiguration.HtmlAttributes);
+            AdjustHtmlForModelState(attrs);
+            var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue() ?? false, attrs);
             var labelHtml = HtmlCreator.BuildLabel(
                 GetFieldName(),
                 FieldConfiguration.InlineLabelText ?? new HtmlString(FieldGenerator.GetFieldDisplayName()),
