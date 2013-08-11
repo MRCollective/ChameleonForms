@@ -48,6 +48,9 @@ namespace ChameleonForms.FieldGenerators
             var labelText = (fieldConfiguration == null ? null : fieldConfiguration.LabelText)
                 ?? new HtmlString(GetFieldDisplayName());
 
+            if (fieldConfiguration != null && !fieldConfiguration.HasLabel)
+                return labelText;
+
             return HtmlCreator.BuildLabel(@for, labelText, null);
         }
 
