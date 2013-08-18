@@ -72,14 +72,15 @@
 @:        </div>
 }
 
-@helper BeginMessage(MessageType messageType, IHtmlString heading) {
-@:      <div class="@string.Format("{0}{1}", messageType.ToString().ToLower(), "_message")">
-@:          <h3>@heading</h3>
-@:          <div class="message">
+@helper BeginMessage(TwitterAlertType messageType, IHtmlString heading) {
+@:      <div class="alert @string.Format("alert-{0}", messageType.ToString().ToLower())">
+            if (heading != null)
+            {
+@:          <p><strong>@heading</strong></p>
+            }
 }
 
 @helper EndMessage() {
-@:          </div>
 @:      </div>
 }
 

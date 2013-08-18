@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
@@ -66,7 +67,7 @@ namespace ChameleonForms.Templates
 
         public virtual IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
         {
-            return TwitterBootstrapHtmlHelpers.BeginMessage(messageType, heading);
+            return TwitterBootstrapHtmlHelpers.BeginMessage(messageType.ToTwitterAlertType(), heading);
         }
 
         public virtual IHtmlString EndMessage()
