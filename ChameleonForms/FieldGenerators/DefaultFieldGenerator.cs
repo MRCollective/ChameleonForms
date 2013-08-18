@@ -21,16 +21,18 @@ namespace ChameleonForms.FieldGenerators
         /// </summary>
         /// <param name="htmlHelper">The HTML helper for the current view</param>
         /// <param name="fieldProperty">Expression to identify the property to generate the field for</param>
-        public DefaultFieldGenerator(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, T>> fieldProperty)
+        public DefaultFieldGenerator(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, T>> fieldProperty, IFormTemplate template)
         {
             HtmlHelper = htmlHelper;
             FieldProperty = fieldProperty;
+            Template = template;
             Metadata = ModelMetadata.FromLambdaExpression(FieldProperty, HtmlHelper.ViewData);
         }
 
         public ModelMetadata Metadata { get; private set; }
         public HtmlHelper<TModel> HtmlHelper { get; private set; }
         public Expression<Func<TModel, T>> FieldProperty { get; private set; }
+        public IFormTemplate Template { get; private set; }
 
         public IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
@@ -94,6 +96,10 @@ namespace ChameleonForms.FieldGenerators
                 fieldConfiguration.WithFormatString(Metadata.EditFormatString);
             if (!string.IsNullOrEmpty(Metadata.NullDisplayText) && string.IsNullOrEmpty(fieldConfiguration.NoneString))
                 fieldConfiguration.WithNoneAs(Metadata.NullDisplayText);
+
+            // Let the template mod the fc here:
+            Template.PrepareFieldConfiguration(this, fieldConfiguration);
+            fieldConfiguration.AddClass("form-control");
 
             FieldGeneratorHandlersRouter<TModel, T>.PrepareFieldConfiguration(this, fieldConfiguration);
 

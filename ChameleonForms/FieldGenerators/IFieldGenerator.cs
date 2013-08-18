@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
+using ChameleonForms.Templates;
 
 namespace ChameleonForms.FieldGenerators
 {
@@ -49,6 +50,11 @@ namespace ChameleonForms.FieldGenerators
         /// The metadata for the form field.
         /// </summary>
         ModelMetadata Metadata { get; }
+
+        /// <summary>
+        /// The form template for the form. (So it can alter the field configuration.)
+        /// </summary>
+        IFormTemplate Template { get; }
 
         /// <summary>
         /// Turns the given <see cref="IFieldConfiguration"/> into a <see cref="ReadonlyFieldConfiguration"/> ready to use for generating the form field.

@@ -2,6 +2,7 @@
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using System.Web.Mvc;
+using ChameleonForms.FieldGenerators;
 
 namespace ChameleonForms.Templates
 {
@@ -10,6 +11,16 @@ namespace ChameleonForms.Templates
     /// </summary>
     public interface IFormTemplate
     {
+        /// <summary>
+        /// Allows the template the modify the field configuration
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="fieldGenerator"></param>
+        /// <param name="fieldConfiguration"></param>
+        /// <returns></returns>
+        void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration);
+
         /// <summary>
         /// Creates the starting HTML for a form.
         /// </summary>

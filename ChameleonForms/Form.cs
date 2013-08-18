@@ -71,7 +71,7 @@ namespace ChameleonForms
 
         public virtual IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property)
         {
-            return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property);
+            return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property, Template);
         }
 
         public void Dispose()
