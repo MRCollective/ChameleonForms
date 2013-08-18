@@ -42,12 +42,12 @@ namespace ChameleonForms.Templates
 
         public virtual IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
-            return TwitterBootstrapHtmlHelpers.BeginNestedSection(title, leadingHtml, htmlAttributes);
+            throw new NotSupportedException("Twitter bootstrap does not support nested form sections.");
         }
 
         public virtual IHtmlString EndNestedSection()
         {
-            return TwitterBootstrapHtmlHelpers.EndNestedSection();
+            throw new NotSupportedException("Twitter bootstrap does not support nested form sections.");
         }
 
         public virtual IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
@@ -57,12 +57,12 @@ namespace ChameleonForms.Templates
 
         public virtual IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
-            return TwitterBootstrapHtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
+            throw new NotSupportedException("Twitter bootstrap does not support nested form fields.");
         }
 
         public virtual IHtmlString EndField()
         {
-            return TwitterBootstrapHtmlHelpers.EndField();
+            throw new NotSupportedException("Twitter bootstrap does not support nested form fields.");
         }
 
         public virtual IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
