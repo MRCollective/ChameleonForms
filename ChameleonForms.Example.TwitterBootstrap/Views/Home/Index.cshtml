@@ -4,32 +4,33 @@
 @model ChameleonForms.Example.TwitterBootstrap.Controllers.ViewModelExample
 
 @{
-    ViewBag.Title = "Example Form";
+    ViewBag.Title = "Chameleon Forms - Twitter Bootstrap - Example Form";
 }
 
 @helper InstructionalText() {
-    <p>Leading instructional text.</p>
+    <p class="text-info">Leading instructional text.</p>
 }
 
-<h1>Example Form 1</h1>
+<h1>Twitter Bootstrap Example Form</h1>
 
 @using (var f = Html.BeginChameleonForm(method: FormMethod.Post, enctype: EncType.Multipart))
 {
+    using (var m = f.BeginMessage(MessageType.Success, "Success!"))
+    {
+        @m.Paragraph("Hello!!!!!!!!")
+    }
+    using (var m = f.BeginMessage(MessageType.Warning, "Lookout!")) {}
+    using (var m = f.BeginMessage(MessageType.Failure, null))
+    {
+        @m.Paragraph(new HtmlString("<strong>Critical Error</strong> Could not find ketchup."))
+    }
     using (var s = f.BeginSection("My Section!", InstructionalText()))
     {
-        @s.FieldFor(m => m.RequiredStringField)
-        @s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
-        @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label")
-        @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
-        @s.FieldFor(m => m.SomeCheckbox).AsList().WithTrueAs("True").WithFalseAs("False")
-        @s.FieldFor(m => m.SomeCheckbox).AsDropDown()
-        @s.FieldFor(m => m.ListId)
-        @s.FieldFor(m => m.ListId).AsList()
-        @s.FieldFor(m => m.SomeEnums)
-        @s.FieldFor(m => m.SomeEnumsList).AsList()
-        @s.FieldFor(m => m.Decimal).WithFormatString("{0:F2}")
-        @s.FieldFor(m => m.DecimalWithFormatStringAttribute)
-        @s.FieldFor(m => m.NullableInt)
+        @s.FieldFor(m => m.RequiredStringField).Placeholder("placeholder")
+        @s.FieldFor(m => m.SomeEnum).Label("Choose one").WithHint("Helpful text about the above choice.")
+        @s.FieldFor(m => m.SomeEnums).Label(new HtmlString("Choose <em>multiple</em>"))
+        @s.FieldFor(m => m.TextAreaField).Rows(3)
+        // Todo: Checkboxes
     }
     using (var n = f.BeginNavigation())
     {

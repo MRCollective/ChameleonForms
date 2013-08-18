@@ -28,8 +28,6 @@ namespace ChameleonForms.Example.TwitterBootstrap.Controllers
         [Required]
         public string RequiredStringField { get; set; }
 
-        public string NestedField { get; set; }
-
         public SomeEnum SomeEnum { get; set; }
 
         public List<SomeEnum> SomeEnums { get; set; }
@@ -64,7 +62,7 @@ namespace ChameleonForms.Example.TwitterBootstrap.Controllers
 
     public enum SomeEnum
     {
-        Value1,
+        FirstValue,
         [Description("Friendly name")]
         ValueWithDescription,
         SomeOtherValue
