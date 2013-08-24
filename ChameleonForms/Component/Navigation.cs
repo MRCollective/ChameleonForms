@@ -61,13 +61,13 @@ namespace ChameleonForms.Component
         /// </remarks>
         /// <param name="name">The name (and id - use htmlAttributes to overwrite) of the element</param>
         /// <param name="value">The value to submit with the form</param>
-        /// <param name="buttonText">If you want to use a &lt;button&gt; rather than &lt;input&gt; then specify this to set the text the user sees</param>
+        /// <param name="content">If you want to use a &lt;button&gt; rather than &lt;input&gt; then specify this to set the text the user sees</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
-        public IHtmlString Submit(string name, string value, IHtmlString buttonText = null, HtmlAttributes htmlAttributes = null)
+        public IHtmlString Submit(string name, string value, IHtmlString content = null, HtmlAttributes htmlAttributes = null)
         {
-            if (buttonText != null)
-                return HtmlCreator.BuildButton(buttonText, "submit", name, value, htmlAttributes);
+            if (content != null)
+                return HtmlCreator.BuildButton(content, "submit", name, value, htmlAttributes);
 
             return HtmlCreator.BuildInput(name, value, "submit", htmlAttributes);
         }
