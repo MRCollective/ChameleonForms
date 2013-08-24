@@ -45,7 +45,7 @@ namespace ChameleonForms.Component
         /// <returns>The HTML for the paragraph</returns>
         public virtual IHtmlString Paragraph(string paragraph)
         {
-            return Form.Template.MessageParagraph(new HtmlString(HttpUtility.HtmlEncode(paragraph)));
+            return Form.Template.MessageParagraph(paragraph.ToHtml());
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace ChameleonForms.Component
         /// <returns>The message</returns>
         public static Message<TModel, TTemplate> BeginMessage<TModel, TTemplate>(this IForm<TModel, TTemplate> form, MessageType messageType, string heading) where TTemplate : IFormTemplate
         {
-            return new Message<TModel, TTemplate>(form, messageType, new HtmlString(HttpUtility.HtmlEncode(heading)));
+            return new Message<TModel, TTemplate>(form, messageType, heading.ToHtml());
         }
     }
 }

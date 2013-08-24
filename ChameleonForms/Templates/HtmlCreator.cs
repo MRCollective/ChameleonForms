@@ -43,7 +43,7 @@ namespace ChameleonForms.Templates
         /// <returns>The HTML for the submit button</returns>
         public static IHtmlString BuildButton(string text, string type = null, string id = null, string value = null, HtmlAttributes htmlAttributes = null)
         {
-            return BuildButton(new HtmlString(HttpUtility.HtmlEncode(text)), type, id, value, htmlAttributes);
+            return BuildButton(text.ToHtml(), type, id, value, htmlAttributes);
         }
 
         /// <summary>
