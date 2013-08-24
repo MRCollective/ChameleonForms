@@ -108,8 +108,11 @@ namespace ChameleonForms.Templates
         public static IHtmlString BuildInput(string name, string value, string type, HtmlAttributes htmlAttributes)
         {
             var t = new TagBuilder("input");
-            t.Attributes.Add("name", name);
-            t.GenerateId(name);
+            if (name != null)
+            {
+                t.Attributes.Add("name", name);
+                t.GenerateId(name);
+            }
             t.Attributes.Add("value", value);
             t.Attributes.Add("type", type);
             if (htmlAttributes != null)

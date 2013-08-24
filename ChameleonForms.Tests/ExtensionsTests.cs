@@ -23,5 +23,13 @@ namespace ChameleonForms.Tests
 
             Assert.That(h.ToHtmlString(), Is.EqualTo("as&lt;D&gt;Sf&amp;1&quot;2 3$"));
         }
+
+        [Test]
+        public void Encode_null_or_empty_string_as_empty_html([Values(null, "")] string str)
+        {
+            var h = str.ToHtml();
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(string.Empty));
+        }
     }
 }

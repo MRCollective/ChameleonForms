@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
@@ -78,6 +79,21 @@ namespace ChameleonForms.Templates
         public virtual IHtmlString EndNavigation()
         {
             return HtmlHelpers.EndNavigation();
+        }
+
+        /// <remarks>
+        /// Uses an &lt;input&gt; by default so the submitted value works in IE7.
+        /// <see cref="http://rommelsantor.com/clog/2012/03/12/fixing-the-ie7-submit-value/"/>
+        /// </remarks>
+        public virtual IHtmlString Button(IHtmlString content, string type, string id, string value, HtmlAttributes htmlAttributes)
+        {
+            if (content == null && value == null)
+                throw new ArgumentNullException("content", "Expected one of content or value to be specified");
+
+            if (content == null)
+                return HtmlCreator.BuildInput(id, value, type ?? "button", htmlAttributes);
+
+            return HtmlCreator.BuildButton(content, type, id, value, htmlAttributes);
         }
     }
 }

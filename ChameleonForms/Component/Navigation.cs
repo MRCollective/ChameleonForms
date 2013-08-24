@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component
@@ -38,7 +39,7 @@ namespace ChameleonForms.Component
         /// <returns>The HTML for the submit button</returns>
         public IHtmlString Submit(string text, HtmlAttributes htmlAttributes = null)
         {
-            return HtmlCreator.BuildButton(text, "submit", htmlAttributes: htmlAttributes);
+            return Submit(text.ToHtml(), htmlAttributes);
         }
 
         /// <summary>
@@ -49,27 +50,26 @@ namespace ChameleonForms.Component
         /// <returns>The HTML for the submit button</returns>
         public IHtmlString Submit(IHtmlString content, HtmlAttributes htmlAttributes = null)
         {
-            return HtmlCreator.BuildButton(content, "submit", htmlAttributes: htmlAttributes);
+            if (content == null)
+                throw new ArgumentNullException("content", "Content must be specified");
+
+            return Form.Template.Button(content, "submit", null, null, htmlAttributes);
         }
 
         /// <summary>
-        /// Creates the HTML for a submit &lt;input&gt; (or optionally &lt;button&gt;) that submits a value in the form post when clicked.
+        /// Creates the HTML for a submit button that submits a value in the form post when clicked.
         /// </summary>
-        /// <remarks>
-        /// Uses an &lt;input&gt; by default so the submitted value works in IE7.
-        /// <see cref="http://rommelsantor.com/clog/2012/03/12/fixing-the-ie7-submit-value/"/>
-        /// </remarks>
-        /// <param name="name">The name (and id - use htmlAttributes to overwrite) of the element</param>
+        /// <param name="name">The name of the element</param>
         /// <param name="value">The value to submit with the form</param>
-        /// <param name="content">If you want to use a &lt;button&gt; rather than &lt;input&gt; then specify this to set the text the user sees</param>
+        /// <param name="content">The text the user sees (leave as null if you want the user to see the value instead)</param>
         /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
         /// <returns>The HTML for the submit button</returns>
         public IHtmlString Submit(string name, string value, IHtmlString content = null, HtmlAttributes htmlAttributes = null)
         {
-            if (content != null)
-                return HtmlCreator.BuildButton(content, "submit", name, value, htmlAttributes);
+            if (value == null)
+                throw new ArgumentNullException("value", "Expected value to be specified");
 
-            return HtmlCreator.BuildInput(name, value, "submit", htmlAttributes);
+            return Form.Template.Button(content, "submit", name, value, htmlAttributes);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace ChameleonForms.Component
         /// <returns>The HTML for the button</returns>
         public IHtmlString Button(string text, HtmlAttributes htmlAttributes = null)
         {
-            return HtmlCreator.BuildButton(text, htmlAttributes: htmlAttributes);
+            return Button(text.ToHtml(), htmlAttributes);
         }
 
         /// <summary>
@@ -91,18 +91,10 @@ namespace ChameleonForms.Component
         /// <returns>The HTML for the button</returns>
         public IHtmlString Button(IHtmlString content, HtmlAttributes htmlAttributes = null)
         {
-            return HtmlCreator.BuildButton(content, htmlAttributes: htmlAttributes);
-        }
+            if (content == null)
+                throw new ArgumentNullException("content", "Content must be specified");
 
-        /// <summary>
-        /// Creates the HTML for a reset &lt;button&gt;.
-        /// </summary>
-        /// <param name="content">The content to display for the button</param>
-        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
-        /// <returns>The HTML for the reset button</returns>
-        public IHtmlString Reset(IHtmlString content, HtmlAttributes htmlAttributes = null)
-        {
-            return HtmlCreator.BuildButton(content, "reset", htmlAttributes: htmlAttributes);
+            return Form.Template.Button(content, null, null, null, htmlAttributes);
         }
 
         /// <summary>
@@ -113,7 +105,21 @@ namespace ChameleonForms.Component
         /// <returns>The HTML for the reset button</returns>
         public IHtmlString Reset(string text, HtmlAttributes htmlAttributes = null)
         {
-            return HtmlCreator.BuildButton(text, "reset", htmlAttributes: htmlAttributes);
+            return Reset(text.ToHtml(), htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates the HTML for a reset &lt;button&gt;.
+        /// </summary>
+        /// <param name="content">The content to display for the button</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
+        /// <returns>The HTML for the reset button</returns>
+        public IHtmlString Reset(IHtmlString content, HtmlAttributes htmlAttributes = null)
+        {
+            if (content == null)
+                throw new ArgumentNullException("content", "Content must be specified");
+
+            return Form.Template.Button(content, "reset", null, null, htmlAttributes);
         }
     }
 

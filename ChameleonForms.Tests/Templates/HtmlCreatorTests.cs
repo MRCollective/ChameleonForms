@@ -43,5 +43,13 @@ namespace ChameleonForms.Tests.Templates
 
             HtmlApprovals.VerifyHtml(h.ToHtmlString());
         }
+
+        [Test]
+        public void Generate_input_without_name()
+        {
+            var h = HtmlCreator.BuildInput(null, "value&", "submit", new HtmlAttributes().AddClass("lol"));
+
+            HtmlApprovals.VerifyHtml(h.ToHtmlString());
+        }
     }
 }

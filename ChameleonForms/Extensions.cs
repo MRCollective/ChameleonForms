@@ -14,7 +14,7 @@ namespace ChameleonForms
         /// <returns>The IHtmlString</returns>
         public static IHtmlString ToHtml(this string content)
         {
-            return new HtmlString(HttpUtility.HtmlEncode(content));
+            return new HtmlString(HttpUtility.HtmlEncode(content ?? ""));
         }
     }
 }
