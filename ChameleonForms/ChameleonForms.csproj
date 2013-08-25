@@ -118,6 +118,7 @@
       <DependentUpon>HtmlHelpers.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\IFormTemplate.cs" />
+    <Compile Include="Templates\LazyHtmlAttributes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ChameleonForms.nuspec" />

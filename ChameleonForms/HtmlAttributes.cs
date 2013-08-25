@@ -177,7 +177,7 @@ namespace ChameleonForms
             return new HtmlAttributes(attributes);
         }
 
-        public string ToHtmlString()
+        public virtual string ToHtmlString()
         {
             var sb = new StringBuilder();
             foreach (var attr in _tagBuilder.Attributes)

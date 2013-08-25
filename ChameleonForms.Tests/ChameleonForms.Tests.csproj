@@ -132,6 +132,7 @@
     <Compile Include="HumanizedLabelsTests.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinderShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates\LazyHtmlAttributesTests.cs" />
     <Content Include="Scripts\fixtures\DateTimeValidationFixtures.js" />
     <Compile Include="Templates\DefaultFormTemplateTests.cs" />
     <Compile Include="Templates\HtmlCreatorTests.cs" />
