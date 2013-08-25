@@ -85,7 +85,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 return FieldGenerator.HtmlHelper.PasswordFor(FieldGenerator.FieldProperty, FieldConfiguration.HtmlAttributes);
 
             var attrs = new HtmlAttributes(FieldConfiguration.HtmlAttributes);
-            attrs.Attr(type => inputType.ToString().ToLower());
+            if (!attrs.Attributes.ContainsKey("type"))
+                attrs.Attr(type => inputType.ToString().ToLower());
             return !string.IsNullOrEmpty(FieldConfiguration.FormatString)
                 ? FieldGenerator.HtmlHelper.TextBoxFor(FieldGenerator.FieldProperty, FieldConfiguration.FormatString, attrs.ToDictionary())
                 : FieldGenerator.HtmlHelper.TextBoxFor(FieldGenerator.FieldProperty, attrs.ToDictionary());
