@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web;
 using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
 using NUnit.Framework;
@@ -103,6 +104,36 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
             var g = Arrange(m => m.OptionalNullableEnumList, m => m.OptionalNullableEnumList = new List<TestEnum?> { TestEnum.Simplevalue, TestEnum.ValueWithDescriptionAttribute });
 
             var result = g.GetFieldHtml(ExampleFieldConfiguration);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_label_for_enum_list()
+        {
+            var g = Arrange(m => m.RequiredEnum);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_label_for_enum_list_with_overridden_label()
+        {
+            var g = Arrange(m => m.RequiredEnum);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().AsList().Label(new HtmlString("<strong>lol</strong>")));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_label_for_enum_dropdown()
+        {
+            var g = Arrange(m => m.RequiredEnum);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().AsDropDown());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
