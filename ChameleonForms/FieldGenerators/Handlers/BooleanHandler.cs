@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
@@ -26,6 +25,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
             var selectList = GetBooleanSelectList();
             return GetSelectListHtml(selectList);
+        }
+
+        public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
+        {
+            // If a list is being displayed there is no element for the label to point to so drop it
+            if (fieldConfiguration.DisplayType == FieldDisplayType.List)
+                fieldConfiguration.WithoutLabel();
         }
 
         private bool? GetValue()

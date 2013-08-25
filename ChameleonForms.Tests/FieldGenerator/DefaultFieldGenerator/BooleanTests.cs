@@ -1,4 +1,5 @@
-﻿using ApprovalTests.Html;
+﻿using System.Web;
+using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
 using NUnit.Framework;
 
@@ -146,5 +147,44 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
 
+        [Test]
+        public void Use_correct_html_for_label_for_boolean_list()
+        {
+            var g = Arrange(m => m.RequiredNullableBoolean);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_label_for_boolean_list_with_overridden_label()
+        {
+            var g = Arrange(m => m.RequiredNullableBoolean);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().AsList().Label(new HtmlString("<strong>lol</strong>")));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_label_for_boolean_dropdown()
+        {
+            var g = Arrange(m => m.RequiredNullableBoolean);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().AsDropDown());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_label_for_boolean_checkbox()
+        {
+            var g = Arrange(m => m.RequiredNullableBoolean);
+
+            var result = g.GetLabelHtml(new FieldConfiguration());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
     }
 }
