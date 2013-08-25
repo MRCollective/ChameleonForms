@@ -36,6 +36,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
             // This turns off unobtrusive validation in that circumstance
             if (fieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && IsNumeric() && !HasMultipleValues())
                 fieldConfiguration.Attr("data-val", "false");
+
+            // If a list is being displayed there is no element for the label to point to so drop it
+            if (fieldConfiguration.DisplayType == FieldDisplayType.List)
+                fieldConfiguration.WithoutLabel();
         }
 
         private IEnumerable<SelectListItem> GetSelectList(TModel model)
