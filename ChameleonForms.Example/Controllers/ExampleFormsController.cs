@@ -189,6 +189,7 @@ namespace ChameleonForms.Example.Controllers
 
         public bool SomeCheckbox { get; set; }
 
+        [ReadOnly(true)]
         public List<ListItem> List { get; set; }
         [ExistsIn("List", "Id", "Name")]
         public int ListId { get; set; }
