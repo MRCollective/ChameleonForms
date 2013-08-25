@@ -19,7 +19,7 @@ namespace ChameleonForms.Tests.Templates
         [Test]
         public void Use_the_given_generator_when_returning_html_string()
         {
-            var h = new LazyHtmlAttributes(() => new HtmlString("asdf"));
+            var h = new LazyHtmlAttributes(_ => new HtmlString("asdf"));
             h.AddClass("lol");
 
             Assert.That(h.ToHtmlString(), Is.EqualTo("asdf"));
@@ -29,9 +29,8 @@ namespace ChameleonForms.Tests.Templates
         public void Lazily_evaluate_the_html_generator()
         {
             var t = new TagBuilder("p");
-            var h = new LazyHtmlAttributes(() => new HtmlString(t.ToString(TagRenderMode.Normal)));
+            var h = new LazyHtmlAttributes(hh => { t.MergeAttributes(hh.Attributes); return new HtmlString(t.ToString(TagRenderMode.Normal));});
             h.AddClass("lol");
-            t.MergeAttributes(h.Attributes);
             t.InnerHtml = "hi";
 
             Assert.That(h.ToHtmlString(), Is.EqualTo("<p class=\"lol\">hi</p>"));

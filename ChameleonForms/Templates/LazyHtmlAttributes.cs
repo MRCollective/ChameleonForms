@@ -8,13 +8,13 @@ namespace ChameleonForms.Templates
     /// </summary>
     public class LazyHtmlAttributes : HtmlAttributes
     {
-        private readonly Func<IHtmlString> _htmlGenerator;
+        private readonly Func<HtmlAttributes, IHtmlString> _htmlGenerator;
 
         /// <summary>
         /// Construct a LazyHtmlAttributes class.
         /// </summary>
         /// <param name="htmlGenerator">The generator to use to generate the HTML when .ToHtmlString() is called</param>
-        public LazyHtmlAttributes(Func<IHtmlString> htmlGenerator)
+        public LazyHtmlAttributes(Func<HtmlAttributes, IHtmlString> htmlGenerator)
         {
             if (htmlGenerator == null)
                 throw new ArgumentNullException("htmlGenerator");
@@ -28,7 +28,7 @@ namespace ChameleonForms.Templates
         /// <returns>The generated HTML</returns>
         public override string ToHtmlString()
         {
-            return _htmlGenerator().ToHtmlString();
+            return _htmlGenerator(this).ToHtmlString();
         }
     }
 }

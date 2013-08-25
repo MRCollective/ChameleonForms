@@ -35,25 +35,23 @@ namespace ChameleonForms.Component
         /// Creates the HTML for a submit &lt;button&gt;.
         /// </summary>
         /// <param name="text">The text to display in the button</param>
-        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
-        /// <returns>The HTML for the submit button</returns>
-        public IHtmlString Submit(string text, HtmlAttributes htmlAttributes = null)
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public HtmlAttributes Submit(string text)
         {
-            return Submit(text.ToHtml(), htmlAttributes);
+            return Submit(text.ToHtml());
         }
 
         /// <summary>
         /// Creates the HTML for a submit &lt;button&gt;.
         /// </summary>
         /// <param name="content">The content to display in the button</param>
-        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
-        /// <returns>The HTML for the submit button</returns>
-        public IHtmlString Submit(IHtmlString content, HtmlAttributes htmlAttributes = null)
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public HtmlAttributes Submit(IHtmlString content)
         {
             if (content == null)
                 throw new ArgumentNullException("content", "Content must be specified");
 
-            return Form.Template.Button(content, "submit", null, null, htmlAttributes);
+            return new LazyHtmlAttributes(h => Form.Template.Button(content, "submit", null, null, h));
         }
 
         /// <summary>
@@ -62,64 +60,59 @@ namespace ChameleonForms.Component
         /// <param name="name">The name of the element</param>
         /// <param name="value">The value to submit with the form</param>
         /// <param name="content">The text the user sees (leave as null if you want the user to see the value instead)</param>
-        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
-        /// <returns>The HTML for the submit button</returns>
-        public IHtmlString Submit(string name, string value, IHtmlString content = null, HtmlAttributes htmlAttributes = null)
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public HtmlAttributes Submit(string name, string value, IHtmlString content = null)
         {
             if (value == null)
                 throw new ArgumentNullException("value", "Expected value to be specified");
 
-            return Form.Template.Button(content, "submit", name, value, htmlAttributes);
+            return new LazyHtmlAttributes(h => Form.Template.Button(content, "submit", name, value, h));
         }
 
         /// <summary>
         /// Creates the HTML for a &lt;button&gt;.
         /// </summary>
         /// <param name="text">The text to display in the button</param>
-        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
-        /// <returns>The HTML for the button</returns>
-        public IHtmlString Button(string text, HtmlAttributes htmlAttributes = null)
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public HtmlAttributes Button(string text)
         {
-            return Button(text.ToHtml(), htmlAttributes);
+            return Button(text.ToHtml());
         }
 
         /// <summary>
         /// Creates the HTML for a &lt;button&gt;.
         /// </summary>
         /// <param name="content">The content to display in the button</param>
-        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
-        /// <returns>The HTML for the button</returns>
-        public IHtmlString Button(IHtmlString content, HtmlAttributes htmlAttributes = null)
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public HtmlAttributes Button(IHtmlString content)
         {
             if (content == null)
                 throw new ArgumentNullException("content", "Content must be specified");
 
-            return Form.Template.Button(content, null, null, null, htmlAttributes);
+            return new LazyHtmlAttributes(h => Form.Template.Button(content, null, null, null, h));
         }
 
         /// <summary>
         /// Creates the HTML for a reset &lt;button&gt;.
         /// </summary>
         /// <param name="text">The text to display for the button</param>
-        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
-        /// <returns>The HTML for the reset button</returns>
-        public IHtmlString Reset(string text, HtmlAttributes htmlAttributes = null)
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public HtmlAttributes Reset(string text)
         {
-            return Reset(text.ToHtml(), htmlAttributes);
+            return Reset(text.ToHtml());
         }
 
         /// <summary>
         /// Creates the HTML for a reset &lt;button&gt;.
         /// </summary>
         /// <param name="content">The content to display for the button</param>
-        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the button</param>
-        /// <returns>The HTML for the reset button</returns>
-        public IHtmlString Reset(IHtmlString content, HtmlAttributes htmlAttributes = null)
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public HtmlAttributes Reset(IHtmlString content)
         {
             if (content == null)
                 throw new ArgumentNullException("content", "Content must be specified");
 
-            return Form.Template.Button(content, "reset", null, null, htmlAttributes);
+            return new LazyHtmlAttributes(h => Form.Template.Button(content, "reset", null, null, h));
         }
     }
 

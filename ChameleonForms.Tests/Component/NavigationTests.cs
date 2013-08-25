@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web;
-using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component;
 using ChameleonForms.Templates;
@@ -15,10 +14,9 @@ namespace ChameleonForms.Tests.Component
     {
         private readonly IHtmlString _beginHtml = new HtmlString("");
         private readonly IHtmlString _endHtml = new HtmlString("");
-        private readonly IHtmlString _buttonHtml = new HtmlString("");
+        private const string ButtonHtml = "buttonHtml";
         private readonly IHtmlString _html = new HtmlString("");
         private IForm<object, IFormTemplate> _f;
-        private readonly HtmlAttributes _attrs = new HtmlAttributes(new { @class = "someclass" });
 
         [SetUp]
         public void Setup()
@@ -26,7 +24,7 @@ namespace ChameleonForms.Tests.Component
             _f = Substitute.For<IForm<object, IFormTemplate>>();
             _f.Template.BeginNavigation().Returns(_beginHtml);
             _f.Template.EndNavigation().Returns(_endHtml);
-            _f.Template.Button(null, null, null, null, null).ReturnsForAnyArgs(_buttonHtml);
+            _f.Template.Button(null, null, null, null, null).ReturnsForAnyArgs(new HtmlString(ButtonHtml));
         }
 
         private Navigation<object, IFormTemplate> Arrange()
@@ -64,8 +62,10 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            Assert.That(n.Button("te&xt", _attrs), Is.EqualTo(_buttonHtml));
-            _f.Template.Received().Button(Arg.Is<IHtmlString>(h => h.ToHtmlString() == "te&amp;xt"), null, null, null, _attrs);
+            var attrs = n.Button("te&xt");
+
+            Assert.That(attrs.ToHtmlString(), Is.EqualTo(ButtonHtml));
+            _f.Template.Received().Button(Arg.Is<IHtmlString>(h => h.ToHtmlString() == "te&amp;xt"), null, null, null, attrs);
         }
 
         [Test]
@@ -73,8 +73,10 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            Assert.That(n.Button(_html, _attrs), Is.EqualTo(_buttonHtml));
-            _f.Template.Received().Button(_html, null, null, null, _attrs);
+            var attrs = n.Button(_html);
+
+            Assert.That(attrs.ToHtmlString(), Is.EqualTo(ButtonHtml));
+            _f.Template.Received().Button(_html, null, null, null, attrs);
         }
 
         [Test]
@@ -82,8 +84,10 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            Assert.That(n.Reset("te&xt", _attrs), Is.EqualTo(_buttonHtml));
-            _f.Template.Received().Button(Arg.Is<IHtmlString>(h => h.ToHtmlString() == "te&amp;xt"), "reset", null, null, _attrs);
+            var attrs = n.Reset("te&xt");
+
+            Assert.That(attrs.ToHtmlString(), Is.EqualTo(ButtonHtml));
+            _f.Template.Received().Button(Arg.Is<IHtmlString>(h => h.ToHtmlString() == "te&amp;xt"), "reset", null, null, attrs);
         }
 
         [Test]
@@ -91,8 +95,10 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            Assert.That(n.Reset(_html, _attrs), Is.EqualTo(_buttonHtml));
-            _f.Template.Received().Button(_html, "reset", null, null, _attrs);
+            var attrs = n.Reset(_html);
+
+            Assert.That(attrs.ToHtmlString(), Is.EqualTo(ButtonHtml));
+            _f.Template.Received().Button(_html, "reset", null, null, attrs);
         }
 
         [Test]
@@ -100,8 +106,10 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            Assert.That(n.Submit("te&xt", _attrs), Is.EqualTo(_buttonHtml));
-            _f.Template.Received().Button(Arg.Is<IHtmlString>(h => h.ToHtmlString() == "te&amp;xt"), "submit", null, null, _attrs);
+            var attrs = n.Submit("te&xt");
+
+            Assert.That(attrs.ToHtmlString(), Is.EqualTo(ButtonHtml));
+            _f.Template.Received().Button(Arg.Is<IHtmlString>(h => h.ToHtmlString() == "te&amp;xt"), "submit", null, null, attrs);
         }
 
         [Test]
@@ -109,8 +117,10 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            Assert.That(n.Submit(_html, _attrs), Is.EqualTo(_buttonHtml));
-            _f.Template.Received().Button(_html, "submit", null, null, _attrs);
+            var attrs = n.Submit(_html);
+
+            Assert.That(attrs.ToHtmlString(), Is.EqualTo(ButtonHtml));
+            _f.Template.Received().Button(_html, "submit", null, null, attrs);
         }
 
         [Test]
@@ -118,8 +128,10 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            Assert.That(n.Submit("name", "value", _html, _attrs), Is.EqualTo(_buttonHtml));
-            _f.Template.Received().Button(_html, "submit", "name", "value", _attrs);
+            var attrs = n.Submit("name", "value", _html);
+
+            Assert.That(attrs.ToHtmlString(), Is.EqualTo(ButtonHtml));
+            _f.Template.Received().Button(_html, "submit", "name", "value", attrs);
         }
 
         [Test]
@@ -127,7 +139,7 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            var e = Assert.Throws<ArgumentNullException>(() => n.Submit("name", null, _html, _attrs));
+            var e = Assert.Throws<ArgumentNullException>(() => n.Submit("name", null, _html));
 
             Assert.That(e.ParamName, Is.EqualTo("value"));
         }
@@ -137,7 +149,7 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            var e = Assert.Throws<ArgumentNullException>(() => n.Button(default(IHtmlString), _attrs));
+            var e = Assert.Throws<ArgumentNullException>(() => n.Button(default(IHtmlString)));
 
             Assert.That(e.ParamName, Is.EqualTo("content"));
         }
@@ -147,7 +159,7 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            var e = Assert.Throws<ArgumentNullException>(() => n.Reset(default(IHtmlString), _attrs));
+            var e = Assert.Throws<ArgumentNullException>(() => n.Reset(default(IHtmlString)));
 
             Assert.That(e.ParamName, Is.EqualTo("content"));
         }
@@ -157,7 +169,7 @@ namespace ChameleonForms.Tests.Component
         {
             var n = Arrange();
 
-            var e = Assert.Throws<ArgumentNullException>(() => n.Submit(default(IHtmlString), _attrs));
+            var e = Assert.Throws<ArgumentNullException>(() => n.Submit(default(IHtmlString)));
 
             Assert.That(e.ParamName, Is.EqualTo("content"));
         }
