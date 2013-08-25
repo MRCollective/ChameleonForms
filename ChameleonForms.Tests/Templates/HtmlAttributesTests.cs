@@ -75,6 +75,56 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
+        public void Add_id()
+        {
+            var h = new HtmlAttributes(@class => "class1");
+
+            h.Id("anId");
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" class=\"class1\" id=\"anId\""));
+        }
+
+        [Test]
+        public void Make_readonly()
+        {
+            var h = new HtmlAttributes(@class => "class1");
+
+            h.Readonly();
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" class=\"class1\" readonly=\"readonly\""));
+        }
+
+        [Test]
+        public void Not_make_readonly_when_guard_is_false()
+        {
+            var h = new HtmlAttributes(@class => "class1");
+
+            h.Readonly(false);
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" class=\"class1\""));
+        }
+
+        [Test]
+        public void Make_disabled()
+        {
+            var h = new HtmlAttributes(@class => "class1");
+
+            h.Disabled();
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" class=\"class1\" disabled=\"disabled\""));
+        }
+
+        [Test]
+        public void Not_make_disabled_when_guard_is_false()
+        {
+            var h = new HtmlAttributes(@class => "class1");
+
+            h.Disabled(false);
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" class=\"class1\""));
+        }
+
+        [Test]
         public void Add_new_attribute()
         {
             var h = new HtmlAttributes(href => "http://url/");
