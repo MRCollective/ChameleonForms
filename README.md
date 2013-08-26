@@ -3,235 +3,50 @@
 
 This library will shape-shift your forms experience in ASP.NET MVC.
 
-It makes it really easy to tersely output a form and easily apply a different template with a single line of code. The library is built with extensibility and flexibility in mind and at any point if you have a usecase that is too complex for what the library handles you can easy drop back into plain Razor / HTML for that part and utilise this library for the bulk of the form that is more standard.
+ChameleonForms takes away the pain and repetition of building forms with ASP.NET MVC by following a philosophy of:
+* **Model-driven** defaults (e.g. enum is drop-down, `[DataType(DataType.Password)]` is password textbox)
+* **Extensible and flexible** core - you can extend or completely change anything you want at any layer of ChameleonForms and you can drop out to plain HTML at any point in your form for those moments where pre-prepared field types and templates just don't cut it
+* **Beautiful, terse, fluent APIs** - it's a pleasure to read and write the code
+* **DRY** up your forms - your forms will be quicker to write and easier to maintain and you won't get stuck writing the same form boilerplate markup form after form after form
+* **Consistent** - consistency of the API and form structure within your forms and consistency across all forms in your site via templating
+* **Declarative** syntax - specify how the form is structured rather than the HTML output of the form; this, in combination with the aforementioned templating means that when it comes time to change the style of your site and/or HTML structure of your forms you can do so as painlessly as possible (think about a scenario where you rapidly prototype a new site using Twitter Bootstrap and you make it big and need to change to a custom design!)
 
-This library is in the very early stages of development and can be considered Beta quality software. We are very confident that the code is comprehensively tested and we are actively adding functionality.
-
-Basic Example
--------------
-
-Say you had the following view model:
-
-```c#
-    public class BasicViewModel
-    {
-        [Required]
-        public string RequiredString { get; set; }
-
-        public SomeEnum SomeEnum { get; set; }
-
-        public bool SomeCheckbox { get; set; }
-    }
-```
-
-And assuming for a moment you used definition lists to wrap your HTML fields then you might end up with something like this in your Razor view:
-
-```html
-@using (Html.BeginForm())
-{
-    <fieldset>
-        <legend>A form</legend>
-        <dl>
-            <dt>@Html.LabelFor(m => m.RequiredString, "Some string")</dt>
-            <dd>@Html.TextBoxFor(m => m.RequiredString) @Html.ValidationMessageFor(m => m.RequiredString)</dd>
-            <dt>@Html.LabelFor(m => m.SomeEnum)</dt>
-            <dd>@Html.DropDownListFor(m => m.SomeEnum, Enum.GetNames(typeof(SomeEnum)).Select(x => new SelectListItem {Text = ((SomeEnum)Enum.Parse(typeof(SomeEnum), x)).Humanize(), Value = x})) @Html.ValidationMessageFor(m => m.SomeEnum)</dd>
-            <dt>@Html.LabelFor(m => m.SomeCheckbox)</dt>
-            <dd>@Html.CheckBoxFor(m => m.SomeCheckbox) @Html.LabelFor(m => m.SomeCheckbox, "Are you sure?") @Html.ValidationMessageFor(m => m.SomeCheckbox)</dd>
-        </dl>
-    </fieldset>
-    <div class="form_navigation">
-        <input type="submit" value="Submit" />
-    </div>
-}
-```
-
-There are a number of problems with this:
-
-* It's tedious to write
-* There is a lot of repetition (each field essentially has the same structure - label in a dt and field and validation in a dd)
-* It's easy to miss out something (e.g. validation HTML) and this results in inconsistency
-* If you want to change the HTML template that you use for your forms (in a small or big way) across the whole site then you need to go into every single `.cshtml` file and change them - i.e. it's a maintenance _nightmare_!
-
-The same HTML output can be achieved with Chameleon Forms out of the box with the following code:
+So what does a ChameleonForms form look like? Here is a (very) basic example:
 
 ```c#
 @using (var f = Html.BeginChameleonForm()) {
-    using (var s = f.BeginSection("A form")) {
-        @s.FieldFor(m => m.RequiredString).Label("Some string")
-        @s.FieldFor(m => m.SomeEnum)
-        @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Are you sure?")
+    using (var s = f.BeginSection("Signup for an account")) {
+        @s.FieldFor(m => m.FirstName)
+        @s.FieldFor(m => m.LastName)
+        @s.FieldFor(m => m.Mobile).Placeholder("04XX XXX XXX")
+        @s.FieldFor(m => m.LicenseAgreement).InlineLabel("I agree to the terms and conditions")
     }
     using (var n = f.BeginNavigation()) {
-        @n.Submit("Submit")
+        @n.Submit("Create")
     }
 }
-```
+```Installing ChameleonForms-------------------------ChameleonForms is available via [NuGet](http://www.nuget.org/packages/chameleonforms).    Install-Package ChameleonForms
+Contributors
+------------
 
-Here is a more complex example:
+### Core Team
 
-View Model
-----------
+* [robdmoore](http://github.com/robdmoore)
+* [mdaviesnet](https://github.com/mattdavies)
+* [royce](https://github.com/royce)
 
-    public class ViewModelExample
-    {
-        public ViewModelExample()
-        {
-            // This could be set using a model binder if it's populated from a database or similar
-            List = new List<ListItem> {new ListItem{Id = 1, Name = "A"}, new ListItem{Id = 2, Name = "B"}};
-        }
-
-        [Required]
-        public string RequiredStringField { get; set; }
-
-        public string NestedField { get; set; }
-
-        public SomeEnum SomeEnum { get; set; }
-
-        public HttpPostedFileBase FileUpload { get; set; }
-		
-        [DataType(DataType.MultilineText)]
-        public string TextAreaField { get; set; }
-
-        public bool SomeCheckbox { get; set; }
-
-        public List<ListItem> List { get; set; }
-        [ExistsIn("List", "Id", "Name")]
-        public int ListId { get; set; }
-    }
-
-    public class ListItem
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-
-Razor view
-----------
-
-	@using (var f = Html.BeginChameleonForm(Url.Action("Index", "Home"), FormMethod.Post, enctype: EncType.Multipart))
-	{
-		using (var m = form.BeginMessage(MessageType.Success, "Success!"))
-		{
-			@m.Paragraph("Hello!!!!!!!!")
-		}
-		<p>@f.LabelFor(m => m.SomeCheckbox).Label("Are you ready for: ") @f.FieldFor(m => m.SomeCheckbox) @f.ValidationMessageFor(m => m.SomeCheckbox)</p>
-		using (var s = f.BeginSection("My Section!", InstructionalText()))
-		{
-			using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value")))
-			{
-				@ff.FieldFor(m => m.NestedField).Attr("data-attr1", "value")
-			}
-			using (var ss = s.BeginSection("Nested section"))
-			{
-				@ss.FieldFor(m => m.FileUpload).Attr("data-attr1", "value")
-			}
-			@s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
-			@s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label")
-			@s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
-			@s.FieldFor(m => m.SomeCheckbox).AsList().WithTrueAs("True").WithFalseAs("False")
-			@s.FieldFor(m => m.SomeCheckbox).AsDropDown()
-			@s.FieldFor(m => m.ListId)
-			@s.FieldFor(m => m.ListId).AsList()
-		}
-		using (var n = f.BeginNavigation())
-		{
-			@n.Submit("Submit")
-			@n.Reset("Reset")
-		}
-	}
-
-HTML output (using default template that comes with Chameleon)
-------------------------------------
-
-	<form action="/" enctype="multipart/form-data" method="post">
-	<div class="success_message">
-        <h3>Success!</h3>
-          <div class="message">
-	<p>Hello!!!!!!!!</p>
-          </div>
-    </div>
-	<p><label for="SomeCheckbox">Are you ready for: </label> <input data-val="true" data-val-required="The Some checkbox field is required." id="SomeCheckbox" name="SomeCheckbox" type="checkbox" value="true" /> <label for="SomeCheckbox">Some checkbox</label> <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span></p>
-    <fieldset>
-        <legend>My Section!</legend>
-            <p>Leading instructional text.</p>
-
-        <dl>
-            <dt><label for="RequiredStringField">Required string field</label></dt>
-            <dd>
-                <input data-some-attr="value" data-val="true" data-val-required="The Required string field field is required." id="RequiredStringField" name="RequiredStringField" type="text" value="" /> <span class="field-validation-valid" data-valmsg-for="RequiredStringField" data-valmsg-replace="true"></span>
-                <dl>
-            <dt><label for="NestedField">Nested field</label></dt>
-            <dd>
-                <input data-attr1="value" id="NestedField" name="NestedField" type="text" value="" /> <span class="field-validation-valid" data-valmsg-for="NestedField" data-valmsg-replace="true"></span>
-            </dd>
-                </dl>
-            </dd>
-            <dt>Nested section</dt>
-            <dd>
-                
-                <dl>
-            <dt><label for="FileUpload">File upload</label></dt>
-            <dd>
-                <input data-attr1="value" id="FileUpload" name="FileUpload" type="file" value="" /> <span class="field-validation-valid" data-valmsg-for="FileUpload" data-valmsg-replace="true"></span>
-            </dd>
-                </dl>
-            </dd>
-            <dt><label for="SomeEnum">Some enum</label></dt>
-            <dd>
-                <select data-attr1="value" data-val="true" data-val-required="The Some enum field is required." id="SomeEnum" name="SomeEnum"><option selected="selected" value="Value1">Value 1</option>
-	<option value="ValueWithDescription">Fiendly name</option>
-	<option value="SomeOtherValue">Some other value</option>
-	</select> <span class="field-validation-valid" data-valmsg-for="SomeEnum" data-valmsg-replace="true"></span>
-            </dd>
-            <dt><label for="TextAreaField">Some Label</label></dt>
-            <dd>
-                <textarea cols="60" id="TextAreaField" name="TextAreaField" rows="5">
-	</textarea> <span class="field-validation-valid" data-valmsg-for="TextAreaField" data-valmsg-replace="true"></span>
-            </dd>
-            <dt><label for="SomeCheckbox">Some checkbox</label></dt>
-            <dd>
-                <input id="SomeCheckbox" name="SomeCheckbox" type="checkbox" value="true" /> <label for="SomeCheckbox">Some label</label> <div class="hint">Format: XXX</div>
-    <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span>
-            </dd>
-            <dt><label for="SomeCheckbox">Some checkbox</label></dt>
-            <dd>
-                    <ul>
-        <li><input id="SomeCheckbox_1" name="SomeCheckbox" type="radio" value="true" /> <label for="SomeCheckbox_1">True</label></li>
-        <li><input checked="checked" id="SomeCheckbox_2" name="SomeCheckbox" type="radio" value="false" /> <label for="SomeCheckbox_2">False</label></li>
-    </ul>
-    <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span>
-            </dd>
-            <dt><label for="SomeCheckbox">Some checkbox</label></dt>
-            <dd>
-                <select id="SomeCheckbox" name="SomeCheckbox"><option value="true">Yes</option>
-    <option selected="selected" value="false">No</option>
-    </select> <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span>
-            </dd>
-            <dt><label for="ListId">List id</label></dt>
-            <dd>
-                <select data-val="true" data-val-number="The field List id must be a number." data-val-required="The List id field is required." id="ListId" name="ListId"><option value="1">A</option>
-    <option value="2">B</option>
-    </select> <span class="field-validation-valid" data-valmsg-for="ListId" data-valmsg-replace="true"></span>
-            </dd>
-            <dt><label for="ListId">List id</label></dt>
-            <dd>
-                    <ul>
-        <li><input id="ListId_1" name="ListId" type="radio" value="1" /> <label for="ListId_1">A</label></li>
-        <li><input id="ListId_2" name="ListId" type="radio" value="2" /> <label for="ListId_2">B</label></li>
-    </ul>
-    <span class="field-validation-valid" data-valmsg-for="ListId" data-valmsg-replace="true"></span>
-            </dd>
-        </dl>
-    </fieldset>
-        <div class="form_navigation">
-    <input type="submit" value="Submit" /><input type="reset" value="Reset" />        </div>
-    </form>
-
-Contributions
+Documentation
 -------------
+Check out the [wiki](http://github.com/MRCollective/ChameleonForms/wiki).
 
-If you would like to contribute to this project then feel free to communicate with us via Twitter @robdmoore / @mdaviesnet or alternatively send a pull request.
+Continuous Integration
+----------------------
+
+We have a [continuous integration build](http://ci.robdmoore.id.au:8010/project.html?projectId=ChameleonForms&tab=projectOverview) that automatically builds and runs tests when we push/merge to master and generates the NuGet packages that we can publish to NuGet.org at the click of a button.
+
+Contributing
+------------
+If you would like to contribute to this project then feel free to communicate with us via Twitter [@robdmoore](http://twitter.com/robdmoore) / [@mdaviesnet](http://twitter.com/mdaviesnet) or alternatively send a pull request / issue to this GitHub project.
 
 Roadmap
 -------
