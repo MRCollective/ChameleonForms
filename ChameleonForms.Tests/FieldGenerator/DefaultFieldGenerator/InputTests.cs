@@ -27,6 +27,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Allow_type_to_be_overridden()
+        {
+            var g = Arrange(m => m.RequiredString);
+
+            var result = g.GetFieldHtml(ExampleFieldConfiguration.Attr("type", "number"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_decimal_field()
         {
             var g = Arrange(m => m.Decimal, m => m.Decimal = 1.2000m);
