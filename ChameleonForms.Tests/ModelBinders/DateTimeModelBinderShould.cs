@@ -102,5 +102,29 @@ namespace ChameleonForms.Tests.ModelBinders
 
             AssertModelError(context, string.Format("The value 'invalid' is not valid for {0}.", DisplayName));
         }
+
+        [Test]
+        public void Return_value_if_value_ok()
+        {
+            _formCollection[PropertyName] = "12/12/2000";
+            var context = ArrangeBindingContext();
+            context.ModelMetadata.DisplayFormatString = "{0:dd/MM/yyyy}";
+
+            var model = BindModel(context);
+
+            Assert.That(model, Is.EqualTo(new DateTime(2000, 12, 12)));
+        }
+
+        [Test]
+        public void Bind_value_if_value_ok()
+        {
+            _formCollection[PropertyName] = "12/12/2000";
+            var context = ArrangeBindingContext();
+            context.ModelMetadata.DisplayFormatString = "{0:dd/MM/yyyy}";
+
+            var model = BindModel(context);
+
+            Assert.That(context.Model, Is.EqualTo(new DateTime(2000, 12, 12)));
+        }
     }
 }
