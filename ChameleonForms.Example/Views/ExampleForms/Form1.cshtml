@@ -14,7 +14,7 @@
 @using (var f = Html.BeginChameleonForm(method: FormMethod.Post, enctype: EncType.Multipart))
 {
     <p>@f.LabelFor(m => m.SomeCheckbox).Label("Are you ready for: ") @f.FieldFor(m => m.SomeCheckbox) @f.ValidationMessageFor(m => m.SomeCheckbox)</p>
-    using (var s = f.BeginSection("My Section!", InstructionalText()))
+    using (var s = f.BeginSection("My Section!", InstructionalText(), new{@class = "aClass"}.ToHtmlAttributes()))
     {
         using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value")))
         {
