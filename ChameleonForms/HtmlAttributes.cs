@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ChameleonForms.Templates
+namespace ChameleonForms
 {
     /// <summary>
     /// Represents a set of HTML attributes.

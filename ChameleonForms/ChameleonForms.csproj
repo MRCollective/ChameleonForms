@@ -109,7 +109,7 @@
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\DefaultFormTemplate.cs" />
-    <Compile Include="Templates\HtmlAttributes.cs" />
+    <Compile Include="HtmlAttributes.cs" />
     <Compile Include="Templates\HtmlCreator.cs" />
     <Compile Include="Templates\HtmlHelpers.generated.cs">
       <AutoGen>True</AutoGen>
