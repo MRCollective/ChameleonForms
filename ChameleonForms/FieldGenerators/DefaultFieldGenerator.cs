@@ -34,8 +34,10 @@ namespace ChameleonForms.FieldGenerators
 
         public IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
+            fieldConfiguration = fieldConfiguration ?? new ReadonlyFieldConfiguration(new FieldConfiguration());
+
             string @for;
-            if (fieldConfiguration != null && fieldConfiguration.HtmlAttributes.ContainsKey("id"))
+            if (fieldConfiguration.HtmlAttributes.ContainsKey("id"))
             {
                 @for = fieldConfiguration.HtmlAttributes["id"].ToString();
             }
@@ -45,13 +47,17 @@ namespace ChameleonForms.FieldGenerators
                     ExpressionHelper.GetExpressionText(FieldProperty));
             }
 
-            var labelText = (fieldConfiguration == null ? null : fieldConfiguration.LabelText)
+            var labelText = fieldConfiguration.LabelText
                 ?? new HtmlString(GetFieldDisplayName());
 
-            if (fieldConfiguration != null && !fieldConfiguration.HasLabel)
+            if (!fieldConfiguration.HasLabel)
                 return labelText;
 
-            return HtmlCreator.BuildLabel(@for, labelText, null);
+            var labelAttrs = new HtmlAttributes();
+            if (fieldConfiguration.HtmlAttributes.ContainsKey("class"))
+                labelAttrs.AddClass(fieldConfiguration.HtmlAttributes["class"] as string);
+
+            return HtmlCreator.BuildLabel(@for, labelText, labelAttrs);
         }
 
         public string GetFieldDisplayName()
