@@ -118,5 +118,16 @@ namespace ChameleonForms.Templates
         /// <param name="paragraph">The paragraph HTML</param>
         /// <returns>The HTML for the message paragraph</returns>
         IHtmlString MessageParagraph(IHtmlString paragraph);
+
+        /// <summary>
+        /// Creates the HTML for a button.
+        /// </summary>
+        /// <param name="content">The content for the user to see or null if the value should be used instead</param>
+        /// <param name="type">The type of button or null if a generic button should be used</param>
+        /// <param name="id">The name/id of the button or null if one shouldn't be set</param>
+        /// <param name="value">The value to submit if the button is clicked or null if one shouldn't be set</param>
+        /// <param name="htmlAttributes">Any HTML attributes to add to the button or null if there are none</param>
+        /// <returns>The HTML for the button</returns>
+        IHtmlString Button(IHtmlString content, string type, string id, string value, HtmlAttributes htmlAttributes);
     }
 }
