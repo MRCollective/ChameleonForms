@@ -66,6 +66,39 @@ namespace ChameleonForms
 
             return this;
         }
+        
+        /// <summary>
+        /// Set the id attribute.
+        /// </summary>
+        /// <param name="id">The text to use for the id</param>
+        /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
+        public HtmlAttributes Id(string id)
+        {
+            Attr("id", id);
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the disabled attribute.
+        /// </summary>
+        /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
+        public HtmlAttributes Disabled(bool disabled = true)
+        {
+            if (disabled)
+                Attr("disabled", "disabled");
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the readonly attribute.
+        /// </summary>
+        /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
+        public HtmlAttributes Readonly(bool @readonly = true)
+        {
+            if (@readonly)
+                Attr("readonly", "readonly");
+            return this;
+        }
 
         /// <summary>
         /// Adds or updates a HTML attribute with a given value.
@@ -144,7 +177,7 @@ namespace ChameleonForms
             return new HtmlAttributes(attributes);
         }
 
-        public string ToHtmlString()
+        public virtual string ToHtmlString()
         {
             var sb = new StringBuilder();
             foreach (var attr in _tagBuilder.Attributes)

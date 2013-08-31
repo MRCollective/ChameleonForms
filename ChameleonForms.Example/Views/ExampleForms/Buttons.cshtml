@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using ChameleonForms.Templates
+@model dynamic
 
 @{
     ViewBag.Title = "Buttons";
@@ -10,13 +11,13 @@
 {
     using (var n = f.BeginNavigation())
     {
-        @n.Button("text button", new HtmlAttributes().AddClass("button"))
-        @n.Button(new HtmlString("<strong>html button</strong>"), new HtmlAttributes().AddClass("button"))
-        @n.Reset("text reset", new HtmlAttributes().AddClass("button"))
-        @n.Reset(new HtmlString("<strong>html reset</strong>"), new HtmlAttributes().AddClass("button"))
-        @n.Submit(new HtmlString("<strong>html submit</strong>"), new HtmlAttributes().AddClass("button"))
-        @n.Submit("text submit", new HtmlAttributes().AddClass("button"))
-        @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>"), new HtmlAttributes().AddClass("button"))
-        @n.Submit("name", "value", htmlAttributes: new HtmlAttributes().AddClass("button"))
+        @n.Button("text button").AddClass("button")
+        @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("button")
+        @n.Reset("text reset").AddClass("button")
+        @n.Reset(new HtmlString("<strong>html reset</strong>")).AddClass("button")
+        @n.Submit(new HtmlString("<strong>html submit</strong>")).AddClass("button")
+        @n.Submit("text submit").AddClass("button")
+        @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>")).AddClass("button")
+        @n.Submit("name", "value").AddClass("button")
     }
 }
