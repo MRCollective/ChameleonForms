@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using ChameleonForms.Component;
 using ChameleonForms.Enums;
 using ChameleonForms.Example.Forms.Templates;
-using ChameleonForms.Templates;
 
 namespace ChameleonForms.Example.Forms.Components
 {
