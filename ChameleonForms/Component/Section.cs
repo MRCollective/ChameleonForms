@@ -103,7 +103,7 @@ namespace ChameleonForms.Component
         /// <returns>The form section</returns>
         public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this IForm<TModel, TTemplate> form, string title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) where TTemplate : IFormTemplate
         {
-            return new Section<TModel, TTemplate>(form, new HtmlString(HttpUtility.HtmlEncode(title)), false, leadingHtml, htmlAttributes);
+            return new Section<TModel, TTemplate>(form, title.ToHtml(), false, leadingHtml, htmlAttributes);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace ChameleonForms.Component
         /// <returns>The nested form section</returns>
         public static Section<TModel, TTemplate> BeginSection<TModel, TTemplate>(this Section<TModel, TTemplate> section, string title, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null) where TTemplate : IFormTemplate
         {
-            return new Section<TModel, TTemplate>(section.Form, new HtmlString(HttpUtility.HtmlEncode(title)), true, leadingHtml, htmlAttributes);
+            return new Section<TModel, TTemplate>(section.Form, title.ToHtml(), true, leadingHtml, htmlAttributes);
         }
     }
 }

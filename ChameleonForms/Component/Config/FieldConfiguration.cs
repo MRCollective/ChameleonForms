@@ -434,7 +434,7 @@ namespace ChameleonForms.Component.Config
 
         public IFieldConfiguration InlineLabel(string labelText)
         {
-            InlineLabelText = new HtmlString(HttpUtility.HtmlEncode(labelText));
+            InlineLabelText = labelText.ToHtml();
             return this;
         }
 
@@ -448,7 +448,7 @@ namespace ChameleonForms.Component.Config
 
         public IFieldConfiguration Label(string labelText)
         {
-            LabelText = new HtmlString(HttpUtility.HtmlEncode(labelText));
+            LabelText = labelText.ToHtml();
             return this;
         }
 
@@ -500,7 +500,7 @@ namespace ChameleonForms.Component.Config
 
         public IFieldConfiguration WithHint(string hint)
         {
-            Hint = new HtmlString(HttpUtility.HtmlEncode(hint));
+            Hint = hint.ToHtml();
             return this;
         }
 
@@ -520,7 +520,7 @@ namespace ChameleonForms.Component.Config
 
         public IFieldConfiguration Prepend(string str)
         {
-            _prependedHtml.Add(new HtmlString(HttpUtility.HtmlEncode(str)));
+            _prependedHtml.Add(str.ToHtml());
             return this;
         }
 
@@ -534,7 +534,7 @@ namespace ChameleonForms.Component.Config
 
         public IFieldConfiguration Append(string str)
         {
-            _appendedHtml.Add(new HtmlString(HttpUtility.HtmlEncode(str)));
+            _appendedHtml.Add(str.ToHtml());
             return this;
         }
 

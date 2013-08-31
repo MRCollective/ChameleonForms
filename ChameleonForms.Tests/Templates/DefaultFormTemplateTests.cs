@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
@@ -194,6 +195,66 @@ namespace ChameleonForms.Tests.Templates
             var t = new DefaultFormTemplate();
 
             var result = t.MessageParagraph(new HtmlString("<strong>asdf</strong>"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_button_input_when_button_with_no_content_specified()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.Button(null, null, null, "value", null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+        
+        [Test]
+        public void Output_submit_input_when_button_with_no_content_and_submit_type_specified()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.Button(null, "submit", "id", "value", new HtmlAttributes(@class => "asdf"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_button_when_button_with_content_specified()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.Button(new HtmlString("<strong>asdf</strong>"), null, null, null, null);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+        
+        [Test]
+        public void Output_submit_button_when_button_with_content_and_submit_type_specified()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.Button(new HtmlString("<strong>asdf</strong>"), "submit", "id", "value", new HtmlAttributes(@class => "asdf"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Throw_exception_when_nothing_for_user_to_see()
+        {
+            var t = new DefaultFormTemplate();
+
+            var e = Assert.Throws<ArgumentNullException>(() => t.Button(null, "type", "id", null, new HtmlAttributes(@class => "asdf")));
+
+            Assert.That(e.ParamName, Is.EqualTo("content"));
+        }
+
+        [Test]
+        public void Allow_for_name_to_be_specified_but_id_to_be_overwritten_when_creating_a_button()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.Button(new HtmlString("a"), null, "name", null, new HtmlAttributes().Attr("id", "asdf"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
