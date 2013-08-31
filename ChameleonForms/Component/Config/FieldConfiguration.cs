@@ -358,7 +358,7 @@ namespace ChameleonForms.Component.Config
 
         public IFieldConfiguration Id(string id)
         {
-            Attributes.Attr("id", id);
+            Attributes.Id(id);
             return this;
         }
 
@@ -412,15 +412,13 @@ namespace ChameleonForms.Component.Config
 
         public IFieldConfiguration Disabled(bool disabled = true)
         {
-            if (disabled)
-                Attr("disabled", "disabled");
+            Attributes.Disabled(disabled);
             return this;
         }
 
         public IFieldConfiguration Readonly(bool @readonly = true)
         {
-            if (@readonly)
-                Attr("readonly", "readonly");
+            Attributes.Readonly(@readonly);
             return this;
         }
 
