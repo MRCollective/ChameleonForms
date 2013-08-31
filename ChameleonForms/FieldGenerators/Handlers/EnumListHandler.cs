@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
+using ChameleonForms.Enums;
 using Humanizer;
 
 namespace ChameleonForms.FieldGenerators.Handlers
@@ -22,6 +23,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
         {
             var selectList = GetSelectList();
             return GetSelectListHtml(selectList);
+        }
+
+        public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
+        {
+            // If a list is being displayed there is no element for the label to point to so drop it
+            if (fieldConfiguration.DisplayType == FieldDisplayType.List)
+                fieldConfiguration.WithoutLabel();
         }
 
         private IEnumerable<SelectListItem> GetSelectList()

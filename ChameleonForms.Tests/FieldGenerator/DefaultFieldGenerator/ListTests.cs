@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Web;
 using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators.Handlers;
@@ -229,6 +230,36 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
             var ex = Assert.Throws<ListPropertyNullException>(() => g.GetFieldHtml(default(IFieldConfiguration)));
 
             Assert.That(ex.Message, Is.EqualTo("The list property (IntList) specified in the [ExistsIn] on OptionalIntListId is null."));
+        }
+
+        [Test]
+        public void Use_correct_html_for_label_for_list_as_list()
+        {
+            var g = Arrange(m => m.RequiredIntListId);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().AsList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_label_for_list_as_list_with_overridden_label()
+        {
+            var g = Arrange(m => m.RequiredIntListId);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().AsList().Label(new HtmlString("<strong>lol</strong>")));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_label_for_list_as_dropdown()
+        {
+            var g = Arrange(m => m.RequiredIntListId);
+
+            var result = g.GetLabelHtml(new FieldConfiguration().AsDropDown());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
     }
 }
