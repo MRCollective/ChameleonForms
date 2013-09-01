@@ -87,22 +87,22 @@ namespace ChameleonForms.Attributes
         {
             if (string.IsNullOrEmpty(_nameProperty) || string.IsNullOrEmpty(_valueProperty))
             {
-                throw new ArgumentException("You must pass valid properties for Name and Value to ExistsIn.");
+                throw new ArgumentException("ExistsIn: You must pass valid properties for Name and Value.");
             }
             var collectionProperty = context.ObjectInstance.GetType().GetProperty(_listProperty);
             if (collectionProperty == null)
             {
-                throw new Exception(string.Format("No property Model.{0} exists for ExistsIn validation.", _listProperty));
+                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", _listProperty));
             }
             var collectionValue = collectionProperty.GetValue(context.ObjectInstance, null);
             if (collectionValue == null)
             {
-                throw new Exception(string.Format("Model.{0} is null. Unable to make list for Model.{1}", _listProperty, context.MemberName));
+                throw new ArgumentException(string.Format("ExistsIn: Model.{0} is null. Unable to make list for Model.{1}", _listProperty, context.MemberName));
             }
             var collection = collectionValue as IEnumerable;
             if (collection == null)
             {
-                throw new Exception(string.Format("Model.{0} is not an IEnumerable. ExistsIn cannot be used to validate against this property.", _listProperty));
+                throw new ArgumentException(string.Format("ExistsIn: Model.{0} is not an IEnumerable. ExistsIn cannot be used to validate against this property.", _listProperty));
             }
 
             return collection.Cast<object>().ToList();

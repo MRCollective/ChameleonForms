@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ChameleonForms.Attributes;
 using ChameleonForms.Example.Controllers;
@@ -25,7 +24,7 @@ namespace ChameleonForms.Tests.Attributes
 
             Assert.Throws<ArgumentException>(
                 () => attribute.GetValidationResult(vm.ListId, validationContext),
-                "You must pass valid properties for Name and Value to ExistsIn"
+                "ExistsIn: You must pass valid properties for Name and Value to ExistsIn"
             );
         }
 
@@ -39,9 +38,9 @@ namespace ChameleonForms.Tests.Attributes
             var validationContext = new ValidationContext(vm, null, null);
             var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
 
-            Assert.Throws<Exception>(
+            Assert.Throws<ArgumentException>(
                 () => attribute.GetValidationResult(vm.ListId, validationContext),
-                string.Format("No property Model.{0} exists for ExistsIn validation.", valueProperty)
+                string.Format("ExistsIn: No property Model.{0} exists for validation.", valueProperty)
             );
         }
 
@@ -55,9 +54,9 @@ namespace ChameleonForms.Tests.Attributes
             var validationContext = new ValidationContext(vm, null, null);
             var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
 
-            Assert.Throws<Exception>(
+            Assert.Throws<ArgumentException>(
                 () => attribute.GetValidationResult(vm.ListId, validationContext),
-                string.Format("No property Model.{0} exists for ExistsIn validation.", valueProperty)
+                string.Format("ExistsIn: No property Model.{0} exists for validation.", valueProperty)
             );
         }
 
@@ -74,9 +73,9 @@ namespace ChameleonForms.Tests.Attributes
             var validationContext = new ValidationContext(vm, null, null);
             var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
 
-            Assert.Throws<Exception>(
+            Assert.Throws<ArgumentException>(
                 () => attribute.GetValidationResult(vm.ListId, validationContext),
-                string.Format("Model.{0} is null. Unable to make list for Model.{1}", valueProperty, validationContext.MemberName)
+                string.Format("ExistsIn: Model.{0} is null. Unable to make list for Model.{1}", valueProperty, validationContext.MemberName)
             );
         }
 
