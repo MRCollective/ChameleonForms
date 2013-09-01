@@ -94,6 +94,11 @@ namespace ChameleonForms.Attributes
             {
                 throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", _listProperty));
             }
+            var collectionType = collectionProperty.PropertyType.GetGenericArguments().FirstOrDefault();
+            if (collectionType != null && collectionType.GetProperty(_valueProperty) == null)
+            {
+                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", _valueProperty));
+            }
             var collectionValue = collectionProperty.GetValue(context.ObjectInstance, null);
             if (collectionValue == null)
             {

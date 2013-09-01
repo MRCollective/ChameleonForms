@@ -29,6 +29,22 @@ namespace ChameleonForms.Tests.Attributes
         }
 
         [Test]
+        public void Throw_exception_if_list_to_validate_against_does_not_contain_specified_value_property()
+        {
+            const string valueProperty = "Id2";
+            const string nameProperty = "Name";
+            const string listProperty = "List";
+            var vm = new ViewModelExample();
+            var validationContext = new ValidationContext(vm, null, null);
+            var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
+
+            Assert.Throws<ArgumentException>(
+                () => attribute.GetValidationResult(vm.ListId, validationContext),
+                string.Format("ExistsIn: No property Model.{0} exists for validation.", valueProperty)
+            );
+        }
+
+        [Test]
         public void Throw_exception_if_list_to_validate_against_does_not_exist()
         {
             const string valueProperty = "Id";
