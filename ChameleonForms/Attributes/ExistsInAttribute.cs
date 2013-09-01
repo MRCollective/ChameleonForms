@@ -57,13 +57,13 @@ namespace ChameleonForms.Attributes
 
         protected override ValidationResult IsValid(object value, ValidationContext context)
         {
-            if (value == null)
+            if (value == null || value.ToString() == string.Empty)
             {
                 return ValidationResult.Success;
             }
             var collection = GetCollectionIfValid(context);
             var possibleValues = collection.Select(item => item.GetType().GetProperty(_valueProperty).GetValue(item, null).ToString());
-            if (value is IEnumerable)
+            if (value is IEnumerable && !(value is string))
             {
                 if ((value as IEnumerable).Cast<object>().All(v => possibleValues.Any(item => item == v.ToString())))
                 {
