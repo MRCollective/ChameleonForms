@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ChameleonForms.Attributes;
 using ChameleonForms.Example.Controllers;
@@ -98,7 +99,7 @@ namespace ChameleonForms.Tests.Attributes
         }
 
         [Test]
-        public void Successfully_validate()
+        public void Successfully_validate_non_ienumerable_property()
         {
             const string valueProperty = "Id";
             const string nameProperty = "Name";
@@ -108,6 +109,23 @@ namespace ChameleonForms.Tests.Attributes
             var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
 
             var result = attribute.GetValidationResult(vm.ListId, validationContext);
+
+            Assert.That(result, Is.Null, string.Format("Validation failed with message: {0}", attribute.ErrorMessage));
+        }
+
+        [TestCase(new[]{1})]
+        [TestCase(new[]{2})]
+        [TestCase(new[]{1,2})]
+        public void Successfully_validate_ienumerable_property(int[] submittedValues)
+        {
+            const string valueProperty = "Id";
+            const string nameProperty = "Name";
+            const string listProperty = "List";
+            var vm = new ModelBindingViewModel { RequiredListIds = submittedValues };
+            var validationContext = new ValidationContext(vm, null, null);
+            var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
+
+            var result = attribute.GetValidationResult(vm.RequiredListIds, validationContext);
 
             Assert.That(result, Is.Null, string.Format("Validation failed with message: {0}", attribute.ErrorMessage));
         }

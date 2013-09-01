@@ -75,8 +75,11 @@ namespace ChameleonForms.Attributes
                 return ValidationResult.Success;
             }
 
+            var attempted = value is IEnumerable
+                ? string.Join(", ", (value as IEnumerable).Cast<object>().Select(t => t.ToString()))
+                : value.ToString();
             var choices = string.Join(", ", collection.Select(o => o.GetType().GetProperty(_nameProperty).GetValue(o, null)));
-            ErrorMessage = string.Format("The {0} field was {1}, but must be one of {2}", "{0}", value, choices);
+            ErrorMessage = string.Format("The {0} field was {1}, but must be one of {2}", "{0}", attempted, choices);
             return new ValidationResult(FormatErrorMessage(context.DisplayName ?? context.MemberName), new List<string> { _listProperty });
         }
 
