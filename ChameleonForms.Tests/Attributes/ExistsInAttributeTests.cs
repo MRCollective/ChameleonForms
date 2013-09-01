@@ -113,17 +113,38 @@ namespace ChameleonForms.Tests.Attributes
             Assert.That(result.ErrorMessage, Is.EqualTo(string.Format(expectedError, validationContext.DisplayName)));
         }
 
-        [Test]
-        public void Successfully_validate_non_ienumerable_property()
+        private readonly ModelBindingViewModel[] _validViewModels =
+        {
+            new ModelBindingViewModel{ RequiredString = "" },
+            new ModelBindingViewModel{ RequiredString = null },
+            new ModelBindingViewModel{ RequiredString = "1" }
+        };
+        [TestCaseSource("_validViewModels")]
+        public void Successfully_validate_string_property(ModelBindingViewModel vm)
         {
             const string valueProperty = "Id";
             const string nameProperty = "Name";
             const string listProperty = "List";
-            var vm = new ViewModelExample { ListId = 1 };
             var validationContext = new ValidationContext(vm, null, null);
             var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
 
-            var result = attribute.GetValidationResult(vm.ListId, validationContext);
+            var result = attribute.GetValidationResult(vm.RequiredString, validationContext);
+
+            Assert.That(result, Is.Null, string.Format("Validation failed with message: {0}", attribute.ErrorMessage));
+        }
+
+        [TestCase(1)]
+        [TestCase(null)]
+        public void Successfully_validate_non_ienumerable_property(int? submittedValue)
+        {
+            const string valueProperty = "Id";
+            const string nameProperty = "Name";
+            const string listProperty = "List";
+            var vm = new ModelBindingViewModel { OptionalInt = submittedValue };
+            var validationContext = new ValidationContext(vm, null, null);
+            var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
+
+            var result = attribute.GetValidationResult(vm.OptionalInt, validationContext);
 
             Assert.That(result, Is.Null, string.Format("Validation failed with message: {0}", attribute.ErrorMessage));
         }
