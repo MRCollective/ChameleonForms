@@ -99,7 +99,7 @@ namespace ChameleonForms.Tests.Attributes
         [TestCase(new []{0})]
         [TestCase(new []{0,1})]
         [TestCase(new []{3})]
-        public void Fail_validation_if_property_value_not_in_list(int[] submittedValues)
+        public void Fail_validation_if_list_property_value_not_in_list(int[] submittedValues)
         {
             const string valueProperty = "Id";
             const string nameProperty = "Name";
@@ -111,6 +111,24 @@ namespace ChameleonForms.Tests.Attributes
             var result = attribute.GetValidationResult(vm.RequiredListIds, validationContext);
 
             var expectedError = string.Format("The {{0}} field was {0}, but must be one of A, B", string.Join(", ", submittedValues));
+            Assert.That(result.ErrorMessage, Is.EqualTo(string.Format(expectedError, validationContext.DisplayName)));
+        }
+
+        [TestCase(-1)]
+        [TestCase(0)]
+        [TestCase(3)]
+        public void Fail_validation_if_single_property_value_not_in_list(int submittedValue)
+        {
+            const string valueProperty = "Id";
+            const string nameProperty = "Name";
+            const string listProperty = "List";
+            var vm = new ModelBindingViewModel { RequiredListId = submittedValue };
+            var validationContext = new ValidationContext(vm, null, null) { DisplayName = "Required list ids" };
+            var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
+
+            var result = attribute.GetValidationResult(vm.RequiredListId, validationContext);
+
+            var expectedError = string.Format("The {{0}} field was {0}, but must be one of A, B", string.Join(", ", submittedValue));
             Assert.That(result.ErrorMessage, Is.EqualTo(string.Format(expectedError, validationContext.DisplayName)));
         }
 
