@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using ChameleonForms.Attributes;
 using ChameleonForms.Example.Controllers;
 using NUnit.Framework;
@@ -95,6 +97,27 @@ namespace ChameleonForms.Tests.Attributes
             );
         }
 
+        private readonly IList<int?[]> _nullableListValues = new List<int?[]>()
+        {
+            new int?[]{null, 0, 0},
+            new int?[]{0, null, 0}
+        };
+        [TestCaseSource("_nullableListValues")]
+        public void Allow_validation_against_lists_containing_null_values(int?[] submittedValues)
+        {
+            const string valueProperty = "Id";
+            const string nameProperty = "Name";
+            const string listProperty = "List";
+            var vm = new ModelBindingViewModel { RequiredNullableListIds = submittedValues };
+            var validationContext = new ValidationContext(vm, null, null) { DisplayName = "Required list ids" };
+            var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
+
+            var result = attribute.GetValidationResult(vm.RequiredNullableListIds, validationContext);
+
+            var expectedError = string.Format("The {{0}} field was {0}, but must be one of A, B", string.Join(", ", submittedValues.Select(s => s == null ? "null" : s.ToString())));
+            Assert.That(result.ErrorMessage, Is.EqualTo(string.Format(expectedError, validationContext.DisplayName)));
+        }
+
         [TestCase(new []{-1})]
         [TestCase(new []{0})]
         [TestCase(new []{0,1})]
@@ -113,7 +136,7 @@ namespace ChameleonForms.Tests.Attributes
             var expectedError = string.Format("The {{0}} field was {0}, but must be one of A, B", string.Join(", ", submittedValues));
             Assert.That(result.ErrorMessage, Is.EqualTo(string.Format(expectedError, validationContext.DisplayName)));
         }
-
+        
         [TestCase(-1)]
         [TestCase(0)]
         [TestCase(3)]

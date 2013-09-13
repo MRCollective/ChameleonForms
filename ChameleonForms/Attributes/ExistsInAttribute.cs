@@ -62,21 +62,22 @@ namespace ChameleonForms.Attributes
                 return ValidationResult.Success;
             }
             var collection = GetCollectionIfValid(context);
-            var possibleValues = collection.Select(item => item.GetType().GetProperty(_valueProperty).GetValue(item, null).ToString());
+            var possibleValues = collection.Select(item => item.GetType().GetProperty(_valueProperty).GetValue(item, null))
+                .Select(i => i is Enum ? (int)i : i);
             if (value is IEnumerable && !(value is string))
             {
-                if ((value as IEnumerable).Cast<object>().All(v => possibleValues.Any(item => item == v.ToString())))
+                if ((value as IEnumerable).Cast<object>().All(v => v == null || possibleValues.Contains(v)))
                 {
                     return ValidationResult.Success;
                 }
             }
-            else if (possibleValues.Any(item => item == value.ToString()))
+            else if (possibleValues.Any(item => item == null || item.ToString() == value.ToString()))
             {
                 return ValidationResult.Success;
             }
 
             var attempted = value is IEnumerable
-                ? string.Join(", ", (value as IEnumerable).Cast<object>().Select(t => t.ToString()))
+                ? string.Join(", ", (value as IEnumerable).Cast<object>().Select(t => t == null ? "null" : t.ToString()))
                 : value.ToString();
             var choices = string.Join(", ", collection.Select(o => o.GetType().GetProperty(_nameProperty).GetValue(o, null)));
             ErrorMessage = string.Format("The {0} field was {1}, but must be one of {2}", "{0}", attempted, choices);

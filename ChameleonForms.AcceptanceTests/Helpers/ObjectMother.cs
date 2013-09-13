@@ -34,7 +34,7 @@ namespace ChameleonForms.AcceptanceTests.Helpers
                         RequiredNullableListId = 1,
                         RequiredListIds = new List<int> {1},
                         RequiredNullableListIds = new List<int?> {1},
-                        OptionalListIds = null,
+                        //OptionalListIds = null,
                         OptionalNullableListIds = null,
                         DateTime = new DateTime(2010, 1, 13)
                     };
