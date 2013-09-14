@@ -146,8 +146,9 @@ namespace ChameleonForms.Example.Controllers
         [Required]
         [ExistsIn("List", "Id", "Name")]
         public IEnumerable<int?> RequiredNullableListIds { get; set; }
-        [ExistsIn("List", "Id", "Name")]
-        public IEnumerable<int> OptionalListIds { get; set; }
+        //Todo: Work around the fact that this list should be empty if no value submitted, but instead is a list with a 0 value element
+        //[ExistsIn("List", "Id", "Name")]
+        //public IEnumerable<int> OptionalListIds { get; set; }
         [ExistsIn("List", "Id", "Name")]
         public IEnumerable<int?> OptionalNullableListIds { get; set; }
     }

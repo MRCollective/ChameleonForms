@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ChameleonForms.Attributes
@@ -7,7 +11,7 @@ namespace ChameleonForms.Attributes
     /// Indicates that the attributed property value should exist within the list property referenced by the attribute.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class ExistsInAttribute : Attribute, IMetadataAware
+    public class ExistsInAttribute : ValidationAttribute, IMetadataAware
     {
         /// <summary>
         /// Additional Values metadata key for whether this attribute has been applied to the property.
@@ -49,6 +53,65 @@ namespace ChameleonForms.Attributes
             metadata.AdditionalValues[PropertyKey] = _listProperty;
             metadata.AdditionalValues[ValueKey] = _valueProperty;
             metadata.AdditionalValues[NameKey] = _nameProperty;
+        }
+
+        protected override ValidationResult IsValid(object value, ValidationContext context)
+        {
+            if (value == null || value.ToString() == string.Empty)
+            {
+                return ValidationResult.Success;
+            }
+            var collection = GetCollectionIfValid(context);
+            var possibleValues = collection.Select(item => item.GetType().GetProperty(_valueProperty).GetValue(item, null))
+                .Select(i => i is Enum ? (int)i : i);
+            if (value is IEnumerable && !(value is string))
+            {
+                if ((value as IEnumerable).Cast<object>().All(v => v == null || possibleValues.Contains(v)))
+                {
+                    return ValidationResult.Success;
+                }
+            }
+            else if (possibleValues.Any(item => item == null || item.ToString() == value.ToString()))
+            {
+                return ValidationResult.Success;
+            }
+
+            var attempted = value is IEnumerable
+                ? string.Join(", ", (value as IEnumerable).Cast<object>().Select(t => t == null ? "null" : t.ToString()))
+                : value.ToString();
+            var choices = string.Join(", ", collection.Select(o => o.GetType().GetProperty(_nameProperty).GetValue(o, null)));
+            ErrorMessage = string.Format("The {0} field was {1}, but must be one of {2}", "{0}", attempted, choices);
+            return new ValidationResult(FormatErrorMessage(context.DisplayName ?? context.MemberName), new List<string> { _listProperty });
+        }
+
+        private IList<object> GetCollectionIfValid(ValidationContext context)
+        {
+            if (string.IsNullOrEmpty(_nameProperty) || string.IsNullOrEmpty(_valueProperty))
+            {
+                throw new ArgumentException("ExistsIn: You must pass valid properties for Name and Value.");
+            }
+            var collectionProperty = context.ObjectInstance.GetType().GetProperty(_listProperty);
+            if (collectionProperty == null)
+            {
+                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", _listProperty));
+            }
+            var collectionType = collectionProperty.PropertyType.GetGenericArguments().FirstOrDefault();
+            if (collectionType != null && collectionType.GetProperty(_valueProperty) == null)
+            {
+                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", _valueProperty));
+            }
+            var collectionValue = collectionProperty.GetValue(context.ObjectInstance, null);
+            if (collectionValue == null)
+            {
+                throw new ArgumentException(string.Format("ExistsIn: Model.{0} is null. Unable to make list for Model.{1}", _listProperty, context.MemberName));
+            }
+            var collection = collectionValue as IEnumerable;
+            if (collection == null)
+            {
+                throw new ArgumentException(string.Format("ExistsIn: Model.{0} is not an IEnumerable. ExistsIn cannot be used to validate against this property.", _listProperty));
+            }
+
+            return collection.Cast<object>().ToList();
         }
     }
 }

@@ -110,6 +110,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ExistsInAttributeTests.cs" />
     <Compile Include="Component\Config\FieldConfigurationTests.cs" />
     <Compile Include="Component\Config\ReadonlyFieldConfigurationTests.cs" />
     <Compile Include="Component\NavigationTests.cs" />
