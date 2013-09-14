@@ -1,6 +1,19 @@
 ChameleonForms Breaking Changes
 -------------------------------
 
+Version 0.9.39
+==============
+
+The `[ExistsIn]` attribute now performs server-side validation to ensure the selected value is in the list. This requires that the list is populated at validation time in the ASP.NET MVC pipeline. This requires you to either fill the list in the constructor of your view model or to create a model binder to populate the list.
+
+If you don't populate the list before the validator runs then it will not do any validation - so it shouldn't break your forms.
+
+### Reason
+We wanted to provide in-built server-side validation of fields using the `[ExistsIn]` attribute and the easiest way to do that is to hook into the validation pipeline in ASP.NET MVC.
+
+### Workaround
+If for some reason you don't want server-side validation to run then don't populate your list until after the validation pipeline runs. If you need to be able to opt out of validation, but still populate the list before then or to tweak the validation in some other way then [raise an issue](https://github.com/MRCollective/ChameleonForms/issues) so we can add that functionality.
+
 Version 0.9.20
 ==============
 
