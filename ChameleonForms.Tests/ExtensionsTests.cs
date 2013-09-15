@@ -1,7 +1,11 @@
-﻿using NUnit.Framework;
+﻿using System.Web.Mvc;
+using ApprovalTests.Html;
+using ApprovalTests.Reporters;
+using NUnit.Framework;
 
 namespace ChameleonForms.Tests
 {
+    [UseReporter(typeof(DiffReporter))]
     class ExtensionsShould
     {
         [Test]
@@ -30,6 +34,23 @@ namespace ChameleonForms.Tests
             var h = str.ToHtml();
 
             Assert.That(h.ToHtmlString(), Is.EqualTo(string.Empty));
+        }
+
+        [Test]
+        public void Create_empty_html_attributes_object_from_html_helper()
+        {
+            var attrs = (default(HtmlHelper)).Attrs();
+
+            Assert.That(attrs, Is.InstanceOf<HtmlAttributes>());
+            Assert.That(attrs.Attributes, Is.Empty);
+        }
+
+        [Test]
+        public void Create_populated_html_attributes_object_from_html_helper()
+        {
+            var attrs = (default(HtmlHelper)).Attrs(style => "font-weight: bold;", @class => "class1 class2");
+
+            HtmlApprovals.VerifyHtml(attrs.ToHtmlString());
         }
     }
 }
