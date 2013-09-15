@@ -99,6 +99,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ComparisonController.cs" />
     <Compile Include="Controllers\ExampleFormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Forms\Components\RandomComponent.cs" />
@@ -131,6 +132,9 @@
     <Content Include="Views\ExampleForms\NullModelWithList.cshtml" />
     <Content Include="Views\ExampleForms\Buttons.cshtml" />
     <Content Include="Views\ExampleForms\Labels.cshtml" />
+    <Content Include="Views\Comparison\ChameleonForms.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates.cshtml" />
+    <Content Include="Views\Comparison\HtmlHelpers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
