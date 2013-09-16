@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using ChameleonForms.Attributes;
 
 namespace ChameleonForms.Example.Controllers
 {
@@ -11,15 +10,30 @@ namespace ChameleonForms.Example.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult ChameleonForms(SignupViewModel vm)
+        {
+            return View(vm);
+        }
 
         public ActionResult EditorTemplates()
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult EditorTemplates(SignupViewModel vm)
+        {
+            return View(vm);
+        }
 
         public ActionResult HtmlHelpers()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult HtmlHelpers(SignupViewModel vm)
+        {
+            return View(vm);
         }
 
         public class SignupViewModel

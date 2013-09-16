@@ -108,6 +108,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Comparison\HtmlExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -142,7 +143,6 @@
     <Content Include="Views\Comparison\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\Decimal.cshtml" />
-    <Content Include="Views\Comparison\EditorTemplates\EditorSection.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\EmailAddress.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\HiddenInput.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\HtmlInput.cshtml" />
