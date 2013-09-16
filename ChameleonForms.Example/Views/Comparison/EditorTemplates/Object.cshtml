@@ -1,0 +1,34 @@
+﻿@{ Layout = "~/Views/Shared/EditorTemplates/_Layout.cshtml"; }
+@if (ViewData.TemplateInfo.TemplateDepth > 1)
+{
+    if (Model == null)
+    {
+    <text>ViewData.ModelMetadata.NullDisplayText</text>
+    }
+    else
+    {
+    <text>ViewData.ModelMetadata.SimpleDisplayText</text>
+    }
+}
+else
+{
+    foreach (var prop in ViewData.ModelMetadata.Properties.Where(metadata => metadata.ShowForEdit
+        // && metadata.ModelType != typeof(System.Data.EntityState) // Dependency on Entity Framework present in Microsoft.Web.Mvc template
+            && !metadata.IsComplexType
+            && !ViewData.TemplateInfo.Visited(metadata)))
+    { 
+        if (prop.HideSurroundingHtml)
+        {
+            @Html.Editor(prop.PropertyName)
+        }
+        else
+        {
+            string label = Html.Label(prop.PropertyName).ToHtmlString();
+            if (!string.IsNullOrEmpty(label))
+            {
+                <div class="editor-label">@Html.Label(prop.PropertyName)</div>
+            }
+            <div class="editor-field">@Html.Editor(prop.PropertyName) @Html.ValidationMessage(prop.PropertyName)</div>
+        }
+    }
+} 

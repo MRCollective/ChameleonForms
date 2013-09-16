@@ -1,0 +1,19 @@
+﻿@{ Layout = "~/Views/Shared/EditorTemplates/_Layout.cshtml"; }
+@model System.Collections.IEnumerable
+@if (Model != null) {
+    var index = 0;
+    var oldPrefix = Html.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix;
+    
+    try
+    {
+	    foreach (var item in Model)
+	    {
+            string fieldName = String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}[{1}]", oldPrefix, index++);
+		    ViewContext.Writer.Write(Html.EditorFor(m => item, null, fieldName));
+	    }
+    }
+    finally
+    {
+	    Html.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = oldPrefix;
+    }
+}

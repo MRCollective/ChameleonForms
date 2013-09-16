@@ -1,0 +1,13 @@
+﻿@{ Layout = "~/Views/Shared/EditorTemplates/_Layout.cshtml"; }
+@{
+    object formattedValue;
+    if (ViewData.TemplateInfo.FormattedModelValue == ViewData.ModelMetadata.Model)
+    {
+        formattedValue = string.Format(System.Globalization.CultureInfo.CurrentCulture, "{0:0.00}", ViewData.ModelMetadata.Model);
+    }
+    else
+    {
+        formattedValue = ViewData.TemplateInfo.FormattedModelValue;
+    }
+}
+@Html.TextBox("", formattedValue, new { @class = "text-box single-line" })

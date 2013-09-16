@@ -136,6 +136,32 @@
     <Content Include="Views\Comparison\ChameleonForms.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates.cshtml" />
     <Content Include="Views\Comparison\HtmlHelpers.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Byte.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Collection.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Decimal.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\EditorSection.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\HiddenInput.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\HtmlInput.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Int32.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Int64.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\MultilineText.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Number.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Object.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\PhoneNumber.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\SByte.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Single.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\String.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Text.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\UInt32.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\UInt64.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

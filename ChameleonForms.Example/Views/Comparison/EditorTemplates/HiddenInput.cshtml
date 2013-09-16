@@ -1,0 +1,28 @@
+﻿@{ Layout = "~/Views/Shared/EditorTemplates/_Layout.cshtml"; }
+@if(!Html.ViewContext.ViewData.ModelMetadata.HideSurroundingHtml) { 
+	<text>@ViewData.TemplateInfo.FormattedModelValue</text>
+}
+@{
+    var bytes = Model as byte[];
+    object modelValue;
+    // Removed dependency on Linq2Sql present in Microsoft.Web.Mvc template, bring it back if you need it
+    /* 
+    if (Model is System.Data.Linq.Binary)
+    {
+        modelValue = Convert.ToBase64String(((System.Data.Linq.Binary)Model).ToArray());
+    }
+    else
+     */
+    if (bytes != null)
+    {
+        modelValue = Convert.ToBase64String(bytes);
+    }
+    else 
+    {
+        modelValue = Model;
+    }
+}
+@Html.Hidden("", modelValue)
+
+
+

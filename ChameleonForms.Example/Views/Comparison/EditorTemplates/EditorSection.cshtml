@@ -1,0 +1,20 @@
+﻿@using RazorDisplayEditorTemplates.DemoMvcApp.Html
+@{
+    // ASP.Net MVC template functionality tracks models that have been displayed to prevent
+    // endless loops due to circular references within the model graph. 
+
+    // However, the nested call is valid here - we call Html.Editor to display the input 
+    // elements within the surrounding HTML - so we need to remove the current model from the
+    // list of tracked objects.
+    TemplateHelper.RemoveModelFromVisitedObjects(ViewData);
+
+    var editorParams = ViewData["TemplateParams"] as TemplateParams ?? new TemplateParams();
+}
+<div class="editor-label">
+    @Html.Label("")
+</div>
+<div class="editor-field">
+    @Html.Editor("", editorParams.TemplateName, editorParams.HtmlFieldName, editorParams.AdditionalViewData)
+    @Html.ValidationMessage("")
+</div>
+
