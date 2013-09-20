@@ -9,5 +9,5 @@ for displaying input elements with surrounding HTML and label and validation
 elements
 
 *@
-<dt>@Html.Label("")@if(ViewData["required"] as bool? == true){ <em class="required">*</em>}</dt>
+<dt>@Html.Label("")@if (@ViewData.ModelMetadata.IsRequired){ <em class="required">*</em>}</dt>
 <dd>@RenderBody()@if(ViewData["hint"] != null){<div class="hint">@ViewData["hint"]</div>}@Html.ValidationMessage("")</dd>

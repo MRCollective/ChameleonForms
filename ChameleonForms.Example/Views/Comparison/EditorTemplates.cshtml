@@ -16,16 +16,16 @@
     
     using (Html.BeginSection("Your details"))
     {
-        @Html.EditorFor(m => m.FirstName, new { required = true }) @* todo: can the required be automatically inspected from model metadata *@
-        @Html.EditorFor(m => m.LastName, new { required = true })
-        @Html.EditorFor(m => m.DateOfBirth, new { hint = "DD/MM/YYYY", required = true }) @* todo: client-side validation attrs *@
+        @Html.EditorFor(m => m.FirstName)
+        @Html.EditorFor(m => m.LastName)
+        @Html.EditorFor(m => m.DateOfBirth, new { hint = "DD/MM/YYYY"}) @* todo: client-side validation attrs *@
     }
 
     using (Html.BeginSection("Account details"))
     {
-        @Html.EditorFor(m => m.EmailAddress, new {hint = "An email will be sent to this address to confirm you own it", required = true })
-        @Html.EditorFor(m => m.Password, new { required = true })
-        @Html.EditorFor(m => m.MembershipType, new { required = true })@* todo: editor template *@
+        @Html.EditorFor(m => m.EmailAddress, new {hint = "An email will be sent to this address to confirm you own it"})
+        @Html.EditorFor(m => m.Password)
+        @Html.EditorFor(m => m.MembershipType)@* todo: editor template *@
     }
 
     using (Html.BeginSection("Additional details"))
