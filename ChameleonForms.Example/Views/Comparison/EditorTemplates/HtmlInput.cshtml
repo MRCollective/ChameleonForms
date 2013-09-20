@@ -1,2 +1,7 @@
-﻿@{ Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml"; }
-@Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, new { @class = "text-box single-line", type = ViewData["type"] } )
+﻿@{
+    Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml";
+    var attrs = ViewData["attrs"] as Dictionary<string, object> ?? new Dictionary<string, object>();
+    attrs["class"] = "text-box single-line";
+    attrs["type"] = ViewData["type"];
+}
+@Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, attrs)
