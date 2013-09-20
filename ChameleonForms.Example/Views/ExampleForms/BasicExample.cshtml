@@ -1,27 +1,4 @@
-﻿@using Humanizer
-@model BasicViewModel
-
-@* Example using built-in MVC form helpers *@
-
-@using (Html.BeginForm())
-{
-    <fieldset>
-        <legend>A form</legend>
-        <dl>
-            <dt>@Html.LabelFor(m => m.RequiredString, "Some string")</dt>
-            <dd>@Html.TextBoxFor(m => m.RequiredString) @Html.ValidationMessageFor(m => m.RequiredString)</dd>
-            <dt>@Html.LabelFor(m => m.SomeEnum)</dt>
-            <dd>@Html.DropDownListFor(m => m.SomeEnum, Enum.GetNames(typeof(SomeEnum)).Select(x => new SelectListItem {Text = ((SomeEnum)Enum.Parse(typeof(SomeEnum), x)).Humanize(), Value = x})) @Html.ValidationMessageFor(m => m.SomeEnum)</dd>
-            <dt>@Html.LabelFor(m => m.SomeCheckbox)</dt>
-            <dd>@Html.CheckBoxFor(m => m.SomeCheckbox) @Html.LabelFor(m => m.SomeCheckbox, "Are you sure?") @Html.ValidationMessageFor(m => m.SomeCheckbox)</dd>
-        </dl>
-    </fieldset>
-    <div class="form_navigation">
-        <button type="submit">Submit</button>
-    </div>
-}
-
-@* Same thing with Chameleon Forms *@
+﻿@model BasicViewModel
 
 @using (var f = Html.BeginChameleonForm()) {
     using (var s = f.BeginSection("A form")) {
