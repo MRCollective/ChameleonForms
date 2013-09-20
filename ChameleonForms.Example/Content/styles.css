@@ -1,0 +1,92 @@
+﻿body {
+    font-size: 76%;
+    font-family: arial, sans-serif;
+}
+
+form {
+    max-width: 1000px;
+    min-width: 500px;
+}
+
+form dt {
+    clear: both;
+    width: 33%;
+    float: left;
+    text-align: right;
+    margin: 0.25em 0 0 0;
+}
+ 
+form dd {
+    float: left;
+    width: 66%;
+    margin: 0 0 0.5em 0.25em;
+    position: relative;
+}
+
+form dd ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+form dl dl {
+    border: 1px solid #000;
+    overflow: hidden;
+    padding: 0.5em;
+}
+
+form em.required {
+    color: red;
+}
+
+form .hint {
+    display: inline;
+    font-size: 0.9em;
+    color: #AAA;
+    padding-left: 1.0em;
+}
+
+.field-validation-error {
+    color: red;
+    display: block;
+    font-style: italic;
+}
+
+fieldset {
+    border: 0;
+    border-top: 1px solid #000;
+}
+
+legend {
+    border: 1px solid #000;
+}
+
+.information_message, .action_message {
+    margin: 2.0em 0;
+    padding: 1.5em 3em 1.5em 1.5em;
+    border-left: 0.5em solid #eee;
+}
+
+.information_message {
+    background-color: #f0f7fd;
+    border-color: #d0e3f0;
+}
+
+.action_message {
+  background-color: #fefbed;
+  border-color: #f1e7bc;
+}
+
+.information_message h3, .action_message h3 {
+    margin-top: 0;
+}
+
+.information_message *:last-child, .action_message *:last-child {
+  margin-bottom: 0;
+}
+
+.form_navigation {
+    text-align: right;
+    background: #EEE;
+    padding: 1.0em;
+}
