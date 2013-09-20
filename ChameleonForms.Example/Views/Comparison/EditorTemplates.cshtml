@@ -25,13 +25,13 @@
     {
         @Html.EditorFor(m => m.EmailAddress, new {hint = "An email will be sent to this address to confirm you own it"})
         @Html.EditorFor(m => m.Password)
-        @Html.EditorFor(m => m.MembershipType)@* todo: editor template *@
+        @Html.EditorFor(m => m.MembershipType)
     }
 
     using (Html.BeginSection("Additional details"))
     {
         @Html.EditorFor(m => m.Bio)
-        @Html.EditorFor(m => m.Homepage)@* todo: placeholder *@
+        @Html.EditorFor(m => m.Homepage, new {placeholder = "http://"})
     }
     
     <div class="action_message">
