@@ -162,6 +162,7 @@
     <Content Include="Views\Comparison\EditorTemplates\UInt64.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\_Layout.cshtml" />
+    <Content Include="Views\Comparison\EditorTemplates\MembershipType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
