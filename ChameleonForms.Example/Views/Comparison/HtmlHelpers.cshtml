@@ -36,8 +36,8 @@
             <dt>@Html.LabelFor(m => m.MembershipType) <em class="required">*</em></dt>
             <dd>@Html.DropDownListFor(m => m.MembershipType,
                     Enum.GetValues(typeof(ComparisonController.MembershipType))
-                        .Cast<object>()
-                        .Select(m => new SelectListItem{Text = ((ComparisonController.MembershipType)m).Humanize(), Value = m.ToString()})
+                        .Cast<ComparisonController.MembershipType>()
+                        .Select(m => new SelectListItem{Text = m.Humanize(), Value = m.ToString()})
                 ) @Html.ValidationMessageFor(m => m.MembershipType)
             </dd>
         </dl>
