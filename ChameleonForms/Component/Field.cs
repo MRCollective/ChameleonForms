@@ -39,7 +39,7 @@ namespace ChameleonForms.Component
         /// <param name="form">The form the field is being created in</param>
         /// <param name="isParent">Whether or not the field has other fields nested within it</param>
         /// <param name="fieldGenerator">A field HTML generator class</param>
-        /// <param name="config"> </param>
+        /// <param name="config">The configuration values for the field</param>
         public Field(IForm<TModel, TTemplate> form, bool isParent, IFieldGenerator fieldGenerator, IFieldConfiguration config)
             : base(form, !isParent)
         {

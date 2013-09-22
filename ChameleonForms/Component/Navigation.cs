@@ -131,10 +131,10 @@ namespace ChameleonForms.Component
         ///     @n.Submit("Next", "next")
         /// }
         /// </example>
-        /// <typeparam name="TModel"></typeparam>
-        /// <typeparam name="TTemplate"></typeparam>
-        /// <param name="form"></param>
-        /// <returns></returns>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>
+        /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
+        /// <param name="form">The form the navigation is being created in</param>
+        /// <returns>The form navigation</returns>
         public static Navigation<TModel, TTemplate> BeginNavigation<TModel, TTemplate>(this IForm<TModel, TTemplate> form) where TTemplate : IFormTemplate
         {
             return new Navigation<TModel, TTemplate>(form);
