@@ -107,7 +107,7 @@ namespace ChameleonForms.Component
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <param name="config">Any configuration information for the field</param>
-        /// <returns></returns>
+        /// <returns>The form field</returns>
         public static Field<TModel, TTemplate> BeginFieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null) where TTemplate : IFormTemplate
         {
             return new Field<TModel, TTemplate>(section.Form, true, section.Form.GetFieldGenerator(property), config);
@@ -140,8 +140,8 @@ namespace ChameleonForms.Component
         /// Creates a standalone form field to be output in a form.
         /// </summary>
         /// <example>
-        /// @using (var f = s.BeginChameleonForm()) {
-        ///     <p>@f.LabelFor(m => m.PositionTitle) @f.FieldFor(m => m.PositionTitle)</p>
+        /// @using (var f = Html.BeginChameleonForm()) {
+        ///     @f.FieldFor(m => m.PositionTitle)
         /// }
         /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
@@ -160,6 +160,11 @@ namespace ChameleonForms.Component
         /// <summary>
         /// Creates a standalone label to be output in a form for a field.
         /// </summary>
+        /// <example>
+        /// @using (var f = Html.BeginChameleonForm()) {
+        ///     @f.LabelFor(m => m.PositionTitle)
+        /// }
+        /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
@@ -176,6 +181,11 @@ namespace ChameleonForms.Component
         /// <summary>
         /// Creates a standalone validation message to be output in a form for a field.
         /// </summary>
+        /// <example>
+        /// @using (var f = Html.BeginChameleonForm()) {
+        ///     @f.ValidationMessageFor(m => m.PositionTitle)
+        /// }
+        /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
