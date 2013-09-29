@@ -1,16 +1,15 @@
 ﻿using System;
-using NUnit.Framework;
 using TestStack.Seleno.Configuration;
 
 namespace ChameleonForms.AcceptanceTests
 {
-    [SetUpFixture]
-    public class AssemblyFixture
+    public static class Host
     {
-        [SetUp]
-        public void SetUp()
+        public static readonly SelenoHost Instance = new SelenoHost();
+
+        static Host()
         {
-            SelenoHost.Run("ChameleonForms.Example", 12345, c => c
+            Instance.Run("ChameleonForms.Example", 12345, c => c
                 .WithMinimumWaitTimeoutOf(TimeSpan.FromSeconds(1))
             );
         }

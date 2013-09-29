@@ -7,12 +7,12 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
     {
         public ModelBindingExamplePage GoToModelBindingExamplePage()
         {
-            return Navigate().To<ModelBindingExamplePage>(By.LinkText("Model Binding Example"));
+            return Navigate.To<ModelBindingExamplePage>(By.LinkText("Model Binding Example"));
         }
 
         public ModelBindingExamplePage GoToModelBindingExamplePage2()
         {
-            return Navigate().To<ModelBindingExamplePage>(By.LinkText("Model Binding Example with lists"));
+            return Navigate.To<ModelBindingExamplePage>(By.LinkText("Model Binding Example with lists"));
         }
     }
 }

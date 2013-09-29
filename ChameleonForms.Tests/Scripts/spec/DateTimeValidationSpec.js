@@ -4,7 +4,7 @@
 // Fixture data
 /// <reference path="../fixtures/DateTimeValidationFixtures.js"/>
 // Libs
-/// <reference path="../src/jquery-1.4.4.js"/>
+/// <reference path="../src/jquery-2.0.3.js"/>
 /// <reference path="../src/jquery.validate.js"/>
 /// <reference path="../src/jquery.validate.unobtrusive.js"/>
 // Src
