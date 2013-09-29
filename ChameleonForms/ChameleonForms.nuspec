@@ -41,7 +41,7 @@
      <file src="bin\Release\ChameleonForms.XML" target="lib\NET40" />
      <file src="..\AppStart.cs.pp" target="content\App_Start\RegisterChameleonFormsComponents.cs.pp" />
      <file src="..\web.config.transform" target="content\Views" />
-     <file src="..\BREAKING_CHANGES.md" target="readme.txt" />
      <file src="..\ChameleonForms.Example\Scripts\jquery.validate.unobtrusive.chameleon.js" target="content\Scripts\jquery.validate.unobtrusive.chameleon.js" />
+     <file src="readme.txt" target="" />
   </files>
 </package>
