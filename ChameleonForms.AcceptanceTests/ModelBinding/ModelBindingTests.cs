@@ -13,7 +13,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
         {
             var enteredViewModel = ObjectMother.ModelBindingViewModels.BasicValid;
 
-            var page = SelenoHost.NavigateToInitialPage<HomePage>()
+            var page = Host.Instance.NavigateToInitialPage<HomePage>()
                 .GoToModelBindingExamplePage()
                 .Submit(enteredViewModel);
 
@@ -26,7 +26,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
         {
             var enteredViewModel = ObjectMother.ModelBindingViewModels.BasicValid;
 
-            var page = SelenoHost.NavigateToInitialPage<HomePage>()
+            var page = Host.Instance.NavigateToInitialPage<HomePage>()
                 .GoToModelBindingExamplePage2()
                 .Submit(enteredViewModel);
 
