@@ -21,6 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 		logo.png = logo.png
 		README.md = README.md
+		ChameleonForms\readme.txt = ChameleonForms\readme.txt
 		web.config.transform = web.config.transform
 	EndProjectSection
 EndProject
