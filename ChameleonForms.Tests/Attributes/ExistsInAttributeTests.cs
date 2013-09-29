@@ -155,6 +155,21 @@ namespace ChameleonForms.Tests.Attributes
             Assert.That(result.ErrorMessage, Is.EqualTo(string.Format(expectedError, validationContext.DisplayName)));
         }
 
+        [Test]
+        public void Successfully_validate_an_invalid_submission_if_validation_disabled()
+        {
+            const string valueProperty = "Id";
+            const string nameProperty = "Name";
+            const string listProperty = "List";
+            var vm = new ModelBindingViewModel { RequiredListId = 3 };
+            var validationContext = new ValidationContext(vm, null, null) { DisplayName = "Required list ids" };
+            var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty, enableValidation: false);
+
+            var result = attribute.GetValidationResult(vm.RequiredListId, validationContext);
+
+            Assert.That(result, Is.EqualTo(ValidationResult.Success));
+        }
+
         private readonly ModelBindingViewModel[] _validViewModels =
         {
             new ModelBindingViewModel{ RequiredString = "" },
