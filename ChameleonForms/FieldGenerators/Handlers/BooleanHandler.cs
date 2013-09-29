@@ -46,7 +46,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue() ?? false, attrs);
             var labelHtml = HtmlCreator.BuildLabel(
                 GetFieldName(),
-                FieldConfiguration.InlineLabelText ?? new HtmlString(FieldGenerator.GetFieldDisplayName()),
+                FieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
                 null
             );
 
