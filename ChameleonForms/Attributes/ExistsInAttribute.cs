@@ -33,6 +33,7 @@ namespace ChameleonForms.Attributes
         private readonly string _listProperty;
         private readonly string _valueProperty;
         private readonly string _nameProperty;
+        private readonly bool _enableValidation;
 
         /// <summary>
         /// Instantiates an <see cref="ExistsInAttribute"/>.
@@ -40,11 +41,13 @@ namespace ChameleonForms.Attributes
         /// <param name="listProperty">The name of the property containing the list this property should reference.</param>
         /// <param name="valueProperty">The name of the property of the list items to use for the value</param>
         /// <param name="nameProperty">The name of the property of the list items to use for the name/label</param>
-        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty)
+        /// <param name="enableValidation">Whether or not to enable server-side validation</param>
+        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty, bool enableValidation = true)
         {
             _listProperty = listProperty;
             _valueProperty = valueProperty;
             _nameProperty = nameProperty;
+            _enableValidation = enableValidation;
         }
 
         public void OnMetadataCreated(ModelMetadata metadata)
@@ -57,7 +60,7 @@ namespace ChameleonForms.Attributes
 
         protected override ValidationResult IsValid(object value, ValidationContext context)
         {
-            if (value == null || value.ToString() == string.Empty)
+            if (!_enableValidation || value == null || value.ToString() == string.Empty)
             {
                 return ValidationResult.Success;
             }
