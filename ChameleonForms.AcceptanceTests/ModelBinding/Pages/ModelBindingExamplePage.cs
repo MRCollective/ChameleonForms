@@ -8,7 +8,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
         public ModelBindingExamplePage Submit(ModelBindingViewModel vm)
         {
             InputModel(vm);
-            return Navigate().To<ModelBindingExamplePage>(By.CssSelector("button[type=submit]"));
+            return Navigate.To<ModelBindingExamplePage>(By.CssSelector("button[type=submit]"));
         }
     }
 }
