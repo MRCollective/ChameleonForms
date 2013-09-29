@@ -10,7 +10,6 @@
 
 @if (ViewData.ModelMetadata.IsNullableValueType)
 {
-
     var triStateValues = new List<SelectListItem>
     {
         new SelectListItem {Text = "Not Set", Value = String.Empty, Selected = !value.HasValue},

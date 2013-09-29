@@ -3,11 +3,11 @@
 {
     if (Model == null)
     {
-    <text>ViewData.ModelMetadata.NullDisplayText</text>
+        <text>ViewData.ModelMetadata.NullDisplayText</text>
     }
     else
     {
-    <text>ViewData.ModelMetadata.SimpleDisplayText</text>
+        <text>ViewData.ModelMetadata.SimpleDisplayText</text>
     }
 }
 else
@@ -23,7 +23,7 @@ else
         }
         else
         {
-            string label = Html.Label(prop.PropertyName).ToHtmlString();
+            var label = Html.Label(prop.PropertyName).ToHtmlString();
             if (!string.IsNullOrEmpty(label))
             {
                 <div class="editor-label">@Html.Label(prop.PropertyName)</div>

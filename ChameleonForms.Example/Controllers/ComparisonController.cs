@@ -10,6 +10,7 @@ namespace ChameleonForms.Example.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult ChameleonForms(SignupViewModel vm)
         {
@@ -20,6 +21,7 @@ namespace ChameleonForms.Example.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult EditorTemplates(SignupViewModel vm)
         {
@@ -30,6 +32,7 @@ namespace ChameleonForms.Example.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult HtmlHelpers(SignupViewModel vm)
         {
@@ -62,7 +65,6 @@ namespace ChameleonForms.Example.Controllers
 
             [Required]
             public bool TermsAndConditions { get; set; }
-
         }
 
         public enum MembershipType
