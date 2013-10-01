@@ -30,10 +30,15 @@ namespace ChameleonForms.Attributes
         /// </summary>
         public const string NameKey = "ExistsInNameProperty";
 
+        /// <summary>
+        /// Application-wide configuration for whether or not to enable ExistsIn validation.
+        /// </summary>
+        public static bool EnableValidation = true;
+
         private readonly string _listProperty;
         private readonly string _valueProperty;
         private readonly string _nameProperty;
-        private readonly bool _enableValidation;
+        private readonly bool? _enableValidation;
 
         /// <summary>
         /// Instantiates an <see cref="ExistsInAttribute"/>.
@@ -41,8 +46,21 @@ namespace ChameleonForms.Attributes
         /// <param name="listProperty">The name of the property containing the list this property should reference.</param>
         /// <param name="valueProperty">The name of the property of the list items to use for the value</param>
         /// <param name="nameProperty">The name of the property of the list items to use for the name/label</param>
-        /// <param name="enableValidation">Whether or not to enable server-side validation</param>
-        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty, bool enableValidation = true)
+        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty)
+        {
+            _listProperty = listProperty;
+            _valueProperty = valueProperty;
+            _nameProperty = nameProperty;
+        }
+
+        /// <summary>
+        /// Instantiates an <see cref="ExistsInAttribute"/>.
+        /// </summary>
+        /// <param name="listProperty">The name of the property containing the list this property should reference.</param>
+        /// <param name="valueProperty">The name of the property of the list items to use for the value</param>
+        /// <param name="nameProperty">The name of the property of the list items to use for the name/label</param>
+        /// <param name="enableValidation">Optional override for ExistsIn server-side validation configuration (if not specified, static configuration setting ExistsInAttribute.EnableValidation is used)</param>
+        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty, bool enableValidation)
         {
             _listProperty = listProperty;
             _valueProperty = valueProperty;
@@ -60,7 +78,7 @@ namespace ChameleonForms.Attributes
 
         protected override ValidationResult IsValid(object value, ValidationContext context)
         {
-            if (!_enableValidation || value == null || value.ToString() == string.Empty)
+            if ((_enableValidation.HasValue && !_enableValidation.Value) || !EnableValidation || value == null || value.ToString() == string.Empty)
             {
                 return ValidationResult.Success;
             }
