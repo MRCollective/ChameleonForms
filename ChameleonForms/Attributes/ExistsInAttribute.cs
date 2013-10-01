@@ -78,10 +78,14 @@ namespace ChameleonForms.Attributes
 
         protected override ValidationResult IsValid(object value, ValidationContext context)
         {
-            if ((_enableValidation.HasValue && !_enableValidation.Value) || (!_enableValidation.HasValue && !EnableValidation) || value == null || value.ToString() == string.Empty)
+            var enableValidation = _enableValidation.HasValue
+                ? _enableValidation.Value
+                : EnableValidation;
+            if (!enableValidation || value == null || value.ToString() == string.Empty)
             {
                 return ValidationResult.Success;
             }
+            
             var collection = GetCollectionIfValid(context);
             var possibleValues = collection.Select(item => item.GetType().GetProperty(_valueProperty).GetValue(item, null))
                 .Select(i => i is Enum ? (int)i : i);
