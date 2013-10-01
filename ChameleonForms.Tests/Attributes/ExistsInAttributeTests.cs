@@ -11,6 +11,12 @@ namespace ChameleonForms.Tests.Attributes
     [TestFixture]
     public class ExistsInAttributeShould
     {
+        [SetUp]
+        public void Setup()
+        {
+            ExistsInAttribute.EnableValidation = true;
+        }
+
         [TestCase("", "Test")]
         [TestCase(null, "Test")]
         [TestCase("Test", "")]
@@ -156,14 +162,47 @@ namespace ChameleonForms.Tests.Attributes
         }
 
         [Test]
-        public void Successfully_validate_an_invalid_submission_if_validation_disabled()
+        public void Fail_to_validate_an_invalid_submission_if_validation_disabled_globally_and_enabled_locally()
         {
             const string valueProperty = "Id";
             const string nameProperty = "Name";
             const string listProperty = "List";
             var vm = new ModelBindingViewModel { RequiredListId = 3 };
-            var validationContext = new ValidationContext(vm, null, null) { DisplayName = "Required list ids" };
+            var validationContext = new ValidationContext(vm, null, null);
+            ExistsInAttribute.EnableValidation = false;
+            var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty, enableValidation: true);
+
+            var result = attribute.GetValidationResult(vm.RequiredListId, validationContext);
+
+            var expectedError = string.Format("The {{0}} field was 3, but must be one of A, B");
+            Assert.That(result.ErrorMessage, Is.EqualTo(string.Format(expectedError, validationContext.DisplayName)));
+        }
+
+        [Test]
+        public void Successfully_validate_an_invalid_submission_if_validation_disabled_locally()
+        {
+            const string valueProperty = "Id";
+            const string nameProperty = "Name";
+            const string listProperty = "List";
+            var vm = new ModelBindingViewModel { RequiredListId = 3 };
+            var validationContext = new ValidationContext(vm, null, null);
             var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty, enableValidation: false);
+
+            var result = attribute.GetValidationResult(vm.RequiredListId, validationContext);
+
+            Assert.That(result, Is.EqualTo(ValidationResult.Success));
+        }
+
+        [Test]
+        public void Successfully_validate_an_invalid_submission_if_validation_disabled_globally_and_not_overidden()
+        {
+            const string valueProperty = "Id";
+            const string nameProperty = "Name";
+            const string listProperty = "List";
+            var vm = new ModelBindingViewModel { RequiredListId = 3 };
+            var validationContext = new ValidationContext(vm, null, null);
+            ExistsInAttribute.EnableValidation = false;
+            var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
 
             var result = attribute.GetValidationResult(vm.RequiredListId, validationContext);
 
