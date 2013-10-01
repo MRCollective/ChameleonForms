@@ -78,7 +78,7 @@ namespace ChameleonForms.Attributes
 
         protected override ValidationResult IsValid(object value, ValidationContext context)
         {
-            if ((_enableValidation.HasValue && !_enableValidation.Value) || !EnableValidation || value == null || value.ToString() == string.Empty)
+            if ((_enableValidation.HasValue && !_enableValidation.Value) || (!_enableValidation.HasValue && !EnableValidation) || value == null || value.ToString() == string.Empty)
             {
                 return ValidationResult.Success;
             }
