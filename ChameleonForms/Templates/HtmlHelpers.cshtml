@@ -52,20 +52,20 @@
     if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="hint">@fieldConfiguration.Hint</div>}
 }
 
-@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata) {
-@:            <dt>@labelHtml@(new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? " <em class=\"required\">*</em>" : ""))</dt>
+@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, IHtmlString requiredDesignator) {
+@:            <dt>@labelHtml@(new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? requiredDesignator.ToHtmlString() : ""))</dt>
 @:            <dd>
 @:                @GetPrependedHtml(fieldConfiguration)@elementHtml@GetAppendedHtml(fieldConfiguration)@GetHint(fieldConfiguration) @validationHtml
 }
 
-@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration) {
-@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata)
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, IHtmlString requiredDesignator) {
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, requiredDesignator)
 @:            </dd>
 }
 
-@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration)
+@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, IHtmlString requiredDesignator)
 {
-@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata)
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, requiredDesignator)
 @:                <dl>
 }
 
@@ -73,6 +73,9 @@
 @:                </dl>
 @:            </dd>
 }
+
+@helper RequiredDesignator() {
+<text> <em class="required">*</em></text>}
 
 @helper BeginNavigation() {
 @:        <div class="form_navigation">
