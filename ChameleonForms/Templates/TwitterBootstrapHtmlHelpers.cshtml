@@ -74,7 +74,7 @@
 
 @helper BeginMessage(TwitterAlertType messageType, IHtmlString heading) {
 @:      <div class="alert @string.Format("alert-{0}", messageType.ToString().ToLower())">
-            if (heading != null)
+            if (!string.IsNullOrEmpty(heading.ToHtmlString()))
             {
 @:          <p><strong>@heading</strong></p>
             }

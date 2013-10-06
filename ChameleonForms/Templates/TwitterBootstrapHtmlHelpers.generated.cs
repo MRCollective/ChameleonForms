@@ -50,7 +50,7 @@ namespace ChameleonForms.Templates
     #line default
     #line hidden
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.5.4.0")]
     public class TwitterBootstrapHtmlHelpers : System.Web.WebPages.HelperPage
     {
 
@@ -583,7 +583,7 @@ WriteLiteralTo(__razor_helper_writer, "\">\r\n");
 
 
 #line 77 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
-            if (heading != null)
+            if (!string.IsNullOrEmpty(heading.ToHtmlString()))
             {
 
 
