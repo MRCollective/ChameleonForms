@@ -8,7 +8,7 @@ namespace ChameleonForms.Example.Controllers.Filters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var templateInParams = filterContext.HttpContext.Request.Params["template"];
+            var templateInParams = filterContext.HttpContext.Request.QueryString["template"];
             var templateInCookies = filterContext.HttpContext.Request.Cookies["template"];
             if (!string.IsNullOrEmpty(templateInParams))
             {

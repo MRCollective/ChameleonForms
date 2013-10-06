@@ -51,6 +51,12 @@ namespace ChameleonForms.Tests
                 new NamedParameter("enctype", Enctype)
             );
         }
+
+        [TearDown]
+        public void Teardown()
+        {
+            FormTemplate.Default = new DefaultFormTemplate();
+        }
         #endregion
 
         [Test]
@@ -97,6 +103,24 @@ namespace ChameleonForms.Tests
 
             Assert.That(f2, Is.Not.Null);
             _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(Action, Method, _htmlAttributes, Enctype).ToHtmlString()));
+        }
+
+        [Test]
+        public void Construct_form_via_extension_method_using_default_template()
+        {
+            var f = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
+
+            Assert.That(f.Template, Is.TypeOf<DefaultFormTemplate>());
+        }
+
+        [Test]
+        public void Construct_form_via_extension_method_using_default_template_defined_by_user()
+        {
+            FormTemplate.Default = new TwitterBootstrapFormTemplate();
+
+            var f = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
+
+            Assert.That(f.Template, Is.TypeOf<TwitterBootstrapFormTemplate>());
         }
 
         [Test]
