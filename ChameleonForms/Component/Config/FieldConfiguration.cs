@@ -323,6 +323,18 @@ namespace ChameleonForms.Component.Config
         bool HasLabel { get; }
 
         /// <summary>
+        /// Specify one or more CSS classes to use for the field label.
+        /// </summary>
+        /// <param name="classes">Any CSS classes to use for the field label</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithLabelClasses(string classes);
+
+        /// <summary>
+        /// Any CSS class(es) to use for the field label.
+        /// </summary>
+        string LabelClasses { get; }
+
+        /// <summary>
         /// Returns readonly field configuration from the current field configuration.
         /// </summary>
         /// <returns>A readonly field configuration</returns>
@@ -561,6 +573,13 @@ namespace ChameleonForms.Component.Config
         }
 
         public bool HasLabel { get; private set; }
+        public IFieldConfiguration WithLabelClasses(string classes)
+        {
+            LabelClasses = classes;
+            return this;
+        }
+
+        public string LabelClasses { get; private set; }
 
         public IFieldConfiguration OverrideFieldHtml(IHtmlString html)
         {

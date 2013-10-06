@@ -29,11 +29,11 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
-        public void Use_class_for_field_label_with_html_attributes_including_a_class()
+        public void Use_label_class_for_field_label_with_html_attributes_including_a_class()
         {
             var g = Arrange(m => m.RequiredString);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().AddClass("asdf").Disabled().Readonly());
+            var result = g.GetLabelHtml(new FieldConfiguration().AddClass("dontshowthis").WithLabelClasses("showthis"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

@@ -57,8 +57,8 @@ namespace ChameleonForms.FieldGenerators
                 return labelText;
 
             var labelAttrs = new HtmlAttributes();
-            if (fieldConfiguration.HtmlAttributes.ContainsKey("class"))
-                labelAttrs.AddClass(fieldConfiguration.HtmlAttributes["class"] as string);
+            if (!string.IsNullOrEmpty(fieldConfiguration.LabelClass))
+                labelAttrs.AddClass(fieldConfiguration.LabelClass);
 
             return HtmlCreator.BuildLabel(@for, labelText, labelAttrs);
         }

@@ -84,6 +84,11 @@ namespace ChameleonForms.Component.Config
         /// Whether or not to use a &lt;label&gt;.
         /// </summary>
         bool HasLabel { get; }
+
+        /// <summary>
+        /// Any CSS class(es) to use for the field label.
+        /// </summary>
+        string LabelClass { get; }
     }
 
     /// <summary>
@@ -175,6 +180,11 @@ namespace ChameleonForms.Component.Config
         public bool HasLabel
         {
             get { return _fieldConfiguration.HasLabel; }
+        }
+
+        public string LabelClass
+        {
+            get { return _fieldConfiguration.LabelClasses; }
         }
     }
 }
