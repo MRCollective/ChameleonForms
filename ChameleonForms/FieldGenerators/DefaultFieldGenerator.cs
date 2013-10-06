@@ -100,7 +100,6 @@ namespace ChameleonForms.FieldGenerators
 
             // Let the template modify the field configuration before it's used
             Template.PrepareFieldConfiguration(this, fieldConfiguration);
-            fieldConfiguration.AddClass("form-control");
 
             FieldGeneratorHandlersRouter<TModel, T>.PrepareFieldConfiguration(this, fieldConfiguration);
 
