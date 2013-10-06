@@ -1,3 +1,11 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using ChameleonForms.Templates
+@{
+    if (FormTemplate.Default.GetType() == typeof (DefaultFormTemplate))
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+    }
 }

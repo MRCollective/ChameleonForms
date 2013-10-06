@@ -117,6 +117,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ComparisonController.cs" />
     <Compile Include="Controllers\ExampleFormsController.cs" />
+    <Compile Include="Controllers\Filters\FormTemplateFilter.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Forms\Components\RandomComponent.cs" />
     <Compile Include="Forms\Templates\RandomFormTemplate.cs" />
@@ -128,6 +129,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\styles.css" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
@@ -179,6 +184,7 @@
     <Content Include="Views\Comparison\EditorTemplates\Url.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\_Layout.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\MembershipType.cshtml" />
+    <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
