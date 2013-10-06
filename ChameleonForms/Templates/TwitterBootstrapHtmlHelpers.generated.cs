@@ -281,7 +281,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "<span");
+WriteLiteralTo(__razor_helper_writer, "<div");
 
 WriteLiteralTo(__razor_helper_writer, " class=\"help-block\"");
 
@@ -289,16 +289,16 @@ WriteLiteralTo(__razor_helper_writer, ">");
 
 
 #line 43 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                   WriteTo(__razor_helper_writer, fieldConfiguration.Hint);
+                                                                  WriteTo(__razor_helper_writer, fieldConfiguration.Hint);
 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</span>");
+WriteLiteralTo(__razor_helper_writer, "</div>");
 
 
 #line 43 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                                                                                }
+                                                                                                                              }
 
 
 #line default
@@ -529,7 +529,7 @@ WriteLiteralTo(__razor_helper_writer, "\">\r\n");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "          <p><strong>");
+WriteLiteralTo(__razor_helper_writer, "          <h4>");
 
 
 #line 70 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
@@ -538,7 +538,7 @@ WriteTo(__razor_helper_writer, heading);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</strong></p>\r\n");
+WriteLiteralTo(__razor_helper_writer, "</h4>\r\n");
 
 
 #line 71 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"

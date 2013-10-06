@@ -40,7 +40,7 @@
 }
 
 @helper GetHint(IReadonlyFieldConfiguration fieldConfiguration) {
-    if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<span class="help-block">@fieldConfiguration.Hint</span>}
+    if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="help-block">@fieldConfiguration.Hint</div>}
 }
 
 @helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata) {
@@ -67,7 +67,7 @@
 @:      <div class="alert @string.Format("alert-{0}", messageType.ToString().ToLower())">
             if (!string.IsNullOrEmpty(heading.ToHtmlString()))
             {
-@:          <p><strong>@heading</strong></p>
+@:          <h4>@heading</h4>
             }
 }
 
