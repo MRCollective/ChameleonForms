@@ -52,7 +52,7 @@ namespace ChameleonForms.FieldGenerators
         ModelMetadata Metadata { get; }
 
         /// <summary>
-        /// The form template for the form. (So it can alter the field configuration.)
+        /// The form template that will be used to render the form.
         /// </summary>
         IFormTemplate Template { get; }
 
