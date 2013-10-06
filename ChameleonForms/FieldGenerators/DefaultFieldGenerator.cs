@@ -21,6 +21,7 @@ namespace ChameleonForms.FieldGenerators
         /// </summary>
         /// <param name="htmlHelper">The HTML helper for the current view</param>
         /// <param name="fieldProperty">Expression to identify the property to generate the field for</param>
+        /// <param name="template">The template being used to output the form</param>
         public DefaultFieldGenerator(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, T>> fieldProperty, IFormTemplate template)
         {
             HtmlHelper = htmlHelper;
@@ -97,7 +98,7 @@ namespace ChameleonForms.FieldGenerators
             if (!string.IsNullOrEmpty(Metadata.NullDisplayText) && string.IsNullOrEmpty(fieldConfiguration.NoneString))
                 fieldConfiguration.WithNoneAs(Metadata.NullDisplayText);
 
-            // Let the template mod the fc here:
+            // Let the template modify the field configuration before it's used
             Template.PrepareFieldConfiguration(this, fieldConfiguration);
             fieldConfiguration.AddClass("form-control");
 

@@ -12,13 +12,12 @@ namespace ChameleonForms.Templates
     public interface IFormTemplate
     {
         /// <summary>
-        /// Allows the template the modify the field configuration
+        /// Allows the template the modify the field configuration for a particular field.
         /// </summary>
-        /// <typeparam name="TModel"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="fieldGenerator"></param>
-        /// <param name="fieldConfiguration"></param>
-        /// <returns></returns>
+        /// <typeparam name="TModel">The type of model the form is being displayed for</typeparam>
+        /// <typeparam name="T">The type of the property the field is being generated against</typeparam>
+        /// <param name="fieldGenerator">The instance of the field generator that will be used to generate the field</param>
+        /// <param name="fieldConfiguration">The field configuration that is being used to configure the field</param>
         void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration);
 
         /// <summary>
