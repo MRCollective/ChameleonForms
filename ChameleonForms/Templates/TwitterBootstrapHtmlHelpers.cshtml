@@ -1,7 +1,6 @@
 ﻿@using System.Web.Mvc
 @using Component.Config
 @using Enums
-@using Templates
 
 @* Generator: MvcHelper *@
 
@@ -64,14 +63,6 @@
 @:            </div>
 }
 
-@helper BeginNavigation() {
-@:        <div class="form_navigation">
-}
-
-@helper EndNavigation() {
-@:        </div>
-}
-
 @helper BeginMessage(TwitterAlertType messageType, IHtmlString heading) {
 @:      <div class="alert @string.Format("alert-{0}", messageType.ToString().ToLower())">
             if (!string.IsNullOrEmpty(heading.ToHtmlString()))
@@ -82,18 +73,4 @@
 
 @helper EndMessage() {
 @:      </div>
-}
-
-@helper MessageParagraph(IHtmlString paragraph) {
-@:    <p>
-@:        @paragraph
-@:    </p>
-}
-
-@helper List(IEnumerable<IHtmlString> items) {
-@:    <ul>
-foreach(var i in items) {
-@:        <li>@i</li>
-}
-@:    </ul>
 }

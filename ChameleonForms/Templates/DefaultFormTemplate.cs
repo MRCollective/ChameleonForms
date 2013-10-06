@@ -12,7 +12,7 @@ namespace ChameleonForms.Templates
     /// </summary>
     public class DefaultFormTemplate : IFormTemplate
     {
-        public void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public virtual void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
         {
         }
 

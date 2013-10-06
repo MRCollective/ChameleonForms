@@ -10,9 +10,9 @@ namespace ChameleonForms.Templates
     /// <summary>
     /// The default Chameleon Forms form template renderer.
     /// </summary>
-    public class TwitterBootstrapFormTemplate : IFormTemplate
+    public class TwitterBootstrapFormTemplate : DefaultFormTemplate
     {
-        public void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public override void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
         {
             //TODO: Only for inputs and textareas
             fieldConfiguration.AddClass("form-control");
@@ -20,84 +20,64 @@ namespace ChameleonForms.Templates
             //TODO: deal with checkbox/radiobox lists
         }
 
-        public virtual IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        public override IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
         {
             return HtmlCreator.BuildFormTag(action, method, htmlAttributes, enctype);
         }
 
-        public virtual IHtmlString EndForm()
+        public override IHtmlString EndForm()
         {
             return TwitterBootstrapHtmlHelpers.EndForm();
         }
 
-        public virtual IHtmlString BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+        public override IHtmlString BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
             return TwitterBootstrapHtmlHelpers.BeginSection(title, leadingHtml, htmlAttributes);
         }
 
-        public virtual IHtmlString EndSection()
+        public override IHtmlString EndSection()
         {
             return TwitterBootstrapHtmlHelpers.EndSection();
         }
 
-        public virtual IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+        public override IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
             throw new NotSupportedException("Twitter bootstrap does not support nested form sections.");
         }
 
-        public virtual IHtmlString EndNestedSection()
+        public override IHtmlString EndNestedSection()
         {
             throw new NotSupportedException("Twitter bootstrap does not support nested form sections.");
         }
 
-        public virtual IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        public override IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
             return TwitterBootstrapHtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
         }
 
-        public virtual IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        public override IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
             throw new NotSupportedException("Twitter bootstrap does not support nested form fields.");
         }
 
-        public IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        public override IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
             throw new NotImplementedException();
         }
 
-        public virtual IHtmlString EndField()
+        public override IHtmlString EndField()
         {
             throw new NotSupportedException("Twitter bootstrap does not support nested form fields.");
         }
 
-        public virtual IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
+        public override IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
         {
             return TwitterBootstrapHtmlHelpers.BeginMessage(messageType.ToTwitterAlertType(), heading);
         }
 
-        public virtual IHtmlString EndMessage()
+        public override IHtmlString EndMessage()
         {
             return TwitterBootstrapHtmlHelpers.EndMessage();
-        }
-
-        public virtual IHtmlString MessageParagraph(IHtmlString paragraph)
-        {
-            return TwitterBootstrapHtmlHelpers.MessageParagraph(paragraph);
-        }
-
-        public IHtmlString Button(IHtmlString content, string type, string id, string value, HtmlAttributes htmlAttributes)
-        {
-            return HtmlCreator.BuildButton(content, type, id, value, htmlAttributes);
-        }
-
-        public virtual IHtmlString BeginNavigation()
-        {
-            return TwitterBootstrapHtmlHelpers.BeginNavigation();
-        }
-
-        public virtual IHtmlString EndNavigation()
-        {
-            return TwitterBootstrapHtmlHelpers.EndNavigation();
         }
     }
 }
