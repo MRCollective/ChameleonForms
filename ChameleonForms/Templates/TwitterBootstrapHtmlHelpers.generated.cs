@@ -581,6 +581,60 @@ WriteLiteralTo(__razor_helper_writer, "      </div>\r\n");
 #line default
 #line hidden
 
+#line 78 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
+public static System.Web.WebPages.HelperResult BeginNavigation() {
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 78 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
+                           
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "        <div class=\"btn-group\">\r\n");
+
+
+#line 80 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line default
+#line hidden
+});
+
+#line 80 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
+}
+#line default
+#line hidden
+
+#line 82 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
+public static System.Web.WebPages.HelperResult EndNavigation() {
+#line default
+#line hidden
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+#line 82 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
+                         
+
+
+#line default
+#line hidden
+WriteLiteralTo(__razor_helper_writer, "        </div>\r\n");
+
+
+#line 84 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line default
+#line hidden
+});
+
+#line 84 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
+}
+#line default
+#line hidden
+
     }
 }
 #pragma warning restore 1591

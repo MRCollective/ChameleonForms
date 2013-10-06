@@ -79,5 +79,24 @@ namespace ChameleonForms.Templates
         {
             return TwitterBootstrapHtmlHelpers.EndMessage();
         }
+
+        public override IHtmlString BeginNavigation()
+        {
+            return TwitterBootstrapHtmlHelpers.BeginNavigation();
+        }
+
+        public override IHtmlString EndNavigation()
+        {
+            return TwitterBootstrapHtmlHelpers.EndNavigation();
+        }
+
+        public override IHtmlString Button(IHtmlString content, string type, string id, string value, HtmlAttributes htmlAttributes)
+        {
+            htmlAttributes = htmlAttributes ?? new HtmlAttributes();
+            htmlAttributes.AddClass("btn");
+            if (!htmlAttributes.Attributes["class"].Contains("btn-"))
+                htmlAttributes.AddClass("btn-default");
+            return base.Button(content, type, id, value, htmlAttributes);
+        }
     }
 }
