@@ -102,12 +102,7 @@ namespace ChameleonForms
         /// <returns>A <see cref="Form{TModel,TTemplate}"/> object with an instance of the default form template renderer.</returns>
         public static IForm<TModel, IFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
-            return new Form<TModel, IFormTemplate>(helper, Config.FormTemplate, action, method, htmlAttributes, enctype);
+            return new Form<TModel, IFormTemplate>(helper, FormTemplate.Default, action, method, htmlAttributes, enctype);
         }
-
-//        public static IForm<TModel, IFormTemplate> WithTemplate<TModel>(this IForm<TModel, IFormTemplate> form, IFormTemplate template)
-//        {
-//            form.Template = template;
-//        }
     }
 }

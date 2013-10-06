@@ -9,7 +9,7 @@ namespace ChameleonForms.Example.TwitterBootstrap
         protected void Application_Start()
         {
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            Config.FormTemplate = new TwitterBootstrapFormTemplate();
+            FormTemplate.Default = new TwitterBootstrapFormTemplate();
         }
     }
 }
