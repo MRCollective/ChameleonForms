@@ -60,6 +60,11 @@ namespace ChameleonForms.Templates
             throw new NotSupportedException("Twitter bootstrap does not support nested form fields.");
         }
 
+        public IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual IHtmlString EndField()
         {
             throw new NotSupportedException("Twitter bootstrap does not support nested form fields.");

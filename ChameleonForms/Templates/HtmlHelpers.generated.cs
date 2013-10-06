@@ -679,7 +679,7 @@ WriteLiteralTo(__razor_helper_writer, "\">\r\n");
 
 
 #line 90 "..\..\Templates\HtmlHelpers.cshtml"
-            if (heading != null)
+            if (!string.IsNullOrEmpty(heading.ToHtmlString()))
             {
 
 

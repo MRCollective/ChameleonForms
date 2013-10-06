@@ -78,7 +78,7 @@ namespace ChameleonForms.Component
         /// <param name="messageType">The type of message to display</param>
         /// <param name="heading">The heading for the message</param>
         /// <returns>The message</returns>
-        public static Message<TModel, TTemplate> BeginMessage<TModel, TTemplate>(this IForm<TModel, TTemplate> form, MessageType messageType, string heading) where TTemplate : IFormTemplate
+        public static Message<TModel, TTemplate> BeginMessage<TModel, TTemplate>(this IForm<TModel, TTemplate> form, MessageType messageType, string heading = null) where TTemplate : IFormTemplate
         {
             return new Message<TModel, TTemplate>(form, messageType, heading.ToHtml());
         }

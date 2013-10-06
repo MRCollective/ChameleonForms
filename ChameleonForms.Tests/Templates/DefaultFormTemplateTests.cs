@@ -170,6 +170,16 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
+        public void Output_begin_information_message_without_heading()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginMessage(MessageType.Information, new HtmlString(""));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Output_begin_failure_message()
         {
             var t = new DefaultFormTemplate();

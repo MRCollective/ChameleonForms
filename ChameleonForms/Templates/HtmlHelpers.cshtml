@@ -87,7 +87,7 @@
 
 @helper BeginMessage(MessageType messageType, IHtmlString heading) {
 @:      <div class="@string.Format("{0}{1}", messageType.ToString().ToLower(), "_message")">
-            if (heading != null)
+            if (!string.IsNullOrEmpty(heading.ToHtmlString()))
             {
 @:          <h3>@heading</h3>
             }
