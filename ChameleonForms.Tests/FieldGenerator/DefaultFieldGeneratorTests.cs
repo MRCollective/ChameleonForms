@@ -154,9 +154,8 @@ namespace ChameleonForms.Tests.FieldGenerator
             }
             H.ViewData.Model = vm;
             H.ViewData.ModelMetadata.Model = vm;
-            var fieldTemplate = new DefaultFormTemplate(); // Todo: Think about this.
 
-            return new DefaultFieldGenerator<TestFieldViewModel, T>(H, property, fieldTemplate);
+            return new DefaultFieldGenerator<TestFieldViewModel, T>(H, property, new DefaultFormTemplate());
         }
 
         [Test]
