@@ -16,9 +16,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// Constructor for the Password Field Generator Handler.
         /// </summary>
         /// <param name="fieldGenerator">The field generator for the field</param>
-        /// <param name="fieldConfiguration">The field configuration to use when outputting the field</param>
-        public PasswordHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
-            : base(fieldGenerator, fieldConfiguration)
+        public PasswordHandler(IFieldGenerator<TModel, T> fieldGenerator)
+            : base(fieldGenerator)
         {}
 
         public override bool CanHandle()
@@ -26,9 +25,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldGenerator.Metadata.DataTypeName == DataType.Password.ToString();
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return GetInputHtml(TextInputType.Password, FieldGenerator, FieldConfiguration);
+            return GetInputHtml(TextInputType.Password, FieldGenerator, fieldConfiguration);
         }
     }
 }

@@ -19,9 +19,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// Constructor for the Enum Field Generator Handler.
         /// </summary>
         /// <param name="fieldGenerator">The field generator for the field</param>
-        /// <param name="fieldConfiguration">The field configuration to use when outputting the field</param>
-        public EnumListHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
-            : base(fieldGenerator, fieldConfiguration)
+        public EnumListHandler(IFieldGenerator<TModel, T> fieldGenerator)
+            : base(fieldGenerator)
         {}
 
         public override bool CanHandle()
@@ -29,10 +28,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return GetUnderlyingType(FieldGenerator).IsEnum;
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var selectList = GetSelectList();
-            return GetSelectListHtml(selectList, FieldGenerator, FieldConfiguration);
+            return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
         }
 
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)

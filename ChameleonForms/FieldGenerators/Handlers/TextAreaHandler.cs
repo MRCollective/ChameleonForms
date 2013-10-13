@@ -16,9 +16,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// Constructor for the TextArea Field Generator Handler.
         /// </summary>
         /// <param name="fieldGenerator">The field generator for the field</param>
-        /// <param name="fieldConfiguration">The field configuration to use when outputting the field</param>
-        public TextAreaHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
-            : base(fieldGenerator, fieldConfiguration)
+        public TextAreaHandler(IFieldGenerator<TModel, T> fieldGenerator)
+            : base(fieldGenerator)
         {}
 
         public override bool CanHandle()
@@ -26,11 +25,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldGenerator.Metadata.DataTypeName == DataType.MultilineText.ToString();
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return FieldGenerator.HtmlHelper.TextAreaFor(
                 FieldGenerator.FieldProperty,
-                FieldConfiguration.HtmlAttributes
+                fieldConfiguration.HtmlAttributes
             );
         }
     }

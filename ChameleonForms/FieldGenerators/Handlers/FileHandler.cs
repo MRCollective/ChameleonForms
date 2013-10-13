@@ -15,9 +15,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// Constructor for the File Field Generator Handler.
         /// </summary>
         /// <param name="fieldGenerator">The field generator for the field</param>
-        /// <param name="fieldConfiguration">The field configuration to use when outputting the field</param>
-        public FileHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
-            : base(fieldGenerator, fieldConfiguration)
+        public FileHandler(IFieldGenerator<TModel, T> fieldGenerator)
+            : base(fieldGenerator)
         {}
 
         public override bool CanHandle()
@@ -25,9 +24,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return typeof(HttpPostedFileBase).IsAssignableFrom(FieldGenerator.Metadata.ModelType);
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return GetInputHtml(TextInputType.File, FieldGenerator, FieldConfiguration);
+            return GetInputHtml(TextInputType.File, FieldGenerator, fieldConfiguration);
         }
     }
 }

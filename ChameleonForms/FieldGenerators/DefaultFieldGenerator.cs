@@ -101,7 +101,7 @@ namespace ChameleonForms.FieldGenerators
             // Let the template modify the field configuration before it's used
             Template.PrepareFieldConfiguration(this, fieldConfiguration);
 
-            FieldGeneratorHandlersRouter<TModel, T>.PrepareFieldConfiguration(this, fieldConfiguration);
+            FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this).PrepareFieldConfiguration(fieldConfiguration);
 
             return new ReadonlyFieldConfiguration(fieldConfiguration);
         }
@@ -112,7 +112,7 @@ namespace ChameleonForms.FieldGenerators
             if (fieldConfiguration.FieldHtml != null)
                 return fieldConfiguration.FieldHtml;
             
-            return FieldGeneratorHandlersRouter<TModel, T>.GetFieldHtml(this, fieldConfiguration);
+            return FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this).GenerateFieldHtml(fieldConfiguration);
         }
 
         public T GetValue()

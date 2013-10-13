@@ -26,8 +26,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <summary>
         /// Generate the HTML for the current field's Field Element using this handler.
         /// </summary>
+        /// <param name="fieldConfiguration">The field configuration to use to generate the HTML</param>
         /// <returns>The HTML for the Field Element</returns>
-        IHtmlString GenerateFieldHtml();
+        IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Modify the field configuration for the field using this field generator handler.
@@ -61,17 +62,14 @@ namespace ChameleonForms.FieldGenerators.Handlers
     /// <typeparam name="T">The type of the property in the model that the specific field is being output for</typeparam>
     public abstract class FieldGeneratorHandler<TModel, T> : IFieldGeneratorHandler<TModel, T>
     {
-        protected readonly IFieldGenerator<TModel, T> FieldGenerator;
-        protected readonly IReadonlyFieldConfiguration FieldConfiguration;
-
-        protected FieldGeneratorHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
+        protected FieldGeneratorHandler(IFieldGenerator<TModel, T> fieldGenerator)
         {
             FieldGenerator = fieldGenerator;
-            FieldConfiguration = fieldConfiguration;
         }
 
+        protected readonly IFieldGenerator<TModel, T> FieldGenerator;
         public abstract bool CanHandle();
-        public abstract IHtmlString GenerateFieldHtml();
+        public abstract IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
         public virtual void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration) {}
 
         protected static bool HasMultipleValues(IFieldGenerator<TModel, T> fieldGenerator)

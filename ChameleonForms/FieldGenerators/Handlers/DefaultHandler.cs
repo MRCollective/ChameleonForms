@@ -15,9 +15,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// Constructor for the Default Field Generator Handler.
         /// </summary>
         /// <param name="fieldGenerator">The field generator for the field</param>
-        /// <param name="fieldConfiguration">The field configuration to use when outputting the field</param>
-        public DefaultHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
-            : base(fieldGenerator, fieldConfiguration)
+        public DefaultHandler(IFieldGenerator<TModel, T> fieldGenerator)
+            : base(fieldGenerator)
         {}
 
         public override bool CanHandle()
@@ -25,9 +24,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return true;
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return GetInputHtml(TextInputType.Text, FieldGenerator, FieldConfiguration);
+            return GetInputHtml(TextInputType.Text, FieldGenerator, fieldConfiguration);
         }
     }
 }

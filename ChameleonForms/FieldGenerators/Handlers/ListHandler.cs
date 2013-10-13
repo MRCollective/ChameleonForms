@@ -20,9 +20,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// Constructor for the List Field Generator Handler.
         /// </summary>
         /// <param name="fieldGenerator">The field generator for the field</param>
-        /// <param name="fieldConfiguration">The field configuration to use when outputting the field</param>
-        public ListHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
-            : base(fieldGenerator, fieldConfiguration)
+        public ListHandler(IFieldGenerator<TModel, T> fieldGenerator)
+            : base(fieldGenerator)
         {}
 
         public override bool CanHandle()
@@ -31,11 +30,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 && FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? == true;
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var model = FieldGenerator.GetModel();
             var selectList = GetSelectList(model);
-            return GetSelectListHtml(selectList, FieldGenerator, FieldConfiguration);
+            return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
         }
 
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)

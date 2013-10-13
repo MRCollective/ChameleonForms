@@ -18,9 +18,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// Constructor for the Boolean Field Generator Handler.
         /// </summary>
         /// <param name="fieldGenerator">The field generator for the field</param>
-        /// <param name="fieldConfiguration">The field configuration to use when outputting the field</param>
-        public BooleanHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
-            : base(fieldGenerator, fieldConfiguration)
+        public BooleanHandler(IFieldGenerator<TModel, T> fieldGenerator)
+            : base(fieldGenerator)
         {}
 
         public override bool CanHandle()
@@ -28,13 +27,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return GetUnderlyingType(FieldGenerator) == typeof(bool);
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            if (FieldConfiguration.DisplayType == FieldDisplayType.Default && FieldGenerator.Metadata.ModelType == typeof(bool))
-                return GetSingleCheckboxHtml();
+            if (fieldConfiguration.DisplayType == FieldDisplayType.Default && FieldGenerator.Metadata.ModelType == typeof(bool))
+                return GetSingleCheckboxHtml(fieldConfiguration);
 
-            var selectList = GetBooleanSelectList();
-            return GetSelectListHtml(selectList, FieldGenerator, FieldConfiguration);
+            var selectList = GetBooleanSelectList(fieldConfiguration);
+            return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
         }
 
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
@@ -49,25 +48,25 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldGenerator.GetValue() as bool?;
         }
 
-        private IHtmlString GetSingleCheckboxHtml()
+        private IHtmlString GetSingleCheckboxHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            var attrs = new HtmlAttributes(FieldConfiguration.HtmlAttributes);
+            var attrs = new HtmlAttributes(fieldConfiguration.HtmlAttributes);
             AdjustHtmlForModelState(attrs, FieldGenerator);
             var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(FieldGenerator), GetValue() ?? false, attrs);
             var labelHtml = HtmlCreator.BuildLabel(
                 GetFieldName(FieldGenerator),
-                FieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
+                fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
                 null
             );
 
             return new HtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
         }
 
-        private IEnumerable<SelectListItem> GetBooleanSelectList()
+        private IEnumerable<SelectListItem> GetBooleanSelectList(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var value = GetValue();
-            yield return new SelectListItem { Value = "true", Text = FieldConfiguration.TrueString, Selected = value == true };
-            yield return new SelectListItem { Value = "false", Text = FieldConfiguration.FalseString, Selected = value == false };
+            yield return new SelectListItem { Value = "true", Text = fieldConfiguration.TrueString, Selected = value == true };
+            yield return new SelectListItem { Value = "false", Text = fieldConfiguration.FalseString, Selected = value == false };
         }
     }
 }
