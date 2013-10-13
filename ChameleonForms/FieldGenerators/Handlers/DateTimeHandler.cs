@@ -23,12 +23,12 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override bool CanHandle()
         {
-            return GetUnderlyingType() == typeof (DateTime);
+            return GetUnderlyingType(FieldGenerator) == typeof (DateTime);
         }
 
         public override IHtmlString GenerateFieldHtml()
         {
-            return GetInputHtml(TextInputType.Text);
+            return GetInputHtml(TextInputType.Text, FieldGenerator, FieldConfiguration);
         }
 
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)

@@ -28,7 +28,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override IHtmlString GenerateFieldHtml()
         {
-            return GetInputHtml(TextInputType.Password);
+            return GetInputHtml(TextInputType.Password, FieldGenerator, FieldConfiguration);
         }
     }
 }

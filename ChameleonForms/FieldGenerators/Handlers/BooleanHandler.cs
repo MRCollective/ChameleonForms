@@ -25,7 +25,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override bool CanHandle()
         {
-            return GetUnderlyingType() == typeof(bool);
+            return GetUnderlyingType(FieldGenerator) == typeof(bool);
         }
 
         public override IHtmlString GenerateFieldHtml()
@@ -34,7 +34,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 return GetSingleCheckboxHtml();
 
             var selectList = GetBooleanSelectList();
-            return GetSelectListHtml(selectList);
+            return GetSelectListHtml(selectList, FieldGenerator, FieldConfiguration);
         }
 
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
@@ -52,10 +52,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
         private IHtmlString GetSingleCheckboxHtml()
         {
             var attrs = new HtmlAttributes(FieldConfiguration.HtmlAttributes);
-            AdjustHtmlForModelState(attrs);
-            var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue() ?? false, attrs);
+            AdjustHtmlForModelState(attrs, FieldGenerator);
+            var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(FieldGenerator), GetValue() ?? false, attrs);
             var labelHtml = HtmlCreator.BuildLabel(
-                GetFieldName(),
+                GetFieldName(FieldGenerator),
                 FieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
                 null
             );

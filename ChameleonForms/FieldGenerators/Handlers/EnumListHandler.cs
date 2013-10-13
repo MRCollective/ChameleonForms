@@ -26,13 +26,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override bool CanHandle()
         {
-            return GetUnderlyingType().IsEnum;
+            return GetUnderlyingType(FieldGenerator).IsEnum;
         }
 
         public override IHtmlString GenerateFieldHtml()
         {
             var selectList = GetSelectList();
-            return GetSelectListHtml(selectList);
+            return GetSelectListHtml(selectList, FieldGenerator, FieldConfiguration);
         }
 
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
@@ -44,14 +44,14 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         private IEnumerable<SelectListItem> GetSelectList()
         {
-            var enumValues = Enum.GetValues(GetUnderlyingType());
+            var enumValues = Enum.GetValues(GetUnderlyingType(FieldGenerator));
             foreach (var i in enumValues)
             {
                 yield return new SelectListItem
                 {
                     Text = (i as Enum).Humanize(),
                     Value = i.ToString(),
-                    Selected = IsSelected(i)
+                    Selected = IsSelected(i, FieldGenerator)
                 };
             }
         }

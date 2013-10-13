@@ -35,7 +35,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         {
             var model = FieldGenerator.GetModel();
             var selectList = GetSelectList(model);
-            return GetSelectListHtml(selectList);
+            return GetSelectListHtml(selectList, FieldGenerator, FieldConfiguration);
         }
 
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
@@ -44,7 +44,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             //  when there is a radio button for "no value selected" i.e. value="" then it can't be selected
             //  as an option since it tries to validate the empty string as a number.
             // This turns off unobtrusive validation in that circumstance
-            if (fieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && IsNumeric() && !HasMultipleValues())
+            if (fieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && IsNumeric(FieldGenerator) && !HasMultipleValues(FieldGenerator))
                 fieldConfiguration.Attr("data-val", "false");
 
             // If a list is being displayed there is no element for the label to point to so drop it
@@ -74,7 +74,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             {
                 var name = item.GetType().GetProperty(nameProperty).GetValue(item, null);
                 var value = item.GetType().GetProperty(valueProperty).GetValue(item, null);
-                yield return new SelectListItem { Selected = IsSelected(value), Value = value.ToString(), Text = name.ToString() };
+                yield return new SelectListItem { Selected = IsSelected(value, FieldGenerator), Value = value.ToString(), Text = name.ToString() };
             }
         }
 
