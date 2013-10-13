@@ -16,8 +16,6 @@ namespace ChameleonForms.Templates
         {
             //TODO: Only for inputs and textareas
             fieldConfiguration.AddClass("form-control");
-
-            //TODO: deal with checkbox/radiobox lists
         }
 
         public override IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
