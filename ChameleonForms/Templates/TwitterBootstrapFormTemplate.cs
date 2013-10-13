@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
@@ -15,8 +16,8 @@ namespace ChameleonForms.Templates
     {
         public override void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration)
         {
-            //TODO: Only for inputs and textareas
-            fieldConfiguration.AddClass("form-control");
+            if (new[] { typeof(DateTimeHandler<TModel, T>), typeof(DefaultHandler<TModel, T>), typeof(PasswordHandler<TModel, T>), typeof(TextAreaHandler<TModel, T>) }.Any(t => t.IsInstanceOfType(fieldGeneratorHandler)))
+                fieldConfiguration.AddClass("form-control");
         }
 
         public override IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
