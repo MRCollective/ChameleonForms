@@ -98,10 +98,9 @@ namespace ChameleonForms.FieldGenerators
             if (!string.IsNullOrEmpty(Metadata.NullDisplayText) && string.IsNullOrEmpty(fieldConfiguration.NoneString))
                 fieldConfiguration.WithNoneAs(Metadata.NullDisplayText);
 
-            // Let the template modify the field configuration before it's used
-            Template.PrepareFieldConfiguration(this, fieldConfiguration);
-
-            FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this).PrepareFieldConfiguration(fieldConfiguration);
+            var handler = FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this);
+            handler.PrepareFieldConfiguration(fieldConfiguration);
+            Template.PrepareFieldConfiguration(this, handler, fieldConfiguration);
 
             return new ReadonlyFieldConfiguration(fieldConfiguration);
         }

@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
+using ChameleonForms.FieldGenerators.Handlers;
 
 namespace ChameleonForms.Templates
 {
@@ -12,7 +13,7 @@ namespace ChameleonForms.Templates
     /// </summary>
     public class DefaultFormTemplate : IFormTemplate
     {
-        public virtual void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration)
+        public virtual void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration)
         {
         }
 

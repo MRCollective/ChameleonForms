@@ -3,6 +3,7 @@ using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using System.Web.Mvc;
 using ChameleonForms.FieldGenerators;
+using ChameleonForms.FieldGenerators.Handlers;
 
 namespace ChameleonForms.Templates
 {
@@ -17,8 +18,9 @@ namespace ChameleonForms.Templates
         /// <typeparam name="TModel">The type of model the form is being displayed for</typeparam>
         /// <typeparam name="T">The type of the property the field is being generated against</typeparam>
         /// <param name="fieldGenerator">The instance of the field generator that will be used to generate the field</param>
+        /// <param name="fieldGeneratorHandler">The instance of the field generator handler that will be used to generate the field element</param>
         /// <param name="fieldConfiguration">The field configuration that is being used to configure the field</param>
-        void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldConfiguration fieldConfiguration);
+        void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the starting HTML for a form.
