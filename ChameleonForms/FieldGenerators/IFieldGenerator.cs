@@ -29,7 +29,7 @@ namespace ChameleonForms.FieldGenerators
         T GetValue();
 
         /// <summary>
-        /// Returns a <see cref="TModel"/> with the current values for the form.
+        /// Returns a model with the current values for the form.
         /// </summary>
         /// <returns>The current model</returns>
         TModel GetModel();
