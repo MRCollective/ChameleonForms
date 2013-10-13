@@ -5,8 +5,18 @@ using ChameleonForms.Enums;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
-    internal class DateTimeHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
+    /// <summary>
+    /// Generates the HTML for the Field Element of datetime fields.
+    /// </summary>
+    /// <typeparam name="TModel">The type of the model the form is being output for</typeparam>
+    /// <typeparam name="T">The type of the property in the model that the specific field is being output for</typeparam>
+    public class DateTimeHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
+        /// <summary>
+        /// Constructor for the DateTime Field Generator Handler.
+        /// </summary>
+        /// <param name="fieldGenerator">The field generator for the field</param>
+        /// <param name="fieldConfiguration">The field configuration to use when outputting the field</param>
         public DateTimeHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
             : base(fieldGenerator, fieldConfiguration)
         { }

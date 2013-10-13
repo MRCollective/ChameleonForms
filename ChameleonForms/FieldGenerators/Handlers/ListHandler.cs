@@ -9,8 +9,18 @@ using ChameleonForms.Enums;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
-    internal class ListHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
+    /// <summary>
+    /// Generates the HTML for the Field Element of list fields as either a select list or a list of radio buttons.
+    /// </summary>
+    /// <typeparam name="TModel">The type of the model the form is being output for</typeparam>
+    /// <typeparam name="T">The type of the property in the model that the specific field is being output for</typeparam>
+    public class ListHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
+        /// <summary>
+        /// Constructor for the List Field Generator Handler.
+        /// </summary>
+        /// <param name="fieldGenerator">The field generator for the field</param>
+        /// <param name="fieldConfiguration">The field configuration to use when outputting the field</param>
         public ListHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
             : base(fieldGenerator, fieldConfiguration)
         {}

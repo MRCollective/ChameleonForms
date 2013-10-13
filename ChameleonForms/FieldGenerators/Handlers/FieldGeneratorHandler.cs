@@ -11,9 +11,34 @@ using System.Linq;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
-    internal abstract class FieldGeneratorHandler<TModel, T>
+    /// <summary>
+    /// A Field Generator Handler is responsible for generating the HTML for a Field Element of a particular type of field.
+    /// </summary>
+    /// <typeparam name="TModel">The type of the model the form is being output for</typeparam>
+    /// <typeparam name="T">The type of the property in the model that the specific field is being output for</typeparam>
+    public interface IFieldGeneratorHandler<TModel, T>
     {
-        private static readonly List<Type> NumericTypes = new List<Type>
+        /// <summary>
+        /// Whether or not the current field can be output using this field generator handler.
+        /// </summary>
+        bool CanHandle();
+
+        /// <summary>
+        /// Generate the HTML for the current field's Field Element using this handler.
+        /// </summary>
+        /// <returns>The HTML for the Field Element</returns>
+        IHtmlString GenerateFieldHtml();
+
+        /// <summary>
+        /// Modify the field configuration for the field using this field generator handler.
+        /// </summary>
+        /// <param name="fieldConfiguration">The field configuration to modify</param>
+        void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration);
+    }
+
+    internal static class FieldGeneratorHandler
+    {
+        public static readonly List<Type> NumericTypes = new List<Type>
         {
             typeof (byte),
             typeof (sbyte),
@@ -27,7 +52,15 @@ namespace ChameleonForms.FieldGenerators.Handlers
             typeof (double),
             typeof (decimal)
         };
+    }
 
+    /// <summary>
+    /// Base class that contains common logic for implementing field generator handlers.
+    /// </summary>
+    /// <typeparam name="TModel">The type of the model the form is being output for</typeparam>
+    /// <typeparam name="T">The type of the property in the model that the specific field is being output for</typeparam>
+    public abstract class FieldGeneratorHandler<TModel, T> : IFieldGeneratorHandler<TModel, T>
+    {
         protected readonly IFieldGenerator<TModel, T> FieldGenerator;
         protected readonly IReadonlyFieldConfiguration FieldConfiguration;
 
@@ -64,7 +97,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return value == null;
         }
 
-        public Type GetUnderlyingType()
+        protected Type GetUnderlyingType()
         {
             var type = FieldGenerator.Metadata.ModelType;
 
@@ -74,9 +107,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return Nullable.GetUnderlyingType(type) ?? type;
         }
 
-        public bool IsNumeric()
+        protected bool IsNumeric()
         {
-            return NumericTypes.Contains(GetUnderlyingType());
+            return FieldGeneratorHandler.NumericTypes.Contains(GetUnderlyingType());
         }
 
         protected IHtmlString GetInputHtml(TextInputType inputType)

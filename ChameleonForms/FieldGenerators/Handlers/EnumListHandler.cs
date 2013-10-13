@@ -8,8 +8,18 @@ using Humanizer;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
-    internal class EnumListHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
+    /// <summary>
+    /// Generates the HTML for the Field Element of enum fields as either a select list or a list of radio buttons.
+    /// </summary>
+    /// <typeparam name="TModel">The type of the model the form is being output for</typeparam>
+    /// <typeparam name="T">The type of the property in the model that the specific field is being output for</typeparam>
+    public class EnumListHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
+        /// <summary>
+        /// Constructor for the Enum Field Generator Handler.
+        /// </summary>
+        /// <param name="fieldGenerator">The field generator for the field</param>
+        /// <param name="fieldConfiguration">The field configuration to use when outputting the field</param>
         public EnumListHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
             : base(fieldGenerator, fieldConfiguration)
         {}
