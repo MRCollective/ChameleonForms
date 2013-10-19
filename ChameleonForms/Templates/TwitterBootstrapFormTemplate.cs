@@ -14,6 +14,11 @@ namespace ChameleonForms.Templates
     /// </summary>
     public class TwitterBootstrapFormTemplate : DefaultFormTemplate
     {
+        /// <summary>
+        /// The attribute name to use for adding an icon class to a Html Attributes object.
+        /// </summary>
+        public const string IconAttrKey = "data-chameleonforms-twbs-icon";
+
         public override void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration)
         {
             if (new[] { typeof(DateTimeHandler<TModel, T>), typeof(DefaultHandler<TModel, T>), typeof(PasswordHandler<TModel, T>), typeof(TextAreaHandler<TModel, T>) }.Any(t => t.IsInstanceOfType(fieldGeneratorHandler)))
@@ -96,6 +101,17 @@ namespace ChameleonForms.Templates
             htmlAttributes.AddClass("btn");
             if (!htmlAttributes.Attributes["class"].Contains("btn-"))
                 htmlAttributes.AddClass("btn-default");
+
+            if (htmlAttributes.Attributes.ContainsKey(IconAttrKey))
+            {
+                var icon = htmlAttributes.Attributes[IconAttrKey];
+                var iconHtml = string.Format("<span class=\"glyphicon glyphicon-{0}\"></span> ", icon);
+                content = content == null
+                    ? new HtmlString(iconHtml + value.ToHtml())
+                    : new HtmlString(iconHtml + content.ToHtmlString());
+                htmlAttributes.Attributes.Remove(IconAttrKey);
+            }
+
             return base.Button(content, type, id, value, htmlAttributes);
         }
     }

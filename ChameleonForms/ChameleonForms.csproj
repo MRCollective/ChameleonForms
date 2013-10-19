@@ -143,6 +143,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TwitterBootstrapHtmlHelpers.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\Twitter\HtmlAttributesExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ChameleonForms.nuspec" />

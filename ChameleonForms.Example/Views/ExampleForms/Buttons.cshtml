@@ -1,4 +1,4 @@
-﻿@using ChameleonForms.Templates
+﻿@using ChameleonForms.Templates.Twitter
 @model dynamic
 
 @{
@@ -13,11 +13,11 @@
     {
         @n.Button("text button").AddClass("button")
         @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("button")
-        @n.Reset("text reset").AddClass("button")
+        @n.Reset("text reset").AddClass("button").WithIcon("refresh")
         @n.Reset(new HtmlString("<strong>html reset</strong>")).AddClass("button")
         @n.Submit(new HtmlString("<strong>html submit</strong>")).AddClass("button")
         @n.Submit("text submit").AddClass("button").AddClass("btn-danger")
         @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>")).AddClass("button")
-        @n.Submit("name", "value").AddClass("button btn-success")
+        @n.Submit("name", "value").AddClass("button btn-success").WithIcon("star")
     }
 }
