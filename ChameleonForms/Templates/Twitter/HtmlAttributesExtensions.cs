@@ -1,4 +1,6 @@
-﻿namespace ChameleonForms.Templates.Twitter
+﻿using ChameleonForms.Component;
+
+namespace ChameleonForms.Templates.Twitter
 {
     /// <summary>
     /// Extension methods on <see cref="HtmlAttributes"/> for Twitter Bootstrap template.
@@ -16,9 +18,10 @@
         /// <param name="attrs">The Html Attributes from a navigation button</param>
         /// <param name="icon">The icon to use; see http://getbootstrap.com/components/#glyphicons-glyphs</param>
         /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
-        public static HtmlAttributes WithIcon(this HtmlAttributes attrs, string icon)
+        public static ButtonHtmlAttributes WithIcon(this ButtonHtmlAttributes attrs, string icon)
         {
-            return attrs.Attr(TwitterBootstrapFormTemplate.IconAttrKey, icon);
+            attrs.Attr(TwitterBootstrapFormTemplate.IconAttrKey, icon);
+            return attrs;
         }
     }
 }
