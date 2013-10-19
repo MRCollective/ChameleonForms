@@ -21,8 +21,32 @@ namespace ChameleonForms.Templates
 
         public override void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration)
         {
-            if (new[] { typeof(DateTimeHandler<TModel, T>), typeof(DefaultHandler<TModel, T>), typeof(PasswordHandler<TModel, T>), typeof(TextAreaHandler<TModel, T>) }.Any(t => t.IsInstanceOfType(fieldGeneratorHandler)))
-                fieldConfiguration.AddClass("form-control");
+            Action applyFormControl = () => fieldConfiguration.AddClass("form-control").WithLabelClasses(string.IsNullOrEmpty(fieldConfiguration.LabelClasses) ? "control-label" : fieldConfiguration.LabelClasses + " control-label");
+
+            if (
+                new[]
+                {
+                    typeof (DateTimeHandler<TModel, T>), typeof (DefaultHandler<TModel, T>),
+                    typeof (PasswordHandler<TModel, T>), typeof (TextAreaHandler<TModel, T>)
+                }.Any(t => t.IsInstanceOfType(fieldGeneratorHandler))
+            )
+                applyFormControl();
+
+            if (new[] {FieldDisplayType.Default, FieldDisplayType.DropDown}.Contains(fieldConfiguration.DisplayType) &&
+                new[] {typeof (EnumListHandler<TModel, T>), typeof (ListHandler<TModel, T>)}.Any(t => t.IsInstanceOfType(fieldGeneratorHandler))
+            )
+                applyFormControl();
+
+            if (typeof(T) == typeof(bool) && fieldConfiguration.DisplayType == FieldDisplayType.Default)
+            {
+                fieldConfiguration.Bag.IsCheckboxControl = true;
+                // Hide the parent label otherwise it looks weird
+                fieldConfiguration.Label("").WithoutLabel();
+            }
+            else if (fieldGeneratorHandler is BooleanHandler<TModel, T> && fieldConfiguration.DisplayType != FieldDisplayType.List)
+            {
+                applyFormControl();
+            }
         }
 
         public override IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
@@ -57,7 +81,7 @@ namespace ChameleonForms.Templates
 
         public override IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
-            return TwitterBootstrapHtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration);
+            return TwitterBootstrapHtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, isValid);
         }
 
         public override IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)

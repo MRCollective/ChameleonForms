@@ -5,7 +5,7 @@
     /// </summary>
     public enum TwitterAlertType
     {
-        Muted,
+        Default,
         Primary,
         Success,
         Info,
@@ -24,8 +24,7 @@
                 case MessageType.Failure: return TwitterAlertType.Danger;
                 case MessageType.Information: return TwitterAlertType.Info;
                 case MessageType.Warning: return TwitterAlertType.Warning;
-                // There is no case for muted in Chameleon...
-                default: return TwitterAlertType.Muted;
+                default: return TwitterAlertType.Default;
             }
         }
     }

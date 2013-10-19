@@ -4,14 +4,15 @@
         <title>@ViewBag.Title</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Bootstrap -->
-        <link href="@Url.Content("~/Content/bootstrap/css/bootstrap.min.css")" rel="stylesheet" media="screen">
+        <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     </head>
     <body>
-        <!-- JavaScript plugins (requires jQuery) -->
-        <script src="http://code.jquery.com/jquery.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="@Url.Content("~/Content/bootstrap/js/bootstrap.min.js")"></script>
+        <script type="text/javascript" src="~/Scripts/jquery-2.0.3.js"></script>
+        <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.validate.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.chameleon.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.twitterbootstrap.js"></script>
         <div class="container">
             @RenderBody()
         </div>
