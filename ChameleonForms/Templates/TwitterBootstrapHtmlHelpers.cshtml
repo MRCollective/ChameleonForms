@@ -43,10 +43,28 @@
     if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="help-block form-hint">@fieldConfiguration.Hint</div>}
 }
 
+@helper GetRequiredDesignator(bool isRequired, bool isCheckboxControl, string requiredTitle) {
+    if(isRequired && !isCheckboxControl){<div class="input-group-addon required"><em title="@requiredTitle">&lowast;</em></div>}
+    if(isCheckboxControl && isRequired) {<em class="required" title="@requiredTitle">&lowast;</em>}
+}
+
 @helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, bool isValid) {
-@:            <div class="@(((IDictionary<string, Object>)fieldConfiguration.Bag).ContainsKey("IsCheckboxControl") && (fieldConfiguration.Bag.IsCheckboxControl as bool?) == true ? "checkbox" : "form-group")@(!isValid ? " has-error" : string.Empty)">
-@:            @labelHtml@(new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? " <em class=\"required\">*</em>" : ""))
-@:            @GetPrependedHtml(fieldConfiguration)@elementHtml@GetAppendedHtml(fieldConfiguration)@GetHint(fieldConfiguration) @validationHtml
+    var isCheckboxControl = ((IDictionary<string, Object>) fieldConfiguration.Bag).ContainsKey("IsCheckboxControl") && (fieldConfiguration.Bag.IsCheckboxControl as bool?) == true;
+    var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
+    var requiredTitle = (((IDictionary<string, Object>) fieldConfiguration.Bag).ContainsKey("RequiredTitle") && (fieldConfiguration.Bag.RequiredTitle as string) != null) ? fieldConfiguration.Bag.RequiredTitle as string : "Required";
+    var isInputGroup = !isCheckboxControl && isRequired;
+@:            <div class="@(isCheckboxControl ? "checkbox" : "form-group")@(!isValid ? " has-error" : string.Empty)">
+@:            @labelHtml
+              if (isInputGroup)
+              {
+@:            <div class="input-group">
+              }
+@:            @GetPrependedHtml(fieldConfiguration)@elementHtml@GetRequiredDesignator(isRequired, isCheckboxControl, requiredTitle)@GetAppendedHtml(fieldConfiguration)
+              if (isInputGroup)
+              {
+@:            </div>
+              }
+@:            @GetHint(fieldConfiguration) @validationHtml
 }
 
 @helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid) {
