@@ -19,33 +19,20 @@ namespace ChameleonForms.Templates
         /// </summary>
         public const string IconAttrKey = "data-chameleonforms-twbs-icon";
 
+        private static readonly FieldDisplayType[] NormalFieldTypes = new[] {FieldDisplayType.DropDown, FieldDisplayType.SingleLineText, FieldDisplayType.MultiLineText};
+
         public override void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration)
         {
-            Action applyFormControl = () => fieldConfiguration.AddClass("form-control").WithLabelClasses(string.IsNullOrEmpty(fieldConfiguration.LabelClasses) ? "control-label" : fieldConfiguration.LabelClasses + " control-label");
+            var displayType = fieldGeneratorHandler.GetDisplayType(fieldConfiguration.ToReadonly());
 
-            if (
-                new[]
-                {
-                    typeof (DateTimeHandler<TModel, T>), typeof (DefaultHandler<TModel, T>),
-                    typeof (PasswordHandler<TModel, T>), typeof (TextAreaHandler<TModel, T>)
-                }.Any(t => t.IsInstanceOfType(fieldGeneratorHandler))
-            )
-                applyFormControl();
+            if (NormalFieldTypes.Contains(displayType))
+                fieldConfiguration.AddClass("form-control").WithLabelClasses(string.IsNullOrEmpty(fieldConfiguration.LabelClasses) ? "control-label" : fieldConfiguration.LabelClasses + " control-label");
 
-            if (new[] {FieldDisplayType.Default, FieldDisplayType.DropDown}.Contains(fieldConfiguration.DisplayType) &&
-                new[] {typeof (EnumListHandler<TModel, T>), typeof (ListHandler<TModel, T>)}.Any(t => t.IsInstanceOfType(fieldGeneratorHandler))
-            )
-                applyFormControl();
-
-            if (typeof(T) == typeof(bool) && fieldConfiguration.DisplayType == FieldDisplayType.Default)
+            if (displayType == FieldDisplayType.Checkbox)
             {
                 fieldConfiguration.Bag.IsCheckboxControl = true;
                 // Hide the parent label otherwise it looks weird
                 fieldConfiguration.Label("").WithoutLabel();
-            }
-            else if (fieldGeneratorHandler is BooleanHandler<TModel, T> && fieldConfiguration.DisplayType != FieldDisplayType.List)
-            {
-                applyFormControl();
             }
         }
 
