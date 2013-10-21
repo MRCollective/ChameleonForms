@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Web;
 using ChameleonForms.Enums;
-using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component.Config
 {
@@ -325,14 +324,26 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// Specify one or more CSS classes to use for the field label.
         /// </summary>
-        /// <param name="classes">Any CSS classes to use for the field label</param>
+        /// <param name="class">Any CSS class(es) to use for the field label</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration WithLabelClasses(string classes);
+        IFieldConfiguration AddLabelClass(string @class);
 
         /// <summary>
         /// Any CSS class(es) to use for the field label.
         /// </summary>
         string LabelClasses { get; }
+
+        /// <summary>
+        /// Specify one or more CSS classes to use for the field validation message.
+        /// </summary>
+        /// <param name="class">Any CSS class(es) to use for the field validation message</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration AddValidationClass(string @class);
+
+        /// <summary>
+        /// Any CSS class(es) to use for the field validation message.
+        /// </summary>
+        string ValidationClasses { get; }
 
         /// <summary>
         /// Returns readonly field configuration from the current field configuration.
@@ -573,13 +584,26 @@ namespace ChameleonForms.Component.Config
         }
 
         public bool HasLabel { get; private set; }
-        public IFieldConfiguration WithLabelClasses(string classes)
+
+        public IFieldConfiguration AddLabelClass(string @class)
         {
-            LabelClasses = classes;
+            if (!string.IsNullOrEmpty(LabelClasses))
+                LabelClasses += " ";
+            LabelClasses += @class;
             return this;
         }
 
         public string LabelClasses { get; private set; }
+
+        public IFieldConfiguration AddValidationClass(string @class)
+        {
+            if (!string.IsNullOrEmpty(ValidationClasses))
+                ValidationClasses += " ";
+            ValidationClasses += @class;
+            return this;
+        }
+
+        public string ValidationClasses { get; private set; }
 
         public IFieldConfiguration OverrideFieldHtml(IHtmlString html)
         {

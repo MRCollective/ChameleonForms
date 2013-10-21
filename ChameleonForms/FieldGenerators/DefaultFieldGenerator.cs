@@ -57,8 +57,8 @@ namespace ChameleonForms.FieldGenerators
                 return labelText;
 
             var labelAttrs = new HtmlAttributes();
-            if (!string.IsNullOrEmpty(fieldConfiguration.LabelClass))
-                labelAttrs.AddClass(fieldConfiguration.LabelClass);
+            if (!string.IsNullOrEmpty(fieldConfiguration.LabelClasses))
+                labelAttrs.AddClass(fieldConfiguration.LabelClasses);
 
             return HtmlCreator.BuildLabel(@for, labelText, labelAttrs);
         }
@@ -72,7 +72,7 @@ namespace ChameleonForms.FieldGenerators
 
         public IHtmlString GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return HtmlHelper.ValidationMessageFor(FieldProperty);
+            return HtmlHelper.ValidationMessageFor(FieldProperty, null, fieldConfiguration.ValidationClasses != null ? new {@class = fieldConfiguration.ValidationClasses} : null);
         }
 
         public IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration)

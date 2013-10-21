@@ -88,7 +88,12 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// Any CSS class(es) to use for the field label.
         /// </summary>
-        string LabelClass { get; }
+        string LabelClasses { get; }
+
+        /// <summary>
+        /// Any CSS class(es) to use for the field validation message.
+        /// </summary>
+        string ValidationClasses { get; }
     }
 
     /// <summary>
@@ -182,9 +187,14 @@ namespace ChameleonForms.Component.Config
             get { return _fieldConfiguration.HasLabel; }
         }
 
-        public string LabelClass
+        public string LabelClasses
         {
             get { return _fieldConfiguration.LabelClasses; }
+        }
+
+        public string ValidationClasses
+        {
+            get { return _fieldConfiguration.ValidationClasses; }
         }
     }
 }

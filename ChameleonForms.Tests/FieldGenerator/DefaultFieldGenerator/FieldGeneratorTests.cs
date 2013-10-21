@@ -33,7 +33,17 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredString);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().AddClass("dontshowthis").WithLabelClasses("showthis"));
+            var result = g.GetLabelHtml(new FieldConfiguration().AddClass("dontshowthis").AddLabelClass("showthis").AddLabelClass("alsoshowthis"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_label_class_for_field_validation_message_with_html_attributes_including_a_class()
+        {
+            var g = Arrange(m => m.RequiredString);
+
+            var result = g.GetValidationHtml(new FieldConfiguration().AddClass("dontshowthis").AddValidationClass("showthis").AddValidationClass("alsoshowthis"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

@@ -23,10 +23,11 @@ namespace ChameleonForms.Templates
 
         public override void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration)
         {
-            var displayType = fieldGeneratorHandler.GetDisplayType(fieldConfiguration.ToReadonly());
+            fieldConfiguration.AddValidationClass("help-block");
 
+            var displayType = fieldGeneratorHandler.GetDisplayType(fieldConfiguration.ToReadonly());
             if (NormalFieldTypes.Contains(displayType))
-                fieldConfiguration.AddClass("form-control").WithLabelClasses(string.IsNullOrEmpty(fieldConfiguration.LabelClasses) ? "control-label" : fieldConfiguration.LabelClasses + " control-label");
+                fieldConfiguration.AddClass("form-control").AddLabelClass("control-label");
 
             if (displayType == FieldDisplayType.Checkbox)
             {
