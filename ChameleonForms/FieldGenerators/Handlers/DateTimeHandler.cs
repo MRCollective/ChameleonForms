@@ -35,5 +35,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
             if (!string.IsNullOrEmpty(FieldGenerator.Metadata.DisplayFormatString))
                 fieldConfiguration.Attr("data-val-format", FieldGenerator.Metadata.DisplayFormatString.Replace("{0:", "").Replace("}", ""));
         }
+
+        public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
+        {
+            return FieldDisplayType.SingleLineText;
+        }
     }
 }

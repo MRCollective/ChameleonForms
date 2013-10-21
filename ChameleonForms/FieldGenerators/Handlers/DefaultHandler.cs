@@ -28,5 +28,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
         {
             return GetInputHtml(TextInputType.Text, FieldGenerator, fieldConfiguration);
         }
+
+        public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
+        {
+            return FieldDisplayType.SingleLineText;
+        }
     }
 }

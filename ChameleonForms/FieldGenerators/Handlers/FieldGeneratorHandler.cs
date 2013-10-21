@@ -35,6 +35,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// </summary>
         /// <param name="fieldConfiguration">The field configuration to modify</param>
         void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration);
+
+        /// <summary>
+        /// The type of control the field will be displayed as.
+        /// </summary>
+        /// <param name="fieldConfiguration">The configuration for the field</param>
+        /// <returns>The display type of the field control</returns>
+        FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration);
     }
 
     internal static class FieldGeneratorHandler
@@ -71,6 +78,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         public abstract bool CanHandle();
         public abstract IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
         public virtual void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration) {}
+        public abstract FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration);
 
         protected static bool HasMultipleValues(IFieldGenerator<TModel, T> fieldGenerator)
         {

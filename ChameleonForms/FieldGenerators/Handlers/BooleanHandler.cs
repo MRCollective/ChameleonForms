@@ -29,7 +29,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            if (fieldConfiguration.DisplayType == FieldDisplayType.Default && FieldGenerator.Metadata.ModelType == typeof(bool))
+            if (GetDisplayType(fieldConfiguration) == FieldDisplayType.Checkbox)
                 return GetSingleCheckboxHtml(fieldConfiguration);
 
             var selectList = GetBooleanSelectList(fieldConfiguration);
@@ -41,6 +41,16 @@ namespace ChameleonForms.FieldGenerators.Handlers
             // If a list is being displayed there is no element for the label to point to so drop it
             if (fieldConfiguration.DisplayType == FieldDisplayType.List)
                 fieldConfiguration.WithoutLabel();
+        }
+
+        public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
+        {
+            if (fieldConfiguration.DisplayType == FieldDisplayType.Default && FieldGenerator.Metadata.ModelType == typeof(bool))
+                return FieldDisplayType.Checkbox;
+
+            return fieldConfiguration.DisplayType == FieldDisplayType.List
+                ? FieldDisplayType.List
+                : FieldDisplayType.DropDown;
         }
 
         private bool? GetValue()

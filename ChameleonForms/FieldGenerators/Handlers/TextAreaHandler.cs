@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
+using ChameleonForms.Enums;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -31,6 +32,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 FieldGenerator.FieldProperty,
                 fieldConfiguration.HtmlAttributes
             );
+        }
+
+        public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
+        {
+            return FieldDisplayType.MultiLineText;
         }
     }
 }

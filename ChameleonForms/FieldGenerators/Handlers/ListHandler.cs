@@ -51,6 +51,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 fieldConfiguration.WithoutLabel();
         }
 
+        public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
+        {
+            return fieldConfiguration.DisplayType == FieldDisplayType.List
+                ? FieldDisplayType.List
+                : FieldDisplayType.DropDown;
+        }
+
         private IEnumerable<SelectListItem> GetSelectList(TModel model)
         {
             var propertyName = (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey];
