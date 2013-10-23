@@ -17,6 +17,14 @@ namespace ChameleonForms.Component.Config
         dynamic Bag { get; }
 
         /// <summary>
+        /// Returns data from the Bag stored in the given property or default(TData) if there is none present.
+        /// </summary>
+        /// <typeparam name="TData">The type of the expected data to return</typeparam>
+        /// <param name="propertyName">The name of the property to retrieve the data for</param>
+        /// <returns>The data from the Bag or default(TData) if there was no data against that property in the bag</returns>
+        TData GetBagData<TData>(string propertyName);
+
+        /// <summary>
         /// Attributes to add to the form element's HTML.
         /// </summary>
         HtmlAttributes Attributes { get; }
@@ -377,6 +385,15 @@ namespace ChameleonForms.Component.Config
         }
 
         public dynamic Bag { get; private set; }
+        public TData GetBagData<TData>(string propertyName)
+        {
+            var bagAsDictionary = (IDictionary<string, object>) Bag;
+
+            return bagAsDictionary.ContainsKey(propertyName) && bagAsDictionary[propertyName] is TData
+                ? (TData) bagAsDictionary[propertyName]
+                : default(TData);
+        }
+
         public HtmlAttributes Attributes { get; private set; }
 
         public IFieldConfiguration Id(string id)

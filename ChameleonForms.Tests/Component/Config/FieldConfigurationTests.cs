@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component;
+using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using NUnit.Framework;
 
@@ -229,6 +229,86 @@ namespace ChameleonForms.Tests.Component.Config
             fc.Bag.SomeConfigItem = "Hello!";
 
             Assert.That(fc.Bag.SomeConfigItem, Is.EqualTo("Hello!"));
+        }
+
+        [Test]
+        public void Get_nullable_primitive_bag_data_if_present()
+        {
+            int? value = 5;
+            var fc = Field.Configure();
+            fc.Bag.Property = value;
+
+            Assert.That(fc.GetBagData<int?>("Property"), Is.EqualTo(value));
+        }
+
+        [Test]
+        public void Get_non_nullable_primitive_bag_data_if_present()
+        {
+            const int value = 5;
+            var fc = Field.Configure();
+            fc.Bag.Property = value;
+
+            Assert.That(fc.GetBagData<int>("Property"), Is.EqualTo(value));
+        }
+
+        [Test]
+        public void Get_nullable_object_bag_data_if_present()
+        {
+            var fc = Field.Configure();
+            fc.Bag.Property = fc;
+
+            Assert.That(fc.GetBagData<IFieldConfiguration>("Property"), Is.SameAs(fc));
+        }
+
+        [Test]
+        public void Return_null_if_getting_non_existant_nullable_primitive_property()
+        {
+            var fc = Field.Configure();
+
+            Assert.That(fc.GetBagData<int?>("Property"), Is.Null);
+        }
+
+        [Test]
+        public void Return_null_if_getting_non_existant_object_property()
+        {
+            var fc = Field.Configure();
+
+            Assert.That(fc.GetBagData<FieldConfiguration>("Property"), Is.Null);
+        }
+
+        [Test]
+        public void Return_default_value_if_getting_non_existant_non_nullable_property()
+        {
+            var fc = Field.Configure();
+
+            Assert.That(fc.GetBagData<int>("Property"), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void Return_null_if_getting_different_typed_nullable_primitive_property()
+        {
+            var fc = Field.Configure();
+            fc.Bag.Property = "different_type";
+
+            Assert.That(fc.GetBagData<int?>("Property"), Is.Null);
+        }
+
+        [Test]
+        public void Return_null_if_getting_different_typed_object_property()
+        {
+            var fc = Field.Configure();
+            fc.Bag.Property = "different_type";
+
+            Assert.That(fc.GetBagData<FieldConfiguration>("Property"), Is.Null);
+        }
+
+        [Test]
+        public void Return_default_value_if_getting_different_typed_non_nullable_property()
+        {
+            var fc = Field.Configure();
+            fc.Bag.Property = "different_type";
+
+            Assert.That(fc.GetBagData<int>("Property"), Is.EqualTo(0));
         }
 
         [Test]

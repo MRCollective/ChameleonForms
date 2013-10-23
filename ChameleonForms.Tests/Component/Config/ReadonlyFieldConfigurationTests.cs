@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Web;
 using ChameleonForms.Component.Config;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Component.Config
@@ -39,6 +40,18 @@ namespace ChameleonForms.Tests.Component.Config
                 var realValue = property.GetValue(_exampleFieldConfiguration, null);
                 Assert.That(readonlyValue, Is.EqualTo(realValue), string.Format("Expected value in FieldConfiguration for property {0} to be equal to value in ReadonlyFieldConfiguration for the same property", property.Name));
             }
+        }
+
+        [Test]
+        public void ProxyGetDataDataMethodOnIFieldConfiguration()
+        {
+            const string propertyName = "property";
+            const string value = "asdF";
+            var fc = Substitute.For<IFieldConfiguration>();
+            var readonlyFc = new ReadonlyFieldConfiguration(fc);
+            fc.GetBagData<string>(propertyName).Returns(value);
+
+            Assert.That(readonlyFc.GetBagData<string>(propertyName), Is.EqualTo(value));
         }
     }
 }

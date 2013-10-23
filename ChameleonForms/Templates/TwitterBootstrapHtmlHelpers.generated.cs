@@ -385,7 +385,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 51 "..\..\Templates\TwitterBootstrapHtmlHelpers.cshtml"
                                                                                                                                                                                                    
-    var isCheckboxControl = ((IDictionary<string, Object>) fieldConfiguration.Bag).ContainsKey("IsCheckboxControl") && (fieldConfiguration.Bag.IsCheckboxControl as bool?) == true;
+    var isCheckboxControl = fieldConfiguration.GetBagData<bool>("IsCheckboxControl");
     var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
     var requiredTitle = (((IDictionary<string, Object>) fieldConfiguration.Bag).ContainsKey("RequiredTitle") && (fieldConfiguration.Bag.RequiredTitle as string) != null) ? fieldConfiguration.Bag.RequiredTitle as string : "Required";
     var isInputGroup = !isCheckboxControl && isRequired;
