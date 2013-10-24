@@ -60,12 +60,12 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
 
         public override IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
-            throw new NotSupportedException("Twitter bootstrap does not support nested form sections.");
+            return TwitterBootstrapHtmlHelpers.BeginNestedSection(title, leadingHtml, htmlAttributes);
         }
 
         public override IHtmlString EndNestedSection()
         {
-            throw new NotSupportedException("Twitter bootstrap does not support nested form sections.");
+            return TwitterBootstrapHtmlHelpers.EndNestedSection();
         }
 
         public override IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
@@ -75,7 +75,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
 
         public override IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
-            throw new NotSupportedException("Twitter bootstrap does not support nested form fields.");
+            return TwitterBootstrapHtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, isValid);
         }
 
         public override IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
@@ -85,7 +85,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
 
         public override IHtmlString EndField()
         {
-            throw new NotSupportedException("Twitter bootstrap does not support nested form fields.");
+            return TwitterBootstrapHtmlHelpers.EndField();
         }
 
         public override IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)

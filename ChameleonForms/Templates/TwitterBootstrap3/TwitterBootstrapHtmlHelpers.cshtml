@@ -15,16 +15,39 @@
 @:        <legend>@title</legend>
 @:        @leadingHtml
 }
-    
-@helper BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
-{
-}
 
 @helper EndSection() {
 @:    </fieldset>
 }
 
+@helper BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+{
+@:    <div class="panel panel-default">
+@:        <div class="panel-heading">@title</div>
+@:        <div class="panel-body">
+@leadingHtml
+}
+
 @helper EndNestedSection() {
+@:        </div>
+@:    </div>
+}
+
+@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid) {
+@:    <div class="panel panel-default">
+@:        <div class="panel-body">
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid)
+@:            </div>
+@:            <div class="row">
+@:                <div class="col-xs-1"></div>
+@:                <div class="col-xs-11">
+}
+
+@helper EndField() {
+@:                </div>
+@:            </div>
+@:        </div>
+@:    </div>
 }
 
 @helper GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
