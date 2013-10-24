@@ -1,6 +1,17 @@
 ChameleonForms Breaking Changes
 -------------------------------
 
+Version 0.9.XX
+==============
+
+The `DefaultFormTemplate` class has been moved to the `ChameleonForms.Templates.Default` namespace.
+
+### Reason
+ChameleonForms now has more than one built-in template so it made sense to move them into their own namespaces.
+
+### Workaround
+If you referenced the `DefaultFormTemplate` at all then you will need to change the using statement from `ChameleonForms.Templates` to `ChameleonForms.Templates.Default`.
+
 Version 0.9.39
 ==============
 

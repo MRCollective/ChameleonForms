@@ -170,7 +170,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             {
                 case FieldDisplayType.List:
                     var list = SelectListToRadioList(selectList, fieldGenerator, fieldConfiguration);
-                    return HtmlHelpers.List(list);
+                    return fieldGenerator.Template.RadioList(list);
                 case FieldDisplayType.DropDown:
                 case FieldDisplayType.Default:
                     return HasMultipleValues(fieldGenerator)

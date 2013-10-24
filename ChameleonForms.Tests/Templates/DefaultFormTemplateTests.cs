@@ -5,7 +5,7 @@ using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
-using ChameleonForms.Templates;
+using ChameleonForms.Templates.Default;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates

@@ -6,6 +6,7 @@ using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.FieldGenerators.Handlers;
+using ChameleonForms.Templates.Default;
 
 namespace ChameleonForms.Templates.TwitterBootstrap3
 {

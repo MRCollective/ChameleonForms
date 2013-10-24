@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 
-namespace ChameleonForms.Templates
+namespace ChameleonForms
 {
     /// <summary>
     /// HtmlAttributes class that evaluates a given HTML generator when .ToHtmlString() is called.

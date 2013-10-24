@@ -5,6 +5,7 @@ using AutofacContrib.NSubstitute;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
+using ChameleonForms.Templates.Default;
 using ChameleonForms.Templates.TwitterBootstrap3;
 using ChameleonForms.Tests.Helpers;
 using NSubstitute;

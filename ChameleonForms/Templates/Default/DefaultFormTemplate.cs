@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
@@ -6,7 +7,7 @@ using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.FieldGenerators.Handlers;
 
-namespace ChameleonForms.Templates
+namespace ChameleonForms.Templates.Default
 {
     /// <summary>
     /// The default Chameleon Forms form template renderer.
@@ -24,72 +25,72 @@ namespace ChameleonForms.Templates
 
         public virtual IHtmlString EndForm()
         {
-            return HtmlHelpers.EndForm();
+            return DefaultHtmlHelpers.EndForm();
         }
 
         public virtual IHtmlString BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
-            return HtmlHelpers.BeginSection(title, leadingHtml, htmlAttributes);
+            return DefaultHtmlHelpers.BeginSection(title, leadingHtml, htmlAttributes);
         }
 
         public virtual IHtmlString EndSection()
         {
-            return HtmlHelpers.EndSection();
+            return DefaultHtmlHelpers.EndSection();
         }
 
         public virtual IHtmlString BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
         {
-            return HtmlHelpers.BeginNestedSection(title, leadingHtml, htmlAttributes);
+            return DefaultHtmlHelpers.BeginNestedSection(title, leadingHtml, htmlAttributes);
         }
 
         public virtual IHtmlString EndNestedSection()
         {
-            return HtmlHelpers.EndNestedSection();
+            return DefaultHtmlHelpers.EndNestedSection();
         }
 
         public virtual IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
-            return HtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid));
+            return DefaultHtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid));
         }
 
         public virtual IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
-            return HtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid));
+            return DefaultHtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid));
         }
 
         public virtual IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
-            return HtmlHelpers.RequiredDesignator();
+            return DefaultHtmlHelpers.RequiredDesignator();
         }
 
         public virtual IHtmlString EndField()
         {
-            return HtmlHelpers.EndField();
+            return DefaultHtmlHelpers.EndField();
         }
 
         public virtual IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
         {
-            return HtmlHelpers.BeginMessage(messageType, heading);
+            return DefaultHtmlHelpers.BeginMessage(messageType, heading);
         }
 
         public virtual IHtmlString EndMessage()
         {
-            return HtmlHelpers.EndMessage();
+            return DefaultHtmlHelpers.EndMessage();
         }
 
         public virtual IHtmlString MessageParagraph(IHtmlString paragraph)
         {
-            return HtmlHelpers.MessageParagraph(paragraph);
+            return DefaultHtmlHelpers.MessageParagraph(paragraph);
         }
 
         public virtual IHtmlString BeginNavigation()
         {
-            return HtmlHelpers.BeginNavigation();
+            return DefaultHtmlHelpers.BeginNavigation();
         }
 
         public virtual IHtmlString EndNavigation()
         {
-            return HtmlHelpers.EndNavigation();
+            return DefaultHtmlHelpers.EndNavigation();
         }
 
         /// <remarks>
@@ -105,6 +106,11 @@ namespace ChameleonForms.Templates
                 return HtmlCreator.BuildInput(id, value, type ?? "button", htmlAttributes);
 
             return HtmlCreator.BuildButton(content, type, id, value, htmlAttributes);
+        }
+
+        public IHtmlString RadioList(IEnumerable<IHtmlString> list)
+        {
+            return DefaultHtmlHelpers.RadioList(list);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using System.Web.Mvc;
@@ -150,5 +151,12 @@ namespace ChameleonForms.Templates
         /// <param name="htmlAttributes">Any HTML attributes to add to the button or null if there are none</param>
         /// <returns>The HTML for the button</returns>
         IHtmlString Button(IHtmlString content, string type, string id, string value, HtmlAttributes htmlAttributes);
+
+        /// <summary>
+        /// Creates the HTML for a list of radio buttons or checkboxes.
+        /// </summary>
+        /// <param name="list">The list of HTML items (one per radio/checkbox)</param>
+        /// <returns>The HTML for the radio list</returns>
+        IHtmlString RadioList(IEnumerable<IHtmlString> list);
     }
 }
