@@ -1,6 +1,6 @@
 ﻿using ChameleonForms.Component;
 
-namespace ChameleonForms.Templates.Twitter
+namespace ChameleonForms.Templates.TwitterBootstrap3
 {
     /// <summary>
     /// Extension methods on <see cref="HtmlAttributes"/> for Twitter Bootstrap template.

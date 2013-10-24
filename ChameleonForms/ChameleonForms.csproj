@@ -127,7 +127,7 @@
     <Compile Include="HumanizedLabels.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Templates\TwitterBootstrapFormTemplate.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\TwitterBootstrapFormTemplate.cs" />
     <Compile Include="Templates\DefaultFormTemplate.cs" />
     <Compile Include="HtmlAttributes.cs" />
     <Compile Include="Templates\HtmlCreator.cs" />
@@ -138,12 +138,12 @@
     </Compile>
     <Compile Include="Templates\IFormTemplate.cs" />
     <Compile Include="Templates\LazyHtmlAttributes.cs" />
-    <Compile Include="Templates\TwitterBootstrapHtmlHelpers.generated.cs">
+    <Compile Include="Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TwitterBootstrapHtmlHelpers.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Twitter\HtmlAttributesExtensions.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\HtmlAttributesExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ChameleonForms.nuspec" />
@@ -152,7 +152,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>HtmlHelpers.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Templates\TwitterBootstrapHtmlHelpers.cshtml">
+    <Content Include="Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>TwitterBootstrapHtmlHelpers.generated.cs</LastGenOutput>
     </Content>

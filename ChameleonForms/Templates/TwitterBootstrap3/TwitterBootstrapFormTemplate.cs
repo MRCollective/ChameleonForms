@@ -7,7 +7,7 @@ using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.FieldGenerators.Handlers;
 
-namespace ChameleonForms.Templates
+namespace ChameleonForms.Templates.TwitterBootstrap3
 {
     /// <summary>
     /// The default Chameleon Forms form template renderer.
