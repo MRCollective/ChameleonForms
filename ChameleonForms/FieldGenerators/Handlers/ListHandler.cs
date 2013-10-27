@@ -61,16 +61,18 @@ namespace ChameleonForms.FieldGenerators.Handlers
         private IEnumerable<SelectListItem> GetSelectList(TModel model)
         {
             var propertyName = (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey];
+            var nameProperty = (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.NameKey];
+            var valueProperty = (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ValueKey];
+
+            ExistsInAttribute.ValidateListConfiguration(model, propertyName, valueProperty, nameProperty, FieldGenerator.GetFieldId());
+
             var listProperty = typeof(TModel).GetProperty(propertyName);
-            if (model == null)
-                throw new ModelNullException(FieldGenerator.GetFieldId());
             var listValue = (IEnumerable)listProperty.GetValue(model, null);
-            if (listValue == null)
-                throw new ListPropertyNullException(propertyName, FieldGenerator.GetFieldId());
+
             return GetSelectListUsingPropertyReflection(
                 listValue,
-                (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.NameKey],
-                (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ValueKey]
+                nameProperty,
+                valueProperty
             );
         }
 
