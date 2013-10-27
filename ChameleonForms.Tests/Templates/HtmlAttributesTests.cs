@@ -193,5 +193,23 @@ namespace ChameleonForms.Tests.Templates
 
             Assert.That(h.ToHtmlString(), Is.EqualTo(" data-existing=\"new\" data-new=\"newnew\""));
         }
+
+        [Test]
+        public void Replace_attributes_with_empty_string_when_null_value_added_using_key_value([Values(1, 2)] int setMethod)
+        {
+            var h = new HtmlAttributes(name => "Old");
+
+            switch (setMethod)
+            {
+                case 1:
+                    h.Attr(name => null);
+                    break;
+                case 2:
+                    h.Attr("name", null);
+                    break;
+            }
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"\""));
+        }
     }
 }
