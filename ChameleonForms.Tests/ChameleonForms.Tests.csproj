@@ -140,6 +140,15 @@
     <Compile Include="FieldGenerator\DefaultFieldGenerator\FieldGeneratorTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\InputTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\ListTests.cs" />
+    <Compile Include="FieldGenerator\Handlers\BooleanHandlerTests.cs" />
+    <Compile Include="FieldGenerator\Handlers\ListHandlerTests.cs" />
+    <Compile Include="FieldGenerator\Handlers\EnumListHandlerTests.cs" />
+    <Compile Include="FieldGenerator\Handlers\TextAreaHandlerTests.cs" />
+    <Compile Include="FieldGenerator\Handlers\PasswordHandlerTests.cs" />
+    <Compile Include="FieldGenerator\Handlers\FileHandlerTests.cs" />
+    <Compile Include="FieldGenerator\Handlers\DefaultHandlerTests.cs" />
+    <Compile Include="FieldGenerator\Handlers\DateTimeHandlerTests.cs" />
+    <Compile Include="FieldGenerator\Handlers\FieldGeneratorHandlerTest.cs" />
     <Compile Include="Form\FormIntegrationTests.cs" />
     <Compile Include="FormTests.cs" />
     <Compile Include="Helpers\AutoSubstituteHelper.cs" />

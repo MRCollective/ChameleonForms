@@ -22,6 +22,10 @@
         /// </summary>
         SingleLineText,
         /// <summary>
+        /// Display the field as a file upload control.
+        /// </summary>
+        FileUpload,
+        /// <summary>
         /// Display the field as a multi-line text input control.
         /// </summary>
         MultiLineText,
