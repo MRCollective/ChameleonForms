@@ -1,9 +1,11 @@
-﻿namespace ChameleonForms.Enums
+﻿using ChameleonForms.Enums;
+
+namespace ChameleonForms.Templates.TwitterBootstrap3
 {
     /// <summary>
     /// Twitter Bootstrap alert/emphasis colors: http://getbootstrap.com/css/#type-emphasis
     /// </summary>
-    public enum TwitterEmphasisStyle
+    public enum EmphasisStyle
     {
         /// <summary>
         /// Default styling.
@@ -33,16 +35,16 @@
 
     internal static class TwitterAlertTypeConversion
     {
-        internal static TwitterEmphasisStyle ToTwitterAlertType(this MessageType messageType)
+        internal static EmphasisStyle ToTwitterAlertType(this MessageType messageType)
         {
             switch (messageType)
             {
-                case MessageType.Action: return TwitterEmphasisStyle.Primary;
-                case MessageType.Success: return TwitterEmphasisStyle.Success;
-                case MessageType.Failure: return TwitterEmphasisStyle.Danger;
-                case MessageType.Information: return TwitterEmphasisStyle.Info;
-                case MessageType.Warning: return TwitterEmphasisStyle.Warning;
-                default: return TwitterEmphasisStyle.Default;
+                case MessageType.Action: return EmphasisStyle.Primary;
+                case MessageType.Success: return EmphasisStyle.Success;
+                case MessageType.Failure: return EmphasisStyle.Danger;
+                case MessageType.Information: return EmphasisStyle.Info;
+                case MessageType.Warning: return EmphasisStyle.Warning;
+                default: return EmphasisStyle.Default;
             }
         }
     }

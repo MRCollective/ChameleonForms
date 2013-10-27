@@ -1,5 +1,6 @@
 ﻿using ChameleonForms.Component;
 using ChameleonForms.Enums;
+using Humanizer;
 
 namespace ChameleonForms.Templates.TwitterBootstrap3
 {
@@ -29,14 +30,30 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         /// Adds the given emphasis to the button.
         /// </summary>
         /// <example>
-        /// @n.Submit("Submit").WithStyle(TwitterEmphasisStyle.Warning)
+        /// @n.Submit("Submit").WithStyle(EmphasisStyle.Warning)
         /// </example>
         /// <param name="attrs">The Html Attributes from a navigation button</param>
-        /// <param name="style"></param>
+        /// <param name="style">The style of button</param>
         /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
-        public static ButtonHtmlAttributes WithStyle(this ButtonHtmlAttributes attrs, TwitterEmphasisStyle style)
+        public static ButtonHtmlAttributes WithStyle(this ButtonHtmlAttributes attrs, EmphasisStyle style)
         {
             attrs.AddClass(string.Format("btn-{0}", style.ToString().ToLower()));
+            return attrs;
+        }
+
+        /// <summary>
+        /// Changes the button to use the given size.
+        /// </summary>
+        /// <example>
+        /// @n.Submit("Submit").WithSize(ButtonSize.Large)
+        /// </example>
+        /// <param name="attrs">The Html Attributes from a navigation button</param>
+        /// <param name="size">The size of button</param>
+        /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
+        public static ButtonHtmlAttributes WithSize(this ButtonHtmlAttributes attrs, ButtonSize size)
+        {
+            if (size != ButtonSize.Default)
+                attrs.AddClass(string.Format("btn-{0}", size.Humanize()));
             return attrs;
         }
     }

@@ -22,7 +22,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         /// </summary>
         public const string IconAttrKey = "data-chameleonforms-twbs-icon";
 
-        private static readonly IEnumerable<string> StyledButtonClasses = Enum.GetNames(typeof(TwitterEmphasisStyle))
+        private static readonly IEnumerable<string> StyledButtonClasses = Enum.GetNames(typeof(EmphasisStyle))
             .Select(x => string.Format("btn-{0}", x.ToLower()))
             .ToArray();
 

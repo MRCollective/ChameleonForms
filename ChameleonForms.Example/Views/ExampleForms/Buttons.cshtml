@@ -11,13 +11,37 @@
 {
     using (var n = f.BeginNavigation())
     {
-        @n.Button("text button").WithStyle(TwitterEmphasisStyle.Primary)
+        @n.Button("text button").WithStyle(EmphasisStyle.Primary).WithSize(ButtonSize.Default)
         @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("random-class")
         @n.Reset("text reset").WithIcon("refresh")
         @n.Reset(new HtmlString("<strong>html reset</strong>"))
         @n.Submit(new HtmlString("<strong>html submit</strong>"))
-        @n.Submit("text submit").WithStyle(TwitterEmphasisStyle.Danger)
+        @n.Submit("text submit").WithStyle(EmphasisStyle.Danger)
         @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>"))
-        @n.Submit("name", "value").WithIcon("star").WithStyle(TwitterEmphasisStyle.Success)
+        @n.Submit("name", "value").WithIcon("star").WithStyle(EmphasisStyle.Success)
+    }
+    
+    <p></p>
+    
+    using (var n = f.BeginNavigation())
+    {
+        @n.Button("Small button 1").WithSize(ButtonSize.Small)
+        @n.Button("Small button 2").WithSize(ButtonSize.Small)
+    }
+    
+    <p></p>
+    
+    using (var n = f.BeginNavigation())
+    {
+        @n.Button("Extra small button 1").WithSize(ButtonSize.ExtraSmall)
+        @n.Button("Extra small button 2").WithSize(ButtonSize.ExtraSmall)
+    }
+    
+    <p></p>
+    
+    using (var n = f.BeginNavigation())
+    {
+        @n.Button("Large button 1").WithSize(ButtonSize.Large)
+        @n.Button("Large button 2").WithSize(ButtonSize.Large)
     }
 }
