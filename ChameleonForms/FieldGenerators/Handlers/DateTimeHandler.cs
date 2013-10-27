@@ -32,6 +32,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
         {
+            base.PrepareFieldConfiguration(fieldConfiguration);
+
             if (!string.IsNullOrEmpty(FieldGenerator.Metadata.DisplayFormatString))
                 fieldConfiguration.Attr("data-val-format", FieldGenerator.Metadata.DisplayFormatString.Replace("{0:", "").Replace("}", ""));
         }
