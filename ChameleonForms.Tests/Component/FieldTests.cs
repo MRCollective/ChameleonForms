@@ -205,7 +205,7 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Construct_field_from_form()
         {
-            var fieldHtml = _f.FieldFor(m => m.SomeProperty);
+            var fieldHtml = _f.FieldElementFor(m => m.SomeProperty);
             
             _g.GetFieldHtml(fieldHtml).Returns(_field);
             Assert.That(fieldHtml.ToHtmlString(), Is.EqualTo(_field.ToHtmlString()));

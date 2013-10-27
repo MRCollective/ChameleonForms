@@ -53,7 +53,7 @@ namespace ChameleonForms.Component
         public override IHtmlString Begin()
         {
             var isValid = Form.HtmlHelper.ViewData.ModelState.IsValidField(_fieldGenerator.GetFieldId());
-            var readonlyConfig = _fieldGenerator.PrepareFieldConfiguration(_config);
+            var readonlyConfig = _fieldGenerator.PrepareFieldConfiguration(_config, FieldParent.Section);
             return !IsParent
                 ? Form.Template.Field(_fieldGenerator.GetLabelHtml(readonlyConfig), _fieldGenerator.GetFieldHtml(readonlyConfig), _fieldGenerator.GetValidationHtml(readonlyConfig), _fieldGenerator.Metadata, readonlyConfig, isValid)
                 : Form.Template.BeginField(_fieldGenerator.GetLabelHtml(readonlyConfig), _fieldGenerator.GetFieldHtml(readonlyConfig), _fieldGenerator.GetValidationHtml(readonlyConfig), _fieldGenerator.Metadata, readonlyConfig, isValid);
@@ -150,7 +150,7 @@ namespace ChameleonForms.Component
         /// <param name="form">The form the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <returns>A field configuration object that allows you to configure the field</returns>
-        public static IFieldConfiguration FieldFor<TModel, TTemplate, T>(this IForm<TModel, TTemplate> form, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static IFieldConfiguration FieldElementFor<TModel, TTemplate, T>(this IForm<TModel, TTemplate> form, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
         {
             var config = new FieldConfiguration();
             config.SetField(() => form.GetFieldGenerator(property).GetFieldHtml(config));
