@@ -108,7 +108,7 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attr(string key, object value)
         {
-            _tagBuilder.MergeAttribute(key, value == null ? string.Empty : value.ToString(), true);
+            _tagBuilder.MergeAttribute(key.ToLower(), value == null ? string.Empty : value.ToString(), true);
 
             return this;
         }
@@ -124,7 +124,7 @@ namespace ChameleonForms
         public HtmlAttributes Attr(Func<object, object> attribute)
         {
             var item = attribute(null);
-            _tagBuilder.MergeAttribute(attribute.Method.GetParameters()[0].Name.Replace("_", "-"), item == null ? string.Empty : item.ToString(), true);
+            _tagBuilder.MergeAttribute(attribute.Method.GetParameters()[0].Name.Replace("_", "-").ToLower(), item == null ? string.Empty : item.ToString(), true);
 
             return this;
         }
@@ -149,6 +149,8 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attrs(IDictionary<string, object> attributes)
         {
+            attributes = attributes.ToDictionary(d => d.Key.ToLower(), d => d.Value);
+
             _tagBuilder.MergeAttributes(attributes, true);
 
             return this;
@@ -161,7 +163,8 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attrs(object attributes)
         {
-            var attrs = HtmlHelper.AnonymousObjectToHtmlAttributes(attributes);
+            var attrs = HtmlHelper.AnonymousObjectToHtmlAttributes(attributes)
+                .ToDictionary(d => d.Key.ToLower(), d => d.Value);
             _tagBuilder.MergeAttributes(attrs, true);
 
             return this;

@@ -211,5 +211,47 @@ namespace ChameleonForms.Tests.Templates
 
             Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"\""));
         }
+
+        [Test]
+        public void Ensure_merged_attributes_are_case_sensitive([Values(1,2,3)] int setMethod)
+        {
+            var h = new HtmlAttributes(name => "Old");
+
+            switch (setMethod)
+            {
+                case 1:
+                    h.Attr(Name => "honey-badger");
+                    break;
+                case 2:
+                    h.Attr("Name", "honey-badger");
+                    break;
+                case 3:
+                    h.Attrs(new {Name = "honey-badger"});
+                    break;
+            }
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"honey-badger\""));
+        }
+
+        [Test]
+        public void Ensure_new_attributes_are_case_sensitive([Values(1, 2, 3)] int constructorOption)
+        {
+            HtmlAttributes h = null;
+
+            switch (constructorOption)
+            {
+                case 1:
+                    h = new HtmlAttributes(Name => "honey-badger");
+                    break;
+                case 2:
+                    h = new HtmlAttributes(new Dictionary<string, object>{{"Name", "honey-badger"}});
+                    break;
+                case 3:
+                    h = new HtmlAttributes(new { Name = "honey-badger" });
+                    break;
+            }
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"honey-badger\""));
+        }
     }
 }
