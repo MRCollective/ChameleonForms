@@ -213,7 +213,7 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
-        public void Ensure_merged_attributes_are_case_sensitive([Values(1,2)] int setMethod)
+        public void Ensure_merged_attributes_are_case_sensitive([Values(1,2,3)] int setMethod)
         {
             var h = new HtmlAttributes(name => "Old");
 
@@ -224,6 +224,9 @@ namespace ChameleonForms.Tests.Templates
                     break;
                 case 2:
                     h.Attr("Name", "honey-badger");
+                    break;
+                case 3:
+                    h.Attrs(new {Name = "honey-badger"});
                     break;
             }
 
