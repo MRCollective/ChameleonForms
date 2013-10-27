@@ -58,7 +58,14 @@ namespace ChameleonForms.Templates.Default
             return DefaultHtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid));
         }
 
-        public virtual IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        /// <summary>
+        /// Creates the HTML for a required designator for a single form field (will only be output if the field is required).
+        /// </summary>
+        /// <param name="fieldMetadata">The metadata for the field being created</param>
+        /// <param name="fieldConfiguration">Configuration for the field</param>
+        /// <param name="isValid">Whether or not the field is valid</param>
+        /// <returns>The HTML for the required designator of field with the given information</returns>
+        protected virtual IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
             return DefaultHtmlHelpers.RequiredDesignator();
         }

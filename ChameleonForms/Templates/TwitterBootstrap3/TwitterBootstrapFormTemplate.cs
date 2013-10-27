@@ -78,7 +78,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             return TwitterBootstrapHtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, isValid);
         }
 
-        public override IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        protected override IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
             throw new NotImplementedException();
         }
