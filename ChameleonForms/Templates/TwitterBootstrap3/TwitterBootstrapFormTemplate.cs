@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,6 +21,10 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         /// The attribute name to use for adding an icon class to a Html Attributes object.
         /// </summary>
         public const string IconAttrKey = "data-chameleonforms-twbs-icon";
+
+        private static readonly IEnumerable<string> StyledButtonClasses = Enum.GetNames(typeof(EmphasisStyle))
+            .Select(x => string.Format("btn-{0}", x.ToLower()))
+            .ToArray();
 
         private static readonly FieldDisplayType[] NormalFieldTypes = new[] {FieldDisplayType.DropDown, FieldDisplayType.SingleLineText, FieldDisplayType.MultiLineText};
 
@@ -119,7 +124,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         {
             htmlAttributes = htmlAttributes ?? new HtmlAttributes();
             htmlAttributes.AddClass("btn");
-            if (!htmlAttributes.Attributes["class"].Contains("btn-"))
+            if (!StyledButtonClasses.Any(c => htmlAttributes.Attributes["class"].Contains(c)))
                 htmlAttributes.AddClass("btn-default");
 
             if (htmlAttributes.Attributes.ContainsKey(IconAttrKey))

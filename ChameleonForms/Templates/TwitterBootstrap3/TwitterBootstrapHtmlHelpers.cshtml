@@ -1,6 +1,7 @@
 ﻿@using System.Web.Mvc
 @using Component.Config
 @using Enums
+@using Templates.TwitterBootstrap3
 
 @* Generator: MvcHelper *@
 
@@ -110,7 +111,7 @@
 @:            </div>
 }
 
-@helper BeginMessage(TwitterAlertType messageType, IHtmlString heading) {
+@helper BeginMessage(EmphasisStyle messageType, IHtmlString heading) {
 @:      <div class="panel @string.Format("panel-{0}", messageType.ToString().ToLower())">
             if (!string.IsNullOrEmpty(heading.ToHtmlString()))
             {

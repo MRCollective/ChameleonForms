@@ -108,7 +108,8 @@
     <Compile Include="Enums\EncType.cs" />
     <Compile Include="Enums\TextInputType.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Enums\TwitterAlertType.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\ButtonSize.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\EmphasisStyle.cs" />
     <Compile Include="FieldGenerators\Handlers\DateTimeHandler.cs" />
     <Compile Include="FieldGenerators\DefaultFieldGenerator.cs" />
     <Compile Include="FieldGenerators\Handlers\DefaultHandler.cs" />
