@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component;
@@ -39,6 +40,9 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
                 // Hide the parent label otherwise it looks weird
                 fieldConfiguration.Label("").WithoutLabel();
             }
+
+            if (displayType == FieldDisplayType.List)
+                fieldConfiguration.Bag.IsRadioList = true;
         }
 
         public override IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
@@ -129,6 +133,11 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             }
 
             return base.Button(content, type, id, value, htmlAttributes);
+        }
+
+        public override IHtmlString RadioList(IEnumerable<IHtmlString> list, bool isCheckbox)
+        {
+            return TwitterBootstrapHtmlHelpers.RadioList(list, isCheckbox);
         }
     }
 }

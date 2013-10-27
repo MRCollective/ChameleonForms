@@ -116,7 +116,7 @@ namespace ChameleonForms.Templates.Default
             return HtmlCreator.BuildButton(content, type, id, value, htmlAttributes);
         }
 
-        public IHtmlString RadioList(IEnumerable<IHtmlString> list)
+        public virtual IHtmlString RadioList(IEnumerable<IHtmlString> list, bool isCheckbox)
         {
             return DefaultHtmlHelpers.RadioList(list);
         }
