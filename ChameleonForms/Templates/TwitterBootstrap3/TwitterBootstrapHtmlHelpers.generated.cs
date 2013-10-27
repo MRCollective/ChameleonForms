@@ -783,13 +783,13 @@ WriteLiteralTo(__razor_helper_writer, "            </div>\r\n");
 #line hidden
 
 #line 113 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-public static System.Web.WebPages.HelperResult BeginMessage(TwitterAlertType messageType, IHtmlString heading) {
+public static System.Web.WebPages.HelperResult BeginMessage(TwitterEmphasisStyle messageType, IHtmlString heading) {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 113 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                         
+                                                                             
 
 
 #line default
@@ -944,14 +944,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <div");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5171), Tuple.Create("\"", 5215)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5175), Tuple.Create("\"", 5219)
 
 #line 137 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-, Tuple.Create(Tuple.Create("", 5179), Tuple.Create<System.Object, System.Int32>(isCheckbox ? "checkbox" : "radio"
+, Tuple.Create(Tuple.Create("", 5183), Tuple.Create<System.Object, System.Int32>(isCheckbox ? "checkbox" : "radio"
 
 #line default
 #line hidden
-, 5179), false)
+, 5183), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");

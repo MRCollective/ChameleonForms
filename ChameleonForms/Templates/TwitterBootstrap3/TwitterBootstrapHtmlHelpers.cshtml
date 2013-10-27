@@ -110,7 +110,7 @@
 @:            </div>
 }
 
-@helper BeginMessage(TwitterAlertType messageType, IHtmlString heading) {
+@helper BeginMessage(TwitterEmphasisStyle messageType, IHtmlString heading) {
 @:      <div class="panel @string.Format("panel-{0}", messageType.ToString().ToLower())">
             if (!string.IsNullOrEmpty(heading.ToHtmlString()))
             {

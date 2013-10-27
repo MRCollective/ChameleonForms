@@ -1,4 +1,5 @@
 ﻿using ChameleonForms.Component;
+using ChameleonForms.Enums;
 
 namespace ChameleonForms.Templates.TwitterBootstrap3
 {
@@ -21,6 +22,21 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         public static ButtonHtmlAttributes WithIcon(this ButtonHtmlAttributes attrs, string icon)
         {
             attrs.Attr(TwitterBootstrapFormTemplate.IconAttrKey, icon);
+            return attrs;
+        }
+
+        /// <summary>
+        /// Adds the given emphasis to the button.
+        /// </summary>
+        /// <example>
+        /// @n.Submit("Submit").WithStyle(TwitterEmphasisStyle.Warning)
+        /// </example>
+        /// <param name="attrs">The Html Attributes from a navigation button</param>
+        /// <param name="style"></param>
+        /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
+        public static ButtonHtmlAttributes WithStyle(this ButtonHtmlAttributes attrs, TwitterEmphasisStyle style)
+        {
+            attrs.AddClass(string.Format("btn-{0}", style.ToString().ToLower()));
             return attrs;
         }
     }

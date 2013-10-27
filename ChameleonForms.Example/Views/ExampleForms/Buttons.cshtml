@@ -11,13 +11,13 @@
 {
     using (var n = f.BeginNavigation())
     {
-        @n.Button("text button").AddClass("button")
-        @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("button")
-        @n.Reset("text reset").WithIcon("refresh").AddClass("button")
-        @n.Reset(new HtmlString("<strong>html reset</strong>")).AddClass("button")
-        @n.Submit(new HtmlString("<strong>html submit</strong>")).AddClass("button")
-        @n.Submit("text submit").AddClass("button").AddClass("btn-danger")
-        @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>")).AddClass("button")
-        @n.Submit("name", "value").WithIcon("star").AddClass("button btn-success")
+        @n.Button("text button").WithStyle(TwitterEmphasisStyle.Primary)
+        @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("random-class")
+        @n.Reset("text reset").WithIcon("refresh")
+        @n.Reset(new HtmlString("<strong>html reset</strong>"))
+        @n.Submit(new HtmlString("<strong>html submit</strong>"))
+        @n.Submit("text submit").WithStyle(TwitterEmphasisStyle.Danger)
+        @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>"))
+        @n.Submit("name", "value").WithIcon("star").WithStyle(TwitterEmphasisStyle.Success)
     }
 }
