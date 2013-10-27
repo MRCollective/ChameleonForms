@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using ChameleonForms.FieldGenerators.Handlers;
 
 namespace ChameleonForms.Attributes
 {
@@ -85,8 +86,11 @@ namespace ChameleonForms.Attributes
             {
                 return ValidationResult.Success;
             }
-            
-            var collection = GetCollectionIfValid(context);
+            ValidateListConfiguration(context.ObjectInstance, _listProperty, _valueProperty, _nameProperty, context.MemberName);
+
+            var collectionProperty = context.ObjectInstance.GetType().GetProperty(_listProperty)
+                .GetValue(context.ObjectInstance, null) as IEnumerable;
+            var collection = collectionProperty.Cast<object>().ToList();
             var possibleValues = collection.Select(item => item.GetType().GetProperty(_valueProperty).GetValue(item, null))
                 .Select(i => i is Enum ? (int)i : i);
             if (value is IEnumerable && !(value is string))
@@ -109,34 +113,49 @@ namespace ChameleonForms.Attributes
             return new ValidationResult(FormatErrorMessage(context.DisplayName ?? context.MemberName), new List<string> { _listProperty });
         }
 
-        private IList<object> GetCollectionIfValid(ValidationContext context)
+        /// <summary>
+        /// Given a model, ensures the ExistsIn attribute has a valid configuration for generating and validating a list.
+        /// </summary>
+        /// <param name="model">The model being validated</param>
+        /// <param name="listProperty">The name of the property containing the list this property should reference.</param>
+        /// <param name="valueProperty">The name of the property of the list items to use for the value</param>
+        /// <param name="nameProperty">The name of the property of the list items to use for the name/label</param>
+        /// <param name="memberName">The name of the property that the ExistsIn attribute is applied do</param>
+        public static void ValidateListConfiguration(object model, string listProperty, string valueProperty, string nameProperty, string memberName)
         {
-            if (string.IsNullOrEmpty(_nameProperty) || string.IsNullOrEmpty(_valueProperty))
+            if (model == null)
+            {
+                throw new ModelNullException(memberName);
+            }
+
+            if (string.IsNullOrEmpty(nameProperty) || string.IsNullOrEmpty(valueProperty))
             {
                 throw new ArgumentException("ExistsIn: You must pass valid properties for Name and Value.");
             }
-            var collectionProperty = context.ObjectInstance.GetType().GetProperty(_listProperty);
+            var collectionProperty = model.GetType().GetProperty(listProperty);
             if (collectionProperty == null)
             {
-                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", _listProperty));
+                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", listProperty));
             }
             var collectionType = collectionProperty.PropertyType.GetGenericArguments().FirstOrDefault();
-            if (collectionType != null && collectionType.GetProperty(_valueProperty) == null)
+            if (collectionType != null && collectionType.GetProperty(valueProperty) == null)
             {
-                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", _valueProperty));
+                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", valueProperty));
             }
-            var collectionValue = collectionProperty.GetValue(context.ObjectInstance, null);
+            if (collectionType != null && collectionType.GetProperty(nameProperty) == null)
+            {
+                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", nameProperty));
+            }
+            var collectionValue = collectionProperty.GetValue(model, null);
             if (collectionValue == null)
             {
-                throw new ArgumentException(string.Format("ExistsIn: Model.{0} is null. Unable to make list for Model.{1}", _listProperty, context.MemberName));
+                throw new ListPropertyNullException(listProperty, memberName);
             }
             var collection = collectionValue as IEnumerable;
             if (collection == null)
             {
-                throw new ArgumentException(string.Format("ExistsIn: Model.{0} is not an IEnumerable. ExistsIn cannot be used to validate against this property.", _listProperty));
+                throw new ArgumentException(string.Format("ExistsIn: Model.{0} is not an IEnumerable. ExistsIn cannot be used to validate against this property.", listProperty));
             }
-
-            return collection.Cast<object>().ToList();
         }
     }
 }

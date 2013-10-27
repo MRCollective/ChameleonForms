@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using ChameleonForms.Attributes;
 using ChameleonForms.Example.Controllers;
+using ChameleonForms.FieldGenerators.Handlers;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Attributes
@@ -41,6 +42,22 @@ namespace ChameleonForms.Tests.Attributes
         {
             const string valueProperty = "Id2";
             const string nameProperty = "Name";
+            const string listProperty = "List";
+            var vm = new ViewModelExample();
+            var validationContext = new ValidationContext(vm, null, null);
+            var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
+
+            Assert.Throws<ArgumentException>(
+                () => attribute.GetValidationResult(vm.ListId, validationContext),
+                string.Format("ExistsIn: No property Model.{0} exists for validation.", valueProperty)
+            );
+        }
+
+        [Test]
+        public void Throw_exception_if_list_to_validate_against_does_not_contain_specified_name_property()
+        {
+            const string valueProperty = "Id";
+            const string nameProperty = "Name2";
             const string listProperty = "List";
             var vm = new ViewModelExample();
             var validationContext = new ValidationContext(vm, null, null);
@@ -94,13 +111,14 @@ namespace ChameleonForms.Tests.Attributes
             {
                 List = null
             };
-            var validationContext = new ValidationContext(vm, null, null);
+
+            var validationContext = new ValidationContext(vm, null, null) { MemberName = listProperty };
             var attribute = new ExistsInAttribute(listProperty, valueProperty, nameProperty);
 
-            Assert.Throws<ArgumentException>(
-                () => attribute.GetValidationResult(vm.ListId, validationContext),
-                string.Format("ExistsIn: Model.{0} is null. Unable to make list for Model.{1}", valueProperty, validationContext.MemberName)
-            );
+            var ex = Assert.Throws<ListPropertyNullException>(() => attribute.GetValidationResult(vm.ListId, validationContext));
+            Assert.That(ex.Message, Is.EqualTo(
+                string.Format("The list property ({0}) specified in the [ExistsIn] on {1} is null.", listProperty, listProperty)
+            ));
         }
 
         private readonly IList<int?[]> _nullableListValues = new List<int?[]>()
