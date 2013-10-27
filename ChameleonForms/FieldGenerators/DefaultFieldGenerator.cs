@@ -98,6 +98,8 @@ namespace ChameleonForms.FieldGenerators
                 fieldConfiguration.WithFormatString(Metadata.EditFormatString);
             if (!string.IsNullOrEmpty(Metadata.NullDisplayText) && string.IsNullOrEmpty(fieldConfiguration.NoneString))
                 fieldConfiguration.WithNoneAs(Metadata.NullDisplayText);
+            if (Metadata.IsReadOnly)
+                fieldConfiguration.Readonly();
 
             var handler = FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this);
             handler.PrepareFieldConfiguration(fieldConfiguration);
