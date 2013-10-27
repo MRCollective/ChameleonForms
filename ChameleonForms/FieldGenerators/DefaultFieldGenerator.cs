@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
 
@@ -77,20 +78,20 @@ namespace ChameleonForms.FieldGenerators
 
         public IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration)
         {
-            return GetFieldHtml(PrepareFieldConfiguration(fieldConfiguration));
+            return GetFieldHtml(PrepareFieldConfiguration(fieldConfiguration, FieldParent.Form));
         }
 
         public IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
         {
-            return GetLabelHtml(PrepareFieldConfiguration(fieldConfiguration));
+            return GetLabelHtml(PrepareFieldConfiguration(fieldConfiguration, FieldParent.Form));
         }
 
         public IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)
         {
-            return GetValidationHtml(PrepareFieldConfiguration(fieldConfiguration));
+            return GetValidationHtml(PrepareFieldConfiguration(fieldConfiguration, FieldParent.Form));
         }
 
-        public IReadonlyFieldConfiguration PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
+        public IReadonlyFieldConfiguration PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration, FieldParent fieldParent)
         {
             fieldConfiguration = fieldConfiguration ?? new FieldConfiguration();
             if (!string.IsNullOrEmpty(Metadata.EditFormatString) && string.IsNullOrEmpty(fieldConfiguration.FormatString))

@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
 
@@ -60,8 +61,9 @@ namespace ChameleonForms.FieldGenerators
         /// Turns the given <see cref="IFieldConfiguration"/> into a <see cref="ReadonlyFieldConfiguration"/> ready to use for generating the form field.
         /// </summary>
         /// <param name="fieldConfiguration">The field configuration to modify</param>
+        /// <param name="fieldParent">The parent component of the field</param>
         /// <returns>The readonly field configuration; ready for generating the form field</returns>
-        IReadonlyFieldConfiguration PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration);
+        IReadonlyFieldConfiguration PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration, FieldParent fieldParent);
 
         /// <summary>
         /// Creates the HTML for the field control.
