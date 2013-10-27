@@ -234,11 +234,24 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
-        public void Ensure_new_attributes_are_case_sensitive()
+        public void Ensure_new_attributes_are_case_sensitive([Values(1, 2, 3)] int constructorOption)
         {
-            var h = new HtmlAttributes(Name => "Old");
+            HtmlAttributes h = null;
 
-            Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"Old\""));
+            switch (constructorOption)
+            {
+                case 1:
+                    h = new HtmlAttributes(Name => "honey-badger");
+                    break;
+                case 2:
+                    h = new HtmlAttributes(new Dictionary<string, object>{{"Name", "honey-badger"}});
+                    break;
+                case 3:
+                    h = new HtmlAttributes(new { Name = "honey-badger" });
+                    break;
+            }
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"honey-badger\""));
         }
     }
 }

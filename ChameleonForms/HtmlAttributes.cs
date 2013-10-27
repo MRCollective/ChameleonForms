@@ -149,6 +149,8 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attrs(IDictionary<string, object> attributes)
         {
+            attributes = attributes.ToDictionary(d => d.Key.ToLower(), d => d.Value);
+
             _tagBuilder.MergeAttributes(attributes, true);
 
             return this;
