@@ -135,16 +135,16 @@ namespace ChameleonForms.Attributes
             var collectionProperty = model.GetType().GetProperty(listProperty);
             if (collectionProperty == null)
             {
-                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", listProperty));
+                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for looking up values for property Model.{1}.", listProperty, memberName));
             }
             var collectionType = collectionProperty.PropertyType.GetGenericArguments().FirstOrDefault();
             if (collectionType != null && collectionType.GetProperty(valueProperty) == null)
             {
-                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", valueProperty));
+                throw new ArgumentException(string.Format("ExistsIn: No property {0} exists for type {1} to look up possible values for property Model.{2}.", valueProperty, collectionType.Name, memberName));
             }
             if (collectionType != null && collectionType.GetProperty(nameProperty) == null)
             {
-                throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for validation.", nameProperty));
+                throw new ArgumentException(string.Format("ExistsIn: No property {0} exists for type {1} to look up possible values for property Model.{2}.", nameProperty, collectionType.Name, memberName));
             }
             var collectionValue = collectionProperty.GetValue(model, null);
             if (collectionValue == null)
