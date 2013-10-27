@@ -33,8 +33,8 @@
 @:    </div>
 }
 
-@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid) {
-@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid)
+@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid, IHtmlString requiredDesignator) {
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid, requiredDesignator)
 @:            <div class="row nested-fields">
 @:                <div class="col-xs-1"></div>
 @:                <div class="col-xs-11">
@@ -62,15 +62,19 @@
     if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="help-block form-hint">@fieldConfiguration.Hint</div>}
 }
 
-@helper GetRequiredDesignator(bool isRequired, bool isCheckboxControl, string requiredTitle) {
-    if(isRequired && !isCheckboxControl){<div class="input-group-addon required"><em title="@requiredTitle">&lowast;</em></div>}
-    if(isCheckboxControl && isRequired) {<em class="required" title="@requiredTitle">&lowast;</em>}
+@helper GetRequiredDesignator(bool isRequired, bool isCheckboxControl, IHtmlString requiredDesignator) {
+    if(isRequired && !isCheckboxControl){<div class="input-group-addon required">@requiredDesignator</div>}
+    if(isCheckboxControl && isRequired) {@requiredDesignator}
 }
 
-@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, bool isValid) {
+@helper RequiredDesignator(IReadonlyFieldConfiguration fieldConfiguration) {
+var title = fieldConfiguration.GetBagData<string>("RequiredTitle") ?? "Required";
+<em class="required" title="@title">&lowast;</em>
+}
+
+@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, bool isValid, IHtmlString requiredDesignator) {
     var isCheckboxControl = fieldConfiguration.GetBagData<bool>("IsCheckboxControl");
     var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
-    var requiredTitle = fieldConfiguration.GetBagData<string>("RequiredTitle") ?? "Required";
     var isInputGroup = !isCheckboxControl && isRequired;
 @:            <div class="@(isCheckboxControl ? "checkbox" : "form-group")@(!isValid ? " has-error" : string.Empty)">
 @:            @labelHtml
@@ -78,7 +82,7 @@
               {
 @:            <div class="input-group">
               }
-@:            @GetPrependedHtml(fieldConfiguration)@elementHtml@GetRequiredDesignator(isRequired, isCheckboxControl, requiredTitle)@GetAppendedHtml(fieldConfiguration)
+@:            @GetPrependedHtml(fieldConfiguration)@elementHtml@GetRequiredDesignator(isRequired, isCheckboxControl, requiredDesignator)@GetAppendedHtml(fieldConfiguration)
               if (isInputGroup)
               {
 @:            </div>
@@ -86,8 +90,8 @@
 @:            @GetHint(fieldConfiguration) @validationHtml
 }
 
-@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid) {
-@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid)
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid, IHtmlString requiredDesignator) {
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid, requiredDesignator)
 @:            </div>
 }
 
