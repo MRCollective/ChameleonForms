@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -77,8 +78,18 @@ namespace ChameleonForms.FieldGenerators.Handlers
         protected readonly IFieldGenerator<TModel, T> FieldGenerator;
         public abstract bool CanHandle();
         public abstract IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
-        public virtual void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration) {}
         public abstract FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration);
+
+        public virtual void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
+        {
+            var readOnly = FieldGenerator.GetModel().GetType().GetProperty(FieldGenerator.GetFieldId())
+                .GetCustomAttributes(typeof (ReadOnlyAttribute), true)
+                .Cast<ReadOnlyAttribute>()
+                .ToList();
+
+            if (readOnly.Any() && readOnly[0].IsReadOnly)
+                fieldConfiguration.Readonly();
+        }
 
         protected static bool HasMultipleValues(IFieldGenerator<TModel, T> fieldGenerator)
         {

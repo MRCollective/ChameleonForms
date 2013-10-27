@@ -39,6 +39,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
         {
+            base.PrepareFieldConfiguration(fieldConfiguration);
+
             // There is a bug in the unobtrusive validation for numeric fields that are a radio button
             //  when there is a radio button for "no value selected" i.e. value="" then it can't be selected
             //  as an option since it tries to validate the empty string as a number.
