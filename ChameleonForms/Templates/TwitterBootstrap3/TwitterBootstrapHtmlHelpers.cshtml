@@ -69,8 +69,7 @@
 }
 
 @helper RequiredDesignator(IReadonlyFieldConfiguration fieldConfiguration) {
-var title = fieldConfiguration.GetBagData<string>("RequiredTitle") ?? "Required";
-<em class="required" title="@title">&lowast;</em>
+<em class="required" title="Required">&lowast;</em>
 }
 
 @helper GetLabelHtml(IHtmlString labelHtml, bool hasLabel, bool isCheckboxControl, bool isRadioList, bool isRequired, IHtmlString requiredDesignator) {
