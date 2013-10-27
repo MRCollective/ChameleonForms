@@ -4,6 +4,17 @@ ChameleonForms Breaking Changes
 Version 0.9.XX
 ==============
 
+The `FieldFor` extension method on the Form has been deprecated in favour of a `FieldElementFor` method.
+
+### Reason
+This fits in more consistently with the nomenclature of ChameleonForms given that the method outputs the Field Element rather than the Field.
+
+### Workaround
+Change any instances of using `@f.FieldFor(m => m.SomeField)` to `@f.FieldElementFor(m => m.SomeField)`.
+
+Version 0.9.81
+==============
+
 The `DefaultFormTemplate` class has been moved to the `ChameleonForms.Templates.Default` namespace.
 
 ### Reason

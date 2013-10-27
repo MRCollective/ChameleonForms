@@ -40,7 +40,7 @@
     using (var m = f.BeginMessage(MessageType.Action, "Confirm the Terms & Conditions"))
     {
         @m.Paragraph(TermsAndConditions())
-        @f.FieldFor(mm => mm.TermsAndConditions).InlineLabel("I agree to the terms and conditions")
+        @f.FieldElementFor(mm => mm.TermsAndConditions).InlineLabel("I agree to the terms and conditions")
     }
     
     using (var n = f.BeginNavigation())

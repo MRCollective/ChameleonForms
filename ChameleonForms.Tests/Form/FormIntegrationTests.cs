@@ -26,7 +26,7 @@ namespace ChameleonForms.Tests.Form
         {
             var form = _h.BeginChameleonForm();
 
-            var html = form.FieldFor(m => m.Decimal).AddClass("a-class").ToHtmlString();
+            var html = form.FieldElementFor(m => m.Decimal).AddClass("a-class").ToHtmlString();
 
             HtmlApprovals.VerifyHtml(html);
         }
