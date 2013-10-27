@@ -213,7 +213,7 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
-        public void Ensure_attributes_are_case_sensitive([Values(1,2)] int setMethod)
+        public void Ensure_merged_attributes_are_case_sensitive([Values(1,2)] int setMethod)
         {
             var h = new HtmlAttributes(name => "Old");
 
@@ -228,6 +228,14 @@ namespace ChameleonForms.Tests.Templates
             }
 
             Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"honey-badger\""));
+        }
+
+        [Test]
+        public void Ensure_new_attributes_are_case_sensitive()
+        {
+            var h = new HtmlAttributes(Name => "Old");
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"Old\""));
         }
     }
 }
