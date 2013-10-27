@@ -31,7 +31,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return FieldDisplayType.SingleLineText;
+            return FieldDisplayType.FileUpload;
         }
     }
 }
