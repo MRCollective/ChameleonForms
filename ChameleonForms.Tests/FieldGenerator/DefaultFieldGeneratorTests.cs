@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using ApprovalTests.Reporters;
 using ChameleonForms.Attributes;
+using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates.Default;
@@ -113,6 +115,9 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         [ExistsIn("IntList", "Id", "Name")]
         public ICollection<int?> OptionalNullableIntListIds { get; set; }
+
+        [ReadOnly(true)]
+        public int ReadonlyInt { get; set; }
     }
 
     public class IntListItem
@@ -186,6 +191,16 @@ namespace ChameleonForms.Tests.FieldGenerator
             var name = generator.GetFieldId();
 
             Assert.That(name, Is.EqualTo("DecimalWithFormatStringAttribute"));
+        }
+
+        [Test]
+        public void Set_field_configuration_if_readonly_attribute_applied()
+        {
+            var generator = Arrange(m => m.ReadonlyInt);
+            
+            var configuration = generator.PrepareFieldConfiguration(ExampleFieldConfiguration, FieldParent.Section);
+
+            Assert.That(configuration.HtmlAttributes["readonly"], Is.EqualTo("readonly"));
         }
     }
 }
