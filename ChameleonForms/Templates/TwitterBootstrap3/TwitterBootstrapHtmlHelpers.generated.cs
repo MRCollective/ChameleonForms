@@ -508,7 +508,7 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
                                                                                                                                                                                                    
     var isCheckboxControl = fieldConfiguration.GetBagData<bool>("IsCheckboxControl");
     var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
-    var requiredTitle = (((IDictionary<string, Object>) fieldConfiguration.Bag).ContainsKey("RequiredTitle") && (fieldConfiguration.Bag.RequiredTitle as string) != null) ? fieldConfiguration.Bag.RequiredTitle as string : "Required";
+    var requiredTitle = fieldConfiguration.GetBagData<string>("RequiredTitle") ?? "Required";
     var isInputGroup = !isCheckboxControl && isRequired;
 
 
