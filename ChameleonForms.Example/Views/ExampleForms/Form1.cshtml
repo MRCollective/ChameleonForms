@@ -19,17 +19,17 @@
         using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value")))
         {
             @ff.FieldFor(m => m.NestedField).Attr("data-attr1", "value")
+            @ff.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
         }
+        @s.FieldFor(m => m.SomeCheckbox).AsDropDown()
         using (var ss = s.BeginSection("Nested section"))
         {
             @ss.FieldFor(m => m.FileUpload).Attr("data-attr1", "value")
         }
         @s.FieldFor(m => m.RequiredStringField).OverrideFieldHtml(new MvcHtmlString("Custom html <b>she-yeah</b>!"))
-        @s.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
         @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label")
         @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
         @s.FieldFor(m => m.SomeCheckbox).AsList().WithTrueAs("True").WithFalseAs("False")
-        @s.FieldFor(m => m.SomeCheckbox).AsDropDown()
         @s.FieldFor(m => m.ListId)
         @s.FieldFor(m => m.ListId).AsList()
         @s.FieldFor(m => m.SomeEnums)

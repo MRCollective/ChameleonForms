@@ -1,5 +1,5 @@
 ﻿using System.Web;
-using ChameleonForms.Templates;
+using ChameleonForms.Templates.Default;
 
 namespace ChameleonForms.Example.Forms.Templates
 {

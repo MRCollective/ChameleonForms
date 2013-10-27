@@ -1,7 +1,6 @@
 ﻿@using System.Web.Mvc
 @using Component.Config
 @using Enums
-@using Templates
 
 @* Generator: MvcHelper *@
 
@@ -87,7 +86,10 @@
 
 @helper BeginMessage(MessageType messageType, IHtmlString heading) {
 @:      <div class="@string.Format("{0}{1}", messageType.ToString().ToLower(), "_message")">
+            if (!string.IsNullOrEmpty(heading.ToHtmlString()))
+            {
 @:          <h3>@heading</h3>
+            }
 @:          <div class="message">
 }
 
@@ -102,7 +104,7 @@
 @:    </p>
 }
 
-@helper List(IEnumerable<IHtmlString> items) {
+@helper RadioList(IEnumerable<IHtmlString> items) {
 @:    <ul>
 foreach(var i in items) {
 @:        <li>@i</li>

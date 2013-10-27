@@ -1,7 +1,10 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using System.Web.Mvc;
+using ChameleonForms.FieldGenerators;
+using ChameleonForms.FieldGenerators.Handlers;
 
 namespace ChameleonForms.Templates
 {
@@ -10,6 +13,16 @@ namespace ChameleonForms.Templates
     /// </summary>
     public interface IFormTemplate
     {
+        /// <summary>
+        /// Allows the template the modify the field configuration for a particular field.
+        /// </summary>
+        /// <typeparam name="TModel">The type of model the form is being displayed for</typeparam>
+        /// <typeparam name="T">The type of the property the field is being generated against</typeparam>
+        /// <param name="fieldGenerator">The instance of the field generator that will be used to generate the field</param>
+        /// <param name="fieldGeneratorHandler">The instance of the field generator handler that will be used to generate the field element</param>
+        /// <param name="fieldConfiguration">The field configuration that is being used to configure the field</param>
+        void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration);
+
         /// <summary>
         /// Creates the starting HTML for a form.
         /// </summary>
@@ -138,5 +151,12 @@ namespace ChameleonForms.Templates
         /// <param name="htmlAttributes">Any HTML attributes to add to the button or null if there are none</param>
         /// <returns>The HTML for the button</returns>
         IHtmlString Button(IHtmlString content, string type, string id, string value, HtmlAttributes htmlAttributes);
+
+        /// <summary>
+        /// Creates the HTML for a list of radio buttons or checkboxes.
+        /// </summary>
+        /// <param name="list">The list of HTML items (one per radio/checkbox)</param>
+        /// <returns>The HTML for the radio list</returns>
+        IHtmlString RadioList(IEnumerable<IHtmlString> list);
     }
 }

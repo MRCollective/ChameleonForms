@@ -5,7 +5,7 @@ using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
-using ChameleonForms.Templates;
+using ChameleonForms.Templates.Default;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates
@@ -165,6 +165,16 @@ namespace ChameleonForms.Tests.Templates
             var t = new DefaultFormTemplate();
 
             var result = t.BeginMessage(MessageType.Information, new HtmlString("Heading"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_begin_information_message_without_heading()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginMessage(MessageType.Information, new HtmlString(""));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

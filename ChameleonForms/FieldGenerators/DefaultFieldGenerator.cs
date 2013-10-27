@@ -21,16 +21,19 @@ namespace ChameleonForms.FieldGenerators
         /// </summary>
         /// <param name="htmlHelper">The HTML helper for the current view</param>
         /// <param name="fieldProperty">Expression to identify the property to generate the field for</param>
-        public DefaultFieldGenerator(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, T>> fieldProperty)
+        /// <param name="template">The template being used to output the form</param>
+        public DefaultFieldGenerator(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, T>> fieldProperty, IFormTemplate template)
         {
             HtmlHelper = htmlHelper;
             FieldProperty = fieldProperty;
+            Template = template;
             Metadata = ModelMetadata.FromLambdaExpression(FieldProperty, HtmlHelper.ViewData);
         }
 
         public ModelMetadata Metadata { get; private set; }
         public HtmlHelper<TModel> HtmlHelper { get; private set; }
         public Expression<Func<TModel, T>> FieldProperty { get; private set; }
+        public IFormTemplate Template { get; private set; }
 
         public IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
@@ -54,8 +57,8 @@ namespace ChameleonForms.FieldGenerators
                 return labelText;
 
             var labelAttrs = new HtmlAttributes();
-            if (fieldConfiguration.HtmlAttributes.ContainsKey("class"))
-                labelAttrs.AddClass(fieldConfiguration.HtmlAttributes["class"] as string);
+            if (!string.IsNullOrEmpty(fieldConfiguration.LabelClasses))
+                labelAttrs.AddClass(fieldConfiguration.LabelClasses);
 
             return HtmlCreator.BuildLabel(@for, labelText, labelAttrs);
         }
@@ -69,7 +72,7 @@ namespace ChameleonForms.FieldGenerators
 
         public IHtmlString GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return HtmlHelper.ValidationMessageFor(FieldProperty);
+            return HtmlHelper.ValidationMessageFor(FieldProperty, null, fieldConfiguration.ValidationClasses != null ? new {@class = fieldConfiguration.ValidationClasses} : null);
         }
 
         public IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration)
@@ -95,7 +98,9 @@ namespace ChameleonForms.FieldGenerators
             if (!string.IsNullOrEmpty(Metadata.NullDisplayText) && string.IsNullOrEmpty(fieldConfiguration.NoneString))
                 fieldConfiguration.WithNoneAs(Metadata.NullDisplayText);
 
-            FieldGeneratorHandlersRouter<TModel, T>.PrepareFieldConfiguration(this, fieldConfiguration);
+            var handler = FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this);
+            handler.PrepareFieldConfiguration(fieldConfiguration);
+            Template.PrepareFieldConfiguration(this, handler, fieldConfiguration);
 
             return new ReadonlyFieldConfiguration(fieldConfiguration);
         }
@@ -106,7 +111,7 @@ namespace ChameleonForms.FieldGenerators
             if (fieldConfiguration.FieldHtml != null)
                 return fieldConfiguration.FieldHtml;
             
-            return FieldGeneratorHandlersRouter<TModel, T>.GetFieldHtml(this, fieldConfiguration);
+            return FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this).GenerateFieldHtml(fieldConfiguration);
         }
 
         public T GetValue()

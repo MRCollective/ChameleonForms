@@ -9,10 +9,19 @@ using ChameleonForms.Enums;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
-    internal class ListHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
+    /// <summary>
+    /// Generates the HTML for the Field Element of list fields as either a select list or a list of radio buttons.
+    /// </summary>
+    /// <typeparam name="TModel">The type of the model the form is being output for</typeparam>
+    /// <typeparam name="T">The type of the property in the model that the specific field is being output for</typeparam>
+    public class ListHandler<TModel, T> : FieldGeneratorHandler<TModel, T>
     {
-        public ListHandler(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
-            : base(fieldGenerator, fieldConfiguration)
+        /// <summary>
+        /// Constructor for the List Field Generator Handler.
+        /// </summary>
+        /// <param name="fieldGenerator">The field generator for the field</param>
+        public ListHandler(IFieldGenerator<TModel, T> fieldGenerator)
+            : base(fieldGenerator)
         {}
 
         public override bool CanHandle()
@@ -21,11 +30,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 && FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? == true;
         }
 
-        public override IHtmlString GenerateFieldHtml()
+        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var model = FieldGenerator.GetModel();
             var selectList = GetSelectList(model);
-            return GetSelectListHtml(selectList);
+            return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
         }
 
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
@@ -34,12 +43,19 @@ namespace ChameleonForms.FieldGenerators.Handlers
             //  when there is a radio button for "no value selected" i.e. value="" then it can't be selected
             //  as an option since it tries to validate the empty string as a number.
             // This turns off unobtrusive validation in that circumstance
-            if (fieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && IsNumeric() && !HasMultipleValues())
+            if (fieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && IsNumeric(FieldGenerator) && !HasMultipleValues(FieldGenerator))
                 fieldConfiguration.Attr("data-val", "false");
 
             // If a list is being displayed there is no element for the label to point to so drop it
             if (fieldConfiguration.DisplayType == FieldDisplayType.List)
                 fieldConfiguration.WithoutLabel();
+        }
+
+        public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
+        {
+            return fieldConfiguration.DisplayType == FieldDisplayType.List
+                ? FieldDisplayType.List
+                : FieldDisplayType.DropDown;
         }
 
         private IEnumerable<SelectListItem> GetSelectList(TModel model)
@@ -64,7 +80,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             {
                 var name = item.GetType().GetProperty(nameProperty).GetValue(item, null);
                 var value = item.GetType().GetProperty(valueProperty).GetValue(item, null);
-                yield return new SelectListItem { Selected = IsSelected(value), Value = value.ToString(), Text = name.ToString() };
+                yield return new SelectListItem { Selected = IsSelected(value, FieldGenerator), Value = value.ToString(), Text = name.ToString() };
             }
         }
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Web;
 using ChameleonForms.Enums;
-using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component.Config
 {
@@ -16,6 +15,14 @@ namespace ChameleonForms.Component.Config
         /// A dynamic bag to allow for custom extensions using the field configuration.
         /// </summary>
         dynamic Bag { get; }
+
+        /// <summary>
+        /// Returns data from the Bag stored in the given property or default(TData) if there is none present.
+        /// </summary>
+        /// <typeparam name="TData">The type of the expected data to return</typeparam>
+        /// <param name="propertyName">The name of the property to retrieve the data for</param>
+        /// <returns>The data from the Bag or default(TData) if there was no data against that property in the bag</returns>
+        TData GetBagData<TData>(string propertyName);
 
         /// <summary>
         /// Attributes to add to the form element's HTML.
@@ -323,6 +330,30 @@ namespace ChameleonForms.Component.Config
         bool HasLabel { get; }
 
         /// <summary>
+        /// Specify one or more CSS classes to use for the field label.
+        /// </summary>
+        /// <param name="class">Any CSS class(es) to use for the field label</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration AddLabelClass(string @class);
+
+        /// <summary>
+        /// Any CSS class(es) to use for the field label.
+        /// </summary>
+        string LabelClasses { get; }
+
+        /// <summary>
+        /// Specify one or more CSS classes to use for the field validation message.
+        /// </summary>
+        /// <param name="class">Any CSS class(es) to use for the field validation message</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration AddValidationClass(string @class);
+
+        /// <summary>
+        /// Any CSS class(es) to use for the field validation message.
+        /// </summary>
+        string ValidationClasses { get; }
+
+        /// <summary>
         /// Returns readonly field configuration from the current field configuration.
         /// </summary>
         /// <returns>A readonly field configuration</returns>
@@ -354,6 +385,15 @@ namespace ChameleonForms.Component.Config
         }
 
         public dynamic Bag { get; private set; }
+        public TData GetBagData<TData>(string propertyName)
+        {
+            var bagAsDictionary = (IDictionary<string, object>) Bag;
+
+            return bagAsDictionary.ContainsKey(propertyName) && bagAsDictionary[propertyName] is TData
+                ? (TData) bagAsDictionary[propertyName]
+                : default(TData);
+        }
+
         public HtmlAttributes Attributes { get; private set; }
 
         public IFieldConfiguration Id(string id)
@@ -561,6 +601,26 @@ namespace ChameleonForms.Component.Config
         }
 
         public bool HasLabel { get; private set; }
+
+        public IFieldConfiguration AddLabelClass(string @class)
+        {
+            if (!string.IsNullOrEmpty(LabelClasses))
+                LabelClasses += " ";
+            LabelClasses += @class;
+            return this;
+        }
+
+        public string LabelClasses { get; private set; }
+
+        public IFieldConfiguration AddValidationClass(string @class)
+        {
+            if (!string.IsNullOrEmpty(ValidationClasses))
+                ValidationClasses += " ";
+            ValidationClasses += @class;
+            return this;
+        }
+
+        public string ValidationClasses { get; private set; }
 
         public IFieldConfiguration OverrideFieldHtml(IHtmlString html)
         {

@@ -50,9 +50,18 @@ namespace ChameleonForms.Tests.Component
         }
 
         [Test]
-        public void Construct_section_via_extension_method([ValueSource("MessageTypes")] MessageType messageType)
+        public void Construct_section_via_extension_method_with_heading([ValueSource("MessageTypes")] MessageType messageType)
         {
             var s = _f.BeginMessage(messageType, _testHeading.ToHtmlString());
+
+            Assert.That(s, Is.Not.Null);
+            _f.Received().Write(_beginHtml);
+        }
+
+        [Test]
+        public void Construct_section_via_extension_method_without_heading([ValueSource("MessageTypes")] MessageType messageType)
+        {
+            var s = _f.BeginMessage(messageType);
 
             Assert.That(s, Is.Not.Null);
             _f.Received().Write(_beginHtml);

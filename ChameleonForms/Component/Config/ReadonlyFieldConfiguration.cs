@@ -15,6 +15,14 @@ namespace ChameleonForms.Component.Config
         dynamic Bag { get; }
 
         /// <summary>
+        /// Returns data from the Bag stored in the given property or default(TData) if there is none present.
+        /// </summary>
+        /// <typeparam name="TData">The type of the expected data to return</typeparam>
+        /// <param name="propertyName">The name of the property to retrieve the data for</param>
+        /// <returns>The data from the Bag or default(TData) if there was no data against that property in the bag</returns>
+        TData GetBagData<TData>(string propertyName);
+
+        /// <summary>
         /// Attributes to add to the form element's HTML.
         /// </summary>
         // todo: consider making this a readonly dictionary
@@ -84,6 +92,16 @@ namespace ChameleonForms.Component.Config
         /// Whether or not to use a &lt;label&gt;.
         /// </summary>
         bool HasLabel { get; }
+
+        /// <summary>
+        /// Any CSS class(es) to use for the field label.
+        /// </summary>
+        string LabelClasses { get; }
+
+        /// <summary>
+        /// Any CSS class(es) to use for the field validation message.
+        /// </summary>
+        string ValidationClasses { get; }
     }
 
     /// <summary>
@@ -105,6 +123,11 @@ namespace ChameleonForms.Component.Config
         public dynamic Bag
         {
             get { return _fieldConfiguration.Bag; }
+        }
+
+        public TData GetBagData<TData>(string propertyName)
+        {
+            return _fieldConfiguration.GetBagData<TData>(propertyName);
         }
 
         public IDictionary<string, object> HtmlAttributes
@@ -175,6 +198,16 @@ namespace ChameleonForms.Component.Config
         public bool HasLabel
         {
             get { return _fieldConfiguration.HasLabel; }
+        }
+
+        public string LabelClasses
+        {
+            get { return _fieldConfiguration.LabelClasses; }
+        }
+
+        public string ValidationClasses
+        {
+            get { return _fieldConfiguration.ValidationClasses; }
         }
     }
 }

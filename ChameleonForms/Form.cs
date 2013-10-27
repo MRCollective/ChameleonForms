@@ -71,7 +71,7 @@ namespace ChameleonForms
 
         public virtual IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property)
         {
-            return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property);
+            return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property, Template);
         }
 
         public void Dispose()
@@ -100,9 +100,9 @@ namespace ChameleonForms
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
         /// <returns>A <see cref="Form{TModel,TTemplate}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TModel, DefaultFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TModel, IFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
-            return new Form<TModel, DefaultFormTemplate>(helper, new DefaultFormTemplate(), action, method, htmlAttributes, enctype);
+            return new Form<TModel, IFormTemplate>(helper, FormTemplate.Default, action, method, htmlAttributes, enctype);
         }
     }
 }

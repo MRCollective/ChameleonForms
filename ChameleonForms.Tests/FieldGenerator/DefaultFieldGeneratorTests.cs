@@ -8,6 +8,7 @@ using ApprovalTests.Reporters;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
+using ChameleonForms.Templates.Default;
 using ChameleonForms.Tests.Helpers;
 using NUnit.Framework;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
@@ -154,7 +155,7 @@ namespace ChameleonForms.Tests.FieldGenerator
             H.ViewData.Model = vm;
             H.ViewData.ModelMetadata.Model = vm;
 
-            return new DefaultFieldGenerator<TestFieldViewModel, T>(H, property);
+            return new DefaultFieldGenerator<TestFieldViewModel, T>(H, property, new DefaultFormTemplate());
         }
 
         [Test]

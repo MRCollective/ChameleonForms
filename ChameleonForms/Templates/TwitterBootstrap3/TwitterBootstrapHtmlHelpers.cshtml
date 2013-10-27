@@ -1,0 +1,114 @@
+﻿@using System.Web.Mvc
+@using Component.Config
+@using Enums
+
+@* Generator: MvcHelper *@
+
+@* The @:'s are to stop compilation errors with the Razor engine due to unclosed HTML tags *@
+
+@helper EndForm() {
+@:    </form>
+}
+
+@helper BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
+@:    <fieldset@(htmlAttributes)>
+@:        <legend>@title</legend>
+@:        @leadingHtml
+}
+
+@helper EndSection() {
+@:    </fieldset>
+}
+
+@helper BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+{
+@:    <div class="panel panel-default">
+@:        <div class="panel-heading">@title</div>
+@:        <div class="panel-body">
+@leadingHtml
+}
+
+@helper EndNestedSection() {
+@:        </div>
+@:    </div>
+}
+
+@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid) {
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid)
+@:            <div class="row nested-fields">
+@:                <div class="col-xs-1"></div>
+@:                <div class="col-xs-11">
+}
+
+@helper EndField() {
+@:                </div>
+@:            </div>
+@:        </div>
+}
+
+@helper GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
+    if (fieldConfiguration != null) {
+        foreach (var html in fieldConfiguration.PrependedHtml) {@html}
+    }
+}
+
+@helper GetAppendedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
+    if (fieldConfiguration != null) {
+        foreach (var html in fieldConfiguration.AppendedHtml) {@html}
+    }
+}
+
+@helper GetHint(IReadonlyFieldConfiguration fieldConfiguration) {
+    if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="help-block form-hint">@fieldConfiguration.Hint</div>}
+}
+
+@helper GetRequiredDesignator(bool isRequired, bool isCheckboxControl, string requiredTitle) {
+    if(isRequired && !isCheckboxControl){<div class="input-group-addon required"><em title="@requiredTitle">&lowast;</em></div>}
+    if(isCheckboxControl && isRequired) {<em class="required" title="@requiredTitle">&lowast;</em>}
+}
+
+@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, bool isValid) {
+    var isCheckboxControl = fieldConfiguration.GetBagData<bool>("IsCheckboxControl");
+    var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
+    var requiredTitle = (((IDictionary<string, Object>) fieldConfiguration.Bag).ContainsKey("RequiredTitle") && (fieldConfiguration.Bag.RequiredTitle as string) != null) ? fieldConfiguration.Bag.RequiredTitle as string : "Required";
+    var isInputGroup = !isCheckboxControl && isRequired;
+@:            <div class="@(isCheckboxControl ? "checkbox" : "form-group")@(!isValid ? " has-error" : string.Empty)">
+@:            @labelHtml
+              if (isInputGroup)
+              {
+@:            <div class="input-group">
+              }
+@:            @GetPrependedHtml(fieldConfiguration)@elementHtml@GetRequiredDesignator(isRequired, isCheckboxControl, requiredTitle)@GetAppendedHtml(fieldConfiguration)
+              if (isInputGroup)
+              {
+@:            </div>
+              }
+@:            @GetHint(fieldConfiguration) @validationHtml
+}
+
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid) {
+@BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid)
+@:            </div>
+}
+
+@helper BeginMessage(TwitterAlertType messageType, IHtmlString heading) {
+@:      <div class="panel @string.Format("panel-{0}", messageType.ToString().ToLower())">
+            if (!string.IsNullOrEmpty(heading.ToHtmlString()))
+            {
+@:          <div class="panel-heading"><h4 class="panel-title">@heading</h4></div>
+            }
+@:          <div class="panel-body">
+}
+
+@helper EndMessage() {
+@:          </div>
+@:      </div>
+}
+
+@helper BeginNavigation() {
+@:        <div class="btn-group">
+}
+
+@helper EndNavigation() {
+@:        </div>
+}
