@@ -108,7 +108,7 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attr(string key, object value)
         {
-            _tagBuilder.MergeAttribute(key, value == null ? string.Empty : value.ToString(), true);
+            _tagBuilder.MergeAttribute(key.ToLower(), value == null ? string.Empty : value.ToString(), true);
 
             return this;
         }
@@ -124,7 +124,7 @@ namespace ChameleonForms
         public HtmlAttributes Attr(Func<object, object> attribute)
         {
             var item = attribute(null);
-            _tagBuilder.MergeAttribute(attribute.Method.GetParameters()[0].Name.Replace("_", "-"), item == null ? string.Empty : item.ToString(), true);
+            _tagBuilder.MergeAttribute(attribute.Method.GetParameters()[0].Name.Replace("_", "-").ToLower(), item == null ? string.Empty : item.ToString(), true);
 
             return this;
         }
