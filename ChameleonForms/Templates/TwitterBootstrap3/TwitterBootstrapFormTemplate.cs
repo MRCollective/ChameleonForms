@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
@@ -21,8 +22,11 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
 
         private static readonly FieldDisplayType[] NormalFieldTypes = new[] {FieldDisplayType.DropDown, FieldDisplayType.SingleLineText, FieldDisplayType.MultiLineText};
 
-        public override void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration)
+        public override void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration, FieldParent fieldParent)
         {
+            if (fieldParent == FieldParent.Form)
+                return;
+
             fieldConfiguration.AddValidationClass("help-block");
 
             var displayType = fieldGeneratorHandler.GetDisplayType(fieldConfiguration.ToReadonly());

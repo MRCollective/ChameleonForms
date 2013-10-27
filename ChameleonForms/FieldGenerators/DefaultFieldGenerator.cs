@@ -101,7 +101,7 @@ namespace ChameleonForms.FieldGenerators
 
             var handler = FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this);
             handler.PrepareFieldConfiguration(fieldConfiguration);
-            Template.PrepareFieldConfiguration(this, handler, fieldConfiguration);
+            Template.PrepareFieldConfiguration(this, handler, fieldConfiguration, fieldParent);
 
             return new ReadonlyFieldConfiguration(fieldConfiguration);
         }

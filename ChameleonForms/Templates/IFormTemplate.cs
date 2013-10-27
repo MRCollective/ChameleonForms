@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web;
+using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using System.Web.Mvc;
@@ -21,7 +22,8 @@ namespace ChameleonForms.Templates
         /// <param name="fieldGenerator">The instance of the field generator that will be used to generate the field</param>
         /// <param name="fieldGeneratorHandler">The instance of the field generator handler that will be used to generate the field element</param>
         /// <param name="fieldConfiguration">The field configuration that is being used to configure the field</param>
-        void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration);
+        /// <param name="fieldParent">The parent component of the field</param>
+        void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration, FieldParent fieldParent);
 
         /// <summary>
         /// Creates the starting HTML for a form.
