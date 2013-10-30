@@ -63,8 +63,8 @@
     if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="help-block form-hint">@fieldConfiguration.Hint</div>}
 }
 
-@helper GetRequiredDesignator(bool isRequired, bool isCheckboxControl, bool isRadioList, IHtmlString requiredDesignator) {
-    if(isRadioList) { return; }
+@helper GetRequiredDesignator(bool isRequired, bool isCheckboxControl, bool isRadioOrCheckboxList, IHtmlString requiredDesignator) {
+    if(isRadioOrCheckboxList) { return; }
     if(isRequired && !isCheckboxControl){<div class="input-group-addon required">@requiredDesignator</div>}
     if(isCheckboxControl && isRequired) {@requiredDesignator}
 }
@@ -73,13 +73,13 @@
 <em class="required" title="Required">&lowast;</em>
 }
 
-@helper GetLabelHtml(IHtmlString labelHtml, bool hasLabel, bool isCheckboxControl, bool isRadioList, bool isRequired, IHtmlString requiredDesignator) {
+@helper GetLabelHtml(IHtmlString labelHtml, bool hasLabel, bool isCheckboxControl, bool isRadioOrCheckboxList, bool isRequired, IHtmlString requiredDesignator) {
     var wrapLabel = !hasLabel && !isCheckboxControl;
     if (wrapLabel) {
         @:<span class="control-label">
     }
     @labelHtml
-    if (isRadioList && isRequired) {
+    if (isRadioOrCheckboxList && isRequired) {
         @requiredDesignator
     }
     if (wrapLabel) {
@@ -89,16 +89,16 @@
 
 @helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, bool isValid, IHtmlString requiredDesignator) {
     var isCheckboxControl = fieldConfiguration.GetBagData<bool>("IsCheckboxControl");
-    var isRadioList = fieldConfiguration.GetBagData<bool>("IsRadioList");
+    var isRadioOrCheckboxList = fieldConfiguration.GetBagData<bool>("IsRadioOrCheckboxList");
     var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
-    var isInputGroup = !isCheckboxControl && !isRadioList && isRequired;
+    var isInputGroup = !isCheckboxControl && !isRadioOrCheckboxList && isRequired;
 @:            <div class="@(isCheckboxControl ? "checkbox" : "form-group")@(!isValid ? " has-error" : string.Empty)">
-              @GetLabelHtml(labelHtml, fieldConfiguration.HasLabel, isCheckboxControl, isRadioList, isRequired, requiredDesignator)
+              @GetLabelHtml(labelHtml, fieldConfiguration.HasLabel, isCheckboxControl, isRadioOrCheckboxList, isRequired, requiredDesignator)
               if (isInputGroup)
               {
 @:            <div class="input-group">
               }
-@:            @GetPrependedHtml(fieldConfiguration)@elementHtml@GetRequiredDesignator(isRequired, isCheckboxControl, isRadioList, requiredDesignator)@GetAppendedHtml(fieldConfiguration)
+@:            @GetPrependedHtml(fieldConfiguration)@elementHtml@GetRequiredDesignator(isRequired, isCheckboxControl, isRadioOrCheckboxList, requiredDesignator)@GetAppendedHtml(fieldConfiguration)
               if (isInputGroup)
               {
 @:            </div>

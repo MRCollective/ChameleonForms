@@ -55,7 +55,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalStringListId, string.Empty);
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -75,7 +75,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredStringListId, null);
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -95,7 +95,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalIntListId, null);
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -105,7 +105,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalStringListId, "2");
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList().WithNoneAs("No Value"));
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList().WithNoneAs("No Value"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -125,7 +125,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredStringListId, "2");
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -145,7 +145,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredIntListIds, new List<int> { 1, 2 });
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -185,7 +185,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalIntListIds, new List<int> { 1, 2 });
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -205,7 +205,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalNullableIntListIds, null);
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -237,7 +237,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredIntListId);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().AsList());
+            var result = g.GetLabelHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -247,7 +247,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredIntListId);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().AsList().Label(new HtmlString("<strong>lol</strong>")));
+            var result = g.GetLabelHtml(new FieldConfiguration().AsRadioList().Label(new HtmlString("<strong>lol</strong>")));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

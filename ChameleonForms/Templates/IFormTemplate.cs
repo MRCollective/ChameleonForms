@@ -151,6 +151,6 @@ namespace ChameleonForms.Templates
         /// <param name="list">The list of HTML items (one per radio/checkbox)</param>
         /// <param name="isCheckbox">Whether the list is for checkboxes rather than radio buttons</param>
         /// <returns>The HTML for the radio list</returns>
-        IHtmlString RadioList(IEnumerable<IHtmlString> list, bool isCheckbox);
+        IHtmlString RadioOrCheckboxList(IEnumerable<IHtmlString> list, bool isCheckbox);
     }
 }

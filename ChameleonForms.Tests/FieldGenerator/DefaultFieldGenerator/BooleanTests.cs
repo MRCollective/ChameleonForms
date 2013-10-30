@@ -42,7 +42,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredBoolean);
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -52,7 +52,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredBoolean, m => m.RequiredBoolean = true);
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -62,7 +62,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalBooleanField);
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -92,7 +92,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredBoolean);
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList().WithTrueAs("True").WithFalseAs("False"));
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList().WithTrueAs("True").WithFalseAs("False"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -132,7 +132,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredNullableBoolean);
 
-            var result = g.GetFieldHtml(new FieldConfiguration().AsList());
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -152,7 +152,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredNullableBoolean);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().AsList());
+            var result = g.GetLabelHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -162,7 +162,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredNullableBoolean);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().AsList().Label(new HtmlString("<strong>lol</strong>")));
+            var result = g.GetLabelHtml(new FieldConfiguration().AsRadioList().Label(new HtmlString("<strong>lol</strong>")));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
