@@ -782,13 +782,13 @@ WriteLiteralTo(__razor_helper_writer, "    </p>\r\n");
 #line hidden
 
 #line 107 "..\..\Templates\Default\DefaultHtmlHelpers.cshtml"
-public static System.Web.WebPages.HelperResult RadioList(IEnumerable<IHtmlString> items) {
+public static System.Web.WebPages.HelperResult RadioOrCheckboxList(IEnumerable<IHtmlString> items) {
 #line default
 #line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 107 "..\..\Templates\Default\DefaultHtmlHelpers.cshtml"
-                                                   
+                                                             
 
 
 #line default

@@ -159,11 +159,20 @@ namespace ChameleonForms.Component.Config
         FieldDisplayType DisplayType { get; }
 
         /// <summary>
-        /// Renders the field as a list of radio or checkbox items.
+        /// Renders the field as a list of radio options for selecting single values or checkbox items for selecting multiple values.
         /// Use for a list or boolean value.
         /// </summary>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration AsList();
+        /// <seealso cref="AsCheckboxList"/>
+        IFieldConfiguration AsRadioList();
+
+        /// <summary>
+        /// Renders the field as a list of radio options for selecting single values or checkbox items for selecting multiple values.
+        /// Use for a list or boolean value.
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        /// <seealso cref="AsRadioList"/>
+        IFieldConfiguration AsCheckboxList();
 
         /// <summary>
         /// Renders the field as a drop-down control.
@@ -498,10 +507,15 @@ namespace ChameleonForms.Component.Config
 
         public FieldDisplayType DisplayType { get; private set; }
 
-        public IFieldConfiguration AsList()
+        public IFieldConfiguration AsRadioList()
         {
             DisplayType = FieldDisplayType.List;
             return this;
+        }
+
+        public IFieldConfiguration AsCheckboxList()
+        {
+            return AsRadioList();
         }
 
         public IFieldConfiguration AsDropDown()

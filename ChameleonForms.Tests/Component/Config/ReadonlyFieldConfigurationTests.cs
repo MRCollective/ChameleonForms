@@ -11,7 +11,7 @@ namespace ChameleonForms.Tests.Component.Config
         private readonly IFieldConfiguration _exampleFieldConfiguration = new FieldConfiguration()
             .AddClass("aClass")
             .Append("append")
-            .AsList()
+            .AsRadioList()
             .HideEmptyItem()
             .InlineLabel("inlineLabel")
             .Label("label")
