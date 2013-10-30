@@ -63,7 +63,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredEnumList, m => m.RequiredEnumList = new List<TestEnum>{TestEnum.Simplevalue,TestEnum.ValueWithDescriptionAttribute});
 
-            var result = g.GetFieldHtml(ExampleFieldConfiguration.AsList());
+            var result = g.GetFieldHtml(ExampleFieldConfiguration.AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -93,7 +93,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.OptionalNullableEnumList, m => m.OptionalNullableEnumList = new List<TestEnum?> { TestEnum.Simplevalue, TestEnum.ValueWithDescriptionAttribute });
 
-            var result = g.GetFieldHtml(ExampleFieldConfiguration.AsList());
+            var result = g.GetFieldHtml(ExampleFieldConfiguration.AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -113,7 +113,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredEnum);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().AsList());
+            var result = g.GetLabelHtml(new FieldConfiguration().AsRadioList());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -123,7 +123,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredEnum);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().AsList().Label(new HtmlString("<strong>lol</strong>")));
+            var result = g.GetLabelHtml(new FieldConfiguration().AsRadioList().Label(new HtmlString("<strong>lol</strong>")));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
