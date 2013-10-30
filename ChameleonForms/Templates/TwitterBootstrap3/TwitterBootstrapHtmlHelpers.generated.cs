@@ -20,7 +20,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
     using System.Web;
     using System.Web.Helpers;
     
-    #line 1 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+    #line 2 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
     using System.Web.Mvc;
     
     #line default
@@ -32,958 +32,981 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
     using System.Web.UI;
     using System.Web.WebPages;
     
-    #line 2 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+    #line 3 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
     using Component.Config;
     
     #line default
     #line hidden
     
-    #line 3 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+    #line 4 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
     using Enums;
     
     #line default
     #line hidden
     
-    #line 4 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+    #line 5 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
     using Templates.TwitterBootstrap3;
     
     #line default
     #line hidden
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "2.0.0.0")]
-    public class TwitterBootstrapHtmlHelpers : System.Web.WebPages.HelperPage
+    public static class TwitterBootstrapHtmlHelpers
     {
 
-#line 10 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 public static System.Web.WebPages.HelperResult EndForm() {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 10 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 9 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                    
 
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    </form>\r\n");
+
+
+
+#line 11 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    </form>\r\n");
 
-
-#line 12 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
 });
 
-#line 12 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 14 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 14 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                                                 
 
+
+#line 13 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                                                                                 
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <fieldset");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    ");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <fieldset");
+
+
+
+#line 14 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, htmlAttributes);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, ">\r\n");
+
 
 
 #line 15 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, htmlAttributes);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, ">\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "        <legend>");
-
-
-#line 16 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, title);
-
+    if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
+    {
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</legend>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "        ");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <legend>");
+
 
 
 #line 17 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, leadingHtml);
-
+WebViewPage.WriteTo(@__razor_helper_writer, title);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</legend>\r\n");
+
 
 
 #line 18 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
+    }
+    if (leadingHtml != null && !string.IsNullOrWhiteSpace(leadingHtml.ToString()))
+    {
 
 #line default
 #line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        ");
+
+
+
+#line 21 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, leadingHtml);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n");
+
+
+
+#line 22 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+    }
+
+#line default
+#line hidden
+
 });
 
-#line 18 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 20 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult EndSection() {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 20 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                      
 
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "    </fieldset>\r\n");
-
-
-#line 22 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
-});
-
-#line 22 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-}
-#line default
-#line hidden
-
-#line 24 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-public static System.Web.WebPages.HelperResult BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
-{
-#line default
-#line hidden
-return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 #line 25 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
- 
-
+                      
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "    <div class=\"panel panel-default\">\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "        <div class=\"panel-heading\">");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    </fieldset>\r\n");
+
 
 
 #line 27 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-       WriteTo(__razor_helper_writer, title);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</div>\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "        <div class=\"panel-body\">\r\n");
-
-
-#line 29 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
 
 #line default
 #line hidden
 
-#line 29 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, leadingHtml);
-
-
-#line default
-#line hidden
-
-#line 29 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-            
-
-
-#line default
-#line hidden
 });
+
+}
+
+
+public static System.Web.WebPages.HelperResult BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+{
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
 
 #line 30 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-}
+ 
+
 #line default
 #line hidden
 
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    ");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    <div class=\"panel panel-default\">\r\n");
+
+
+
 #line 32 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-public static System.Web.WebPages.HelperResult EndNestedSection() {
+    if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
+    {
+
 #line default
 #line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <div class=\"panel-heading\">");
+
+
+
+#line 34 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, title);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</div>\r\n");
+
+
+
+#line 35 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+    }
+
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <div class=\"panel-body\">\r\n");
+
+
+
+#line 38 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+    if (leadingHtml != null && !string.IsNullOrWhiteSpace(leadingHtml.ToString()))
+    {
+        
+#line default
+#line hidden
+
+
+#line 40 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, leadingHtml);
+
+#line default
+#line hidden
+
+
+#line 40 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                        
+    }
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult EndNestedSection() {
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 32 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 44 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                             
 
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </div>\r\n");
+
+
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    </div>\r\n");
+
+
+
+#line 47 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        </div>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "    </div>\r\n");
-
-
-#line 35 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
 });
 
-#line 35 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 37 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid, IHtmlString requiredDesignator) {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 37 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 49 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                                                                                                                                                                            
 
+#line default
+#line hidden
+
+
+#line 50 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid, requiredDesignator));
 
 #line default
 #line hidden
 
-#line 38 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid, requiredDesignator));
 
-
-#line default
-#line hidden
-
-#line 38 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+#line 50 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                                                                            
 
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            <div class=\"row nested-fields\">\r\n");
+
+
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                <div class=\"col-xs-1\"></div>\r\n");
+
+
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                <div class=\"col-xs-11\">\r\n");
+
+
+
+#line 54 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            <div class=\"row nested-fields\">\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "                <div class=\"col-xs-1\"></div>\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "                <div class=\"col-xs-11\">\r\n");
-
-
-#line 42 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
 });
 
-#line 42 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 44 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult EndField() {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 44 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 56 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                     
 
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "                </div>\r\n");
+
+
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            </div>\r\n");
+
+
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </div>\r\n");
+
+
+
+#line 60 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "                </div>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "            </div>\r\n");
-
-WriteLiteralTo(__razor_helper_writer, "        </div>\r\n");
-
-
-#line 48 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
 });
 
-#line 48 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 50 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 50 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 62 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                           
     if (fieldConfiguration != null) {
         foreach (var html in fieldConfiguration.PrependedHtml) {
+#line default
+#line hidden
+
+
+#line 64 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                     WebViewPage.WriteTo(@__razor_helper_writer, html);
 
 #line default
 #line hidden
 
-#line 52 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                  WriteTo(__razor_helper_writer, html);
 
-
-#line default
-#line hidden
-
-#line 52 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+#line 64 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                      }
     }
 
-
 #line default
 #line hidden
+
 });
 
-#line 54 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 56 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult GetAppendedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 56 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 68 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                          
     if (fieldConfiguration != null) {
         foreach (var html in fieldConfiguration.AppendedHtml) {
+#line default
+#line hidden
+
+
+#line 70 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                    WebViewPage.WriteTo(@__razor_helper_writer, html);
 
 #line default
 #line hidden
 
-#line 58 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                 WriteTo(__razor_helper_writer, html);
 
-
-#line default
-#line hidden
-
-#line 58 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+#line 70 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                     }
     }
 
-
 #line default
 #line hidden
+
 });
 
-#line 60 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 62 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult GetHint(IReadonlyFieldConfiguration fieldConfiguration) {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 62 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 74 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                  
     if (fieldConfiguration != null && fieldConfiguration.Hint != null) {
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "<div class=\"help-block form-hint\">");
+
+
+
+#line 75 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                                               WebViewPage.WriteTo(@__razor_helper_writer, fieldConfiguration.Hint);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "<div");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"help-block form-hint\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</div>");
 
 
-#line 63 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                            WriteTo(__razor_helper_writer, fieldConfiguration.Hint);
 
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</div>");
-
-
-#line 63 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+#line 75 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                                                                                         }
 
-
 #line default
 #line hidden
+
 });
 
-#line 64 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 66 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult GetRequiredDesignator(bool isRequired, bool isCheckboxControl, bool isRadioOrCheckboxList, IHtmlString requiredDesignator) {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 66 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 78 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                                                                                     
     if(isRadioOrCheckboxList) { return; }
     if(isRequired && !isCheckboxControl){
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "<div class=\"input-group-addon required\">");
+
+
+
+#line 80 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                      WebViewPage.WriteTo(@__razor_helper_writer, requiredDesignator);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "<div");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"input-group-addon required\"");
-
-WriteLiteralTo(__razor_helper_writer, ">");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</div>");
 
 
-#line 68 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                   WriteTo(__razor_helper_writer, requiredDesignator);
 
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "</div>");
-
-
-#line 68 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+#line 80 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                                                           }
     if(isCheckboxControl && isRequired) {
+#line default
+#line hidden
+
+
+#line 81 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, requiredDesignator);
 
 #line default
 #line hidden
 
-#line 69 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-           WriteTo(__razor_helper_writer, requiredDesignator);
 
-
-#line default
-#line hidden
-
-#line 69 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+#line 81 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                             }
 
-
 #line default
 #line hidden
+
 });
 
-#line 70 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 72 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult RequiredDesignator(IReadonlyFieldConfiguration fieldConfiguration) {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 72 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 84 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                             
 
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "<em class=\"required\" title=\"Required\">&lowast;</em>\r\n");
+
+
+
+#line 86 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "<em");
 
-WriteLiteralTo(__razor_helper_writer, " class=\"required\"");
-
-WriteLiteralTo(__razor_helper_writer, " title=\"Required\"");
-
-WriteLiteralTo(__razor_helper_writer, ">&lowast;</em>\r\n");
-
-
-#line 74 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
 });
 
-#line 74 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 76 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult GetLabelHtml(IHtmlString labelHtml, bool hasLabel, bool isCheckboxControl, bool isRadioOrCheckboxList, bool isRequired, IHtmlString requiredDesignator) {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 76 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 88 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                                                                                                                  
     var wrapLabel = !hasLabel && !isCheckboxControl;
     if (wrapLabel) {
 
-
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        ");
 
-WriteLiteralTo(__razor_helper_writer, "<span class=\"control-label\">\r\n");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        ");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "<span class=\"control-label\">\r\n");
 
 
-#line 80 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+#line 92 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
     }
     
+#line default
+#line hidden
+
+
+#line 93 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, labelHtml);
 
 #line default
 #line hidden
 
-#line 81 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, labelHtml);
 
-
-#line default
-#line hidden
-
-#line 81 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+#line 93 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
               
     if (isRadioOrCheckboxList && isRequired) {
         
+#line default
+#line hidden
+
+
+#line 95 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, requiredDesignator);
 
 #line default
 #line hidden
 
-#line 83 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, requiredDesignator);
 
-
-#line default
-#line hidden
-
-#line 83 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+#line 95 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                            
     }
     if (wrapLabel) {
 
-
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        ");
 
-WriteLiteralTo(__razor_helper_writer, "</span>\r\n");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        ");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</span>\r\n");
 
 
-#line 87 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+#line 99 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
     }
 
-
 #line default
 #line hidden
+
 });
 
-#line 88 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 90 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, bool isValid, IHtmlString requiredDesignator) {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 90 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 102 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                                                                                                                                                                                    
     var isCheckboxControl = fieldConfiguration.GetBagData<bool>("IsCheckboxControl");
     var isRadioOrCheckboxList = fieldConfiguration.GetBagData<bool>("IsRadioOrCheckboxList");
     var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
     var isInputGroup = !isCheckboxControl && !isRadioOrCheckboxList && isRequired;
 
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "            <div class=\"");
-
-
-#line 95 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, isCheckboxControl ? "checkbox" : "form-group");
-
-
 #line default
 #line hidden
 
-#line 95 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                             WriteTo(__razor_helper_writer, !isValid ? " has-error" : string.Empty);
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            <div class=\"");
 
+
+
+#line 107 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, isCheckboxControl ? "checkbox" : "form-group");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\">\r\n");
 
 
-#line 96 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+#line 107 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                WebViewPage.WriteTo(@__razor_helper_writer, !isValid ? " has-error" : string.Empty);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">\r\n");
+
+
+
+#line 108 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
               
+#line default
+#line hidden
+
+
+#line 108 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, GetLabelHtml(labelHtml, fieldConfiguration.HasLabel, isCheckboxControl, isRadioOrCheckboxList, isRequired, requiredDesignator));
 
 #line default
 #line hidden
 
-#line 96 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, GetLabelHtml(labelHtml, fieldConfiguration.HasLabel, isCheckboxControl, isRadioOrCheckboxList, isRequired, requiredDesignator));
 
-
-#line default
-#line hidden
-
-#line 96 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+#line 108 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                                                                                              
               if (isInputGroup)
               {
 
-
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            <div class=\"input-group\">\r\n");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            <div class=\"input-group\">\r\n");
 
 
-#line 100 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+#line 112 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
               }
 
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "            ");
-
-
-#line 101 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, GetPrependedHtml(fieldConfiguration));
-
-
 #line default
 #line hidden
 
-#line 101 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                     WriteTo(__razor_helper_writer, elementHtml);
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            ");
 
+
+
+#line 113 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, GetPrependedHtml(fieldConfiguration));
 
 #line default
 #line hidden
 
-#line 101 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                 WriteTo(__razor_helper_writer, GetRequiredDesignator(isRequired, isCheckboxControl, isRadioOrCheckboxList, requiredDesignator));
 
+
+#line 113 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+        WebViewPage.WriteTo(@__razor_helper_writer, elementHtml);
+
+#line default
+#line hidden
+
+
+
+#line 113 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                    WebViewPage.WriteTo(@__razor_helper_writer, GetRequiredDesignator(isRequired, isCheckboxControl, isRadioOrCheckboxList, requiredDesignator));
 
 #line default
 #line hidden
 
-#line 101 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                                                                                 WriteTo(__razor_helper_writer, GetAppendedHtml(fieldConfiguration));
 
+
+#line 113 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                                                                                                    WebViewPage.WriteTo(@__razor_helper_writer, GetAppendedHtml(fieldConfiguration));
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n");
 
 
-#line 102 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+#line 114 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
               if (isInputGroup)
               {
 
-
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "            </div>\r\n");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            </div>\r\n");
 
 
-#line 105 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+#line 117 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
               }
 
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "            ");
-
-
-#line 106 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, GetHint(fieldConfiguration));
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, " ");
-
-
-#line 106 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-             WriteTo(__razor_helper_writer, validationHtml);
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "\r\n");
-
-
-#line 107 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
-});
-
-#line 107 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-}
 #line default
 #line hidden
 
-#line 109 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-public static System.Web.WebPages.HelperResult Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid, IHtmlString requiredDesignator) {
-#line default
-#line hidden
-return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            ");
 
-#line 109 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                                                                                                                                                                      
-
-
-#line default
-#line hidden
-
-#line 110 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid, requiredDesignator));
-
-
-#line default
-#line hidden
-
-#line 110 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                                                                           
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "            </div>\r\n");
-
-
-#line 112 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
-});
-
-#line 112 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-}
-#line default
-#line hidden
-
-#line 114 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-public static System.Web.WebPages.HelperResult BeginMessage(EmphasisStyle messageType, IHtmlString heading) {
-#line default
-#line hidden
-return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
-
-#line 114 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                      
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "      <div class=\"panel ");
-
-
-#line 115 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WriteTo(__razor_helper_writer, string.Format("panel-{0}", messageType.ToString().ToLower()));
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "\">\r\n");
-
-
-#line 116 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-            if (!string.IsNullOrEmpty(heading.ToHtmlString()))
-            {
-
-
-#line default
-#line hidden
-WriteLiteralTo(__razor_helper_writer, "          <div class=\"panel-heading\"><h4 class=\"panel-title\">");
 
 
 #line 118 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                 WriteTo(__razor_helper_writer, heading);
-
+WebViewPage.WriteTo(@__razor_helper_writer, GetHint(fieldConfiguration));
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</h4></div>\r\n");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, " ");
+
+
+
+#line 118 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, validationHtml);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\r\n");
+
 
 
 #line 119 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid, IHtmlString requiredDesignator) {
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 121 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                                                                                                                                                                                                      
+
+#line default
+#line hidden
+
+
+#line 122 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid, requiredDesignator));
+
+#line default
+#line hidden
+
+
+#line 122 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                                                                                                           
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            </div>\r\n");
+
+
+
+#line 124 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult BeginMessage(EmphasisStyle messageType, IHtmlString heading) {
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 126 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                                                      
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "      <div class=\"panel ");
+
+
+
+#line 127 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, string.Format("panel-{0}", messageType.ToString().ToLower()));
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">\r\n");
+
+
+
+#line 128 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+            if (!string.IsNullOrEmpty(heading.ToHtmlString()))
+            {
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "          <div class=\"panel-heading\"><h4 class=\"panel-title\">");
+
+
+
+#line 130 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                    WebViewPage.WriteTo(@__razor_helper_writer, heading);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</h4></div>\r\n");
+
+
+
+#line 131 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
             }
 
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "          <div class=\"panel-body\">\r\n");
+
+
+
+#line 133 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "          <div class=\"panel-body\">\r\n");
 
-
-#line 121 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
 });
 
-#line 121 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 123 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult EndMessage() {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 123 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 135 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                       
 
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "          </div>\r\n");
+
+
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "      </div>\r\n");
+
+
+
+#line 138 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "          </div>\r\n");
 
-WriteLiteralTo(__razor_helper_writer, "      </div>\r\n");
-
-
-#line 126 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
 });
 
-#line 126 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 128 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult BeginNavigation() {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 128 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 140 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                            
 
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <div class=\"btn-group\">\r\n");
+
+
+
+#line 142 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <div class=\"btn-group\">\r\n");
 
-
-#line 130 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
 });
 
-#line 130 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 132 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult EndNavigation() {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 132 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 144 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                          
 
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        </div>\r\n");
+
+
+
+#line 146 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        </div>\r\n");
 
-
-#line 134 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-
-
-#line default
-#line hidden
 });
 
-#line 134 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
 
-#line 136 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
 public static System.Web.WebPages.HelperResult RadioOrCheckboxList(IEnumerable<IHtmlString> items, bool isCheckbox) {
-#line default
-#line hidden
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
-#line 136 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+
+#line 148 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
                                                                               
     foreach (var item in items) {
 
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <div class=\"");
+
+
+
+#line 150 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+WebViewPage.WriteTo(@__razor_helper_writer, isCheckbox ? "checkbox" : "radio");
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "        <div");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 5304), Tuple.Create("\"", 5348)
-
-#line 138 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-, Tuple.Create(Tuple.Create("", 5312), Tuple.Create<System.Object, System.Int32>(isCheckbox ? "checkbox" : "radio"
-
-#line default
-#line hidden
-, 5312), false)
-);
-
-WriteLiteralTo(__razor_helper_writer, ">");
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "\">");
 
 
-#line 138 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                            WriteTo(__razor_helper_writer, item);
 
+#line 150 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+               WebViewPage.WriteTo(@__razor_helper_writer, item);
 
 #line default
 #line hidden
-WriteLiteralTo(__razor_helper_writer, "</div>\r\n");
+
+WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</div>\r\n");
 
 
-#line 139 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+
+#line 151 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
     }
 
-
 #line default
 #line hidden
+
 });
 
-#line 140 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
 }
-#line default
-#line hidden
+
 
     }
 }
