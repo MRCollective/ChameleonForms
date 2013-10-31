@@ -12,16 +12,28 @@
 
 @helper BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
 @:    <fieldset@(htmlAttributes)>
+    if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
+    {
 @:        <legend>@title</legend>
+    }
+    if (leadingHtml != null && !string.IsNullOrWhiteSpace(leadingHtml.ToString()))
+    {
 @:        @leadingHtml
+    }
 @:        <dl>
 }
     
 @helper BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
 {
+    if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
+    {
 @:            <dt>@title</dt>
+    }
 @:            <dd>
+    if (leadingHtml != null && !string.IsNullOrWhiteSpace(leadingHtml.ToString()))
+    {
 @:                @leadingHtml
+    }
 @:                <dl@(htmlAttributes)>
 }
 
