@@ -41,6 +41,8 @@
         @s.FieldFor(m => m.NullableInt)
         @s.FieldFor(m => m.Child.ChildField)
         @s.FieldFor(m => m.Child.SomeEnum).AsRadioList()
+        @s.FieldFor(m => m.RequiredStringField).Disabled()
+        @s.FieldFor(m => m.RequiredStringField).Readonly()
     }
     using (var n = f.BeginNavigation())
     {
