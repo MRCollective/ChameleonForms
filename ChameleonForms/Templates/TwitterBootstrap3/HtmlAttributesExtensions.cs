@@ -1,4 +1,5 @@
 ﻿using ChameleonForms.Component;
+using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using Humanizer;
 
@@ -55,6 +56,12 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             if (size != ButtonSize.Default)
                 attrs.AddClass(string.Format("btn-{0}", size.Humanize()));
             return attrs;
+        }
+
+        public static IFieldConfiguration AsInputGroup(this IFieldConfiguration fc)
+        {
+            fc.Bag.DisplayAsInputGroup = true;
+            return fc;
         }
     }
 }
