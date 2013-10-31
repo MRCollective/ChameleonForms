@@ -95,7 +95,7 @@ namespace ChameleonForms.Example.Controllers
         public IFieldConfiguration ModifyConfig(IFieldConfiguration config)
         {
             if (_aslist)
-                config.AsList();
+                config.AsRadioList();
             return config;
         }
 

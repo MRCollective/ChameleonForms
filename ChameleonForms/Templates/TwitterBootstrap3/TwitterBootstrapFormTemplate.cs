@@ -47,7 +47,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             }
 
             if (displayType == FieldDisplayType.List)
-                fieldConfiguration.Bag.IsRadioList = true;
+                fieldConfiguration.Bag.IsRadioOrCheckboxList = true;
         }
 
         public override IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
@@ -140,9 +140,9 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             return base.Button(content, type, id, value, htmlAttributes);
         }
 
-        public override IHtmlString RadioList(IEnumerable<IHtmlString> list, bool isCheckbox)
+        public override IHtmlString RadioOrCheckboxList(IEnumerable<IHtmlString> list, bool isCheckbox)
         {
-            return TwitterBootstrapHtmlHelpers.RadioList(list, isCheckbox);
+            return TwitterBootstrapHtmlHelpers.RadioOrCheckboxList(list, isCheckbox);
         }
     }
 }

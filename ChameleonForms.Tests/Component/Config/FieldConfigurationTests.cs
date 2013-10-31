@@ -140,12 +140,30 @@ namespace ChameleonForms.Tests.Component.Config
         }
 
         [Test]
-        public void Set_list_display()
+        public void Set_list_display_using_radiolist()
         {
             var fc = Field.Configure()
-                .AsList();
+                .AsRadioList();
 
             Assert.That(fc.DisplayType, Is.EqualTo(FieldDisplayType.List));
+        }
+
+        [Test]
+        public void Set_list_display_using_checkboxlist()
+        {
+            var fc = Field.Configure()
+                .AsCheckboxList();
+
+            Assert.That(fc.DisplayType, Is.EqualTo(FieldDisplayType.List));
+        }
+
+        [Test]
+        public void Ensure_checkboxlist_always_performs_same_action_as_radiolist()
+        {
+            var fcCheckbox = Field.Configure().AsCheckboxList();
+            var fcRadio = Field.Configure().AsRadioList();
+
+            Assert.That(fcCheckbox.DisplayType, Is.EqualTo(fcRadio.DisplayType));
         }
 
         [Test]
