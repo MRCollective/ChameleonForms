@@ -1,7 +1,6 @@
 ﻿@* Generator: MvcHelper *@
 @using System.Web.Mvc
 @using Component.Config
-@using Enums
 @using Templates.TwitterBootstrap3
 
 @* The @:'s are to stop compilation errors with the Razor engine due to unclosed HTML tags *@
@@ -59,15 +58,19 @@
 @:        </div>
 }
 
-@helper GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
+@helper GetInputGroupHtml(IHtmlString html, bool isInputGroup) {
+@(new HtmlString(isInputGroup ? "<div class=\"input-group-addon\">" : ""))@html@(new HtmlString(isInputGroup ? "</div>" : ""))
+}
+
+@helper GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration, bool isInputGroup) {
     if (fieldConfiguration != null) {
-        foreach (var html in fieldConfiguration.PrependedHtml) {@html}
+        foreach (var html in fieldConfiguration.PrependedHtml) {@GetInputGroupHtml(html, isInputGroup)}
     }
 }
 
-@helper GetAppendedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
+@helper GetAppendedHtml(IReadonlyFieldConfiguration fieldConfiguration, bool isInputGroup) {
     if (fieldConfiguration != null) {
-        foreach (var html in fieldConfiguration.AppendedHtml) {@html}
+        foreach (var html in fieldConfiguration.AppendedHtml) {@GetInputGroupHtml(html, isInputGroup)}
     }
 }
 
@@ -75,10 +78,14 @@
     if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="help-block form-hint">@fieldConfiguration.Hint</div>}
 }
 
-@helper GetRequiredDesignator(bool isRequired, bool isCheckboxControl, bool isRadioOrCheckboxList, IHtmlString requiredDesignator) {
-    if(isRadioOrCheckboxList) { return; }
-    if(isRequired && !isCheckboxControl){<div class="input-group-addon required">@requiredDesignator</div>}
-    if(isCheckboxControl && isRequired) {@requiredDesignator}
+@helper GetCheckboxRequiredDesignator(bool isRequired, bool isCheckboxControl, IHtmlString requiredDesignator) {
+    if(!isRequired) { return; }
+    if(isCheckboxControl) {@requiredDesignator}
+}
+
+@helper GetInputGroupRequiredDesignator(bool isRequired, bool isInputGroup, IHtmlString requiredDesignator) {
+    if (!isRequired) { return; }
+    if (isInputGroup) {<div class="input-group-addon required">@requiredDesignator</div>}
 }
 
 @helper RequiredDesignator(IReadonlyFieldConfiguration fieldConfiguration) {
@@ -103,14 +110,14 @@
     var isCheckboxControl = fieldConfiguration.GetBagData<bool>("IsCheckboxControl");
     var isRadioOrCheckboxList = fieldConfiguration.GetBagData<bool>("IsRadioOrCheckboxList");
     var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
-    var isInputGroup = !isCheckboxControl && !isRadioOrCheckboxList && isRequired;
+    var isInputGroup = (!isCheckboxControl && !isRadioOrCheckboxList && isRequired) || fieldConfiguration.GetBagData<bool>("DisplayAsInputGroup");
 @:            <div class="@(isCheckboxControl ? "checkbox" : "form-group")@(!isValid ? " has-error" : string.Empty)">
               @GetLabelHtml(labelHtml, fieldConfiguration.HasLabel, isCheckboxControl, isRadioOrCheckboxList, isRequired, requiredDesignator)
               if (isInputGroup)
               {
 @:            <div class="input-group">
               }
-@:            @GetPrependedHtml(fieldConfiguration)@elementHtml@GetRequiredDesignator(isRequired, isCheckboxControl, isRadioOrCheckboxList, requiredDesignator)@GetAppendedHtml(fieldConfiguration)
+@:            @GetPrependedHtml(fieldConfiguration, isInputGroup)@elementHtml@GetCheckboxRequiredDesignator(isRequired, isCheckboxControl, requiredDesignator)@GetAppendedHtml(fieldConfiguration, isInputGroup)@GetInputGroupRequiredDesignator(isRequired, isInputGroup, requiredDesignator)
               if (isInputGroup)
               {
 @:            </div>

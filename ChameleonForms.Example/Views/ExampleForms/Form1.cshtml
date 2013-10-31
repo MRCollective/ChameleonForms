@@ -1,4 +1,5 @@
 ﻿@using ChameleonForms.Example.Forms.Components
+@using ChameleonForms.Templates.TwitterBootstrap3
 @model ViewModelExample
 
 @{
@@ -31,7 +32,7 @@
         @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label")
         @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
         @s.FieldFor(m => m.SomeCheckbox).AsRadioList().WithTrueAs("True").WithFalseAs("False")
-        @s.FieldFor(m => m.ListId)
+        @s.FieldFor(m => m.ListId).AsInputGroup().Append(".00").Prepend("$")
         @s.FieldFor(m => m.ListId).AsRadioList()
         @s.FieldFor(m => m.SomeEnums)
         @s.FieldFor(m => m.SomeEnumsList).AsRadioList()
