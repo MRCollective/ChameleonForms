@@ -161,7 +161,7 @@
       <Link>Scripts\src\jquery-2.0.3.js</Link>
     </Content>
     <Content Include="Scripts\fixtures\DateTimeValidationFixtures.js" />
-    <Compile Include="Templates\DefaultFormTemplateTests.cs" />
+    <Compile Include="Templates\Default\DefaultFormTemplateTests.cs" />
     <Compile Include="Templates\HtmlCreatorTests.cs" />
     <Compile Include="Templates\HtmlAttributesTests.cs" />
   </ItemGroup>
