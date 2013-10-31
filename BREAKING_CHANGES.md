@@ -1,7 +1,18 @@
 ChameleonForms Breaking Changes
 -------------------------------
 
-Version 0.9.XX
+Version 0.9.XXX
+===============
+
+The `AsList` method on the `IFieldConfiguration` interface has been removed in favour of `AsRadioList` and `AsCheckboxList`.
+
+### Reason
+We feel this is more discoverable and intention revealing than `AsList`.
+
+### Workaround
+Change any instances of using `@s.FieldFor(m => m.SomeField).AsList()` to `@s.FieldFor(m => m.SomeField).AsRadioList()` or `@s.FieldFor(m => m.SomeField).AsCheckboxList()`.
+
+Version 0.9.89
 ==============
 
 The `FieldFor` extension method on the Form has been deprecated in favour of a `FieldElementFor` method.
