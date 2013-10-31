@@ -162,6 +162,7 @@
     <Compile Include="Templates\TwitterBootstrap3\FormTests.cs" />
     <Compile Include="Templates\TwitterBootstrap3\MessageTests.cs" />
     <Compile Include="Templates\TwitterBootstrap3\NavigationTests.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\PrepareFieldConfigurationTests.cs" />
     <Compile Include="Templates\TwitterBootstrap3\SectionTests.cs" />
     <Content Include="..\ChameleonForms.Example\Scripts\jquery-2.0.3.js">
       <Link>Scripts\src\jquery-2.0.3.js</Link>
