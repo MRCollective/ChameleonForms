@@ -55,11 +55,31 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
+        public void Begin_section_without_leading_html_or_title()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginSection();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void End_section()
         {
             var t = new DefaultFormTemplate();
 
             var result = t.EndSection();
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Begin_nested_section_without_leading_html_or_title()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.BeginNestedSection();
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
