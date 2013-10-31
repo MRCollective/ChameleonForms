@@ -70,8 +70,50 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         public void Output_field_with_prepended_and_appended_html_when_required()
         {
             var t = new TwitterBootstrapFormTemplate();
+            var metadata = new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), () => null, typeof(object), "");
+            metadata.IsRequired = true;
 
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration()
+                .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
+                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
+                .WithHint(new HtmlString("<hint>"))
+                .ToReadonly(),
+                false
+            );
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_checkbox_field_with_prepended_and_appended_html_when_required()
+        {
+            var t = new TwitterBootstrapFormTemplate();
+            var fc = new FieldConfiguration();
+            fc.Bag.IsCheckboxControl = true;
+            var metadata = new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), () => null, typeof(object), "");
+            metadata.IsRequired = true;
+
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), metadata, fc
+                .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
+                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
+                .WithHint(new HtmlString("<hint>"))
+                .ToReadonly(),
+                false
+            );
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_radio_list_field_with_prepended_and_appended_html_when_required()
+        {
+            var t = new TwitterBootstrapFormTemplate();
+            var fc = new FieldConfiguration();
+            fc.Bag.IsRadioOrCheckboxList = true;
+            var metadata = new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), () => null, typeof(object), "");
+            metadata.IsRequired = true;
+
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), metadata, fc
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
                 .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
                 .WithHint(new HtmlString("<hint>"))
