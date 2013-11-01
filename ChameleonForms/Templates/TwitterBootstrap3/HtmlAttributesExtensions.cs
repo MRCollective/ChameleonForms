@@ -58,6 +58,14 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             return attrs;
         }
 
+        /// <summary>
+        /// Outputs the field in an input group using prepended and appended HTML.
+        /// </summary>
+        /// <example>
+        /// @n.Field(labelHtml, elementHtml, validationHtml, metadata, new FieldConfiguration().Prepend(beforeHtml).Append(afterHtml).AsInputGroup(), false)
+        /// </example>
+        /// <param name="fc"></param>
+        /// <returns></returns>
         public static IFieldConfiguration AsInputGroup(this IFieldConfiguration fc)
         {
             fc.Bag.DisplayAsInputGroup = true;
