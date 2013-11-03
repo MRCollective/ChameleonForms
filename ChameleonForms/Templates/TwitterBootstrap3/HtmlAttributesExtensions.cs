@@ -64,8 +64,8 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         /// <example>
         /// @n.Field(labelHtml, elementHtml, validationHtml, metadata, new FieldConfiguration().Prepend(beforeHtml).Append(afterHtml).AsInputGroup(), false)
         /// </example>
-        /// <param name="fc"></param>
-        /// <returns></returns>
+        /// <param name="fc">The configuration for a field</param>
+        /// <returns>The field configuration object to allow for method chaining</returns>
         public static IFieldConfiguration AsInputGroup(this IFieldConfiguration fc)
         {
             fc.Bag.DisplayAsInputGroup = true;
