@@ -27,7 +27,8 @@
 
 @helper BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
 {
-    @:    <div class="panel panel-default">
+    htmlAttributes.AddClass("panel panel-default");
+@:    <div@(htmlAttributes)>
     if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
     {
 @:        <div class="panel-heading">@title</div>
@@ -36,7 +37,7 @@
 @:        <div class="panel-body">
     if (leadingHtml != null && !string.IsNullOrWhiteSpace(leadingHtml.ToString()))
     {
-        @leadingHtml    
+        @leadingHtml
     }
 }
 
