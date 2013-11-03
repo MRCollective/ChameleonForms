@@ -37,7 +37,10 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
 
             var displayType = fieldGeneratorHandler.GetDisplayType(fieldConfiguration.ToReadonly());
             if (NormalFieldTypes.Contains(displayType))
+            {
+                fieldConfiguration.Bag.CanBeInputGroup = true;
                 fieldConfiguration.AddClass("form-control").AddLabelClass("control-label");
+            }
 
             if (displayType == FieldDisplayType.Checkbox)
             {
