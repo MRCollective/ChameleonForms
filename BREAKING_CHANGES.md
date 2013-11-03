@@ -1,7 +1,7 @@
 ChameleonForms Breaking Changes
 -------------------------------
 
-Version 0.9.XXX
+Version 0.9.116
 ===============
 
 The `AsList` method on the `IFieldConfiguration` interface has been removed in favour of `AsRadioList` and `AsCheckboxList`.
