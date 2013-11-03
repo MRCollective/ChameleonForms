@@ -60,9 +60,9 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             return TwitterBootstrapHtmlHelpers.EndForm();
         }
 
-        public override IHtmlString BeginSection(IHtmlString title = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public override IHtmlString BeginSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
-            return TwitterBootstrapHtmlHelpers.BeginSection(title, leadingHtml, htmlAttributes ?? new HtmlAttributes());
+            return TwitterBootstrapHtmlHelpers.BeginSection(heading, leadingHtml, htmlAttributes ?? new HtmlAttributes());
         }
 
         public override IHtmlString EndSection()
@@ -70,9 +70,9 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             return TwitterBootstrapHtmlHelpers.EndSection();
         }
 
-        public override IHtmlString BeginNestedSection(IHtmlString title = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public override IHtmlString BeginNestedSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
-            return TwitterBootstrapHtmlHelpers.BeginNestedSection(title, leadingHtml, htmlAttributes ?? new HtmlAttributes());
+            return TwitterBootstrapHtmlHelpers.BeginNestedSection(heading, leadingHtml, htmlAttributes ?? new HtmlAttributes());
         }
 
         public override IHtmlString EndNestedSection()

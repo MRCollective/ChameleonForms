@@ -44,11 +44,11 @@ namespace ChameleonForms.Templates
         /// <summary>
         /// Creates the beginning HTML for a section.
         /// </summary>
-        /// <param name="title">The title of the section</param>
+        /// <param name="heading">The heading of the section</param>
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes the section container should use; specified as an anonymous object</param>
         /// <returns>The beginning HTML for a section</returns>
-        IHtmlString BeginSection(IHtmlString title = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null);
+        IHtmlString BeginSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null);
 
         /// <summary>
         /// Creates the ending HTML for a section.
@@ -59,11 +59,11 @@ namespace ChameleonForms.Templates
         /// <summary>
         /// Creates the beginning HTML for a section that is nested within another section.
         /// </summary>
-        /// <param name="title">The title of the nested section</param>
+        /// <param name="heading">The heading of the nested section</param>
         /// <param name="leadingHtml">Any HTML to output at the start of the nested section</param>
         /// <param name="htmlAttributes">Any HTML attributes the nested section container should use; specified as an anaonymous object</param>
         /// <returns>The beginning HTML for a nested section</returns>
-        IHtmlString BeginNestedSection(IHtmlString title = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null);
+        IHtmlString BeginNestedSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null);
 
         /// <summary>
         /// Creates the ending HTML for a section that is nested within another section.

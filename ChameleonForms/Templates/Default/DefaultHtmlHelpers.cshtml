@@ -10,11 +10,11 @@
 @:    </form>
 }
 
-@helper BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
+@helper BeginSection(IHtmlString heading, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
 @:    <fieldset@(htmlAttributes)>
-    if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
+    if (heading != null && !string.IsNullOrWhiteSpace(heading.ToString()))
     {
-@:        <legend>@title</legend>
+@:        <legend>@heading</legend>
     }
     if (leadingHtml != null && !string.IsNullOrWhiteSpace(leadingHtml.ToString()))
     {
@@ -23,11 +23,11 @@
 @:        <dl>
 }
     
-@helper BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+@helper BeginNestedSection(IHtmlString heading, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
 {
-    if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
+    if (heading != null && !string.IsNullOrWhiteSpace(heading.ToString()))
     {
-@:            <dt>@title</dt>
+@:            <dt>@heading</dt>
     }
 @:            <dd>
     if (leadingHtml != null && !string.IsNullOrWhiteSpace(leadingHtml.ToString()))

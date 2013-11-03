@@ -29,9 +29,9 @@ namespace ChameleonForms.Templates.Default
             return DefaultHtmlHelpers.EndForm();
         }
 
-        public virtual IHtmlString BeginSection(IHtmlString title = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public virtual IHtmlString BeginSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
-            return DefaultHtmlHelpers.BeginSection(title, leadingHtml, htmlAttributes ?? new HtmlAttributes());
+            return DefaultHtmlHelpers.BeginSection(heading, leadingHtml, htmlAttributes ?? new HtmlAttributes());
         }
 
         public virtual IHtmlString EndSection()
@@ -39,9 +39,9 @@ namespace ChameleonForms.Templates.Default
             return DefaultHtmlHelpers.EndSection();
         }
 
-        public virtual IHtmlString BeginNestedSection(IHtmlString title = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public virtual IHtmlString BeginNestedSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
-            return DefaultHtmlHelpers.BeginNestedSection(title, leadingHtml, htmlAttributes ?? new HtmlAttributes());
+            return DefaultHtmlHelpers.BeginNestedSection(heading, leadingHtml, htmlAttributes ?? new HtmlAttributes());
         }
 
         public virtual IHtmlString EndNestedSection()

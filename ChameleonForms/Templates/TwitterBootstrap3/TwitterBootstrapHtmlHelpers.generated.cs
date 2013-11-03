@@ -73,13 +73,13 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    </form>\r\n");
 }
 
 
-public static System.Web.WebPages.HelperResult BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
+public static System.Web.WebPages.HelperResult BeginSection(IHtmlString heading, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
 
 
 #line 12 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                                                 
+                                                                                                   
 
 #line default
 #line hidden
@@ -101,7 +101,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, ">\r\n");
 
 
 #line 14 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-    if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
+    if (heading != null && !string.IsNullOrWhiteSpace(heading.ToString()))
     {
 
 #line default
@@ -112,7 +112,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <legend>");
 
 
 #line 16 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, title);
+WebViewPage.WriteTo(@__razor_helper_writer, heading);
 
 #line default
 #line hidden
@@ -179,7 +179,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    </fieldset>\r\n");
 }
 
 
-public static System.Web.WebPages.HelperResult BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+public static System.Web.WebPages.HelperResult BeginNestedSection(IHtmlString heading, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
 {
 return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 
@@ -207,7 +207,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, ">\r\n");
 
 
 #line 32 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-    if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
+    if (heading != null && !string.IsNullOrWhiteSpace(heading.ToString()))
     {
 
 #line default
@@ -218,7 +218,7 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "        <div class=\"panel-h
 
 
 #line 34 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, title);
+WebViewPage.WriteTo(@__razor_helper_writer, heading);
 
 #line default
 #line hidden
