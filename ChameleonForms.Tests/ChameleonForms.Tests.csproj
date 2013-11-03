@@ -157,11 +157,19 @@
     <Compile Include="ModelBinders\DateTimeModelBinderShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\LazyHtmlAttributesTests.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\ButtonTests.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\FieldTests.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\FormTests.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\MessageTests.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\NavigationTests.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\PrepareFieldConfigurationTests.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\RadioListTests.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\SectionTests.cs" />
     <Content Include="..\ChameleonForms.Example\Scripts\jquery-2.0.3.js">
       <Link>Scripts\src\jquery-2.0.3.js</Link>
     </Content>
     <Content Include="Scripts\fixtures\DateTimeValidationFixtures.js" />
-    <Compile Include="Templates\DefaultFormTemplateTests.cs" />
+    <Compile Include="Templates\Default\DefaultFormTemplateTests.cs" />
     <Compile Include="Templates\HtmlCreatorTests.cs" />
     <Compile Include="Templates\HtmlAttributesTests.cs" />
   </ItemGroup>
