@@ -129,6 +129,7 @@
     <Compile Include="HumanizedLabels.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\FieldConfigurationExtensions.cs" />
     <Compile Include="Templates\TwitterBootstrap3\TwitterBootstrapFormTemplate.cs" />
     <Compile Include="Templates\Default\DefaultFormTemplate.cs" />
     <Compile Include="HtmlAttributes.cs" />
@@ -145,7 +146,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TwitterBootstrapHtmlHelpers.cshtml</DependentUpon>
     </Compile>
-    <Compile Include="Templates\TwitterBootstrap3\HtmlAttributesExtensions.cs" />
+    <Compile Include="Templates\TwitterBootstrap3\ButtonHtmlAttributesExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ChameleonForms.nuspec" />
