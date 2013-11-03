@@ -38,6 +38,8 @@
         @s.FieldFor(m => m.Decimal).WithFormatString("{0:F2}")
         @s.FieldFor(m => m.DecimalWithFormatStringAttribute)
         @s.FieldFor(m => m.NullableInt)
+        @s.FieldFor(m => m.Child.ChildField)
+        @s.FieldFor(m => m.Child.SomeEnum).AsRadioList()
     }
     using (var n = f.BeginNavigation())
     {

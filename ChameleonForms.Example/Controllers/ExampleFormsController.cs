@@ -171,6 +171,7 @@ namespace ChameleonForms.Example.Controllers
             List = new List<ListItem> {new ListItem{Id = 1, Name = "A"}, new ListItem{Id = 2, Name = "B"}};
             DecimalWithFormatStringAttribute = 1.2300m;
             Decimal = 1.2300m;
+            Child = new ChildViewModel();
         }
 
         [Required]
@@ -203,6 +204,8 @@ namespace ChameleonForms.Example.Controllers
         public int? NullableInt { get; set; }
 
         public bool Boolean { get; set; }
+
+        public ChildViewModel Child { get; set; }
     }
 
     public class ListItem
@@ -217,5 +220,11 @@ namespace ChameleonForms.Example.Controllers
         [Description("Friendly name")]
         ValueWithDescription,
         SomeOtherValue
+    }
+
+    public class ChildViewModel
+    {
+        public string ChildField { get; set; }
+        public SomeEnum SomeEnum { get; set; }
     }
 }

@@ -27,6 +27,11 @@ namespace ChameleonForms.Tests.FieldGenerator
 
     public class TestFieldViewModel
     {
+        public TestFieldViewModel()
+        {
+            Child = new ChildViewModel();
+        }
+
         [Required]
         public string RequiredString { get; set; }
 
@@ -118,6 +123,8 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         [ReadOnly(true)]
         public int ReadonlyInt { get; set; }
+
+        public ChildViewModel Child { get; set; }
     }
 
     public class IntListItem
@@ -130,6 +137,11 @@ namespace ChameleonForms.Tests.FieldGenerator
     {
         public string Value { get; set; }
         public string Label { get; set; }
+    }
+
+    public class ChildViewModel
+    {
+        public TestEnum RequiredChildEnum { get; set; }
     }
 
     [TestFixture]

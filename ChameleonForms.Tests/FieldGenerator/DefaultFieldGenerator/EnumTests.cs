@@ -137,5 +137,15 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
+
+        [Test]
+        public void Use_correct_html_for_child_viewmodel_enum_list_field()
+        {
+            var g = Arrange(m => m.Child.RequiredChildEnum);
+
+            var result = g.GetFieldHtml(ExampleFieldConfiguration.AsRadioList());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
     }
 }
