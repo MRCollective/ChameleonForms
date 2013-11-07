@@ -11,6 +11,8 @@ ChameleonForms takes away the pain and repetition of building forms with ASP.NET
 * **Consistent** - consistency of the API and form structure within your forms and consistency across all forms in your site via templating
 * **Declarative** syntax - specify how the form is structured rather than the HTML output of the form; this, in combination with the aforementioned templating means that when it comes time to change the style of your site and/or HTML structure of your forms you can do so as painlessly as possible (think about a scenario where you rapidly prototype a new site using Twitter Bootstrap and you make it big and need to change to a custom design!)
 
+ChameleonForms has built-in support for building forms using Twitter Bootstrap 3! Get rid of all the boilerplate code you have to write around every field and instead use code like below. Clone the repository and fire up the example project to see what we mean!
+
 So what does a ChameleonForms form look like? Here is a (very) basic example:
 
 ```c#
