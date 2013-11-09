@@ -127,12 +127,12 @@ namespace ChameleonForms
         /// <returns>A <see cref="Form{TModel,TTemplate}"/> object with an instance of the default form template renderer, which will not render the form begin and end parts.</returns>
         public static IForm<TModel, IFormTemplate> BeginChameleonFormContext<TModel>(this HtmlHelper<TModel> helper)
         {
-            return new ContextForm<TModel, IFormTemplate>(helper, FormTemplate.Default);
+            return new FormContext<TModel, IFormTemplate>(helper, FormTemplate.Default);
         }
 
-        private class ContextForm<TModel, TTemplate> : Form<TModel, TTemplate> where TTemplate : IFormTemplate
+        private class FormContext<TModel, TTemplate> : Form<TModel, TTemplate> where TTemplate : IFormTemplate
         {
-            public ContextForm(HtmlHelper<TModel> helper, TTemplate template)
+            public FormContext(HtmlHelper<TModel> helper, TTemplate template)
                 : base(helper, template, "", FormMethod.Get, null, null)
             {
             }
