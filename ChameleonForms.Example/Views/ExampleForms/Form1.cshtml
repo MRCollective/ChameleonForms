@@ -74,3 +74,13 @@
         @m.Paragraph("Hello!!!!!!!!")
     }
 }
+
+@using (var form = Html.BeginChameleonForm("/random", FormMethod.Get))
+{
+    using (var s = form.BeginSection("Html.EditorFor and Html.BeginChameleonEditor"))
+    {
+        <p>This demonstrates using an editor template (<code>Html.EditorFor</code>) that uses <code>Html.BeginChameleonEditor</code> for a composable view.</p>
+        @s.FieldFor(x => x.RequiredStringField)
+        @Html.EditorFor(x => x.Child)
+    }
+}

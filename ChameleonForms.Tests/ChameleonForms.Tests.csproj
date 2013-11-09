@@ -149,6 +149,7 @@
     <Compile Include="FieldGenerator\Handlers\DefaultHandlerTests.cs" />
     <Compile Include="FieldGenerator\Handlers\DateTimeHandlerTests.cs" />
     <Compile Include="FieldGenerator\Handlers\FieldGeneratorHandlerTest.cs" />
+    <Compile Include="Form\EditorFormIntegrationTests.cs" />
     <Compile Include="Form\FormIntegrationTests.cs" />
     <Compile Include="FormTests.cs" />
     <Compile Include="Helpers\AutoSubstituteHelper.cs" />

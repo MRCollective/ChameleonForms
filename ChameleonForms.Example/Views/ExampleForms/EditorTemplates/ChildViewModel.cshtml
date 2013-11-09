@@ -1,0 +1,10 @@
+﻿@model ChildViewModel
+
+@using (var f = Html.BeginChameleonEditor())
+{
+    using (var s = f.BeginSection("Editor for Child"))
+    {
+        @s.FieldFor(x => x.ChildField)
+        @s.FieldFor(x => x.SomeEnum).AsRadioList()
+    }
+}
