@@ -77,9 +77,9 @@
 
 @using (var form = Html.BeginChameleonForm("/random", FormMethod.Get))
 {
-    using (var s = form.BeginSection("Html.EditorFor and Html.BeginChameleonEditor"))
+    using (var s = form.BeginSection("Html.EditorFor and Html.BeginChameleonFormContext"))
     {
-        <p>This demonstrates using an editor template (<code>Html.EditorFor</code>) that uses <code>Html.BeginChameleonEditor</code> for a composable view.</p>
+        <p>This demonstrates using an editor template (<code>Html.EditorFor</code>) that uses <code>Html.BeginChameleonFormContext</code> for a composable view.</p>
         @s.FieldFor(x => x.RequiredStringField)
         @Html.EditorFor(x => x.Child)
     }

@@ -119,20 +119,20 @@ namespace ChameleonForms
         /// Constructs a <see cref="Form{TModel,TTemplate}"/> object for use in a partial view, editor template, or display template. This uses the default form template renderer with the form begin and end parts excluded from the rendering. 
         /// </summary>
         /// <example>
-        /// @using (var f = Html.BeginChameleonEditor()) {
+        /// @using (var f = Html.BeginChameleonFormContext()) {
         ///     ...
         /// }</example>
         /// <typeparam name="TModel">The view model for the current view</typeparam>
         /// <param name="helper">The HTML Helper for the current view</param>
         /// <returns>A <see cref="Form{TModel,TTemplate}"/> object with an instance of the default form template renderer, which will not render the form begin and end parts.</returns>
-        public static IForm<TModel, IFormTemplate> BeginChameleonEditor<TModel>(this HtmlHelper<TModel> helper)
+        public static IForm<TModel, IFormTemplate> BeginChameleonFormContext<TModel>(this HtmlHelper<TModel> helper)
         {
-            return new EditorForm<TModel, IFormTemplate>(helper, FormTemplate.Default);
+            return new ContextForm<TModel, IFormTemplate>(helper, FormTemplate.Default);
         }
 
-        private class EditorForm<TModel, TTemplate> : Form<TModel, TTemplate> where TTemplate : IFormTemplate
+        private class ContextForm<TModel, TTemplate> : Form<TModel, TTemplate> where TTemplate : IFormTemplate
         {
-            public EditorForm(HtmlHelper<TModel> helper, TTemplate template)
+            public ContextForm(HtmlHelper<TModel> helper, TTemplate template)
                 : base(helper, template, "", FormMethod.Get, null, null)
             {
             }
