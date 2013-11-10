@@ -85,6 +85,16 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
+        public void Add_sanitised_id()
+        {
+            var h = new HtmlAttributes();
+
+            h.Id("Model.Id");
+
+            Assert.That(h.ToHtmlString(), Is.EqualTo(" id=\"Model_Id\""));
+        }
+
+        [Test]
         public void Make_readonly()
         {
             var h = new HtmlAttributes(@class => "class1");
