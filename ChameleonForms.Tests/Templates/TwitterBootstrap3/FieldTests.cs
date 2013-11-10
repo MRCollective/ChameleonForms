@@ -58,7 +58,28 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
                 .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
                 .WithHint(new HtmlString("<hint>"))
-                .AsInputGroup()
+                .AsInputGroup() // This shouldn't take effect since we haven't specified this field can be an input group
+                .ToReadonly(),
+                false
+            );
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Output_field_with_prepended_and_appended_html_when_allowed_input_group()
+        {
+            var t = new TwitterBootstrapFormTemplate();
+            var metadata = new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), () => null, typeof(object), "");
+            metadata.IsRequired = true;
+            var fc = new FieldConfiguration();
+            fc.Bag.CanBeInputGroup = true;
+
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), metadata, fc
+                .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
+                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
+                .WithHint(new HtmlString("<hint>"))
+                .AsInputGroup() // This shouldn't take effect since we haven't specified this field can be an input group
                 .ToReadonly(),
                 false
             );

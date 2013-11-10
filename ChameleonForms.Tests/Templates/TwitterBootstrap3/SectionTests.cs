@@ -15,13 +15,13 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginSection(new HtmlString("Section Title"), new HtmlString("<p>hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
+            var result = t.BeginSection(new HtmlString("Section Heading"), new HtmlString("<p>hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
 
         [Test]
-        public void Begin_section_without_leading_html_or_title()
+        public void Begin_section_without_leading_html_or_heading()
         {
             var t = new TwitterBootstrapFormTemplate();
 
@@ -41,7 +41,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         }
 
         [Test]
-        public void Begin_nested_section_without_leading_html_or_title()
+        public void Begin_nested_section_without_leading_html_or_heading()
         {
             var t = new TwitterBootstrapFormTemplate();
 
@@ -55,7 +55,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginNestedSection(new HtmlString("Section Title"), new HtmlString("<p>Hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
+            var result = t.BeginNestedSection(new HtmlString("Section Heading"), new HtmlString("<p>Hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

@@ -9,11 +9,11 @@
 @:    </form>
 }
 
-@helper BeginSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
+@helper BeginSection(IHtmlString heading, IHtmlString leadingHtml, HtmlAttributes htmlAttributes) {
     @:    <fieldset@(htmlAttributes)>
-    if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
+    if (heading != null && !string.IsNullOrWhiteSpace(heading.ToString()))
     {
-@:        <legend>@title</legend>
+@:        <legend>@heading</legend>
     }
     if (leadingHtml != null && !string.IsNullOrWhiteSpace(leadingHtml.ToString()))
     {
@@ -25,18 +25,19 @@
 @:    </fieldset>
 }
 
-@helper BeginNestedSection(IHtmlString title, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
+@helper BeginNestedSection(IHtmlString heading, IHtmlString leadingHtml, HtmlAttributes htmlAttributes)
 {
-    @:    <div class="panel panel-default">
-    if (title != null && !string.IsNullOrWhiteSpace(title.ToString()))
+    htmlAttributes.AddClass("panel panel-default");
+@:    <div@(htmlAttributes)>
+    if (heading != null && !string.IsNullOrWhiteSpace(heading.ToString()))
     {
-@:        <div class="panel-heading">@title</div>
+@:        <div class="panel-heading">@heading</div>
     }
 
 @:        <div class="panel-body">
     if (leadingHtml != null && !string.IsNullOrWhiteSpace(leadingHtml.ToString()))
     {
-        @leadingHtml    
+        @leadingHtml
     }
 }
 
@@ -78,9 +79,9 @@
     if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="help-block form-hint">@fieldConfiguration.Hint</div>}
 }
 
-@helper GetCheckboxRequiredDesignator(bool isRequired, bool isCheckboxControl, IHtmlString requiredDesignator) {
-    if(!isRequired) { return; }
-    if(isCheckboxControl) {@requiredDesignator}
+@helper GetPostElementRequiredDesignator(bool isRequired, bool displayDesignator, IHtmlString requiredDesignator) {
+    if (!isRequired) { return; }
+    if (displayDesignator) {@requiredDesignator}
 }
 
 @helper GetInputGroupRequiredDesignator(bool isRequired, bool isInputGroup, IHtmlString requiredDesignator) {
@@ -92,13 +93,13 @@
 <em class="required" title="Required">&lowast;</em>
 }
 
-@helper GetLabelHtml(IHtmlString labelHtml, bool hasLabel, bool isCheckboxControl, bool isRadioOrCheckboxList, bool isRequired, IHtmlString requiredDesignator) {
+@helper GetLabelHtml(IHtmlString labelHtml, bool hasLabel, bool isCheckboxControl, bool displayDesignator, bool isRequired, IHtmlString requiredDesignator) {
     var wrapLabel = !hasLabel && !isCheckboxControl;
     if (wrapLabel) {
         @:<span class="control-label">
     }
     @labelHtml
-    if (isRadioOrCheckboxList && isRequired) {
+    if (displayDesignator && isRequired) {
         @requiredDesignator
     }
     if (wrapLabel) {
@@ -108,16 +109,17 @@
 
 @helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, bool isValid, IHtmlString requiredDesignator) {
     var isCheckboxControl = fieldConfiguration.GetBagData<bool>("IsCheckboxControl");
+    var canBeInputGroup = fieldConfiguration.GetBagData<bool>("CanBeInputGroup");
     var isRadioOrCheckboxList = fieldConfiguration.GetBagData<bool>("IsRadioOrCheckboxList");
     var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
-    var isInputGroup = (!isCheckboxControl && !isRadioOrCheckboxList && isRequired) || fieldConfiguration.GetBagData<bool>("DisplayAsInputGroup");
+    var isInputGroup = canBeInputGroup && (isRequired || fieldConfiguration.GetBagData<bool>("DisplayAsInputGroup"));
 @:            <div class="@(isCheckboxControl ? "checkbox" : "form-group")@(!isValid ? " has-error" : string.Empty)">
-              @GetLabelHtml(labelHtml, fieldConfiguration.HasLabel, isCheckboxControl, isRadioOrCheckboxList, isRequired, requiredDesignator)
+              @GetLabelHtml(labelHtml, fieldConfiguration.HasLabel, isCheckboxControl, isRadioOrCheckboxList || (!isCheckboxControl && !isInputGroup), isRequired, requiredDesignator)
               if (isInputGroup)
               {
 @:            <div class="input-group">
               }
-@:            @GetPrependedHtml(fieldConfiguration, isInputGroup)@elementHtml@GetCheckboxRequiredDesignator(isRequired, isCheckboxControl, requiredDesignator)@GetAppendedHtml(fieldConfiguration, isInputGroup)@GetInputGroupRequiredDesignator(isRequired, isInputGroup, requiredDesignator)
+@:            @GetPrependedHtml(fieldConfiguration, isInputGroup)@elementHtml@GetPostElementRequiredDesignator(isRequired, isCheckboxControl, requiredDesignator)@GetAppendedHtml(fieldConfiguration, isInputGroup)@GetInputGroupRequiredDesignator(isRequired, isInputGroup, requiredDesignator)
               if (isInputGroup)
               {
 @:            </div>
