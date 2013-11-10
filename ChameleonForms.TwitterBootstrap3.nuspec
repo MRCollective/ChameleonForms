@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>
-       ChameleonForms.TwitterBootstrap
+       ChameleonForms.TwitterBootstrap3
     </id>
     <version>
        0.1.0.0
@@ -29,11 +29,11 @@
        en-US
     </language>
     <dependencies>
-      <dependency id="ChameleonForms" version="0.1.0.0" />
+      <dependency id="ChameleonForms" version="1.0.0.0" />
       <dependency id="bootstrap" version="3.0.2" />
     </dependencies>
   </metadata>
   <files>
-     <file src="AppStart.TwitterBootstrap.cs.pp" target="content\App_Start\ConfigureTwitterBootstrap.cs.pp" />
+     <file src="AppStart.TwitterBootstrap.cs.pp" target="content\App_Start\ConfigureChameleonTwitterBootstrap.cs.pp" />
   </files>
 </package>

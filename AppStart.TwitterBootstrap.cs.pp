@@ -5,7 +5,7 @@ using ChameleonForms.Templates.TwitterBootstrap3;
  
 namespace $rootnamespace$.App_Start
 {
-    public static class ConfigureTwitterBootstrap
+    public static class ConfigureChameleonTwitterBootstrap
     {
         public static void Start()
         {
