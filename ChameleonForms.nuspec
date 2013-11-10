@@ -36,14 +36,14 @@
     </dependencies>
   </metadata>
   <files>
-     <file src="bin\Release\ChameleonForms.dll" target="lib\NET40" />
-     <file src="bin\Release\ChameleonForms.pdb" target="lib\NET40" />
-     <file src="bin\Release\ChameleonForms.XML" target="lib\NET40" />
-     <file src="..\AppStart.cs.pp" target="content\App_Start\RegisterChameleonFormsComponents.cs.pp" />
-     <file src="..\web.config.transform" target="content\Views" />
-     <file src="..\ChameleonForms.Example\Scripts\jquery.validate.unobtrusive.chameleon.js" target="content\Scripts\jquery.validate.unobtrusive.chameleon.js" />
-     <file src="..\ChameleonForms.Example\Scripts\jquery.validate.unobtrusive.twitterbootstrap.js" target="content\Scripts\jquery.validate.unobtrusive.twitterbootstrap.js" />
-     <file src="..\ChameleonForms.Example\Content\chameleonforms-twitterbootstrap.css" target="content\Content\chameleonforms-twitterbootstrap.css" />
-     <file src="readme.txt" target="" />
+     <file src="ChameleonForms\bin\Release\ChameleonForms.dll" target="lib\NET40" />
+     <file src="ChameleonForms\bin\Release\ChameleonForms.pdb" target="lib\NET40" />
+     <file src="ChameleonForms\bin\Release\ChameleonForms.XML" target="lib\NET40" />
+     <file src="AppStart.cs.pp" target="content\App_Start\RegisterChameleonFormsComponents.cs.pp" />
+     <file src="web.config.transform" target="content\Views" />
+     <file src="ChameleonForms.Example\Scripts\jquery.validate.unobtrusive.chameleon.js" target="content\Scripts\jquery.validate.unobtrusive.chameleon.js" />
+     <file src="ChameleonForms.Example\Scripts\jquery.validate.unobtrusive.twitterbootstrap.js" target="content\Scripts\jquery.validate.unobtrusive.twitterbootstrap.js" />
+     <file src="ChameleonForms.Example\Content\chameleonforms-twitterbootstrap.css" target="content\Content\chameleonforms-twitterbootstrap.css" />
+     <file src="ChameleonForms\readme.txt" target="" />
   </files>
 </package>
