@@ -1,14 +1,12 @@
 ﻿using ChameleonForms.Component;
-using ChameleonForms.Component.Config;
-using ChameleonForms.Enums;
 using Humanizer;
 
 namespace ChameleonForms.Templates.TwitterBootstrap3
 {
     /// <summary>
-    /// Extension methods on <see cref="HtmlAttributes"/> for Twitter Bootstrap template.
+    /// Extension methods on <see cref="HtmlAttributes"/> for the Twitter Bootstrap 3 template.
     /// </summary>
-    public static class HtmlAttributesExtensions
+    public static class ButtonHtmlAttributesExtensions
     {
         /// <summary>
         /// Adds the given icon to the start of a navigation button.
@@ -56,20 +54,6 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             if (size != ButtonSize.Default)
                 attrs.AddClass(string.Format("btn-{0}", size.Humanize()));
             return attrs;
-        }
-
-        /// <summary>
-        /// Outputs the field in an input group using prepended and appended HTML.
-        /// </summary>
-        /// <example>
-        /// @n.Field(labelHtml, elementHtml, validationHtml, metadata, new FieldConfiguration().Prepend(beforeHtml).Append(afterHtml).AsInputGroup(), false)
-        /// </example>
-        /// <param name="fc">The configuration for a field</param>
-        /// <returns>The field configuration object to allow for method chaining</returns>
-        public static IFieldConfiguration AsInputGroup(this IFieldConfiguration fc)
-        {
-            fc.Bag.DisplayAsInputGroup = true;
-            return fc;
         }
     }
 }
