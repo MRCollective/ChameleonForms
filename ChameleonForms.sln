@@ -17,8 +17,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{950DEBD6-FCA3-47B8-9E1F-0005E79BD664}"
 	ProjectSection(SolutionItems) = preProject
 		AppStart.cs.pp = AppStart.cs.pp
+		AppStart.TwitterBootstrap.cs.pp = AppStart.TwitterBootstrap.cs.pp
 		BREAKING_CHANGES.md = BREAKING_CHANGES.md
 		ChameleonForms.nuspec = ChameleonForms.nuspec
+		ChameleonForms.TwitterBootstrap.nuspec = ChameleonForms.TwitterBootstrap.nuspec
 		LICENSE = LICENSE
 		logo.png = logo.png
 		README.md = README.md
