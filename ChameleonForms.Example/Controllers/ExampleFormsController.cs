@@ -202,6 +202,8 @@ namespace ChameleonForms.Example.Controllers
 
         public decimal Decimal { get; set; }
 
+        public int Int { get; set; }
+
         public int? NullableInt { get; set; }
 
         public bool Boolean { get; set; }
