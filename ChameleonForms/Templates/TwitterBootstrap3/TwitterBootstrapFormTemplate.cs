@@ -102,7 +102,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
 
         public override IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
         {
-            return TwitterBootstrapHtmlHelpers.BeginMessage(messageType.ToTwitterAlertType(), heading);
+            return TwitterBootstrapHtmlHelpers.BeginMessage(messageType.ToTwitterEmphasisStyle(), heading);
         }
 
         public override IHtmlString EndMessage()

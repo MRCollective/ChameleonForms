@@ -35,7 +35,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
 
     internal static class TwitterAlertTypeConversion
     {
-        internal static EmphasisStyle ToTwitterAlertType(this MessageType messageType)
+        internal static EmphasisStyle ToTwitterEmphasisStyle(this MessageType messageType)
         {
             switch (messageType)
             {
