@@ -149,7 +149,6 @@
     <Compile Include="Templates\TwitterBootstrap3\ButtonHtmlAttributesExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ChameleonForms.nuspec" />
     <None Include="packages.config" />
     <Content Include="Templates\Default\DefaultHtmlHelpers.cshtml">
       <Generator>RazorGenerator</Generator>
