@@ -224,7 +224,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 var attrs = new HtmlAttributes(fieldConfiguration.HtmlAttributes);
                 if (item.Selected)
                     attrs.Attr("checked", "checked");
-                attrs.Attr("id", TagBuilder.CreateSanitizedId(id));
+                attrs.Id(id);
                 if (HasMultipleValues(fieldGenerator))
                     AdjustHtmlForModelState(attrs, fieldGenerator);
                 yield return new HtmlString(string.Format("{0} {1}",

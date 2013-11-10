@@ -74,7 +74,7 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Id(string id)
         {
-            Attr("id", id);
+            Attr("id", TagBuilder.CreateSanitizedId(id));
             return this;
         }
 
