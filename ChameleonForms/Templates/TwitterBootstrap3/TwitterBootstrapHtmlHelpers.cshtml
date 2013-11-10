@@ -64,19 +64,15 @@
 }
 
 @helper GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration, bool isInputGroup) {
-    if (fieldConfiguration != null) {
-        foreach (var html in fieldConfiguration.PrependedHtml) {@GetInputGroupHtml(html, isInputGroup)}
-    }
+    foreach (var html in fieldConfiguration.PrependedHtml) {@GetInputGroupHtml(html, isInputGroup)}
 }
 
 @helper GetAppendedHtml(IReadonlyFieldConfiguration fieldConfiguration, bool isInputGroup) {
-    if (fieldConfiguration != null) {
-        foreach (var html in fieldConfiguration.AppendedHtml) {@GetInputGroupHtml(html, isInputGroup)}
-    }
+    foreach (var html in fieldConfiguration.AppendedHtml) {@GetInputGroupHtml(html, isInputGroup)}
 }
 
 @helper GetHint(IReadonlyFieldConfiguration fieldConfiguration) {
-    if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="help-block form-hint">@fieldConfiguration.Hint</div>}
+    if (fieldConfiguration.Hint != null) {<div class="help-block form-hint">@fieldConfiguration.Hint</div>}
 }
 
 @helper GetPostElementRequiredDesignator(bool isRequired, bool displayDesignator, IHtmlString requiredDesignator) {

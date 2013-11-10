@@ -48,19 +48,15 @@
 }
 
 @helper GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
-    if (fieldConfiguration != null) {
-        foreach (var html in fieldConfiguration.PrependedHtml) {@html}
-    }
+    foreach (var html in fieldConfiguration.PrependedHtml) {@html}
 }
 
 @helper GetAppendedHtml(IReadonlyFieldConfiguration fieldConfiguration) {
-    if (fieldConfiguration != null) {
-        foreach (var html in fieldConfiguration.AppendedHtml) {@html}
-    }
+    foreach (var html in fieldConfiguration.AppendedHtml) {@html}
 }
 
 @helper GetHint(IReadonlyFieldConfiguration fieldConfiguration) {
-    if (fieldConfiguration != null && fieldConfiguration.Hint != null) {<div class="hint">@fieldConfiguration.Hint</div>}
+    if (fieldConfiguration.Hint != null) {<div class="hint">@fieldConfiguration.Hint</div>}
 }
 
 @helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, IHtmlString requiredDesignator) {
