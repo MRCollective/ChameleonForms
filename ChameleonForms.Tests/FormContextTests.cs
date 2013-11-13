@@ -13,7 +13,7 @@ using NUnit.Framework;
 namespace ChameleonForms.Tests
 {
     [TestFixture]
-    class ContextFormShould
+    class FormContextShould
     {
         [SetUp]
         public void Setup()

@@ -10,7 +10,7 @@ namespace ChameleonForms.Tests.Form
 {
     [TestFixture]
     [UseReporter(typeof (DiffReporter))]
-    internal class IntegratedEditorFormShould
+    internal class IntegratedFormContextShould
     {
         [SetUp]
         public void Setup()
