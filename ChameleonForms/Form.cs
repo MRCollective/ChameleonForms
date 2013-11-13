@@ -59,9 +59,14 @@ namespace ChameleonForms
             HtmlHelper = helper;
             Template = template;
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
+            WriteBeginForm(action, method, htmlAttributes, enctype);
+            // ReSharper restore DoNotCallOverridableMethodsInConstructor
+        }
+
+        protected virtual void WriteBeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        {
             // Write method is virtual to allow it to be mocked for testing
             Write(Template.BeginForm(action, method, htmlAttributes, enctype));
-            // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
 
         public virtual void Write(IHtmlString htmlString)
@@ -75,6 +80,11 @@ namespace ChameleonForms
         }
 
         public void Dispose()
+        {
+            WriteEndForm();
+        }
+
+        protected virtual void WriteEndForm()
         {
             Write(Template.EndForm());
         }
@@ -103,6 +113,37 @@ namespace ChameleonForms
         public static IForm<TModel, IFormTemplate> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             return new Form<TModel, IFormTemplate>(helper, FormTemplate.Default, action, method, htmlAttributes, enctype);
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="Form{TModel,TTemplate}"/> object for use in a partial view, editor template, or display template. This uses the default form template renderer with the form begin and end parts excluded from the rendering. 
+        /// </summary>
+        /// <example>
+        /// @using (var f = Html.BeginChameleonFormContext()) {
+        ///     ...
+        /// }</example>
+        /// <typeparam name="TModel">The view model for the current view</typeparam>
+        /// <param name="helper">The HTML Helper for the current view</param>
+        /// <returns>A <see cref="Form{TModel,TTemplate}"/> object with an instance of the default form template renderer, which will not render the form begin and end parts.</returns>
+        public static IForm<TModel, IFormTemplate> BeginChameleonFormContext<TModel>(this HtmlHelper<TModel> helper)
+        {
+            return new FormContext<TModel, IFormTemplate>(helper, FormTemplate.Default);
+        }
+
+        private class FormContext<TModel, TTemplate> : Form<TModel, TTemplate> where TTemplate : IFormTemplate
+        {
+            public FormContext(HtmlHelper<TModel> helper, TTemplate template)
+                : base(helper, template, "", FormMethod.Get, null, null)
+            {
+            }
+
+            protected override void WriteBeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+            {
+            }
+
+            protected override void WriteEndForm()
+            {
+            }
         }
     }
 }

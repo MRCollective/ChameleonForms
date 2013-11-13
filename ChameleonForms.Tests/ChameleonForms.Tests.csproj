@@ -132,6 +132,7 @@
     <Compile Include="Component\FieldTests.cs" />
     <Compile Include="Component\FormComponentTests.cs" />
     <Compile Include="Component\SectionTests.cs" />
+    <Compile Include="FormContextTests.cs" />
     <Compile Include="ExtensionsTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGeneratorTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\BooleanTests.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="FieldGenerator\Handlers\DefaultHandlerTests.cs" />
     <Compile Include="FieldGenerator\Handlers\DateTimeHandlerTests.cs" />
     <Compile Include="FieldGenerator\Handlers\FieldGeneratorHandlerTest.cs" />
+    <Compile Include="Form\FormContextIntegrationTests.cs" />
     <Compile Include="Form\FormIntegrationTests.cs" />
     <Compile Include="FormTests.cs" />
     <Compile Include="Helpers\AutoSubstituteHelper.cs" />
