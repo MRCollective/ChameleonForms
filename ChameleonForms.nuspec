@@ -5,7 +5,7 @@
        ChameleonForms
     </id>
     <version>
-       0.1.0.0
+       1.0.0.0
     </version>
     <authors>
        Robert Moore, Matthew Davies
@@ -31,7 +31,7 @@
     </language>
     <dependencies>
       <dependency id="Microsoft.AspNet.Mvc" version="4.0.20710.0" />
-      <dependency id="Humanizer" version="0.5" />
+      <dependency id="Humanizer" version="1.0" />
       <dependency id="WebActivator" version="1.5" />
     </dependencies>
   </metadata>
