@@ -129,18 +129,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="Content\bootstrap\css\bootstrap.css" />
-    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
-    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\bootstrap\js\bootstrap.js" />
-    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\chameleonforms-twitterbootstrap.css" />
     <Content Include="Content\styles.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
