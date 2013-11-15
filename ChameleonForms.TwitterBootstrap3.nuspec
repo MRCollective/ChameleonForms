@@ -5,7 +5,7 @@
        ChameleonForms.TwitterBootstrap3
     </id>
     <version>
-       0.1.0.0
+       1.0.0
     </version>
     <authors>
        Robert Moore, Matthew Davies
@@ -29,11 +29,13 @@
        en-US
     </language>
     <dependencies>
-      <dependency id="ChameleonForms" version="1.0.0.0" />
-      <dependency id="bootstrap" version="3.0.2" />
+      <dependency id="ChameleonForms" version="1.0" />
+      <dependency id="bootstrap" version="3.0" />
     </dependencies>
   </metadata>
   <files>
-     <file src="AppStart.TwitterBootstrap.cs.pp" target="content\App_Start\ConfigureChameleonTwitterBootstrap.cs.pp" />
+    <file src="AppStart.TwitterBootstrap.cs.pp" target="content\App_Start\ConfigureChameleonTwitterBootstrap.cs.pp" />
+    <file src="ChameleonForms.Example\Scripts\jquery.validate.unobtrusive.twitterbootstrap.js" target="content\Scripts\jquery.validate.unobtrusive.twitterbootstrap.js" />
+    <file src="ChameleonForms.Example\Content\chameleonforms-twitterbootstrap.css" target="content\Content\chameleonforms-twitterbootstrap.css" />
   </files>
 </package>
