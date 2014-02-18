@@ -31,7 +31,7 @@
     using (Html.BeginSection("Additional details"))
     {
         @Html.EditorFor(m => m.Bio)
-        @Html.EditorFor(m => m.Homepage, new {placeholder = "http://"})
+        @Html.EditorFor(m => m.Homepage, new {placeholder = "http://", autofocus = "autofocus"})
     }
     
     <div class="action_message">

@@ -21,7 +21,8 @@ namespace ChameleonForms.Tests.Component.Config
             .Readonly()
             .WithFalseAs("FALSE")
             .WithTrueAs("TRUE")
-            .WithoutLabel();
+            .WithoutLabel()
+            .Autofocus();
 
         [Test]
         public void ProxyAllPublicGetterPropertiesOnIFieldConfiguration()

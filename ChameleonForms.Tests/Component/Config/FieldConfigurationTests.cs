@@ -24,8 +24,8 @@ namespace ChameleonForms.Tests.Component.Config
             var fc = Field.Configure()
                 .Attr("data-attr1", "value")
                 .Attr(data_attr2 => "value")
-                .Attrs(new Dictionary<string, object> {{"data-attr3", "value"}})
-                .Attrs(new {data_attr4 = "value"})
+                .Attrs(new Dictionary<string, object> { { "data-attr3", "value" } })
+                .Attrs(new { data_attr4 = "value" })
                 .Attrs(data_attr5 => "value")
                 .AddClass("someclass");
 
@@ -92,6 +92,15 @@ namespace ChameleonForms.Tests.Component.Config
         {
             var fc = Field.Configure()
                 .Placeholder("Some placeholder text");
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
+        public void Set_autofocus_attribute()
+        {
+            var fc = Field.Configure()
+                .Autofocus();
 
             HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
         }

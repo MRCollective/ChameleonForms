@@ -116,6 +116,12 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Placeholder(string placeholderText);
 
         /// <summary>
+        /// Sets the focus on the field
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Autofocus();
+
+        /// <summary>
         /// Gets any text that has been set for an inline label.
         /// </summary>
         IHtmlString InlineLabelText { get; }
@@ -474,6 +480,12 @@ namespace ChameleonForms.Component.Config
         public IFieldConfiguration Placeholder(string placeholderText)
         {
             Attr("placeholder", placeholderText);
+            return this;
+        }
+
+        public IFieldConfiguration Autofocus()
+        {
+            Attr("autofocus", "autofocus");
             return this;
         }
 
