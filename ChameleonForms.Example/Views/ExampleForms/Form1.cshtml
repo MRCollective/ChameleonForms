@@ -18,7 +18,7 @@
     <p>@f.FieldElementFor(m => m.RequiredStringField)</p>
     using (var s = f.BeginSection("My Section!", InstructionalText(), new{@class = "aClass"}.ToHtmlAttributes()))
     {
-        using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value")))
+        using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value").Autofocus()))
         {
             @ff.FieldFor(m => m.NestedField).Attr("data-attr1", "value")
             @ff.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")

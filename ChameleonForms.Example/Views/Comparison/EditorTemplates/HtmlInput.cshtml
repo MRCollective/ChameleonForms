@@ -7,5 +7,9 @@
     {
         attrs["placeholder"] = ViewData["placeholder"];
     }
+    if (ViewData["autofocus"] != null)
+    {
+        attrs["autofocus"] = "autofocus";
+    }
 }
 @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, attrs)
