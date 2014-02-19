@@ -116,7 +116,7 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Placeholder(string placeholderText);
 
         /// <summary>
-        /// Sets the focus on the field
+        /// The field will automatically receive focus on page load.
         /// </summary>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Autofocus();
