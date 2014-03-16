@@ -12,12 +12,14 @@ namespace ChameleonForms
     /// </summary>
     public class HumanizedLabels : DataAnnotationsModelMetadataProvider
     {
+        internal LetterCasing Casing { get; set; }
+
         /// <summary>
         /// Register the HumanizedLabels metadata provider as the current Model Metadata Provider.
         /// </summary>
-        public static void Register()
+        public static void Register(LetterCasing casing = LetterCasing.Sentence)
         {
-            ModelMetadataProviders.Current = new HumanizedLabels();
+            ModelMetadataProviders.Current = new HumanizedLabels() { Casing = casing };
         }
 
         protected override ModelMetadata CreateMetadata(IEnumerable<Attribute> attributes, Type containerType,
@@ -29,7 +31,7 @@ namespace ChameleonForms
             // Auto-sentence case for display name
             if (metadata.DisplayName == null && metadata.PropertyName != null)
             {
-                metadata.DisplayName = metadata.PropertyName.Humanize(LetterCasing.Sentence);
+                metadata.DisplayName = metadata.PropertyName.Humanize(Casing);
             }
 
             return metadata;

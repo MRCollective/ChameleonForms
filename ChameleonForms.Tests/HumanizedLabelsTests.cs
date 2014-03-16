@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Web.Mvc;
+using Humanizer;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests
@@ -15,6 +16,20 @@ namespace ChameleonForms.Tests
             var m = ModelMetadataProviders.Current.GetMetadataForProperty(null, typeof(NonHumanizedViewModel), "SomeFieldName");
 
             Assert.That(m.DisplayName, Is.EqualTo("Some field name"));
+        }
+
+        [Test]
+        [TestCase(LetterCasing.AllCaps, "SOME FIELD NAME")]
+        [TestCase(LetterCasing.LowerCase, "some field name")]
+        [TestCase(LetterCasing.Sentence, "Some field name")]
+        [TestCase(LetterCasing.Title, "Some Field Name")]
+        public void Humanize_model_labels_with_custom_casing(LetterCasing casing, string expected)
+        {
+            HumanizedLabels.Register(casing);
+
+            var m = ModelMetadataProviders.Current.GetMetadataForProperty(null, typeof(NonHumanizedViewModel), "SomeFieldName");
+
+            Assert.That(m.DisplayName, Is.EqualTo(expected));
         }
 
         [Test]
