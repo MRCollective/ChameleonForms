@@ -1,5 +1,6 @@
 ﻿@using ChameleonForms.Example.Forms.Components
 @using ChameleonForms.Templates.TwitterBootstrap3
+@using ChameleonForms.Component.Config
 @model ViewModelExample
 
 @{
@@ -15,12 +16,12 @@
 @using (var f = Html.BeginChameleonForm(method: FormMethod.Post, enctype: EncType.Multipart))
 {
     <p>@f.LabelFor(m => m.SomeCheckbox).Label("Are you ready for: ") @f.FieldElementFor(m => m.SomeCheckbox) @f.ValidationMessageFor(m => m.SomeCheckbox)</p>
-    <p>@f.FieldElementFor(m => m.RequiredStringField)</p>
+    <p>@f.FieldElementFor(m => m.RequiredStringField).TabIndex(4)</p>
     using (var s = f.BeginSection("My Section!", InstructionalText(), new{@class = "aClass"}.ToHtmlAttributes()))
     {
-        using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value")))
+        using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value").TabIndex(3)))
         {
-            @ff.FieldFor(m => m.NestedField).Attr("data-attr1", "value")
+            @ff.FieldFor(m => m.NestedField).Attr("data-attr1", "value").TabIndex(2)
             @ff.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
         }
         @s.FieldFor(m => m.SomeCheckbox).AsDropDown()
@@ -29,7 +30,7 @@
             @ss.FieldFor(m => m.FileUpload).Attr("data-attr1", "value")
         }
         @s.FieldFor(m => m.RequiredStringField).OverrideFieldHtml(new MvcHtmlString("Custom html <b>she-yeah</b>!"))
-        @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label")
+        @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label").AutoFocus().TabIndex(1)
         @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
         @s.FieldFor(m => m.SomeCheckbox).AsRadioList().WithTrueAs("True").WithFalseAs("False")
         @s.FieldFor(m => m.ListId)

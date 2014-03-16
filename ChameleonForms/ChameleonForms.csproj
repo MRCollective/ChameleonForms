@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ExistsInAttribute.cs" />
     <Compile Include="Component\Config\FieldConfiguration.cs" />
+    <Compile Include="Component\Config\FieldConfigurationExtensions.cs" />
     <Compile Include="Component\Config\ReadonlyFieldConfiguration.cs" />
     <Compile Include="Component\FieldParent.cs" />
     <Compile Include="Component\Navigation.cs" />

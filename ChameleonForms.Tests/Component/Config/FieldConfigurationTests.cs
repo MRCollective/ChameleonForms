@@ -97,6 +97,22 @@ namespace ChameleonForms.Tests.Component.Config
         }
 
         [Test]
+        public void Set_autofocus_attribute()
+        {
+            var fc = Field.Configure().AutoFocus();
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
+        public void Set_tabindex_attribute()
+        {
+            var fc = Field.Configure().TabIndex(44);
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
         public void Set_inline_label()
         {
             var fc = Field.Configure()
