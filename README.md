@@ -1,4 +1,4 @@
-﻿ChameleonForms
+ChameleonForms
 ==============
 
 This library will shape-shift your forms experience in ASP.NET MVC.
@@ -63,3 +63,5 @@ Roadmap
 -------
 
 Feel free to check out our [Trello board](https://trello.com/b/fSuyhwNZ). It gives some idea as to the eventual goals we have for the project and the current backlog we are working against. Beware that it's pretty rough around the edges at the moment.
+
+Logo by [Jason Roberts](https://twitter.com/robertsjason)
