@@ -6,9 +6,17 @@ ObjectMother.TimeFormats = {
         ["h:mm:sstt", "1:59:59pm"],
         ["hh:mmtt", "01:59AM"],
         ["hh:mm:sstt", "01:59:59PM"],
+        ["H:mm", "0:00"],
+        ["H:mm", "0:59"],
         ["H:mm", "13:59"],
+        ["H:mm:ss", "0:00:00"],
+        ["H:mm:ss", "0:59:59"],
         ["H:mm:ss", "13:59:59"],
+        ["HH:mm", "00:00"],
+        ["HH:mm", "00:59"],
         ["HH:mm", "13:59"],
+        ["HH:mm:ss", "00:00:00"],
+        ["HH:mm:ss", "00:59:59"],
         ["HH:mm:ss", "13:59:59"]
     ],
     Invalid: [
@@ -35,10 +43,8 @@ ObjectMother.TimeFormats = {
         ["hh:mm:sstt", "01:59:59"],
         ["hh:mm:sstt", "01:59:59xx"],
         ["H:mm", "24:59"],
-        ["H:mm", "0:59"],
         ["H:mm", "13:60"],
         ["H:mm:ss", "24:59:59"],
-        ["H:mm:ss", "0:59:59"],
         ["H:mm:ss", "13:60:59"],
         ["H:mm:ss", "13:59:60"],
         ["HH:mm", "24:59"],
@@ -121,11 +127,11 @@ ObjectMother.DateFormats = {
     var invalidTime = [];
     for (i in ObjectMother.DateFormats.Valid)
         for (j in ObjectMother.TimeFormats.Invalid)
-            invalidDate.push([ObjectMother.DateFormats.Valid[i][0] + " " + ObjectMother.TimeFormats.Invalid[j][0], ObjectMother.DateFormats.Valid[i][1] + " " + ObjectMother.TimeFormats.Invalid[j][1]]);
+            invalidTime.push([ObjectMother.DateFormats.Valid[i][0] + " " + ObjectMother.TimeFormats.Invalid[j][0], ObjectMother.DateFormats.Valid[i][1] + " " + ObjectMother.TimeFormats.Invalid[j][1]]);
     var invalidDateAndTime = [];
     for (i in ObjectMother.DateFormats.Invalid)
         for (j in ObjectMother.TimeFormats.Invalid)
-            invalidDate.push([ObjectMother.DateFormats.Invalid[i][0] + " " + ObjectMother.TimeFormats.Invalid[j][0], ObjectMother.DateFormats.Invalid[i][1] + " " + ObjectMother.TimeFormats.Invalid[j][1]]);
+            invalidDateAndTime.push([ObjectMother.DateFormats.Invalid[i][0] + " " + ObjectMother.TimeFormats.Invalid[j][0], ObjectMother.DateFormats.Invalid[i][1] + " " + ObjectMother.TimeFormats.Invalid[j][1]]);
 
     om.DateTimeFormats = {
         Valid: valid,

@@ -147,11 +147,9 @@
         var minute = match[timeParser.minuteIndex] * 1;
         var is12Hour = timeParser.is12HourTime;
 
-        if (hour < 1)
+        if (is12Hour && (hour < 1 || hour > 12))
             return false;
-        if (is12Hour && hour > 12)
-            return false;
-        if (!is12Hour && hour > 23)
+        if (!is12Hour && (hour < 0 || hour > 23))
             return false;
         if (minute < 0 || minute > 59)
             return false;
