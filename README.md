@@ -1,6 +1,8 @@
 ChameleonForms
 ==============
 
+![Chameleon Forms logo](https://raw.githubusercontent.com/MRCollective/ChameleonForms/master/logo.png)
+
 This library will shape-shift your forms experience in ASP.NET MVC.
 
 ChameleonForms takes away the pain and repetition of building forms with ASP.NET MVC by following a philosophy of:
