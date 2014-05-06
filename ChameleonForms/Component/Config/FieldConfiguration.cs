@@ -351,6 +351,18 @@ namespace ChameleonForms.Component.Config
         string LabelClasses { get; }
 
         /// <summary>
+        /// Specify one or more CSS classes to use for the field container element.
+        /// </summary>
+        /// <param name="class">Any CSS class(es) to use for the field container element</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration AddFieldContainerClass(string @class);
+
+        /// <summary>
+        /// Any CSS class(es) to use for the field container element.
+        /// </summary>
+        string FieldContainerClasses { get; }
+
+        /// <summary>
         /// Specify one or more CSS classes to use for the field validation message.
         /// </summary>
         /// <param name="class">Any CSS class(es) to use for the field validation message</param>
@@ -625,6 +637,16 @@ namespace ChameleonForms.Component.Config
         }
 
         public string LabelClasses { get; private set; }
+
+        public IFieldConfiguration AddFieldContainerClass(string @class)
+        {
+            if (!string.IsNullOrEmpty(FieldContainerClasses))
+                FieldContainerClasses += " ";
+            FieldContainerClasses += @class;
+            return this;
+        }
+
+        public string FieldContainerClasses { get; private set; }
 
         public IFieldConfiguration AddValidationClass(string @class)
         {

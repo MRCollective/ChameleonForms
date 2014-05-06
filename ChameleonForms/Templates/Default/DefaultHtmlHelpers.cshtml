@@ -1,8 +1,7 @@
-﻿@using System.Web.Mvc
+﻿@* Generator: MvcHelper *@
+@using System.Web.Mvc
 @using Component.Config
 @using Enums
-
-@* Generator: MvcHelper *@
 
 @* The @:'s are to stop compilation errors with the Razor engine due to unclosed HTML tags *@
 
@@ -61,7 +60,7 @@
 
 @helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, IHtmlString requiredDesignator) {
 @:            <dt>@labelHtml@(new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? requiredDesignator.ToHtmlString() : ""))</dt>
-@:            <dd>
+@:            <dd@(string.IsNullOrEmpty(fieldConfiguration.FieldContainerClasses) ? new HtmlString(string.Empty) : new HtmlString(" class=\"" + fieldConfiguration.FieldContainerClasses + "\""))>
 @:                @GetPrependedHtml(fieldConfiguration)@elementHtml@GetAppendedHtml(fieldConfiguration)@GetHint(fieldConfiguration) @validationHtml
 }
 
