@@ -442,7 +442,28 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "            <dd");
 
 
 #line 63 "..\..\Templates\Default\DefaultHtmlHelpers.cshtml"
-WebViewPage.WriteTo(@__razor_helper_writer, string.IsNullOrEmpty(fieldConfiguration.FieldContainerClasses) ? new HtmlString(string.Empty) : new HtmlString(" class=\"" + fieldConfiguration.FieldContainerClasses + "\""));
+WebViewPage.WriteTo(@__razor_helper_writer, RenderIfNotEmpty(fieldConfiguration.FieldContainerClasses,item => new System.Web.WebPages.HelperResult(__razor_template_writer => {
+
+#line default
+#line hidden
+
+
+WebViewPage.WriteLiteralTo(@__razor_template_writer, " class=\"");
+
+
+
+#line 63 "..\..\Templates\Default\DefaultHtmlHelpers.cshtml"
+                                               WebViewPage.WriteTo(@__razor_template_writer, fieldConfiguration.FieldContainerClasses);
+
+#line default
+#line hidden
+
+WebViewPage.WriteLiteralTo(@__razor_template_writer, "\"");
+
+
+
+#line 63 "..\..\Templates\Default\DefaultHtmlHelpers.cshtml"
+                                                                                                                                           })));
 
 #line default
 #line hidden
@@ -876,6 +897,36 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "    </ul>\r\n");
 
 
 #line 120 "..\..\Templates\Default\DefaultHtmlHelpers.cshtml"
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult RenderIfNotEmpty(string mayBeEmpty, Func<object, IHtmlString> template) {
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 123 "..\..\Templates\Default\DefaultHtmlHelpers.cshtml"
+                                                                                 
+    if (!string.IsNullOrEmpty(mayBeEmpty)) {
+#line default
+#line hidden
+
+
+#line 124 "..\..\Templates\Default\DefaultHtmlHelpers.cshtml"
+ WebViewPage.WriteTo(@__razor_helper_writer, template(null));
+
+#line default
+#line hidden
+
+
+#line 124 "..\..\Templates\Default\DefaultHtmlHelpers.cshtml"
+                                                           }
 
 #line default
 #line hidden

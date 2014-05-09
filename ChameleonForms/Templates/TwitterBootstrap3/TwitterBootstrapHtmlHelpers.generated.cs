@@ -729,7 +729,26 @@ WebViewPage.WriteTo(@__razor_helper_writer, isCheckboxControl ? "checkbox" : "fo
 
 
 #line 112 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                         WebViewPage.WriteTo(@__razor_helper_writer, string.IsNullOrEmpty(fieldConfiguration.FieldContainerClasses) ? string.Empty : " " + fieldConfiguration.FieldContainerClasses);
+                                                                         WebViewPage.WriteTo(@__razor_helper_writer, RenderIfNotEmpty(fieldConfiguration.FieldContainerClasses,item => new System.Web.WebPages.HelperResult(__razor_template_writer => {
+
+#line default
+#line hidden
+
+
+WebViewPage.WriteLiteralTo(@__razor_template_writer, " ");
+
+
+
+#line 112 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                                                                                                                          WebViewPage.WriteTo(@__razor_template_writer, fieldConfiguration.FieldContainerClasses);
+
+#line default
+#line hidden
+
+
+
+#line 112 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                                                                                                                                                                                                                     })));
 
 #line default
 #line hidden
@@ -1088,6 +1107,36 @@ WebViewPage.WriteLiteralTo(@__razor_helper_writer, "</div>\r\n");
 
 #line 156 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
     }
+
+#line default
+#line hidden
+
+});
+
+}
+
+
+public static System.Web.WebPages.HelperResult RenderIfNotEmpty(string mayBeEmpty, Func<object, IHtmlString> template) {
+return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
+
+
+
+#line 160 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                                                                 
+    if (!string.IsNullOrEmpty(mayBeEmpty)) {
+#line default
+#line hidden
+
+
+#line 161 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+ WebViewPage.WriteTo(@__razor_helper_writer, template(null));
+
+#line default
+#line hidden
+
+
+#line 161 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
+                                                           }
 
 #line default
 #line hidden
