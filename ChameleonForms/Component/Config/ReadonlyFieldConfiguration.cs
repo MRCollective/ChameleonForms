@@ -99,6 +99,11 @@ namespace ChameleonForms.Component.Config
         string LabelClasses { get; }
 
         /// <summary>
+        /// Any CSS class(es) to use for the field container element.
+        /// </summary>
+        string FieldContainerClasses { get; }
+
+        /// <summary>
         /// Any CSS class(es) to use for the field validation message.
         /// </summary>
         string ValidationClasses { get; }
@@ -203,6 +208,11 @@ namespace ChameleonForms.Component.Config
         public string LabelClasses
         {
             get { return _fieldConfiguration.LabelClasses; }
+        }
+
+        public string FieldContainerClasses
+        {
+            get { return _fieldConfiguration.FieldContainerClasses; }
         }
 
         public string ValidationClasses

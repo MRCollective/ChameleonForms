@@ -22,6 +22,16 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         }
 
         [Test]
+        public void Output_field_with_container_class()
+        {
+            var t = new TwitterBootstrapFormTemplate();
+
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().AddFieldContainerClass("a-container-class-1").AddFieldContainerClass("a-container-class-2").ToReadonly(), false);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Output_field_with_hint()
         {
             var t = new TwitterBootstrapFormTemplate();

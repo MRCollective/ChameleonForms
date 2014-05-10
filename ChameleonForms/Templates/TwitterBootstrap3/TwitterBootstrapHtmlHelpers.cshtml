@@ -109,7 +109,7 @@
     var isRadioOrCheckboxList = fieldConfiguration.GetBagData<bool>("IsRadioOrCheckboxList");
     var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
     var isInputGroup = canBeInputGroup && (isRequired || fieldConfiguration.GetBagData<bool>("DisplayAsInputGroup"));
-@:            <div class="@(isCheckboxControl ? "checkbox" : "form-group")@(!isValid ? " has-error" : string.Empty)">
+@:            <div class="@(isCheckboxControl ? "checkbox" : "form-group")@(!isValid ? " has-error" : string.Empty)@(RenderIfNotEmpty(fieldConfiguration.FieldContainerClasses,@<text> @fieldConfiguration.FieldContainerClasses</text>))">
               @GetLabelHtml(labelHtml, fieldConfiguration.HasLabel, isCheckboxControl, isRadioOrCheckboxList || (!isCheckboxControl && !isInputGroup), isRequired, requiredDesignator)
               if (isInputGroup)
               {
@@ -154,4 +154,9 @@
     foreach (var item in items) {
         <div class="@(isCheckbox ? "checkbox" : "radio")">@item</div>
     }
+}
+
+@* http://stackoverflow.com/questions/15160654/mvc-razor-helper-method-to-render-alternate-content-when-empty *@
+@helper RenderIfNotEmpty(string mayBeEmpty, Func<object, IHtmlString> template) {
+    if (!string.IsNullOrEmpty(mayBeEmpty)) {@template(null)}
 }
