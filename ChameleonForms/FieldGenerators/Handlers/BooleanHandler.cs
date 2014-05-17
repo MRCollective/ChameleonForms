@@ -22,11 +22,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
             : base(fieldGenerator)
         {}
 
+        /// <inheritdoc />
         public override bool CanHandle()
         {
             return GetUnderlyingType(FieldGenerator) == typeof(bool);
         }
 
+        /// <inheritdoc />
         public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             if (GetDisplayType(fieldConfiguration) == FieldDisplayType.Checkbox)
@@ -36,6 +38,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
         }
 
+        /// <inheritdoc />
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
         {
             // If a list is being displayed there is no element for the label to point to so drop it
@@ -43,6 +46,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 fieldConfiguration.WithoutLabel();
         }
 
+        /// <inheritdoc />
         public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
         {
             if (fieldConfiguration.DisplayType == FieldDisplayType.Default && FieldGenerator.Metadata.ModelType == typeof(bool))

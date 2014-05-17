@@ -9,6 +9,7 @@ namespace ChameleonForms.ModelBinders
     /// </summary>
     public class DateTimeModelBinder : DefaultModelBinder
     {
+        /// <inheritdoc />
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             var underlyingType = Nullable.GetUnderlyingType(bindingContext.ModelType) ?? bindingContext.ModelType;

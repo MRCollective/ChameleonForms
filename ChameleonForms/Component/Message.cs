@@ -28,11 +28,13 @@ namespace ChameleonForms.Component
             Initialise();
         }
 
+        /// <inheritdoc />
         public override IHtmlString Begin()
         {
             return Form.Template.BeginMessage(_messageType, _heading);
         }
 
+        /// <inheritdoc />
         public override IHtmlString End()
         {
             return Form.Template.EndMessage();

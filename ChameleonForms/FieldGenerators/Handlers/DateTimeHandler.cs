@@ -20,22 +20,26 @@ namespace ChameleonForms.FieldGenerators.Handlers
             : base(fieldGenerator)
         { }
 
+        /// <inheritdoc />
         public override bool CanHandle()
         {
             return GetUnderlyingType(FieldGenerator) == typeof (DateTime);
         }
 
+        /// <inheritdoc />
         public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return GetInputHtml(TextInputType.Text, FieldGenerator, fieldConfiguration);
         }
 
+        /// <inheritdoc />
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
         {
             if (!string.IsNullOrEmpty(FieldGenerator.Metadata.DisplayFormatString))
                 fieldConfiguration.Attr("data-val-format", FieldGenerator.Metadata.DisplayFormatString.Replace("{0:", "").Replace("}", ""));
         }
 
+        /// <inheritdoc />
         public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return FieldDisplayType.SingleLineText;

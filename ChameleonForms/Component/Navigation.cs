@@ -21,11 +21,13 @@ namespace ChameleonForms.Component
             Initialise();
         }
 
+        /// <inheritdoc />
         public override IHtmlString Begin()
         {
             return Form.Template.BeginNavigation();
         }
 
+        /// <inheritdoc />
         public override IHtmlString End()
         {
             return Form.Template.EndNavigation();

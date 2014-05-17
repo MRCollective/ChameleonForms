@@ -50,11 +50,13 @@ namespace ChameleonForms.Component
             return fc;
         }
 
+        /// <inheritdoc />
         public override IHtmlString Begin()
         {
             return _nested ? Form.Template.BeginNestedSection(_heading, _leadingHtml, _htmlAttributes) : Form.Template.BeginSection(_heading, _leadingHtml, _htmlAttributes);
         }
 
+        /// <inheritdoc />
         public override IHtmlString End()
         {
             return _nested ? Form.Template.EndNestedSection() : Form.Template.EndSection();

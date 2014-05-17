@@ -20,16 +20,19 @@ namespace ChameleonForms.FieldGenerators.Handlers
             : base(fieldGenerator)
         {}
 
+        /// <inheritdoc />
         public override bool CanHandle()
         {
             return FieldGenerator.Metadata.DataTypeName == DataType.Password.ToString();
         }
 
+        /// <inheritdoc />
         public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return GetInputHtml(TextInputType.Password, FieldGenerator, fieldConfiguration);
         }
 
+        /// <inheritdoc />
         public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return FieldDisplayType.SingleLineText;

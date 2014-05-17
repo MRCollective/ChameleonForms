@@ -24,12 +24,14 @@ namespace ChameleonForms.FieldGenerators.Handlers
             : base(fieldGenerator)
         {}
 
+        /// <inheritdoc />
         public override bool CanHandle()
         {
             return FieldGenerator.Metadata.AdditionalValues.ContainsKey(ExistsInAttribute.ExistsKey)
                 && FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? == true;
         }
 
+        /// <inheritdoc />
         public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var model = FieldGenerator.GetModel();
@@ -37,6 +39,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
         }
 
+        /// <inheritdoc />
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
         {
             // There is a bug in the unobtrusive validation for numeric fields that are a radio button
@@ -51,6 +54,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 fieldConfiguration.WithoutLabel();
         }
 
+        /// <inheritdoc />
         public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return fieldConfiguration.DisplayType == FieldDisplayType.List

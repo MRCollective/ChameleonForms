@@ -49,7 +49,8 @@ namespace ChameleonForms.Component
                 _config.SetField(this);
             Initialise();
         }
-        
+
+        /// <inheritdoc />
         public override IHtmlString Begin()
         {
             var isValid = Form.HtmlHelper.ViewData.ModelState.IsValidField(_fieldGenerator.GetFieldId());
@@ -59,6 +60,7 @@ namespace ChameleonForms.Component
                 : Form.Template.BeginField(_fieldGenerator.GetLabelHtml(readonlyConfig), _fieldGenerator.GetFieldHtml(readonlyConfig), _fieldGenerator.GetValidationHtml(readonlyConfig), _fieldGenerator.Metadata, readonlyConfig, isValid);
         }
 
+        /// <inheritdoc />
         public override IHtmlString End()
         {
             return !IsParent
