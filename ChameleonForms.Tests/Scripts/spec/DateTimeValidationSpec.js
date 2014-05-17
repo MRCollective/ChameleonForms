@@ -1,15 +1,3 @@
-// Jasmine
-/// <reference path="../lib/jasmine-1.3.1/jasmine.js"/>
-/// <reference path="../lib/jasmine.using.js"/>
-// Fixture data
-/// <reference path="../fixtures/DateTimeValidationFixtures.js"/>
-// Libs
-/// <reference path="../src/jquery-2.0.3.js"/>
-/// <reference path="../src/jquery.validate.js"/>
-/// <reference path="../src/jquery.validate.unobtrusive.js"/>
-// Src
-/// <reference path="../src/jquery.validate.unobtrusive.chameleon.js"/>
-
 describe("When validating a date field", function () {
 
     var element = {};
@@ -22,7 +10,7 @@ describe("When validating a date field", function () {
     describe("that has no value", function () {
         
         beforeEach(function() {
-            spyOn(validatorContext, "optional").andReturn(true);
+            spyOn(validatorContext, "optional").and.returnValue(true);
         });
         
         it("should return true", function () {
@@ -35,8 +23,8 @@ describe("When validating a date field", function () {
         var formatString;
 
         beforeEach(function () {
-            spyOn(validatorContext, "optional").andReturn(false);
-            spyOn($.fn, "data").andCallFake(function (key) {
+            spyOn(validatorContext, "optional").and.returnValue(false);
+            spyOn($.fn, "data").and.callFake(function (key) {
                 if (key == "val-format")
                     return formatString;
                 return null;
@@ -70,16 +58,16 @@ describe("When validating a date field", function () {
             });
         });
         
-        describe("against a date-only format", function () {
-            using("valid format and value", ObjectMother.DateFormats.Valid, function (format, value) {
-                it("should return true", function () {
+        describe("against a date-only format", function() {
+            all(ObjectMother.DateFormats.Valid, function(format, value) {
+                it("should return true for "+format+" and valid value ("+value+")", function() {
                     formatString = format;
                     expect(invoke(value)).toBe(true);
                 });
             });
-            
-            using("valid format and invalid value", ObjectMother.DateFormats.Invalid, function (format, value) {
-                it("should return false", function () {
+
+            all(ObjectMother.DateFormats.Invalid, function(format, value) {
+                it("should return false for " + format + " and invalid value (" + value + ")", function() {
                     formatString = format;
                     expect(invoke(value)).toBe(false);
                 });
@@ -96,35 +84,36 @@ describe("When validating a date field", function () {
             });
         });
 
-        describe("against a date and time format", function () {
-            using("valid format and value", ObjectMother.DateTimeFormats.Valid, function (format, value) {
-                it("should return true", function () {
+        describe("against a date and time format", function() {
+
+            all(ObjectMother.DateTimeFormats.Valid, function(format, value) {
+                it("should return true for " + format + " and valid value (" + value + ")", function() {
                     formatString = format;
                     expect(invoke(value)).toBe(true);
                 });
             });
-            
-            using("valid format and invalid date", ObjectMother.DateTimeFormats.InvalidDate, function (format, value) {
-                it("should return false", function () {
+
+            all(ObjectMother.DateTimeFormats.InvalidDate, function(format, value) {
+                it("should return false for " + format + " and invalid date (" + value + ")", function() {
                     formatString = format;
                     expect(invoke(value)).toBe(false);
                 });
             });
-            
-            using("valid format and invalid time", ObjectMother.DateTimeFormats.InvalidTime, function (format, value) {
-                it("should return false", function () {
+
+            all(ObjectMother.DateTimeFormats.InvalidTime, function(format, value) {
+                it("should return false for " + format + " and invalid time (" + value + ")", function() {
                     formatString = format;
                     expect(invoke(value)).toBe(false);
                 });
             });
-            
-            using("valid format and invalid date and time", ObjectMother.DateTimeFormats.InvalidDateAndTime, function (format, value) {
-                it("should return false", function () {
+
+            all(ObjectMother.DateTimeFormats.InvalidDateAndTime, function(format, value) {
+                it("should return false for " + format + " and invalid date and time (" + value + ")", function() {
                     formatString = format;
                     expect(invoke(value)).toBe(false);
                 });
             });
-            
+
             it("should return false if the value doesn't have a space in it", function () {
                 formatString = "d/M/yyyy HH:mm:ss";
                 expect(invoke("12/12/2000")).toBe(false);
