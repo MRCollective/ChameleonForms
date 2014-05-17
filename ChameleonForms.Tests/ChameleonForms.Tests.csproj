@@ -173,9 +173,6 @@
     <Compile Include="Templates\TwitterBootstrap3\PrepareFieldConfigurationTests.cs" />
     <Compile Include="Templates\TwitterBootstrap3\RadioListTests.cs" />
     <Compile Include="Templates\TwitterBootstrap3\SectionTests.cs" />
-    <Content Include="..\ChameleonForms.Example\Scripts\jquery-2.0.3.js">
-      <Link>Scripts\src\jquery-2.0.3.js</Link>
-    </Content>
     <Content Include="Scripts\fixtures\DateTimeValidationFixtures.js" />
     <Compile Include="Templates\Default\DefaultFormTemplateTests.cs" />
     <Compile Include="Templates\HtmlCreatorTests.cs" />
@@ -198,23 +195,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Scripts\lib\jasmine-1.3.1\MIT.LICENSE" />
+    <None Include="Scripts\chutzpah.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\ChameleonForms.Example\Scripts\jquery.validate.js">
-      <Link>Scripts\src\jquery.validate.js</Link>
-    </Content>
-    <Content Include="..\ChameleonForms.Example\Scripts\jquery.validate.unobtrusive.chameleon.js">
-      <Link>Scripts\src\jquery.validate.unobtrusive.chameleon.js</Link>
-    </Content>
-    <Content Include="..\ChameleonForms.Example\Scripts\jquery.validate.unobtrusive.js">
-      <Link>Scripts\src\jquery.validate.unobtrusive.js</Link>
-    </Content>
-    <Content Include="Scripts\lib\jasmine-1.3.1\jasmine-html.js" />
-    <Content Include="Scripts\lib\jasmine-1.3.1\jasmine.css" />
-    <Content Include="Scripts\lib\jasmine-1.3.1\jasmine.js" />
-    <Content Include="Scripts\lib\jasmine.using.js" />
-    <Content Include="Scripts\SpecRunner.html" />
+    <Content Include="Scripts\lib\data-driven.js" />
+    <Content Include="Scripts\lib\jasmine-2.0.0\boot.js" />
+    <Content Include="Scripts\lib\jasmine-2.0.0\console.js" />
+    <Content Include="Scripts\lib\jasmine-2.0.0\jasmine-html.js" />
+    <Content Include="Scripts\lib\jasmine-2.0.0\jasmine.css" />
+    <Content Include="Scripts\lib\jasmine-2.0.0\jasmine.js" />
+    <Content Include="Scripts\lib\jasmine-2.0.0\jasmine_favicon.png" />
+    <Content Include="Scripts\ManuallyRunSpecs.html" />
     <Content Include="Scripts\spec\DateTimeValidationSpec.js" />
   </ItemGroup>
   <ItemGroup />
