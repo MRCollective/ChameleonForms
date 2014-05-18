@@ -69,6 +69,7 @@ namespace ChameleonForms.Attributes
             _enableValidation = enableValidation;
         }
 
+        /// <inheritdoc />
         public void OnMetadataCreated(ModelMetadata metadata)
         {
             metadata.AdditionalValues[ExistsKey] = true;
@@ -77,6 +78,7 @@ namespace ChameleonForms.Attributes
             metadata.AdditionalValues[NameKey] = _nameProperty;
         }
 
+        /// <inheritdoc />
         protected override ValidationResult IsValid(object value, ValidationContext context)
         {
             var enableValidation = _enableValidation.HasValue

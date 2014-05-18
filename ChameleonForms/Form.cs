@@ -41,7 +41,9 @@ namespace ChameleonForms
     /// </summary>
     public class Form<TModel, TTemplate> : IForm<TModel, TTemplate> where TTemplate : IFormTemplate
     {
+        /// <inheritdoc />
         public HtmlHelper<TModel> HtmlHelper { get; private set; }
+        /// <inheritdoc />
         public TTemplate Template { get; private set; }
 
         /// <summary>
@@ -64,16 +66,19 @@ namespace ChameleonForms
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
 
+        /// <inheritdoc />
         public virtual void Write(IHtmlString htmlString)
         {
             HtmlHelper.ViewContext.Writer.Write(htmlString);
         }
 
+        /// <inheritdoc />
         public virtual IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property)
         {
             return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property, Template);
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             Write(Template.EndForm());

@@ -23,9 +23,16 @@ namespace ChameleonForms.Component
     /// </summary>
     public abstract class FormComponent<TModel, TTemplate> : IFormComponent<TModel, TTemplate>, IHtmlString, IDisposable where TTemplate : IFormTemplate
     {
+        /// <inheritdoc />
         protected readonly bool IsSelfClosing;
+        /// <inheritdoc />
         public IForm<TModel, TTemplate> Form { get; private set; }
 
+        /// <summary>
+        /// Create a form component.
+        /// </summary>
+        /// <param name="form">The form</param>
+        /// <param name="isSelfClosing">Whether or not the component is self closing or has an explicit end tag</param>
         protected FormComponent(IForm<TModel, TTemplate> form, bool isSelfClosing)
         {
             Form = form;
@@ -54,6 +61,7 @@ namespace ChameleonForms.Component
         /// <returns>The ending HTML for the form component</returns>
         public abstract IHtmlString End();
 
+        /// <inheritdoc />
         public string ToHtmlString()
         {
             if (!IsSelfClosing)
@@ -62,6 +70,7 @@ namespace ChameleonForms.Component
             return string.Format("{0}{1}", Begin().ToHtmlString(), End().ToHtmlString());
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             if (!IsSelfClosing)

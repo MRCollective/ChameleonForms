@@ -69,28 +69,40 @@ namespace ChameleonForms.FieldGenerators.Handlers
     /// <typeparam name="T">The type of the property in the model that the specific field is being output for</typeparam>
     public abstract class FieldGeneratorHandler<TModel, T> : IFieldGeneratorHandler<TModel, T>
     {
+        /// <summary>
+        /// Create a field generator handler.
+        /// </summary>
+        /// <param name="fieldGenerator">The field generator to use</param>
         protected FieldGeneratorHandler(IFieldGenerator<TModel, T> fieldGenerator)
         {
             FieldGenerator = fieldGenerator;
         }
 
+        /// <inheritdoc />
         protected readonly IFieldGenerator<TModel, T> FieldGenerator;
+        /// <inheritdoc />
         public abstract bool CanHandle();
+        /// <inheritdoc />
         public abstract IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
+        /// <inheritdoc />
         public virtual void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration) {}
+        /// <inheritdoc />
         public abstract FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration);
 
+        /// <inheritdoc />
         protected static bool HasMultipleValues(IFieldGenerator<TModel, T> fieldGenerator)
         {
             return fieldGenerator.Metadata.ModelType.IsGenericType
                 && typeof(IEnumerable).IsAssignableFrom(fieldGenerator.Metadata.ModelType);
         }
 
+        /// <inheritdoc />
         protected static IEnumerable<object> GetValues(IFieldGenerator<TModel, T> fieldGenerator)
         {
             return (((IEnumerable)fieldGenerator.GetValue()) ?? new object[]{}).Cast<object>();
         }
 
+        /// <inheritdoc />
         protected static bool IsSelected(object value, IFieldGenerator<TModel, T> fieldGenerator)
         {
             if (HasMultipleValues(fieldGenerator))
@@ -103,6 +115,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return value == null;
         }
 
+        /// <inheritdoc />
         protected static Type GetUnderlyingType(IFieldGenerator<TModel, T> fieldGenerator)
         {
             var type = fieldGenerator.Metadata.ModelType;
@@ -113,11 +126,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return Nullable.GetUnderlyingType(type) ?? type;
         }
 
+        /// <inheritdoc />
         protected static bool IsNumeric(IFieldGenerator<TModel, T> fieldGenerator)
         {
             return FieldGeneratorHandler.NumericTypes.Contains(GetUnderlyingType(fieldGenerator));
         }
 
+        /// <inheritdoc />
         protected static IHtmlString GetInputHtml(TextInputType inputType, IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
         {
             if (inputType == TextInputType.Password)
@@ -161,6 +176,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return false;
         }
 
+        /// <inheritdoc />
         protected static IHtmlString GetSelectListHtml(IEnumerable<SelectListItem> selectList, IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
         {
             if (HasEmptySelectListItem(fieldGenerator, fieldConfiguration))
@@ -236,12 +252,14 @@ namespace ChameleonForms.FieldGenerators.Handlers
             }
         }
 
+        /// <inheritdoc />
         protected static string GetFieldName(IFieldGenerator<TModel, T> fieldGenerator)
         {
             var name = ExpressionHelper.GetExpressionText(fieldGenerator.FieldProperty);
             return fieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
         }
 
+        /// <inheritdoc />
         protected static void AdjustHtmlForModelState(HtmlAttributes attrs, IFieldGenerator<TModel, T> fieldGenerator)
         {
             var name = ExpressionHelper.GetExpressionText(fieldGenerator.FieldProperty);

@@ -23,17 +23,20 @@ namespace ChameleonForms.FieldGenerators.Handlers
             : base(fieldGenerator)
         {}
 
+        /// <inheritdoc />
         public override bool CanHandle()
         {
             return GetUnderlyingType(FieldGenerator).IsEnum;
         }
 
+        /// <inheritdoc />
         public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var selectList = GetSelectList();
             return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
         }
 
+        /// <inheritdoc />
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
         {
             // If a list is being displayed there is no element for the label to point to so drop it
@@ -41,6 +44,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 fieldConfiguration.WithoutLabel();
         }
 
+        /// <inheritdoc />
         public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return fieldConfiguration.DisplayType == FieldDisplayType.List

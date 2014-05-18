@@ -125,96 +125,115 @@ namespace ChameleonForms.Component.Config
             _fieldConfiguration = fieldConfiguration ?? new FieldConfiguration();
         }
 
+        /// <inheritdoc />
         public dynamic Bag
         {
             get { return _fieldConfiguration.Bag; }
         }
 
+        /// <inheritdoc />
         public TData GetBagData<TData>(string propertyName)
         {
             return _fieldConfiguration.GetBagData<TData>(propertyName);
         }
 
+        /// <inheritdoc />
         public IDictionary<string, object> HtmlAttributes
         {
             get { return _fieldConfiguration.Attributes.ToDictionary(); }
         }
 
+        /// <inheritdoc />
         public IHtmlString InlineLabelText
         {
             get { return _fieldConfiguration.InlineLabelText; }
         }
 
+        /// <inheritdoc />
         public IHtmlString LabelText
         {
             get { return _fieldConfiguration.LabelText; }
         }
 
+        /// <inheritdoc />
         public FieldDisplayType DisplayType
         {
             get { return _fieldConfiguration.DisplayType; }
         }
 
+        /// <inheritdoc />
         public string TrueString
         {
             get { return _fieldConfiguration.TrueString; }
         }
 
+        /// <inheritdoc />
         public string FalseString
         {
             get { return _fieldConfiguration.FalseString; }
         }
 
+        /// <inheritdoc />
         public string NoneString
         {
             get { return _fieldConfiguration.NoneString; }
         }
 
+        /// <inheritdoc />
         public IHtmlString Hint
         {
             get { return _fieldConfiguration.Hint; }
         }
 
+        /// <inheritdoc />
         public IEnumerable<IHtmlString> PrependedHtml
         {
             get { return _fieldConfiguration.PrependedHtml; }
         }
 
+        /// <inheritdoc />
         public IEnumerable<IHtmlString> AppendedHtml
         {
             get { return _fieldConfiguration.AppendedHtml; }
         }
 
+        /// <inheritdoc />
         public IHtmlString FieldHtml
         {
             get { return _fieldConfiguration.FieldHtml; }
         }
 
+        /// <inheritdoc />
         public string FormatString
         {
             get { return _fieldConfiguration.FormatString; }
         }
 
+        /// <inheritdoc />
         public bool EmptyItemHidden
         {
             get { return _fieldConfiguration.EmptyItemHidden; }
         }
 
+        /// <inheritdoc />
         public bool HasLabel
         {
             get { return _fieldConfiguration.HasLabel; }
         }
 
+        /// <inheritdoc />
         public string LabelClasses
         {
             get { return _fieldConfiguration.LabelClasses; }
         }
 
+        /// <inheritdoc />
         public string FieldContainerClasses
         {
             get { return _fieldConfiguration.FieldContainerClasses; }
         }
 
+        /// <inheritdoc />
         public string ValidationClasses
         {
             get { return _fieldConfiguration.ValidationClasses; }

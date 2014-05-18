@@ -405,7 +405,9 @@ namespace ChameleonForms.Component.Config
             Bag = new ExpandoObject();
         }
 
+        /// <inheritdoc />
         public dynamic Bag { get; private set; }
+        /// <inheritdoc />
         public TData GetBagData<TData>(string propertyName)
         {
             var bagAsDictionary = (IDictionary<string, object>) Bag;
@@ -415,219 +417,265 @@ namespace ChameleonForms.Component.Config
                 : default(TData);
         }
 
+        /// <inheritdoc />
         public HtmlAttributes Attributes { get; private set; }
 
+        /// <inheritdoc />
         public IFieldConfiguration Id(string id)
         {
             Attributes.Id(id);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration AddClass(string @class)
         {
             Attributes.AddClass(@class);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Attr(string key, object value)
         {
             Attributes.Attr(key, value);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Attr(Func<object, object> attribute)
         {
             Attributes.Attr(attribute);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Attrs(params Func<object, object>[] attributes)
         {
             Attributes.Attrs(attributes);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Attrs(IDictionary<string, object> attributes)
         {
             Attributes.Attrs(attributes);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Attrs(object attributes)
         {
             Attributes.Attrs(attributes);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Rows(int numRows)
         {
             Attr("rows", numRows);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Cols(int numCols)
         {
             Attr("cols", numCols);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Disabled(bool disabled = true)
         {
             Attributes.Disabled(disabled);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Readonly(bool @readonly = true)
         {
             Attributes.Readonly(@readonly);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Placeholder(string placeholderText)
         {
             Attr("placeholder", placeholderText);
             return this;
         }
 
+        /// <inheritdoc />
         public IHtmlString InlineLabelText { get; private set; }
 
+        /// <inheritdoc />
         public IFieldConfiguration InlineLabel(string labelText)
         {
             InlineLabelText = labelText.ToHtml();
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration InlineLabel(IHtmlString labelHtml)
         {
             InlineLabelText = labelHtml;
             return this;
         }
 
+        /// <inheritdoc />
         public IHtmlString LabelText { get; private set; }
 
+        /// <inheritdoc />
         public IFieldConfiguration Label(string labelText)
         {
             LabelText = labelText.ToHtml();
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Label(IHtmlString labelHtml)
         {
             LabelText = labelHtml;
             return this;
         }
 
+        /// <inheritdoc />
         public FieldDisplayType DisplayType { get; private set; }
 
+        /// <inheritdoc />
         public IFieldConfiguration AsRadioList()
         {
             DisplayType = FieldDisplayType.List;
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration AsCheckboxList()
         {
             return AsRadioList();
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration AsDropDown()
         {
             DisplayType = FieldDisplayType.DropDown;
             return this;
         }
 
+        /// <inheritdoc />
         public string TrueString { get; private set; }
+        /// <inheritdoc />
         public IFieldConfiguration WithTrueAs(string trueString)
         {
             TrueString = trueString;
             return this;
         }
 
+        /// <inheritdoc />
         public string FalseString { get; private set; }
+        /// <inheritdoc />
         public IFieldConfiguration WithFalseAs(string falseString)
         {
             FalseString = falseString;
             return this;
         }
 
+        /// <inheritdoc />
         public string NoneString { get; private set; }
+        /// <inheritdoc />
         public IFieldConfiguration WithNoneAs(string noneString)
         {
             NoneString = noneString;
             return this;
         }
 
+        /// <inheritdoc />
         public void SetField(IHtmlString field)
         {
             _field = () => field;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration WithHint(string hint)
         {
             Hint = hint.ToHtml();
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration WithHint(IHtmlString hint)
         {
             Hint = hint;
             return this;
         }
 
+        /// <inheritdoc />
         public IHtmlString Hint { get; private set; }
-        
+
+        /// <inheritdoc />
         public IFieldConfiguration Prepend(IHtmlString html)
         {
             _prependedHtml.Add(html);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Prepend(string str)
         {
             _prependedHtml.Add(str.ToHtml());
             return this;
         }
 
+        /// <inheritdoc />
         public IEnumerable<IHtmlString> PrependedHtml { get { var html = _prependedHtml.ToArray(); Array.Reverse(html); return html; } }
-        
+
+        /// <inheritdoc />
         public IFieldConfiguration Append(IHtmlString html)
         {
             _appendedHtml.Add(html);
             return this;
         }
 
+        /// <inheritdoc />
         public IFieldConfiguration Append(string str)
         {
             _appendedHtml.Add(str.ToHtml());
             return this;
         }
 
+        /// <inheritdoc />
         public IEnumerable<IHtmlString> AppendedHtml { get { return _appendedHtml.ToArray(); } }
 
+        /// <inheritdoc />
         public IFieldConfiguration WithFormatString(string formatString)
         {
             FormatString = formatString;
             return this;
         }
 
+        /// <inheritdoc />
         public string FormatString { get; private set; }
 
+        /// <inheritdoc />
         public IFieldConfiguration HideEmptyItem()
         {
             EmptyItemHidden = true;
             return this;
         }
 
+        /// <inheritdoc />
         public bool EmptyItemHidden { get; private set; }
 
+        /// <inheritdoc />
         public IFieldConfiguration WithoutLabel()
         {
             HasLabel = false;
             return this;
         }
 
+        /// <inheritdoc />
         public bool HasLabel { get; private set; }
 
+        /// <inheritdoc />
         public IFieldConfiguration AddLabelClass(string @class)
         {
             if (!string.IsNullOrEmpty(LabelClasses))
@@ -636,8 +684,10 @@ namespace ChameleonForms.Component.Config
             return this;
         }
 
+        /// <inheritdoc />
         public string LabelClasses { get; private set; }
 
+        /// <inheritdoc />
         public IFieldConfiguration AddFieldContainerClass(string @class)
         {
             if (!string.IsNullOrEmpty(FieldContainerClasses))
@@ -646,8 +696,10 @@ namespace ChameleonForms.Component.Config
             return this;
         }
 
+        /// <inheritdoc />
         public string FieldContainerClasses { get; private set; }
 
+        /// <inheritdoc />
         public IFieldConfiguration AddValidationClass(string @class)
         {
             if (!string.IsNullOrEmpty(ValidationClasses))
@@ -656,26 +708,32 @@ namespace ChameleonForms.Component.Config
             return this;
         }
 
+        /// <inheritdoc />
         public string ValidationClasses { get; private set; }
 
+        /// <inheritdoc />
         public IFieldConfiguration OverrideFieldHtml(IHtmlString html)
         {
             _fieldHtml = html;
             return this;
         }
 
+        /// <inheritdoc />
         public IHtmlString FieldHtml { get { return _fieldHtml; } }
 
+        /// <inheritdoc />
         public void SetField(Func<IHtmlString> field)
         {
             _field = field;
         }
-        
+
+        /// <inheritdoc />
         public string ToHtmlString()
         {
             return _field().ToHtmlString();
         }
 
+        /// <inheritdoc />
         public IReadonlyFieldConfiguration ToReadonly()
         {
             return new ReadonlyFieldConfiguration(this);

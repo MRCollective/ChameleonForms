@@ -180,6 +180,7 @@ namespace ChameleonForms
             return new HtmlAttributes(attributes);
         }
 
+        /// <inheritdoc />
         public virtual string ToHtmlString()
         {
             var sb = new StringBuilder();

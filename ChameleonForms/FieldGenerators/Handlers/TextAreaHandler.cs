@@ -21,11 +21,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
             : base(fieldGenerator)
         {}
 
+        /// <inheritdoc />
         public override bool CanHandle()
         {
             return FieldGenerator.Metadata.DataTypeName == DataType.MultilineText.ToString();
         }
 
+        /// <inheritdoc />
         public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return FieldGenerator.HtmlHelper.TextAreaFor(
@@ -34,6 +36,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             );
         }
 
+        /// <inheritdoc />
         public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return FieldDisplayType.MultiLineText;

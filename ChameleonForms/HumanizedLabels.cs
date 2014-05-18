@@ -22,6 +22,7 @@ namespace ChameleonForms
             ModelMetadataProviders.Current = new HumanizedLabels() { Casing = casing };
         }
 
+        /// <inheritdoc />
         protected override ModelMetadata CreateMetadata(IEnumerable<Attribute> attributes, Type containerType,
             Func<object> modelAccessor, Type modelType, string propertyName)
         {
