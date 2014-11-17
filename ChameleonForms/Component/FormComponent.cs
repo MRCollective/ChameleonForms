@@ -8,32 +8,31 @@ namespace ChameleonForms.Component
     /// Chameleon Forms component - holds a reference to a form.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
-    public interface IFormComponent<TModel, out TTemplate> where TTemplate : IFormTemplate
+    public interface IFormComponent<TModel>
     {
         /// <summary>
         /// The form that the component is attached to.
         /// </summary>
-        IForm<TModel, TTemplate> Form { get; }
+        IForm<TModel> Form { get; }
     }
 
     /// <summary>
     /// Chameleon Forms base component class; provides an ability to easily write HTML to the page in a self-closing or nested manner.
     /// Ensure you call Initialise() at the end of the constructor when extending this class.
     /// </summary>
-    public abstract class FormComponent<TModel, TTemplate> : IFormComponent<TModel, TTemplate>, IHtmlString, IDisposable where TTemplate : IFormTemplate
+    public abstract class FormComponent<TModel> : IFormComponent<TModel>, IHtmlString, IDisposable
     {
         /// <inheritdoc />
         protected readonly bool IsSelfClosing;
         /// <inheritdoc />
-        public IForm<TModel, TTemplate> Form { get; private set; }
+        public IForm<TModel> Form { get; private set; }
 
         /// <summary>
         /// Create a form component.
         /// </summary>
         /// <param name="form">The form</param>
         /// <param name="isSelfClosing">Whether or not the component is self closing or has an explicit end tag</param>
-        protected FormComponent(IForm<TModel, TTemplate> form, bool isSelfClosing)
+        protected FormComponent(IForm<TModel> form, bool isSelfClosing)
         {
             Form = form;
             IsSelfClosing = isSelfClosing;

@@ -44,9 +44,9 @@ namespace ChameleonForms.Tests
             _t.EndForm().Returns(_endHtml);
         }
 
-        private Form<TestFieldViewModel, IFormTemplate> CreateForm()
+        private Form<TestFieldViewModel> CreateForm()
         {
-            return _autoSubstitute.Resolve<Form<TestFieldViewModel, IFormTemplate>>(
+            return _autoSubstitute.Resolve<Form<TestFieldViewModel>>(
                 new NamedParameter("action", Action),
                 new NamedParameter("method", Method),
                 new NamedParameter("htmlAttributes", _htmlAttributes),
