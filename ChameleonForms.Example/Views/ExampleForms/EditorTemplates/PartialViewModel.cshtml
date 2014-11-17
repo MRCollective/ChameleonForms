@@ -1,0 +1,4 @@
+﻿@model ViewModelExample
+
+@this.ChameleonSection().PartialFor(x => x.Child, "ChildView")
+@this.ChameleonSection().FieldFor(x => x.SomeCheckbox)

@@ -2,15 +2,60 @@
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
+using System.Web.Mvc.Html;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Dynamic;
+using System.Collections;
+using System.Collections.Generic;
+using System.Web.Routing;
 
 namespace ChameleonForms.Component
 {
+    interface ISection
+    {
+        ISection<TChild> CreateChildSection<TChild>(object parentExpression);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
+    public interface ISection<TModel>
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TChild"></typeparam>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        IFieldConfiguration FieldFor<TChild>(Expression<Func<TModel, TChild>> expression);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TChild"></typeparam>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        IHtmlString PartialFor<TChild>(Expression<Func<TModel, TChild>> expression);
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TChild"></typeparam>
+        /// <param name="expression"></param>
+        /// <param name="templateName"></param>
+        /// <returns></returns>
+        IHtmlString PartialFor<TChild>(Expression<Func<TModel, TChild>> expression, string templateName);
+    }
+
     /// <summary>
     /// Wraps the output of a form section.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
     /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
-    public class Section<TModel, TTemplate> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
+    public class Section<TModel, TTemplate> : FormComponent<TModel, TTemplate>, ISection where TTemplate : IFormTemplate
     {
         private readonly IHtmlString _heading;
         private readonly bool _nested;
@@ -25,7 +70,8 @@ namespace ChameleonForms.Component
         /// <param name="nested">Whether the section is nested within another section</param>
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
-        public Section(IForm<TModel, TTemplate> form, IHtmlString heading, bool nested, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null) : base(form, false)
+        public Section(IForm<TModel, TTemplate> form, IHtmlString heading, bool nested, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+            : base(form, false)
         {
             _heading = heading;
             _nested = nested;
@@ -60,6 +106,42 @@ namespace ChameleonForms.Component
         public override IHtmlString End()
         {
             return _nested ? Form.Template.EndNestedSection() : Form.Template.EndSection();
+        }
+
+        ISection<TChild> ISection.CreateChildSection<TChild>(object parentExpression)
+        {
+            Expression<Func<TModel, TChild>> parEx = parentExpression as Expression<Func<TModel, TChild>>;
+            return new PartialSection<TModel, TChild, TTemplate>(this, parEx);
+        }
+    }
+
+    static class ExpressionExtensions
+    {
+        public static Expression<Func<T, TProperty>> Combine<T, TNav, TProperty>(Expression<Func<T, TNav>> parent, Expression<Func<TNav, TProperty>> nav)
+        {
+            var param = Expression.Parameter(typeof(T), "x");
+            var visitor = new ReplacementVisitor(parent.Parameters[0], param);
+            var newParentBody = visitor.Visit(parent.Body);
+            visitor = new ReplacementVisitor(nav.Parameters[0], newParentBody);
+            var body = visitor.Visit(nav.Body);
+            return Expression.Lambda<Func<T, TProperty>>(body, param);
+        }
+    }
+    class ReplacementVisitor : System.Linq.Expressions.ExpressionVisitor
+    {
+        private readonly Expression _oldExpr;
+        private readonly Expression _newExpr;
+        public ReplacementVisitor(Expression oldExpr, Expression newExpr)
+        {
+            _oldExpr = oldExpr;
+            _newExpr = newExpr;
+        }
+
+        public override Expression Visit(Expression node)
+        {
+            if (node == _oldExpr)
+                return _newExpr;
+            return base.Visit(node);
         }
     }
 
