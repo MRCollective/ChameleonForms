@@ -147,5 +147,15 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
+
+        [Test]
+        public void Use_correct_html_for_enum_list_with_excluded_value()
+        {
+            var g = Arrange(m => m.RequiredEnum);
+
+            var result = g.GetFieldHtml(ExampleFieldConfiguration.Exclude(TestEnum.Simplevalue));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
     }
 }

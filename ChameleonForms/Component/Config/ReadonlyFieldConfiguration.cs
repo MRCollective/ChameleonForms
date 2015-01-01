@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using ChameleonForms.Enums;
 
@@ -107,6 +108,11 @@ namespace ChameleonForms.Component.Config
         /// Any CSS class(es) to use for the field validation message.
         /// </summary>
         string ValidationClasses { get; }
+
+        /// <summary>
+        /// Enum value(s) to exclude from the generated field.
+        /// </summary>
+        Enum[] ExcludedEnums { get; }
     }
 
     /// <summary>
@@ -237,6 +243,12 @@ namespace ChameleonForms.Component.Config
         public string ValidationClasses
         {
             get { return _fieldConfiguration.ValidationClasses; }
+        }
+
+        /// <inheritdoc />
+        public Enum[] ExcludedEnums
+        {
+            get { return _fieldConfiguration.ExcludedEnums; }
         }
     }
 }

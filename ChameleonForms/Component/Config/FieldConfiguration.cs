@@ -379,6 +379,18 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <returns>A readonly field configuration</returns>
         IReadonlyFieldConfiguration ToReadonly();
+
+        /// <summary>
+        /// Excludes one or more Enum values from the generated field.
+        /// </summary>
+        /// <param name="enumValues">The value of Enum(s) to exclude from the generated field.</param>
+        /// <returns></returns>
+        IFieldConfiguration Exclude(params Enum[] enumValues);
+
+        /// <summary>
+        /// Enum value(s) to exclude from the generated field.
+        /// </summary>
+        Enum[] ExcludedEnums { get; }
     }
 
     /// <summary>
@@ -403,6 +415,7 @@ namespace ChameleonForms.Component.Config
             NoneString = "";
             HasLabel = true;
             Bag = new ExpandoObject();
+            ExcludedEnums = new Enum[]{};
         }
 
         /// <inheritdoc />
@@ -737,6 +750,16 @@ namespace ChameleonForms.Component.Config
         public IReadonlyFieldConfiguration ToReadonly()
         {
             return new ReadonlyFieldConfiguration(this);
+        }
+
+        /// <inheritdoc />
+        public Enum[] ExcludedEnums { get; private set; }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Exclude(params Enum[] enumValues)
+        {
+            ExcludedEnums = enumValues;
+            return this;
         }
     }
 }

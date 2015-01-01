@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
@@ -32,7 +33,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            var selectList = GetSelectList();
+            var selectList = GetSelectList(fieldConfiguration.ExcludedEnums);
             return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
         }
 
@@ -52,11 +53,14 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 : FieldDisplayType.DropDown;
         }
 
-        private IEnumerable<SelectListItem> GetSelectList()
+        private IEnumerable<SelectListItem> GetSelectList(Enum[] excludeEnums)
         {
             var enumValues = Enum.GetValues(GetUnderlyingType(FieldGenerator));
             foreach (var i in enumValues)
             {
+                if (excludeEnums.Contains(i))
+                    continue;
+
                 yield return new SelectListItem
                 {
                     Text = (i as Enum).Humanize(),
