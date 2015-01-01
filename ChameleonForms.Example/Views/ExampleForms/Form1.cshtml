@@ -23,6 +23,7 @@
         {
             @ff.FieldFor(m => m.NestedField).Attr("data-attr1", "value").TabIndex(2)
             @ff.FieldFor(m => m.SomeEnum).Attr("data-attr1", "value")
+            @ff.FieldFor(m => m.SomeEnum).Exclude(SomeEnum.SomeOtherValue)
         }
         @s.FieldFor(m => m.SomeCheckbox).AsDropDown()
         using (var ss = s.BeginSection("Nested section"))
