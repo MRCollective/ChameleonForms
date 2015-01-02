@@ -84,6 +84,8 @@
     <Compile Include="Component\Field.cs" />
     <Compile Include="Component\FormComponent.cs" />
     <Compile Include="Component\Message.cs" />
+    <Compile Include="Component\PartialSection.cs" />
+    <Compile Include="Component\ProxyForm.cs" />
     <Compile Include="Enums\DisplayType.cs" />
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Component\Section.cs" />
@@ -129,6 +131,7 @@
       <DependentUpon>TwitterBootstrapHtmlHelpers.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\TwitterBootstrap3\ButtonHtmlAttributesExtensions.cs" />
+    <Compile Include="WebViewPageExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -197,6 +197,13 @@
     <Content Include="Views\Comparison\EditorTemplates\_Layout.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\MembershipType.cshtml" />
     <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
+    <Content Include="Views\ExampleForms\PartialFor.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\ExampleForms\EditorTemplates\ChildView.cshtml" />
+    <Content Include="Views\ExampleForms\EditorTemplates\ChildView2.cshtml" />
+    <Content Include="Views\ExampleForms\EditorTemplates\PartialViewModel.cshtml" />
+    <Content Include="Views\ExampleForms\EditorTemplates\PartialViewModel2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
