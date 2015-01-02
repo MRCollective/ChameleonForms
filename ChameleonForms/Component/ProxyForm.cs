@@ -1,18 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Web.Mvc;
 
 namespace ChameleonForms.Component
 {
     class ProxyForm<TParent, TChild> : IForm<TChild>
     {
-        private readonly Form<TParent> form;
+        private class FakeViewDataContainer : IViewDataContainer
+        {
+            public ViewDataDictionary ViewData { get; set; }
+        }
+
+        private readonly IForm<TParent> form;
         private readonly Expression<Func<TParent, TChild>> parEx;
 
-        public ProxyForm(Form<TParent> form, Expression<Func<TParent, TChild>> parEx)
+        public ProxyForm(IForm<TParent> form, Expression<Func<TParent, TChild>> parEx)
         {
             this.form = form;
             this.parEx = parEx;
@@ -22,8 +24,16 @@ namespace ChameleonForms.Component
         {
             get
             {
-                HtmlHelper<TParent> parentHelper = this.form.HtmlHelper;
-                HtmlHelper<TChild> child = new HtmlHelper<TChild>(parentHelper.ViewContext, parentHelper.ViewDataContainer, parentHelper.RouteCollection);
+                var parentHelper = this.form.HtmlHelper;
+                var data = new ViewDataDictionary<TChild>();
+                foreach (var item in parentHelper.ViewDataContainer.ViewData)
+                {
+                    data.Add(item.Key, item.Value);
+                }
+
+                var container = new FakeViewDataContainer {ViewData = data};
+
+                var child = new HtmlHelper<TChild>(parentHelper.ViewContext, container, parentHelper.RouteCollection);
                 return child;
             }
         }
@@ -38,7 +48,7 @@ namespace ChameleonForms.Component
             this.form.Write(htmlString);
         }
 
-        public FieldGenerators.IFieldGenerator GetFieldGenerator<T>(System.Linq.Expressions.Expression<Func<TChild, T>> property)
+        public FieldGenerators.IFieldGenerator GetFieldGenerator<T>(Expression<Func<TChild, T>> property)
         {
             return this.form.GetFieldGenerator(ExpressionExtensions.Combine(parEx, property));
         }

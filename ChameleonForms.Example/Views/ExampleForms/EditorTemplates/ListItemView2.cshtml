@@ -1,0 +1,8 @@
+﻿@model ChameleonForms.Example.Controllers.ListItem
+
+
+@using (var s = this.ChameleonForm().BeginSection())
+{
+    @s.FieldFor(x => x.Id)
+    @s.FieldFor(x => x.Name)
+}

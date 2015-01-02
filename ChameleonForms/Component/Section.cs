@@ -1,9 +1,9 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Component.Config;
-using ChameleonForms.Templates;
 using System;
 using System.Linq.Expressions;
+using ChameleonForms.FieldGenerators;
 
 namespace ChameleonForms.Component
 {
@@ -13,42 +13,10 @@ namespace ChameleonForms.Component
     }
 
     /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="TModel"></typeparam>
-    public interface ISection<TModel>
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TChild"></typeparam>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        IFieldConfiguration FieldFor<TChild>(Expression<Func<TModel, TChild>> expression);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TChild"></typeparam>
-        /// <param name="expression"></param>
-        /// <returns></returns>
-        IHtmlString PartialFor<TChild>(Expression<Func<TModel, TChild>> expression);
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="TChild"></typeparam>
-        /// <param name="expression"></param>
-        /// <param name="templateName"></param>
-        /// <returns></returns>
-        IHtmlString PartialFor<TChild>(Expression<Func<TModel, TChild>> expression, string templateName);
-    }
-
-    /// <summary>
     /// Wraps the output of a form section.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    public class Section<TModel> : FormComponent<TModel>, ISection
+    class Section<TModel> : FormComponent<TModel>, ISection<TModel>, ISection
     {
         private readonly IHtmlString _heading;
         private readonly bool _nested;
@@ -106,6 +74,11 @@ namespace ChameleonForms.Component
             Expression<Func<TModel, TChild>> parEx = parentExpression as Expression<Func<TModel, TChild>>;
             return new PartialSection<TModel, TChild>(this, parEx);
         }
+
+        public IFieldGenerator GetFieldGenerator<TChild>(Expression<Func<TModel, TChild>> property)
+        {
+            return this.Form.GetFieldGenerator(property);
+        }
     }
 
     static class ExpressionExtensions
@@ -133,9 +106,7 @@ namespace ChameleonForms.Component
 
         public override Expression Visit(Expression node)
         {
-            if (node == _oldExpr)
-                return _newExpr;
-            return base.Visit(node);
+            return node == _oldExpr ? _newExpr : base.Visit(node);
         }
     }
 
@@ -158,7 +129,7 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this IForm<TModel> form, string heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public static ISection<TModel> BeginSection<TModel>(this IForm<TModel> form, string heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(form, heading.ToHtml(), false, leadingHtml, htmlAttributes);
         }
@@ -179,7 +150,7 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, string heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public static ISection<TModel> BeginSection<TModel>(this ISection<TModel> section, string heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml, htmlAttributes);
         }
