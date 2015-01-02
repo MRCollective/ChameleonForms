@@ -1,0 +1,16 @@
+﻿@model ViewModelExample
+
+@{
+    ViewBag.Title = "ViewUsingPartial";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<h2>ViewUsingPartial</h2>
+
+@using (var f = Html.BeginChameleonForm())
+{
+    using (var s = f.BeginSection())
+    {
+        @s.PartialFor(x => x, "PartialViewModel");
+    }
+}
