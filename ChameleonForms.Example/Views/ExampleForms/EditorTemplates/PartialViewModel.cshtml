@@ -1,0 +1,7 @@
+﻿@model ViewModelExample
+
+IsChameleonForm: @Html.Raw(this.IsChameleonForm().ToString())<br/>
+IsChameleonSection: @Html.Raw(this.IsChameleonSection().ToString())
+
+@this.ChameleonSection().PartialFor(x => x.Child, "ChildView")
+@this.ChameleonSection().FieldFor(x => x.SomeCheckbox)
