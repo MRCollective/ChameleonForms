@@ -16,20 +16,20 @@ namespace ChameleonForms.Tests.Component
         private readonly IHtmlString _endHtml = new HtmlString("");
         private const string ButtonHtml = "buttonHtml";
         private readonly IHtmlString _html = new HtmlString("");
-        private IForm<object, IFormTemplate> _f;
+        private IForm<object> _f;
 
         [SetUp]
         public void Setup()
         {
-            _f = Substitute.For<IForm<object, IFormTemplate>>();
+            _f = Substitute.For<IForm<object>>();
             _f.Template.BeginNavigation().Returns(_beginHtml);
             _f.Template.EndNavigation().Returns(_endHtml);
             _f.Template.Button(null, null, null, null, null).ReturnsForAnyArgs(new HtmlString(ButtonHtml));
         }
 
-        private Navigation<object, IFormTemplate> Arrange()
+        private Navigation<object> Arrange()
         {
-            return new Navigation<object, IFormTemplate>(_f);
+            return new Navigation<object>(_f);
         }
 
         [Test]

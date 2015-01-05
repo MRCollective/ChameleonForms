@@ -9,8 +9,8 @@ namespace ChameleonForms.Component
     /// Wraps the output of a message to display to a user.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
-    public class Message<TModel, TTemplate> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
+    
+    public class Message<TModel> : FormComponent<TModel>
     {
         private readonly MessageType _messageType;
         private readonly IHtmlString _heading;
@@ -21,7 +21,7 @@ namespace ChameleonForms.Component
         /// <param name="form">The form the message is being created in</param>
         /// <param name="messageType">The type of message to display</param>
         /// <param name="heading">The heading for the message</param>
-        public Message(IForm<TModel, TTemplate> form, MessageType messageType, IHtmlString heading) : base(form, false)
+        public Message(IForm<TModel> form, MessageType messageType, IHtmlString heading) : base(form, false)
         {
             _messageType = messageType;
             _heading = heading;
@@ -74,15 +74,14 @@ namespace ChameleonForms.Component
         ///     @m.Paragraph(string.Format("Your item was successfully created with id {0}", Model.Id))
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>
-        /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
         /// <param name="form">The form the message is being created in</param>
         /// <param name="messageType">The type of message to display</param>
         /// <param name="heading">The heading for the message</param>
         /// <returns>The message</returns>
-        public static Message<TModel, TTemplate> BeginMessage<TModel, TTemplate>(this IForm<TModel, TTemplate> form, MessageType messageType, string heading = null) where TTemplate : IFormTemplate
+        public static Message<TModel> BeginMessage<TModel>(this IForm<TModel> form, MessageType messageType, string heading = null)
         {
-            return new Message<TModel, TTemplate>(form, messageType, heading.ToHtml());
+            return new Message<TModel>(form, messageType, heading.ToHtml());
         }
     }
 }

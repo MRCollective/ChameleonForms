@@ -17,9 +17,9 @@ namespace ChameleonForms.Tests.Component
        private readonly IHtmlString _beginHtml = new HtmlString("");
        private readonly IHtmlString _endHtml = new HtmlString("");
 
-        public FormComponent<object, IFormTemplate> Arrange(bool selfClosing)
+        public FormComponent<object> Arrange(bool selfClosing)
         {
-            var f = Substitute.For<FormComponent<object, IFormTemplate>>(Substitute.For<IForm<object, IFormTemplate>>(), selfClosing);
+            var f = Substitute.For<FormComponent<object>>(Substitute.For<IForm<object>>(), selfClosing);
             f.Begin().Returns(_beginHtml);
             f.End().Returns(_endHtml);
             return f;

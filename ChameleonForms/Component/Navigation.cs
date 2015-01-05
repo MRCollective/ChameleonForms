@@ -9,14 +9,14 @@ namespace ChameleonForms.Component
     /// For example the area with submit buttons.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
-    public class Navigation<TModel, TTemplate> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
+    
+    public class Navigation<TModel> : FormComponent<TModel>
     {
         /// <summary>
         /// Creates a form navigation area.
         /// </summary>
         /// <param name="form">The form the message is being created in</param>
-        public Navigation(IForm<TModel, TTemplate> form) : base(form, false)
+        public Navigation(IForm<TModel> form) : base(form, false)
         {
             Initialise();
         }
@@ -133,13 +133,12 @@ namespace ChameleonForms.Component
         ///     @n.Submit("Next", "next")
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>
-        /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
         /// <param name="form">The form the navigation is being created in</param>
         /// <returns>The form navigation</returns>
-        public static Navigation<TModel, TTemplate> BeginNavigation<TModel, TTemplate>(this IForm<TModel, TTemplate> form) where TTemplate : IFormTemplate
+        public static Navigation<TModel> BeginNavigation<TModel>(this IForm<TModel> form)
         {
-            return new Navigation<TModel, TTemplate>(form);
+            return new Navigation<TModel>(form);
         }
     }
 

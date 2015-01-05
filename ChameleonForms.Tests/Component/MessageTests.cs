@@ -14,19 +14,19 @@ namespace ChameleonForms.Tests.Component
         private readonly IHtmlString _testHeading = new HtmlString("TestHeading");
         private readonly IHtmlString _beginHtml = new HtmlString("");
         private readonly IHtmlString _endHtml = new HtmlString("");
-        private IForm<object, IFormTemplate> _f;
+        private IForm<object> _f;
 
         [SetUp]
         public void Setup()
         {
-            _f = Substitute.For<IForm<object, IFormTemplate>>();
+            _f = Substitute.For<IForm<object>>();
             _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any<IHtmlString>()).Returns(_beginHtml);
             _f.Template.EndMessage().Returns(_endHtml);
         }
 
-        private Message<object, IFormTemplate> Arrange(MessageType messageType)
+        private Message<object> Arrange(MessageType messageType)
         {
-            return new Message<object, IFormTemplate>(_f, messageType, _testHeading);
+            return new Message<object>(_f, messageType, _testHeading);
         }
 
         private static readonly MessageType[] MessageTypes = EnumHelper.GetValues<MessageType>();
