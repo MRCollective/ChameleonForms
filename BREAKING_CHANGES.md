@@ -1,6 +1,19 @@
 ChameleonForms Breaking Changes
 -------------------------------
 
+Version 2.0.0
+=============
+
+Removed the `TTemplate` type parameter from all of the form component classes. This will only affect you if you created custom form components e.g. you extended `Component`, `Form`, `Section`, `Naviation`, etc.
+
+### Reason
+
+It made extensibility harder to have to pass that type around everywhere and it wasn't really being used. Using polymorphism with a property of type `IFormTemplate` made more sense.
+
+### Workaround
+
+You need to change any custom components to simply remove the template type. If you custom component relied on that template type for strong typing then you can follow the example of the `RandomComponent` example in the source: https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Forms/Components/RandomComponent.cs.
+
 Version 0.9.116
 ===============
 
