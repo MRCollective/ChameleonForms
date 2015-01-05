@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
-using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component
 {
@@ -26,8 +25,7 @@ namespace ChameleonForms.Component
     /// Wraps the output of a single form field.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
-    public class Field<TModel, TTemplate> : FormComponent<TModel, TTemplate> where TTemplate : IFormTemplate
+    public class Field<TModel> : FormComponent<TModel>
     {
         private readonly IFieldGenerator _fieldGenerator;
         private readonly IFieldConfiguration _config;
@@ -40,7 +38,7 @@ namespace ChameleonForms.Component
         /// <param name="isParent">Whether or not the field has other fields nested within it</param>
         /// <param name="fieldGenerator">A field HTML generator class</param>
         /// <param name="config">The configuration values for the field</param>
-        public Field(IForm<TModel, TTemplate> form, bool isParent, IFieldGenerator fieldGenerator, IFieldConfiguration config)
+        public Field(IForm<TModel> form, bool isParent, IFieldGenerator fieldGenerator, IFieldConfiguration config)
             : base(form, !isParent)
         {
             _fieldGenerator = fieldGenerator;
@@ -81,16 +79,15 @@ namespace ChameleonForms.Component
         /// @s.FieldFor(m => m.FirstName)
         /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
-        /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <returns>A field configuration object that allows you to configure the field</returns>
-        public static IFieldConfiguration FieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static IFieldConfiguration FieldFor<TModel, T>(this ISection<TModel> section, Expression<Func<TModel, T>> property)
         {
             var fc = new FieldConfiguration();
             // ReSharper disable ObjectCreationAsStatement
-            new Field<TModel, TTemplate>(section.Form, false, section.Form.GetFieldGenerator(property), fc);
+            new Field<TModel>(section.Form, false, section.GetFieldGenerator(property), fc);
             // ReSharper restore ObjectCreationAsStatement
             return fc;
         }
@@ -104,15 +101,14 @@ namespace ChameleonForms.Component
         /// }
         /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
-        /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <param name="config">Any configuration information for the field</param>
         /// <returns>The form field</returns>
-        public static Field<TModel, TTemplate> BeginFieldFor<TModel, TTemplate, T>(this Section<TModel, TTemplate> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null) where TTemplate : IFormTemplate
+        public static Field<TModel> BeginFieldFor<TModel, T>(this ISection<TModel> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null)
         {
-            return new Field<TModel, TTemplate>(section.Form, true, section.Form.GetFieldGenerator(property), config);
+            return new Field<TModel>(section.Form, true, section.Form.GetFieldGenerator(property), config);
         }
 
         /// <summary>
@@ -124,16 +120,15 @@ namespace ChameleonForms.Component
         /// }
         /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
-        /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="field">The parent field the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <returns>A field configuration object that allows you to configure the field</returns>
-        public static IFieldConfiguration FieldFor<TModel, TTemplate, T>(this Field<TModel, TTemplate> field, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static IFieldConfiguration FieldFor<TModel, T>(this Field<TModel> field, Expression<Func<TModel, T>> property)
         {
             var config = new FieldConfiguration();
             // ReSharper disable ObjectCreationAsStatement
-            new Field<TModel, TTemplate>(field.Form, false, field.Form.GetFieldGenerator(property), config);
+            new Field<TModel>(field.Form, false, field.Form.GetFieldGenerator(property), config);
             // ReSharper restore ObjectCreationAsStatement
             return config;
         }
@@ -147,12 +142,11 @@ namespace ChameleonForms.Component
         /// }
         /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
-        /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="form">The form the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <returns>A field configuration object that allows you to configure the field</returns>
-        public static IFieldConfiguration FieldElementFor<TModel, TTemplate, T>(this IForm<TModel, TTemplate> form, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static IFieldConfiguration FieldElementFor<TModel, T>(this IForm<TModel> form, Expression<Func<TModel, T>> property)
         {
             var config = new FieldConfiguration();
             config.SetField(() => form.GetFieldGenerator(property).GetFieldHtml(config));
@@ -168,12 +162,11 @@ namespace ChameleonForms.Component
         /// }
         /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
-        /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="form">The form the label is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the label for</param>
         /// <returns>The HTML for the label</returns>
-        public static IFieldConfiguration LabelFor<TModel, TTemplate, T>(this IForm<TModel, TTemplate> form, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static IFieldConfiguration LabelFor<TModel, T>(this IForm<TModel> form, Expression<Func<TModel, T>> property)
         {
             var config = new FieldConfiguration();
             config.SetField(() => form.GetFieldGenerator(property).GetLabelHtml(config));
@@ -189,12 +182,11 @@ namespace ChameleonForms.Component
         /// }
         /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>
-        /// <typeparam name="TTemplate">The type of HTML template renderer the form is using</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="form">The form the label is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the validation message for</param>
         /// <returns>The HTML for the validation message</returns>
-        public static IFieldConfiguration ValidationMessageFor<TModel, TTemplate, T>(this IForm<TModel, TTemplate> form, Expression<Func<TModel, T>> property) where TTemplate : IFormTemplate
+        public static IFieldConfiguration ValidationMessageFor<TModel, T>(this IForm<TModel> form, Expression<Func<TModel, T>> property)
         {
             var config = new FieldConfiguration();
             config.SetField(() => form.GetFieldGenerator(property).GetValidationHtml(config));

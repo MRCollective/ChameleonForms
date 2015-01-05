@@ -15,22 +15,22 @@ namespace ChameleonForms.Tests.Component
         private readonly IHtmlString _endHtml = new HtmlString("");
         private readonly IHtmlString _nestedBeginHtml = new HtmlString("");
         private readonly IHtmlString _nestedEndHtml = new HtmlString("");
-        private IForm<object, IFormTemplate> _f;
+        private IForm<object> _f;
         private readonly IHtmlString _heading = new HtmlString("title");
 
         [SetUp]
         public void Setup()
         {
-            _f = Substitute.For<IForm<object, IFormTemplate>>();
+            _f = Substitute.For<IForm<object>>();
             _f.Template.BeginSection(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _heading.ToHtmlString()), Arg.Any<IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_beginHtml);
             _f.Template.EndSection().Returns(_endHtml);
             _f.Template.BeginNestedSection(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _heading.ToHtmlString()), Arg.Any<IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_nestedBeginHtml);
             _f.Template.EndNestedSection().Returns(_nestedEndHtml);
         }
 
-        private Section<object, IFormTemplate> Arrange(bool isNested)
+        private ISection<object> Arrange(bool isNested)
         {
-            return new Section<object, IFormTemplate>(_f, _heading, isNested);
+            return new Section<object>(_f, _heading, isNested);
         }
 
         [Test]

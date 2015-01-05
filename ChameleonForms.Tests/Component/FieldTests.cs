@@ -29,7 +29,7 @@ namespace ChameleonForms.Tests.Component
         private readonly IHtmlString _field = new HtmlString("f");
         private readonly IHtmlString _validation = new HtmlString("v");
         private readonly ModelMetadata _metadata = new ModelMetadata(new EmptyModelMetadataProvider(), null, null, typeof(object), null);
-        private IForm<TestFieldViewModel, IFormTemplate> _f;
+        private IForm<TestFieldViewModel> _f;
         private IFieldGenerator _g;
         private IFieldConfiguration _fc;
 
@@ -38,7 +38,7 @@ namespace ChameleonForms.Tests.Component
         {
             _fc = Substitute.For<IFieldConfiguration>();
 
-            _f = Substitute.For<IForm<TestFieldViewModel, IFormTemplate>>();
+            _f = Substitute.For<IForm<TestFieldViewModel>>();
             _f.Template.BeginField(_label, _field, _validation, _metadata, Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(_beginHtml);
             _f.Template.Field(_label, _field, _validation, _metadata, Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(_html);
             _f.Template.EndField().Returns(_endHtml);
@@ -56,9 +56,9 @@ namespace ChameleonForms.Tests.Component
             _f.GetFieldGenerator(Arg.Any<Expression<Func<TestFieldViewModel, string>>>()).Returns(_g);
         }
 
-        private Field<TestFieldViewModel, IFormTemplate> Arrange(bool isParent)
+        private Field<TestFieldViewModel> Arrange(bool isParent)
         {
-            return new Field<TestFieldViewModel, IFormTemplate>(_f, isParent, _g, _fc);
+            return new Field<TestFieldViewModel>(_f, isParent, _g, _fc);
         }
         #endregion
 
@@ -147,7 +147,7 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Construct_field_via_extension_method()
         {
-            var s = new Section<TestFieldViewModel, IFormTemplate>(_f, new HtmlString(""), false);
+            var s = new Section<TestFieldViewModel>(_f, new HtmlString(""), false);
             _f.ClearReceivedCalls();
 
             var f = s.FieldFor(m => m.SomeProperty);
@@ -159,7 +159,7 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Construct_nested_field_via_extension_method()
         {
-            var s = new Field<TestFieldViewModel, IFormTemplate>(_f, false, _g, null);
+            var s = new Field<TestFieldViewModel>(_f, false, _g, null);
             _f.ClearReceivedCalls();
 
             var f = s.FieldFor(m => m.SomeProperty);
@@ -173,7 +173,7 @@ namespace ChameleonForms.Tests.Component
         public void Construct_parent_field_via_extension_method()
         {
             var h = new HtmlString("");
-            var s = new Section<TestFieldViewModel, IFormTemplate>(_f, new HtmlString(""), false);
+            var s = new Section<TestFieldViewModel>(_f, new HtmlString(""), false);
             _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(h);
             _f.ClearReceivedCalls();
 
