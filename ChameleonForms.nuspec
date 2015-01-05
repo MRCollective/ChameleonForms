@@ -30,7 +30,7 @@
        en-US
     </language>
     <dependencies>
-      <dependency id="Microsoft.AspNet.Mvc" version="4.0.20710.0" />
+      <dependency id="Microsoft.AspNet.Mvc" version="4.0.30506.0" />
       <dependency id="Humanizer" version="1.28.0" />
       <dependency id="WebActivator" version="1.5" />
     </dependencies>
