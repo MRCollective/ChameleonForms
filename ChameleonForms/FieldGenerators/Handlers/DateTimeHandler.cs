@@ -2,6 +2,7 @@
 using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
+using System.Globalization;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -36,7 +37,15 @@ namespace ChameleonForms.FieldGenerators.Handlers
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
         {
             if (!string.IsNullOrEmpty(FieldGenerator.Metadata.DisplayFormatString))
-                fieldConfiguration.Attr("data-val-format", FieldGenerator.Metadata.DisplayFormatString.Replace("{0:", "").Replace("}", ""));
+            {
+                var format = FieldGenerator.Metadata.DisplayFormatString.Replace("{0:", "").Replace("}", "");
+                if(format == "g")
+                {
+                    format = string.Join(" ", CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern, CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern);
+                }
+
+                fieldConfiguration.Attr("data-val-format", format);
+            }
         }
 
         /// <inheritdoc />

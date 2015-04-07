@@ -110,6 +110,9 @@ namespace ChameleonForms.Example.Controllers
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? NullableDateTime { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
+        public DateTime DateTimeWithG { get; set; }
+
         public bool RequiredBool { get; set; }
         [Required]
         public bool? RequiredNullableBool { get; set; }
@@ -209,6 +212,9 @@ namespace ChameleonForms.Example.Controllers
         public bool Boolean { get; set; }
 
         public ChildViewModel Child { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
+        public DateTime DateField { get; set; }
     }
 
     public class ListItem

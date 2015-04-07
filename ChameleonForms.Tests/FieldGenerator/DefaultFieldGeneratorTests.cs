@@ -52,6 +52,9 @@ namespace ChameleonForms.Tests.FieldGenerator
         [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? NullableDateTimeWithFormat { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
+        public DateTime DateTimeWithGFormat { get; set; }
+
         public TestEnum RequiredEnum { get; set; }
 
         [Required]

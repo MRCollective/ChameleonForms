@@ -46,6 +46,7 @@
         @s.FieldFor(m => m.Child.SomeEnum).AsRadioList()
         @s.FieldFor(m => m.RequiredStringField).Disabled()
         @s.FieldFor(m => m.RequiredStringField).Readonly()
+        @s.FieldFor(m => m.DateField)
     }
     using (var n = f.BeginNavigation())
     {

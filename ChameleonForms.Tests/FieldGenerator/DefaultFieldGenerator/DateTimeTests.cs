@@ -48,5 +48,29 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
+
+        [Test]
+        public void Use_correct_html_for_datetime_field_with_g_format_en_gb()
+        {
+            using (ChangeCulture.To("en-GB"))
+            {
+                var g = Arrange(m => m.DateTimeWithGFormat);
+
+                var result = g.GetFieldHtml(ExampleFieldConfiguration);
+                HtmlApprovals.VerifyHtml(result.ToHtmlString());
+            }
+        }
+
+        [Test]
+        public void Use_correct_html_for_datetime_field_with_g_format_uk_ua()
+        {
+            using (ChangeCulture.To("uk-UA"))
+            {
+                var g = Arrange(m => m.DateTimeWithGFormat);
+
+                var result = g.GetFieldHtml(ExampleFieldConfiguration);
+                HtmlApprovals.VerifyHtml(result.ToHtmlString());
+            }
+        }
     }
 }
