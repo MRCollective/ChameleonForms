@@ -186,5 +186,18 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
+
+        [Test]
+        public void Use_correct_html_for_without_inline_label_for_boolean_checkbox()
+        {
+            var g = Arrange(x => x.RequiredBoolean);
+
+            IFieldConfiguration config = new FieldConfiguration();
+            config = config.WithoutInlineLabel();
+
+            var result = g.GetFieldHtml(config);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
     }
 }
