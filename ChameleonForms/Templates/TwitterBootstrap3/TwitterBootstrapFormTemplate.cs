@@ -46,12 +46,12 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             if (displayType == FieldDisplayType.Checkbox)
             {
                 fieldConfiguration.Bag.IsCheckboxControl = true;
-                // Hide the parent label otherwise it looks weird
-                fieldConfiguration.Label("").WithoutLabel();
             }
 
             if (displayType == FieldDisplayType.List)
+            {
                 fieldConfiguration.Bag.IsRadioOrCheckboxList = true;
+            }
         }
 
         /// <inheritdoc />

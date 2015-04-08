@@ -74,7 +74,14 @@ namespace ChameleonForms
         /// <inheritdoc />
         public virtual IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property)
         {
-            return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property, Template);
+            if(typeof(T) == typeof(bool))
+            {
+                return new BooleanFieldGenerator<TModel, T>(HtmlHelper, property, Template);
+            }
+            else
+            {
+                return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property, Template);
+            }
         }
 
         /// <inheritdoc />

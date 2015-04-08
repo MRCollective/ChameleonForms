@@ -20,7 +20,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <param name="fieldGenerator">The field generator for the field</param>
         public BooleanHandler(IFieldGenerator<TModel, T> fieldGenerator)
             : base(fieldGenerator)
-        {}
+        { }
 
         /// <inheritdoc />
         public override bool CanHandle()
@@ -67,11 +67,19 @@ namespace ChameleonForms.FieldGenerators.Handlers
             var attrs = new HtmlAttributes(fieldConfiguration.HtmlAttributes);
             AdjustHtmlForModelState(attrs, FieldGenerator);
             var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(FieldGenerator), GetValue() ?? false, attrs);
-            var labelHtml = HtmlCreator.BuildLabel(
-                GetFieldName(FieldGenerator),
-                fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
-                null
-            );
+            IHtmlString labelHtml;
+            if (fieldConfiguration.HasLabel)
+            {
+                labelHtml = HtmlCreator.BuildLabel(
+                    GetFieldName(FieldGenerator),
+                    fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
+                    null
+                );
+            }
+            else
+            {
+                labelHtml = MvcHtmlString.Empty;
+            }
 
             return new HtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
         }
