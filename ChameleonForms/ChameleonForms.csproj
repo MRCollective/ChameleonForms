@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ExistsInAttribute.cs" />
+    <Compile Include="FieldGenerators\BooleanFieldGenerator.cs" />
     <Compile Include="Component\Config\FieldConfiguration.cs" />
     <Compile Include="Component\Config\FieldConfigurationExtensions.cs" />
     <Compile Include="Component\Config\ReadonlyFieldConfiguration.cs" />

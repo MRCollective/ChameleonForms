@@ -19,6 +19,8 @@
     <p>@f.FieldElementFor(m => m.RequiredStringField).TabIndex(4)</p>
     using (var s = f.BeginSection("My Section!", InstructionalText(), new{@class = "aClass"}.ToHtmlAttributes()))
     {
+        @s.FieldFor(x=>x.SomeCheckbox).WithoutLabel();
+        
         using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value").TabIndex(3)))
         {
             @ff.FieldFor(m => m.NestedField).Attr("data-attr1", "value").TabIndex(2)

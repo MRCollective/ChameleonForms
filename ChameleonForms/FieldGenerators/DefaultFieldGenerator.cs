@@ -41,7 +41,7 @@ namespace ChameleonForms.FieldGenerators
         public IFormTemplate Template { get; private set; }
 
         /// <inheritdoc />
-        public IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public virtual IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             fieldConfiguration = fieldConfiguration ?? new ReadonlyFieldConfiguration(new FieldConfiguration());
 
