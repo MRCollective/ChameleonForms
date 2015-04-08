@@ -391,6 +391,17 @@ namespace ChameleonForms.Component.Config
         /// Enum value(s) to exclude from the generated field.
         /// </summary>
         Enum[] ExcludedEnums { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        IFieldConfiguration WithoutInlineLabel();
+
+        /// <summary>
+        /// Whether or not to use an inline &lt;label&gt;.
+        /// </summary>
+        bool HasInlineLabel { get; }
     }
 
     /// <summary>
@@ -416,6 +427,7 @@ namespace ChameleonForms.Component.Config
             HasLabel = true;
             Bag = new ExpandoObject();
             ExcludedEnums = new Enum[]{};
+            HasInlineLabel = true;
         }
 
         /// <inheritdoc />
@@ -761,5 +773,15 @@ namespace ChameleonForms.Component.Config
             ExcludedEnums = enumValues;
             return this;
         }
+
+        /// <inheritdoc />
+        public IFieldConfiguration WithoutInlineLabel()
+        {
+            this.HasInlineLabel = false;
+            return this;
+        }
+
+        /// <inheritdoc />
+        public bool HasInlineLabel { get; private set; }
     }
 }

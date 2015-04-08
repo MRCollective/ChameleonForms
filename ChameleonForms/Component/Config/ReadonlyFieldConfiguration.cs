@@ -113,6 +113,11 @@ namespace ChameleonForms.Component.Config
         /// Enum value(s) to exclude from the generated field.
         /// </summary>
         Enum[] ExcludedEnums { get; }
+
+        /// <summary>
+        /// Whether or not to use an inline &lt;label&gt;.
+        /// </summary>
+        bool HasInlineLabel { get; }
     }
 
     /// <summary>
@@ -249,6 +254,12 @@ namespace ChameleonForms.Component.Config
         public Enum[] ExcludedEnums
         {
             get { return _fieldConfiguration.ExcludedEnums; }
+        }
+
+        /// <inheritdoc />
+        public bool HasInlineLabel
+        {
+            get { return _fieldConfiguration.HasInlineLabel; }
         }
     }
 }
