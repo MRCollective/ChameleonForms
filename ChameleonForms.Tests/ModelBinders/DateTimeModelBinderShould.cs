@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using ChameleonForms.ModelBinders;
 using ChameleonForms.Tests.Helpers;
 using NUnit.Framework;
+using System.Globalization;
 
 namespace ChameleonForms.Tests.ModelBinders
 {
@@ -125,6 +126,25 @@ namespace ChameleonForms.Tests.ModelBinders
             var model = BindModel(context);
 
             Assert.That(context.Model, Is.EqualTo(new DateTime(2000, 12, 12)));
+        }
+
+        [Test]
+        public void Use_default_model_binder_with_g_format_string([Values("en-GB", "uk-UA")]string culture)
+        {
+            using (ChangeCulture.To(culture))
+            {
+                var val = DateTime.UtcNow;
+                string s = val.ToString("g");
+                _formCollection[PropertyName] = s;
+                val = DateTime.ParseExact(s, "g", CultureInfo.CurrentCulture);
+                var context = ArrangeBindingContext();
+                context.ModelMetadata.DisplayFormatString = "{0:g}";
+
+                var model = BindModel(context);
+
+                Assert.That(model, Is.EqualTo(val));
+                Assert.That(context.ModelState.IsValid, Is.True);
+            }
         }
     }
 }
