@@ -283,12 +283,6 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration AddValidationClass(string @class);
         
         /// <summary>
-        /// Returns readonly field configuration from the current field configuration.
-        /// </summary>
-        /// <returns>A readonly field configuration</returns>
-        IReadonlyFieldConfiguration ToReadonly();
-
-        /// <summary>
         /// Excludes one or more Enum values from the generated field.
         /// </summary>
         /// <param name="enumValues">The value of Enum(s) to exclude from the generated field.</param>
@@ -664,12 +658,6 @@ namespace ChameleonForms.Component.Config
         public string ToHtmlString()
         {
             return _field().ToHtmlString();
-        }
-
-        /// <inheritdoc />
-        public IReadonlyFieldConfiguration ToReadonly()
-        {
-            return this;
         }
 
         /// <inheritdoc />

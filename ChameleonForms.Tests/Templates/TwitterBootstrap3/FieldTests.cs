@@ -16,7 +16,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().ToReadonly(), false);
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration(), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -26,7 +26,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().AddFieldContainerClass("a-container-class-1").AddFieldContainerClass("a-container-class-2").ToReadonly(), false);
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().AddFieldContainerClass("a-container-class-1").AddFieldContainerClass("a-container-class-2"), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -36,7 +36,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().WithHint("hello").ToReadonly(), false);
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().WithHint("hello"), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -49,8 +49,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration()
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
                 .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
-                .WithHint(new HtmlString("<hint>"))
-                .ToReadonly(),
+                .WithHint(new HtmlString("<hint>")),
                 false
             );
 
@@ -68,8 +67,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
                 .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
                 .WithHint(new HtmlString("<hint>"))
-                .AsInputGroup() // This shouldn't take effect since we haven't specified this field can be an input group
-                .ToReadonly(),
+                .AsInputGroup(), // This shouldn't take effect since we haven't specified this field can be an input group
                 false
             );
 
@@ -89,8 +87,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
                 .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
                 .WithHint(new HtmlString("<hint>"))
-                .AsInputGroup() // This shouldn't take effect since we haven't specified this field can be an input group
-                .ToReadonly(),
+                .AsInputGroup(), // This shouldn't take effect since we haven't specified this field can be an input group
                 false
             );
 
@@ -107,8 +104,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration()
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
                 .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
-                .WithHint(new HtmlString("<hint>"))
-                .ToReadonly(),
+                .WithHint(new HtmlString("<hint>")),
                 false
             );
 
@@ -127,8 +123,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), metadata, fc
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
                 .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
-                .WithHint(new HtmlString("<hint>"))
-                .ToReadonly(),
+                .WithHint(new HtmlString("<hint>")),
                 false
             );
 
@@ -147,8 +142,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), metadata, fc
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
                 .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
-                .WithHint(new HtmlString("<hint>"))
-                .ToReadonly(),
+                .WithHint(new HtmlString("<hint>")),
                 false
             );
 
@@ -160,7 +154,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginField(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().ToReadonly(), false);
+            var result = t.BeginField(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration(), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

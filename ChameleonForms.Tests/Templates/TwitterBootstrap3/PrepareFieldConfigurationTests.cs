@@ -27,7 +27,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
             var fgh = Substitute.For<IFieldGeneratorHandler<TestViewModel, string>>();
             fgh.GetDisplayType(Arg.Any<IReadonlyFieldConfiguration>()).Returns(displayType);
             _t.PrepareFieldConfiguration(fg, fgh, _fieldConfiguration, parent);
-            return _fieldConfiguration.ToReadonly();
+            return _fieldConfiguration;
         }
 
         [Test]
