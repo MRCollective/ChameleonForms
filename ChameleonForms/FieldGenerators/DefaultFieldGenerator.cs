@@ -43,7 +43,7 @@ namespace ChameleonForms.FieldGenerators
         /// <inheritdoc />
         public IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            fieldConfiguration = fieldConfiguration ?? new ReadonlyFieldConfiguration(new FieldConfiguration());
+            fieldConfiguration = fieldConfiguration ?? new FieldConfiguration();
 
             string @for;
             if (fieldConfiguration.HtmlAttributes.ContainsKey("id"))
@@ -116,13 +116,13 @@ namespace ChameleonForms.FieldGenerators
             handler.PrepareFieldConfiguration(fieldConfiguration);
             Template.PrepareFieldConfiguration(this, handler, fieldConfiguration, fieldParent);
 
-            return new ReadonlyFieldConfiguration(fieldConfiguration);
+            return fieldConfiguration;
         }
 
         /// <inheritdoc />
         public IHtmlString GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            fieldConfiguration = fieldConfiguration ?? new ReadonlyFieldConfiguration(new FieldConfiguration());
+            fieldConfiguration = fieldConfiguration ?? new FieldConfiguration();
             if (fieldConfiguration.FieldHtml != null)
                 return fieldConfiguration.FieldHtml;
             
