@@ -26,7 +26,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             .Select(x => string.Format("btn-{0}", x.ToLower()))
             .ToArray();
 
-        private static readonly FieldDisplayType[] NormalFieldTypes = new[] {FieldDisplayType.DropDown, FieldDisplayType.SingleLineText, FieldDisplayType.MultiLineText};
+        private static readonly FieldDisplayType[] NormalFieldTypes = new[] { FieldDisplayType.DropDown, FieldDisplayType.SingleLineText, FieldDisplayType.MultiLineText };
 
         /// <inheritdoc />
         public override void PrepareFieldConfiguration<TModel, T>(IFieldGenerator<TModel, T> fieldGenerator, IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, IFieldConfiguration fieldConfiguration, FieldParent fieldParent)
@@ -36,7 +36,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
 
             fieldConfiguration.AddValidationClass("help-block");
 
-            var displayType = fieldGeneratorHandler.GetDisplayType(fieldConfiguration.ToReadonly());
+            var displayType = fieldGeneratorHandler.GetDisplayType(fieldConfiguration);
             if (NormalFieldTypes.Contains(displayType))
             {
                 fieldConfiguration.Bag.CanBeInputGroup = true;

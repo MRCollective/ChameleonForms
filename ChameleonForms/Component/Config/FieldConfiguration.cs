@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Web;
 using ChameleonForms.Enums;
 
@@ -9,21 +10,8 @@ namespace ChameleonForms.Component.Config
     /// <summary>
     /// Holds configuration data for a form field.
     /// </summary>
-    public interface IFieldConfiguration : IHtmlString
+    public interface IFieldConfiguration : IHtmlString, IReadonlyFieldConfiguration
     {
-        /// <summary>
-        /// A dynamic bag to allow for custom extensions using the field configuration.
-        /// </summary>
-        dynamic Bag { get; }
-
-        /// <summary>
-        /// Returns data from the Bag stored in the given property or default(TData) if there is none present.
-        /// </summary>
-        /// <typeparam name="TData">The type of the expected data to return</typeparam>
-        /// <param name="propertyName">The name of the property to retrieve the data for</param>
-        /// <returns>The data from the Bag or default(TData) if there was no data against that property in the bag</returns>
-        TData GetBagData<TData>(string propertyName);
-
         /// <summary>
         /// Attributes to add to the form element's HTML.
         /// </summary>
@@ -114,12 +102,7 @@ namespace ChameleonForms.Component.Config
         /// <param name="placeholderText">The text to use for the placeholder</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Placeholder(string placeholderText);
-
-        /// <summary>
-        /// Gets any text that has been set for an inline label.
-        /// </summary>
-        IHtmlString InlineLabelText { get; }
-
+        
         /// <summary>
         /// Sets an inline label for a checkbox.
         /// </summary>
@@ -135,11 +118,6 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration InlineLabel(IHtmlString labelHtml);
 
         /// <summary>
-        /// Gets any text that has been set for the label.
-        /// </summary>
-        IHtmlString LabelText { get; }
-
-        /// <summary>
         /// Override the default label for the field.
         /// </summary>
         /// <param name="labelText">The text to use for the label</param>
@@ -152,11 +130,6 @@ namespace ChameleonForms.Component.Config
         /// <param name="labelHtml">The text to use for the label</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Label(IHtmlString labelHtml);
-
-        /// <summary>
-        /// Returns the display type for the field.
-        /// </summary>
-        FieldDisplayType DisplayType { get; }
 
         /// <summary>
         /// Renders the field as a list of radio options for selecting single values or checkbox items for selecting multiple values.
@@ -182,22 +155,12 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration AsDropDown();
 
         /// <summary>
-        /// The label that represents true.
-        /// </summary>
-        string TrueString { get; }
-
-        /// <summary>
         /// Change the label that represents true.
         /// </summary>
         /// <param name="trueString">The label to use as true</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithTrueAs(string trueString);
-
-        /// <summary>
-        /// The label that represents false.
-        /// </summary>
-        string FalseString { get; }
-
+        
         /// <summary>
         /// Change the label that represents none.
         /// </summary>
@@ -205,11 +168,6 @@ namespace ChameleonForms.Component.Config
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithNoneAs(string noneString);
         
-        /// <summary>
-        /// The label that represents none.
-        /// </summary>
-        string NoneString { get; }
-
         /// <summary>
         /// Change the label that represents false.
         /// </summary>
@@ -244,12 +202,7 @@ namespace ChameleonForms.Component.Config
         /// <param name="hint">The hint markup</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithHint(IHtmlString hint);
-
-        /// <summary>
-        /// Get the hint to display with the field.
-        /// </summary>
-        IHtmlString Hint { get; }
-
+        
         /// <summary>
         /// Prepends the given HTML to the form field.
         /// </summary>
@@ -263,11 +216,6 @@ namespace ChameleonForms.Component.Config
         /// <param name="str">The string to prepend</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Prepend(string str);
-
-        /// <summary>
-        /// A list of HTML to be prepended to the form field in ltr order.
-        /// </summary>
-        IEnumerable<IHtmlString> PrependedHtml { get; }
 
         /// <summary>
         /// Appends the given HTML to the form field.
@@ -284,11 +232,6 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Append(string str);
 
         /// <summary>
-        /// A list of HTML to be appended to the form field in ltr order.
-        /// </summary>
-        IEnumerable<IHtmlString> AppendedHtml { get; }
-
-        /// <summary>
         /// Override the HTML of the form field.
         /// 
         /// This gives you ultimate flexibility with your field HTML when it's
@@ -298,24 +241,14 @@ namespace ChameleonForms.Component.Config
         /// <param name="html">The HTML for the field</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration OverrideFieldHtml(IHtmlString html);
-
-        /// <summary>
-        /// The HTML to be used as the field html.
-        /// </summary>
-        IHtmlString FieldHtml { get; }
-        
+                
         /// <summary>
         /// Uses the given format string when outputting the field value.
         /// </summary>
         /// <param name="formatString">The format string to use</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithFormatString(string formatString);
-
-        /// <summary>
-        /// The format string to use for the field.
-        /// </summary>
-        string FormatString { get; }
-
+        
         /// <summary>
         /// Hide the empty item that would normally display for the field.
         /// </summary>
@@ -323,20 +256,10 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration HideEmptyItem();
 
         /// <summary>
-        /// Whether or not the empty item is hidden.
-        /// </summary>
-        bool EmptyItemHidden { get; }
-
-        /// <summary>
         /// Don't use a &lt;label&gt;, but still include the label text for the field.
         /// </summary>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithoutLabel();
-
-        /// <summary>
-        /// Whether or not to use a &lt;label&gt;.
-        /// </summary>
-        bool HasLabel { get; }
 
         /// <summary>
         /// Specify one or more CSS classes to use for the field label.
@@ -346,62 +269,31 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration AddLabelClass(string @class);
 
         /// <summary>
-        /// Any CSS class(es) to use for the field label.
-        /// </summary>
-        string LabelClasses { get; }
-
-        /// <summary>
         /// Specify one or more CSS classes to use for the field container element.
         /// </summary>
         /// <param name="class">Any CSS class(es) to use for the field container element</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration AddFieldContainerClass(string @class);
-
-        /// <summary>
-        /// Any CSS class(es) to use for the field container element.
-        /// </summary>
-        string FieldContainerClasses { get; }
-
+        
         /// <summary>
         /// Specify one or more CSS classes to use for the field validation message.
         /// </summary>
         /// <param name="class">Any CSS class(es) to use for the field validation message</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration AddValidationClass(string @class);
-
-        /// <summary>
-        /// Any CSS class(es) to use for the field validation message.
-        /// </summary>
-        string ValidationClasses { get; }
-
-        /// <summary>
-        /// Returns readonly field configuration from the current field configuration.
-        /// </summary>
-        /// <returns>A readonly field configuration</returns>
-        IReadonlyFieldConfiguration ToReadonly();
-
+        
         /// <summary>
         /// Excludes one or more Enum values from the generated field.
         /// </summary>
         /// <param name="enumValues">The value of Enum(s) to exclude from the generated field.</param>
         /// <returns></returns>
         IFieldConfiguration Exclude(params Enum[] enumValues);
-
-        /// <summary>
-        /// Enum value(s) to exclude from the generated field.
-        /// </summary>
-        Enum[] ExcludedEnums { get; }
-
+        
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         IFieldConfiguration WithoutInlineLabel();
-
-        /// <summary>
-        /// Whether or not to use an inline &lt;label&gt;.
-        /// </summary>
-        bool HasInlineLabel { get; }
     }
 
     /// <summary>
@@ -444,6 +336,16 @@ namespace ChameleonForms.Component.Config
 
         /// <inheritdoc />
         public HtmlAttributes Attributes { get; private set; }
+
+        /// <inheritdoc />
+        public IDictionary<string, object> HtmlAttributes
+        {
+            get
+            {
+                return Attributes.Attributes.ToDictionary(x => x.Key, x => (object)x.Value);
+            }
+        }
+            
 
         /// <inheritdoc />
         public IFieldConfiguration Id(string id)
@@ -756,12 +658,6 @@ namespace ChameleonForms.Component.Config
         public string ToHtmlString()
         {
             return _field().ToHtmlString();
-        }
-
-        /// <inheritdoc />
-        public IReadonlyFieldConfiguration ToReadonly()
-        {
-            return new ReadonlyFieldConfiguration(this);
         }
 
         /// <inheritdoc />

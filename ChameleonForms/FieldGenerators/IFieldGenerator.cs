@@ -58,7 +58,7 @@ namespace ChameleonForms.FieldGenerators
         IFormTemplate Template { get; }
 
         /// <summary>
-        /// Turns the given <see cref="IFieldConfiguration"/> into a <see cref="ReadonlyFieldConfiguration"/> ready to use for generating the form field.
+        /// Turns the given <see cref="IFieldConfiguration"/> into a <see cref="FieldConfiguration"/> ready to use for generating the form field.
         /// </summary>
         /// <param name="fieldConfiguration">The field configuration to modify</param>
         /// <param name="fieldParent">The parent component of the field</param>

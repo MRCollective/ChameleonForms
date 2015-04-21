@@ -4,6 +4,19 @@ ChameleonForms Breaking Changes
 Version 2.0.0
 =============
 
+Remove the `ReadOnlyConfiguration` public class. 
+
+### Reason
+
+The class was redundant, because it just wrapped calls to `FieldConfiguration` instance. Implementing `IReadOnlyConfiguration` in `FieldCofiguration` class has more sense
+
+### Workaround
+
+The `ReadonlyConfiguration` class expected not to be widely using. In case of using remove reference to he class and/or move possible implementation to custom wrapper around `FieldConfiguration`
+
+Version 2.0.0
+=============
+
 Removed the `TTemplate` type parameter from all of the form component classes. This will only affect you if you created custom form components e.g. you extended `Component`, `Form`, `Section`, `Naviation`, etc.
 
 ### Reason
