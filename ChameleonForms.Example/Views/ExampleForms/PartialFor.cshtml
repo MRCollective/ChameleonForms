@@ -1,0 +1,21 @@
+﻿@using ChameleonForms.Component.Partial
+@model ViewModelExample
+
+@{
+    ViewBag.Title = "ViewUsingPartial";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<h2>ViewUsingPartial</h2>
+
+@using (var f = Html.BeginChameleonForm())
+{
+    using (var s = f.BeginSection())
+    {
+    @s.PartialFor(x => x, "EditorTemplates\\PartialViewModel")
+    @s.PartialForList(x => x.List, "EditorTemplates\\ListItemView")
+    }
+    
+    @f.PartialFor(x => x, "EditorTemplates\\PartialViewModel2")
+    @f.PartialForList(x => x.List, "EditorTemplates\\ListItemView2")
+}

@@ -80,16 +80,21 @@
     <Compile Include="Component\Config\FieldConfigurationExtensions.cs" />
     <Compile Include="Component\Config\ReadonlyFieldConfiguration.cs" />
     <Compile Include="Component\FieldParent.cs" />
+    <Compile Include="Component\ISection.cs" />
     <Compile Include="Component\Navigation.cs" />
     <Compile Include="Component\Field.cs" />
     <Compile Include="Component\FormComponent.cs" />
     <Compile Include="Component\Message.cs" />
+    <Compile Include="Component\Partial.cs" />
+    <Compile Include="Component\Partial\PartialProxySection.cs" />
+    <Compile Include="Component\Partial\PartialProxyForm.cs" />
     <Compile Include="Enums\DisplayType.cs" />
     <Compile Include="Enums\MessageType.cs" />
     <Compile Include="Component\Section.cs" />
     <Compile Include="Enums\EncType.cs" />
     <Compile Include="Enums\TextInputType.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="Templates\TwitterBootstrap3\ButtonSize.cs" />
     <Compile Include="Templates\TwitterBootstrap3\EmphasisStyle.cs" />
     <Compile Include="FieldGenerators\Handlers\DateTimeHandler.cs" />
@@ -129,6 +134,9 @@
       <DependentUpon>TwitterBootstrapHtmlHelpers.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\TwitterBootstrap3\ButtonHtmlAttributesExtensions.cs" />
+    <Compile Include="Utils\ReflectionUtils.cs" />
+    <Compile Include="Utils\ExpressionUtils.cs" />
+    <Compile Include="WebViewPageExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

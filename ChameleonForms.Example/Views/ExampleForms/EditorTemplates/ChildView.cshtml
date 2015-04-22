@@ -1,0 +1,9 @@
+﻿@model ChameleonForms.Example.Controllers.ChildViewModel
+
+@{
+    ViewBag.Title = "ChildView";
+}
+
+<h2>ChildView</h2>
+
+@this.ChameleonSection().FieldFor(x => x.ChildField)

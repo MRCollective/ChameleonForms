@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Component.Partial;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
@@ -11,7 +12,7 @@ namespace ChameleonForms
     /// <summary>
     /// Interface for a Chameleon Form.
     /// </summary>
-    /// <typeparam name="TModel">The view model type for the current view</typeparam>    
+    /// <typeparam name="TModel">The view model type for the current view</typeparam>
     public interface IForm<TModel> : IDisposable
     {
         /// <summary>
@@ -35,10 +36,15 @@ namespace ChameleonForms
         IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property);
     }
 
+    interface IForm
+    {
+        IForm<TModel> CreateChildProxy<TModel>(object parentExpression, HtmlHelper<TModel> helper);
+    }
+
     /// <summary>
     /// Default Chameleon Form implementation.
     /// </summary>
-    public class Form<TModel> : IForm<TModel>
+    public class Form<TModel> : IForm<TModel>, IForm
     {
         /// <inheritdoc />
         public HtmlHelper<TModel> HtmlHelper { get; private set; }
@@ -81,6 +87,12 @@ namespace ChameleonForms
         public void Dispose()
         {
             Write(Template.EndForm());
+        }
+        
+        IForm<TChild> IForm.CreateChildProxy<TChild>(object parentExpression, HtmlHelper<TChild> helper)
+        {
+            Expression<Func<TModel, TChild>> parEx = parentExpression as Expression<Func<TModel, TChild>>;
+            return new PartialProxyForm<TModel, TChild>(this, parEx, helper);
         }
     }
 

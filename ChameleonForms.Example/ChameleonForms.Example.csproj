@@ -197,6 +197,15 @@
     <Content Include="Views\Comparison\EditorTemplates\_Layout.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\MembershipType.cshtml" />
     <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
+    <Content Include="Views\ExampleForms\PartialFor.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\ExampleForms\EditorTemplates\ChildView.cshtml" />
+    <Content Include="Views\ExampleForms\EditorTemplates\ChildView2.cshtml" />
+    <Content Include="Views\ExampleForms\EditorTemplates\PartialViewModel.cshtml" />
+    <Content Include="Views\ExampleForms\EditorTemplates\PartialViewModel2.cshtml" />
+    <Content Include="Views\ExampleForms\EditorTemplates\ListItemView.cshtml" />
+    <Content Include="Views\ExampleForms\EditorTemplates\ListItemView2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -218,7 +227,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj">
-      <Project>{854754fe-f40a-47eb-b32d-646e8f35c65f}</Project>
+      <Project>{854754fe-f40a-47eb-b32d-646e8f35c65f}</Project> 
       <Name>ChameleonForms</Name>
     </ProjectReference>
   </ItemGroup>

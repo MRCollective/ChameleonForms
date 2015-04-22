@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web;
-using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component
 {
@@ -9,7 +8,6 @@ namespace ChameleonForms.Component
     /// For example the area with submit buttons.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    
     public class Navigation<TModel> : FormComponent<TModel>
     {
         /// <summary>
@@ -133,7 +131,7 @@ namespace ChameleonForms.Component
         ///     @n.Submit("Next", "next")
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <param name="form">The form the navigation is being created in</param>
         /// <returns>The form navigation</returns>
         public static Navigation<TModel> BeginNavigation<TModel>(this IForm<TModel> form)
