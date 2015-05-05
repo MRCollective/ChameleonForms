@@ -110,7 +110,7 @@
     var isRequired = fieldMetadata != null && fieldMetadata.IsRequired;
     var isInputGroup = canBeInputGroup && (isRequired || fieldConfiguration.GetBagData<bool>("DisplayAsInputGroup"));
 @:            <div class="@(isCheckboxControl ? "checkbox" : "form-group")@(!isValid ? " has-error" : string.Empty)@(RenderIfNotEmpty(fieldConfiguration.FieldContainerClasses,@<text> @fieldConfiguration.FieldContainerClasses</text>))">
-              @GetLabelHtml(labelHtml, fieldConfiguration.HasLabel, isCheckboxControl, isRadioOrCheckboxList || (!isCheckboxControl && !isInputGroup), isRequired, requiredDesignator)
+              @GetLabelHtml(labelHtml, fieldConfiguration.HasLabelElement, isCheckboxControl, isRadioOrCheckboxList || (!isCheckboxControl && !isInputGroup), isRequired, requiredDesignator)
               if (isInputGroup)
               {
 @:            <div class="input-group">

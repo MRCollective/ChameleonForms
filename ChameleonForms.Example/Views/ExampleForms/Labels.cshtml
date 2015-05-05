@@ -25,8 +25,8 @@
     }
     
     using (var s = f.BeginSection("No label")) {
-        @s.FieldFor(m => m.RequiredString).Label(new HtmlString("<strong>look at my html skillz</strong>")).WithoutLabel()
-        @s.FieldFor(m => m.RequiredString).Label("Label string").WithoutLabel()
-        @s.FieldFor(m => m.RequiredString).WithoutLabel()
+        @s.FieldFor(m => m.RequiredString).Label(new HtmlString("<strong>look at my html skillz</strong>")).WithoutLabelElement()
+        @s.FieldFor(m => m.RequiredString).Label("Label string").WithoutLabelElement()
+        @s.FieldFor(m => m.RequiredString).WithoutLabelElement()
     }
 }

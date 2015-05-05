@@ -217,5 +217,16 @@ namespace ChameleonForms.Tests.FieldGenerator
 
             Assert.That(configuration.HtmlAttributes["readonly"], Is.EqualTo("readonly"));
         }
+
+        [Test]
+        public void GetLabelHtml_should_return_display_attribute_if_WithoutLabelElement_used_and_DisplayAttribute_present()
+        {
+            var generator = Arrange(x => x.StringWithDisplayAttribute);
+            var fieldConfig = new FieldConfiguration();
+            fieldConfig.WithoutLabelElement();
+            var config = generator.PrepareFieldConfiguration(fieldConfig, FieldParent.Section);
+            var actual = generator.GetLabelHtml(config).ToString();
+            Assert.That(actual, Is.EqualTo("Use this display name"));
+        }
     }
 }
