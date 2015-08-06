@@ -657,7 +657,9 @@ namespace ChameleonForms.Component.Config
         /// <inheritdoc />
         public string ToHtmlString()
         {
-            return _field().ToHtmlString();
+            var field = _field();
+
+            return field != null ? field.ToHtmlString() : String.Empty;
         }
 
         /// <inheritdoc />
