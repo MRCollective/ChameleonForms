@@ -139,7 +139,8 @@ namespace ChameleonForms.Attributes
             {
                 throw new ArgumentException(string.Format("ExistsIn: No property Model.{0} exists for looking up values for property Model.{1}.", listProperty, memberName));
             }
-            var collectionType = collectionProperty.PropertyType.GetGenericArguments().FirstOrDefault();
+            var collectionPropertyType = collectionProperty.PropertyType;
+            var collectionType = collectionPropertyType.IsArray ? collectionPropertyType.GetElementType() : collectionPropertyType.GetGenericArguments().FirstOrDefault();
             if (collectionType != null && collectionType.GetProperty(valueProperty) == null)
             {
                 throw new ArgumentException(string.Format("ExistsIn: No property {0} exists for type {1} to look up possible values for property Model.{2}.", valueProperty, collectionType.Name, memberName));
