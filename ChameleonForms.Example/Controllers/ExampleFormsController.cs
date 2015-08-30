@@ -85,6 +85,7 @@ namespace ChameleonForms.Example.Controllers
         public ModelBindingViewModel()
         {
             List = new List<ListItem> { new ListItem { Id = 1, Name = "A" }, new ListItem { Id = 2, Name = "B" } };
+            ChoicesAsTuples = new[] { Tuple.Create(1, "A"), Tuple.Create(2, "B") };
         }
 
         public void AsList()
@@ -154,6 +155,16 @@ namespace ChameleonForms.Example.Controllers
         //public IEnumerable<int> OptionalListIds { get; set; }
         [ExistsIn("List", "Id", "Name")]
         public IEnumerable<int?> OptionalNullableListIds { get; set; }
+
+
+        // These are tested in addition to the other list tests as there
+        // was an bug manifesting when using an array of a templated type.
+        [ReadOnly(true)]
+        public Tuple<Int32, String>[] ChoicesAsTuples { get; set; }
+
+        [Required]
+        [ExistsIn("ChoicesAsTuples", "Item1", "Item2")]
+        public Int32? Choice { get; set; }
     }
 
     public class BasicViewModel
