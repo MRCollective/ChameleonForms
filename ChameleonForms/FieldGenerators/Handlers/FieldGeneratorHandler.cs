@@ -243,11 +243,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 attrs.Id(id);
                 if (HasMultipleValues(fieldGenerator))
                     AdjustHtmlForModelState(attrs, fieldGenerator);
-                yield return new HtmlString(string.Format("{0} {1}",
+                yield return new HtmlString(string.Format("<label>{0} {1}</label>",
                     HasMultipleValues(fieldGenerator)
                         ? HtmlCreator.BuildSingleCheckbox(GetFieldName(fieldGenerator), item.Selected, attrs, item.Value)
                         : fieldGenerator.HtmlHelper.RadioButtonFor(fieldGenerator.FieldProperty, item.Value, attrs.ToDictionary()),
-                    fieldGenerator.HtmlHelper.Label(id, item.Text)
+                    item.Text
                 ));
             }
         }
