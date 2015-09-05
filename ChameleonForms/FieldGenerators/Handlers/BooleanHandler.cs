@@ -72,7 +72,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             {
                 var inlineLabelText = fieldConfiguration.InlineLabelText;
 
-                var content = fieldhtml.ToHtmlString() + (inlineLabelText != null ? inlineLabelText.ToHtmlString() : FieldGenerator.GetFieldDisplayName());
+                var content = fieldhtml.ToHtmlString() + " " + (inlineLabelText != null ? inlineLabelText.ToHtmlString() : FieldGenerator.GetFieldDisplayName());
 
                 return HtmlCreator.BuildLabel(null, new HtmlString(content), null);
             }
