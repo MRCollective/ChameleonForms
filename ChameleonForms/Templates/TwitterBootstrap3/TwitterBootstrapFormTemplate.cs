@@ -34,6 +34,8 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             if (fieldParent == FieldParent.Form)
                 return;
 
+            fieldConfiguration.InlineLabelWrapsElement();
+
             fieldConfiguration.AddValidationClass("help-block");
 
             var displayType = fieldGeneratorHandler.GetDisplayType(fieldConfiguration);

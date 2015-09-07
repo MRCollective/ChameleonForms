@@ -123,5 +123,10 @@ namespace ChameleonForms.Component.Config
         /// Whether or not to use an inline &lt;label&gt;.
         /// </summary>
         bool HasInlineLabel { get; }
+
+        /// <summary>
+        /// Whether or not inline &lt;label&gt; should wrap their &lt;input&gt; element.
+        /// </summary>
+        bool ShouldInlineLabelWrapsElement { get; }
     }
 }
