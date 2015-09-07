@@ -455,9 +455,9 @@ namespace ChameleonForms.Tests.Component.Config
         [Test]
         public void Set_no_label()
         {
-            var fc = Field.Configure().WithoutLabel();
+            var fc = Field.Configure().WithoutLabelElement();
 
-            Assert.That(fc.HasLabel, Is.False);
+            Assert.That(fc.HasLabelElement, Is.False);
         }
     }
 }

@@ -47,7 +47,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             {
                 fieldConfiguration.Bag.IsCheckboxControl = true;
                 // Hide the parent label otherwise it looks weird
-                fieldConfiguration.Label("").WithoutLabel();
+                fieldConfiguration.Label("").WithoutLabelElement();
             }
 
             if (displayType == FieldDisplayType.List)

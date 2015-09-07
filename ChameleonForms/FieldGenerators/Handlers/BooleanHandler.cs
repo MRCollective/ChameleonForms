@@ -43,7 +43,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         {
             // If a list is being displayed there is no element for the label to point to so drop it
             if (fieldConfiguration.DisplayType == FieldDisplayType.List)
-                fieldConfiguration.WithoutLabel();
+                fieldConfiguration.WithoutLabelElement();
         }
 
         /// <inheritdoc />

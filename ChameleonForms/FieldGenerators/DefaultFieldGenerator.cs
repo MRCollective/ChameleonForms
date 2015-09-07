@@ -59,7 +59,7 @@ namespace ChameleonForms.FieldGenerators
             var labelText = fieldConfiguration.LabelText
                 ?? GetFieldDisplayName().ToHtml();
 
-            if (!fieldConfiguration.HasLabel)
+            if (!fieldConfiguration.HasLabelElement)
                 return labelText;
 
             var labelAttrs = new HtmlAttributes();

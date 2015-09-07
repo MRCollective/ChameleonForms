@@ -113,7 +113,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredString);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().WithoutLabel());
+            var result = g.GetLabelHtml(new FieldConfiguration().WithoutLabelElement());
 
             Assert.That(result.ToHtmlString(), Is.EqualTo("RequiredString"));
         }

@@ -259,7 +259,15 @@ namespace ChameleonForms.Component.Config
         /// Don't use a &lt;label&gt;, but still include the label text for the field.
         /// </summary>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        [Obsolete("Use WithoutLabelElementElement alias instead")]
         IFieldConfiguration WithoutLabel();
+
+        /// <summary>
+        /// Don't use a &lt;label&gt;, but still include the label text for the field.
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithoutLabelElement();
+
 
         /// <summary>
         /// Specify one or more CSS classes to use for the field label.
@@ -316,7 +324,7 @@ namespace ChameleonForms.Component.Config
             TrueString = "Yes";
             FalseString = "No";
             NoneString = "";
-            HasLabel = true;
+            HasLabelElement = true;
             Bag = new ExpandoObject();
             ExcludedEnums = new Enum[]{};
             HasInlineLabel = true;
@@ -593,14 +601,23 @@ namespace ChameleonForms.Component.Config
         public bool EmptyItemHidden { get; private set; }
 
         /// <inheritdoc />
-        public IFieldConfiguration WithoutLabel()
+        public IFieldConfiguration WithoutLabelElement()
         {
-            HasLabel = false;
+            HasLabelElement = false;
             return this;
         }
 
         /// <inheritdoc />
-        public bool HasLabel { get; private set; }
+        public IFieldConfiguration WithoutLabel()
+        {
+            return this.WithoutLabelElement();
+        }
+
+        /// <inheritdoc />
+        public bool HasLabel { get { return this.HasLabelElement; } }
+
+        /// <inheritdoc />
+        public bool HasLabelElement { get; private set; }
 
         /// <inheritdoc />
         public IFieldConfiguration AddLabelClass(string @class)

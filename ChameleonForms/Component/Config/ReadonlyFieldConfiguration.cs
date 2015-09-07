@@ -92,8 +92,13 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// Whether or not to use a &lt;label&gt;.
         /// </summary>
+        [Obsolete("Use HasLabelElement alias instead")]
         bool HasLabel { get; }
 
+        /// <summary>
+        /// Whether or not to use a &lt;label&gt;.
+        /// </summary>
+        bool HasLabelElement { get; }
         /// <summary>
         /// Any CSS class(es) to use for the field label.
         /// </summary>

@@ -96,7 +96,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
 
             Assert.That(config.GetBagData<bool>("IsCheckboxControl"), Is.True);
             Assert.That(config.LabelText.ToHtmlString(), Is.EqualTo(string.Empty));
-            Assert.That(config.HasLabel, Is.False);
+            Assert.That(config.HasLabelElement, Is.False);
         }
 
         [Test]
@@ -108,7 +108,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
 
             Assert.That(config.GetBagData<bool>("IsCheckboxControl"), Is.False);
             Assert.That(config.LabelText.ToHtmlString(), Is.EqualTo("label"));
-            Assert.That(config.HasLabel, Is.True);
+            Assert.That(config.HasLabelElement, Is.True);
         }
 
         [Test]
