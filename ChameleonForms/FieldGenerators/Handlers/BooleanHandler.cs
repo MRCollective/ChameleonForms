@@ -68,21 +68,18 @@ namespace ChameleonForms.FieldGenerators.Handlers
             AdjustHtmlForModelState(attrs, FieldGenerator);
             var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(FieldGenerator), GetValue() ?? false, attrs);
 
-            IHtmlString labelHtml;
             if (fieldConfiguration.HasInlineLabel)
             {
-                labelHtml = HtmlCreator.BuildLabel(
-                    GetFieldName(FieldGenerator),
-                    fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
-                    null
-                    );
+                var inlineLabelText = fieldConfiguration.InlineLabelText;
+
+                var content = fieldhtml.ToHtmlString() + " " + (inlineLabelText != null ? inlineLabelText.ToHtmlString() : FieldGenerator.GetFieldDisplayName());
+
+                return HtmlCreator.BuildLabel(null, new HtmlString(content), null);
             }
             else
             {
-                labelHtml = new HtmlString(string.Empty);
+                return fieldhtml;
             }
-
-            return new HtmlString(string.Format("{0} {1}", fieldhtml, labelHtml));
         }
 
         private IEnumerable<SelectListItem> GetBooleanSelectList(IReadonlyFieldConfiguration fieldConfiguration)
