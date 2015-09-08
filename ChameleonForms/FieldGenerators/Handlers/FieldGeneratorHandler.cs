@@ -246,7 +246,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 var fieldHtml = HasMultipleValues(fieldGenerator)
                         ? HtmlCreator.BuildSingleCheckbox(GetFieldName(fieldGenerator), item.Selected, attrs, item.Value)
                         : fieldGenerator.HtmlHelper.RadioButtonFor(fieldGenerator.FieldProperty, item.Value, attrs.ToDictionary());
-                if (fieldConfiguration.ShouldInlineLabelWrapsElement)
+                if (fieldConfiguration.ShouldInlineLabelWrapElement)
                     yield return new HtmlString(string.Format("<label>{0} {1}</label>", fieldHtml, item.Text));
                 else
                     yield return new HtmlString(string.Format("{0} {1}", fieldHtml, fieldGenerator.HtmlHelper.Label(id, item.Text)));

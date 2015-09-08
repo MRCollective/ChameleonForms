@@ -699,14 +699,14 @@ namespace ChameleonForms.Component.Config
         /// <inheritdoc />
         public IFieldConfiguration WithoutInlineLabel()
         {
-            this.HasInlineLabel = false;
+            HasInlineLabel = false;
             return this;
         }
 
         /// <inheritdoc />
         public IFieldConfiguration InlineLabelWrapsElement(bool wrapElement = true)
         {
-            this.ShouldInlineLabelWrapsElement = true;
+            ShouldInlineLabelWrapElement = wrapElement;
             return this;
         }
 
@@ -714,6 +714,6 @@ namespace ChameleonForms.Component.Config
         public bool HasInlineLabel { get; private set; }
 
         /// <inheritdoc />
-        public bool ShouldInlineLabelWrapsElement { get; private set; }
+        public bool ShouldInlineLabelWrapElement { get; private set; }
     }
 }

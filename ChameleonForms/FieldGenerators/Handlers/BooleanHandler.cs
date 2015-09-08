@@ -70,7 +70,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
             if (fieldConfiguration.HasInlineLabel)
             {
-                if (fieldConfiguration.ShouldInlineLabelWrapsElement)
+                if (fieldConfiguration.ShouldInlineLabelWrapElement)
                 {
                     var inlineLabelText = fieldConfiguration.InlineLabelText;
 
