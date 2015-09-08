@@ -38,6 +38,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Use_correct_html_for_single_checkbox_with_label_wrapping_element()
+        {
+            var g = Arrange(m => m.RequiredBoolean);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().InlineLabelWrapsElement());
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_boolean_list_and_false_value()
         {
             var g = Arrange(m => m.RequiredBoolean);
@@ -93,6 +103,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
             var g = Arrange(m => m.RequiredBoolean);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList().WithTrueAs("True").WithFalseAs("False"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_boolean_list_with_label_wrapping_element()
+        {
+            var g = Arrange(m => m.RequiredBoolean);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList().InlineLabelWrapsElement());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
