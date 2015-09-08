@@ -24,6 +24,8 @@ namespace ChameleonForms.Tests.ModelBinders
             var c = AutoSubstituteContainer.Create();
             _context = c.Resolve<ControllerContext>();
             _formCollection = new FormCollection();
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
         }
 
         private ModelBindingContext ArrangeBindingContext()

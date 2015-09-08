@@ -26,7 +26,9 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
         public ModelFieldType(Type fieldType, string format)
         {
             _fieldType = fieldType;
-            Format = format.Replace("{0:", "").Replace("}", "");
+
+            if (format != null && format != "{0}")
+                Format = format.Replace("{0:", "").Replace("}", "");
         }
 
         public object GetValueFromString(string stringValue)
@@ -68,7 +70,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
             var underlyingType = UnderlyingType;
 
             if (underlyingType == typeof (DateTime) && !string.IsNullOrEmpty(Format))
-                return DateTime.ParseExact(value, Format, new DateTimeFormatInfo(), DateTimeStyles.None);
+                return DateTime.ParseExact(value, Format, null, DateTimeStyles.None);
 
             return underlyingType.IsEnum
                 ? Enum.Parse(underlyingType, value)

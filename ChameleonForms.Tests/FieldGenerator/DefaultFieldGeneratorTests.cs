@@ -160,6 +160,8 @@ namespace ChameleonForms.Tests.FieldGenerator
             var autoSubstitute = AutoSubstituteContainer.Create();
             H = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
             ExampleFieldConfiguration = new FieldConfiguration().Attr("data-attr", "value");
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
         }
 
         protected DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, params Action<TestFieldViewModel>[] vmSetter)
