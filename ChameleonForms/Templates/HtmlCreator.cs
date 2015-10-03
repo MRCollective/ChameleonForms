@@ -131,7 +131,8 @@ namespace ChameleonForms.Templates
         public static IHtmlString BuildLabel(string @for, IHtmlString labelText, HtmlAttributes htmlAttributes)
         {
             var t = new TagBuilder("label");
-            t.Attributes.Add("for", TagBuilder.CreateSanitizedId(@for));
+            if (@for != null)
+                t.Attributes.Add("for", TagBuilder.CreateSanitizedId(@for));
             t.InnerHtml = labelText.ToHtmlString();
 
             if (htmlAttributes != null)

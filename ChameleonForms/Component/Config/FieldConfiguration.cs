@@ -298,10 +298,17 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Exclude(params Enum[] enumValues);
         
         /// <summary>
-        /// 
+        /// Specify that no inline label should be generated.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithoutInlineLabel();
+
+        /// <summary>
+        /// Specify that inline labels should wrap their input element. Important for bootstrap.
+        /// </summary>
+        /// <param name="wrapElement">True if the input element should be wrapped.</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration InlineLabelWrapsElement(bool wrapElement = true);
     }
 
     /// <summary>
@@ -692,11 +699,21 @@ namespace ChameleonForms.Component.Config
         /// <inheritdoc />
         public IFieldConfiguration WithoutInlineLabel()
         {
-            this.HasInlineLabel = false;
+            HasInlineLabel = false;
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration InlineLabelWrapsElement(bool wrapElement = true)
+        {
+            ShouldInlineLabelWrapElement = wrapElement;
             return this;
         }
 
         /// <inheritdoc />
         public bool HasInlineLabel { get; private set; }
+
+        /// <inheritdoc />
+        public bool ShouldInlineLabelWrapElement { get; private set; }
     }
 }
