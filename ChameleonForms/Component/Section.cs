@@ -113,6 +113,18 @@ namespace ChameleonForms.Component
         }
 
         /// <summary>
+        /// Renders the given partial in the context of the parent model.
+        /// </summary>
+        /// <typeparam name="TModel">The form model type</typeparam>
+        /// <param name="section">The current section</param>
+        /// <param name="partialViewName">The name of the partial view to render</param>
+        /// <returns>The HTML for the rendered partial</returns>
+        public static IHtmlString Partial<TModel>(this Section<TModel> section, [AspMvcPartialView] string partialViewName)
+        {
+            return PartialFor(section, m => m, partialViewName);
+        }
+
+        /// <summary>
         /// Renders the given partial in the context of the given property.
         /// Use PartialFor(m => m) to render a partial for the model itself rather than a child property.
         /// </summary>
