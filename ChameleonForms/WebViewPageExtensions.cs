@@ -43,7 +43,7 @@ namespace ChameleonForms
         /// <typeparam name="TPartialViewModel">View model of the partial view</typeparam>
         /// <param name="partial">View page for partial view</param>
         /// <returns>Current form section</returns>
-        public static Section<TPartialViewModel> FormSection<TPartialViewModel>(this WebViewPage<TPartialViewModel> partial)
+        public static ISection<TPartialViewModel> FormSection<TPartialViewModel>(this WebViewPage<TPartialViewModel> partial)
         {
             object currentSection;
             if (!partial.ViewData.TryGetValue(CurrentFormSectionViewDataKey, out currentSection))
@@ -51,7 +51,7 @@ namespace ChameleonForms
                 throw new InvalidOperationException("Not currently inside a form section.");
             }
 
-            return currentSection as Section<TPartialViewModel>;
+            return (currentSection as ISection).CreatePartialSection(Form(partial));
         }
 
         /// <summary>

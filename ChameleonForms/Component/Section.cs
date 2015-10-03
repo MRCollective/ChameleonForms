@@ -4,17 +4,33 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
-using ChameleonForms.Templates;
 using JetBrains.Annotations;
 
 namespace ChameleonForms.Component
 {
     /// <summary>
+    /// Interface for a modeless cast of a ChameleonForms Section.
+    /// </summary>
+    public interface ISection
+    {
+        /// <summary>
+        /// Returns a section with the same characteristics as the current section, but using the given partial form.
+        /// </summary>
+        /// <typeparam name="TPartialModel">The model type of the partial view</typeparam>
+        /// <returns>A section with the same characteristics as the current section, but using the given partial form</returns>
+        ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm);
+    }
+
+    /// <summary>
+    /// Tagging interface for a ChameleonForms Section with a model type.
+    /// </summary>
+    public interface ISection<TModel> : IFormComponent<TModel> {}
+
+    /// <summary>
     /// Wraps the output of a form section.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    
-    public class Section<TModel> : FormComponent<TModel>
+    public class Section<TModel> : FormComponent<TModel>, ISection, ISection<TModel>
     {
         private readonly IHtmlString _heading;
         private readonly bool _nested;
@@ -64,6 +80,12 @@ namespace ChameleonForms.Component
         public override IHtmlString End()
         {
             return _nested ? Form.Template.EndNestedSection() : Form.Template.EndSection();
+        }
+
+        /// <inheritdoc />
+        public ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm)
+        {
+            return new PartialViewSection<TPartialModel>(partialModelForm);
         }
     }
 
@@ -119,7 +141,7 @@ namespace ChameleonForms.Component
         /// <param name="section">The current section</param>
         /// <param name="partialViewName">The name of the partial view to render</param>
         /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlString Partial<TModel>(this Section<TModel> section, [AspMvcPartialView] string partialViewName)
+        public static IHtmlString Partial<TModel>(this ISection<TModel> section, [AspMvcPartialView] string partialViewName)
         {
             return PartialFor(section, m => m, partialViewName);
         }
@@ -134,7 +156,7 @@ namespace ChameleonForms.Component
         /// <param name="partialModelProperty">The property to use for the partial model</param>
         /// <param name="partialViewName">The name of the partial view to render</param>
         /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlString PartialFor<TModel, TPartialModel>(this Section<TModel> section, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
+        public static IHtmlString PartialFor<TModel, TPartialModel>(this ISection<TModel> section, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
         {
             var formModel = (TModel)section.Form.HtmlHelper.ViewData.ModelMetadata.Model;
             var viewData = new ViewDataDictionary(section.Form.HtmlHelper.ViewData);
