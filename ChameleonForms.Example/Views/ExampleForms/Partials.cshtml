@@ -1,0 +1,18 @@
+﻿@model ViewModelExample
+
+@{
+    ViewBag.Title = "Partials";
+}
+
+<h1>Partials</h1>
+
+@using (var f = Html.BeginChameleonForm())
+{
+    @f.PartialFor(m => m, "_ParentPartial")
+    @f.PartialFor(m => m.Child, "_ChildPartial")
+    
+    using (var n = f.BeginNavigation())
+    {
+         @n.Submit("Submit")
+    }
+}
