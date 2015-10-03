@@ -11,6 +11,13 @@
     @f.PartialFor(m => m, "_ParentPartial")
     @f.PartialFor(m => m.Child, "_ChildPartial")
     
+    using (var s = f.BeginSection("This is in the parent view"))
+    {
+        @s.FieldFor(m => m.Decimal).Append("in parent view")
+        @s.PartialFor(m => m, "_ParentPartial")
+        @s.FieldFor(m => m.SomeCheckbox).Append(" in parent view")
+    }
+
     using (var n = f.BeginNavigation())
     {
          @n.Submit("Submit")

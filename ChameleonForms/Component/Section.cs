@@ -1,7 +1,11 @@
-﻿using System.Web;
+﻿using System;
+using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
+using JetBrains.Annotations;
 
 namespace ChameleonForms.Component
 {
@@ -106,6 +110,26 @@ namespace ChameleonForms.Component
         public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, string heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml, htmlAttributes);
+        }
+
+        /// <summary>
+        /// Renders the given partial in the context of the given property.
+        /// Use PartialFor(m => m) to render a partial for the model itself rather than a child property.
+        /// </summary>
+        /// <typeparam name="TModel">The form model type</typeparam>
+        /// <typeparam name="TPartialModel">The type of the model property to use for the partial model</typeparam>
+        /// <param name="section">The current section</param>
+        /// <param name="partialModelProperty">The property to use for the partial model</param>
+        /// <param name="partialViewName">The name of the partial view to render</param>
+        /// <returns>The HTML for the rendered partial</returns>
+        public static IHtmlString PartialFor<TModel, TPartialModel>(this Section<TModel> section, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
+        {
+            var formModel = (TModel)section.Form.HtmlHelper.ViewData.ModelMetadata.Model;
+            var viewData = new ViewDataDictionary(section.Form.HtmlHelper.ViewData);
+            viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
+            viewData[WebViewPageExtensions.CurrentFormViewDataKey] = section.Form;
+            viewData[WebViewPageExtensions.CurrentFormSectionViewDataKey] = section;
+            return section.Form.HtmlHelper.Partial(partialViewName, partialModelProperty.Compile().Invoke(formModel), viewData);
         }
     }
 }
