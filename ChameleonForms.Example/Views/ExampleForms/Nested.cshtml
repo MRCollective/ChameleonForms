@@ -1,0 +1,19 @@
+﻿@model NestedViewModel
+
+@Model.ReadOnlyValue
+
+@using (var h = Html.BeginContext(m => m.Writable))
+{
+    using (var f = h.BeginChameleonForm())
+    {
+        using (var s = f.BeginSection())
+        {
+            @s.FieldFor(m => m.StringValue)
+            @s.FieldFor(m => m.IntValue)
+        }
+        using (var n = f.BeginNavigation())
+        {
+            @n.Submit("Submit")
+        }
+    }
+}

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.UI.WebControls;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
 
@@ -20,6 +23,17 @@ namespace ChameleonForms.Example.Controllers
         public ActionResult Form1(ViewModelExample vm)
         {
             return View(vm);
+        }
+
+        public ActionResult Nested()
+        {
+            return View(new NestedViewModel("readonly"));
+        }
+
+        [HttpPost]
+        public ActionResult Nested(WriteViewModel vm)
+        {
+            return View(new NestedViewModel("readonly", vm));
         }
 
         public ActionResult BasicExample()
@@ -167,6 +181,31 @@ namespace ChameleonForms.Example.Controllers
         public Int32? Choice { get; set; }
     }
 
+    public class NestedViewModel
+    {
+        public NestedViewModel(string readonlyValue)
+        {
+            ReadOnlyValue = readonlyValue;
+            Writable = new WriteViewModel();
+        }
+
+        public NestedViewModel(string readonlyValue, WriteViewModel writable)
+            : this (readonlyValue)
+        {
+            Writable = writable;
+        }
+
+        public string ReadOnlyValue { get; private set; }
+        public WriteViewModel Writable { get; private set; }
+    }
+
+    public class WriteViewModel
+    {
+        public string StringValue { get; set; }
+
+        public int IntValue { get; set; }
+    }
+
     public class BasicViewModel
     {
         [Required]
@@ -246,5 +285,35 @@ namespace ChameleonForms.Example.Controllers
     {
         public string ChildField { get; set; }
         public SomeEnum SomeEnum { get; set; }
+    }
+
+    public static class HtmlHelperExtensions
+    {
+        public static DisposableHtmlHelper<TContext> BeginContext<TModel, TContext>(
+            this HtmlHelper<TModel> htmlHelper,
+            Expression<Func<TModel, TContext>> contextProperty
+        )
+        {
+            var container = new ViewDataContainer(htmlHelper.ViewDataContainer);
+            container.ViewData.Model = contextProperty.Compile().Invoke(htmlHelper.ViewData.Model);
+            return new DisposableHtmlHelper<TContext>(htmlHelper.ViewContext, container, htmlHelper.RouteCollection);
+        }
+    }
+
+    public class DisposableHtmlHelper<TModel> : HtmlHelper<TModel>, IDisposable
+    {
+        public DisposableHtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer) : base(viewContext, viewDataContainer) {}
+        public DisposableHtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer, RouteCollection routeCollection) : base(viewContext, viewDataContainer, routeCollection) {}
+        public void Dispose() {}
+    }
+
+    public class ViewDataContainer : IViewDataContainer
+    {
+        public ViewDataContainer(IViewDataContainer originalContainer)
+        {
+            ViewData = new ViewDataDictionary(originalContainer.ViewData);
+        }
+
+        public ViewDataDictionary ViewData { get; set; }
     }
 }

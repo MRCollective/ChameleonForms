@@ -200,6 +200,7 @@
     <Content Include="Views\Comparison\EditorTemplates\_Layout.cshtml" />
     <Content Include="Views\Comparison\EditorTemplates\MembershipType.cshtml" />
     <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
+    <Content Include="Views\ExampleForms\Nested.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
