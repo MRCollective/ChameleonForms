@@ -76,6 +76,11 @@ namespace ChameleonForms.Example.Controllers
         {
             return View();
         }
+
+        public ActionResult PartialFor()
+        {
+            return this.View(new ViewModelExample());
+        }
     }
 
     public class ModelBindingViewModel

@@ -28,7 +28,7 @@ namespace ChameleonForms.Tests.Component
             _f.Template.EndNestedSection().Returns(_nestedEndHtml);
         }
 
-        private Section<object> Arrange(bool isNested)
+        private ISection<object> Arrange(bool isNested)
         {
             return new Section<object>(_f, _heading, isNested);
         }

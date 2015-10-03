@@ -3,7 +3,6 @@ using System.Linq.Expressions;
 using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
-using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component
 {
@@ -26,7 +25,6 @@ namespace ChameleonForms.Component
     /// Wraps the output of a single form field.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    
     public class Field<TModel> : FormComponent<TModel>
     {
         private readonly IFieldGenerator _fieldGenerator;
@@ -80,16 +78,16 @@ namespace ChameleonForms.Component
         /// <example>
         /// @s.FieldFor(m => m.FirstName)
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <returns>A field configuration object that allows you to configure the field</returns>
-        public static IFieldConfiguration FieldFor<TModel, T>(this Section<TModel> section, Expression<Func<TModel, T>> property)
+        public static IFieldConfiguration FieldFor<TModel, T>(this ISection<TModel> section, Expression<Func<TModel, T>> property)
         {
             var fc = new FieldConfiguration();
             // ReSharper disable ObjectCreationAsStatement
-            new Field<TModel>(section.Form, false, section.Form.GetFieldGenerator(property), fc);
+            new Field<TModel>(section.Form, false, section.GetFieldGenerator(property), fc);
             // ReSharper restore ObjectCreationAsStatement
             return fc;
         }
@@ -102,13 +100,13 @@ namespace ChameleonForms.Component
         ///     @f.FieldFor(m => m.PositionTitle)
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <param name="config">Any configuration information for the field</param>
         /// <returns>The form field</returns>
-        public static Field<TModel> BeginFieldFor<TModel, T>(this Section<TModel> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null)
+        public static Field<TModel> BeginFieldFor<TModel, T>(this ISection<TModel> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null)
         {
             return new Field<TModel>(section.Form, true, section.Form.GetFieldGenerator(property), config);
         }
@@ -121,7 +119,7 @@ namespace ChameleonForms.Component
         ///     @f.FieldFor(m => m.PositionTitle)
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="field">The parent field the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
@@ -143,7 +141,7 @@ namespace ChameleonForms.Component
         ///     @f.FieldFor(m => m.PositionTitle)
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="form">The form the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
@@ -163,7 +161,7 @@ namespace ChameleonForms.Component
         ///     @f.LabelFor(m => m.PositionTitle)
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="form">The form the label is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the label for</param>
@@ -183,7 +181,7 @@ namespace ChameleonForms.Component
         ///     @f.ValidationMessageFor(m => m.PositionTitle)
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="form">The form the label is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the validation message for</param>

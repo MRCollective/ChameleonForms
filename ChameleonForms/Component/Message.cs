@@ -9,7 +9,6 @@ namespace ChameleonForms.Component
     /// Wraps the output of a message to display to a user.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    
     public class Message<TModel> : FormComponent<TModel>
     {
         private readonly MessageType _messageType;
@@ -74,7 +73,7 @@ namespace ChameleonForms.Component
         ///     @m.Paragraph(string.Format("Your item was successfully created with id {0}", Model.Id))
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>
         /// <param name="form">The form the message is being created in</param>
         /// <param name="messageType">The type of message to display</param>
         /// <param name="heading">The heading for the message</param>
