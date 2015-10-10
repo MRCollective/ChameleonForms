@@ -86,6 +86,7 @@ namespace ChameleonForms
         public DisposableHtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer) : base(viewContext, viewDataContainer) {}
         /// <inheritdoc />
         public DisposableHtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer, RouteCollection routeCollection) : base(viewContext, viewDataContainer, routeCollection) {}
+        /// <inheritdoc />
         public void Dispose() {}
     }
 }
