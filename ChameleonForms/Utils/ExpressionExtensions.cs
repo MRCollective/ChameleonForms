@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 
 namespace ChameleonForms.Utils
 {
+    // http://stackoverflow.com/questions/10898800/combine-two-linq-expressions-to-inject-navigation-property
     static class ExpressionExtensions
     {
         public static Expression<Func<T, TProperty>> Combine<T, TNav, TProperty>(this Expression<Func<T, TNav>> parent, Expression<Func<TNav, TProperty>> nav)
