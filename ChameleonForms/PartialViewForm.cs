@@ -8,6 +8,9 @@ using ChameleonForms.Utils;
 
 namespace ChameleonForms
 {
+    /// <summary>
+    /// Form that looks like the parent form, but writes to the text writer for the partial otherwise the output is out of order.
+    /// </summary>
     internal class PartialViewForm<TModel, TPartialModel> : IForm<TPartialModel>
     {
         private readonly IForm<TModel> _parentForm;
