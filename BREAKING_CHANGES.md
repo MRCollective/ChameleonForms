@@ -4,6 +4,19 @@ ChameleonForms Breaking Changes
 Version 2.0.0
 =============
 
+Deprecated `WithoutLabel` method on `IFieldConfiguration`. It still works (for now), but the method has been marked with the `[Obsolete]` attribute.
+
+### Reason
+
+The method has been renamed to `WithoutLabelElement` since it more closely reflects what the method does.
+
+### Workaround
+
+Change all instances of `WithoutLabel` to `WithoutLabelElement`.
+
+Version 2.0.0
+=============
+
 Remove the `ReadOnlyConfiguration` public class. 
 
 ### Reason
