@@ -91,6 +91,7 @@
     <Compile Include="Enums\TextInputType.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="PartialViewForm.cs" />
+    <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="PartialViewSection.cs" />
     <Compile Include="ReSharper\ReSharperAnnotations.cs" />
     <Compile Include="Templates\TwitterBootstrap3\ButtonSize.cs" />
