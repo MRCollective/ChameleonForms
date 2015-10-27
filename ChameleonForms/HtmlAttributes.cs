@@ -194,6 +194,12 @@ namespace ChameleonForms
             return sb.ToString();
         }
 
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return ToHtmlString();
+        }
+
         /// <summary>
         /// Returns the HTML attributes as a dictionary.
         /// </summary>
