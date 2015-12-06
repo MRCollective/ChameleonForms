@@ -1,16 +1,36 @@
-﻿using System.Web;
+﻿using System;
+using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
-using ChameleonForms.Templates;
+using JetBrains.Annotations;
 
 namespace ChameleonForms.Component
 {
     /// <summary>
+    /// Interface for a modeless cast of a ChameleonForms Section.
+    /// </summary>
+    public interface ISection
+    {
+        /// <summary>
+        /// Returns a section with the same characteristics as the current section, but using the given partial form.
+        /// </summary>
+        /// <typeparam name="TPartialModel">The model type of the partial view</typeparam>
+        /// <returns>A section with the same characteristics as the current section, but using the given partial form</returns>
+        ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm);
+    }
+
+    /// <summary>
+    /// Tagging interface for a ChameleonForms Section with a model type.
+    /// </summary>
+    public interface ISection<TModel> : IFormComponent<TModel> {}
+
+    /// <summary>
     /// Wraps the output of a form section.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    
-    public class Section<TModel> : FormComponent<TModel>
+    public class Section<TModel> : FormComponent<TModel>, ISection, ISection<TModel>
     {
         private readonly IHtmlString _heading;
         private readonly bool _nested;
@@ -61,6 +81,12 @@ namespace ChameleonForms.Component
         {
             return _nested ? Form.Template.EndNestedSection() : Form.Template.EndSection();
         }
+
+        /// <inheritdoc />
+        public ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm)
+        {
+            return new PartialViewSection<TPartialModel>(partialModelForm);
+        }
     }
 
     /// <summary>
@@ -106,6 +132,38 @@ namespace ChameleonForms.Component
         public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, string heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml, htmlAttributes);
+        }
+
+        /// <summary>
+        /// Renders the given partial in the context of the parent model.
+        /// </summary>
+        /// <typeparam name="TModel">The form model type</typeparam>
+        /// <param name="section">The current section</param>
+        /// <param name="partialViewName">The name of the partial view to render</param>
+        /// <returns>The HTML for the rendered partial</returns>
+        public static IHtmlString Partial<TModel>(this ISection<TModel> section, [AspMvcPartialView] string partialViewName)
+        {
+            return PartialFor(section, m => m, partialViewName);
+        }
+
+        /// <summary>
+        /// Renders the given partial in the context of the given property.
+        /// Use PartialFor(m => m) to render a partial for the model itself rather than a child property.
+        /// </summary>
+        /// <typeparam name="TModel">The form model type</typeparam>
+        /// <typeparam name="TPartialModel">The type of the model property to use for the partial model</typeparam>
+        /// <param name="section">The current section</param>
+        /// <param name="partialModelProperty">The property to use for the partial model</param>
+        /// <param name="partialViewName">The name of the partial view to render</param>
+        /// <returns>The HTML for the rendered partial</returns>
+        public static IHtmlString PartialFor<TModel, TPartialModel>(this ISection<TModel> section, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
+        {
+            var formModel = (TModel)section.Form.HtmlHelper.ViewData.ModelMetadata.Model;
+            var viewData = new ViewDataDictionary(section.Form.HtmlHelper.ViewData);
+            viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
+            viewData[WebViewPageExtensions.CurrentFormViewDataKey] = section.Form;
+            viewData[WebViewPageExtensions.CurrentFormSectionViewDataKey] = section;
+            return section.Form.HtmlHelper.Partial(partialViewName, partialModelProperty.Compile().Invoke(formModel), viewData);
         }
     }
 }

@@ -85,7 +85,7 @@ namespace ChameleonForms.Component
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <returns>A field configuration object that allows you to configure the field</returns>
-        public static IFieldConfiguration FieldFor<TModel, T>(this Section<TModel> section, Expression<Func<TModel, T>> property)
+        public static IFieldConfiguration FieldFor<TModel, T>(this ISection<TModel> section, Expression<Func<TModel, T>> property)
         {
             var fc = new FieldConfiguration();
             // ReSharper disable ObjectCreationAsStatement
@@ -108,7 +108,7 @@ namespace ChameleonForms.Component
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <param name="config">Any configuration information for the field</param>
         /// <returns>The form field</returns>
-        public static Field<TModel> BeginFieldFor<TModel, T>(this Section<TModel> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null)
+        public static Field<TModel> BeginFieldFor<TModel, T>(this ISection<TModel> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null)
         {
             return new Field<TModel>(section.Form, true, section.Form.GetFieldGenerator(property), config);
         }

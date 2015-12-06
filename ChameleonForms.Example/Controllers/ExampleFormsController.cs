@@ -76,6 +76,17 @@ namespace ChameleonForms.Example.Controllers
         {
             return View();
         }
+
+        public ActionResult Partials()
+        {
+            return View(new ViewModelExample{TextAreaField = "Initial value"});
+        }
+
+        [HttpPost]
+        public ActionResult Partials(ViewModelExample vm)
+        {
+            return View(vm);
+        }
     }
 
     public class ModelBindingViewModel
@@ -158,7 +169,7 @@ namespace ChameleonForms.Example.Controllers
 
 
         // These are tested in addition to the other list tests as there
-        // was an bug manifesting when using an array of a templated type.
+        // was a bug manifesting when using an array of a templated type.
         [ReadOnly(true)]
         public Tuple<Int32, String>[] ChoicesAsTuples { get; set; }
 

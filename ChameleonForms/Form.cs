@@ -2,17 +2,34 @@
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
+using JetBrains.Annotations;
 
 namespace ChameleonForms
 {
     /// <summary>
+    /// Interface for a modeless cast of a Chameleon Form.
+    /// </summary>
+    public interface IForm
+    {
+        /// <summary>
+        /// Returns a wrapped <see cref="PartialViewForm{TModel,TPartialModel}"/> for the given partial view information.
+        /// </summary>
+        /// <typeparam name="TPartialModel">The model type of the partial view</typeparam>
+        /// <param name="partialModelExpression">The expression that identifies the partial model</param>
+        /// <param name="partialViewHelper">The HTML Helper from the partial view</param>
+        /// <returns>The PartialViewForm wrapping the original form</returns>
+        IForm<TPartialModel> CreatePartialForm<TPartialModel>(object partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper);
+    }
+
+    /// <summary>
     /// Interface for a Chameleon Form.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>    
-    public interface IForm<TModel> : IDisposable
+    public interface IForm<TModel> : IForm, IDisposable
     {
         /// <summary>
         /// The HTML helper for the current view.
@@ -82,6 +99,13 @@ namespace ChameleonForms
         {
             Write(Template.EndForm());
         }
+
+        /// <inheritdoc />
+        public IForm<TPartialModel> CreatePartialForm<TPartialModel>(object partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper)
+        {
+            var partialModelAsExpression = partialModelExpression as Expression<Func<TModel, TPartialModel>>;
+            return new PartialViewForm<TModel, TPartialModel>(this, partialViewHelper, partialModelAsExpression);
+        }
     }
 
     /// <summary>
@@ -107,6 +131,37 @@ namespace ChameleonForms
         public static IForm<TModel> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             return new Form<TModel>(helper, FormTemplate.Default, action, method, htmlAttributes, enctype);
+        }
+
+        /// <summary>
+        /// Renders the given partial in the context of the parent model.
+        /// </summary>
+        /// <typeparam name="TModel">The form model type</typeparam>
+        /// <param name="form">The form</param>
+        /// <param name="partialViewName">The name of the partial view to render</param>
+        /// <returns>The HTML for the rendered partial</returns>
+        public static IHtmlString Partial<TModel>(this IForm<TModel> form, [AspMvcPartialView] string partialViewName)
+        {
+            return PartialFor(form, m => m, partialViewName);
+        }
+
+        /// <summary>
+        /// Renders the given partial in the context of the given property.
+        /// Use PartialFor(m => m, ...) pr Partial(...) to render a partial for the model itself rather than a child property.
+        /// </summary>
+        /// <typeparam name="TModel">The form model type</typeparam>
+        /// <typeparam name="TPartialModel">The type of the model property to use for the partial model</typeparam>
+        /// <param name="form">The form</param>
+        /// <param name="partialModelProperty">The property to use for the partial model</param>
+        /// <param name="partialViewName">The name of the partial view to render</param>
+        /// <returns>The HTML for the rendered partial</returns>
+        public static IHtmlString PartialFor<TModel, TPartialModel>(this IForm<TModel> form, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
+        {
+            var formModel = (TModel) form.HtmlHelper.ViewData.ModelMetadata.Model;
+            var viewData = new ViewDataDictionary(form.HtmlHelper.ViewData);
+            viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
+            viewData[WebViewPageExtensions.CurrentFormViewDataKey] = form;
+            return form.HtmlHelper.Partial(partialViewName, partialModelProperty.Compile().Invoke(formModel), viewData);
         }
     }
 }
