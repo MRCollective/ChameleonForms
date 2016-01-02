@@ -38,8 +38,6 @@ So what does a ChameleonForms form look like? Here is a (very) basic example:
 
 [Find out more](http://chameleonforms.readthedocs.org/en/latest/why/) about why we created ChameleonForms and the advantages it gives you.
 
-The CI Server for this project is hosted at <http://ci.robdmoore.id.au:8010/>. It is hosted using a free license of [TeamCity Enterprise](https://www.jetbrains.com/teamcity/) thanks to the generous supprot of [Jetbrains](https://www.jetbrains.com/).
-
 Installing ChameleonForms
 -------------------------
 ChameleonForms is available via [NuGet](http://www.nuget.org/packages/chameleonforms).
@@ -54,6 +52,10 @@ Contributors
 * [robdmoore](http://github.com/robdmoore)
 * [mdaviesnet](https://github.com/mattdavies)
 * [royce](https://github.com/royce)
+
+### Other contributors
+
+The core team would like to thank everyone that has contributed code to this project! Check out the [contributors graph](https://github.com/MRCollective/ChameleonForms/graphs/contributors) to see them :)
 
 Documentation
 -------------
