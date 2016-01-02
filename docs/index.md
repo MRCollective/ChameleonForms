@@ -54,6 +54,7 @@ We expect that you know how to use ASP.NET MVC's form generation, model-binding 
 
 ## Form structure
 Examples for generating a form and each type of default component within the form. The following pages show both the ChameleonForms syntax, as well as the default generated HTML (which you can easily override to suit your own needs).
+
 * [Form](the-form.md) - How to output and configure the containing form
 * [Message](the-message.md) - How to output and configure a message
 * [Section](the-section.md) - How to output and configure a form section
