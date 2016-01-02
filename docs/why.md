@@ -1,6 +1,6 @@
 # Why is ChameleonForms needed?
 
-[tl;dr](https://github.com/MRCollective/ChameleonForms/wiki/why#where-does-chameleonforms-fit-in)
+[tl;dr](why.md#where-does-chameleonforms-fit-in)
 
 ## The core problems with HTML form development
 

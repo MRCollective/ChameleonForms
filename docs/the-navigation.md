@@ -124,7 +124,7 @@ using (var n = f.BeginNavigation()) {
 Extending Navigation Buttons
 ----------------------------
 
-See [the HTML Attributes documentation](https://github.com/MRCollective/ChameleonForms/wiki/html-attributes#extending-navigation-buttons-specifically) for more information.
+See [the HTML Attributes documentation](html-attributes.md#extending-navigation-buttons-specifically) for more information.
 
 Default HTML
 ------------
