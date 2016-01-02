@@ -13,10 +13,10 @@ pages:
   - Field Configuration: field-configuration.md
   - HTML Attributes: html-attributes.md
 - Form structure:
-  - Form: form.md
-  - Message: message.md
-  - Section: section.md
-  - Navigation: navigation.md
+  - Form: the-form.md
+  - Message: the-message.md
+  - Section: the-section.md
+  - Navigation: the-navigation.md
   - Field: field.md
   - Field Element: field-element.md
   - Field Label: field-label.md
@@ -40,4 +40,4 @@ pages:
   - Extending the field configuration: extending-field-configuration.md
   - Extending the form components: extending-form-components.md
   - Creating and using a custom field generator: custom-field-generator.md
-  - Creating and using custom field generator handlers: customer-field-generator-handlers.md
+  - Creating and using custom field generator handlers: custom-field-generator-handlers.md
