@@ -1,7 +1,12 @@
+![Chameleon Forms logo](https://raw.githubusercontent.com/MRCollective/ChameleonForms/master/logo.png)
+
 ChameleonForms
 ==============
 
-![Chameleon Forms logo](https://raw.githubusercontent.com/MRCollective/ChameleonForms/master/logo.png)
+[![Build status](https://ci.mdavies.net/app/rest/builds/buildType:%28id:ChameleonForms_CI%29,branch:%28default:true%29/statusIcon)](https://ci.mdavies.net/viewType.html?buildTypeId=ChameleonForms_CI&branch_ChameleonForms=%3Cdefault%3E&tab=buildTypeStatusDiv&guest=1) 
+[![NuGet downloads](https://img.shields.io/nuget/dt/ChameleonForms.svg)](https://www.nuget.org/packages/ChameleonForms) 
+[![NuGet version](https://img.shields.io/nuget/vpre/ChameleonForms.svg)](https://www.nuget.org/packages/ChameleonForms)
+[![Documentation status](https://readthedocs.org/projects/chameleonforms/badge/?version=latest)](http://chameleonforms.readthedocs.org/en/latest/)
 
 This library will shape-shift your forms experience in ASP.NET MVC.
 
@@ -31,7 +36,7 @@ So what does a ChameleonForms form look like? Here is a (very) basic example:
 }
 ```
 
-[Find out more](https://github.com/MRCollective/ChameleonForms/wiki/why) about why we created ChameleonForms and the advantages it gives you.
+[Find out more](http://chameleonforms.readthedocs.org/en/latest/why/) about why we created ChameleonForms and the advantages it gives you.
 
 The CI Server for this project is hosted at <http://ci.robdmoore.id.au:8010/>. It is hosted using a free license of [TeamCity Enterprise](https://www.jetbrains.com/teamcity/) thanks to the generous supprot of [Jetbrains](https://www.jetbrains.com/).
 
@@ -52,12 +57,12 @@ Contributors
 
 Documentation
 -------------
-Check out the [wiki](http://github.com/MRCollective/ChameleonForms/wiki).
+Check out the [Read the Docs site](http://chameleonforms.readthedocs.org/).
 
 Continuous Integration
 ----------------------
 
-We have a [continuous integration build](http://ci.robdmoore.id.au:8010/project.html?projectId=ChameleonForms&tab=projectOverview) that automatically builds and runs tests when we push/merge to master and generates the NuGet packages that we can publish to NuGet.org at the click of a button.
+We have a [continuous integration build](https://ci.mdavies.net/project.html?projectId=ChameleonForms&tab=projectOverview&guest=1) that automatically builds and runs tests when we push/merge to master and generates the NuGet packages that we can publish to NuGet.org at the click of a button.
 
 Contributing
 ------------
@@ -68,4 +73,8 @@ Roadmap
 
 Feel free to check out our [Trello board](https://trello.com/b/fSuyhwNZ). It gives some idea as to the eventual goals we have for the project and the current backlog we are working against. Beware that it's pretty rough around the edges at the moment.
 
-Logo by [Jason Roberts](https://twitter.com/robertsjason)
+Thanks
+------
+
+* Logo by [Jason Roberts](https://twitter.com/robertsjason)
+* OSS TeamCity license from [Jetbrains](https://www.jetbrains.com/)
