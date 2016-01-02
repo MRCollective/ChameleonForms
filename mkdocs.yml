@@ -3,9 +3,41 @@ theme: readthedocs
 markdown_extensions: [fenced_code]
 pages:
 - Home: index.md
-- Twitter Bootstrap 3 Template: bootstrap-template.md
 - Philosophy:
   - Why is ChameleonForms needed: why.md
 - Basic usage:
   - Getting started: getting-started.md
   - Comparison: comparison.md
+  - Twitter Bootstrap 3 Template: bootstrap-template.md
+  - Automatically sentence case form labels: auto-sentence-case.md
+  - Field Configuration: field-configuration.md
+  - HTML Attributes: html-attributes.md
+- Form structure:
+  - Form: form.md
+  - Message: message.md
+  - Section: section.md
+  - Navigation: navigation.md
+  - Field: field.md
+  - Field Element: field-element.md
+    - Field Label: field-label.md
+    - Field Validation HTML: field-validation-html.md
+- Field types:
+  - Boolean fields: boolean.md
+  - DateTime fields: datetime.md
+    - Client-side validation of DateTime fields: datetime-client-side-validation.md
+  - Enum fields: enum.md
+  - Multiple-select enum fields: multiple-enum.md
+  - List fields: list.md
+  - Multiple-select list fields: multiple-list.md
+  - Textarea fields: textarea.md
+  - File upload fields: file-upload.md
+  - Password fields: password.md
+  - Default fields: default-fields.md
+- Advanced usage:
+  - Use partial views for repeated or abstracted form areas: partials.md
+  - Using different form templates: form-templates.md
+  - Creating custom form templates: custom-template.md
+  - Extending the field configuration: extending-field-configuration.md
+  - Extending the form components: extending-form-components.md
+  - Creating and using a custom field generator: custom-field-generator.md
+  - Creating and using custom field generator handlers: customer-field-generator-handlers.md
