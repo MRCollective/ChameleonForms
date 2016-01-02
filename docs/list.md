@@ -3,7 +3,7 @@ List Fields
 
 If you want the user to specify an item from an arbitrary list of objects you can use the `[ExistsIn]` attribute against a model property of the type of the value property, e.g.:
 
-```c#
+```csharp
 
 public class MyObject
 {
@@ -34,7 +34,7 @@ public class MyViewModel
 
 The `ExistsIn` attribute looks like this:
 
-```c#
+```csharp
     /// <summary>
     /// Indicates that the attributed property value should exist within the list property referenced by the attribute.
     /// </summary>
@@ -122,11 +122,11 @@ If you want to provide server-side validation protection of the value the user s
 If you don't want to perform server-side validation then you can either:
 
 * Turn off Exists In validation globally by setting the appropriate setting in your `Application_Start` function (or a method it calls) within `Global.asax.cs`:
-```c#
+```csharp
 ExistsInAttribute.EnableValidation = false;
 ```
 * Turn off validation on a per-usage basis by setting `false` to the `enableValidation` value when adding the attribute, e.g.:
-```c#
+```csharp
     [ExistsIn("ListValues", "Id", "Name", enableValidation: false)]
     public int ListId { get; set; }
 ```
@@ -142,7 +142,7 @@ If you want to take advantage of the server-side validation then the list needs 
 
 For example:
 
-```c#
+```csharp
     public class InvoiceSelectionViewModelBinder : DefaultModelBinder
     {
         private readonly IQueryExecutor _queryExecutor;
@@ -168,7 +168,7 @@ For example:
 
 Remember to register the model binder with your type by using the following in `Global.asax.cs` (or, if you want dependency injection getting your DI framework to do it for you using attributes, e.g. [Autofac](http://alexmg.com/post/2010/12/08/Model-Binder-Injection-in-Autofac-ASPNET-MVC-3-Integration.aspx)):
 
-```c#
+```csharp
 ModelBinders.Binders.Add(typeof(%yourModelType%), new %modelBinderType%());
 ```
 
@@ -179,7 +179,7 @@ Configurability
 
 You can force a list field to display as a list of radio buttons rather than a drop-down using the `AsRadioList` method on the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.ListId).AsRadioList()
 @s.FieldFor(m => m.NullableListId).AsRadioList()
 ```
@@ -209,7 +209,7 @@ And it will change the default HTML for the non-Required nullable list id field 
 
 When you display a nullable list id field as a drop-down or a non-Required nullable list id field as a list of radio buttons you can change the text that is used to display the `none` value to the user. By default the text used is an empty string for the drop-down and `None` for the radio button. To change the text simply use the `WithNoneAs` method, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.NullableListId).WithNoneAs("No value")
 ```
 
@@ -225,7 +225,7 @@ This will change the default HTML for the nullable list id field as shown above 
 ### Hide empty item
 If you have a nullable list id field as a drop-down or a non-Required nullable list id field as a list of radio buttons then it will show the empty item and this item will be selected by default if the field value is null. If for some reason you want one of these fields, but you would also like to hide the empty item you can do so with the `HideEmptyItem` method in the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.NullableListId).HideEmptyItem()
 ```
 

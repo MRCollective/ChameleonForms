@@ -3,13 +3,13 @@ File Upload Fields
 
 If you need to collect uploaded file data then you can use ASP.NET MVC's `HttpPostedFileBase` type for your model property, e.g.:
 
-```c#
+```csharp
 public HttpPostedFileBase FileUpload { get; set; }
 ```
 
 In order for file uploads to work you will need to set the encoding type on the form to `multipart/form-data` ([as opposed to the default](http://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean)), e.g.:
 
-```c#
+```csharp
 @using (var f = Html.BeginChameleonForm(encType: EncType.Multipart)) {
     @* ... *@
 }

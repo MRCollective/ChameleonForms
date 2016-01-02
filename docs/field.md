@@ -4,7 +4,7 @@ You can also create a parent field that can have child fields nested within it b
 
 The `Field<TModel>` class is defined as follows in the `ChameleonForms.Component` namespace:
 
-```c#
+```csharp
     /// <summary>
     /// Wraps the output of a single form field.
     /// </summary>
@@ -39,7 +39,7 @@ Default usage
 
 If you want to define your own HTML for the Field Element, Field Label and Field Validation HTML then you can do so by using the `Field` method on the Section, e.g.:
 
-```c#
+```csharp
 using (var s = f.BeginSection("Title")) {
     @s.Field(new HtmlString("label"), new HtmlString("element")).ChainFieldConfigurationMethodsHere()
     @* Or, if you want to specify all the possible values: *@
@@ -49,7 +49,7 @@ using (var s = f.BeginSection("Title")) {
 
 The `Field` method on the Section looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Outputs a field with passed in HTML.
         /// </summary>
@@ -66,7 +66,7 @@ The `Field` method on the Section looks like this:
 
 If you would like ChameleonForms to use a Field Generator to generate the HTML for the Field Element, Field Label and Field Validation HTML from a field on the model then you can use the `FieldFor` extension method on the Section, e.g.:
 
-```c#
+```csharp
 using (var s = f.BeginSection("Title")) {
     @s.FieldFor(m => m.FieldOnTheModel).ChainFieldConfigurationMethodsHere()
 }
@@ -74,7 +74,7 @@ using (var s = f.BeginSection("Title")) {
 
 The `FieldFor` extension method looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Creates a single form field as a child of a form section.
         /// </summary>
@@ -98,7 +98,7 @@ The `FieldFor` extension method looks like this:
 
 If you want to use a Field Generator and want to nest child Fields under a Field then you can use the `BeginFieldFor` extension method on the Section (optionally with a Field Configuration), e.g.:
 
-```c#
+```csharp
 using (var s = f.BeginSection("Title")) {
     using (var ff = s.BeginFieldFor(m => m.FieldOnTheModel, Field.Configure().ChainFieldConfigurationMethodsHere())) {
         @* Child Fields *@
@@ -108,7 +108,7 @@ using (var s = f.BeginSection("Title")) {
 
 The `BeginFieldFor` extension method looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Creates a single form field as a child of a form section that can have other form fields nested within it.
         /// </summary>
@@ -133,7 +133,7 @@ The `BeginFieldFor` extension method looks like this:
 
 If you want to use a Field Generator to create nested Fields under a parent Field then you can use the `BeginFieldFor` extension method on the Field (with an optional Field Configuration), e.g.:
 
-```c#
+```csharp
 using (var ff = s.BeginFieldFor(m => m.FieldOnTheModel)) {
     @ff.FieldFor(m => m.ChildField).ChainFieldConfigurationMethodsHere()
 }
@@ -141,7 +141,7 @@ using (var ff = s.BeginFieldFor(m => m.FieldOnTheModel)) {
 
 The `FieldFor` extension method looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Creates a single form field as a child of another form field.
         /// </summary>
@@ -305,7 +305,7 @@ In all other situations you will manually need to add wrapping HTML with the rel
 
 As an example of what you can do with the input group consider the following:
 
-```c#
+```csharp
 @s.FieldFor(m => m.Int).AsInputGroup().Append(".00").Prepend("$")
 ```
 

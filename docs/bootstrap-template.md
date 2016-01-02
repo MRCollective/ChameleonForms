@@ -20,7 +20,7 @@ Make Twitter Bootstrap template the global default
 
 To easily change the form template for all forms that use the [`BeginChameleonForm` extension method](the-form) simply use this snippet in `Global.asax.cs`:
 
-```c#
+```csharp
 using ChameleonForms;
 using ChameleonForms.Templates.TwitterBootstrap3;
 ...

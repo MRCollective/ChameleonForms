@@ -12,7 +12,7 @@ Example Form
 
 The example in question is an arbitrary signup form against the `SignupViewModel` in the [`ComparisonController`](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Controllers/ComparisonController.cs):
 
-```c#
+```csharp
         public class SignupViewModel
         {
             [Required]
@@ -99,7 +99,7 @@ In the case where we use the Form Section to ask the user to enter account detai
 
 ### Editor Templates
 
-```c#
+```csharp
     using (Html.BeginSection("Account details"))
     {
         @Html.EditorFor(m => m.EmailAddress, new {hint = "An email will be sent to this address to confirm you own it"})
@@ -110,7 +110,7 @@ In the case where we use the Form Section to ask the user to enter account detai
 
 ### ChameleonForms
 
-```c#
+```csharp
     using (var s = f.BeginSection("Account details"))
     {
         @s.FieldFor(m => m.EmailAddress).WithHint("An email will be sent to this address to confirm you own it")

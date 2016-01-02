@@ -3,7 +3,7 @@ Datetime Fields
 
 If you need to collect DateTime data you can use a `DateTime` or `DateTime?` model property, e.g.:
 
-```c#
+```csharp
 public DateTime DateTimeField { get; set; }
 [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyInEditMode = true)]
 public DateTime DateTimeFieldWithFormat { get; set;
@@ -48,7 +48,7 @@ In order to provide a nice server-side validation experience, ChameleonForms pro
 
 You should be able to see if you have the model binder registered by searching for the `App_Start\RegisterChameleonFormsComponents.cs` file, which should look something like:
 
-```c#
+```csharp
 using ChameleonForms.ModelBinders;
 using System;
 using System.Web.Mvc;
@@ -71,7 +71,7 @@ namespace %yourNamespace%.App_Start
 
 Alternatively, you can simply register the model binder yourself by adding the following to `Application_Start` (or a method it calls):
 
-```c#
+```csharp
 ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
 ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
 ```

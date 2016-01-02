@@ -14,7 +14,7 @@ For an example of this in action see the extension we added to the [Twitter Boot
 
 Firstly, the [definition of the extension method](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Templates/TwitterBootstrap3/FieldConfigurationExtensions.cs) is:
 
-```c#
+```csharp
         /// <summary>
         /// Outputs the field in an input group using prepended and appended HTML.
         /// </summary>
@@ -32,7 +32,7 @@ Firstly, the [definition of the extension method](https://github.com/MRCollectiv
 
 Then the corresponding code in the [template](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Templates/TwitterBootstrap3/TwitterBootstrapHtmlHelpers.cshtml#L110) that gets the value as a local variable to switch on is:
 
-```c#
+```csharp
 var isInputGroup = canBeInputGroup && (isRequired || fieldConfiguration.GetBagData<bool>("DisplayAsInputGroup"));
 ```
 

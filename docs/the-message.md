@@ -5,7 +5,7 @@ The Message is a container to show a message to the user; you create a Message b
 
 The `Message<TModel>` class looks like this and is in the `ChameleonForms.Component` namespace:
 
-```c#
+```csharp
     /// <summary>
     /// Wraps the output of a message to display to a user.
     /// </summary>
@@ -43,7 +43,7 @@ Default usage
 
 In order to get an instance of a `Message<TModel>` you can use the `BeginMessage` extension method on the Form, e.g.:
 
-```c#
+```csharp
 using (var m = f.BeginMessage(MessageType.Information, "Message title")) {
     @* Message content goes here *@
 }
@@ -51,7 +51,7 @@ using (var m = f.BeginMessage(MessageType.Information, "Message title")) {
 
 The `BeginMessage` extension method looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Creates a message.
         /// </summary>
@@ -73,7 +73,7 @@ The `BeginMessage` extension method looks like this:
 
 The `MessageType` enum is defined like this and appears in the `ChameleonForms.Enums` namespace:
 
-```c#
+```csharp
     /// <summary>
     /// Types of messages that can be displayed to the user
     /// </summary>
@@ -108,7 +108,7 @@ The `MessageType` enum is defined like this and appears in the `ChameleonForms.E
 
 If you want to add paragraphs using the template you can do that by using one of the `Paragraph` methods as defined above and of course you can use normal HTML or any valid Razor code as well:
 
-```c#
+```csharp
 using (var m = f.BeginMessage(MessageType.Information, "Message title")) {
     @m.Paragraph("Here is the first part of the message")
     <img src="/path/to/img" alt="alt text" />

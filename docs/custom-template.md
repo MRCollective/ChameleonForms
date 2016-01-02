@@ -3,7 +3,7 @@ Creating custom form templates
 
 To create a custom form template you need to have a class that derives from the `IFormTemplate` interface:
 
-```c#
+```csharp
     /// <summary>
     /// A Chameleon Forms form template renderer.
     /// </summary>
@@ -160,7 +160,7 @@ RazorGenerator
 
 Rather than expressing all of the complex template HTML as a string we recommend that you instead use the [RazorGenerator Visual Studio extension](http://razorgenerator.codeplex.com/) so that you can specify the HTML using Razor syntax in a `.cshtml` file beginning with:
 
-```c#
+```csharp
 @* Generator: MvcHelper *@
 ```
 

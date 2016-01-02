@@ -3,7 +3,7 @@ Default (Text) Fields
 
 If you need to collect some sort of primitive value from the user such as a string, number, email, etc. then you can use any value type (nullable or not nullable), e.g.:
 
-```c#
+```csharp
 public string StringField { get; set; }
 public int IntField { get; set; }
 public int? NullableIntField { get; set; }

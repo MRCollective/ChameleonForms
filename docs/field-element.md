@@ -13,13 +13,13 @@ Outputting directly from the Form
 
 To use a Field Generator to output the HTML for a standalone Field Element you can use the `FieldElementFor` extension method on the Form (with optional Field Configuration), e.g.:
 
-```c#
+```csharp
 @f.FieldElementFor(m => m.SomeField).ChainFieldConfigurationMethodsHere()
 ```
 
 The `FieldElementFor` extension method looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Creates a standalone form field to be output in a form.
         /// </summary>

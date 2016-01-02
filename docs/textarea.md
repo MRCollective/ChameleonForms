@@ -3,7 +3,7 @@ Textarea Fields
 
 If you need to collect multi-line text data using a textarea then you can use the `[DataType]` attribute in `System.ComponentModel.DataAnnotations` to annotate that a string model property is in fact multi-line text, e.g.:
 
-```c#
+```csharp
 [DataType(DataType.MultilineText)]
 public string TextareaField { get; set; }
 ```
@@ -24,6 +24,6 @@ Configurability
 
 You can easily specify the required `rows` and `cols` HTML attributes by using the `Rows` and `Cols` methods on the [Field Configuration](field-configuration), e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.TextareaField).Rows(5).Cols(60)
 ```

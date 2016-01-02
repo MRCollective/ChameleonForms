@@ -13,13 +13,13 @@ Outputting directly from the Form
 
 To use a Field Generator to output the HTML for a standalone Field Label you can use the `LabelFor` extension method on the Form, e.g.:
 
-```c#
+```csharp
 @f.LabelFor(m => m.SomeField).ChainFieldConfigurationMethodsHere()
 ```
 
 The `LabelFor` extension method looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Creates a standalone label to be output in a form for a field.
         /// </summary>

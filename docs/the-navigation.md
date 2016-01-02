@@ -5,7 +5,7 @@ The Navigation is a grouping of a set of navigation elements; you create a Navig
 
 The `Navigation<TModel>` class looks like this and is in the `ChameleonForms.Component` namespace:
 
-```c#
+```csharp
     /// <summary>
     /// Wraps the output of the navigation area of a form.
     /// For example the area with submit buttons.
@@ -78,7 +78,7 @@ Default usage
 
 In order to get an instance of a `Navigation<TModel>` you can use the `BeginNavigation` method on the Form, e.g.:
 
-```c#
+```csharp
 using (var n = f.BeginNavigation()) {
     @* Navigation elements go here *@
 }
@@ -86,7 +86,7 @@ using (var n = f.BeginNavigation()) {
 
 The `BeginNavigation` extension methods looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Creates a navigation section.
         /// </summary>
@@ -108,7 +108,7 @@ The `BeginNavigation` extension methods looks like this:
 
 From within a section you can create Navigation Submit, Reset and normal Buttons and you can chain [HTML Attributes](html-attributes) specifiers off the end of them, e.g.:
 
-```c#
+```csharp
 using (var n = f.BeginNavigation()) {
     @n.Button("text button").AddClass("button").Id("button1")
     @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("button").Id("button2")
@@ -194,7 +194,7 @@ The HTML is the same as the default except a class of `btn` will always be added
 
 There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that allows you to add an emphasis style to the buttons:
 
-```c#
+```csharp
         /// <summary>
         /// Adds the given emphasis to the button.
         /// </summary>
@@ -213,7 +213,7 @@ There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3`
 
 The `EmphasisStyle` enum is as follows:
 
-```c#
+```csharp
     /// <summary>
     /// Twitter Bootstrap alert/emphasis colors: http://getbootstrap.com/css/#type-emphasis
     /// </summary>
@@ -248,7 +248,7 @@ The `EmphasisStyle` enum is as follows:
 
 You can use the extension method like this:
 
-```c#
+```csharp
 @using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").WithStyle(EmphasisStyle.Primary)
 }
@@ -268,7 +268,7 @@ In order to be able to swap out the extension method usage across your applicati
 
 There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that allows you to change the size of your buttons:
 
-```c#
+```csharp
         /// <summary>
         /// Changes the button to use the given size.
         /// </summary>
@@ -288,7 +288,7 @@ There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3`
 
 The `ButtonSize` enum is as follows:
 
-```c#
+```csharp
     /// <summary>
     /// Twitter Bootstrap button sizes: http://getbootstrap.com/css/#buttons-sizes
     /// </summary>
@@ -318,7 +318,7 @@ The `ButtonSize` enum is as follows:
 
 You can use the extension method like this:
 
-```c#
+```csharp
 @using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").WithSize(ButtonSize.Large)
 }
@@ -338,7 +338,7 @@ In order to be able to swap out the extension method usage across your applicati
 
 There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that allows you to add icons to your buttons:
 
-```c#
+```csharp
         /// <summary>
         /// Adds the given icon to the start of a navigation button.
         /// </summary>
@@ -361,7 +361,7 @@ You can see the list of possible icon names to choose from on the [Twitter Boots
 
 You can use the extension method like this:
 
-```c#
+```csharp
 @using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").WithIcon("adjust")
 }
@@ -384,7 +384,7 @@ Here is an example from the example project of what the buttons can look like:
 
 Here is the code that generated the above screenshot:
 
-```c#
+```csharp
     using (var n = f.BeginNavigation())
     {
         @n.Button("text button").WithStyle(EmphasisStyle.Primary).WithSize(ButtonSize.Default)

@@ -7,7 +7,7 @@ The `IFieldConfiguration` interface is translated to an `IReadonlyFieldConfigura
 
 The `IFieldConfiguration` interface looks like this and is in the `ChameleonForms.Component.Config` namespace:
 
-```c#
+```csharp
     /// <summary>
     /// Holds configuration data for a form field.
     /// </summary>
@@ -409,7 +409,7 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
 
 The `IReadonlyFieldConfiguration` interface can be created by calling the `ToReadonly()` method on the `IFieldConfiguration`; it is in the `ChameleonForms.Component.Config` namespace and looks like this:
 
-```c#
+```csharp
     /// <summary>
     /// Immutable field configuration for use when generating a field's HTML.
     /// </summary>

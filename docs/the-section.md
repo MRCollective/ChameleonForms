@@ -5,7 +5,7 @@ The Section is a grouping of a set of fields; you create a Section by instantiat
 
 The `Section<TModel>` class looks like this and is in the `ChameleonForms.Component` namespace:
 
-```c#
+```csharp
     /// <summary>
     /// Wraps the output of a form section.
     /// </summary>
@@ -42,7 +42,7 @@ Default usage
 
 In order to get an instance of a `Section<TModel>` you can use the `BeginSection` method on the Form, e.g.
 
-```c#
+```csharp
 using (var s = f.BeginSection("Heading")) {
     @* Section fields go here *@
 }
@@ -50,7 +50,7 @@ using (var s = f.BeginSection("Heading")) {
 
 The `BeginSection` extension method looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Creates a top-level form section.
         /// </summary>
@@ -73,7 +73,7 @@ The `BeginSection` extension method looks like this:
 
 From within a Section you can create [Fields](the-field) and you can also create nested sections using the `BeginSection` extension method off the Section:
 
-```c#
+```csharp
 using (var s = f.BeginSection("Heading")) {
     @* Fields... *@
     using (var ss = s.BeginSection("Inner Heading")) {
@@ -85,7 +85,7 @@ using (var s = f.BeginSection("Heading")) {
 
 The `BeginSection` extension method on Section looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Creates a nested form section.
         /// </summary>

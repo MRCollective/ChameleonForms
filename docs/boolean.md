@@ -3,7 +3,7 @@ Boolean Fields
 
 If you need to collect Boolean data you can use a `bool` or `bool?` model property, e.g.:
 
-```c#
+```csharp
     public bool BooleanField { get; set; }
     public bool? NullableBooleanField { get; set; }
 ```
@@ -40,7 +40,7 @@ Configurability
 
 If you are outputting a non-nullable Boolean then a label will show next to the field as part of the Field Element. If you want to override just the label text for this label (and not the Field Label as well) then you can do so using the `InlineLabel` method in the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.BooleanField).InlineLabel("override")
 ```
 
@@ -48,7 +48,7 @@ If you are outputting a non-nullable Boolean then a label will show next to the 
 
 You can force a Boolean field to display as a drop-down box rather than a checkbox using the `AsDropDown` method on the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.BooleanField).AsDropDown()
 ```
 
@@ -65,7 +65,7 @@ This will change the default HTML for the non-nullable Boolean field as shown ab
 
 You can force a Boolean field to display as a list of radio buttons rather than a checkbox using the `AsRadioList` method on the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.BooleanField).AsRadioList()
 @s.FieldFor(m => m.NullableBooleanField).AsRadioList()
 ```
@@ -93,7 +93,7 @@ And it will change the default HTML for the non-Required nullable Boolean field 
 
 When you display a Boolean field as a drop-down or a list of radio buttons you can change the text that is used to display the `true`, `false` and `none` values to the user. By default the text used is `Yes`, `No` and `None` (except for drop-downs, which have an empty string) respectively. To change the text simply use the `WithTrueAs`, `WithFalseAs` and `WithNoneAs` methods respectively, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.NullableBooleanField).WithTrueAs("OK").WithFalseAs("Not OK").WithNoneAs("No comment")
 ```
 
@@ -110,7 +110,7 @@ This will change the default HTML for the nullable Boolean field as shown above 
 ### Hide empty item
 If you have a nullable Boolean field then it will show the empty item and this item will be selected by default if the field value is null. If for some reason you want a nullable boolean, but you would also like to hide the empty item you can do so with the `HideEmptyItem` method in the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.NullableBooleanField).HideEmptyItem()
 ```
 
@@ -126,7 +126,7 @@ This will change the default HTML for the nullable Boolean field as shown above 
 ### Hide inline label
 If you would like to output just a checkbox for a non-nullable boolean field without an inline label next to it you can do so with the `WithoutInlineLabel` method in the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.BooleanField).WithoutInlineLabel()
 ```
 
@@ -139,7 +139,7 @@ This will change the default HTML for the non-nullable Boolean field as shown ab
 ### Wrap input with label
 If you would like to wrap the checkbox with the label you can do so with the `InlineLabelWrapsElement` method in the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.BooleanField).InlineLabelWrapsElement()
 ```
 

@@ -3,7 +3,7 @@ Multiple-Select List Fields
 
 If you want the user to specify multiple values from items in an arbitrary list of objects you can use the `[ExistsIn]` attribute against a model property that enumerates the type of the value property, e.g.:
 
-```c#
+```csharp
 
 public class MyObject
 {
@@ -86,7 +86,7 @@ Configurability
 
 You can force a list of list items field to display as a list of checkboxes (say that 10 times fast!) rather than a drop-down using the `AsCheckboxList` method on the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.EnumerableListId).AsCheckboxList()
 @s.FieldFor(m => m.ListListId).AsCheckboxList()
 @s.FieldFor(m => m.NullableEnumerableListId).AsCheckboxList()
@@ -107,7 +107,7 @@ This will change the default HTML for both Required and non-Required fields with
 
 When you display a non-Required list of list values field as a drop-down you can change the text that is used to display the `none` value to the user. By default the text used is `None`. To change the text simply use the `WithNoneAs` method, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.EnumerableListId).WithNoneAs("No value")
 ```
 
@@ -123,7 +123,7 @@ This will change the default HTML for the enumerable list id field as shown abov
 ### Hide empty item
 If you have a non-Required list of list values field as a drop-down then it will show the empty item and this item will be selected by default if there are no values selected. If for some reason you want one of these fields, but you would also like to hide the empty item you can do so with the `HideEmptyItem` method in the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.EnumerableListId).HideEmptyItem()
 ```
 

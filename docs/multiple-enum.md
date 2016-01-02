@@ -3,7 +3,7 @@ Multiple-Select Enum Fields
 
 If you want the user to specify multiple values from an enum you can use that enum type against any property with a type convertible to `IEnumerable<%enumType%>`, e.g.:
 
-```c#
+```csharp
 public enum MyEnum  { ... }
 ...
 public IEnumerable<MyEnum> EnumEnumerableField { get; set; }
@@ -50,7 +50,7 @@ Configurability
 
 You can force a list of enums field to display as a list of checkboxes rather than a multi-select drop-down using the `AsCheckboxList` method on the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.EnumListField).AsCheckboxList()
 ```
 
@@ -68,7 +68,7 @@ This will change the default HTML for a both Required and non-Required list of e
 
 When you display a non-Required list of enums field (nullable or non-nulable) as a drop-down you can change the text that is used to display the `none` value to the user. By default the text used is `None`. To change the text simply use the `WithNoneAs` method, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.NullableEnumListField).WithNoneAs("No value")
 ```
 
@@ -84,7 +84,7 @@ This will change the default HTML for the non-Required drop-down list of enum fi
 ### Hide empty item
 If you have a non-Required list of enums field then it will show the empty item and this item will be selected by default if no values are selected. If for some reason you want a non-Required list of enums field, but you would also like to hide the empty item you can do so with the `HideEmptyItem` method in the Field Configuration, e.g.:
 
-```c#
+```csharp
 @s.FieldFor(m => m.NullableEnumListField).HideEmptyItem()
 ```
 

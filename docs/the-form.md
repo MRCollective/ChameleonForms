@@ -5,7 +5,7 @@ The Form is the root element of a ChameleonForms form; you create a Form by inst
 
 The `IForm<TModel>` interface looks like this and is in the `ChameleonForms` namespace:
 
-```c#
+```csharp
     /// <summary>
     /// Interface for a Chameleon Form.
     /// </summary>
@@ -41,7 +41,7 @@ Default usage
 
 In order to get an instance of an `IForm<TModel>` using the default form template (by default the default form template uses definition lists, [but you you can adjust it](#configuring-the-default-form-template)) you can use the `BeginChameleonForm` extension method on the `HtmlHelper` that appears in MVC views, e.g.:
 
-```c#
+```csharp
 @using (var f = Html.BeginChameleonForm()) {
     @* Form content goes here *@
 }
@@ -49,7 +49,7 @@ In order to get an instance of an `IForm<TModel>` using the default form templat
 
 The `BeginChameleonForm` extension method looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Constructs a <see cref="Form{TModel}"/> object with the default Chameleon form template renderer.
         /// </summary>

@@ -13,13 +13,13 @@ Outputting directly from the Form
 
 To use a Field Generator to output the HTML for a standalone Field Validation HTML you can use the `ValidationMessageFor` extension method on the Form, e.g.:
 
-```c#
+```csharp
 @f.ValidationMessageFor(m => m.SomeField).ChainedFieldConfigurationMethodsHereAreIgnored()
 ```
 
 The `ValidationMessageFor` extension method looks like this:
 
-```c#
+```csharp
         /// <summary>
         /// Creates a standalone validation message to be output in a form for a field.
         /// </summary>
@@ -46,7 +46,7 @@ Default HTML
 
 The HTML for the Field Validation HTML is the same as calling:
 
-```c#
+```csharp
 @Html.ValidationMessageFor(m => m.SomeField, new { @class = %validationClasses% })
 ```
 
