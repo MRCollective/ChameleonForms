@@ -19,12 +19,12 @@ pages:
   - Navigation: navigation.md
   - Field: field.md
   - Field Element: field-element.md
-    - Field Label: field-label.md
-    - Field Validation HTML: field-validation-html.md
+  - Field Label: field-label.md
+  - Field Validation HTML: field-validation-html.md
 - Field types:
   - Boolean fields: boolean.md
   - DateTime fields: datetime.md
-    - Client-side validation of DateTime fields: datetime-client-side-validation.md
+  - Client-side validation of DateTime fields: datetime-client-side-validation.md
   - Enum fields: enum.md
   - Multiple-select enum fields: multiple-enum.md
   - List fields: list.md
