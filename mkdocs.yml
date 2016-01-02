@@ -1,5 +1,6 @@
 site_name: ChameleonForms
-
+theme: readthedocs
+markdown_extensions: [fenced_code]
 pages:
 - Home: index.md
 - Twitter Bootstrap 3 Template: bootstrap-template.md
