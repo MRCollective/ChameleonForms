@@ -2,6 +2,7 @@
 
 ## Overview
 ChameleonForms takes away the pain and repetition of building forms with ASP.NET MVC by following a philosophy of:
+
 * **Model-driven** defaults (e.g. enum is drop-down, `[DataType(DataType.Password)]` is password textbox)
 * **DRY** up your forms - your forms will be quicker to write and easier to maintain and you won't get stuck writing the same form boilerplate markup form after form after form
 * **Consistent** - consistency of the API and form structure within your forms and consistency across all forms in your site via templating
@@ -24,7 +25,7 @@ What does a ChameleonForms form look like?
 ------------------------------------------
 So what does a ChameleonForms form look like? Here is a (very) basic example:
 
-```c#
+```csharp
 @using (var f = Html.BeginChameleonForm()) {
     using (var s = f.BeginSection("Signup for an account")) {
         @s.FieldFor(m => m.FirstName)
