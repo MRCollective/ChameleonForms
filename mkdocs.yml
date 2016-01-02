@@ -1,0 +1,10 @@
+site_name: ChameleonForms
+
+pages:
+- Home: index.md
+- Twitter Bootstrap 3 Template: bootstrap-template.md
+- Philosophy:
+  - Why is ChameleonForms needed: why.md
+- Basic usage:
+  - Getting started: getting-started.md
+  - Comparison: comparison.md
