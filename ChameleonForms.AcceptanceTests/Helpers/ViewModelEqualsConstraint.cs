@@ -33,6 +33,12 @@ namespace ChameleonForms.AcceptanceTests.Helpers
                 var expectedValue = property.GetValue(_expectedViewModel, null);
                 var actualValue = property.GetValue(actualViewModel, null);
 
+                if (!property.PropertyType.IsValueType && property.PropertyType != typeof(string) && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
+                {
+                    Assert.That(actualValue, IsSame.ViewModelAs(expectedValue));
+                    continue;
+                }
+
                 if (expectedValue is IEnumerable && !(expectedValue as IEnumerable).Cast<object>().Any())
                     Assert.That(actualValue, Is.Null.Or.Empty);
                 else

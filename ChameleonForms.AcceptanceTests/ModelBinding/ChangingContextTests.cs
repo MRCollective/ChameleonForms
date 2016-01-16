@@ -33,5 +33,18 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
             Assert.That(page.ReadChildModel(), IsSame.ViewModelAs(enteredViewModel));
             Assert.That(page.HasValidationErrors(), Is.False, "There are validation errors on the page");
         }
+
+        [Test]
+        public void Post_child_view_model_and_bind_to_parent_on_postback()
+        {
+            var enteredViewModel = ObjectMother.ChangingContextViewModels.ParentViewModel;
+
+            var page = Host.Instance.NavigateToInitialPage<HomePage>()
+                .GoToChangingContextPage2()
+                .PostParentModel(enteredViewModel);
+
+            Assert.That(page.ReadParentModel(), IsSame.ViewModelAs(enteredViewModel));
+            Assert.That(page.HasValidationErrors(), Is.False, "There are validation errors on the page");
+        }
     }
 }
