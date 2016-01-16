@@ -203,6 +203,7 @@
     <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
     <Content Include="Views\ExampleForms\Partials.cshtml" />
     <Content Include="Views\ExampleForms\_ChildPartial.cshtml" />
+    <Content Include="Views\ExampleForms\ChangingContext.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

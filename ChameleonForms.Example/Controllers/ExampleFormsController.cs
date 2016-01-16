@@ -87,6 +87,11 @@ namespace ChameleonForms.Example.Controllers
         {
             return View(vm);
         }
+
+        public ActionResult ChangingContext()
+        {
+            return View(new ParentViewModel{Child = new ChildViewModel { ChildField = "Initial value from controller"}});
+        }
     }
 
     public class ModelBindingViewModel
@@ -186,6 +191,12 @@ namespace ChameleonForms.Example.Controllers
         public SomeEnum SomeEnum { get; set; }
 
         public bool SomeCheckbox { get; set; }
+    }
+
+    public class ParentViewModel
+    {
+        public string Field { get; set; }
+        public ChildViewModel Child { get; set; }
     }
 
     public class ViewModelExample

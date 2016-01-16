@@ -1,0 +1,51 @@
+﻿@model ParentViewModel
+
+@{
+    ViewBag.Title = "Changing context";
+}
+
+<h1>Completely different model</h1>
+
+@using (var f = Html.BeginChameleonFormFor(new BasicViewModel {RequiredString = "Initial value"}, Url.Action("PostDifferentModel")))
+{
+    using (var s = f.BeginSection())
+    {
+        @s.FieldFor(m => m.RequiredString)
+        @s.FieldFor(m => m.SomeCheckbox)
+    }
+    using (var n = f.BeginNavigation())
+    {
+        @n.Submit("Submit")
+    }
+}
+
+<h1>Sub model (binding to itself)</h1>
+
+@using (var f = Html.BeginChameleonFormFor(m => m.Child, Url.Action("PostChildViewModel")))
+{
+    using (var s = f.BeginSection())
+    {
+        @s.FieldFor(m => m.ChildField)
+        @s.FieldFor(m => m.SomeEnum)
+    }
+    using (var n = f.BeginNavigation())
+    {
+        @n.Submit("Submit")
+    }
+}
+
+<h1>Sub model (binding to parent)</h1>
+
+@using (var f = Html.For(m => m.Child, bindFieldsToParent: true).BeginChameleonForm(Url.Action("PostParentViewModel")))
+{
+    using (var s = f.BeginSection())
+    {
+        @s.FieldFor(m => m.ChildField)
+        @s.FieldFor(m => m.SomeEnum)
+    }
+    using (var n = f.BeginNavigation())
+    {
+        @n.Submit("Submit")
+    }
+}
+
