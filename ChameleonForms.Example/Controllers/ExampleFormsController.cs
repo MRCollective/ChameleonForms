@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
+using Newtonsoft.Json;
 
 namespace ChameleonForms.Example.Controllers
 {
@@ -91,6 +92,33 @@ namespace ChameleonForms.Example.Controllers
         public ActionResult ChangingContext()
         {
             return View(new ParentViewModel{Child = new ChildViewModel { ChildField = "Initial value from controller"}});
+        }
+
+        [HttpPost]
+        public ActionResult PostDifferentModel(BasicViewModel vm)
+        {
+            ViewBag.Action = "PostDifferentModel";
+            ViewBag.ModelType = vm.GetType().Name;
+            ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            return View("ChangingContext");
+        }
+
+        [HttpPost]
+        public ActionResult PostChildViewModel(ChildViewModel vm)
+        {
+            ViewBag.Action = "PostChildViewModel";
+            ViewBag.ModelType = vm.GetType().Name;
+            ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            return View("ChangingContext");
+        }
+
+        [HttpPost]
+        public ActionResult PostParentViewModel(ParentViewModel vm)
+        {
+            ViewBag.Action = "PostParentViewModel";
+            ViewBag.ModelType = vm.GetType().Name;
+            ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            return View("ChangingContext");
         }
     }
 
@@ -266,6 +294,7 @@ namespace ChameleonForms.Example.Controllers
 
     public class ChildViewModel
     {
+        [Required]
         public string ChildField { get; set; }
         public SomeEnum SomeEnum { get; set; }
     }

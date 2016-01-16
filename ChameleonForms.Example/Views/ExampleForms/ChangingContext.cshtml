@@ -4,7 +4,21 @@
     ViewBag.Title = "Changing context";
 }
 
-<h1>Completely different model</h1>
+<h1>Changing the context of HTML helper</h1>
+
+<p>There are three separate forms tied to three different post actions. Turn off JavaScript, clear all the text fields and hit each of the three submit buttons and also play with putting in values and submitting the values to see how they are bound back.</p>
+
+@if (Request.HttpMethod == "POST")
+{
+    <h2>Binding data</h2>
+    <ul>
+        <li><strong>Action:</strong> @ViewBag.Action</li>
+        <li><strong>Model type:</strong> @ViewBag.ModelType</li>
+        <li><strong>Model data:</strong> <pre>@ViewBag.BoundModelData</pre></li>
+    </ul>
+}
+
+<h2>Completely different model</h2>
 
 @using (var f = Html.BeginChameleonFormFor(new BasicViewModel {RequiredString = "Initial value"}, Url.Action("PostDifferentModel")))
 {
@@ -19,7 +33,7 @@
     }
 }
 
-<h1>Sub model (binding to itself)</h1>
+<h2>Sub model (binding to itself)</h2>
 
 @using (var f = Html.BeginChameleonFormFor(m => m.Child, Url.Action("PostChildViewModel")))
 {
@@ -34,7 +48,7 @@
     }
 }
 
-<h1>Sub model (binding to parent)</h1>
+<h2>Sub model (binding to parent)</h2>
 
 @using (var f = Html.For(m => m.Child, bindFieldsToParent: true).BeginChameleonForm(Url.Action("PostParentViewModel")))
 {
