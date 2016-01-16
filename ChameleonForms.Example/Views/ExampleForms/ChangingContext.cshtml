@@ -20,6 +20,8 @@
 
 <h2>Completely different model</h2>
 
+<p><code>@@using (var f = Html.BeginChameleonFormFor(new BasicViewModel { RequiredString = "Initial value" }, Url.Action("PostDifferentModel")))</code></p>
+
 @using (var f = Html.BeginChameleonFormFor(new BasicViewModel {RequiredString = "Initial value"}, Url.Action("PostDifferentModel")))
 {
     using (var s = f.BeginSection())
@@ -35,6 +37,8 @@
 
 <h2>Sub model (binding to itself)</h2>
 
+<p><code>@@using (var f = Html.BeginChameleonFormFor(m => m.Child, Url.Action("PostChildViewModel")))</code></p>
+
 @using (var f = Html.BeginChameleonFormFor(m => m.Child, Url.Action("PostChildViewModel")))
 {
     using (var s = f.BeginSection())
@@ -49,6 +53,8 @@
 }
 
 <h2>Sub model (binding to parent)</h2>
+
+<p><code>@@using (var f = Html.For(m => m.Child, bindFieldsToParent: true).BeginChameleonForm(Url.Action("PostParentViewModel")))</code></p>
 
 @using (var f = Html.For(m => m.Child, bindFieldsToParent: true).BeginChameleonForm(Url.Action("PostParentViewModel")))
 {
