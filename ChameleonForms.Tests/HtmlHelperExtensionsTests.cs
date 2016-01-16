@@ -70,7 +70,7 @@ namespace ChameleonForms.Tests
         }
 
         [Test]
-        public void Create_html_helper_with_new_model_for_sub_model_bound_to_parent()
+        public void Create_html_helper_with_sub_model_bound_to_parent()
         {
             _h.ViewData.Model = new TestViewModel
             {
@@ -82,7 +82,7 @@ namespace ChameleonForms.Tests
         }
 
         [Test]
-        public void Create_html_helper_with_correct_prefix_for_new_model_for_sub_model_bound_to_parent_with_prefix()
+        public void Create_html_helper_with_correct_prefix_for_sub_model_bound_to_parent_with_prefix()
         {
             _h.ViewData.Model = new TestViewModel
             {
@@ -91,6 +91,14 @@ namespace ChameleonForms.Tests
             _h.ViewData.TemplateInfo.HtmlFieldPrefix = "OriginalPrefix";
             var newHtmlHelper = _h.For(m => m.Child, bindFieldsToParent: true);
             Assert.That(newHtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, Is.EqualTo("OriginalPrefix.Child"));
+        }
+
+        [Test]
+        public void Create_html_helper_for_sub_model_when_parent_null()
+        {
+            _h.ViewData.Model = null;
+            var newHtmlHelper = _h.For(m => m.Child, bindFieldsToParent: true);
+            Assert.That(newHtmlHelper.ViewData.Model, Is.Null);
         }
 
         [Test]

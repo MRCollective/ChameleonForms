@@ -23,7 +23,7 @@ namespace ChameleonForms
         public static DisposableHtmlHelper<TChildModel> For<TParentModel, TChildModel>(this HtmlHelper<TParentModel> helper,
             Expression<Func<TParentModel, TChildModel>> propertyFor, bool bindFieldsToParent)
         {
-            return helper.For(propertyFor.Compile().Invoke(helper.ViewData.Model),
+            return helper.For(helper.ViewData.Model != null ? propertyFor.Compile().Invoke(helper.ViewData.Model) : default(TChildModel),
                 bindFieldsToParent ? ExpressionHelper.GetExpressionText(propertyFor) : null);
         }
 

@@ -63,6 +63,43 @@ namespace ChameleonForms.Tests
         }
 
         [Test]
+        public void Construct_form_via_extension_method_to_sub_property()
+        {
+            var f2 = _h.BeginChameleonFormFor(m => m.Child, Action, Method, new HtmlAttributes(), Enctype);
+
+            Assert.That(f2.HtmlHelper, Is.AssignableTo<HtmlHelper<TestChildViewModel>>());
+            Assert.That(f2.HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, Is.Empty);
+        }
+
+        [Test]
+        public void Construct_form_via_extension_method_to_sub_property_and_use_correct_model()
+        {
+            _h.ViewData.Model = new TestFieldViewModel {Child = new TestChildViewModel()};
+            var f2 = _h.BeginChameleonFormFor(m => m.Child, Action, Method, new HtmlAttributes(), Enctype);
+
+            Assert.That(f2.HtmlHelper.ViewData.Model, Is.SameAs(_h.ViewData.Model.Child));
+        }
+
+        [Test]
+        public void Construct_form_via_extension_method_to_new_model_and_use_correct_model()
+        {
+            var newModel = new RandomViewModel();
+            var f2 = _h.BeginChameleonFormFor(newModel, Action, Method, new HtmlAttributes(), Enctype);
+
+            Assert.That(f2.HtmlHelper.ViewData.Model, Is.SameAs(newModel));
+            Assert.That(f2.HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, Is.Empty);
+        }
+
+        [Test]
+        public void Construct_form_via_extension_method_to_new_model_type_with_null_model()
+        {
+            var f2 = _h.BeginChameleonFormFor(default(RandomViewModel), Action, Method, new HtmlAttributes(), Enctype);
+
+            Assert.That(f2.HtmlHelper, Is.AssignableTo<HtmlHelper<RandomViewModel>>());
+            Assert.That(f2.HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, Is.Empty);
+        }
+
+        [Test]
         public void Construct_form_via_extension_method_using_default_template()
         {
             var f = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
@@ -131,6 +168,17 @@ namespace ChameleonForms.Tests
         public class TestFieldViewModel
         {
             public string SomeProperty { get; set; }
+            public TestChildViewModel Child { get; set; }
+        }
+
+        public class TestChildViewModel
+        {
+            public string AnotherProperty { get; set; }
+        }
+
+        public class RandomViewModel
+        {
+            public string SomeOtherProperty { get; set; }
         }
     }
 }
