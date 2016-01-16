@@ -16,51 +16,6 @@ namespace ChameleonForms.Tests
     [TestFixture]
     class FormShould
     {
-        public class TestFieldViewModel
-        {
-            public string SomeProperty { get; set; }
-        }
-
-        #region Setup
-        private AutoSubstitute _autoSubstitute;
-        private HtmlHelper<TestFieldViewModel> _h;
-        private IFormTemplate _t;
-
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
-
-        private const string Action = "/";
-        private const FormMethod Method = FormMethod.Post;
-        private const EncType Enctype = EncType.Multipart;
-        private readonly HtmlAttributes _htmlAttributes = new HtmlAttributes();
-
-        [SetUp]
-        public void Setup()
-        {
-            _autoSubstitute = AutoSubstituteContainer.Create();
-            _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<TestFieldViewModel>>();
-            _t = _autoSubstitute.Resolve<IFormTemplate>();
-            _t.BeginForm(Action, Method, _htmlAttributes, Enctype).Returns(_beginHtml);
-            _t.EndForm().Returns(_endHtml);
-        }
-
-        private Form<TestFieldViewModel> CreateForm()
-        {
-            return _autoSubstitute.Resolve<Form<TestFieldViewModel>>(
-                new NamedParameter("action", Action),
-                new NamedParameter("method", Method),
-                new NamedParameter("htmlAttributes", _htmlAttributes),
-                new NamedParameter("enctype", Enctype)
-            );
-        }
-
-        [TearDown]
-        public void Teardown()
-        {
-            FormTemplate.Default = new DefaultFormTemplate();
-        }
-        #endregion
-
         [Test]
         public void Store_html_helper()
         {
@@ -133,6 +88,49 @@ namespace ChameleonForms.Tests
             var g = f.GetFieldGenerator(m => m.SomeProperty);
 
             Assert.That(g, Is.TypeOf<DefaultFieldGenerator<TestFieldViewModel, string>>());
+        }
+
+        private AutoSubstitute _autoSubstitute;
+        private HtmlHelper<TestFieldViewModel> _h;
+        private IFormTemplate _t;
+
+        private readonly IHtmlString _beginHtml = new HtmlString("");
+        private readonly IHtmlString _endHtml = new HtmlString("");
+
+        private const string Action = "/";
+        private const FormMethod Method = FormMethod.Post;
+        private const EncType Enctype = EncType.Multipart;
+        private readonly HtmlAttributes _htmlAttributes = new HtmlAttributes();
+
+        [SetUp]
+        public void Setup()
+        {
+            _autoSubstitute = AutoSubstituteContainer.Create();
+            _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<TestFieldViewModel>>();
+            _t = _autoSubstitute.Resolve<IFormTemplate>();
+            _t.BeginForm(Action, Method, _htmlAttributes, Enctype).Returns(_beginHtml);
+            _t.EndForm().Returns(_endHtml);
+        }
+
+        private Form<TestFieldViewModel> CreateForm()
+        {
+            return _autoSubstitute.Resolve<Form<TestFieldViewModel>>(
+                new NamedParameter("action", Action),
+                new NamedParameter("method", Method),
+                new NamedParameter("htmlAttributes", _htmlAttributes),
+                new NamedParameter("enctype", Enctype)
+            );
+        }
+
+        [TearDown]
+        public void Teardown()
+        {
+            FormTemplate.Default = new DefaultFormTemplate();
+        }
+
+        public class TestFieldViewModel
+        {
+            public string SomeProperty { get; set; }
         }
     }
 }
