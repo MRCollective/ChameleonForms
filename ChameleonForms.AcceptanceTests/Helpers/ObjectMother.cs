@@ -42,5 +42,20 @@ namespace ChameleonForms.AcceptanceTests.Helpers
                 }
             }
         }
+
+        public static class ChangingContextViewModels
+        {
+            public static BasicViewModel DifferentViewModel
+            {
+                get
+                {
+                    return new BasicViewModel
+                    {
+                        RequiredString = "req_string",
+                        SomeCheckbox = true
+                    };
+                }
+            }
+        }
     }
 }

@@ -100,6 +100,7 @@ namespace ChameleonForms.Example.Controllers
             ViewBag.Action = "PostDifferentModel";
             ViewBag.ModelType = vm.GetType().Name;
             ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            ViewBag.BoundModel = vm;
             return View("ChangingContext");
         }
 
@@ -109,6 +110,7 @@ namespace ChameleonForms.Example.Controllers
             ViewBag.Action = "PostChildViewModel";
             ViewBag.ModelType = vm.GetType().Name;
             ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            ViewBag.BoundModel = vm;
             return View("ChangingContext");
         }
 
@@ -118,6 +120,7 @@ namespace ChameleonForms.Example.Controllers
             ViewBag.Action = "PostParentViewModel";
             ViewBag.ModelType = vm.GetType().Name;
             ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            ViewBag.BoundModel = vm;
             return View("ChangingContext");
         }
     }
