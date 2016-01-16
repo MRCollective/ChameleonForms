@@ -8,7 +8,7 @@ namespace ChameleonForms.AcceptanceTests
 {
     public static class Host
     {
-        private static readonly RemoteWebDriver Browser = BrowserFactory.PhantomJS();
+        private static readonly RemoteWebDriver Browser = BrowserFactory.FireFox();
         public static readonly SelenoHost Instance = new SelenoHost();
 
         static Host()

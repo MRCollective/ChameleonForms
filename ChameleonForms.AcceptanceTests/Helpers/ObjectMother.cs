@@ -56,6 +56,18 @@ namespace ChameleonForms.AcceptanceTests.Helpers
                     };
                 }
             }
+
+            public static ChildViewModel ChildViewModel
+            {
+                get
+                {
+                    return new ChildViewModel
+                    {
+                        ChildField = "child_field_val",
+                        SomeEnum = SomeEnum.ValueWithDescription
+                    };
+                }
+            }
         }
     }
 }

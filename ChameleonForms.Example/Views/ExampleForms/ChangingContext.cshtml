@@ -11,7 +11,10 @@
 
 @if (Request.HttpMethod == "POST")
 {
-    differentViewModel = ViewBag.BoundModel;
+    if (ViewBag.Action == "PostDifferentModel")
+    {
+        differentViewModel = ViewBag.BoundModel;
+    }
     <h2>Binding data</h2>
     <ul>
         <li><strong>Action:</strong> @ViewBag.Action</li>
