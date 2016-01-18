@@ -51,6 +51,9 @@ We expect that you know how to use ASP.NET MVC's form generation, model-binding 
 * [Automatically sentence case form labels](auto-sentence-case.md) - How to automatically sentence case your form labels without having to annotate them with `[DisplayName]` by adding a single line to `global.asax`
 * [Field Configuration](field-configuration.md) - An overview of the common options available to configure a form field via the `IFieldConfiguration` interface
 * [HTML Attributes](html-attributes.md) - An overview of how to define HTML attributes using the `HtmlAttributes` class
+* [Change the model type for HTML Helper for portions of your page](html-helper-context.md)
+* [Create a form against an model type different from the page model](different-form-models.md)
+* [Use partial views for repeated or abstracted form areas](partials.md)
 
 ## Form structure
 Examples for generating a form and each type of default component within the form. The following pages show both the ChameleonForms syntax, as well as the default generated HTML (which you can easily override to suit your own needs).
@@ -78,7 +81,6 @@ Examples for generating a form and each type of default component within the for
 * [Default (`<input type="text" />`) fields](default-fields.md)
 
 ## Advanced usage
-* [Use partial views for repeated or abstracted form areas](partials.md)
 * [Using different form templates](form-templates.md)
 * [Creating custom form templates](custom-template.md)
 * [Extending the field configuration](extending-field-configuration.md)
