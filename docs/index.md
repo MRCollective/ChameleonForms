@@ -52,7 +52,7 @@ We expect that you know how to use ASP.NET MVC's form generation, model-binding 
 * [Field Configuration](field-configuration.md) - An overview of the common options available to configure a form field via the `IFieldConfiguration` interface
 * [HTML Attributes](html-attributes.md) - An overview of how to define HTML attributes using the `HtmlAttributes` class
 * [Change the model type for HTML Helper for portions of your page](html-helper-context.md)
-* [Create a form against an model type different from the page model](different-form-models.md)
+* [Create a form against a model type different from the page model](different-form-models.md)
 * [Use partial views for repeated or abstracted form areas](partials.md)
 
 ## Form structure

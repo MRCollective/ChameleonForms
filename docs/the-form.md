@@ -73,6 +73,8 @@ The `BeginChameleonForm` extension method looks like this:
 
 By default a self-submitting form that performs a HTTP post with the browser's default enctype is outputted, but you can change the submit location, HTTP verb, enctype and add any [HTML attributes you like](html-attributes) using the appropriate parameters.
 
+You can also [create a form against a model type different from the page model](different-form-models.md).
+
 ### Configuring the Default Form Template
 
 As you can see above, when using the `BeginChameleonForm` extension method it uses `FormTemplate.Default` to determine what form template to use. By default this is set to an instance of the `DefaultFormTemplate` class from the `ChameleonForms.Templates.Default` namespace.
