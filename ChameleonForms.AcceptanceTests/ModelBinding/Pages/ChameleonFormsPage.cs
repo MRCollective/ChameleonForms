@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,12 +16,27 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
     {
         protected void InputModel(T model)
         {
+            InputModel(model, "");
+        }
+
+        private void InputModel(object model, string prefix)
+        {
             foreach (var property in model.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
+                var propertyName = string.IsNullOrEmpty(prefix)
+                    ? property.Name
+                    : string.Format("{0}.{1}", prefix, property.Name);
+
                 if (property.IsReadonly())
                     continue;
 
-                var elements = ((RemoteWebDriver)Browser).FindElementsByName(property.Name);
+                if (!property.PropertyType.IsValueType && property.PropertyType != typeof(string) && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
+                {
+                    InputModel(property.GetValue(model, null), propertyName);
+                    continue;
+                }
+
+                var elements = ((RemoteWebDriver)Browser).FindElementsByName(propertyName);
                 var format = GetFormatStringForProperty(property);
                 FieldFactory.Create(elements).Set(new ModelFieldValue(property.GetValue(model, null), format));
             }
@@ -28,13 +44,29 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
 
         public T GetFormValues()
         {
-            var vm = new T();
+            return (T) GetFormValues(typeof (T), "");
+        }
+
+        private object GetFormValues(Type typeOfModel, string prefix)
+        {
+            var vm = Activator.CreateInstance(typeOfModel);
             foreach (var property in vm.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
+                var propertyName = string.IsNullOrEmpty(prefix)
+                    ? property.Name
+                    : string.Format("{0}.{1}", prefix, property.Name);
+
                 if (property.IsReadonly())
                     continue;
 
-                var elements = ((RemoteWebDriver)Browser).FindElementsByName(property.Name);
+                if (!property.PropertyType.IsValueType && property.PropertyType != typeof(string) && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
+                {
+                    var childValue = GetFormValues(property.PropertyType, propertyName);
+                    property.SetValue(vm, childValue, null);
+                    continue;
+                }
+
+                var elements = ((RemoteWebDriver)Browser).FindElementsByName(propertyName);
                 var format = GetFormatStringForProperty(property);
                 property.SetValue(vm, FieldFactory.Create(elements).Get(new ModelFieldType(property.PropertyType, format)), null);
             }

@@ -14,5 +14,10 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
         {
             return Navigate.To<ModelBindingExamplePage>(By.LinkText("Model Binding Example with lists"));
         }
+
+        public ChangingContextPage GoToChangingContextPage2()
+        {
+            return Navigate.To<ChangingContextPage>(By.LinkText("Changing HTML Helper context"));
+        }
     }
 }

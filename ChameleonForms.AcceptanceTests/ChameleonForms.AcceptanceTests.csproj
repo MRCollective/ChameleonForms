@@ -126,6 +126,7 @@
     <Compile Include="AssemblyFixture.cs" />
     <Compile Include="Helpers\ObjectMother.cs" />
     <Compile Include="Helpers\ViewModelEqualsConstraint.cs" />
+    <Compile Include="ModelBinding\ChangingContextTests.cs" />
     <Compile Include="ModelBinding\ModelBindingTests.cs" />
     <Compile Include="ModelBinding\Pages\ChameleonFormsPage.cs" />
     <Compile Include="ModelBinding\Pages\Fields\BinaryInputField.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="ModelBinding\Pages\Fields\SelectField.cs" />
     <Compile Include="ModelBinding\Pages\Fields\TextInputField.cs" />
     <Compile Include="ModelBinding\Pages\HomePage.cs" />
+    <Compile Include="ModelBinding\Pages\ChangingContextPage.cs" />
     <Compile Include="ModelBinding\Pages\ModelBindingExamplePage.cs" />
     <Compile Include="ModelBinding\Pages\ModelFieldType.cs" />
     <Compile Include="ModelBinding\Pages\ModelFieldValue.cs" />

@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using ChameleonForms.AcceptanceTests.ModelBinding.Pages;
-using ChameleonForms.Example.Controllers;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
@@ -27,12 +26,18 @@ namespace ChameleonForms.AcceptanceTests.Helpers
 
         public override bool Matches(object actualViewModel)
         {
-            foreach (var property in typeof(ModelBindingViewModel).GetProperties(BindingFlags.Instance | BindingFlags.Public))
+            foreach (var property in actualViewModel.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
             {
                 if (property.IsReadonly())
                     continue;
                 var expectedValue = property.GetValue(_expectedViewModel, null);
                 var actualValue = property.GetValue(actualViewModel, null);
+
+                if (!property.PropertyType.IsValueType && property.PropertyType != typeof(string) && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
+                {
+                    Assert.That(actualValue, IsSame.ViewModelAs(expectedValue));
+                    continue;
+                }
 
                 if (expectedValue is IEnumerable && !(expectedValue as IEnumerable).Cast<object>().Any())
                     Assert.That(actualValue, Is.Null.Or.Empty);

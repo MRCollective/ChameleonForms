@@ -42,5 +42,47 @@ namespace ChameleonForms.AcceptanceTests.Helpers
                 }
             }
         }
+
+        public static class ChangingContextViewModels
+        {
+            public static BasicViewModel DifferentViewModel
+            {
+                get
+                {
+                    return new BasicViewModel
+                    {
+                        RequiredString = "req_string",
+                        SomeCheckbox = true
+                    };
+                }
+            }
+
+            public static ChildViewModel ChildViewModel
+            {
+                get
+                {
+                    return new ChildViewModel
+                    {
+                        ChildField = "child_field_val",
+                        SomeEnum = SomeEnum.ValueWithDescription
+                    };
+                }
+            }
+
+            public static ParentViewModel ParentViewModel
+            {
+                get
+                {
+                    return new ParentViewModel
+                    {
+                        Child = new ChildViewModel
+                        {
+                            ChildField = "child_field_val_from_parent",
+                            SomeEnum = SomeEnum.SomeOtherValue
+                        }
+                    };
+                }
+            }
+        }
     }
 }

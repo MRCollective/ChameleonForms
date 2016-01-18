@@ -105,9 +105,9 @@ Rendered Source
 <option value="2">B</option>
 </select>in parent view <span class="field-validation-valid" data-valmsg-for="ListId" data-valmsg-replace="true"></span>
             </dd>
-                <dt><label for="Child_ChildField">Child field</label></dt>
+                <dt><label for="Child_ChildField">Child field</label> <em class="required">*</em></dt>
             <dd>
-                <input id="Child_ChildField" name="Child.ChildField" type="text" value="">From partial against child model <span class="field-validation-valid" data-valmsg-for="Child.ChildField" data-valmsg-replace="true"></span>
+                <input data-val="true" data-val-required="The Child field field is required." id="Child_ChildField" name="Child.ChildField" type="text" value="">From partial against child model <span class="field-validation-valid" data-valmsg-for="Child.ChildField" data-valmsg-replace="true"></span>
             </dd>
 
             <dt><label for="SomeCheckbox">Some checkbox</label> <em class="required">*</em></dt>

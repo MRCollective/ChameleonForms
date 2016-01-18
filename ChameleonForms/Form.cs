@@ -114,7 +114,7 @@ namespace ChameleonForms
     public static class ChameleonFormExtensions
     {
         /// <summary>
-        /// Constructs a <see cref="Form{TModel}"/> object with the default Chameleon form template renderer.
+        /// Constructs a <see cref="Form{TModel}"/> object with the default ChameleonForms template renderer.
         /// </summary>
         /// <example>
         /// @using (var f = Html.BeginChameleonForm(...)) {
@@ -162,6 +162,63 @@ namespace ChameleonForms
             viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
             viewData[WebViewPageExtensions.CurrentFormViewDataKey] = form;
             return form.HtmlHelper.Partial(partialViewName, partialModelProperty.Compile().Invoke(formModel), viewData);
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="Form{TModel}"/> object with the default ChameleonForms template renderer using a sub-property of the current model as the model.
+        /// Values will bind back to the model type of the sub-property as if that was the model all along.
+        /// </summary>
+        /// <example>
+        /// @using (var f = Html.BeginChameleonFormFor(m => m.Subproperty, ...)) {
+        ///     ...
+        /// }
+        /// </example>
+        /// <typeparam name="TParentModel">The model type of the view</typeparam>
+        /// <typeparam name="TChildModel">The model type of the sub-property to construct the form for</typeparam>
+        /// <param name="helper">The HTML Helper for the current view</param>
+        /// <param name="formFor">A lambda expression identifying the sub-property to construct the form for</param>
+        /// <param name="action">The action the form should submit to</param>
+        /// <param name="method">The HTTP method the form submission should use</param>
+        /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
+        /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
+        public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this HtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        {
+            var childHelper = helper.For(formFor, bindFieldsToParent: false);
+            return new Form<TChildModel>(childHelper, FormTemplate.Default, action, method, htmlAttributes, enctype);
+        }
+
+        /// <summary>
+        /// Constructs a <see cref="Form{TModel}"/> object with the default ChameleonForms template renderer using the given model type and instance.
+        /// Values will bind back to the model type specified as if that was the model all along.
+        /// </summary>
+        /// <example>
+        /// @using (var f = Html.BeginChameleonFormFor(new AnotherModelType(), ...)) {
+        ///     ...
+        /// }
+        /// @using (var f = Html.BeginChameleonFormFor(default(AnotherModelType), ...)) {
+        ///     ...
+        /// }
+        /// </example>
+        /// <remarks>
+        /// This can also be done using the For() extension method and just a type:
+        /// @using (var f = Html.For&lt;AnotherModelType&gt;().BeginChameleonForm(...)) {
+        ///     ...
+        /// }
+        /// </remarks>
+        /// <typeparam name="TOriginalModel">The model type of the view</typeparam>
+        /// <typeparam name="TNewModel">The model type of the sub-property to construct the form for</typeparam>
+        /// <param name="helper">The HTML Helper for the current view</param>
+        /// <param name="model">The model to use for the form</param>
+        /// <param name="action">The action the form should submit to</param>
+        /// <param name="method">The HTTP method the form submission should use</param>
+        /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
+        /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
+        public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this HtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        {
+            var childHelper = helper.For(model);
+            return new Form<TNewModel>(childHelper, FormTemplate.Default, action, method, htmlAttributes, enctype);
         }
     }
 }
