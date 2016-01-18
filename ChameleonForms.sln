@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Example", "ChameleonForms.Example\ChameleonForms.Example.csproj", "{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{07599B0A-359D-45A6-90A0-D5D2356C7DFD}"
@@ -21,14 +23,64 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		BREAKING_CHANGES.md = BREAKING_CHANGES.md
 		ChameleonForms.nuspec = ChameleonForms.nuspec
 		ChameleonForms.TwitterBootstrap3.nuspec = ChameleonForms.TwitterBootstrap3.nuspec
+		GitVersionConfig.yaml = GitVersionConfig.yaml
 		LICENSE = LICENSE
 		logo.png = logo.png
+		mkdocs.yml = mkdocs.yml
 		README.md = README.md
 		ChameleonForms\readme.txt = ChameleonForms\readme.txt
 		web.config.transform = web.config.transform
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.AcceptanceTests", "ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj", "{67A08E34-2498-404D-9869-E13F4F496B3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-CB64-4380-A326-C5562973F32F}"
+	ProjectSection(SolutionItems) = preProject
+		docs\auto-sentence-case.md = docs\auto-sentence-case.md
+		docs\boolean.md = docs\boolean.md
+		docs\bootstrap-buttons.png = docs\bootstrap-buttons.png
+		docs\bootstrap-example-banner.png = docs\bootstrap-example-banner.png
+		docs\bootstrap-template.md = docs\bootstrap-template.md
+		docs\comparison.md = docs\comparison.md
+		docs\custom-field-generator-handlers.md = docs\custom-field-generator-handlers.md
+		docs\custom-field-generator.md = docs\custom-field-generator.md
+		docs\custom-template.md = docs\custom-template.md
+		docs\datetime-client-side-validation.md = docs\datetime-client-side-validation.md
+		docs\datetime.md = docs\datetime.md
+		docs\default-fields.md = docs\default-fields.md
+		docs\Diagrams.docx = docs\Diagrams.docx
+		docs\different-form-models.md = docs\different-form-models.md
+		docs\enum.md = docs\enum.md
+		docs\extending-field-configuration.md = docs\extending-field-configuration.md
+		docs\extending-form-components.md = docs\extending-form-components.md
+		docs\field-configuration.md = docs\field-configuration.md
+		docs\field-element.md = docs\field-element.md
+		docs\field-label.md = docs\field-label.md
+		docs\field-validation-html.md = docs\field-validation-html.md
+		docs\field.md = docs\field.md
+		docs\file-upload.md = docs\file-upload.md
+		docs\form-templates.md = docs\form-templates.md
+		docs\form.png = docs\form.png
+		docs\getting-started.md = docs\getting-started.md
+		docs\html-attributes.md = docs\html-attributes.md
+		docs\html-helper-context.md = docs\html-helper-context.md
+		docs\index.md = docs\index.md
+		docs\int-field-with-bootstrap-input-group.png = docs\int-field-with-bootstrap-input-group.png
+		docs\list.md = docs\list.md
+		docs\message.png = docs\message.png
+		docs\multiple-enum.md = docs\multiple-enum.md
+		docs\multiple-list.md = docs\multiple-list.md
+		docs\navigation.png = docs\navigation.png
+		docs\partials.md = docs\partials.md
+		docs\password.md = docs\password.md
+		docs\section.png = docs\section.png
+		docs\textarea.md = docs\textarea.md
+		docs\the-form.md = docs\the-form.md
+		docs\the-message.md = docs\the-message.md
+		docs\the-navigation.md = docs\the-navigation.md
+		docs\the-section.md = docs\the-section.md
+		docs\why.md = docs\why.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

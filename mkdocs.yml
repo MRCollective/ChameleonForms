@@ -12,6 +12,9 @@ pages:
   - Automatically sentence case form labels: auto-sentence-case.md
   - Field Configuration: field-configuration.md
   - HTML Attributes: html-attributes.md
+  - Change the model type for HTML Helper for portions of your page: html-helper-context.md
+  - Create a form against an model type different from the page model: different-form-models.md
+  - Use partial views for repeated or abstracted form areas: partials.md
 - Form structure:
   - Form: the-form.md
   - Message: the-message.md
@@ -34,7 +37,6 @@ pages:
   - Password fields: password.md
   - Default fields: default-fields.md
 - Advanced usage:
-  - Use partial views for repeated or abstracted form areas: partials.md
   - Using different form templates: form-templates.md
   - Creating custom form templates: custom-template.md
   - Extending the field configuration: extending-field-configuration.md
