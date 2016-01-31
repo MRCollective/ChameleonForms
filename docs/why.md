@@ -45,6 +45,7 @@ ASP.NET MVC covers most of the pain points with building HTML forms that were de
 ChameleonForms was created to leverage the advantages of ASP.NET MVC while bridging the gap of the deficiencies described above. It's also designed to provide a lot of nice functionality to help make form development *better*.
 
 ChameleonForms:
+
 * Provides a first-class templating model that allows you to **quickly and easily define new form templates and swap them out**
 * Encourages you to specify the structure of your form in a way that provides a lot of **consistency within and across your forms**
 * Encourages a **minimum of repetition** - most of the time you only need to specify the property of the field you are outputting and it will work out everything else (label, validation HTML, field type based on model metadata, etc.)
