@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
-using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component
 {
@@ -51,9 +49,9 @@ namespace ChameleonForms.Component
         }
 
         /// <inheritdoc />
-        public override IHtmlString Begin()
+        public override IHtml Begin()
         {
-            var isValid = Form.HtmlHelper.ViewData.ModelState.IsValidField(_fieldGenerator.GetFieldId());
+            var isValid = _fieldGenerator.Metadata.IsValid;
             var readonlyConfig = _fieldGenerator.PrepareFieldConfiguration(_config, FieldParent.Section);
             return !IsParent
                 ? Form.Template.Field(_fieldGenerator.GetLabelHtml(readonlyConfig), _fieldGenerator.GetFieldHtml(readonlyConfig), _fieldGenerator.GetValidationHtml(readonlyConfig), _fieldGenerator.Metadata, readonlyConfig, isValid)
@@ -61,10 +59,10 @@ namespace ChameleonForms.Component
         }
 
         /// <inheritdoc />
-        public override IHtmlString End()
+        public override IHtml End()
         {
             return !IsParent
-                ? new HtmlString(string.Empty)
+                ? new Html(string.Empty)
                 : Form.Template.EndField();
         }
     }

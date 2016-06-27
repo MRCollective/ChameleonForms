@@ -1,7 +1,5 @@
-﻿using System;
-using System.Web;
-using ChameleonForms.Enums;
-using ChameleonForms.Templates;
+﻿using ChameleonForms.Enums;
+using ChameleonForms.Utils;
 
 namespace ChameleonForms.Component
 {
@@ -13,7 +11,7 @@ namespace ChameleonForms.Component
     public class Message<TModel> : FormComponent<TModel>
     {
         private readonly MessageType _messageType;
-        private readonly IHtmlString _heading;
+        private readonly IHtml _heading;
 
         /// <summary>
         /// Creates a message.
@@ -21,7 +19,7 @@ namespace ChameleonForms.Component
         /// <param name="form">The form the message is being created in</param>
         /// <param name="messageType">The type of message to display</param>
         /// <param name="heading">The heading for the message</param>
-        public Message(IForm<TModel> form, MessageType messageType, IHtmlString heading) : base(form, false)
+        public Message(IForm<TModel> form, MessageType messageType, IHtml heading) : base(form, false)
         {
             _messageType = messageType;
             _heading = heading;
@@ -29,13 +27,13 @@ namespace ChameleonForms.Component
         }
 
         /// <inheritdoc />
-        public override IHtmlString Begin()
+        public override IHtml Begin()
         {
             return Form.Template.BeginMessage(_messageType, _heading);
         }
 
         /// <inheritdoc />
-        public override IHtmlString End()
+        public override IHtml End()
         {
             return Form.Template.EndMessage();
         }
@@ -45,7 +43,7 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="paragraph">The paragraph to output</param>
         /// <returns>The HTML for the paragraph</returns>
-        public virtual IHtmlString Paragraph(string paragraph)
+        public virtual IHtml Paragraph(string paragraph)
         {
             return Form.Template.MessageParagraph(paragraph.ToHtml());
         }
@@ -55,7 +53,7 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="paragraph">The paragraph to output</param>
         /// <returns>The HTML for the paragraph</returns>
-        public virtual IHtmlString Paragraph(IHtmlString paragraph)
+        public virtual IHtml Paragraph(IHtml paragraph)
         {
             return Form.Template.MessageParagraph(paragraph);
         }

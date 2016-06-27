@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using Humanizer;
@@ -31,7 +29,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtml GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var selectList = GetSelectList(fieldConfiguration.ExcludedEnums);
             return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);

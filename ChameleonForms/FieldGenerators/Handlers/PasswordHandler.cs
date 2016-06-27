@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 
@@ -27,7 +26,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtml GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return GetInputHtml(TextInputType.Password, FieldGenerator, fieldConfiguration);
         }

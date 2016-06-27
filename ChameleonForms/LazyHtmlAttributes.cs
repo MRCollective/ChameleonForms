@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 
 namespace ChameleonForms
 {
@@ -8,13 +7,13 @@ namespace ChameleonForms
     /// </summary>
     public class LazyHtmlAttributes : HtmlAttributes
     {
-        private readonly Func<HtmlAttributes, IHtmlString> _htmlGenerator;
+        private readonly Func<HtmlAttributes, IHtml> _htmlGenerator;
 
         /// <summary>
         /// Construct a LazyHtmlAttributes class.
         /// </summary>
         /// <param name="htmlGenerator">The generator to use to generate the HTML when .ToHtmlString() is called</param>
-        public LazyHtmlAttributes(Func<HtmlAttributes, IHtmlString> htmlGenerator)
+        public LazyHtmlAttributes(Func<HtmlAttributes, IHtml> htmlGenerator)
         {
             if (htmlGenerator == null)
                 throw new ArgumentNullException("htmlGenerator");

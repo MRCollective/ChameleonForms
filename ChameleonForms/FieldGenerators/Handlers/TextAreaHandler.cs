@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Web;
-using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 
@@ -28,11 +26,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtml GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return FieldGenerator.HtmlHelper.TextAreaFor(
+            return FieldGenerator.View.TextareaFor(
                 FieldGenerator.FieldProperty,
-                fieldConfiguration.HtmlAttributes
+                fieldConfiguration.HtmlAttributes.ToHtmlAttributes()
             );
         }
 

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
@@ -57,91 +56,91 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         }
 
         /// <inheritdoc />
-        public override IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        public override IHtml BeginForm(string action, FormSubmitMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
         {
             return HtmlCreator.BuildFormTag(action, method, htmlAttributes, enctype);
         }
 
         /// <inheritdoc />
-        public override IHtmlString EndForm()
+        public override IHtml EndForm()
         {
-            return TwitterBootstrapHtmlHelpers.EndForm();
+            return TwitterBootstrapHtmlHelpers.EndForm().ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString BeginSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public override IHtml BeginSection(IHtml heading = null, IHtml leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
-            return TwitterBootstrapHtmlHelpers.BeginSection(heading, leadingHtml, htmlAttributes ?? new HtmlAttributes());
+            return TwitterBootstrapHtmlHelpers.BeginSection(heading.ToIHtmlString(), leadingHtml.ToIHtmlString(), htmlAttributes ?? new HtmlAttributes()).ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString EndSection()
+        public override IHtml EndSection()
         {
-            return TwitterBootstrapHtmlHelpers.EndSection();
+            return TwitterBootstrapHtmlHelpers.EndSection().ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString BeginNestedSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public override IHtml BeginNestedSection(IHtml heading = null, IHtml leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
-            return TwitterBootstrapHtmlHelpers.BeginNestedSection(heading, leadingHtml, htmlAttributes ?? new HtmlAttributes());
+            return TwitterBootstrapHtmlHelpers.BeginNestedSection(heading.ToIHtmlString(), leadingHtml.ToIHtmlString(), htmlAttributes ?? new HtmlAttributes()).ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString EndNestedSection()
+        public override IHtml EndNestedSection()
         {
-            return TwitterBootstrapHtmlHelpers.EndNestedSection();
+            return TwitterBootstrapHtmlHelpers.EndNestedSection().ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        public override IHtml Field(IHtml labelHtml, IHtml elementHtml, IHtml validationHtml, IFieldMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
-            return TwitterBootstrapHtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, isValid, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid));
+            return TwitterBootstrapHtmlHelpers.Field(labelHtml.ToIHtmlString(), elementHtml.ToIHtmlString(), validationHtml.ToIHtmlString(), fieldMetadata, fieldConfiguration, isValid, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid).ToIHtmlString()).ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        public override IHtml BeginField(IHtml labelHtml, IHtml elementHtml, IHtml validationHtml, IFieldMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
-            return TwitterBootstrapHtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, isValid, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid));
+            return TwitterBootstrapHtmlHelpers.BeginField(labelHtml.ToIHtmlString(), elementHtml.ToIHtmlString(), validationHtml.ToIHtmlString(), fieldMetadata, fieldConfiguration, isValid, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid).ToIHtmlString()).ToIHtml();
         }
 
         /// <inheritdoc />
-        protected override IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        protected override IHtml RequiredDesignator(IFieldMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
-            return TwitterBootstrapHtmlHelpers.RequiredDesignator(fieldConfiguration);
+            return TwitterBootstrapHtmlHelpers.RequiredDesignator(fieldConfiguration).ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString EndField()
+        public override IHtml EndField()
         {
-            return TwitterBootstrapHtmlHelpers.EndField();
+            return TwitterBootstrapHtmlHelpers.EndField().ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
+        public override IHtml BeginMessage(MessageType messageType, IHtml heading)
         {
-            return TwitterBootstrapHtmlHelpers.BeginMessage(messageType.ToTwitterEmphasisStyle(), heading);
+            return TwitterBootstrapHtmlHelpers.BeginMessage(messageType.ToTwitterEmphasisStyle(), heading.ToIHtmlString()).ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString EndMessage()
+        public override IHtml EndMessage()
         {
-            return TwitterBootstrapHtmlHelpers.EndMessage();
+            return TwitterBootstrapHtmlHelpers.EndMessage().ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString BeginNavigation()
+        public override IHtml BeginNavigation()
         {
-            return TwitterBootstrapHtmlHelpers.BeginNavigation();
+            return TwitterBootstrapHtmlHelpers.BeginNavigation().ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString EndNavigation()
+        public override IHtml EndNavigation()
         {
-            return TwitterBootstrapHtmlHelpers.EndNavigation();
+            return TwitterBootstrapHtmlHelpers.EndNavigation().ToIHtml();
         }
 
         /// <inheritdoc />
-        public override IHtmlString Button(IHtmlString content, string type, string id, string value, HtmlAttributes htmlAttributes)
+        public override IHtml Button(IHtml content, string type, string id, string value, HtmlAttributes htmlAttributes)
         {
             htmlAttributes = htmlAttributes ?? new HtmlAttributes();
             htmlAttributes.AddClass("btn");
@@ -153,8 +152,8 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
                 var icon = htmlAttributes.Attributes[IconAttrKey];
                 var iconHtml = string.Format("<span class=\"glyphicon glyphicon-{0}\"></span> ", icon);
                 content = content == null
-                    ? new HtmlString(iconHtml + value.ToHtml())
-                    : new HtmlString(iconHtml + content.ToHtmlString());
+                    ? new Html(iconHtml + value.ToHtml())
+                    : new Html(iconHtml + content.ToHtmlString());
                 htmlAttributes.Attributes.Remove(IconAttrKey);
             }
 
@@ -162,9 +161,9 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         }
 
         /// <inheritdoc />
-        public override IHtmlString RadioOrCheckboxList(IEnumerable<IHtmlString> list, bool isCheckbox)
+        public override IHtml RadioOrCheckboxList(IEnumerable<IHtml> list, bool isCheckbox)
         {
-            return TwitterBootstrapHtmlHelpers.RadioOrCheckboxList(list, isCheckbox);
+            return TwitterBootstrapHtmlHelpers.RadioOrCheckboxList(list, isCheckbox).ToIHtml();
         }
     }
 }

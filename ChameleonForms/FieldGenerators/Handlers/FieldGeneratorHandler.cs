@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
 using System.Linq;
+using System.Web;
+using System.Web.ModelBinding;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -16,6 +15,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
     /// </summary>
     /// <typeparam name="TModel">The type of the model the form is being output for</typeparam>
     /// <typeparam name="T">The type of the property in the model that the specific field is being output for</typeparam>
+    // ReSharper disable UnusedTypeParameter
     public interface IFieldGeneratorHandler<TModel, T>
     {
         /// <summary>
@@ -28,7 +28,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// </summary>
         /// <param name="fieldConfiguration">The field configuration to use to generate the HTML</param>
         /// <returns>The HTML for the Field Element</returns>
-        IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
+        IHtml GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Modify the field configuration for the field using this field generator handler.
@@ -43,6 +43,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <returns>The display type of the field control</returns>
         FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration);
     }
+    // ReSharper enable UnusedTypeParameter
 
     internal static class FieldGeneratorHandler
     {
@@ -83,7 +84,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public abstract bool CanHandle();
         /// <inheritdoc />
-        public abstract IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
+        public abstract IHtml GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
         /// <inheritdoc />
         public virtual void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration) {}
         /// <inheritdoc />
@@ -133,17 +134,15 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        protected static IHtmlString GetInputHtml(TextInputType inputType, IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
+        protected static IHtml GetInputHtml(TextInputType inputType, IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
         {
-            if (inputType == TextInputType.Password)
-                return fieldGenerator.HtmlHelper.PasswordFor(fieldGenerator.FieldProperty, fieldConfiguration.HtmlAttributes);
-
             var attrs = new HtmlAttributes(fieldConfiguration.HtmlAttributes);
+            if (inputType == TextInputType.Password)
+                attrs.Attr(type => "password");
+
             if (!attrs.Attributes.ContainsKey("type"))
                 attrs.Attr(type => inputType.ToString().ToLower());
-            return !string.IsNullOrEmpty(fieldConfiguration.FormatString)
-                ? fieldGenerator.HtmlHelper.TextBoxFor(fieldGenerator.FieldProperty, fieldConfiguration.FormatString, attrs.ToDictionary())
-                : fieldGenerator.HtmlHelper.TextBoxFor(fieldGenerator.FieldProperty, attrs.ToDictionary());
+            return fieldGenerator.View.InputFor(fieldGenerator.FieldProperty, attrs, fieldConfiguration.FormatString);
         }
 
         private static bool HasEmptySelectListItem(IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
@@ -177,7 +176,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        protected static IHtmlString GetSelectListHtml(IEnumerable<SelectListItem> selectList, IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
+        protected static IHtml GetSelectListHtml(IEnumerable<SelectListItem> selectList, IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
         {
             if (HasEmptySelectListItem(fieldGenerator, fieldConfiguration))
                 selectList = new []{GetEmptySelectListItem(fieldGenerator, fieldConfiguration)}.Union(selectList);
@@ -189,13 +188,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
                     return fieldGenerator.Template.RadioOrCheckboxList(list, isCheckbox: HasMultipleValues(fieldGenerator));
                 case FieldDisplayType.DropDown:
                 case FieldDisplayType.Default:
-                    return HasMultipleValues(fieldGenerator)
-                        ? fieldGenerator.HtmlHelper.ListBoxFor(
-                            fieldGenerator.FieldProperty, selectList,
-                            fieldConfiguration.HtmlAttributes)
-                        : fieldGenerator.HtmlHelper.DropDownListFor(
-                            fieldGenerator.FieldProperty, selectList,
-                            fieldConfiguration.HtmlAttributes);
+                    return fieldGenerator.View.SelectListFor(
+                        fieldGenerator.FieldProperty,
+                        selectList,
+                        HasMultipleValues(fieldGenerator),
+                        fieldConfiguration.HtmlAttributes.ToHtmlAttributes());
             }
 
             return null;
@@ -231,12 +228,12 @@ namespace ChameleonForms.FieldGenerators.Handlers
             };
         }
 
-        private static IEnumerable<IHtmlString> SelectListToRadioList(IEnumerable<SelectListItem> selectList, IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
+        private static IEnumerable<IHtml> SelectListToRadioList(IEnumerable<SelectListItem> selectList, IFieldGenerator<TModel, T> fieldGenerator, IReadonlyFieldConfiguration fieldConfiguration)
         {
             var count = 0;
             foreach (var item in selectList)
             {
-                var id = string.Format("{0}_{1}", GetFieldName(fieldGenerator), ++count);
+                var id = string.Format("{0}_{1}", fieldGenerator.GetFieldId(), ++count);
                 var attrs = new HtmlAttributes(fieldConfiguration.HtmlAttributes);
                 if (item.Selected)
                     attrs.Attr("checked", "checked");
@@ -245,37 +242,33 @@ namespace ChameleonForms.FieldGenerators.Handlers
                     AdjustHtmlForModelState(attrs, fieldGenerator);
                 var fieldHtml = HasMultipleValues(fieldGenerator)
                         ? HtmlCreator.BuildSingleCheckbox(GetFieldName(fieldGenerator), item.Selected, attrs, item.Value)
-                        : fieldGenerator.HtmlHelper.RadioButtonFor(fieldGenerator.FieldProperty, item.Value, attrs.ToDictionary());
+                        : fieldGenerator.View.RadioItemFor(fieldGenerator.FieldProperty, item.Value, attrs);
                 if (fieldConfiguration.ShouldInlineLabelWrapElement)
-                    yield return new HtmlString(string.Format("<label>{0} {1}</label>", fieldHtml, item.Text));
+                    yield return new Html(string.Format("<label>{0} {1}</label>", fieldHtml.ToHtmlString(), HttpUtility.HtmlEncode(item.Text)));
                 else
-                    yield return new HtmlString(string.Format("{0} {1}", fieldHtml, fieldGenerator.HtmlHelper.Label(id, item.Text)));
+                    yield return new Html(string.Format("{0} {1}", fieldHtml.ToHtmlString(), fieldGenerator.View.Label(id, item.Text, new HtmlAttributes().AddClass(fieldConfiguration.LabelClasses)).ToHtmlString()));
             }
         }
 
         /// <inheritdoc />
         protected static string GetFieldName(IFieldGenerator<TModel, T> fieldGenerator)
         {
-            var name = ExpressionHelper.GetExpressionText(fieldGenerator.FieldProperty);
-            return fieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+            return fieldGenerator.View.GetFieldName(fieldGenerator.FieldProperty);
         }
 
         /// <inheritdoc />
         protected static void AdjustHtmlForModelState(HtmlAttributes attrs, IFieldGenerator<TModel, T> fieldGenerator)
         {
-            var name = ExpressionHelper.GetExpressionText(fieldGenerator.FieldProperty);
-            var fullName = fieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+            var fullName = GetFieldName(fieldGenerator);
 
             ModelState modelState;
-            if (fieldGenerator.HtmlHelper.ViewContext.ViewData.ModelState.TryGetValue(fullName, out modelState))
+            if (fieldGenerator.View.ModelState.TryGetValue(fullName, out modelState))
             {
                 if (modelState.Errors.Count > 0)
-                {
-                    attrs.AddClass(HtmlHelper.ValidationInputCssClassName);
-                }
+                    fieldGenerator.View.AddValidationErrorAttributes(attrs, fieldGenerator.FieldProperty, modelState);
             }
 
-            attrs.Attrs(fieldGenerator.HtmlHelper.GetUnobtrusiveValidationAttributes(name, ModelMetadata.FromLambdaExpression(fieldGenerator.FieldProperty, fieldGenerator.HtmlHelper.ViewData)));
+            fieldGenerator.View.AddValidationAttributes(attrs, fieldGenerator.FieldProperty);
         }
     }
 

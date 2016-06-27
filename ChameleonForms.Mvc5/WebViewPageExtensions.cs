@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Web.Mvc;
 using ChameleonForms.Component;
 
@@ -71,7 +70,7 @@ namespace ChameleonForms
             if (!partial.ViewData.TryGetValue(CurrentFormViewDataKey, out currentForm))
                 throw new InvalidOperationException("Not currently inside a form section.");
 
-            return (currentForm as IForm).CreatePartialForm(partial.PartialModelExpression(), partial.Html);
+            return (currentForm as IForm).CreatePartialForm(partial.PartialModelExpression(), new MvcViewWithModel<TPartialViewModel>(partial.Html));
         }
 
         /// <summary>

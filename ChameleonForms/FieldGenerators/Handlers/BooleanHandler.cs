@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
+using ChameleonForms.Utils;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -29,7 +28,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtml GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             if (GetDisplayType(fieldConfiguration) == FieldDisplayType.Checkbox)
                 return GetSingleCheckboxHtml(fieldConfiguration);
@@ -62,7 +61,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldGenerator.GetValue() as bool?;
         }
 
-        private IHtmlString GetSingleCheckboxHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        private IHtml GetSingleCheckboxHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var attrs = new HtmlAttributes(fieldConfiguration.HtmlAttributes);
             AdjustHtmlForModelState(attrs, FieldGenerator);
@@ -76,11 +75,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
                     var content = fieldhtml.ToHtmlString() + " " + (inlineLabelText != null ? inlineLabelText.ToHtmlString() : FieldGenerator.GetFieldDisplayName());
 
-                    return HtmlCreator.BuildLabel(null, new HtmlString(content), null);
+                    return HtmlCreator.BuildLabel(null, new Html(content), null);
                 }
                 else
                 {
-                    return new HtmlString(string.Format("{0} {1}", fieldhtml, HtmlCreator.BuildLabel(
+                    return new Html(string.Format("{0} {1}", fieldhtml, HtmlCreator.BuildLabel(
                         GetFieldName(FieldGenerator),
                         fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
                         null

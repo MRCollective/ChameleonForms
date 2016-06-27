@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using System.Web.Mvc;
+using ChameleonForms.Utils;
 
 namespace ChameleonForms
 {
     /// <summary>
     /// Represents a set of HTML attributes.
     /// </summary>
-    public class HtmlAttributes : IHtmlString
+    public class HtmlAttributes : IHtml
     {
         private readonly TagBuilder _tagBuilder = new TagBuilder("p");
 
@@ -163,8 +163,7 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attrs(object attributes)
         {
-            var attrs = HtmlHelper.AnonymousObjectToHtmlAttributes(attributes)
-                .ToDictionary(d => d.Key.ToLower(), d => d.Value);
+            var attrs = attributes.AnonymousObjectToHtmlAttributes();
             _tagBuilder.MergeAttributes(attrs, true);
 
             return this;

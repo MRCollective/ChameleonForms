@@ -1,7 +1,8 @@
-﻿@* Generator: MvcHelper *@
-@using System.Web.Mvc
-@using Component.Config
-@using Enums
+﻿@* Generator: MvcHelper
+   GeneratePrettyNames : true *@
+@using ChameleonForms
+@using ChameleonForms.Component.Config
+@using ChameleonForms.Enums
 
 @* The @:'s are to stop compilation errors with the Razor engine due to unclosed HTML tags *@
 
@@ -58,18 +59,18 @@
     if (fieldConfiguration.Hint != null) {<div class="hint">@fieldConfiguration.Hint</div>}
 }
 
-@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, IHtmlString requiredDesignator) {
+@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, IFieldMetadata fieldMetadata, IHtmlString requiredDesignator) {
 @:            <dt>@labelHtml@(new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? requiredDesignator.ToHtmlString() : ""))</dt>
 @:            <dd@(RenderIfNotEmpty(fieldConfiguration.FieldContainerClasses,@<text> class="@fieldConfiguration.FieldContainerClasses"</text>))>
 @:                @GetPrependedHtml(fieldConfiguration)@elementHtml@GetAppendedHtml(fieldConfiguration)@GetHint(fieldConfiguration) @validationHtml
 }
 
-@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, IHtmlString requiredDesignator) {
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, IHtmlString requiredDesignator) {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, requiredDesignator)
 @:            </dd>
 }
 
-@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, IHtmlString requiredDesignator)
+@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, IHtmlString requiredDesignator)
 {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, requiredDesignator)
 @:                <dl>
@@ -111,10 +112,10 @@
 @:    </p>
 }
 
-@helper RadioOrCheckboxList(IEnumerable<IHtmlString> items) {
+@helper RadioOrCheckboxList(IEnumerable<IHtml> items) {
 @:    <ul>
 foreach(var i in items) {
-@:        <li>@i</li>
+@:        <li>@i.ToIHtmlString()</li>
 }
 @:    </ul>
 }

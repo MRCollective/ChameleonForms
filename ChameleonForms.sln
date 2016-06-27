@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Example", "ChameleonForms.Example\ChameleonForms.Example.csproj", "{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}"
 EndProject
@@ -82,6 +82,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-C
 		docs\why.md = docs\why.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Mvc5", "ChameleonForms.Mvc5\ChameleonForms.Mvc5.csproj", "{02A0FA65-304C-4224-8D54-342F77FB63C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeAnalysis|Any CPU = CodeAnalysis|Any CPU
@@ -113,6 +115,12 @@ Global
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02A0FA65-304C-4224-8D54-342F77FB63C6}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
+		{02A0FA65-304C-4224-8D54-342F77FB63C6}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
+		{02A0FA65-304C-4224-8D54-342F77FB63C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02A0FA65-304C-4224-8D54-342F77FB63C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02A0FA65-304C-4224-8D54-342F77FB63C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02A0FA65-304C-4224-8D54-342F77FB63C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Web;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
-using System.Web.Mvc;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.FieldGenerators.Handlers;
 
@@ -33,13 +31,13 @@ namespace ChameleonForms.Templates
         /// <param name="htmlAttributes">Any HTML attributes the form should use; specified as an anonymous object</param>
         /// <param name="enctype">The encoding type for the form</param>
         /// <returns>The starting HTML for a form</returns>
-        IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype);
+        IHtml BeginForm(string action, FormSubmitMethod method, HtmlAttributes htmlAttributes, EncType? enctype);
 
         /// <summary>
         /// Creates the ending HTML for a form.
         /// </summary>
         /// <returns>The ending HTML for a form</returns>
-        IHtmlString EndForm();
+        IHtml EndForm();
 
         /// <summary>
         /// Creates the beginning HTML for a section.
@@ -48,13 +46,13 @@ namespace ChameleonForms.Templates
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes the section container should use; specified as an anonymous object</param>
         /// <returns>The beginning HTML for a section</returns>
-        IHtmlString BeginSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null);
+        IHtml BeginSection(IHtml heading = null, IHtml leadingHtml = null, HtmlAttributes htmlAttributes = null);
 
         /// <summary>
         /// Creates the ending HTML for a section.
         /// </summary>
         /// <returns>The ending HTML for a section</returns>
-        IHtmlString EndSection();
+        IHtml EndSection();
 
         /// <summary>
         /// Creates the beginning HTML for a section that is nested within another section.
@@ -63,13 +61,13 @@ namespace ChameleonForms.Templates
         /// <param name="leadingHtml">Any HTML to output at the start of the nested section</param>
         /// <param name="htmlAttributes">Any HTML attributes the nested section container should use; specified as an anaonymous object</param>
         /// <returns>The beginning HTML for a nested section</returns>
-        IHtmlString BeginNestedSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null);
+        IHtml BeginNestedSection(IHtml heading = null, IHtml leadingHtml = null, HtmlAttributes htmlAttributes = null);
 
         /// <summary>
         /// Creates the ending HTML for a section that is nested within another section.
         /// </summary>
         /// <returns>The ending HTML for a nested section</returns>
-        IHtmlString EndNestedSection();
+        IHtml EndNestedSection();
 
         /// <summary>
         /// Creates the HTML for a single form field.
@@ -81,7 +79,7 @@ namespace ChameleonForms.Templates
         /// <param name="fieldConfiguration">Configuration for the field</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>The HTML for the field</returns>
-        IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
+        IHtml Field(IHtml labelHtml, IHtml elementHtml, IHtml validationHtml, IFieldMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
 
         /// <summary>
         /// Creates the beginning HTML for a single form field that contains other fields nested within it.
@@ -93,25 +91,25 @@ namespace ChameleonForms.Templates
         /// <param name="fieldConfiguration">Configuration for the field</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>The beginning HTML for the parent field</returns>
-        IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
+        IHtml BeginField(IHtml labelHtml, IHtml elementHtml, IHtml validationHtml, IFieldMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
 
         /// <summary>
         /// Creates the ending HTML for a single form field that contains other fields nested within it.
         /// </summary>
         /// <returns>The ending HTML for the parent field</returns>
-        IHtmlString EndField();
+        IHtml EndField();
 
         /// <summary>
         /// Creates the beginning HTML for a navigation section.
         /// </summary>
         /// <returns>The beginning HTML for a navigation section</returns>
-        IHtmlString BeginNavigation();
+        IHtml BeginNavigation();
 
         /// <summary>
         /// Creates the ending HTML for a navigation section.
         /// </summary>
         /// <returns>The ending HTML for a navigation section</returns>
-        IHtmlString EndNavigation();
+        IHtml EndNavigation();
 
         /// <summary>
         /// Creates the beginning HTML for a message.
@@ -119,20 +117,20 @@ namespace ChameleonForms.Templates
         /// <param name="messageType">The type of message being displayed</param>
         /// <param name="heading">The heading for the message</param>
         /// <returns>The beginning HTML for the message</returns>
-        IHtmlString BeginMessage(MessageType messageType, IHtmlString heading);
+        IHtml BeginMessage(MessageType messageType, IHtml heading);
 
         /// <summary>
         /// Creates the ending HTML for a message.
         /// </summary>
         /// <returns>The ending HTML for the message</returns>
-        IHtmlString EndMessage();
+        IHtml EndMessage();
 
         /// <summary>
         /// Creates the HTML for a paragraph in a message.
         /// </summary>
         /// <param name="paragraph">The paragraph HTML</param>
         /// <returns>The HTML for the message paragraph</returns>
-        IHtmlString MessageParagraph(IHtmlString paragraph);
+        IHtml MessageParagraph(IHtml paragraph);
 
         /// <summary>
         /// Creates the HTML for a button.
@@ -143,7 +141,7 @@ namespace ChameleonForms.Templates
         /// <param name="value">The value to submit if the button is clicked or null if one shouldn't be set</param>
         /// <param name="htmlAttributes">Any HTML attributes to add to the button or null if there are none</param>
         /// <returns>The HTML for the button</returns>
-        IHtmlString Button(IHtmlString content, string type, string id, string value, HtmlAttributes htmlAttributes);
+        IHtml Button(IHtml content, string type, string id, string value, HtmlAttributes htmlAttributes);
 
         /// <summary>
         /// Creates the HTML for a list of radio buttons or checkboxes.
@@ -151,6 +149,6 @@ namespace ChameleonForms.Templates
         /// <param name="list">The list of HTML items (one per radio/checkbox)</param>
         /// <param name="isCheckbox">Whether the list is for checkboxes rather than radio buttons</param>
         /// <returns>The HTML for the radio list</returns>
-        IHtmlString RadioOrCheckboxList(IEnumerable<IHtmlString> list, bool isCheckbox);
+        IHtml RadioOrCheckboxList(IEnumerable<IHtml> list, bool isCheckbox);
     }
 }

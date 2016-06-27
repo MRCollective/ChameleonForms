@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
+using System.Web.ModelBinding;
 using Humanizer;
 
 namespace ChameleonForms
@@ -19,7 +19,7 @@ namespace ChameleonForms
         /// </summary>
         public static void Register(LetterCasing casing = LetterCasing.Sentence)
         {
-            ModelMetadataProviders.Current = new HumanizedLabels() { Casing = casing };
+            ModelMetadataProviders.Current = new HumanizedLabels { Casing = casing };
         }
 
         /// <inheritdoc />

@@ -1,7 +1,8 @@
-﻿@* Generator: MvcHelper *@
-@using System.Web.Mvc
-@using Component.Config
-@using Templates.TwitterBootstrap3
+﻿@* Generator: MvcHelper
+   GeneratePrettyNames : true *@
+@using ChameleonForms
+@using ChameleonForms.Component.Config
+@using ChameleonForms.Templates.TwitterBootstrap3
 
 @* The @:'s are to stop compilation errors with the Razor engine due to unclosed HTML tags *@
 
@@ -46,7 +47,7 @@
 @:    </div>
 }
 
-@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid, IHtmlString requiredDesignator) {
+@helper BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid, IHtmlString requiredDesignator) {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid, requiredDesignator)
 @:            <div class="row nested-fields">
 @:                <div class="col-xs-1"></div>
@@ -59,8 +60,8 @@
 @:        </div>
 }
 
-@helper GetInputGroupHtml(IHtmlString html, bool isInputGroup) {
-@(new HtmlString(isInputGroup ? "<div class=\"input-group-addon\">" : ""))@html@(new HtmlString(isInputGroup ? "</div>" : ""))
+@helper GetInputGroupHtml(IHtml html, bool isInputGroup) {
+@(new HtmlString(isInputGroup ? "<div class=\"input-group-addon\">" : ""))@html.ToHtmlString()@(new HtmlString(isInputGroup ? "</div>" : ""))
 }
 
 @helper GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration, bool isInputGroup) {
@@ -103,7 +104,7 @@
     }
 }
 
-@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, ModelMetadata fieldMetadata, bool isValid, IHtmlString requiredDesignator) {
+@helper BeginFieldInternal(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IReadonlyFieldConfiguration fieldConfiguration, IFieldMetadata fieldMetadata, bool isValid, IHtmlString requiredDesignator) {
     var isCheckboxControl = fieldConfiguration.GetBagData<bool>("IsCheckboxControl");
     var canBeInputGroup = fieldConfiguration.GetBagData<bool>("CanBeInputGroup");
     var isRadioOrCheckboxList = fieldConfiguration.GetBagData<bool>("IsRadioOrCheckboxList");
@@ -123,7 +124,7 @@
 @:            @GetHint(fieldConfiguration) @validationHtml
 }
 
-@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid, IHtmlString requiredDesignator) {
+@helper Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, IFieldMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid, IHtmlString requiredDesignator) {
 @BeginFieldInternal(labelHtml, elementHtml, validationHtml, fieldConfiguration, fieldMetadata, isValid, requiredDesignator)
 @:            </div>
 }
@@ -150,7 +151,7 @@
 @:        </div>
 }
 
-@helper RadioOrCheckboxList(IEnumerable<IHtmlString> items, bool isCheckbox) {
+@helper RadioOrCheckboxList(IEnumerable<IHtml> items, bool isCheckbox) {
     foreach (var item in items) {
         <div class="@(isCheckbox ? "checkbox" : "radio")">@item</div>
     }

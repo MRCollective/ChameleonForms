@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Web;
-using ChameleonForms.Templates;
 
 namespace ChameleonForms.Component
 {
@@ -20,7 +18,7 @@ namespace ChameleonForms.Component
     /// Chameleon Forms base component class; provides an ability to easily write HTML to the page in a self-closing or nested manner.
     /// Ensure you call Initialise() at the end of the constructor when extending this class.
     /// </summary>
-    public abstract class FormComponent<TModel> : IFormComponent<TModel>, IHtmlString, IDisposable
+    public abstract class FormComponent<TModel> : IFormComponent<TModel>, IHtml, IDisposable
     {
         /// <inheritdoc />
         protected readonly bool IsSelfClosing;
@@ -52,13 +50,13 @@ namespace ChameleonForms.Component
         /// Returns the HTML representation of the beginning of the form component.
         /// </summary>
         /// <returns>The beginning HTML for the form component</returns>
-        public abstract IHtmlString Begin();
+        public abstract IHtml Begin();
 
         /// <summary>
         /// Returns the HTML representation of the end of the form component.
         /// </summary>
         /// <returns>The ending HTML for the form component</returns>
-        public abstract IHtmlString End();
+        public abstract IHtml End();
 
         /// <inheritdoc />
         public string ToHtmlString()

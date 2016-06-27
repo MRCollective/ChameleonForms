@@ -1,5 +1,4 @@
 ﻿using ChameleonForms.Templates;
-using ChameleonForms.Templates.Default;
 
 namespace ChameleonForms
 {
@@ -8,11 +7,6 @@ namespace ChameleonForms
     /// </summary>
     public static class FormTemplate
     {
-        static FormTemplate()
-        {
-            Default = new DefaultFormTemplate();
-        }
-
         /// <summary>
         /// The default form template instance to render forms.
         /// </summary>

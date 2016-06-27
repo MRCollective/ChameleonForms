@@ -5,10 +5,9 @@ using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
-using ChameleonForms.Templates.Default;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Templates
+namespace ChameleonForms.Tests.Templates.Default
 {
     [TestFixture]
     [UseReporter(typeof(DiffReporter))]
