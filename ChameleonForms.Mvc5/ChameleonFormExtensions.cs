@@ -27,9 +27,9 @@ namespace ChameleonForms
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TModel> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormSubmitMethod method = FormSubmitMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TModel> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
-            return new Form<TModel>(new MvcViewWithModel<TModel>(helper), FormTemplate.Default, action, method, htmlAttributes, enctype);
+            return new Form<TModel>(new MvcViewWithModel<TModel>(helper), FormTemplate.Default, action, method.ToFormSubmitMethod(), htmlAttributes, enctype);
         }
 
         /// <summary>
@@ -77,10 +77,10 @@ namespace ChameleonForms
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this HtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormSubmitMethod method = FormSubmitMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this HtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             var childHelper = helper.For(formFor, bindFieldsToParent: false);
-            return new Form<TChildModel>(new MvcViewWithModel<TChildModel>(childHelper), FormTemplate.Default, action, method, htmlAttributes, enctype);
+            return new Form<TChildModel>(new MvcViewWithModel<TChildModel>(childHelper), FormTemplate.Default, action, method.ToFormSubmitMethod(), htmlAttributes, enctype);
         }
 
         /// <summary>
@@ -110,10 +110,10 @@ namespace ChameleonForms
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this HtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormSubmitMethod method = FormSubmitMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this HtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             var childHelper = helper.For(model);
-            return new Form<TNewModel>(new MvcViewWithModel<TNewModel>(childHelper), FormTemplate.Default, action, method, htmlAttributes, enctype);
+            return new Form<TNewModel>(new MvcViewWithModel<TNewModel>(childHelper), FormTemplate.Default, action, method.ToFormSubmitMethod(), htmlAttributes, enctype);
         }
     }
 }

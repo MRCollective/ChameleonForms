@@ -46,7 +46,7 @@ namespace ChameleonForms.Example.Forms.Components
     {
         public static Form<TModel> BeginRandomForm<TModel>(this HtmlHelper<TModel> helper, string action, FormMethod method, object htmlAttributes = null, EncType? enctype = null)
         {
-            return new Form<TModel>(new MvcViewWithModel<TModel>(helper), new RandomFormTemplate(), action, method == FormMethod.Get ? FormSubmitMethod.Get : FormSubmitMethod.Post, htmlAttributes.ToHtmlAttributes(), enctype);
+            return new Form<TModel>(new MvcViewWithModel<TModel>(helper), new RandomFormTemplate(), action, method.ToFormSubmitMethod(), htmlAttributes.ToHtmlAttributes(), enctype);
         }
 
         public static RandomComponent<TModel> RandomComponent<TModel>(this Form<TModel>  form)

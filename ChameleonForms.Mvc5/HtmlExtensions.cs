@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ChameleonForms.Enums;
 
 namespace ChameleonForms
 {
@@ -38,6 +39,8 @@ namespace ChameleonForms
         /// <returns>The IHtml</returns>
         public static IHtml ToIHtml(this IHtmlString content)
         {
+            if (content == null)
+                return null;
             return new Html(content.ToHtmlString());
         }
 
@@ -48,6 +51,8 @@ namespace ChameleonForms
         /// <returns>The IHtmlString</returns>
         public static IHtmlString ToIHtmlString(this IHtml content)
         {
+            if (content == null)
+                return null;
             return new HtmlString(content.ToHtmlString());
         }
         
@@ -72,6 +77,17 @@ namespace ChameleonForms
                     Selected = i.Selected,
                     Text = i.Text
                 });
+        }
+
+        public static FormSubmitMethod ToFormSubmitMethod(this FormMethod method)
+        {
+            switch (method)
+            {
+                case FormMethod.Get:
+                    return FormSubmitMethod.Get;
+                default:
+                    return FormSubmitMethod.Post;
+            }
         }
     }
 }

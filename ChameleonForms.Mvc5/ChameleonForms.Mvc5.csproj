@@ -74,6 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChameleonFormExtensions.cs" />
+    <Compile Include="Component\FieldConfigurationExtensions.cs" />
+    <Compile Include="Component\MessageExtensions.cs" />
+    <Compile Include="Component\NavigationExtensions.cs" />
     <Compile Include="HtmlExtensions.cs" />
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />

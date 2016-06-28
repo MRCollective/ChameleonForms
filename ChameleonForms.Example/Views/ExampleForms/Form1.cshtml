@@ -31,7 +31,7 @@
         {
             @ss.FieldFor(m => m.FileUpload).Attr("data-attr1", "value")
         }
-        @s.FieldFor(m => m.RequiredStringField).OverrideFieldHtml(new MvcHtmlString("Custom html <b>she-yeah</b>!"))
+        @s.FieldFor(m => m.RequiredStringField).OverrideFieldHtml(new HtmlString("Custom html <b>she-yeah</b>!"))
         @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label").AutoFocus().TabIndex(1)
         @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
         @s.FieldFor(m => m.SomeCheckbox).AsRadioList().WithTrueAs("True").WithFalseAs("False")
