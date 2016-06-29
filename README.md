@@ -4,7 +4,6 @@ ChameleonForms
 ==============
 
 [![Build status](https://ci.mdavies.net/app/rest/builds/buildType:%28id:ChameleonForms_CI%29,branch:%28default:true%29/statusIcon)](https://ci.mdavies.net/viewType.html?buildTypeId=ChameleonForms_CI&branch_ChameleonForms=%3Cdefault%3E&tab=buildTypeStatusDiv&guest=1) 
-[![NuGet downloads](https://img.shields.io/nuget/dt/ChameleonForms.svg)](https://www.nuget.org/packages/ChameleonForms) 
 [![NuGet version](https://img.shields.io/nuget/vpre/ChameleonForms.svg)](https://www.nuget.org/packages/ChameleonForms)
 [![Documentation status](https://readthedocs.org/projects/chameleonforms/badge/?version=latest)](http://chameleonforms.readthedocs.org/en/latest/)
 
