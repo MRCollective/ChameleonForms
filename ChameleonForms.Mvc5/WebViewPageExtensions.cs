@@ -14,11 +14,6 @@ namespace ChameleonForms
         /// </summary>
         public const string PartialViewModelExpressionViewDataKey = "PartialViewModelExpression";
 
-        public static void Write(this WebViewPage view, IHtml html)
-        {
-            view.WriteLiteral(html.ToHtmlString());
-        }
-
         /// <summary>
         /// Get view model expression when inside a partial view.
         /// </summary>

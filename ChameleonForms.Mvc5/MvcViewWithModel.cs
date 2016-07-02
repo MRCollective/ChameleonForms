@@ -29,7 +29,7 @@ namespace ChameleonForms
                         state.Errors.Add(e.Exception != null
                             ? new System.Web.ModelBinding.ModelError(e.Exception)
                             : new System.Web.ModelBinding.ModelError(e.ErrorMessage)));
-                    state.Value = new System.Web.ModelBinding.ValueProviderResult(kvp.Value.Value.RawValue, kvp.Value.Value.AttemptedValue, kvp.Value.Value.Culture);
+                    state.Value = kvp.Value.Value == null ? null : new System.Web.ModelBinding.ValueProviderResult(kvp.Value.Value.RawValue, kvp.Value.Value.AttemptedValue, kvp.Value.Value.Culture);
                     return state;
                 });
         }
@@ -120,25 +120,27 @@ namespace ChameleonForms
 
         public IHtml TextareaFor<TProperty>(Expression<Func<TModel, TProperty>> fieldProperty, HtmlAttributes htmlAttributes)
         {
-            return _htmlHelper.TextAreaFor(fieldProperty, htmlAttributes.Attributes).ToIHtml();
+            return _htmlHelper.TextAreaFor(fieldProperty, htmlAttributes.ToDictionary()).ToIHtml();
         }
 
         public IHtml InputFor<TProperty>(Expression<Func<TModel, TProperty>> fieldProperty, HtmlAttributes htmlAttributes, string formatString = null)
         {
-            return _htmlHelper.TextBoxFor(fieldProperty, htmlAttributes.Attributes).ToIHtml();
+            return !string.IsNullOrEmpty(formatString)
+                ? _htmlHelper.TextBoxFor(fieldProperty, formatString, htmlAttributes.ToDictionary()).ToIHtml()
+                : _htmlHelper.TextBoxFor(fieldProperty, htmlAttributes.ToDictionary()).ToIHtml();
         }
 
         public IHtml SelectListFor<TProperty>(Expression<Func<TModel, TProperty>> fieldProperty, IEnumerable<SelectListItem> selectList, bool allowMultipleSelect,
             HtmlAttributes htmlAttributes)
         {
             return allowMultipleSelect
-                ? _htmlHelper.ListBoxFor(fieldProperty, selectList.ToMvcSelectList(), htmlAttributes.Attributes).ToIHtml()
-                : _htmlHelper.DropDownListFor(fieldProperty, selectList.ToMvcSelectList(), htmlAttributes.Attributes).ToIHtml();
+                ? _htmlHelper.ListBoxFor(fieldProperty, selectList.ToMvcSelectList(), htmlAttributes.ToDictionary()).ToIHtml()
+                : _htmlHelper.DropDownListFor(fieldProperty, selectList.ToMvcSelectList(), htmlAttributes.ToDictionary()).ToIHtml();
         }
 
         public IHtml RadioItemFor<TProperty>(Expression<Func<TModel, TProperty>> fieldProperty, string value, HtmlAttributes htmlAttributes)
         {
-            return _htmlHelper.RadioButtonFor(fieldProperty, value, htmlAttributes.Attributes).ToIHtml();
+            return _htmlHelper.RadioButtonFor(fieldProperty, value, htmlAttributes.ToDictionary()).ToIHtml();
         }
 
         public IHtml Label(string id, string text, HtmlAttributes htmlAttributes)

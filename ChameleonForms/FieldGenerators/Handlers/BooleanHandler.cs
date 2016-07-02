@@ -79,11 +79,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 }
                 else
                 {
-                    return new Html(string.Format("{0} {1}", fieldhtml, HtmlCreator.BuildLabel(
+                    return new Html(string.Format("{0} {1}", fieldhtml.ToHtmlString(), HtmlCreator.BuildLabel(
                         GetFieldName(FieldGenerator),
                         fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
                         null
-                        )));
+                        ).ToHtmlString()));
                 }
             }
             else
