@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component;
@@ -14,7 +13,7 @@ namespace ChameleonForms.Tests.Component.Config
     [UseReporter(typeof(DiffReporter))]
     class FieldConfigurationShould
     {
-        private HtmlString _someHtmlString = new HtmlString("");
+        private readonly Html _someHtmlString = new Html("");
         private const string _someTextWithHtmlCharacters = "Some text with <html> & characters";
         private const string _someTextWithHtmlCharactersEscaped = "Some text with &lt;html&gt; &amp; characters";
 
@@ -364,7 +363,7 @@ namespace ChameleonForms.Tests.Component.Config
         [Test]
         public void Return_html_for_prepended_html_if_one_set()
         {
-            var x = new HtmlString("");
+            var x = new Html("");
             var fc = Field.Configure().Prepend(x);
 
             Assert.That(fc.PrependedHtml, Is.EqualTo(new[]{x}));
@@ -373,7 +372,7 @@ namespace ChameleonForms.Tests.Component.Config
         [Test]
         public void Return_html_for_appended_html_if_one_set()
         {
-            var x = new HtmlString("");
+            var x = new Html("");
             var fc = Field.Configure().Append(x);
 
             Assert.That(fc.AppendedHtml, Is.EqualTo(new[] { x }));
@@ -400,9 +399,9 @@ namespace ChameleonForms.Tests.Component.Config
         [Test]
         public void Return_ltr_html_for_prepended_html_if_multiple_set()
         {
-            var x = new HtmlString("x");
-            var y = new HtmlString("y");
-            var z = new HtmlString("z");
+            var x = new Html("x");
+            var y = new Html("y");
+            var z = new Html("z");
             var fc = Field.Configure().Prepend(x).Prepend(y).Prepend(z);
 
             Assert.That(fc.PrependedHtml, Is.EqualTo(new[] { z, y, x }));
@@ -411,9 +410,9 @@ namespace ChameleonForms.Tests.Component.Config
         [Test]
         public void Return_ltr_html_for_appended_html_if_multiple_set()
         {
-            var x = new HtmlString("x");
-            var y = new HtmlString("y");
-            var z = new HtmlString("z");
+            var x = new Html("x");
+            var y = new Html("y");
+            var z = new Html("z");
             var fc = Field.Configure().Append(x).Append(y).Append(z);
 
             Assert.That(fc.AppendedHtml, Is.EqualTo(new[] { x, y, z }));
@@ -422,7 +421,7 @@ namespace ChameleonForms.Tests.Component.Config
         [Test]
         public void Return_html_for_field_html_if_one_set()
         {
-            var x = new HtmlString("");
+            var x = new Html("");
             var fc = Field.Configure().OverrideFieldHtml(x);
 
             Assert.That(fc.FieldHtml, Is.EqualTo(x));

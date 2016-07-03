@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using Autofac;
 using AutofacContrib.NSubstitute;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
@@ -17,11 +16,13 @@ namespace ChameleonForms.Tests
     class FormShould
     {
         [Test]
-        public void Store_html_helper()
+        public void Store_view_based_on_html_helper()
         {
             var f = CreateForm();
 
-            Assert.That(f.HtmlHelper, Is.EqualTo(_h));
+            var view = f.View as MvcViewWithModel<TestFieldViewModel>;
+            Assert.That(view, Is.Not.Null);
+            Assert.That(view.HtmlHelper, Is.EqualTo(_h));
         }
 
         [Test]
@@ -37,8 +38,8 @@ namespace ChameleonForms.Tests
         {
             CreateForm();
 
-            _h.ViewContext.Writer.Received().Write(_beginHtml);
-            _h.ViewContext.Writer.DidNotReceive().Write(_endHtml);
+            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _beginHtml.ToHtmlString()));
+            _h.ViewContext.Writer.DidNotReceive().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _endHtml.ToHtmlString()));
         }
 
         [Test]
@@ -48,7 +49,7 @@ namespace ChameleonForms.Tests
 
             f.Dispose();
 
-            _h.ViewContext.Writer.Received().Write(_endHtml);
+            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _endHtml.ToHtmlString()));
         }
 
         [Test]
@@ -59,7 +60,7 @@ namespace ChameleonForms.Tests
             var f2 = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
 
             Assert.That(f2, Is.Not.Null);
-            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(Action, Method, _htmlAttributes, Enctype).ToHtmlString()));
+            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(Action, Method.ToFormSubmitMethod(), _htmlAttributes, Enctype).ToHtmlString()));
         }
 
         [Test]
@@ -67,8 +68,8 @@ namespace ChameleonForms.Tests
         {
             var f2 = _h.BeginChameleonFormFor(m => m.Child, Action, Method, new HtmlAttributes(), Enctype);
 
-            Assert.That(f2.HtmlHelper, Is.AssignableTo<HtmlHelper<TestChildViewModel>>());
-            Assert.That(f2.HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, Is.Empty);
+            Assert.That(f2.View, Is.AssignableTo<IViewWithModel<TestChildViewModel>>());
+            Assert.That(f2.View.GetFieldName(""), Is.Empty);
         }
 
         [Test]
@@ -77,7 +78,7 @@ namespace ChameleonForms.Tests
             _h.ViewData.Model = new TestFieldViewModel {Child = new TestChildViewModel()};
             var f2 = _h.BeginChameleonFormFor(m => m.Child, Action, Method, new HtmlAttributes(), Enctype);
 
-            Assert.That(f2.HtmlHelper.ViewData.Model, Is.SameAs(_h.ViewData.Model.Child));
+            Assert.That(f2.View.Model, Is.SameAs(_h.ViewData.Model.Child));
         }
 
         [Test]
@@ -86,8 +87,8 @@ namespace ChameleonForms.Tests
             var newModel = new RandomViewModel();
             var f2 = _h.BeginChameleonFormFor(newModel, Action, Method, new HtmlAttributes(), Enctype);
 
-            Assert.That(f2.HtmlHelper.ViewData.Model, Is.SameAs(newModel));
-            Assert.That(f2.HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, Is.Empty);
+            Assert.That(f2.View.Model, Is.SameAs(newModel));
+            Assert.That(f2.View.GetFieldName(""), Is.Empty);
         }
 
         [Test]
@@ -95,8 +96,8 @@ namespace ChameleonForms.Tests
         {
             var f2 = _h.BeginChameleonFormFor(default(RandomViewModel), Action, Method, new HtmlAttributes(), Enctype);
 
-            Assert.That(f2.HtmlHelper, Is.AssignableTo<HtmlHelper<RandomViewModel>>());
-            Assert.That(f2.HtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, Is.Empty);
+            Assert.That(f2.View, Is.AssignableTo<IViewWithModel<RandomViewModel>>());
+            Assert.That(f2.View.GetFieldName(""), Is.Empty);
         }
 
         [Test]
@@ -131,8 +132,8 @@ namespace ChameleonForms.Tests
         private HtmlHelper<TestFieldViewModel> _h;
         private IFormTemplate _t;
 
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
+        private readonly IHtml _beginHtml = new Html("begin");
+        private readonly IHtml _endHtml = new Html("end");
 
         private const string Action = "/";
         private const FormMethod Method = FormMethod.Post;
@@ -145,18 +146,13 @@ namespace ChameleonForms.Tests
             _autoSubstitute = AutoSubstituteContainer.Create();
             _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<TestFieldViewModel>>();
             _t = _autoSubstitute.Resolve<IFormTemplate>();
-            _t.BeginForm(Action, Method, _htmlAttributes, Enctype).Returns(_beginHtml);
+            _t.BeginForm(Action, Method.ToFormSubmitMethod(), _htmlAttributes, Enctype).Returns(_beginHtml);
             _t.EndForm().Returns(_endHtml);
         }
 
         private Form<TestFieldViewModel> CreateForm()
         {
-            return _autoSubstitute.Resolve<Form<TestFieldViewModel>>(
-                new NamedParameter("action", Action),
-                new NamedParameter("method", Method),
-                new NamedParameter("htmlAttributes", _htmlAttributes),
-                new NamedParameter("enctype", Enctype)
-            );
+            return new Form<TestFieldViewModel>(new MvcViewWithModel<TestFieldViewModel>(_h), _t, Action, Method.ToFormSubmitMethod(), _htmlAttributes, Enctype);
         }
 
         [TearDown]

@@ -111,12 +111,12 @@ From within a section you can create Navigation Submit, Reset and normal Buttons
 ```csharp
 using (var n = f.BeginNavigation()) {
     @n.Button("text button").AddClass("button").Id("button1")
-    @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("button").Id("button2")
+    @n.Button(new Html("<strong>html button</strong>")).AddClass("button").Id("button2")
     @n.Reset("text reset").AddClass("button").Id("button3")
-    @n.Reset(new HtmlString("<strong>html reset</strong>")).AddClass("button").Id("button4")
-    @n.Submit(new HtmlString("<strong>html submit</strong>")).AddClass("button").Id("button5")
+    @n.Reset(new Html("<strong>html reset</strong>")).AddClass("button").Id("button4")
+    @n.Submit(new Html("<strong>html submit</strong>")).AddClass("button").Id("button5")
     @n.Submit("text submit").AddClass("button").Id("button6")
-    @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>")).AddClass("button").Id("button7")
+    @n.Submit("name", "value", new Html("<strong>html submit with value</strong>")).AddClass("button").Id("button7")
     @n.Submit("name", "value").AddClass("button").Id("button8")
 }
 ```
@@ -388,12 +388,12 @@ Here is the code that generated the above screenshot:
     using (var n = f.BeginNavigation())
     {
         @n.Button("text button").WithStyle(EmphasisStyle.Primary).WithSize(ButtonSize.Default)
-        @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("random-class")
+        @n.Button(new Html("<strong>html button</strong>")).AddClass("random-class")
         @n.Reset("text reset").WithIcon("refresh")
-        @n.Reset(new HtmlString("<strong>html reset</strong>"))
-        @n.Submit(new HtmlString("<strong>html submit</strong>"))
+        @n.Reset(new Html("<strong>html reset</strong>"))
+        @n.Submit(new Html("<strong>html submit</strong>"))
         @n.Submit("text submit").WithStyle(EmphasisStyle.Danger)
-        @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>"))
+        @n.Submit("name", "value", new Html("<strong>html submit with value</strong>"))
         @n.Submit("name", "value").WithIcon("star").WithStyle(EmphasisStyle.Success)
     }
     

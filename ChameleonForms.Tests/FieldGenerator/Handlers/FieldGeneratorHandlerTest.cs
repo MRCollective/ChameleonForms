@@ -1,5 +1,4 @@
-﻿using System.Web.Mvc;
-using AutofacContrib.NSubstitute;
+﻿using AutofacContrib.NSubstitute;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
@@ -19,7 +18,7 @@ namespace ChameleonForms.Tests.FieldGenerator.Handlers
         {
             Container = new AutoSubstitute();
             var fg = Container.Resolve<IFieldGenerator<TestFieldViewModel, T>>();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(null, typeof(T));
+            var metadata = Substitute.For<IFieldMetadata>();
             fg.Metadata.Returns(metadata);
             _handler = GetHandler(fg);
         }

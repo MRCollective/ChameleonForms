@@ -29,5 +29,11 @@
         {
             return _htmlSafeString;
         }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return ToHtmlString();
+        }
     }
 }

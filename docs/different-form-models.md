@@ -23,7 +23,7 @@ This can be achieved using the default form template by using these overloads to
 /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
 /// <param name="enctype">The encoding type the form submission should use</param>
 /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this HtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this HtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormSubmitMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
 
 /// <summary>
 /// Constructs a <see cref="Form{TModel}"/> object with the default ChameleonForms template renderer using the given model type and instance.
@@ -52,7 +52,7 @@ public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel
 /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
 /// <param name="enctype">The encoding type the form submission should use</param>
 /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this HtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this HtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormSubmitMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
 ```
 
 ## Examples

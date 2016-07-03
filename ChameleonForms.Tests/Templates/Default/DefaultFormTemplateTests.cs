@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Web;
-using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
+using ChameleonForms.Templates.Default;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates.Default
@@ -18,7 +17,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginForm("/", FormMethod.Post, new HtmlAttributes(data_attr => "value"), EncType.Multipart);
+            var result = t.BeginForm("/", FormSubmitMethod.Post, new HtmlAttributes(data_attr => "value"), EncType.Multipart);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -28,7 +27,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginForm("/", FormMethod.Post, null, null);
+            var result = t.BeginForm("/", FormSubmitMethod.Post, null, null);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -48,7 +47,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginSection(new HtmlString("Section Heading"), new HtmlString("<p>hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
+            var result = t.BeginSection(new Html("Section Heading"), new Html("<p>hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -88,7 +87,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginNestedSection(new HtmlString("Section Heading"), new HtmlString("<p>Hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
+            var result = t.BeginNestedSection(new Html("Section Heading"), new Html("<p>Hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -108,7 +107,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration(), false);
+            var result = t.Field(new Html("labelhtml"), new Html("elementhtml"), new Html("validationhtml"), null, new FieldConfiguration(), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -118,7 +117,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().AddFieldContainerClass("a-container-class-1").AddFieldContainerClass("a-container-class-2"), false);
+            var result = t.Field(new Html("labelhtml"), new Html("elementhtml"), new Html("validationhtml"), null, new FieldConfiguration().AddFieldContainerClass("a-container-class-1").AddFieldContainerClass("a-container-class-2"), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -128,7 +127,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().WithHint("hello"), false);
+            var result = t.Field(new Html("labelhtml"), new Html("elementhtml"), new Html("validationhtml"), null, new FieldConfiguration().WithHint("hello"), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -138,9 +137,9 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration()
-                .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
-                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>")),
+            var result = t.Field(new Html("labelhtml"), new Html("elementhtml"), new Html("validationhtml"), null, new FieldConfiguration()
+                .Prepend(new Html("<1>")).Prepend(new Html("<2>"))
+                .Append(new Html("<3>")).Append(new Html("<4>")),
                 false
             );
 
@@ -152,7 +151,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginField(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration(), false);
+            var result = t.BeginField(new Html("labelhtml"), new Html("elementhtml"), new Html("validationhtml"), null, new FieldConfiguration(), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -192,7 +191,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Information, new HtmlString("Heading"));
+            var result = t.BeginMessage(MessageType.Information, new Html("Heading"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -202,7 +201,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Information, new HtmlString(""));
+            var result = t.BeginMessage(MessageType.Information, new Html(""));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -212,7 +211,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Failure, new HtmlString("Heading"));
+            var result = t.BeginMessage(MessageType.Failure, new Html("Heading"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -232,7 +231,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.MessageParagraph(new HtmlString("<strong>asdf</strong>"));
+            var result = t.MessageParagraph(new Html("<strong>asdf</strong>"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -262,7 +261,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.Button(new HtmlString("<strong>asdf</strong>"), null, null, null, null);
+            var result = t.Button(new Html("<strong>asdf</strong>"), null, null, null, null);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -272,7 +271,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.Button(new HtmlString("<strong>asdf</strong>"), "submit", "id", "value", new HtmlAttributes(@class => "asdf"));
+            var result = t.Button(new Html("<strong>asdf</strong>"), "submit", "id", "value", new HtmlAttributes(@class => "asdf"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -292,7 +291,7 @@ namespace ChameleonForms.Tests.Templates.Default
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.Button(new HtmlString("a"), null, "name", null, new HtmlAttributes().Attr("id", "asdf"));
+            var result = t.Button(new Html("a"), null, "name", null, new HtmlAttributes().Attr("id", "asdf"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

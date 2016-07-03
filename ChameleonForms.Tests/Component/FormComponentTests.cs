@@ -1,6 +1,4 @@
-﻿using System.Web;
-using ChameleonForms.Component;
-using ChameleonForms.Templates;
+﻿using ChameleonForms.Component;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -14,8 +12,8 @@ namespace ChameleonForms.Tests.Component
     [TestFixture]
     class FormComponentShould
     {
-       private readonly IHtmlString _beginHtml = new HtmlString("");
-       private readonly IHtmlString _endHtml = new HtmlString("");
+       private readonly IHtml _beginHtml = new Html("");
+       private readonly IHtml _endHtml = new Html("");
 
         public FormComponent<object> Arrange(bool selfClosing)
         {
@@ -29,11 +27,11 @@ namespace ChameleonForms.Tests.Component
         public void Write_begin_html_when_constructing_if_not_self_closing()
         {
             var f = Arrange(!Self.Closing);
-
+            
             f.Initialise();
 
             f.Form.Received(1).Write(_beginHtml);
-            f.Form.DidNotReceive().Write(Arg.Is<IHtmlString>(h => h != _beginHtml));
+            f.Form.DidNotReceive().Write(Arg.Is<IHtml>(h => h != _beginHtml));
         }
 
         [Test]
@@ -43,7 +41,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Dispose();
 
-            f.Form.DidNotReceive().Write(Arg.Is<IHtmlString>(h => h != _endHtml));
+            f.Form.DidNotReceive().Write(Arg.Is<IHtml>(h => h != _endHtml));
             f.Form.Received(1).Write(_endHtml);
         }
 
@@ -55,7 +53,7 @@ namespace ChameleonForms.Tests.Component
             f.Initialise();
             f.Dispose();
 
-            f.Form.DidNotReceive().Write(Arg.Any<IHtmlString>());
+            f.Form.DidNotReceive().Write(Arg.Any<IHtml>());
         }
 
         [Test]

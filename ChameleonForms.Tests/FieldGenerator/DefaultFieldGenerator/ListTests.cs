@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Web;
 using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators.Handlers;
@@ -247,7 +246,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredIntListId);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().AsRadioList().Label(new HtmlString("<strong>lol</strong>")));
+            var result = g.GetLabelHtml(new FieldConfiguration().AsRadioList().Label(new Html("<strong>lol</strong>")));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

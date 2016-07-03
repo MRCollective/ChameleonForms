@@ -14,7 +14,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.RadioOrCheckboxList(new IHtmlString[] {new HtmlString("1"), new HtmlString("2")}, false);
+            var result = t.RadioOrCheckboxList(new IHtml[] {new Html("1"), new Html("2")}, false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -24,7 +24,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.RadioOrCheckboxList(new IHtmlString[] { new HtmlString("1"), new HtmlString("2") }, true);
+            var result = t.RadioOrCheckboxList(new IHtml[] { new Html("1"), new Html("2") }, true);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

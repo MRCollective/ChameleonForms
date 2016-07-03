@@ -65,7 +65,7 @@ The `BeginChameleonForm` extension method looks like this:
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TModel> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TModel> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormSubmitMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             return new Form<TModel>(helper, FormTemplate.Default, action, method, htmlAttributes, enctype);
         }

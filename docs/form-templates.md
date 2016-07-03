@@ -12,7 +12,7 @@ If you would like to change the template being used across one or more forms, or
 ```csharp
     public static class FormHelpers
     {
-        public static IForm<TModel> BeginMyApplicationNameForm<TModel>(this HtmlHelper<TModel> htmlhelper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TModel> BeginMyApplicationNameForm<TModel>(this HtmlHelper<TModel> htmlhelper, string action = "", FormMethod method = FormSubmitMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             return new Form<TModel>(htmlhelper, new MyFormTemplate(), action, method, htmlAttributes, enctype);
         }

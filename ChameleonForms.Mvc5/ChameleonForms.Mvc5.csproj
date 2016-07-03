@@ -80,6 +80,7 @@
     <Compile Include="Component\NavigationExtensions.cs" />
     <Compile Include="HtmlExtensions.cs" />
     <Compile Include="HtmlHelperExtensions.cs" />
+    <Compile Include="HumanizedLabels.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
     <Compile Include="ModelMetadataFieldMetadata.cs" />
     <Compile Include="MvcViewWithModel.cs" />

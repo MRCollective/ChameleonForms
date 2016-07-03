@@ -11,7 +11,6 @@ namespace ChameleonForms.Tests.ModelBinders
     [TestFixture(TypeArgs = new[]{typeof(DateTime?)})]
     class DateTimeModelBinderShould<T>
     {
-        #region Setup
         private ControllerContext _context;
         private FormCollection _formCollection;
 
@@ -25,7 +24,7 @@ namespace ChameleonForms.Tests.ModelBinders
             _context = c.Resolve<ControllerContext>();
             _formCollection = new FormCollection();
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+            System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         }
 
         private ModelBindingContext ArrangeBindingContext()
@@ -52,7 +51,6 @@ namespace ChameleonForms.Tests.ModelBinders
             Assert.That(context.ModelState[PropertyName].Errors.Count, Is.EqualTo(1), "Expecting an error against " + PropertyName);
             Assert.That(context.ModelState[PropertyName].Errors[0].ErrorMessage, Is.EqualTo(error), "Expecting different error message for model state against " + PropertyName);
         }
-        #endregion
 
         [Test]
         public void Use_default_model_binder_when_there_is_no_display_format()
@@ -125,7 +123,7 @@ namespace ChameleonForms.Tests.ModelBinders
             var context = ArrangeBindingContext();
             context.ModelMetadata.DisplayFormatString = "{0:dd/MM/yyyy}";
 
-            var model = BindModel(context);
+            BindModel(context);
 
             Assert.That(context.Model, Is.EqualTo(new DateTime(2000, 12, 12)));
         }

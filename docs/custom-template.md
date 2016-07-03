@@ -203,7 +203,7 @@ If you want the ability to specify the required designator separately within the
 If you want a fully-fledged Field HTML implementation then you need to account for:
 
 * Outputting the Field Label HTML, Field Element HTML and Field Validation Message HTML
-* Outputting the required designator if the field is required (e.g. `@(new HtmlString(fieldMetadata != null && fieldMetadata.IsRequired ? requiredDesignator.ToHtmlString() : ""))`)
+* Outputting the required designator if the field is required (e.g. `@(new Html(fieldMetadata != null && fieldMetadata.IsRequired ? requiredDesignator.ToHtmlString() : ""))`)
 * Outputting the prepended HTML before the field (e.g. `foreach (var html in fieldConfiguration.PrependedHtml) {@html}`)
 * Outputting the appended HTML after the field (e.g. `foreach (var html in fieldConfiguration.AppendedHtml) {@html}`)
 * Outputting the hint (e.g. `if (fieldConfiguration.Hint != null) {<div class="hint">@fieldConfiguration.Hint</div>}`)

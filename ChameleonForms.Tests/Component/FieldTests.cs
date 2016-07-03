@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Web;
-using System.Web.Mvc;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
-using ChameleonForms.Templates;
-using ChameleonForms.Tests.Helpers;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -20,15 +16,15 @@ namespace ChameleonForms.Tests.Component
     [TestFixture]
     public class FieldShould
     {
-        #region Setup
         private const string FieldId = "FieldId";
-        private readonly IHtmlString _beginHtml = new HtmlString("b");
-        private readonly IHtmlString _endHtml = new HtmlString("e");
-        private readonly IHtmlString _html = new HtmlString("h");
-        private readonly IHtmlString _label = new HtmlString("l");
-        private readonly IHtmlString _field = new HtmlString("f");
-        private readonly IHtmlString _validation = new HtmlString("v");
-        private readonly ModelMetadata _metadata = new ModelMetadata(new EmptyModelMetadataProvider(), null, null, typeof(object), null);
+        private readonly IHtml _beginHtml = new Html("b");
+        private readonly IHtml _endHtml = new Html("e");
+        private readonly IHtml _html = new Html("h");
+        private readonly IHtml _label = new Html("l");
+        private readonly IHtml _field = new Html("f");
+        private readonly IHtml _validation = new Html("v");
+        private IFieldMetadata _metadata;
+        private IViewWithModel<TestFieldViewModel> _view;
         private IForm<TestFieldViewModel> _f;
         private IFieldGenerator _g;
         private IFieldConfiguration _fc;
@@ -36,6 +32,9 @@ namespace ChameleonForms.Tests.Component
         [SetUp]
         public void Setup()
         {
+            _metadata = Substitute.For<IFieldMetadata>();
+            _view = Substitute.For<IViewWithModel<TestFieldViewModel>>();
+
             _fc = Substitute.For<IFieldConfiguration>();
 
             _f = Substitute.For<IForm<TestFieldViewModel>>();
@@ -50,39 +49,38 @@ namespace ChameleonForms.Tests.Component
             _g.Metadata.Returns(_metadata);
             _g.GetFieldId().Returns(FieldId);
 
-            var autoSubstitute = AutoSubstituteContainer.Create();
-            var helper = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
-            _f.HtmlHelper.Returns(helper);
+            _f.View.Returns(_view);
             _f.GetFieldGenerator(Arg.Any<Expression<Func<TestFieldViewModel, string>>>()).Returns(_g);
+
         }
 
         private Field<TestFieldViewModel> Arrange(bool isParent)
         {
             return new Field<TestFieldViewModel>(_f, isParent, _g, _fc);
         }
-        #endregion
 
         [Test]
         public void Passthrough_true_to_template_for_valid_child_field()
         {
             var f = Arrange(false);
+            _metadata.IsValid.Returns(true);
 
             f.Begin();
 
-            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().Field(Arg.Any<IHtml>(), Arg.Any<IHtml>(), Arg.Any<IHtml>(), Arg.Any<IFieldMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 true
             );
         }
 
         [Test]
-        public void Passthrough_false_to_template_for_valid_child_field()
+        public void Passthrough_false_to_template_for_invalid_child_field()
         {
             var f = Arrange(false);
-            _f.HtmlHelper.ViewData.ModelState.AddModelError(FieldId, "Error");
+            _metadata.IsValid.Returns(false);
 
             f.Begin();
 
-            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().Field(Arg.Any<IHtml>(), Arg.Any<IHtml>(), Arg.Any<IHtml>(), Arg.Any<IFieldMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 false
             );
         }
@@ -91,10 +89,11 @@ namespace ChameleonForms.Tests.Component
         public void Passthrough_true_to_template_for_valid_parent_field()
         {
             var f = Arrange(true);
+            _metadata.IsValid.Returns(true);
 
             f.Begin();
 
-            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().BeginField(Arg.Any<IHtml>(), Arg.Any<IHtml>(), Arg.Any<IHtml>(), Arg.Any<IFieldMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 true
             );
         }
@@ -103,11 +102,11 @@ namespace ChameleonForms.Tests.Component
         public void Passthrough_false_to_template_for_valid_parent_field()
         {
             var f = Arrange(true);
-            _f.HtmlHelper.ViewData.ModelState.AddModelError(FieldId, "Error");
+            _metadata.IsValid.Returns(false);
 
             f.Begin();
 
-            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().BeginField(Arg.Any<IHtml>(), Arg.Any<IHtml>(), Arg.Any<IHtml>(), Arg.Any<IFieldMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 false
             );
         }
@@ -147,13 +146,13 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Construct_field_via_extension_method()
         {
-            var s = new Section<TestFieldViewModel>(_f, new HtmlString(""), false);
+            var s = new Section<TestFieldViewModel>(_f, new Html(""), false);
             _f.ClearReceivedCalls();
 
             var f = s.FieldFor(m => m.SomeProperty);
 
             Assert.That(f, Is.Not.Null);
-            _f.DidNotReceive().Write(Arg.Any<IHtmlString>());
+            _f.DidNotReceive().Write(Arg.Any<IHtml>());
         }
 
         [Test]
@@ -165,16 +164,16 @@ namespace ChameleonForms.Tests.Component
             var f = s.FieldFor(m => m.SomeProperty);
 
             Assert.That(f, Is.Not.Null);
-            _f.DidNotReceive().Write(Arg.Any<IHtmlString>());
+            _f.DidNotReceive().Write(Arg.Any<IHtml>());
         }
 
 
         [Test]
         public void Construct_parent_field_via_extension_method()
         {
-            var h = new HtmlString("");
-            var s = new Section<TestFieldViewModel>(_f, new HtmlString(""), false);
-            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(h);
+            var h = new Html("");
+            var s = new Section<TestFieldViewModel>(_f, new Html(""), false);
+            _f.Template.BeginField(Arg.Any<IHtml>(), Arg.Any<IHtml>(), Arg.Any<IHtml>(), Arg.Any<IFieldMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(h);
             _f.ClearReceivedCalls();
 
             var f = s.BeginFieldFor(m => m.SomeProperty);

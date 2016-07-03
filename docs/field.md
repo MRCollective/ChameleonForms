@@ -41,9 +41,9 @@ If you want to define your own HTML for the Field Element, Field Label and Field
 
 ```csharp
 using (var s = f.BeginSection("Title")) {
-    @s.Field(new HtmlString("label"), new HtmlString("element")).ChainFieldConfigurationMethodsHere()
+    @s.Field(new Html("label"), new Html("element")).ChainFieldConfigurationMethodsHere()
     @* Or, if you want to specify all the possible values: *@
-    @s.Field(new HtmlString("label"), new HtmlString("element"), new HtmlString("validation"), new ModelMetadata(...), isValid: false).ChainFieldConfigurationMethodsHere()
+    @s.Field(new Html("label"), new Html("element"), new Html("validation"), new ModelMetadata(...), isValid: false).ChainFieldConfigurationMethodsHere()
 }
 ```
 

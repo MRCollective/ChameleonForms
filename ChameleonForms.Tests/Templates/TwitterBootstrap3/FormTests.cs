@@ -16,7 +16,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginForm("/", FormMethod.Post, new HtmlAttributes(data_attr => "value"), EncType.Multipart);
+            var result = t.BeginForm("/", FormSubmitMethod.Post, new HtmlAttributes(data_attr => "value"), EncType.Multipart);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -26,7 +26,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginForm("/", FormMethod.Post, null, null);
+            var result = t.BeginForm("/", FormSubmitMethod.Post, null, null);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

@@ -1,8 +1,6 @@
-﻿using System.Web;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component;
-using ChameleonForms.Component.Config;
 using ChameleonForms.Templates.TwitterBootstrap3;
 using NUnit.Framework;
 
@@ -36,7 +34,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.Button(new HtmlString("<strong>asdf</strong>"), null, null, null, null);
+            var result = t.Button(new Html("<strong>asdf</strong>"), null, null, null, null);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -46,7 +44,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.Button(new HtmlString("<strong>asdf</strong>"), "submit", "id", "value", new HtmlAttributes(@class => "asdf"));
+            var result = t.Button(new Html("<strong>asdf</strong>"), "submit", "id", "value", new HtmlAttributes(@class => "asdf"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -56,7 +54,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = new ButtonHtmlAttributes(h => t.Button(new HtmlString("content"), "submit", null, null, h))
+            var result = new ButtonHtmlAttributes(h => t.Button(new Html("content"), "submit", null, null, h))
                 .WithStyle(EmphasisStyle.Danger).WithSize(ButtonSize.Large).WithIcon("star");
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());

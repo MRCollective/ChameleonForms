@@ -1,5 +1,4 @@
-﻿using System.Web;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
 using NUnit.Framework;
 
@@ -11,7 +10,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         public void Use_overridden_html_for_field_if_provided()
         {
             var g = Arrange(m => m.RequiredString);
-            var field = new HtmlString("<p>override</p>");
+            var field = new Html("<p>override</p>");
 
             var result = g.GetFieldHtml(new FieldConfiguration().OverrideFieldHtml(field));
 
@@ -83,7 +82,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredString);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().Label(new HtmlString("<em>lay</em>bell")));
+            var result = g.GetLabelHtml(new FieldConfiguration().Label(new Html("<em>lay</em>bell")));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

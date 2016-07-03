@@ -1,5 +1,4 @@
-﻿using System.Web;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
 using NUnit.Framework;
 
@@ -182,7 +181,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredNullableBoolean);
 
-            var result = g.GetLabelHtml(new FieldConfiguration().AsRadioList().Label(new HtmlString("<strong>lol</strong>")));
+            var result = g.GetLabelHtml(new FieldConfiguration().AsRadioList().Label(new Html("<strong>lol</strong>")));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

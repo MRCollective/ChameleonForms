@@ -302,7 +302,7 @@ If you created the following extension method on the HTML Helper:
                     var t = new TagBuilder("p");
                     t.SetInnerText(paragraphText);
                     t.MergeAttributes(a.Attributes);
-                    return new HtmlString(t.ToString());
+                    return new Html(t.ToString());
                 }
             );
         }

@@ -112,7 +112,7 @@ If you want to add paragraphs using the template you can do that by using one of
 using (var m = f.BeginMessage(MessageType.Information, "Message title")) {
     @m.Paragraph("Here is the first part of the message")
     <img src="/path/to/img" alt="alt text" />
-    @m.Paragraph(new HtmlString("Here is a <strong>styled</strong> message"))
+    @m.Paragraph(new Html("Here is a <strong>styled</strong> message"))
     @SomeRazorHelperDefinedOnThisPage()
     @Html.Partial("_WooWeCanGetReallyCrazyAndAddPartialsToo_OMG")
 }

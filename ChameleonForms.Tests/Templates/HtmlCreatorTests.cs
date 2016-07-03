@@ -1,5 +1,4 @@
-﻿using System.Web;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Templates;
 using NUnit.Framework;
@@ -29,7 +28,7 @@ namespace ChameleonForms.Tests.Templates
         [Test]
         public void Generate_reset_button_with_html_content()
         {
-            var h = HtmlCreator.BuildButton(new HtmlString("<b>content</b>"), "reset", "name", "value",
+            var h = HtmlCreator.BuildButton(new Html("<b>content</b>"), "reset", "name", "value",
                 new HtmlAttributes().Attr(id => "overriddenid").AddClass("lol")
             );
 

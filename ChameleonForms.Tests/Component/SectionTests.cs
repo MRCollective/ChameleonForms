@@ -1,8 +1,5 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using ChameleonForms.Component;
+﻿using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
-using ChameleonForms.Templates;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -11,20 +8,20 @@ namespace ChameleonForms.Tests.Component
     [TestFixture]
     public class SectionShould
     {
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
-        private readonly IHtmlString _nestedBeginHtml = new HtmlString("");
-        private readonly IHtmlString _nestedEndHtml = new HtmlString("");
+        private readonly IHtml _beginHtml = new Html("");
+        private readonly IHtml _endHtml = new Html("");
+        private readonly IHtml _nestedBeginHtml = new Html("");
+        private readonly IHtml _nestedEndHtml = new Html("");
         private IForm<object> _f;
-        private readonly IHtmlString _heading = new HtmlString("title");
+        private readonly IHtml _heading = new Html("title");
 
         [SetUp]
         public void Setup()
         {
             _f = Substitute.For<IForm<object>>();
-            _f.Template.BeginSection(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _heading.ToHtmlString()), Arg.Any<IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_beginHtml);
+            _f.Template.BeginSection(Arg.Is<IHtml>(h => h.ToHtmlString() == _heading.ToHtmlString()), Arg.Any<IHtml>(), Arg.Any<HtmlAttributes>()).Returns(_beginHtml);
             _f.Template.EndSection().Returns(_endHtml);
-            _f.Template.BeginNestedSection(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _heading.ToHtmlString()), Arg.Any<IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_nestedBeginHtml);
+            _f.Template.BeginNestedSection(Arg.Is<IHtml>(h => h.ToHtmlString() == _heading.ToHtmlString()), Arg.Any<IHtml>(), Arg.Any<HtmlAttributes>()).Returns(_nestedBeginHtml);
             _f.Template.EndNestedSection().Returns(_nestedEndHtml);
         }
 
@@ -88,11 +85,11 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Output_a_field([Values(true, false)] bool isValid)
         {
-            var labelHtml = Substitute.For<IHtmlString>();
-            var elementHtml = Substitute.For<IHtmlString>();
-            var validationHtml = Substitute.For<IHtmlString>();
-            var metadata = new ModelMetadata(Substitute.For<ModelMetadataProvider>(), null, null, typeof(string), null);
-            var expectedOutput = new HtmlString("output");
+            var labelHtml = Substitute.For<IHtml>();
+            var elementHtml = Substitute.For<IHtml>();
+            var validationHtml = Substitute.For<IHtml>();
+            var metadata = Substitute.For<IFieldMetadata>();
+            var expectedOutput = new Html("output");
             _f.Template.Field(labelHtml, elementHtml, validationHtml, metadata, Arg.Any<IReadonlyFieldConfiguration>(), isValid).Returns(expectedOutput);
             var s = Arrange(false);
 

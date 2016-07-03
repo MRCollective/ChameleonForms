@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ChameleonForms.Templates;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates

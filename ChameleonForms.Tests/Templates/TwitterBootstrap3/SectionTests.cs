@@ -15,7 +15,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginSection(new HtmlString("Section Heading"), new HtmlString("<p>hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
+            var result = t.BeginSection(new Html("Section Heading"), new Html("<p>hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -55,7 +55,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginNestedSection(new HtmlString("Section Heading"), new HtmlString("<p>Hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
+            var result = t.BeginNestedSection(new Html("Section Heading"), new Html("<p>Hello</p>"), new { @class = "asdf" }.ToHtmlAttributes());
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

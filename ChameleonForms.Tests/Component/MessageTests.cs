@@ -1,7 +1,5 @@
-﻿using System.Web;
-using ChameleonForms.Component;
+﻿using ChameleonForms.Component;
 using ChameleonForms.Enums;
-using ChameleonForms.Templates;
 using FizzWare.NBuilder;
 using NSubstitute;
 using NUnit.Framework;
@@ -11,16 +9,16 @@ namespace ChameleonForms.Tests.Component
     [TestFixture]
     public class MessageShould
     {
-        private readonly IHtmlString _testHeading = new HtmlString("TestHeading");
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
+        private readonly IHtml _testHeading = new Html("TestHeading");
+        private readonly IHtml _beginHtml = new Html("");
+        private readonly IHtml _endHtml = new Html("");
         private IForm<object> _f;
 
         [SetUp]
         public void Setup()
         {
             _f = Substitute.For<IForm<object>>();
-            _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any<IHtmlString>()).Returns(_beginHtml);
+            _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any<IHtml>()).Returns(_beginHtml);
             _f.Template.EndMessage().Returns(_endHtml);
         }
 
@@ -70,9 +68,9 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Create_a_paragraph_with_a_string()
         {
-            var html = Substitute.For<IHtmlString>();
+            var html = Substitute.For<IHtml>();
             var s = Arrange(MessageType.Success);
-            _f.Template.MessageParagraph(Arg.Is<IHtmlString>(h => h.ToHtmlString() == "aerg&amp;%^&quot;esrg&#39;"))
+            _f.Template.MessageParagraph(Arg.Is<IHtml>(h => h.ToHtmlString() == "aerg&amp;%^&quot;esrg&#39;"))
                 .Returns(html);
 
             var paragraph = s.Paragraph("aerg&%^\"esrg'");
@@ -83,8 +81,8 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Create_a_paragraph_with_html()
         {
-            var inputHtml = Substitute.For<IHtmlString>();
-            var outputHtml = Substitute.For<IHtmlString>();
+            var inputHtml = Substitute.For<IHtml>();
+            var outputHtml = Substitute.For<IHtml>();
             var s = Arrange(MessageType.Success);
             _f.Template.MessageParagraph(inputHtml).Returns(outputHtml);
 

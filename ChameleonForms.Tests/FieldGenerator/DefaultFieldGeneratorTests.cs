@@ -177,7 +177,7 @@ namespace ChameleonForms.Tests.FieldGenerator
             H.ViewData.Model = vm;
             H.ViewData.ModelMetadata.Model = vm;
 
-            return new DefaultFieldGenerator<TestFieldViewModel, T>(H, property, new DefaultFormTemplate());
+            return new DefaultFieldGenerator<TestFieldViewModel, T>(new MvcViewWithModel<TestFieldViewModel>(H), property, new DefaultFormTemplate());
         }
 
         [Test]
