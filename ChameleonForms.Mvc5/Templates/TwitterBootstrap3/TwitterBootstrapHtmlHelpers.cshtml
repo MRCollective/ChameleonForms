@@ -62,7 +62,7 @@
 }
 
 @helper GetInputGroupHtml(IHtml html, bool isInputGroup) {
-@(new HtmlString(isInputGroup ? "<div class=\"input-group-addon\">" : ""))@html.ToHtmlString()@(new HtmlString(isInputGroup ? "</div>" : ""))
+@(new HtmlString(isInputGroup ? "<div class=\"input-group-addon\">" : ""))@html@(new HtmlString(isInputGroup ? "</div>" : ""))
 }
 
 @helper GetPrependedHtml(IReadonlyFieldConfiguration fieldConfiguration, bool isInputGroup) {

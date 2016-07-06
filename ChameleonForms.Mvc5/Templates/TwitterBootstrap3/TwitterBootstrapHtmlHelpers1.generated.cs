@@ -397,27 +397,27 @@ WriteTo(__razor_helper_writer, new HtmlString(isInputGroup ? "<div class=\"input
 #line hidden
 
 #line 65 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                            WriteTo(__razor_helper_writer, html.ToHtmlString());
+                                            WriteTo(__razor_helper_writer, html);
 
 
 #line default
 #line hidden
 
 #line 65 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                                              
+                                                                               
 
 #line default
 #line hidden
 
 #line 65 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                 WriteTo(__razor_helper_writer, new HtmlString(isInputGroup ? "</div>" : ""));
+                                                  WriteTo(__razor_helper_writer, new HtmlString(isInputGroup ? "</div>" : ""));
 
 
 #line default
 #line hidden
 
 #line 65 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-                                                                                                                                             
+                                                                                                                              
 
 
 #line default
@@ -1100,14 +1100,14 @@ return new System.Web.WebPages.HelperResult(__razor_helper_writer => {
 #line hidden
 WriteLiteralTo(__razor_helper_writer, "        <div");
 
-WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 6492), Tuple.Create("\"", 6536)
+WriteAttributeTo(__razor_helper_writer, "class", Tuple.Create(" class=\"", 6477), Tuple.Create("\"", 6521)
 
 #line 157 "..\..\Templates\TwitterBootstrap3\TwitterBootstrapHtmlHelpers.cshtml"
-, Tuple.Create(Tuple.Create("", 6500), Tuple.Create<System.Object, System.Int32>(isCheckbox ? "checkbox" : "radio"
+, Tuple.Create(Tuple.Create("", 6485), Tuple.Create<System.Object, System.Int32>(isCheckbox ? "checkbox" : "radio"
 
 #line default
 #line hidden
-, 6500), false)
+, 6485), false)
 );
 
 WriteLiteralTo(__razor_helper_writer, ">");
