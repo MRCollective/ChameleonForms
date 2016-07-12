@@ -84,7 +84,7 @@ namespace ChameleonForms
         public IHtml ValidationMessageFor<TProperty>(Expression<Func<TModel, TProperty>> property, string validationMessage = null, HtmlAttributes htmlAttributes = null)
         {
             return htmlAttributes != null
-                ? HtmlHelper.ValidationMessageFor(property, validationMessage, htmlAttributes.Attributes).ToIHtml()
+                ? HtmlHelper.ValidationMessageFor(property, validationMessage, htmlAttributes.ToDictionary()).ToIHtml()
                 : HtmlHelper.ValidationMessageFor(property, validationMessage).ToIHtml();
         }
 
@@ -124,6 +124,9 @@ namespace ChameleonForms
 
         public IHtml InputFor<TProperty>(Expression<Func<TModel, TProperty>> fieldProperty, HtmlAttributes htmlAttributes, string formatString = null)
         {
+            if (htmlAttributes.Attributes["type"] == "password")
+                return HtmlHelper.PasswordFor(fieldProperty, htmlAttributes.ToDictionary()).ToIHtml();
+
             return !string.IsNullOrEmpty(formatString)
                 ? HtmlHelper.TextBoxFor(fieldProperty, formatString, htmlAttributes.ToDictionary()).ToIHtml()
                 : HtmlHelper.TextBoxFor(fieldProperty, htmlAttributes.ToDictionary()).ToIHtml();

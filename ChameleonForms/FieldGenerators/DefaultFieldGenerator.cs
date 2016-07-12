@@ -139,7 +139,7 @@ namespace ChameleonForms.FieldGenerators
         /// <inheritdoc />
         public string GetFieldId()
         {
-            return ((MemberExpression) FieldProperty.Body).Member.Name;
+            return View.GetFieldId(FieldProperty);
         }
 
         /// <inheritdoc />

@@ -62,7 +62,8 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes AddClass(string @class)
         {
-            _tagBuilder.AddCssClass(@class);
+            if (!string.IsNullOrEmpty(@class))
+                _tagBuilder.AddCssClass(@class);
 
             return this;
         }
