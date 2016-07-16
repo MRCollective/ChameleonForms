@@ -1,6 +1,19 @@
 ChameleonForms Breaking Changes
 -------------------------------
 
+Version 3.0.0
+=============
+
+Enums marked with the `[Flags]` attribute will now show as multiple select elements (or checkboxes when displaying as a list).
+
+### Reason
+
+Support has been added for flags enums; these make sense as multiple-select controls since a flags enum can support multiple values.
+
+### Workaround
+
+Create a enum class without the `[Flags]` attribute with the same values and bind to that instead.
+
 Version 2.0.0
 =============
 

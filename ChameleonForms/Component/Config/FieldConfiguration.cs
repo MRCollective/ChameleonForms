@@ -254,14 +254,7 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration HideEmptyItem();
-
-        /// <summary>
-        /// Don't use a &lt;label&gt;, but still include the label text for the field.
-        /// </summary>
-        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        [Obsolete("Use WithoutLabelElementElement alias instead")]
-        IFieldConfiguration WithoutLabel();
-
+        
         /// <summary>
         /// Don't use a &lt;label&gt;, but still include the label text for the field.
         /// </summary>
@@ -613,15 +606,6 @@ namespace ChameleonForms.Component.Config
             HasLabelElement = false;
             return this;
         }
-
-        /// <inheritdoc />
-        public IFieldConfiguration WithoutLabel()
-        {
-            return this.WithoutLabelElement();
-        }
-
-        /// <inheritdoc />
-        public bool HasLabel { get { return this.HasLabelElement; } }
 
         /// <inheritdoc />
         public bool HasLabelElement { get; private set; }
