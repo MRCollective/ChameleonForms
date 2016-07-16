@@ -152,7 +152,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 return value == null;
 
             if (HasMultipleEnumValues(fieldGenerator))
-                return (Convert.ToInt32(fieldGenerator.GetValue()) & Convert.ToInt32(value)) != 0;
+                return (Convert.ToInt64(fieldGenerator.GetValue()) & Convert.ToInt64(value)) != 0;
 
             return val.Equals(value);
         }
