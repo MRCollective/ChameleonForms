@@ -25,9 +25,17 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
         {
             var values = _elements
                 .Select(e => FieldFactory.Create(new[] {e}).Get(new ModelFieldType(fieldType.BaseType, fieldType.Format)))
-                .Where(e => e != null);
+                .Where(e => e != null)
+                .ToArray();
 
-            if (fieldType.HasMultipleValues)
+            if (fieldType.IsFlagsEnum)
+            {
+                if (values.Length == 1)
+                    return values.First();
+                return fieldType.GetValueFromStrings(values.Select(v => v.ToString()));
+            }
+
+            if (fieldType.IsEnumerable)
                 return fieldType.Cast(values);
 
             return values.FirstOrDefault() ?? fieldType.DefaultValue;

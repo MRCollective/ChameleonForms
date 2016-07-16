@@ -22,7 +22,16 @@ namespace ChameleonForms.Tests.FieldGenerator
         Simplevalue,
         [Description("Description attr text")]
         ValueWithDescriptionAttribute,
-        ValueWithMultpipleWordsAndNoDescriptionAttribute,
+        ValueWithMultpipleWordsAndNoDescriptionAttribute
+    }
+
+    [Flags]
+    public enum TestFlagsEnum
+    {
+        Simplevalue = 1,
+        [Description("Description attr text")]
+        ValueWithDescriptionAttribute = 2,
+        ValueWithMultpipleWordsAndNoDescriptionAttribute = 4
     }
 
     public class TestFieldViewModel
@@ -56,14 +65,21 @@ namespace ChameleonForms.Tests.FieldGenerator
         public DateTime DateTimeWithGFormat { get; set; }
 
         public TestEnum RequiredEnum { get; set; }
+        [Required, RequiredFlagsEnum]
+        public TestFlagsEnum RequiredFlagsEnum { get; set; }
 
         [Required]
         public TestEnum? RequiredNullableEnum { get; set; }
+        [Required, RequiredFlagsEnum]
+        public TestFlagsEnum? RequiredNullableFlagsEnum { get; set; }
 
         [DisplayFormat(NullDisplayText = "Nothing to see here")]
         public TestEnum? OptionalEnumWithNullStringAttribute { get; set; }
+        [DisplayFormat(NullDisplayText = "Nothing to see here")]
+        public TestFlagsEnum? OptionalFlagsEnumWithNullStringAttribute { get; set; }
 
         public TestEnum? OptionalEnum { get; set; }
+        public TestFlagsEnum? OptionalFlagsEnum { get; set; }
 
         [Required]
         public IEnumerable<TestEnum> RequiredEnumList { get; set; }
@@ -145,6 +161,8 @@ namespace ChameleonForms.Tests.FieldGenerator
     public class ChildViewModel
     {
         public TestEnum RequiredChildEnum { get; set; }
+        [Required, RequiredFlagsEnum]
+        public TestFlagsEnum RequiredChildFlagsEnum { get; set; }
     }
 
     [TestFixture]
@@ -180,55 +198,58 @@ namespace ChameleonForms.Tests.FieldGenerator
             return new DefaultFieldGenerator<TestFieldViewModel, T>(H, property, new DefaultFormTemplate());
         }
 
-        [Test]
-        public void Not_throw_exception_getting_model_when_view_model_is_null()
+        class DefaultFieldGeneratorTests : DefaultFieldGeneratorShould
         {
-            var generator = Arrange(m => m.Decimal);
-            H.ViewData.Model = null;
-            H.ViewData.ModelMetadata.Model = null;
-            
-            generator.GetModel();
-        }
+            [Test]
+            public void Not_throw_exception_getting_model_when_view_model_is_null()
+            {
+                var generator = Arrange(m => m.Decimal);
+                H.ViewData.Model = null;
+                H.ViewData.ModelMetadata.Model = null;
 
-        [Test]
-        public void Not_throw_exception_getting_value_when_view_model_is_null()
-        {
-            var generator = Arrange(m => m.Decimal);
-            H.ViewData.Model = null;
-            H.ViewData.ModelMetadata.Model = null;
+                generator.GetModel();
+            }
 
-            generator.GetValue();
-        }
-        
-        [Test]
-        public void Return_property_name()
-        {
-            var generator = Arrange(m => m.DecimalWithFormatStringAttribute);
+            [Test]
+            public void Not_throw_exception_getting_value_when_view_model_is_null()
+            {
+                var generator = Arrange(m => m.Decimal);
+                H.ViewData.Model = null;
+                H.ViewData.ModelMetadata.Model = null;
 
-            var name = generator.GetFieldId();
+                generator.GetValue();
+            }
 
-            Assert.That(name, Is.EqualTo("DecimalWithFormatStringAttribute"));
-        }
+            [Test]
+            public void Return_property_name()
+            {
+                var generator = Arrange(m => m.DecimalWithFormatStringAttribute);
 
-        [Test]
-        public void Set_field_configuration_if_readonly_attribute_applied()
-        {
-            var generator = Arrange(m => m.ReadonlyInt);
-            
-            var configuration = generator.PrepareFieldConfiguration(ExampleFieldConfiguration, FieldParent.Section);
+                var name = generator.GetFieldId();
 
-            Assert.That(configuration.HtmlAttributes["readonly"], Is.EqualTo("readonly"));
-        }
+                Assert.That(name, Is.EqualTo("DecimalWithFormatStringAttribute"));
+            }
 
-        [Test]
-        public void GetLabelHtml_should_return_display_attribute_if_WithoutLabelElement_used_and_DisplayAttribute_present()
-        {
-            var generator = Arrange(x => x.StringWithDisplayAttribute);
-            var fieldConfig = new FieldConfiguration();
-            fieldConfig.WithoutLabelElement();
-            var config = generator.PrepareFieldConfiguration(fieldConfig, FieldParent.Section);
-            var actual = generator.GetLabelHtml(config).ToString();
-            Assert.That(actual, Is.EqualTo("Use this display name"));
+            [Test]
+            public void Set_field_configuration_if_readonly_attribute_applied()
+            {
+                var generator = Arrange(m => m.ReadonlyInt);
+
+                var configuration = generator.PrepareFieldConfiguration(ExampleFieldConfiguration, FieldParent.Section);
+
+                Assert.That(configuration.HtmlAttributes["readonly"], Is.EqualTo("readonly"));
+            }
+
+            [Test]
+            public void GetLabelHtml_should_return_display_attribute_if_WithoutLabelElement_used_and_DisplayAttribute_present()
+            {
+                var generator = Arrange(x => x.StringWithDisplayAttribute);
+                var fieldConfig = new FieldConfiguration();
+                fieldConfig.WithoutLabelElement();
+                var config = generator.PrepareFieldConfiguration(fieldConfig, FieldParent.Section);
+                var actual = generator.GetLabelHtml(config).ToString();
+                Assert.That(actual, Is.EqualTo("Use this display name"));
+            }
         }
     }
 }

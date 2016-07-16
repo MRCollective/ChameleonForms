@@ -12,6 +12,12 @@ namespace $rootnamespace$.App_Start
         {
             System.Web.Mvc.ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
             System.Web.Mvc.ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
+            GetType().Assembly.GetTypes().Where(t => t.IsEnum && t.GetCustomAttributes(typeof(FlagsAttribute), false).Any())
+                .ToList().ForEach(t =>
+                {
+                    System.Web.Mvc.ModelBinders.Binders.Add(t, new FlagsEnumModelBinder());
+                    System.Web.Mvc.ModelBinders.Binders.Add(typeof(Nullable<>).MakeGenericType(t), new FlagsEnumModelBinder());
+                });
         }
     }
 }

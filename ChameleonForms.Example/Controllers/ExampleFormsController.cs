@@ -173,6 +173,12 @@ namespace ChameleonForms.Example.Controllers
         public SomeEnum? RequiredNullableEnum { get; set; }
         public SomeEnum? OptionalEnum { get; set; }
 
+        [Required, RequiredFlagsEnum]
+        public FlagsEnum RequiredFlagsEnum { get; set; }
+        [Required, RequiredFlagsEnum]
+        public FlagsEnum? RequiredNullableFlagsEnum { get; set; }
+        public FlagsEnum? OptionalFlagsEnum { get; set; }
+
         [Required]
         public IEnumerable<SomeEnum> RequiredEnums { get; set; }
         [Required]
@@ -246,6 +252,8 @@ namespace ChameleonForms.Example.Controllers
 
         public string NestedField { get; set; }
 
+        public FlagsEnum FlagsEnums { get; set; }
+
         public SomeEnum SomeEnum { get; set; }
 
         public List<SomeEnum> SomeEnums { get; set; }
@@ -285,6 +293,16 @@ namespace ChameleonForms.Example.Controllers
     {
         public int Id { get; set; }
         public string Name { get; set; }
+    }
+
+    [Flags]
+    public enum FlagsEnum
+    {
+        One = 1,
+        Two = 2,
+        Three = 4,
+        Four = 8,
+        Five = 16
     }
 
     public enum SomeEnum
