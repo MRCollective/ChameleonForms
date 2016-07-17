@@ -6,9 +6,13 @@ If you want the user to specify a value from an enum you can use that enum type 
 ```csharp
 public enum MyEnum  { ... }
 ...
-public MyEnum EnumField { get; set; }
-public MyEnum? NullableEnumField { get; set; }
+public MyEnum EnumField { get; set; } // automatically required since it's non-nullable
+[Required]
+public MyEnum? RequiredNullableEnumField { get; set; } // Required, but can start off as an empty value
+public MyEnum? NullableEnumField { get; set; } // Not required
 ```
+
+If you want the user to select multiple enum values you can either use a [flags enum](flags-enum.md) or a [list of enums](multiple-enum.md).
 
 Default HTML
 ------------
