@@ -173,9 +173,9 @@ namespace ChameleonForms.Example.Controllers
         public SomeEnum? RequiredNullableEnum { get; set; }
         public SomeEnum? OptionalEnum { get; set; }
 
-        [Required, RequiredFlagsEnum]
+        [RequiredFlagsEnum]
         public FlagsEnum RequiredFlagsEnum { get; set; }
-        [Required, RequiredFlagsEnum]
+        [RequiredFlagsEnum]
         public FlagsEnum? RequiredNullableFlagsEnum { get; set; }
         public FlagsEnum? OptionalFlagsEnum { get; set; }
 

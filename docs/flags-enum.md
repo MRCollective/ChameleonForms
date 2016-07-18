@@ -13,10 +13,10 @@ public enum MyFlagsEnum
     ...
 }
 ...
-[Required, RequiredFlagsEnum]
+[RequiredFlagsEnum]
 public MyFlagsEnum RequiredFlagsEnumWithZeroAsUnselectedValue { get; set; }
 
-[Required, RequiredFlagsEnum]
+[RequiredFlagsEnum]
 public MyFlagsEnum? RequiredFlagsEnumWithNullAsUnselectedValue { get; set; }
 
 public MyFlagsEnum? NonRequiredFlagsEnumAndNullAsUnselectedValue { get; set; }
@@ -29,11 +29,17 @@ If you want the user to specify a single value from an enum then you can [use th
 Required validation
 -------------------
 
-ASP.NET MVC's default validation doesn't pick up `0` for a flags enum as the field not being specified, thus you need to alter the validation for requires flags enums. ChameleonForms provides the `[RequiredFlagsEnum]` attribute to overcome that problem. You need to apply it alongside the usual `[Required]` attribute otherwise the client-side validation won't function as normal. This might look like:
+ASP.NET MVC's default validation doesn't pick up `0` for a flags enum as the field not being specified, thus you need to alter the validation for requires flags enums. ChameleonForms provides the `[RequiredFlagsEnum]` attribute to overcome that problem. This might look like:
 
 ```csharp
-[Required, RequiredFlagsEnum]
+[RequiredFlagsEnum]
 public MyFlagsEnum FlagsEnumField { get; set; }
+```
+
+In order for this attribute to correctly apply client side validation you need to ensure the following call is made on your application start (this should be automatically added when installing ChameleonForms, but if you are upgrading from before version 3 it's possible it won't be added automatically):
+
+```csharp
+DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequiredFlagsEnumAttribute), typeof(RequiredAttributeAdapter));
 ```
 
 Model binding

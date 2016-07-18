@@ -65,12 +65,12 @@ namespace ChameleonForms.Tests.FieldGenerator
         public DateTime DateTimeWithGFormat { get; set; }
 
         public TestEnum RequiredEnum { get; set; }
-        [Required, RequiredFlagsEnum]
+        [RequiredFlagsEnum]
         public TestFlagsEnum RequiredFlagsEnum { get; set; }
 
         [Required]
         public TestEnum? RequiredNullableEnum { get; set; }
-        [Required, RequiredFlagsEnum]
+        [RequiredFlagsEnum]
         public TestFlagsEnum? RequiredNullableFlagsEnum { get; set; }
 
         [DisplayFormat(NullDisplayText = "Nothing to see here")]
@@ -161,7 +161,7 @@ namespace ChameleonForms.Tests.FieldGenerator
     public class ChildViewModel
     {
         public TestEnum RequiredChildEnum { get; set; }
-        [Required, RequiredFlagsEnum]
+        [RequiredFlagsEnum]
         public TestFlagsEnum RequiredChildFlagsEnum { get; set; }
     }
 
@@ -187,6 +187,7 @@ namespace ChameleonForms.Tests.FieldGenerator
             H.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             H.ViewContext.ClientValidationEnabled = true;
             H.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(property), "asdf");
+            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequiredFlagsEnumAttribute), typeof(RequiredAttributeAdapter));
             var vm = new TestFieldViewModel();
             foreach (var action in vmSetter)
             {
