@@ -29,6 +29,7 @@ pages:
   - DateTime fields: datetime.md
   - Client-side validation of DateTime fields: datetime-client-side-validation.md
   - Enum fields: enum.md
+  - Flags enum fields: flags-enum.md
   - Multiple-select enum fields: multiple-enum.md
   - List fields: list.md
   - Multiple-select list fields: multiple-list.md
