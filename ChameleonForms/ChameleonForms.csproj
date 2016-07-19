@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ExistsInAttribute.cs" />
+    <Compile Include="Attributes\RequiredFlagsEnumAttribute.cs" />
     <Compile Include="Component\Config\FieldConfiguration.cs" />
     <Compile Include="Component\Config\FieldConfigurationExtensions.cs" />
     <Compile Include="Component\Config\ReadonlyFieldConfiguration.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Enums\EncType.cs" />
     <Compile Include="Enums\TextInputType.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="ModelBinders\FlagsEnumModelBinder.cs" />
     <Compile Include="PartialViewForm.cs" />
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="PartialViewSection.cs" />

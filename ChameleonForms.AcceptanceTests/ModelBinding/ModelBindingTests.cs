@@ -1,7 +1,6 @@
 ﻿using ChameleonForms.AcceptanceTests.Helpers;
 using ChameleonForms.AcceptanceTests.ModelBinding.Pages;
 using NUnit.Framework;
-using TestStack.Seleno.Configuration;
 
 namespace ChameleonForms.AcceptanceTests.ModelBinding
 {

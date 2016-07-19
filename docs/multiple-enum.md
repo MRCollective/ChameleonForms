@@ -1,7 +1,7 @@
 Multiple-Select Enum Fields
 ===========================
 
-If you want the user to specify multiple values from an enum you can use that enum type against any property with a type convertible to `IEnumerable<%enumType%>`, e.g.:
+If you want the user to specify multiple values from an enum you can either use a [flags enum](flags-enum.md) or use a non-flags enum against any property with a type convertible to `IEnumerable<%enumType%>`, e.g.:
 
 ```csharp
 public enum MyEnum  { ... }
@@ -14,6 +14,8 @@ public List<MyEnum?> NullableEnumListField { get; set; }
 ```
 
 Note: as you will see below - there isn't much point in specifying a nullable enum for the enum type in the enumerable/list - we recommend you always use the enum type directly.
+
+If you want the user to specify a single value from an enum then you can [use the enum type directly](enum.md).
 
 Default HTML
 ------------

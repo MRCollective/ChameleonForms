@@ -72,6 +72,7 @@ Examples for generating a form and each type of default component within the for
 * [DateTime fields](datetime.md) - Display DateTimes as a text box including model binding and client-side validation that respects `[DisplayFormat]`
     * [Client-side validation of DateTime fields](datetime-client-side-validation.md) - How to use `jquery.validate.unobtrusive.chameleon.js`
 * [Enum fields](enum.md) - Display enums as drop-downs or a list of radio buttons
+* [Flags enum fields](flags-enum.md) - Display flags enums as multi-select drop-downs or a list of checkboxes
 * [Multiple-select enum fields](multiple-enum.md) - Display enums as multi-select drop-downs or a list of checkboxes
 * [List fields](list.md) - Display drop-downs or lists of radio buttons to allow users to select an item from a list
 * [Multiple-select list fields](multiple-list.md) - Display multi-select drop-downs or lists of checkboxes to allow users to select multiple items from a list

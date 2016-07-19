@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using ChameleonForms.Enums;
 using Humanizer;
@@ -95,6 +96,40 @@ namespace ChameleonForms.Templates
                 t.MergeAttributes(htmlAttributes.Attributes, false);
 
             return new HtmlString(t.ToString(TagRenderMode.SelfClosing));
+        }
+
+        /// <summary>
+        /// Creates the HTML for a select.
+        /// </summary>
+        /// <param name="name">The name/id of the select</param>
+        /// <param name="selectListItems">The items for the select list</param>
+        /// <param name="multiple">Whether or not multiple items can be selected</param>
+        /// <param name="htmlAttributes">Any HTML attributes that should be applied to the select</param>
+        /// <returns>The HTML for the select</returns>
+        public static IHtmlString BuildSelect(string name, IEnumerable<SelectListItem> selectListItems, bool multiple, HtmlAttributes htmlAttributes)
+        {
+            var t = new TagBuilder("select");
+            if (name != null)
+            {
+                t.Attributes.Add("name", name);
+                t.GenerateId(name);
+            }
+            if (htmlAttributes != null)
+                t.MergeAttributes(htmlAttributes.Attributes, true);
+            if (multiple)
+                t.Attributes.Add("multiple", "multiple");
+
+            foreach (var item in selectListItems)
+            {
+                var option = new TagBuilder("option");
+                if (item.Selected)
+                    option.Attributes.Add("selected", "selected");
+                option.Attributes.Add("value", item.Value);
+                option.SetInnerText(item.Text);
+                t.InnerHtml += option.ToString();
+            }
+
+            return new HtmlString(t.ToString());
         }
 
         /// <summary>
