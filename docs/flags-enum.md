@@ -50,19 +50,19 @@ The default MVC model binder does **not** correctly bind flags enum values. Cham
 When you install ChameleonForms it should automatically register this model binder for all of the flags enum types registered in your MVC project within the `RegisterChameleonFormsComponents.cs` file. If you are upgrading from a pre version 3.0 version of ChameleonForms then the registration may not automatically add itself. Also, if you have view models / flags enums defined outside of your MVC project then the default registration won't work. This is the registration code we add (you may need to alter the assembly being scanned or alternatively explicitly register the model binder for the flags enums in question):
 
 ```csharp
-    GetType().Assembly.GetTypes().Where(t => t.IsEnum && t.GetCustomAttributes(typeof(FlagsAttribute), false).Any())
+    typeof(RegisterChameleonFormsComponents).Assembly.GetTypes().Where(t => t.IsEnum && t.GetCustomAttributes(typeof(FlagsAttribute), false).Any())
         .ToList().ForEach(t =>
         {
-            System.Web.Mvc.ModelBinders.Binders.Add(t, new FlagsEnumModelBinder());
-            System.Web.Mvc.ModelBinders.Binders.Add(typeof(Nullable<>).MakeGenericType(t), new FlagsEnumModelBinder());
+            ModelBinders.Binders.Add(t, new FlagsEnumModelBinder());
+            ModelBinders.Binders.Add(typeof(Nullable<>).MakeGenericType(t), new FlagsEnumModelBinder());
         });
 ```
 
 If registering a specifc flags enum type you can simply use:
 
 ```csharp
-	System.Web.Mvc.ModelBinders.Binders.Add(typeof(MyFlagsEnum), new FlagsEnumModelBinder());
-	System.Web.Mvc.ModelBinders.Binders.Add(typeof(MyFlagsEnum?), new FlagsEnumModelBinder());
+	ModelBinders.Binders.Add(typeof(MyFlagsEnum), new FlagsEnumModelBinder());
+	ModelBinders.Binders.Add(typeof(MyFlagsEnum?), new FlagsEnumModelBinder());
 ```
 
 Default HTML
