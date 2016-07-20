@@ -448,7 +448,7 @@ namespace ChameleonForms.Tests.Component.Config
         {
             var fc = Field.Configure();
 
-            Assert.That(fc.HasLabel, Is.True);
+            Assert.That(fc.HasLabelElement, Is.True);
         }
 
         [Test]

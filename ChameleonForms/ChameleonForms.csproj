@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ExistsInAttribute.cs" />
+    <Compile Include="Attributes\RequiredFlagsEnumAttribute.cs" />
     <Compile Include="Component\Config\FieldConfiguration.cs" />
     <Compile Include="Component\Config\FieldConfigurationExtensions.cs" />
     <Compile Include="Component\Config\ReadonlyFieldConfiguration.cs" />

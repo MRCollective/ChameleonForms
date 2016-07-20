@@ -116,6 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\ExistsInAttributeTests.cs" />
+    <Compile Include="Attributes\RequiredFlagsEnumAttributeTests.cs" />
     <Compile Include="Component\Config\FieldConfigurationTests.cs" />
     <Compile Include="Component\NavigationTests.cs" />
     <Compile Include="Component\MessageTests.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="FieldGenerator\DefaultFieldGeneratorTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\BooleanTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\DateTimeTests.cs" />
+    <Compile Include="FieldGenerator\DefaultFieldGenerator\FlagsEnumTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\EnumTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\FieldGeneratorTests.cs" />
     <Compile Include="FieldGenerator\DefaultFieldGenerator\InputTests.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="Helpers\ChangeCulture.cs" />
     <Compile Include="HtmlHelperExtensionsTests.cs" />
     <Compile Include="HumanizedLabelsTests.cs" />
+    <Compile Include="ModelBinders\FlagsEnumModelBinderShould.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinderShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\LazyHtmlAttributesTests.cs" />

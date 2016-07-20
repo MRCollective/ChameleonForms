@@ -24,7 +24,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override bool CanHandle()
         {
-            return GetUnderlyingType(FieldGenerator) == typeof(bool);
+            return GetUnderlyingType(FieldGenerator) == typeof(bool)
+                && !HasEnumerableValues(FieldGenerator);
         }
 
         /// <inheritdoc />

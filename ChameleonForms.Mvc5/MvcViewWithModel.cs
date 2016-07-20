@@ -135,6 +135,11 @@ namespace ChameleonForms
         public IHtml SelectListFor<TProperty>(Expression<Func<TModel, TProperty>> fieldProperty, IEnumerable<SelectListItem> selectList, bool allowMultipleSelect,
             HtmlAttributes htmlAttributes)
         {
+            if (allowMultipleSelect && (Nullable.GetUnderlyingType(typeof(TProperty)) ?? typeof(TProperty)).IsEnum)
+            {
+                return HtmlCreator.BuildSelect(GetFieldName(fieldProperty), selectList, multiple: true, htmlAttributes: htmlAttributes);
+            }
+            
             return allowMultipleSelect
                 ? HtmlHelper.ListBoxFor(fieldProperty, selectList.ToMvcSelectList(), htmlAttributes.ToDictionary()).ToIHtml()
                 : HtmlHelper.DropDownListFor(fieldProperty, selectList.ToMvcSelectList(), htmlAttributes.ToDictionary()).ToIHtml();

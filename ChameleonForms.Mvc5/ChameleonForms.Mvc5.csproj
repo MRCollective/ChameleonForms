@@ -82,6 +82,7 @@
     <Compile Include="HtmlHelperExtensions.cs" />
     <Compile Include="HumanizedLabels.cs" />
     <Compile Include="ModelBinders\DateTimeModelBinder.cs" />
+    <Compile Include="ModelBinders\FlagsEnumModelBinder.cs" />
     <Compile Include="ModelMetadataFieldMetadata.cs" />
     <Compile Include="MvcViewWithModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

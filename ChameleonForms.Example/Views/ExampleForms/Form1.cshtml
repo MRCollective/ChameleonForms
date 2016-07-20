@@ -19,6 +19,7 @@
     <p>@f.FieldElementFor(m => m.RequiredStringField).TabIndex(4)</p>
     using (var s = f.BeginSection("My Section!", InstructionalText(), new{@class = "aClass"}.ToHtmlAttributes()))
     {
+        @s.FieldFor(m => m.FlagsEnums)
         @s.FieldFor(m=>m.Boolean).WithoutInlineLabel()
         using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value").TabIndex(3)))
         {

@@ -16,6 +16,8 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
         bool HasMultipleValues { get; }
         bool IsBoolean { get; }
         Type BaseType { get; }
+        bool IsFlagsEnum { get; }
+        bool IsEnumerable { get; }
     }
 
     internal class ModelFieldType : IModelFieldType
@@ -34,7 +36,7 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
         public object GetValueFromString(string stringValue)
         {
             var value = GetUnderlyingValueFromString(stringValue);
-            if (!HasMultipleValues)
+            if (!IsEnumerable)
                 return value;
 
             return Cast(new[] {value});
@@ -47,6 +49,19 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
 
             if (!HasMultipleValues)
                 return GetUnderlyingValueFromString(string.Join(",", stringValues.Where(s => !string.IsNullOrEmpty(s))));
+
+            if (IsFlagsEnum)
+            {
+                var value = Enum.Parse(UnderlyingType, stringValues
+                    .Where(v => !string.IsNullOrEmpty(v))
+                    .Select(v => Convert.ToInt64(Enum.Parse(UnderlyingType, v)))
+                    .Aggregate(0L, (x, y) => x | y).ToString());
+
+                if (Convert.ToInt64(value) == 0L && Nullable.GetUnderlyingType(BaseType) != null)
+                    return null;
+
+                return value;
+            }
 
             return Cast(stringValues.Where(s => !string.IsNullOrEmpty(s)).Select(GetUnderlyingValueFromString));
         }
@@ -95,10 +110,24 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
 
         public bool HasMultipleValues
         {
+            get { return IsEnumerable || IsFlagsEnum; }
+        }
+
+        public bool IsFlagsEnum
+        {
+            get
+            {
+                return UnderlyingType.IsEnum
+                    && UnderlyingType.GetCustomAttributes(typeof(FlagsAttribute), false).Any();
+            }
+        }
+
+        public bool IsEnumerable
+        {
             get
             {
                 return _fieldType.IsGenericType &&
-                    typeof (IEnumerable<>).IsAssignableFrom(_fieldType.GetGenericTypeDefinition());
+                    typeof(IEnumerable<>).IsAssignableFrom(_fieldType.GetGenericTypeDefinition());
             }
         }
 
@@ -111,7 +140,10 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
         {
             get
             {
-                return HasMultipleValues ? _fieldType.GetGenericArguments()[0] : _fieldType;
+                if (_fieldType.IsGenericType &&
+                    typeof(IEnumerable<>).IsAssignableFrom(_fieldType.GetGenericTypeDefinition()))
+                    return _fieldType.GetGenericArguments()[0];
+                return _fieldType;
             }
         }
     }

@@ -24,7 +24,21 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
             _format = format;
         }
 
-        public bool HasMultipleValues { get { return _value as IEnumerable != null && _value.GetType() != typeof(string); } }
+        public bool HasMultipleValues
+        {
+            get
+            {
+                if (_value == null)
+                    return false;
+
+                var underlyingType = Nullable.GetUnderlyingType(_value.GetType()) ?? _value.GetType();
+                if (underlyingType.IsEnum && underlyingType.GetCustomAttributes(typeof(FlagsAttribute), false).Any())
+                    return true;
+
+                return _value is IEnumerable
+                    && _value.GetType() != typeof(string);
+            }
+        }
 
         public IEnumerable<string> Values
         {
@@ -32,6 +46,14 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
             {
                 if (!HasMultipleValues)
                     throw new InvalidOperationException("Field does not have multiple values!");
+                if (_value == null)
+                    return new string[] {};
+                var underlyingType = Nullable.GetUnderlyingType(_value.GetType()) ?? _value.GetType();
+                if (underlyingType.IsEnum)
+                    return Enum.GetValues(underlyingType)
+                        .Cast<object>()
+                        .Where(e => (Convert.ToInt32(e) & Convert.ToInt32(_value)) != 0)
+                        .Select(e => e.ToString());
                 return (_value as IEnumerable).Cast<object>()
                     .Select(o => new ModelFieldValue(o, _format))
                     .Select(v => v.Value);
