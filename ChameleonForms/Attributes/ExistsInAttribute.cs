@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web.ModelBinding;
 using ChameleonForms.FieldGenerators.Handlers;
 
@@ -14,6 +15,32 @@ namespace ChameleonForms.Attributes
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class ExistsInAttribute : ValidationAttribute, IMetadataAware
     {
+        /// <summary>
+        /// Returns whether or not the attribute applies to the given property
+        /// </summary>
+        /// <typeparam name="TParent">Type of the parent class of the property</typeparam>
+        /// <typeparam name="TProperty">Type of the property itself</typeparam>
+        /// <param name="property">The property to check</param>
+        /// <returns>Whether or not the attribute applies</returns>
+        public static bool AppliesToProperty<TParent, TProperty>(Expression<Func<TParent, TProperty>> property)
+        {
+            return GetAttributeInstanceForProperty(property) != null;
+        }
+
+        /// <summary>
+        /// Returns the ExistsInAttribute instance that applies to the given property (or null if it doesn't).
+        /// </summary>
+        /// <typeparam name="TParent">Type of the parent class of the property</typeparam>
+        /// <typeparam name="TProperty">Type of the property itself</typeparam>
+        /// <param name="property">The property to check</param>
+        /// <returns>The attribute that applies</returns>
+        public static ExistsInAttribute GetAttributeInstanceForProperty<TParent, TProperty>(Expression<Func<TParent, TProperty>> property)
+        {
+            return property.Body.NodeType == ExpressionType.MemberAccess
+                ? ((MemberExpression)property.Body).Member.GetCustomAttributes(typeof(ExistsInAttribute), false).Cast<ExistsInAttribute>().FirstOrDefault()
+                : null;
+        }
+
         /// <summary>
         /// Additional Values metadata key for whether this attribute has been applied to the property.
         /// </summary>
@@ -36,10 +63,25 @@ namespace ChameleonForms.Attributes
         /// </summary>
         public static bool EnableValidation = true;
 
-        private readonly string _listProperty;
-        private readonly string _valueProperty;
-        private readonly string _nameProperty;
-        private readonly bool? _enableValidation;
+        /// <summary>
+        /// The name of the list property on the parent model to get the value from.
+        /// </summary>
+        public string ListProperty { get; private set; }
+
+        /// <summary>
+        /// The name of the name property of the list item type to get the value from.
+        /// </summary>
+        public string ValueProperty { get; private set; }
+
+        /// <summary>
+        /// The name of the name property of the list item type to get the description from.
+        /// </summary>
+        public string NameProperty { get; private set; }
+
+        /// <summary>
+        /// Whether or not server-side validation is enabled for this instance.
+        /// </summary>
+        public bool? EnableValidationForThisInstance;
 
         /// <summary>
         /// Instantiates an <see cref="ExistsInAttribute"/>.
@@ -49,9 +91,9 @@ namespace ChameleonForms.Attributes
         /// <param name="nameProperty">The name of the property of the list items to use for the name/label</param>
         public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty)
         {
-            _listProperty = listProperty;
-            _valueProperty = valueProperty;
-            _nameProperty = nameProperty;
+            ListProperty = listProperty;
+            ValueProperty = valueProperty;
+            NameProperty = nameProperty;
         }
 
         /// <summary>
@@ -63,37 +105,37 @@ namespace ChameleonForms.Attributes
         /// <param name="enableValidation">Optional override for ExistsIn server-side validation configuration (if not specified, static configuration setting ExistsInAttribute.EnableValidation is used)</param>
         public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty, bool enableValidation)
         {
-            _listProperty = listProperty;
-            _valueProperty = valueProperty;
-            _nameProperty = nameProperty;
-            _enableValidation = enableValidation;
+            ListProperty = listProperty;
+            ValueProperty = valueProperty;
+            NameProperty = nameProperty;
+            EnableValidationForThisInstance = enableValidation;
         }
 
         /// <inheritdoc />
         public void OnMetadataCreated(ModelMetadata metadata)
         {
             metadata.AdditionalValues[ExistsKey] = true;
-            metadata.AdditionalValues[PropertyKey] = _listProperty;
-            metadata.AdditionalValues[ValueKey] = _valueProperty;
-            metadata.AdditionalValues[NameKey] = _nameProperty;
+            metadata.AdditionalValues[PropertyKey] = ListProperty;
+            metadata.AdditionalValues[ValueKey] = ValueProperty;
+            metadata.AdditionalValues[NameKey] = NameProperty;
         }
 
         /// <inheritdoc />
         protected override ValidationResult IsValid(object value, ValidationContext context)
         {
-            var enableValidation = _enableValidation.HasValue
-                ? _enableValidation.Value
+            var enableValidation = EnableValidationForThisInstance.HasValue
+                ? EnableValidationForThisInstance.Value
                 : EnableValidation;
             if (!enableValidation || value == null || value.ToString() == string.Empty)
             {
                 return ValidationResult.Success;
             }
-            ValidateListConfiguration(context.ObjectInstance, _listProperty, _valueProperty, _nameProperty, context.MemberName);
+            ValidateListConfiguration(context.ObjectInstance, ListProperty, ValueProperty, NameProperty, context.MemberName);
 
-            var collectionProperty = context.ObjectInstance.GetType().GetProperty(_listProperty)
+            var collectionProperty = context.ObjectInstance.GetType().GetProperty(ListProperty)
                 .GetValue(context.ObjectInstance, null) as IEnumerable;
             var collection = collectionProperty.Cast<object>().ToList();
-            var possibleValues = collection.Select(item => item.GetType().GetProperty(_valueProperty).GetValue(item, null))
+            var possibleValues = collection.Select(item => item.GetType().GetProperty(ValueProperty).GetValue(item, null))
                 .Select(i => i is Enum ? (int)i : i);
             if (value is IEnumerable && !(value is string))
             {
@@ -110,9 +152,9 @@ namespace ChameleonForms.Attributes
             var attempted = value is IEnumerable
                 ? string.Join(", ", (value as IEnumerable).Cast<object>().Select(t => t == null ? "null" : t.ToString()))
                 : value.ToString();
-            var choices = string.Join(", ", collection.Select(o => o.GetType().GetProperty(_nameProperty).GetValue(o, null)));
+            var choices = string.Join(", ", collection.Select(o => o.GetType().GetProperty(NameProperty).GetValue(o, null)));
             ErrorMessage = string.Format("The {0} field was {1}, but must be one of {2}", "{0}", attempted, choices);
-            return new ValidationResult(FormatErrorMessage(context.DisplayName ?? context.MemberName), new List<string> { _listProperty });
+            return new ValidationResult(FormatErrorMessage(context.DisplayName ?? context.MemberName), new List<string> { ListProperty });
         }
 
         /// <summary>

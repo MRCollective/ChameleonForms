@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
@@ -25,8 +27,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override bool CanHandle()
         {
-            return FieldGenerator.Metadata.AdditionalValues.ContainsKey(ExistsInAttribute.ExistsKey)
-                && FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ExistsKey] as bool? == true;
+            return ExistsInAttribute.AppliesToProperty(FieldGenerator.FieldProperty);
         }
 
         /// <inheritdoc />
@@ -62,9 +63,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         private IEnumerable<SelectListItem> GetSelectList(TModel model)
         {
-            var propertyName = (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.PropertyKey];
-            var nameProperty = (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.NameKey];
-            var valueProperty = (string)FieldGenerator.Metadata.AdditionalValues[ExistsInAttribute.ValueKey];
+            var attr = ExistsInAttribute.GetAttributeInstanceForProperty(FieldGenerator.FieldProperty);
+            var propertyName = attr.ListProperty;
+            var nameProperty = attr.NameProperty;
+            var valueProperty = attr.ValueProperty;
 
             ExistsInAttribute.ValidateListConfiguration(model, propertyName, valueProperty, nameProperty, FieldGenerator.GetFieldId());
 
