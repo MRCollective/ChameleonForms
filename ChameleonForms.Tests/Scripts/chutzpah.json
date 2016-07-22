@@ -2,7 +2,7 @@
     "Framework": "jasmine",
     "TestHarnessLocationMode": "SettingsFileAdjacent",
     "References" : [
-        {"Path" : "../../ChameleonForms.Example/Scripts/jquery-2.0.3.js" },
+        {"Path" : "../../ChameleonForms.Example/Scripts/jquery-2.2.4.js" },
         {"Path" : "../../ChameleonForms.Example/Scripts/jquery.validate.js" },
         {"Path" : "../../ChameleonForms.Example/Scripts/jquery.validate.unobtrusive.js" },
         {"Path" : "../../ChameleonForms.Example/Scripts/jquery.validate.unobtrusive.chameleon.js" },
