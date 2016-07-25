@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>
-       ChameleonForms
+       ChameleonForms.Mvc5
     </id>
     <version>
        1.0.0.0
@@ -30,15 +30,15 @@
        en-US
     </language>
     <dependencies>
-      <dependency id="Microsoft.AspNet.Mvc" version="4.0.30506.0" />
-      <dependency id="Humanizer" version="1.28.0" />
-      <dependency id="WebActivator" version="1.5" />
+      <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
+      <dependency id="Humanizer" version="1.37.7" />
+      <dependency id="WebActivatorEx" version="2.0.0" />
     </dependencies>
   </metadata>
   <files>
-     <file src="ChameleonForms\bin\Release\ChameleonForms.dll" target="lib\NET40" />
-     <file src="ChameleonForms\bin\Release\ChameleonForms.pdb" target="lib\NET40" />
-     <file src="ChameleonForms\bin\Release\ChameleonForms.XML" target="lib\NET40" />
+     <file src="ChameleonForms\bin\Release\ChameleonForms.dll" target="lib\NET45" />
+     <file src="ChameleonForms\bin\Release\ChameleonForms.pdb" target="lib\NET45" />
+     <file src="ChameleonForms\bin\Release\ChameleonForms.XML" target="lib\NET45" />
      <file src="AppStart.cs.pp" target="content\App_Start\RegisterChameleonFormsComponents.cs.pp" />
      <file src="web.config.transform" target="content\Views" />
      <file src="ChameleonForms.Example\Scripts\jquery.validate.unobtrusive.chameleon.js" target="content\Scripts\jquery.validate.unobtrusive.chameleon.js" />
