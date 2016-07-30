@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Example", "ChameleonForms.Example\ChameleonForms.Example.csproj", "{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Example", "examples\ChameleonForms.Example\ChameleonForms.Example.csproj", "{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{07599B0A-359D-45A6-90A0-D5D2356C7DFD}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,9 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{07599B
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms", "ChameleonForms\ChameleonForms.csproj", "{854754FE-F40A-47EB-B32D-646E8F35C65F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Tests", "ChameleonForms.Tests\ChameleonForms.Tests.csproj", "{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Tests", "tests\ChameleonForms.Tests\ChameleonForms.Tests.csproj", "{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{950DEBD6-FCA3-47B8-9E1F-0005E79BD664}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ChameleonForms.Mvc5.nuspec = ChameleonForms.Mvc5.nuspec
 		ChameleonForms.TwitterBootstrap3.nuspec = ChameleonForms.TwitterBootstrap3.nuspec
 		GitVersionConfig.yaml = GitVersionConfig.yaml
+		global.json = global.json
 		LICENSE = LICENSE
 		logo.png = logo.png
 		mkdocs.yml = mkdocs.yml
@@ -32,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		web.config.transform = web.config.transform
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.AcceptanceTests", "ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj", "{67A08E34-2498-404D-9869-E13F4F496B3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.AcceptanceTests", "tests\ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj", "{67A08E34-2498-404D-9869-E13F4F496B3E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-CB64-4380-A326-C5562973F32F}"
 	ProjectSection(SolutionItems) = preProject
@@ -83,7 +82,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-C
 		docs\why.md = docs\why.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Mvc5", "ChameleonForms.Mvc5\ChameleonForms.Mvc5.csproj", "{02A0FA65-304C-4224-8D54-342F77FB63C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Mvc5", "src\ChameleonForms.Mvc5\ChameleonForms.Mvc5.csproj", "{02A0FA65-304C-4224-8D54-342F77FB63C6}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ChameleonForms", "src\ChameleonForms\ChameleonForms.xproj", "{21C750E4-3BD5-495D-981B-289466EB1BF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -98,12 +99,6 @@ Global
 		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{854754FE-F40A-47EB-B32D-646E8F35C65F}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
-		{854754FE-F40A-47EB-B32D-646E8F35C65F}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
-		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
 		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
 		{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -122,6 +117,12 @@ Global
 		{02A0FA65-304C-4224-8D54-342F77FB63C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02A0FA65-304C-4224-8D54-342F77FB63C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02A0FA65-304C-4224-8D54-342F77FB63C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21C750E4-3BD5-495D-981B-289466EB1BF7}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C750E4-3BD5-495D-981B-289466EB1BF7}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
+		{21C750E4-3BD5-495D-981B-289466EB1BF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C750E4-3BD5-495D-981B-289466EB1BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C750E4-3BD5-495D-981B-289466EB1BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C750E4-3BD5-495D-981B-289466EB1BF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

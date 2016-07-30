@@ -11,3 +11,4 @@ _ReSharper.*
 packages
 *.received.*
 .vs
+project.lock.json

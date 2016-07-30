@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Humanizer.Core": "2.1.0",
+    "Newtonsoft.Json": "9.0.1",
+    "System.ComponentModel.TypeConverter":  "4.1.0"  
+  },
+
+  "frameworks": {
+    "net45": {
+      "dependencies": {
+      },
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": "4.0.0",
+        "System.Runtime": "4.0.0",
+        "System.Globalization":  "4.0.0" 
+      }
+    },
+    "netstandard1.6": {
+      "imports": "dnxcore50",
+      "buildOptions": {
+        "define": ["NETSTANDARD"]
+      },
+      "dependencies": {
+        "NETStandard.Library": "1.6.0",
+        "System.ComponentModel.Annotations": "4.1.0",
+        "System.Text.Encodings.Web": "4.0.0",
+        "System.Reflection.Extensions": "4.0.1"
+      }
+    }
+  }
+}

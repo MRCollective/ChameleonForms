@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{854754FE-F40A-47EB-B32D-646E8F35C65F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChameleonForms</RootNamespace>
+    <AssemblyName>ChameleonForms</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\ChameleonForms.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\ChameleonForms.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Humanizer, Version=1.37.7.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Humanizer.1.37.7\lib\portable-win+net40+sl50+wp8+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Humanizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\ExistsInAttribute.cs" />
+    <Compile Include="Attributes\RequiredFlagsEnumAttribute.cs" />
+    <Compile Include="Component\Config\FieldConfiguration.cs" />
+    <Compile Include="Component\Config\FieldConfigurationExtensions.cs" />
+    <Compile Include="Component\Config\ReadonlyFieldConfiguration.cs" />
+    <Compile Include="Component\FieldParent.cs" />
+    <Compile Include="Component\Navigation.cs" />
+    <Compile Include="Component\Field.cs" />
+    <Compile Include="Component\FormComponent.cs" />
+    <Compile Include="Component\Message.cs" />
+    <Compile Include="Enums\DisplayType.cs" />
+    <Compile Include="Enums\MessageType.cs" />
+    <Compile Include="Component\Section.cs" />
+    <Compile Include="Enums\EncType.cs" />
+    <Compile Include="Enums\TextInputType.cs" />
+    <Compile Include="Enums\FormSubmitMethod.cs" />
+    <Compile Include="FieldGenerators\SelectListItem.cs" />
+    <Compile Include="FieldMetadata.cs" />
+    <Compile Include="Utils\HtmlExtensions.cs" />
+    <Compile Include="Utils\ObjectExtensions.cs" />
+    <Compile Include="Utils\TagBuilder.cs" />
+    <Compile Include="IHtml.cs" />
+    <Compile Include="PartialViewForm.cs" />
+    <Compile Include="PartialViewSection.cs" />
+    <Compile Include="ReSharper\ReSharperAnnotations.cs" />
+    <Compile Include="FieldGenerators\Handlers\DateTimeHandler.cs" />
+    <Compile Include="FieldGenerators\DefaultFieldGenerator.cs" />
+    <Compile Include="FieldGenerators\Handlers\DefaultHandler.cs" />
+    <Compile Include="FieldGenerators\Handlers\EnumListHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FieldGenerators\Handlers\FieldGeneratorHandler.cs" />
+    <Compile Include="FieldGenerators\FieldGeneratorHandlersRouter.cs" />
+    <Compile Include="FieldGenerators\Handlers\FileHandler.cs" />
+    <Compile Include="FieldGenerators\Handlers\ListHandler.cs" />
+    <Compile Include="FieldGenerators\Handlers\PasswordHandler.cs" />
+    <Compile Include="FieldGenerators\Handlers\BooleanHandler.cs" />
+    <Compile Include="FieldGenerators\Handlers\TextAreaHandler.cs" />
+    <Compile Include="FieldGenerators\IFieldGenerator.cs" />
+    <Compile Include="Form.cs" />
+    <Compile Include="FormTemplate.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HtmlAttributes.cs" />
+    <Compile Include="Templates\HtmlCreator.cs" />
+    <Compile Include="Templates\IFormTemplate.cs" />
+    <Compile Include="LazyHtmlAttributes.cs" />
+    <Compile Include="Utils\ExpressionExtensions.cs" />
+    <Compile Include="Utils\SwapViewWriter.cs" />
+    <Compile Include="IViewWithModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
