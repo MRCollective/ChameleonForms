@@ -26,7 +26,7 @@ namespace ChameleonForms.Utils
             {
                 foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(htmlAttributes))
                 {
-                    result.Add(property.Name.Replace('_', '-'), property.GetValue(htmlAttributes));
+                    result.Add(property.Name.Replace('_', '-').ToLower(), property.GetValue(htmlAttributes));
                 }
             }
 

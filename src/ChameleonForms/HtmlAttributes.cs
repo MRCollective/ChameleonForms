@@ -125,7 +125,8 @@ namespace ChameleonForms
         public HtmlAttributes Attr(Func<object, object> attribute)
         {
             var item = attribute(null);
-            _tagBuilder.MergeAttribute(attribute.GetMethodInfo().GetParameters().First().Name.Replace("_", "-").ToLower(), item == null ? string.Empty : item.ToString(), true);
+            var key = attribute.GetMethodInfo().GetParameters().First().Name.Replace("_", "-").ToLower();
+            _tagBuilder.MergeAttribute(key, item == null ? string.Empty : item.ToString(), true);
 
             return this;
         }

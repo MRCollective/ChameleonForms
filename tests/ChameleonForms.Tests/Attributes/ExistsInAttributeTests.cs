@@ -229,13 +229,13 @@ namespace ChameleonForms.Tests.Attributes
             Assert.That(result, Is.EqualTo(ValidationResult.Success));
         }
 
-        private readonly ModelBindingViewModel[] _validViewModels =
+        private static readonly ModelBindingViewModel[] ValidViewModels =
         {
             new ModelBindingViewModel{ RequiredString = "" },
             new ModelBindingViewModel{ RequiredString = null },
             new ModelBindingViewModel{ RequiredString = "1" }
         };
-        [TestCaseSource("_validViewModels")]
+        [TestCaseSource(nameof(ValidViewModels))]
         public void Successfully_validate_string_property(ModelBindingViewModel vm)
         {
             const string valueProperty = "Id";

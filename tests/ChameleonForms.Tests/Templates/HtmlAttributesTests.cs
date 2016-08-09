@@ -18,6 +18,7 @@ namespace ChameleonForms.Tests.Templates
         [Test]
         public void Construct_via_lambdas()
         {
+            // ReSharper disable once InconsistentNaming
             var h = new HtmlAttributes(style => "width: 100%;", cellpadding => 0, @class => "class1 class2", src => "http://url/", data_somedata => "\"rubbi&h\"");
 
             Assert.That(h.ToHtmlString(), Is.EqualTo(ExpectedHtml));
@@ -148,6 +149,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var h = new HtmlAttributes(href => "http://url/");
 
+            // ReSharper disable once InconsistentNaming
             h.Attr(data_value => "val");
 
             Assert.That(h.ToHtmlString(), Is.EqualTo(" data-value=\"val\" href=\"http://url/\""));
@@ -176,9 +178,12 @@ namespace ChameleonForms.Tests.Templates
         [Test]
         public void Replace_and_add_attributes_using_lambdas()
         {
+            // ReSharper disable once InconsistentNaming
             var h = new HtmlAttributes(data_existing => "old");
 
+            // ReSharper disable InconsistentNaming
             h.Attrs(data_existing => "new", data_new => "newnew");
+            // ReSharper enable InconsistentNaming
 
             Assert.That(h.ToHtmlString(), Is.EqualTo(" data-existing=\"new\" data-new=\"newnew\""));
         }
@@ -222,13 +227,14 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
-        public void Ensure_merged_attributes_are_case_sensitive([Values(1,2,3)] int setMethod)
+        public void Ensure_merged_attributes_are_case_sensitive([Values(1,2,3,4)] int setMethod)
         {
             var h = new HtmlAttributes(name => "Old");
 
             switch (setMethod)
             {
                 case 1:
+                    // ReSharper disable once InconsistentNaming
                     h.Attr(Name => "honey-badger");
                     break;
                 case 2:
@@ -237,19 +243,23 @@ namespace ChameleonForms.Tests.Templates
                 case 3:
                     h.Attrs(new {Name = "honey-badger"});
                     break;
+                case 4:
+                    h.Attr(name => "honey-badger");
+                    break;
             }
 
             Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"honey-badger\""));
         }
 
         [Test]
-        public void Ensure_new_attributes_are_case_sensitive([Values(1, 2, 3)] int constructorOption)
+        public void Ensure_new_attributes_are_case_sensitive([Values(1, 2, 3, 4)] int constructorOption)
         {
             HtmlAttributes h = null;
 
             switch (constructorOption)
             {
                 case 1:
+                    // ReSharper disable once InconsistentNaming
                     h = new HtmlAttributes(Name => "honey-badger");
                     break;
                 case 2:
@@ -258,8 +268,12 @@ namespace ChameleonForms.Tests.Templates
                 case 3:
                     h = new HtmlAttributes(new { Name = "honey-badger" });
                     break;
+                case 4:
+                    h = new HtmlAttributes(name => "honey-badger");
+                    break;
             }
 
+            // ReSharper disable once PossibleNullReferenceException
             Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"honey-badger\""));
         }
     }
