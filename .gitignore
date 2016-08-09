@@ -12,3 +12,4 @@ packages
 *.received.*
 .vs
 project.lock.json
+TestResult.xml

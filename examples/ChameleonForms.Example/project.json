@@ -1,0 +1,41 @@
+{
+  "version": "0.0.0-*",
+  "dependencies": {
+    "bootstrap": "3.3.6",
+    "Humanizer.Core": "2.1.0",
+    "jQuery": "2.2.4",
+    "jQuery.Validation": "1.15.0",
+    "Microsoft.AspNet.Mvc": "5.2.3",
+    "Microsoft.AspNet.Razor": "3.2.3",
+    "Microsoft.AspNet.WebPages": "3.2.3",
+    "Microsoft.jQuery.Unobtrusive.Validation": "3.2.3",
+    "Microsoft.Web.Infrastructure": "1.0.0.0",
+    "Newtonsoft.Json": "9.0.1",
+    "ChameleonForms.Mvc5": "*"
+  },
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "Microsoft.CSharp": "*",
+        "System.Data": "*",
+        "System.Data.DataSetExtensions": "*",
+        "System.Drawing": "*",
+        "System.Net.Http": "*",
+        "System.Net.Http.WebRequest": "*",
+        "System.Web.DynamicData": "*",
+        "System.Web.Entity": "*",
+        "System.Web.ApplicationServices": "*",
+        "System.ComponentModel.DataAnnotations": "*",
+        "System.Web": "*",
+        "System.Web.Abstractions": "*",
+        "System.Web.Extensions": "*",
+        "System.Web.Routing": "*",
+        "System.Xml": "*",
+        "System.Configuration": "*",
+        "System.Web.Services": "*",
+        "System.EnterpriseServices": "*",
+        "System.Xml.Linq": "*"
+      }
+    }
+  }
+}

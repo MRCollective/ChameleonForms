@@ -31,7 +31,7 @@
     </language>
     <dependencies>
       <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
-      <dependency id="Humanizer" version="1.37.7" />
+      <dependency id="Humanizer.Core" version="2.1.0" />
       <dependency id="WebActivatorEx" version="2.0.0" />
     </dependencies>
   </metadata>

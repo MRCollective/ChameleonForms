@@ -1,0 +1,43 @@
+{
+  "version": "0.0.0-*",
+  "dependencies": {
+    "ApprovalTests": "3.0.11",
+    "ApprovalUtilities": "3.0.11",
+    "Autofac": "3.5.2",
+    "AutofacContrib.NSubstitute": "3.3.6",
+    "Humanizer.Core": "2.1.0",
+    "Microsoft.AspNet.Mvc": "5.2.3",
+    "Microsoft.AspNet.Razor": "3.2.3",
+    "Microsoft.AspNet.WebPages": "3.2.3",
+    "Microsoft.Web.Infrastructure": "1.0.0.0",
+    "NBuilder": "3.0.1.1",
+    "NSubstitute": "1.10.0.0",
+    "nunit": "3.4.1",
+    "dotnet-test-nunit": "3.4.0-beta-2",
+    "ChameleonForms.Example": "*",
+    "ChameleonForms.Mvc5": "*"
+  },
+  "testRunner": "nunit",
+  "buildOptions": {
+    "copyToOutput": {
+      "include": [ "nunit.runner.json" ]
+    }
+  },
+  "frameworks": {
+    "net451": {
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": "*",
+        "System.Core": "*",
+        "System.Drawing": "*",
+        "System.Net.Http": "*",
+        "System.Net.Http.WebRequest": "*",
+        "System.Web": "*",
+        "System.Xml.Linq": "*",
+        "System.Data.DataSetExtensions": "*",
+        "Microsoft.CSharp": "*",
+        "System.Data": "*",
+        "System.Xml": "*"
+      }
+    }
+  }
+}

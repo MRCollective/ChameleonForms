@@ -1,0 +1,22 @@
+{
+  "version": "0.0.0-*",
+  "dependencies": {
+    "Humanizer.Core": "2.1.0",
+    "Microsoft.AspNet.Mvc": "5.2.3",
+    "Microsoft.AspNet.Razor": "3.2.3",
+    "Microsoft.AspNet.WebPages": "3.2.3",
+    "Microsoft.Web.Infrastructure": "1.0.0.0",
+    "Newtonsoft.Json": "9.0.1",
+    "ChameleonForms": "*"
+  },
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "Microsoft.CSharp": "*",
+        "System.ComponentModel.DataAnnotations": "*",
+        "System.Core": "*",
+        "System.Web": "*"
+      }
+    }
+  }
+}

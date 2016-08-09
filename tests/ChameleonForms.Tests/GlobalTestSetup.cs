@@ -6,7 +6,7 @@ namespace ChameleonForms.Tests
     [SetUpFixture]
     class GlobalTestSetup
     {
-        [SetUp]
+        [OneTimeSetUp]
         public void GlobalSetup()
         {
             FormTemplate.Default = new DefaultFormTemplate();

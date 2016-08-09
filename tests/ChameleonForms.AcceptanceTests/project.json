@@ -1,0 +1,34 @@
+{
+  "version": "0.0.0-*",
+  "dependencies": {
+    "ApprovalTests": "3.0.11",
+    "ApprovalUtilities": "3.0.11",
+    "Castle.Core": "3.3.3",
+    "Microsoft.AspNet.Mvc": "5.2.3",
+    "Microsoft.AspNet.Razor": "3.2.3",
+    "Microsoft.AspNet.WebPages": "3.2.3",
+    "Microsoft.Web.Infrastructure": "1.0.0.0",
+    "NUnit": "2.6.4",
+    "PhantomJS": "2.1.1",
+    "Selenium.Support": "2.53.1",
+    "Selenium.WebDriver": "2.53.1",
+    "TestStack.Seleno": "0.9.61",
+    "ChameleonForms.Example": "*"
+  },
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System.ComponentModel.DataAnnotations": "*",
+        "System.Core": "*",
+        "System.Drawing": "*",
+        "System.Net.Http": "*",
+        "System.Net.Http.WebRequest": "*",
+        "System.Xml.Linq": "*",
+        "System.Data.DataSetExtensions": "*",
+        "Microsoft.CSharp": "*",
+        "System.Data": "*",
+        "System.Xml": "*"
+      }
+    }
+  }
+}

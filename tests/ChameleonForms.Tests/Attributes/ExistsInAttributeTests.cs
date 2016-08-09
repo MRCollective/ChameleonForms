@@ -123,12 +123,12 @@ namespace ChameleonForms.Tests.Attributes
             ));
         }
 
-        private readonly IList<int?[]> _nullableListValues = new List<int?[]>()
+        private static readonly IList<int?[]> NullableListValues = new List<int?[]>()
         {
             new int?[]{null, 0, 0},
             new int?[]{0, null, 0}
         };
-        [TestCaseSource("_nullableListValues")]
+        [TestCaseSource(nameof(NullableListValues))]
         public void Allow_validation_against_lists_containing_null_values(int?[] submittedValues)
         {
             const string valueProperty = "Id";

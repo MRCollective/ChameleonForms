@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using ChameleonForms.Component;
@@ -161,6 +162,11 @@ namespace ChameleonForms
         public IHtml Label(string id, string text, HtmlAttributes htmlAttributes)
         {
             return HtmlCreator.BuildLabel(id, text.ToIHtml(), htmlAttributes);
+        }
+
+        public bool IsFile(Type modelType)
+        {
+            return typeof(HttpPostedFileBase).IsAssignableFrom(modelType);
         }
     }
 }
