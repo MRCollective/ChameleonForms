@@ -23,7 +23,7 @@ namespace ChameleonForms
         /// <param name="partialModelExpression">The expression that identifies the partial model</param>
         /// <param name="partialViewHelper">The HTML Helper from the partial view</param>
         /// <returns>The PartialViewForm wrapping the original form</returns>
-        IForm<TPartialModel> CreatePartialForm<TPartialModel>(object partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper);
+        IForm<TPartialModel> CreatePartialForm<TPartialModel>(LambdaExpression partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper);
     }
 
     /// <summary>
@@ -102,7 +102,7 @@ namespace ChameleonForms
         }
 
         /// <inheritdoc />
-        public IForm<TPartialModel> CreatePartialForm<TPartialModel>(object partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper)
+        public IForm<TPartialModel> CreatePartialForm<TPartialModel>(LambdaExpression partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper)
         {
             var partialModelAsExpression = partialModelExpression as Expression<Func<TModel, TPartialModel>>;
             if (partialModelAsExpression == null
