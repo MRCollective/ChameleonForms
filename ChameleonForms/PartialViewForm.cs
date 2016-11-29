@@ -36,7 +36,7 @@ namespace ChameleonForms
         {
             using (new SwapHtmlHelperWriter<TModel>(_parentForm.HtmlHelper, _partialViewHtmlHelper.ViewContext.Writer))
             {
-                return new DefaultFieldGenerator<TModel, T>(_parentForm.HtmlHelper, _partialModelProperty.Combine(property), Template);
+                return _parentForm.GetFieldGenerator(_partialModelProperty.Combine(property));
             }
         }
 
