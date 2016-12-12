@@ -24,7 +24,7 @@ namespace ChameleonForms.AcceptanceTests.Helpers
             _expectedViewModel = expectedViewModel;
         }
 
-        public override bool Matches(object actualViewModel)
+        public override ConstraintResult ApplyTo<TActual>(TActual actualViewModel)
         {
             foreach (var property in actualViewModel.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
             {
@@ -45,12 +45,7 @@ namespace ChameleonForms.AcceptanceTests.Helpers
                     Assert.That(actualValue, Is.EqualTo(expectedValue), property.Name);
             }
 
-            return true;
-        }
-
-        public override void WriteDescriptionTo(MessageWriter writer)
-        {
-            throw new System.NotImplementedException();
+            return new ConstraintResult(this, actualViewModel, true);
         }
     }
 }

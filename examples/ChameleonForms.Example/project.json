@@ -11,10 +11,13 @@
     "Microsoft.jQuery.Unobtrusive.Validation": "3.2.3",
     "Microsoft.Web.Infrastructure": "1.0.0.0",
     "Newtonsoft.Json": "9.0.1",
-    "ChameleonForms.Mvc5": "*"
+    "ChameleonForms.Mvc5": "*",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
+    "Microsoft.AspNetCore.Hosting": "1.0.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0"
   },
   "frameworks": {
-    "net45": {
+    "net451": {
       "frameworkAssemblies": {
         "Microsoft.CSharp": "*",
         "System.Data": "*",
@@ -37,5 +40,8 @@
         "System.Xml.Linq": "*"
       }
     }
+  },
+  "buildOptions": {
+    "emitEntryPoint": true
   }
 }

@@ -18,11 +18,6 @@
     "ChameleonForms.Mvc5": "*"
   },
   "testRunner": "nunit",
-  "buildOptions": {
-    "copyToOutput": {
-      "include": [ "nunit.runner.json" ]
-    }
-  },
   "frameworks": {
     "net451": {
       "frameworkAssemblies": {
