@@ -236,7 +236,26 @@ namespace ChameleonForms.Example.Controllers
         public ChildViewModel Child { get; set; }
     }
 
-    public class ViewModelExample
+    public class ViewModelExampleBase
+    {
+        public ViewModelExampleBase()
+        {
+            BaseChild = new ViewModelExampleBaseChild();
+        }
+
+        public string BaseField { get; set; }
+        public string BaseField2 { get; set; }
+
+        public ViewModelExampleBaseChild BaseChild { get; set; }
+    }
+
+    public class ViewModelExampleBaseChild
+    {
+        public string BaseChildField { get; set; }
+        public string BaseChildField2 { get; set; }
+    }
+
+    public class ViewModelExample : ViewModelExampleBase
     {
         public ViewModelExample()
         {
