@@ -1,5 +1,7 @@
 ﻿@model ChildViewModel
 
+<p>This should show the ID of the child field including the parent path: @Html.IdFor(m => m.ChildField)</p>
+
 @if (this.IsInFormSection())
 {
     @:@this.FormSection().FieldFor(m => m.ChildField).Append("From partial against child model")

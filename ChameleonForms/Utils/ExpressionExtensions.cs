@@ -15,6 +15,14 @@ namespace ChameleonForms.Utils
             var body = visitor.Visit(nav.Body);
             return Expression.Lambda<Func<T, TProperty>>(body, param);
         }
+
+        public static Expression<Func<TInput, TOutput>> AddCast<TInput, TOutput>(this Expression<Func<TInput, TInput>> expression)
+        {
+            Expression converted = Expression.Convert(expression.Body, typeof(TOutput));
+
+            return Expression.Lambda<Func<TInput, TOutput>>
+                 (converted, expression.Parameters);
+        }
     }
 
     class ReplacementVisitor : ExpressionVisitor

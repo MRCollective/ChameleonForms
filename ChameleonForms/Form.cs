@@ -6,6 +6,7 @@ using System.Web.Mvc.Html;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
+using ChameleonForms.Utils;
 using JetBrains.Annotations;
 
 namespace ChameleonForms
@@ -104,6 +105,13 @@ namespace ChameleonForms
         public IForm<TPartialModel> CreatePartialForm<TPartialModel>(object partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper)
         {
             var partialModelAsExpression = partialModelExpression as Expression<Func<TModel, TPartialModel>>;
+            if (partialModelAsExpression == null
+                && typeof(TPartialModel).IsAssignableFrom(typeof(TModel))
+                && partialModelExpression is Expression<Func<TModel, TModel>>)
+            {
+                var partialModelAsUnboxedExpression = partialModelExpression as Expression<Func<TModel, TModel>>;
+                partialModelAsExpression = partialModelAsUnboxedExpression.AddCast<TModel, TPartialModel>();
+            }
             return new PartialViewForm<TModel, TPartialModel>(this, partialViewHelper, partialModelAsExpression);
         }
     }

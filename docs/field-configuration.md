@@ -548,3 +548,17 @@ This works because:
 * All the methods on `IFieldConfiguration` return the same instance of the `IFieldConfiguration` object so the `@` operator will apply to that Field Configuration regardless of what methods the user calls
 * The `SetField(IHtmlString)` method or the `SetField(Func<IHtmlString>)` method will be called before returning the `IFieldConfiguration` to indicate what HTML should be output by the Field Configuration when the `.ToHtmlString()` method is called
 * The `SetField` method approach allows for lazy evaluation of the HTML to output, meaning the HTML generation can occur after all of the `IFieldConfiguration` methods have been called (allowing the Field Configuration to be mutated before eventually being used)
+
+Passing HTML to field configuration methods
+-------------------------------------------
+
+For all the field configuration methods that take an `IHtmlString` you have a few options available to you:
+
+* Pass the HTML as a string e.g. `.Label(new HtmlString("<strong>My label</strong>"))`
+* Pass the HTML by calling any method that returns an `IHtmlString` including a razor helper e.g.: `.Label(GetLabelHtml())`
+```
+    @helper GetLabelHtml() {
+		<strong>My label</strong>
+	}
+```
+* Passing the HTML inline using the `Func<object, IHtml>` extension method overloads e.g. `.Label(@<strong>My label</strong>)`

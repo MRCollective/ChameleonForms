@@ -1,7 +1,5 @@
 ﻿using System;
-using System.CodeDom;
 using System.IO;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
@@ -21,10 +19,12 @@ namespace ChameleonForms.AcceptanceTests
         public void Should_render_correctly_when_used_via_form_or_section_and_when_used_for_top_level_property_or_sub_property()
         {
             var renderedSource = GetRenederedSource("/ExampleForms/Partials");
-            HtmlApprovals.VerifyHtml(string.Format("Partials.cshtml\r\n\r\n{0}\r\n=====\r\n\r\n_ParentPartial.cshtml\r\n\r\n{1}\r\n=====\r\n\r\n_ChildPartial.cshtml\r\n\r\n{2}\r\n=====\r\n\r\nRendered Source\r\n\r\n{3}",
+            HtmlApprovals.VerifyHtml(string.Format("Partials.cshtml\r\n\r\n{0}\r\n=====\r\n\r\n_ParentPartial.cshtml\r\n\r\n{1}\r\n=====\r\n\r\n_ChildPartial.cshtml\r\n\r\n{2}\r\n=====\r\n\r\n_BaseParentPartial.cshtml\r\n\r\n{3}\r\n=====\r\n\r\n_BaseChildPartial.cshtml\r\n\r\n{4}\r\n=====\r\n\r\nRendered Source\r\n\r\n{5}",
                 GetViewContents("Partials"),
                 GetViewContents("_ParentPartial"),
                 GetViewContents("_ChildPartial"),
+                GetViewContents("_BaseParentPartial"),
+                GetViewContents("_BaseChildPartial"),
                 renderedSource));
         }
 

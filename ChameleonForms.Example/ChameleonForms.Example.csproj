@@ -23,6 +23,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <TargetFrameworkProfile />
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -208,6 +209,8 @@
     <Content Include="Views\ExampleForms\Partials.cshtml" />
     <Content Include="Views\ExampleForms\_ChildPartial.cshtml" />
     <Content Include="Views\ExampleForms\ChangingContext.cshtml" />
+    <Content Include="Views\ExampleForms\_BaseParentPartial.cshtml" />
+    <Content Include="Views\ExampleForms\_BaseChildPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
