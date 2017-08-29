@@ -25,6 +25,12 @@ namespace ChameleonForms.Example.Controllers
         [HttpPost]
         public ActionResult EditorTemplates(SignupViewModel vm)
         {
+         //Here you can add your validation on server side...
+            if (vm.LastName != null && vm.LastName.Length < 3)
+            {
+                ModelState.AddModelError("", "Last name is too short.");
+
+            }
             return View(vm);
         }
 
