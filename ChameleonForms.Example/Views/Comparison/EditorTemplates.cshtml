@@ -9,6 +9,8 @@
 
 @using (Html.BeginForm("EditorTemplates", "Comparison", FormMethod.Post, new {id = "signup-form"}))
 {
+     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+         
     <div class="information_message">
         <h3>Signup for an account</h3>
         <p>Please fill in your information below to signup for an account.</p>
