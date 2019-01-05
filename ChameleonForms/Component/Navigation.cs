@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Component
 {
@@ -22,13 +23,13 @@ namespace ChameleonForms.Component
         }
 
         /// <inheritdoc />
-        public override IHtmlString Begin()
+        public override IHtmlContent Begin()
         {
             return Form.Template.BeginNavigation();
         }
 
         /// <inheritdoc />
-        public override IHtmlString End()
+        public override IHtmlContent End()
         {
             return Form.Template.EndNavigation();
         }
@@ -48,7 +49,7 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="content">The content to display in the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Submit(IHtmlString content)
+        public ButtonHtmlAttributes Submit(IHtmlContent content)
         {
             if (content == null)
                 throw new ArgumentNullException("content", "Content must be specified");
@@ -63,7 +64,7 @@ namespace ChameleonForms.Component
         /// <param name="value">The value to submit with the form</param>
         /// <param name="content">The text the user sees (leave as null if you want the user to see the value instead)</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Submit(string name, string value, IHtmlString content = null)
+        public ButtonHtmlAttributes Submit(string name, string value, IHtmlContent content = null)
         {
             if (value == null)
                 throw new ArgumentNullException("value", "Expected value to be specified");
@@ -86,7 +87,7 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="content">The content to display in the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Button(IHtmlString content)
+        public ButtonHtmlAttributes Button(IHtmlContent content)
         {
             if (content == null)
                 throw new ArgumentNullException("content", "Content must be specified");
@@ -109,7 +110,7 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="content">The content to display for the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Reset(IHtmlString content)
+        public ButtonHtmlAttributes Reset(IHtmlContent content)
         {
             if (content == null)
                 throw new ArgumentNullException("content", "Content must be specified");
@@ -151,6 +152,6 @@ namespace ChameleonForms.Component
         /// Construct a ButtonHtmlAttributes class.
         /// </summary>
         /// <param name="htmlGenerator">The generator to use to generate the HTML when .ToHtmlString() is called</param>
-        public ButtonHtmlAttributes(Func<HtmlAttributes, IHtmlString> htmlGenerator) : base(htmlGenerator) {}
+        public ButtonHtmlAttributes(Func<HtmlAttributes, IHtmlContent> htmlGenerator) : base(htmlGenerator) {}
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Html;
+using System;
+using System.IO;
+using System.Text.Encodings.Web;
 using System.Web;
 
 namespace ChameleonForms
@@ -8,13 +11,13 @@ namespace ChameleonForms
     /// </summary>
     public class LazyHtmlAttributes : HtmlAttributes
     {
-        private readonly Func<HtmlAttributes, IHtmlString> _htmlGenerator;
+        private readonly Func<HtmlAttributes, IHtmlContent> _htmlGenerator;
 
         /// <summary>
         /// Construct a LazyHtmlAttributes class.
         /// </summary>
         /// <param name="htmlGenerator">The generator to use to generate the HTML when .ToHtmlString() is called</param>
-        public LazyHtmlAttributes(Func<HtmlAttributes, IHtmlString> htmlGenerator)
+        public LazyHtmlAttributes(Func<HtmlAttributes, IHtmlContent> htmlGenerator)
         {
             if (htmlGenerator == null)
                 throw new ArgumentNullException("htmlGenerator");
@@ -25,10 +28,9 @@ namespace ChameleonForms
         /// <summary>
         /// Invokes the given HTML generator to return HTML.
         /// </summary>
-        /// <returns>The generated HTML</returns>
-        public override string ToHtmlString()
+        public override void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
-            return _htmlGenerator(this).ToHtmlString();
+            _htmlGenerator(this).WriteTo(writer, encoder);
         }
     }
 }

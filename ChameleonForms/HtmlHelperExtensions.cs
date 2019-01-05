@@ -1,7 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq.Expressions;
-using System.Web.Mvc;
-using System.Web.Routing;
+using System.Text.Encodings.Web;
 
 namespace ChameleonForms
 {
@@ -20,7 +25,7 @@ namespace ChameleonForms
         /// <param name="propertyFor">The sub-property to use</param>
         /// <param name="bindFieldsToParent">Whether to set field names to bind to the parent model type (true) or the sub-property type (false)</param>
         /// <returns>A HTML helper against the sub-property</returns>
-        public static DisposableHtmlHelper<TChildModel> For<TParentModel, TChildModel>(this HtmlHelper<TParentModel> helper,
+        public static DisposableHtmlHelper<TChildModel> For<TParentModel, TChildModel>(this IHtmlHelper<TParentModel> helper,
             Expression<Func<TParentModel, TChildModel>> propertyFor, bool bindFieldsToParent)
         {
             return helper.For(helper.ViewData.Model != null ? propertyFor.Compile().Invoke(helper.ViewData.Model) : default(TChildModel),
@@ -35,44 +40,38 @@ namespace ChameleonForms
         /// <param name="model">An instance of the model type to use as the model</param>
         /// <param name="htmlFieldPrefix">A prefix value to use for field names</param>
         /// <returns>The HTML helper against the other model type</returns>
-        public static DisposableHtmlHelper<TModel> For<TModel>(this HtmlHelper htmlHelper, TModel model = default(TModel), string htmlFieldPrefix = null)
+        public static DisposableHtmlHelper<TModel> For<TModel>(this IHtmlHelper htmlHelper
+            , TModel model = default(TModel)
+            , string htmlFieldPrefix = null
+            )
         {
-            var viewDataContainer = CreateViewDataContainer(htmlHelper.ViewData, model);
-
-            var templateInfo = viewDataContainer.ViewData.TemplateInfo;
-
-            if (!String.IsNullOrEmpty(htmlFieldPrefix))
-                templateInfo.HtmlFieldPrefix = templateInfo.GetFullHtmlFieldName(htmlFieldPrefix);
-
             var viewContext = htmlHelper.ViewContext;
-            var newViewContext = new ViewContext(viewContext.Controller.ControllerContext, viewContext.View, viewDataContainer.ViewData, viewContext.TempData, viewContext.Writer);
+            var newViewData = new ViewDataDictionary<TModel>(viewContext.ViewData, model);
 
-            return new DisposableHtmlHelper<TModel>(newViewContext, viewDataContainer, htmlHelper.RouteCollection);
-        }
-
-        static IViewDataContainer CreateViewDataContainer(ViewDataDictionary viewData, object model)
-        {
-
-            var newViewData = new ViewDataDictionary(viewData)
+            if (!string.IsNullOrEmpty(htmlFieldPrefix))
             {
-                Model = model
-            };
+                newViewData.TemplateInfo.HtmlFieldPrefix = htmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldPrefix);
+            }
 
-            newViewData.TemplateInfo = new TemplateInfo
-            {
-                HtmlFieldPrefix = newViewData.TemplateInfo.HtmlFieldPrefix
-            };
+            var newViewContext = new ViewContext(viewContext
+                , viewContext.View
+                , newViewData
+                , viewContext.Writer
+                );
 
-            return new ViewDataContainer
-            {
-                ViewData = newViewData
-            };
-        }
-
-        class ViewDataContainer : IViewDataContainer
-        {
-
-            public ViewDataDictionary ViewData { get; set; }
+            var htmlGenerator = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<IHtmlGenerator>();
+            var viewEngine = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ICompositeViewEngine>();
+            var bufferScope = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<IViewBufferScope>();
+            var ret = new DisposableHtmlHelper<TModel>(htmlGenerator
+                , viewEngine
+                , htmlHelper.MetadataProvider
+                , bufferScope
+                , HtmlEncoder.Default
+                , htmlHelper.UrlEncoder
+                , new ExpressionTextCache()
+                );
+            ret.Contextualize(newViewContext);
+            return ret;
         }
     }
 
@@ -82,10 +81,25 @@ namespace ChameleonForms
     /// <typeparam name="TModel">The model type of the HTML helper</typeparam>
     public class DisposableHtmlHelper<TModel> : HtmlHelper<TModel>, IDisposable
     {
-        /// <inheritdoc />
-        public DisposableHtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer) : base(viewContext, viewDataContainer) {}
-        /// <inheritdoc />
-        public DisposableHtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer, RouteCollection routeCollection) : base(viewContext, viewDataContainer, routeCollection) {}
+        public DisposableHtmlHelper(IHtmlGenerator htmlGenerator
+            , ICompositeViewEngine viewEngine
+            , IModelMetadataProvider metadataProvider
+            , IViewBufferScope bufferScope
+            , HtmlEncoder htmlEncoder
+            , UrlEncoder urlEncoder
+            , ExpressionTextCache expressionTextCache
+            ) 
+            : base(htmlGenerator
+                  , viewEngine
+                  , metadataProvider
+                  , bufferScope
+                  , htmlEncoder
+                  , urlEncoder
+                  , expressionTextCache
+                  )
+        {
+        }
+
         /// <inheritdoc />
         public void Dispose() {}
     }

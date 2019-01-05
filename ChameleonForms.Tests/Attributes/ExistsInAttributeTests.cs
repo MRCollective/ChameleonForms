@@ -123,11 +123,12 @@ namespace ChameleonForms.Tests.Attributes
             ));
         }
 
-        private readonly IList<int?[]> _nullableListValues = new List<int?[]>()
+        private static readonly IList<int?[]> _nullableListValues = new List<int?[]>()
         {
             new int?[]{null, 0, 0},
             new int?[]{0, null, 0}
         };
+
         [TestCaseSource("_nullableListValues")]
         public void Allow_validation_against_lists_containing_null_values(int?[] submittedValues)
         {
@@ -229,12 +230,13 @@ namespace ChameleonForms.Tests.Attributes
             Assert.That(result, Is.EqualTo(ValidationResult.Success));
         }
 
-        private readonly ModelBindingViewModel[] _validViewModels =
+        private static readonly ModelBindingViewModel[] _validViewModels =
         {
             new ModelBindingViewModel{ RequiredString = "" },
             new ModelBindingViewModel{ RequiredString = null },
             new ModelBindingViewModel{ RequiredString = "1" }
         };
+
         [TestCaseSource("_validViewModels")]
         public void Successfully_validate_string_property(ModelBindingViewModel vm)
         {

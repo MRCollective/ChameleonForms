@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web;
-using System.Web.Mvc;
+using Autofac;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
 using ChameleonForms.Tests.Helpers;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -22,13 +28,13 @@ namespace ChameleonForms.Tests.Component
     {
         #region Setup
         private const string FieldId = "FieldId";
-        private readonly IHtmlString _beginHtml = new HtmlString("b");
-        private readonly IHtmlString _endHtml = new HtmlString("e");
-        private readonly IHtmlString _html = new HtmlString("h");
-        private readonly IHtmlString _label = new HtmlString("l");
-        private readonly IHtmlString _field = new HtmlString("f");
-        private readonly IHtmlString _validation = new HtmlString("v");
-        private readonly ModelMetadata _metadata = new ModelMetadata(new EmptyModelMetadataProvider(), null, null, typeof(object), null);
+        private readonly IHtmlContent _beginHtml = new HtmlString("b");
+        private readonly IHtmlContent _endHtml = new HtmlString("e");
+        private readonly IHtmlContent _html = new HtmlString("h");
+        private readonly IHtmlContent _label = new HtmlString("l");
+        private readonly IHtmlContent _field = new HtmlString("f");
+        private readonly IHtmlContent _validation = new HtmlString("v");
+        private readonly ModelMetadata _metadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(object));
         private IForm<TestFieldViewModel> _f;
         private IFieldGenerator _g;
         private IFieldConfiguration _fc;
@@ -51,7 +57,14 @@ namespace ChameleonForms.Tests.Component
             _g.GetFieldId().Returns(FieldId);
 
             var autoSubstitute = AutoSubstituteContainer.Create();
+
+            var viewDataDictionary = new ViewDataDictionary<TestFieldViewModel>(autoSubstitute.Resolve<IModelMetadataProvider>(), new ModelStateDictionary());
+
             var helper = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            var viewContext = autoSubstitute.Resolve<ViewContext>(TypedParameter.From<ViewDataDictionary>(viewDataDictionary), TypedParameter.From(autoSubstitute.Resolve<ActionContext>()));
+            viewContext.ClientValidationEnabled = true;
+            helper.Contextualize(viewContext);
+
             _f.HtmlHelper.Returns(helper);
             _f.GetFieldGenerator(Arg.Any<Expression<Func<TestFieldViewModel, string>>>()).Returns(_g);
         }
@@ -69,7 +82,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().Field(Arg.Any<IHtmlContent>(), Arg.Any<IHtmlContent>(), Arg.Any<IHtmlContent>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 true
             );
         }
@@ -82,7 +95,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().Field(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().Field(Arg.Any<IHtmlContent>(), Arg.Any<IHtmlContent>(), Arg.Any<IHtmlContent>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 false
             );
         }
@@ -94,7 +107,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().BeginField(Arg.Any<IHtmlContent>(), Arg.Any<IHtmlContent>(), Arg.Any<IHtmlContent>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 true
             );
         }
@@ -107,7 +120,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Begin();
 
-            _f.Template.Received().BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
+            _f.Template.Received().BeginField(Arg.Any<IHtmlContent>(), Arg.Any<IHtmlContent>(), Arg.Any<IHtmlContent>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(),
                 false
             );
         }
@@ -153,7 +166,7 @@ namespace ChameleonForms.Tests.Component
             var f = s.FieldFor(m => m.SomeProperty);
 
             Assert.That(f, Is.Not.Null);
-            _f.DidNotReceive().Write(Arg.Any<IHtmlString>());
+            _f.DidNotReceive().Write(Arg.Any<IHtmlContent>());
         }
 
         [Test]
@@ -165,7 +178,7 @@ namespace ChameleonForms.Tests.Component
             var f = s.FieldFor(m => m.SomeProperty);
 
             Assert.That(f, Is.Not.Null);
-            _f.DidNotReceive().Write(Arg.Any<IHtmlString>());
+            _f.DidNotReceive().Write(Arg.Any<IHtmlContent>());
         }
 
 
@@ -174,7 +187,7 @@ namespace ChameleonForms.Tests.Component
         {
             var h = new HtmlString("");
             var s = new Section<TestFieldViewModel>(_f, new HtmlString(""), false);
-            _f.Template.BeginField(Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<IHtmlString>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(h);
+            _f.Template.BeginField(Arg.Any<IHtmlContent>(), Arg.Any<IHtmlContent>(), Arg.Any<IHtmlContent>(), Arg.Any<ModelMetadata>(), Arg.Any<IReadonlyFieldConfiguration>(), Arg.Any<bool>()).Returns(h);
             _f.ClearReceivedCalls();
 
             var f = s.BeginFieldFor(m => m.SomeProperty);

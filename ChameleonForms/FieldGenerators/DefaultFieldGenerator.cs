@@ -2,11 +2,16 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Html;
+
+
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace ChameleonForms.FieldGenerators
 {
@@ -23,25 +28,25 @@ namespace ChameleonForms.FieldGenerators
         /// <param name="htmlHelper">The HTML helper for the current view</param>
         /// <param name="fieldProperty">Expression to identify the property to generate the field for</param>
         /// <param name="template">The template being used to output the form</param>
-        public DefaultFieldGenerator(HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, T>> fieldProperty, IFormTemplate template)
+        public DefaultFieldGenerator(IHtmlHelper<TModel> htmlHelper, Expression<Func<TModel, T>> fieldProperty, IFormTemplate template)
         {
             HtmlHelper = htmlHelper;
             FieldProperty = fieldProperty;
             Template = template;
-            Metadata = ModelMetadata.FromLambdaExpression(FieldProperty, HtmlHelper.ViewData);
+            Metadata = ExpressionMetadataProvider.FromLambdaExpression(FieldProperty, HtmlHelper.ViewData, HtmlHelper.MetadataProvider).Metadata;
         }
 
         /// <inheritdoc />
         public ModelMetadata Metadata { get; private set; }
         /// <inheritdoc />
-        public HtmlHelper<TModel> HtmlHelper { get; private set; }
+        public IHtmlHelper<TModel> HtmlHelper { get; private set; }
         /// <inheritdoc />
         public Expression<Func<TModel, T>> FieldProperty { get; private set; }
         /// <inheritdoc />
         public IFormTemplate Template { get; private set; }
 
         /// <inheritdoc />
-        public IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public IHtmlContent GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             fieldConfiguration = fieldConfiguration ?? new FieldConfiguration();
 
@@ -78,25 +83,25 @@ namespace ChameleonForms.FieldGenerators
         }
 
         /// <inheritdoc />
-        public IHtmlString GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public IHtmlContent GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return HtmlHelper.ValidationMessageFor(FieldProperty, null, fieldConfiguration.ValidationClasses != null ? new {@class = fieldConfiguration.ValidationClasses} : null);
         }
 
         /// <inheritdoc />
-        public IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration)
+        public IHtmlContent GetFieldHtml(IFieldConfiguration fieldConfiguration)
         {
             return GetFieldHtml(PrepareFieldConfiguration(fieldConfiguration, FieldParent.Form));
         }
 
         /// <inheritdoc />
-        public IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration)
+        public IHtmlContent GetLabelHtml(IFieldConfiguration fieldConfiguration)
         {
             return GetLabelHtml(PrepareFieldConfiguration(fieldConfiguration, FieldParent.Form));
         }
 
         /// <inheritdoc />
-        public IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration)
+        public IHtmlContent GetValidationHtml(IFieldConfiguration fieldConfiguration)
         {
             return GetValidationHtml(PrepareFieldConfiguration(fieldConfiguration, FieldParent.Form));
         }
@@ -120,7 +125,7 @@ namespace ChameleonForms.FieldGenerators
         }
 
         /// <inheritdoc />
-        public IHtmlString GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public IHtmlContent GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             fieldConfiguration = fieldConfiguration ?? new FieldConfiguration();
             if (fieldConfiguration.FieldHtml != null)
@@ -146,7 +151,7 @@ namespace ChameleonForms.FieldGenerators
         /// <inheritdoc />
         public TModel GetModel()
         {
-            return (TModel) HtmlHelper.ViewData.ModelMetadata.Model;
+            return (TModel) HtmlHelper.ViewData.Model;
         }
     }
 }

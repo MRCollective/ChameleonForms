@@ -3,6 +3,7 @@ using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using System.Globalization;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -28,7 +29,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return GetInputHtml(TextInputType.Text, FieldGenerator, fieldConfiguration);
         }

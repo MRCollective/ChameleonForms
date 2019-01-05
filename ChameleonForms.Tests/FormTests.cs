@@ -1,5 +1,5 @@
 ﻿using System.Web;
-using System.Web.Mvc;
+
 using Autofac;
 using AutofacContrib.NSubstitute;
 using ChameleonForms.Enums;
@@ -8,6 +8,11 @@ using ChameleonForms.Templates;
 using ChameleonForms.Templates.Default;
 using ChameleonForms.Templates.TwitterBootstrap3;
 using ChameleonForms.Tests.Helpers;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -59,7 +64,7 @@ namespace ChameleonForms.Tests
             var f2 = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
 
             Assert.That(f2, Is.Not.Null);
-            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(Action, Method, _htmlAttributes, Enctype).ToHtmlString()));
+            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlContent>(h => h.ToHtmlString() == t.BeginForm(Action, Method, _htmlAttributes, Enctype).ToHtmlString()));
         }
 
         [Test]
@@ -131,8 +136,8 @@ namespace ChameleonForms.Tests
         private HtmlHelper<TestFieldViewModel> _h;
         private IFormTemplate _t;
 
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
+        private readonly IHtmlContent _beginHtml = new HtmlString("");
+        private readonly IHtmlContent _endHtml = new HtmlString("");
 
         private const string Action = "/";
         private const FormMethod Method = FormMethod.Post;
@@ -143,7 +148,14 @@ namespace ChameleonForms.Tests
         public void Setup()
         {
             _autoSubstitute = AutoSubstituteContainer.Create();
-            _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<TestFieldViewModel>>();
+            var viewDataDictionary = new ViewDataDictionary<TestFieldViewModel>(_autoSubstitute.Resolve<IModelMetadataProvider>(), new ModelStateDictionary());
+
+            _h = _autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            _autoSubstitute.Provide<IHtmlHelper<TestFieldViewModel>>(_h);
+            var viewContext = _autoSubstitute.Resolve<ViewContext>(TypedParameter.From<ViewDataDictionary>(viewDataDictionary), TypedParameter.From(_autoSubstitute.Resolve<ActionContext>()));
+            viewContext.ClientValidationEnabled = true;
+            _h.Contextualize(viewContext);
+
             _t = _autoSubstitute.Resolve<IFormTemplate>();
             _t.BeginForm(Action, Method, _htmlAttributes, Enctype).Returns(_beginHtml);
             _t.EndForm().Returns(_endHtml);

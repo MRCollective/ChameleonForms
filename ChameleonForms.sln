@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Example", "ChameleonForms.Example\ChameleonForms.Example.csproj", "{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{07599B0A-359D-45A6-90A0-D5D2356C7DFD}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -12,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{07599B
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms", "ChameleonForms\ChameleonForms.csproj", "{854754FE-F40A-47EB-B32D-646E8F35C65F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms", "ChameleonForms\ChameleonForms.csproj", "{854754FE-F40A-47EB-B32D-646E8F35C65F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Tests", "ChameleonForms.Tests\ChameleonForms.Tests.csproj", "{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Tests", "ChameleonForms.Tests\ChameleonForms.Tests.csproj", "{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{950DEBD6-FCA3-47B8-9E1F-0005E79BD664}"
 	ProjectSection(SolutionItems) = preProject
@@ -83,6 +81,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-C
 		docs\why.md = docs\why.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Generated", "ChameleonForms.Generated\ChameleonForms.Generated.csproj", "{4BF5B0F5-22FE-41A5-BCE9-D9BDD1AF03A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Example", "ChameleonForms.Example\ChameleonForms.Example.csproj", "{10EC89A6-AFB9-4E74-B22A-5D8C42183668}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeAnalysis|Any CPU = CodeAnalysis|Any CPU
@@ -90,12 +92,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{854754FE-F40A-47EB-B32D-646E8F35C65F}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
 		{854754FE-F40A-47EB-B32D-646E8F35C65F}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
 		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -114,8 +110,20 @@ Global
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BF5B0F5-22FE-41A5-BCE9-D9BDD1AF03A4}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
+		{4BF5B0F5-22FE-41A5-BCE9-D9BDD1AF03A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BF5B0F5-22FE-41A5-BCE9-D9BDD1AF03A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E5A6E79-7EDF-4105-8679-B892FD11799D}
 	EndGlobalSection
 EndGlobal

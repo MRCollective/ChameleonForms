@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using ChameleonForms.Enums;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Component.Config
 {
@@ -32,12 +33,12 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// Gets any text that has been set for an inline label.
         /// </summary>
-        IHtmlString InlineLabelText { get; }
+        IHtmlContent InlineLabelText { get; }
 
         /// <summary>
         /// Gets any text that has been set for the label.
         /// </summary>
-        IHtmlString LabelText { get; }
+        IHtmlContent LabelText { get; }
 
         /// <summary>
         /// Returns the display type for the field.
@@ -62,22 +63,22 @@ namespace ChameleonForms.Component.Config
         /// <summary>
         /// Get the hint to display with the field.
         /// </summary>
-        IHtmlString Hint { get; }
+        IHtmlContent Hint { get; }
 
         /// <summary>
         /// A list of HTML to be prepended to the form field in ltr order.
         /// </summary>
-        IEnumerable<IHtmlString> PrependedHtml { get; }
+        IEnumerable<IHtmlContent> PrependedHtml { get; }
 
         /// <summary>
         /// A list of HTML to be appended to the form field in ltr order.
         /// </summary>
-        IEnumerable<IHtmlString> AppendedHtml { get; }
+        IEnumerable<IHtmlContent> AppendedHtml { get; }
 
         /// <summary>
         /// The HTML to be used as the field html.
         /// </summary>
-        IHtmlString FieldHtml { get; }
+        IHtmlContent FieldHtml { get; }
 
         /// <summary>
         /// The format string to use for the field.

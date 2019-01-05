@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
@@ -70,7 +71,7 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         [Test]
         public void Use_correct_html_for_optional_boolean_list_and_no_value()
         {
-            var g = Arrange(m => m.OptionalBooleanField);
+            var g = Arrange(m => m.OptionalBooleanField, x => x.OptionalBooleanField = null);
 
             var result = g.GetFieldHtml(new FieldConfiguration().AsRadioList());
 

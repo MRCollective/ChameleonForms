@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web;
-using System.Web.Mvc;
+
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ChameleonForms.FieldGenerators
 {
@@ -16,7 +20,7 @@ namespace ChameleonForms.FieldGenerators
         /// <summary>
         /// A HTML helper for the model.
         /// </summary>
-        HtmlHelper<TModel> HtmlHelper { get; }
+        IHtmlHelper<TModel> HtmlHelper { get; }
 
         /// <summary>
         /// The expression that identifies the property in the model being output.
@@ -69,37 +73,37 @@ namespace ChameleonForms.FieldGenerators
         /// Creates the HTML for the field control.
         /// </summary>
         /// <returns>The HTML for the field control</returns>
-        IHtmlString GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
+        IHtmlContent GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field label.
         /// </summary>
         /// <returns>The HTML for the field label</returns>
-        IHtmlString GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration);
+        IHtmlContent GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field's validation messages
         /// </summary>
         /// <returns>The HTML for the field's validation messages</returns>
-        IHtmlString GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration);
+        IHtmlContent GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field control after preparing the given field configuration.
         /// </summary>
         /// <returns>The HTML for the field control</returns>
-        IHtmlString GetFieldHtml(IFieldConfiguration fieldConfiguration);
+        IHtmlContent GetFieldHtml(IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field label after preparing the given field configuration.
         /// </summary>
         /// <returns>The HTML for the field label</returns>
-        IHtmlString GetLabelHtml(IFieldConfiguration fieldConfiguration);
+        IHtmlContent GetLabelHtml(IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Creates the HTML for the field's validation messages after preparing the given field configuration.
         /// </summary>
         /// <returns>The HTML for the field's validation messages</returns>
-        IHtmlString GetValidationHtml(IFieldConfiguration fieldConfiguration);
+        IHtmlContent GetValidationHtml(IFieldConfiguration fieldConfiguration);
 
         /// <summary>
         /// Returns the id of the field being generated.

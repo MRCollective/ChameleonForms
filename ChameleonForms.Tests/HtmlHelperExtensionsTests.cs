@@ -1,6 +1,11 @@
-﻿using System.Web.Mvc;
+﻿
+using Autofac;
 using AutofacContrib.NSubstitute;
 using ChameleonForms.Tests.Helpers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests
@@ -18,16 +23,10 @@ namespace ChameleonForms.Tests
         public void Create_html_helper_against_same_request_context_with_different_type()
         {
             var newHtmlHelper = _h.For<AnotherViewModel>();
-            Assert.That(newHtmlHelper.ViewContext.RequestContext, Is.SameAs(_h.ViewContext.RequestContext));
+            Assert.That(newHtmlHelper.ViewContext.RouteData, Is.SameAs(_h.ViewContext.RouteData));
+            Assert.That(newHtmlHelper.ViewContext.HttpContext, Is.SameAs(_h.ViewContext.HttpContext));
         }
-
-        [Test]
-        public void Create_html_helper_against_same_route_collection_with_different_type()
-        {
-            var newHtmlHelper = _h.For<AnotherViewModel>();
-            Assert.That(newHtmlHelper.RouteCollection, Is.SameAs(_h.RouteCollection));
-        }
-
+        
         [Test]
         public void Create_html_helper_with_empty_prefix_with_different_type()
         {
@@ -121,7 +120,13 @@ namespace ChameleonForms.Tests
         public void Setup()
         {
             _autoSubstitute = AutoSubstituteContainer.Create();
-            _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<TestViewModel>>();
+            var viewDataDictionary = new ViewDataDictionary<TestViewModel>(_autoSubstitute.Resolve<IModelMetadataProvider>(), new ModelStateDictionary());
+
+            _h = _autoSubstitute.Resolve<HtmlHelper<TestViewModel>>();
+            _autoSubstitute.Provide<IHtmlHelper<TestViewModel>>(_h);
+            var viewContext = _autoSubstitute.Resolve<ViewContext>(TypedParameter.From<ViewDataDictionary>(viewDataDictionary), TypedParameter.From(_autoSubstitute.Resolve<ActionContext>()));
+            viewContext.ClientValidationEnabled = true;
+            _h.Contextualize(viewContext);
         }
 
         public class TestViewModel

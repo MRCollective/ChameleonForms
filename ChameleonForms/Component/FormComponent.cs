@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Text.Encodings.Web;
 using System.Web;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Component
 {
@@ -20,7 +23,7 @@ namespace ChameleonForms.Component
     /// Chameleon Forms base component class; provides an ability to easily write HTML to the page in a self-closing or nested manner.
     /// Ensure you call Initialise() at the end of the constructor when extending this class.
     /// </summary>
-    public abstract class FormComponent<TModel> : IFormComponent<TModel>, IHtmlString, IDisposable
+    public abstract class FormComponent<TModel> : IFormComponent<TModel>, IHtmlContent, IDisposable
     {
         /// <inheritdoc />
         protected readonly bool IsSelfClosing;
@@ -52,21 +55,22 @@ namespace ChameleonForms.Component
         /// Returns the HTML representation of the beginning of the form component.
         /// </summary>
         /// <returns>The beginning HTML for the form component</returns>
-        public abstract IHtmlString Begin();
+        public abstract IHtmlContent Begin();
 
         /// <summary>
         /// Returns the HTML representation of the end of the form component.
         /// </summary>
         /// <returns>The ending HTML for the form component</returns>
-        public abstract IHtmlString End();
+        public abstract IHtmlContent End();
 
         /// <inheritdoc />
-        public string ToHtmlString()
+        public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             if (!IsSelfClosing)
-                return null;
+                return;
 
-            return string.Format("{0}{1}", Begin().ToHtmlString(), End().ToHtmlString());
+            Begin().WriteTo(writer, encoder);
+            End().WriteTo(writer, encoder);
         }
 
         /// <inheritdoc />

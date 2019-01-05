@@ -1,5 +1,6 @@
 ﻿using ApprovalTests.Html;
 using ChameleonForms.Tests.Helpers;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator

@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Mvc;
+
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -32,7 +34,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var model = FieldGenerator.GetModel();
             var selectList = GetSelectList(model);

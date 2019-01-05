@@ -7,8 +7,8 @@
     ViewBag.Title = "Example Form 1";
 }
 
-@helper InstructionalText() {
-    <p>Leading instructional text.</p>
+@{
+    Func<dynamic, IHtmlContent> InstructionalText = @<p>Leading instructional text.</p>;
 }
 
 <h1>Example Form 1</h1>
@@ -17,10 +17,10 @@
 {
     <p>@f.LabelFor(m => m.SomeCheckbox).Label("Are you ready for: ") @f.FieldElementFor(m => m.SomeCheckbox) @f.ValidationMessageFor(m => m.SomeCheckbox)</p>
     <p>@f.FieldElementFor(m => m.RequiredStringField).TabIndex(4)</p>
-    using (var s = f.BeginSection("My Section!", InstructionalText(), new{@class = "aClass"}.ToHtmlAttributes()))
+    using (var s = f.BeginSection("My Section!", InstructionalText(null), new { @class = "aClass" }.ToHtmlAttributes()))
     {
         @s.FieldFor(m => m.FlagsEnums)
-        @s.FieldFor(m=>m.Boolean).WithoutInlineLabel()
+        @s.FieldFor(m => m.Boolean).WithoutInlineLabel()
         using (var ff = s.BeginFieldFor(m => m.RequiredStringField, Field.Configure().Attr("data-some-attr", "value").TabIndex(3)))
         {
             @ff.FieldFor(m => m.NestedField).Attr("data-attr1", "value").TabIndex(2)
@@ -30,9 +30,8 @@
         @s.FieldFor(m => m.SomeCheckbox).AsDropDown()
         using (var ss = s.BeginSection("Nested section"))
         {
-            @ss.FieldFor(m => m.FileUpload).Attr("data-attr1", "value")
         }
-        @s.FieldFor(m => m.RequiredStringField).OverrideFieldHtml(new MvcHtmlString("Custom html <b>she-yeah</b>!"))
+        @s.FieldFor(m => m.RequiredStringField).OverrideFieldHtml(new HtmlString("Custom html <b>she-yeah</b>!"))
         @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label").AutoFocus().TabIndex(1)
         @s.FieldFor(m => m.SomeCheckbox).InlineLabel("Some label").WithHint("Format: XXX")
         @s.FieldFor(m => m.SomeCheckbox).AsRadioList().WithTrueAs("True").WithFalseAs("False")
@@ -40,7 +39,7 @@
         @s.FieldFor(m => m.ListId).AsRadioList()
         @s.FieldFor(m => m.SomeEnums)
         @s.FieldFor(m => m.SomeEnumsList).AsRadioList()
-        @s.FieldFor(m => m.Decimal)    
+        @s.FieldFor(m => m.Decimal)
         @s.FieldFor(m => m.Int).AsInputGroup().Append(".00").Prepend("$")
         @s.FieldFor(m => m.DecimalWithFormatStringAttribute)
         @s.FieldFor(m => m.NullableInt)
@@ -63,13 +62,13 @@
     @form.RandomComponent2()
 }
 
-@using (var form = Html.BeginRandomForm("/random", FormMethod.Post, new {test = "testValue"}))
+@using (var form = Html.BeginRandomForm("/random", FormMethod.Post, new { test = "testValue" }))
 {
     @form.RandomComponent()
     @form.RandomComponent2()
 }
 
-@using (var form = Html.BeginRandomForm("/random", FormMethod.Post, new {@class = "fish"}, EncType.Multipart))
+@using (var form = Html.BeginRandomForm("/random", FormMethod.Post, new { @class = "fish" }, EncType.Multipart))
 {
     @form.RandomComponent()
     @form.RandomComponent2()

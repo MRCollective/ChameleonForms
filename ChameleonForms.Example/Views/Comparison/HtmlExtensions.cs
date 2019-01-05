@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System;
 using System.IO;
 using System.Web;
-using System.Web.Mvc;
 
 namespace ChameleonForms.Example.Views.Comparison
 {
     public static class HtmlExtensions
     {
-        public static IDisposable BeginSection<TViewModel>(this HtmlHelper<TViewModel> helper, string heading)
+        public static IDisposable BeginSection<TViewModel>(this IHtmlHelper<TViewModel> helper, string heading)
         {
             return new Section(helper.ViewContext.Writer, heading);
         }

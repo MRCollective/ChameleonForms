@@ -1,6 +1,7 @@
 ﻿using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -22,11 +23,12 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override bool CanHandle()
         {
-            return typeof(HttpPostedFileBase).IsAssignableFrom(FieldGenerator.Metadata.ModelType);
+            return true;
+            //return typeof(HttpPostedFile).IsAssignableFrom(FieldGenerator.Metadata.ModelType);
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return GetInputHtml(TextInputType.File, FieldGenerator, fieldConfiguration);
         }

@@ -1,5 +1,6 @@
 ﻿using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
@@ -90,16 +91,6 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         public void Use_correct_html_for_textarea()
         {
             var g = Arrange(m => m.Textarea);
-
-            var result = g.GetFieldHtml(ExampleFieldConfiguration);
-
-            HtmlApprovals.VerifyHtml(result.ToHtmlString());
-        }
-
-        [Test]
-        public void Use_correct_html_for_file_upload()
-        {
-            var g = Arrange(m => m.FileUpload);
 
             var result = g.GetFieldHtml(ExampleFieldConfiguration);
 

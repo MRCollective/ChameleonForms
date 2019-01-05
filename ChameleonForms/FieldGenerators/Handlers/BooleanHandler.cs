@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Web;
-using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -30,7 +31,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             if (GetDisplayType(fieldConfiguration) == FieldDisplayType.Checkbox)
                 return GetSingleCheckboxHtml(fieldConfiguration);
@@ -63,7 +64,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldGenerator.GetValue() as bool?;
         }
 
-        private IHtmlString GetSingleCheckboxHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        private IHtmlContent GetSingleCheckboxHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var attrs = new HtmlAttributes(fieldConfiguration.HtmlAttributes);
             AdjustHtmlForModelState(attrs, FieldGenerator);
@@ -75,17 +76,31 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 {
                     var inlineLabelText = fieldConfiguration.InlineLabelText;
 
-                    var content = fieldhtml.ToHtmlString() + " " + (inlineLabelText != null ? inlineLabelText.ToHtmlString() : FieldGenerator.GetFieldDisplayName());
-
-                    return HtmlCreator.BuildLabel(null, new HtmlString(content), null);
+                    var contentBuilder = new HtmlContentBuilder();
+                    contentBuilder.AppendHtml(fieldhtml);
+                    contentBuilder.Append(" ");
+                    if(inlineLabelText != null)
+                    {
+                        contentBuilder.AppendHtml(inlineLabelText);
+                    }
+                    else
+                    {
+                        contentBuilder.Append(FieldGenerator.GetFieldDisplayName());
+                    }
+                    
+                    return HtmlCreator.BuildLabel(null, contentBuilder, null);
                 }
                 else
                 {
-                    return new HtmlString(string.Format("{0} {1}", fieldhtml, HtmlCreator.BuildLabel(
+                    HtmlContentBuilder bld = new HtmlContentBuilder();
+                    bld.AppendHtml(fieldhtml)
+                        .Append(" ")
+                        .AppendHtml(HtmlCreator.BuildLabel(
                         GetFieldName(FieldGenerator),
                         fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
                         null
-                        )));
+                        ));
+                    return bld;
                 }
             }
             else

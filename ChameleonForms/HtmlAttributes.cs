@@ -1,16 +1,21 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Web;
-using System.Web.Mvc;
+
 
 namespace ChameleonForms
 {
     /// <summary>
     /// Represents a set of HTML attributes.
     /// </summary>
-    public class HtmlAttributes : IHtmlString
+    public class HtmlAttributes : IHtmlContent
     {
         private readonly TagBuilder _tagBuilder = new TagBuilder("p");
 
@@ -74,7 +79,7 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Id(string id)
         {
-            Attr("id", TagBuilder.CreateSanitizedId(id));
+            Attr("id", TagBuilder.CreateSanitizedId(id, "_"));
             return this;
         }
 
@@ -181,23 +186,15 @@ namespace ChameleonForms
         }
 
         /// <inheritdoc />
-        public virtual string ToHtmlString()
+        public virtual void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
-            var sb = new StringBuilder();
             foreach (var attr in _tagBuilder.Attributes)
             {
-                sb.Append(string.Format(" {0}=\"{1}\"",
-                    HttpUtility.HtmlEncode(attr.Key),
-                    HttpUtility.HtmlEncode(attr.Value))
+                writer.Write(string.Format(" {0}=\"{1}\"",
+                    encoder.Encode(attr.Key),
+                    encoder.Encode(attr.Value))
                 );
             }
-            return sb.ToString();
-        }
-
-        /// <inheritdoc />
-        public override string ToString()
-        {
-            return ToHtmlString();
         }
 
         /// <summary>

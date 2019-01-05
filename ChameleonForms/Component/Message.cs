@@ -2,6 +2,7 @@
 using System.Web;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Component
 {
@@ -13,7 +14,8 @@ namespace ChameleonForms.Component
     public class Message<TModel> : FormComponent<TModel>
     {
         private readonly MessageType _messageType;
-        private readonly IHtmlString _heading;
+        private readonly IHtmlContent _heading;
+        private readonly bool _headingEmpty;
 
         /// <summary>
         /// Creates a message.
@@ -21,21 +23,35 @@ namespace ChameleonForms.Component
         /// <param name="form">The form the message is being created in</param>
         /// <param name="messageType">The type of message to display</param>
         /// <param name="heading">The heading for the message</param>
-        public Message(IForm<TModel> form, MessageType messageType, IHtmlString heading) : base(form, false)
+        public Message(IForm<TModel> form, MessageType messageType, IHtmlContent heading) : base(form, false)
         {
             _messageType = messageType;
             _heading = heading;
+            _headingEmpty = false;
+            Initialise();
+        }
+        /// <summary>
+        /// Creates a message.
+        /// </summary>
+        /// <param name="form">The form the message is being created in</param>
+        /// <param name="messageType">The type of message to display</param>
+        /// <param name="heading">The heading for the message</param>
+        public Message(IForm<TModel> form, MessageType messageType, string heading) : base(form, false)
+        {
+            _messageType = messageType;
+            _heading = new HtmlString(heading);
+            _headingEmpty = string.IsNullOrEmpty(heading);
             Initialise();
         }
 
         /// <inheritdoc />
-        public override IHtmlString Begin()
+        public override IHtmlContent Begin()
         {
-            return Form.Template.BeginMessage(_messageType, _heading);
+            return Form.Template.BeginMessage(_messageType, _heading, _headingEmpty);
         }
 
         /// <inheritdoc />
-        public override IHtmlString End()
+        public override IHtmlContent End()
         {
             return Form.Template.EndMessage();
         }
@@ -45,7 +61,7 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="paragraph">The paragraph to output</param>
         /// <returns>The HTML for the paragraph</returns>
-        public virtual IHtmlString Paragraph(string paragraph)
+        public virtual IHtmlContent Paragraph(string paragraph)
         {
             return Form.Template.MessageParagraph(paragraph.ToHtml());
         }
@@ -55,7 +71,7 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="paragraph">The paragraph to output</param>
         /// <returns>The HTML for the paragraph</returns>
-        public virtual IHtmlString Paragraph(IHtmlString paragraph)
+        public virtual IHtmlContent Paragraph(IHtmlContent paragraph)
         {
             return Form.Template.MessageParagraph(paragraph);
         }
@@ -81,7 +97,7 @@ namespace ChameleonForms.Component
         /// <returns>The message</returns>
         public static Message<TModel> BeginMessage<TModel>(this IForm<TModel> form, MessageType messageType, string heading = null)
         {
-            return new Message<TModel>(form, messageType, heading.ToHtml());
+            return new Message<TModel>(form, messageType, heading);
         }
     }
 }

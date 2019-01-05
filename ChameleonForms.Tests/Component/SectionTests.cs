@@ -1,8 +1,11 @@
 ﻿using System.Web;
-using System.Web.Mvc;
+
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -11,20 +14,20 @@ namespace ChameleonForms.Tests.Component
     [TestFixture]
     public class SectionShould
     {
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
-        private readonly IHtmlString _nestedBeginHtml = new HtmlString("");
-        private readonly IHtmlString _nestedEndHtml = new HtmlString("");
+        private readonly IHtmlContent _beginHtml = new HtmlString("");
+        private readonly IHtmlContent _endHtml = new HtmlString("");
+        private readonly IHtmlContent _nestedBeginHtml = new HtmlString("");
+        private readonly IHtmlContent _nestedEndHtml = new HtmlString("");
         private IForm<object> _f;
-        private readonly IHtmlString _heading = new HtmlString("title");
+        private readonly IHtmlContent _heading = new HtmlString("title");
 
         [SetUp]
         public void Setup()
         {
             _f = Substitute.For<IForm<object>>();
-            _f.Template.BeginSection(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _heading.ToHtmlString()), Arg.Any<IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_beginHtml);
+            _f.Template.BeginSection(Arg.Is<IHtmlContent>(h => h.ToHtmlString() == _heading.ToHtmlString()), Arg.Any<IHtmlContent>(), Arg.Any<HtmlAttributes>()).Returns(_beginHtml);
             _f.Template.EndSection().Returns(_endHtml);
-            _f.Template.BeginNestedSection(Arg.Is<IHtmlString>(h => h.ToHtmlString() == _heading.ToHtmlString()), Arg.Any<IHtmlString>(), Arg.Any<HtmlAttributes>()).Returns(_nestedBeginHtml);
+            _f.Template.BeginNestedSection(Arg.Is<IHtmlContent>(h => h.ToHtmlString() == _heading.ToHtmlString()), Arg.Any<IHtmlContent>(), Arg.Any<HtmlAttributes>()).Returns(_nestedBeginHtml);
             _f.Template.EndNestedSection().Returns(_nestedEndHtml);
         }
 
@@ -68,7 +71,7 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Construct_section_via_extension_method()
         {
-            var s = _f.BeginSection(_heading.ToHtmlString());
+            var s = _f.BeginSection(_heading);
 
             Assert.That(s, Is.Not.Null);
             _f.Received().Write(_beginHtml);
@@ -77,9 +80,9 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Construct_nested_section_via_extension_method()
         {
-            var s = _f.BeginSection(_heading.ToHtmlString());
+            var s = _f.BeginSection(_heading);
             _f.ClearReceivedCalls();
-            var ss = s.BeginSection(_heading.ToHtmlString());
+            var ss = s.BeginSection(_heading);
 
             Assert.That(ss, Is.Not.Null);
             _f.Received().Write(_nestedBeginHtml);
@@ -88,10 +91,10 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Output_a_field([Values(true, false)] bool isValid)
         {
-            var labelHtml = Substitute.For<IHtmlString>();
-            var elementHtml = Substitute.For<IHtmlString>();
-            var validationHtml = Substitute.For<IHtmlString>();
-            var metadata = new ModelMetadata(Substitute.For<ModelMetadataProvider>(), null, null, typeof(string), null);
+            var labelHtml = Substitute.For<IHtmlContent>();
+            var elementHtml = Substitute.For<IHtmlContent>();
+            var validationHtml = Substitute.For<IHtmlContent>();
+            var metadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(string));
             var expectedOutput = new HtmlString("output");
             _f.Template.Field(labelHtml, elementHtml, validationHtml, metadata, Arg.Any<IReadonlyFieldConfiguration>(), isValid).Returns(expectedOutput);
             var s = Arrange(false);

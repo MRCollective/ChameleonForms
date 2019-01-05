@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.Mvc;
+
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.FieldGenerators.Handlers;
+using ChameleonForms.Generated;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChameleonForms.Templates.Default
 {
@@ -21,49 +25,49 @@ namespace ChameleonForms.Templates.Default
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        public virtual IHtmlContent BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
         {
             return HtmlCreator.BuildFormTag(action, method, htmlAttributes, enctype);
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString EndForm()
+        public virtual IHtmlContent EndForm()
         {
             return DefaultHtmlHelpers.EndForm();
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString BeginSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public virtual IHtmlContent BeginSection(IHtmlContent heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return DefaultHtmlHelpers.BeginSection(heading, leadingHtml, htmlAttributes ?? new HtmlAttributes());
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString EndSection()
+        public virtual IHtmlContent EndSection()
         {
             return DefaultHtmlHelpers.EndSection();
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString BeginNestedSection(IHtmlString heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public virtual IHtmlContent BeginNestedSection(IHtmlContent heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return DefaultHtmlHelpers.BeginNestedSection(heading, leadingHtml, htmlAttributes ?? new HtmlAttributes());
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString EndNestedSection()
+        public virtual IHtmlContent EndNestedSection()
         {
             return DefaultHtmlHelpers.EndNestedSection();
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        public virtual IHtmlContent Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
             return DefaultHtmlHelpers.Field(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid));
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString BeginField(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        public virtual IHtmlContent BeginField(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
             return DefaultHtmlHelpers.BeginField(labelHtml, elementHtml, validationHtml, fieldMetadata, fieldConfiguration, RequiredDesignator(fieldMetadata, fieldConfiguration, isValid));
         }
@@ -75,43 +79,43 @@ namespace ChameleonForms.Templates.Default
         /// <param name="fieldConfiguration">Configuration for the field</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>The HTML for the required designator of field with the given information</returns>
-        protected virtual IHtmlString RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
+        protected virtual IHtmlContent RequiredDesignator(ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid)
         {
             return DefaultHtmlHelpers.RequiredDesignator();
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString EndField()
+        public virtual IHtmlContent EndField()
         {
             return DefaultHtmlHelpers.EndField();
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString BeginMessage(MessageType messageType, IHtmlString heading)
+        public virtual IHtmlContent BeginMessage(MessageType messageType, IHtmlContent heading, bool emptyHeading)
         {
-            return DefaultHtmlHelpers.BeginMessage(messageType, heading);
+            return DefaultHtmlHelpers.BeginMessage(messageType, heading, emptyHeading);
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString EndMessage()
+        public virtual IHtmlContent EndMessage()
         {
             return DefaultHtmlHelpers.EndMessage();
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString MessageParagraph(IHtmlString paragraph)
+        public virtual IHtmlContent MessageParagraph(IHtmlContent paragraph)
         {
             return DefaultHtmlHelpers.MessageParagraph(paragraph);
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString BeginNavigation()
+        public virtual IHtmlContent BeginNavigation()
         {
             return DefaultHtmlHelpers.BeginNavigation();
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString EndNavigation()
+        public virtual IHtmlContent EndNavigation()
         {
             return DefaultHtmlHelpers.EndNavigation();
         }
@@ -121,7 +125,7 @@ namespace ChameleonForms.Templates.Default
         /// Uses an &lt;input&gt; by default so the submitted value works in IE7.
         /// See http://rommelsantor.com/clog/2012/03/12/fixing-the-ie7-submit-value/
         /// </remarks>
-        public virtual IHtmlString Button(IHtmlString content, string type, string id, string value, HtmlAttributes htmlAttributes)
+        public virtual IHtmlContent Button(IHtmlContent content, string type, string id, string value, HtmlAttributes htmlAttributes)
         {
             if (content == null && value == null)
                 throw new ArgumentNullException("content", "Expected one of content or value to be specified");
@@ -133,7 +137,7 @@ namespace ChameleonForms.Templates.Default
         }
 
         /// <inheritdoc />
-        public virtual IHtmlString RadioOrCheckboxList(IEnumerable<IHtmlString> list, bool isCheckbox)
+        public virtual IHtmlContent RadioOrCheckboxList(IEnumerable<IHtmlContent> list, bool isCheckbox)
         {
             return DefaultHtmlHelpers.RadioOrCheckboxList(list);
         }

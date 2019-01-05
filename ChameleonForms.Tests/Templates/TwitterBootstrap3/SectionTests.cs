@@ -2,6 +2,7 @@
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Templates.TwitterBootstrap3;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates.TwitterBootstrap3

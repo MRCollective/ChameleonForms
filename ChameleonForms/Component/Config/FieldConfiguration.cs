@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.IO;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Web;
 using ChameleonForms.Enums;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Component.Config
 {
     /// <summary>
     /// Holds configuration data for a form field.
     /// </summary>
-    public interface IFieldConfiguration : IHtmlString, IReadonlyFieldConfiguration
+    public interface IFieldConfiguration : IHtmlContent, IReadonlyFieldConfiguration
     {
         /// <summary>
         /// Attributes to add to the form element's HTML.
@@ -115,7 +118,7 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <param name="labelHtml">The html to use for the label</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration InlineLabel(IHtmlString labelHtml);
+        IFieldConfiguration InlineLabel(IHtmlContent labelHtml);
 
         /// <summary>
         /// Override the default label for the field.
@@ -129,7 +132,7 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <param name="labelHtml">The text to use for the label</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration Label(IHtmlString labelHtml);
+        IFieldConfiguration Label(IHtmlContent labelHtml);
 
         /// <summary>
         /// Renders the field as a list of radio options for selecting single values or checkbox items for selecting multiple values.
@@ -180,14 +183,14 @@ namespace ChameleonForms.Component.Config
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
         /// <param name="field">A lambda returning the HTML to output</param>
-        void SetField(Func<IHtmlString> field);
+        void SetField(Func<IHtmlContent> field);
 
         /// <summary>
         /// Sets the field that the field configuration is wrapping so that
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
         /// <param name="field">The field being configured</param>
-        void SetField(IHtmlString field);
+        void SetField(IHtmlContent field);
 
         /// <summary>
         /// Supply a string hint to display along with the field.
@@ -201,14 +204,14 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <param name="hint">The hint markup</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration WithHint(IHtmlString hint);
+        IFieldConfiguration WithHint(IHtmlContent hint);
         
         /// <summary>
         /// Prepends the given HTML to the form field.
         /// </summary>
         /// <param name="html">The HTML to prepend</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration Prepend(IHtmlString html);
+        IFieldConfiguration Prepend(IHtmlContent html);
 
         /// <summary>
         /// Prepends the given string to the form field.
@@ -222,7 +225,7 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <param name="html">The HTML to append</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration Append(IHtmlString html);
+        IFieldConfiguration Append(IHtmlContent html);
 
         /// <summary>
         /// Appends the given string to the form field.
@@ -240,7 +243,7 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <param name="html">The HTML for the field</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration OverrideFieldHtml(IHtmlString html);
+        IFieldConfiguration OverrideFieldHtml(IHtmlContent html);
                 
         /// <summary>
         /// Uses the given format string when outputting the field value.
@@ -309,10 +312,10 @@ namespace ChameleonForms.Component.Config
     /// </summary>
     public class FieldConfiguration : IFieldConfiguration
     {
-        private Func<IHtmlString> _field;
-        private readonly List<IHtmlString> _prependedHtml = new List<IHtmlString>();
-        private readonly List<IHtmlString> _appendedHtml = new List<IHtmlString>();
-        private IHtmlString _fieldHtml;
+        private Func<IHtmlContent> _field;
+        private readonly List<IHtmlContent> _prependedHtml = new List<IHtmlContent>();
+        private readonly List<IHtmlContent> _appendedHtml = new List<IHtmlContent>();
+        private IHtmlContent _fieldHtml;
 
         /// <summary>
         /// Constructs a field configuration.
@@ -440,7 +443,7 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
-        public IHtmlString InlineLabelText { get; private set; }
+        public IHtmlContent InlineLabelText { get; private set; }
 
         /// <inheritdoc />
         public IFieldConfiguration InlineLabel(string labelText)
@@ -450,14 +453,14 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
-        public IFieldConfiguration InlineLabel(IHtmlString labelHtml)
+        public IFieldConfiguration InlineLabel(IHtmlContent labelHtml)
         {
             InlineLabelText = labelHtml;
             return this;
         }
 
         /// <inheritdoc />
-        public IHtmlString LabelText { get; private set; }
+        public IHtmlContent LabelText { get; private set; }
 
         /// <inheritdoc />
         public IFieldConfiguration Label(string labelText)
@@ -467,7 +470,7 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
-        public IFieldConfiguration Label(IHtmlString labelHtml)
+        public IFieldConfiguration Label(IHtmlContent labelHtml)
         {
             LabelText = labelHtml;
             return this;
@@ -524,7 +527,7 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
-        public void SetField(IHtmlString field)
+        public void SetField(IHtmlContent field)
         {
             _field = () => field;
         }
@@ -537,17 +540,17 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
-        public IFieldConfiguration WithHint(IHtmlString hint)
+        public IFieldConfiguration WithHint(IHtmlContent hint)
         {
             Hint = hint;
             return this;
         }
 
         /// <inheritdoc />
-        public IHtmlString Hint { get; private set; }
+        public IHtmlContent Hint { get; private set; }
 
         /// <inheritdoc />
-        public IFieldConfiguration Prepend(IHtmlString html)
+        public IFieldConfiguration Prepend(IHtmlContent html)
         {
             _prependedHtml.Add(html);
             return this;
@@ -561,10 +564,10 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
-        public IEnumerable<IHtmlString> PrependedHtml { get { var html = _prependedHtml.ToArray(); Array.Reverse(html); return html; } }
+        public IEnumerable<IHtmlContent> PrependedHtml { get { var html = _prependedHtml.ToArray(); Array.Reverse(html); return html; } }
 
         /// <inheritdoc />
-        public IFieldConfiguration Append(IHtmlString html)
+        public IFieldConfiguration Append(IHtmlContent html)
         {
             _appendedHtml.Add(html);
             return this;
@@ -578,7 +581,7 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
-        public IEnumerable<IHtmlString> AppendedHtml { get { return _appendedHtml.ToArray(); } }
+        public IEnumerable<IHtmlContent> AppendedHtml { get { return _appendedHtml.ToArray(); } }
 
         /// <inheritdoc />
         public IFieldConfiguration WithFormatString(string formatString)
@@ -647,27 +650,30 @@ namespace ChameleonForms.Component.Config
         public string ValidationClasses { get; private set; }
 
         /// <inheritdoc />
-        public IFieldConfiguration OverrideFieldHtml(IHtmlString html)
+        public IFieldConfiguration OverrideFieldHtml(IHtmlContent html)
         {
             _fieldHtml = html;
             return this;
         }
 
         /// <inheritdoc />
-        public IHtmlString FieldHtml { get { return _fieldHtml; } }
+        public IHtmlContent FieldHtml { get { return _fieldHtml; } }
 
         /// <inheritdoc />
-        public void SetField(Func<IHtmlString> field)
+        public void SetField(Func<IHtmlContent> field)
         {
             _field = field;
         }
 
         /// <inheritdoc />
-        public string ToHtmlString()
+        public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             var field = _field();
 
-            return field != null ? field.ToHtmlString() : String.Empty;
+            if (field != null)
+            {
+                field.WriteTo(writer, encoder);
+            }
         }
 
         /// <inheritdoc />

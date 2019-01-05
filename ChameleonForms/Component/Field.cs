@@ -4,6 +4,7 @@ using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Component
 {
@@ -51,9 +52,9 @@ namespace ChameleonForms.Component
         }
 
         /// <inheritdoc />
-        public override IHtmlString Begin()
+        public override IHtmlContent Begin()
         {
-            var isValid = Form.HtmlHelper.ViewData.ModelState.IsValidField(_fieldGenerator.GetFieldId());
+            var isValid = Form.HtmlHelper.ViewData.ModelState.GetFieldValidationState(_fieldGenerator.GetFieldId()) != Microsoft.AspNetCore.Mvc.ModelBinding.ModelValidationState.Invalid;
             var readonlyConfig = _fieldGenerator.PrepareFieldConfiguration(_config, FieldParent.Section);
             return !IsParent
                 ? Form.Template.Field(_fieldGenerator.GetLabelHtml(readonlyConfig), _fieldGenerator.GetFieldHtml(readonlyConfig), _fieldGenerator.GetValidationHtml(readonlyConfig), _fieldGenerator.Metadata, readonlyConfig, isValid)
@@ -61,7 +62,7 @@ namespace ChameleonForms.Component
         }
 
         /// <inheritdoc />
-        public override IHtmlString End()
+        public override IHtmlContent End()
         {
             return !IsParent
                 ? new HtmlString(string.Empty)

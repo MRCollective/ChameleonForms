@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web.Mvc;
+
 using ChameleonForms.FieldGenerators.Handlers;
+using ChameleonForms.Metadata;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace ChameleonForms.Attributes
 {
@@ -12,7 +15,7 @@ namespace ChameleonForms.Attributes
     /// Indicates that the attributed property value should exist within the list property referenced by the attribute.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class ExistsInAttribute : ValidationAttribute, IMetadataAware
+    public class ExistsInAttribute : ValidationAttribute, IModelMetadataAware
     {
         /// <summary>
         /// Additional Values metadata key for whether this attribute has been applied to the property.
@@ -40,6 +43,11 @@ namespace ChameleonForms.Attributes
         private readonly string _valueProperty;
         private readonly string _nameProperty;
         private readonly bool? _enableValidation;
+
+        static ExistsInAttribute()
+        {
+            ModelMetadataAwareDisplayMetadataProvider.RegisterMetadataAwareAttribute(typeof(ExistsInAttribute));
+        }
 
         /// <summary>
         /// Instantiates an <see cref="ExistsInAttribute"/>.
@@ -70,12 +78,12 @@ namespace ChameleonForms.Attributes
         }
 
         /// <inheritdoc />
-        public void OnMetadataCreated(ModelMetadata metadata)
+        public void GetDisplayMetadata(DisplayMetadataProviderContext metadata)
         {
-            metadata.AdditionalValues[ExistsKey] = true;
-            metadata.AdditionalValues[PropertyKey] = _listProperty;
-            metadata.AdditionalValues[ValueKey] = _valueProperty;
-            metadata.AdditionalValues[NameKey] = _nameProperty;
+            metadata.DisplayMetadata.AdditionalValues[ExistsKey] = true;
+            metadata.DisplayMetadata.AdditionalValues[PropertyKey] = _listProperty;
+            metadata.DisplayMetadata.AdditionalValues[ValueKey] = _valueProperty;
+            metadata.DisplayMetadata.AdditionalValues[NameKey] = _nameProperty;
         }
 
         /// <inheritdoc />

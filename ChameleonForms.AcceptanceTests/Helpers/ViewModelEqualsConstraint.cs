@@ -1,21 +1,21 @@
-﻿using System.Collections;
+﻿using ChameleonForms.AcceptanceTests.Helpers.Pages;
+using ChameleonForms.AcceptanceTests.ModelBinding;
+using System.Collections;
 using System.Linq;
 using System.Reflection;
-using ChameleonForms.AcceptanceTests.ModelBinding.Pages;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
+using Xunit;
 
 namespace ChameleonForms.AcceptanceTests.Helpers
 {
     public static class IsSame
     {
-        public static Constraint ViewModelAs(object expectedViewModel)
+        public static void ViewModelAs(object expectedViewModel, object actualViewModel)
         {
-            return new ViewModelEqualsConstraint(expectedViewModel);
+            new ViewModelEqualsConstraint(expectedViewModel).Matches(actualViewModel);
         }
     }
 
-    public class ViewModelEqualsConstraint : Constraint
+    public class ViewModelEqualsConstraint
     {
         private readonly object _expectedViewModel;
 
@@ -24,33 +24,35 @@ namespace ChameleonForms.AcceptanceTests.Helpers
             _expectedViewModel = expectedViewModel;
         }
 
-        public override bool Matches(object actualViewModel)
+        public bool Matches(object actualViewModel)
         {
             foreach (var property in actualViewModel.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
             {
                 if (property.IsReadonly())
+                {
                     continue;
+                }
+
                 var expectedValue = property.GetValue(_expectedViewModel, null);
                 var actualValue = property.GetValue(actualViewModel, null);
 
                 if (!property.PropertyType.IsValueType && property.PropertyType != typeof(string) && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
                 {
-                    Assert.That(actualValue, IsSame.ViewModelAs(expectedValue));
+                    IsSame.ViewModelAs(expectedValue, actualValue);
                     continue;
                 }
 
                 if (expectedValue is IEnumerable && !(expectedValue as IEnumerable).Cast<object>().Any())
-                    Assert.That(actualValue, Is.Null.Or.Empty);
+                {
+                    Assert.Null(actualValue);
+                }
                 else
-                    Assert.That(actualValue, Is.EqualTo(expectedValue), property.Name);
+                {
+                    Assert.Equal(expectedValue, actualValue);
+                }
             }
 
             return true;
-        }
-
-        public override void WriteDescriptionTo(MessageWriter writer)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using ChameleonForms.Templates.Default;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Example.Forms.Templates
 {
@@ -10,7 +11,7 @@ namespace ChameleonForms.Example.Forms.Templates
             return "RANDOM unencoded string &\"<g>!";
         }
 
-        public IHtmlString RandomComponent2()
+        public IHtmlContent RandomComponent2()
         {
             return new HtmlString("<p>Some encoded HTML</p>");
         }

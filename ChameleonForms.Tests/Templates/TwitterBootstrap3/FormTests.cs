@@ -1,8 +1,10 @@
-﻿using System.Web.Mvc;
+﻿
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates.TwitterBootstrap3;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates.TwitterBootstrap3

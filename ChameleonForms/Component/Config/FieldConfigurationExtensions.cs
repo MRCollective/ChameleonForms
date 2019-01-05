@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Html;
 using System;
 using System.Web;
 
@@ -43,7 +44,7 @@ namespace ChameleonForms.Component.Config
         /// <param name="config">Field configuration to modify</param>
         /// <param name="html">The HTML for the field</param>
         /// <returns>The instance of <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        public static IFieldConfiguration OverrideFieldHtml(this IFieldConfiguration config, Func<object, IHtmlString> html)
+        public static IFieldConfiguration OverrideFieldHtml(this IFieldConfiguration config, Func<object, IHtmlContent> html)
         {
             if (config != null)
                 return config.OverrideFieldHtml(html(null));
@@ -56,7 +57,7 @@ namespace ChameleonForms.Component.Config
         /// <param name="labelHtml">The html to use for the label</param>
         /// <param name="config">Field configuration to update</param>
         /// <returns>The instance of <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        public static IFieldConfiguration InlineLabel(this IFieldConfiguration config, Func<object, IHtmlString> labelHtml)
+        public static IFieldConfiguration InlineLabel(this IFieldConfiguration config, Func<object, IHtmlContent> labelHtml)
         {
             if (config != null)
                 return config.InlineLabel(labelHtml(null));
@@ -68,7 +69,7 @@ namespace ChameleonForms.Component.Config
         /// <param name="labelHtml">The text to use for the label</param>
         /// <param name="config">Field configuration to update</param>
         /// <returns>The instance of <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        public static IFieldConfiguration Label(this IFieldConfiguration config, Func<object, IHtmlString> labelHtml)
+        public static IFieldConfiguration Label(this IFieldConfiguration config, Func<object, IHtmlContent> labelHtml)
         {
             if (config != null)
                 return config.Label(labelHtml(null));
@@ -81,7 +82,7 @@ namespace ChameleonForms.Component.Config
         /// <param name="hint">The hint markup</param>
         /// <param name="config">Field configuration to update</param>
         /// <returns>The instance of <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        public static IFieldConfiguration WithHint(this IFieldConfiguration config, Func<object, IHtmlString> hint)
+        public static IFieldConfiguration WithHint(this IFieldConfiguration config, Func<object, IHtmlContent> hint)
         {
             if (config != null)
                 return config.WithHint(hint(null));
@@ -93,7 +94,7 @@ namespace ChameleonForms.Component.Config
         /// <param name="html">The HTML to prepend</param>
         /// <param name="config">Field configuration to update</param>
         /// <returns>The instance of <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        public static IFieldConfiguration Prepend(this IFieldConfiguration config, Func<object, IHtmlString> html)
+        public static IFieldConfiguration Prepend(this IFieldConfiguration config, Func<object, IHtmlContent> html)
         {
             if (config != null)
                 return config.Prepend(html(null));
@@ -105,7 +106,7 @@ namespace ChameleonForms.Component.Config
         /// <param name="html">The HTML to append</param>
         /// <param name="config">Field configuration to update</param>
         /// <returns>The instance of <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        public static IFieldConfiguration Append(this IFieldConfiguration config, Func<object, IHtmlString> html)
+        public static IFieldConfiguration Append(this IFieldConfiguration config, Func<object, IHtmlContent> html)
         {
             if (config != null)
                 return config.Append(html(null));

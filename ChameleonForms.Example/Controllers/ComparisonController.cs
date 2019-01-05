@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace ChameleonForms.Example.Controllers
 {

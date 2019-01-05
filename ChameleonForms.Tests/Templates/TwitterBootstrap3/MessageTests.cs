@@ -3,6 +3,7 @@ using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates.TwitterBootstrap3;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
@@ -15,7 +16,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Information, new HtmlString("Heading"));
+            var result = t.BeginMessage(MessageType.Information, new HtmlString("Heading"), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -25,7 +26,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Information, new HtmlString(""));
+            var result = t.BeginMessage(MessageType.Information, new HtmlString(""), true);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -35,7 +36,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Failure, new HtmlString("Heading"));
+            var result = t.BeginMessage(MessageType.Failure, new HtmlString("Heading"), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

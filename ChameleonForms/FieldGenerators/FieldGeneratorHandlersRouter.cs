@@ -11,7 +11,7 @@ namespace ChameleonForms.FieldGenerators
             yield return new PasswordHandler<TModel, T>(g);
             yield return new TextAreaHandler<TModel, T>(g);
             yield return new BooleanHandler<TModel, T>(g);
-            yield return new FileHandler<TModel, T>(g);
+            //yield return new FileHandler<TModel, T>(g);
             yield return new ListHandler<TModel, T>(g);
             yield return new EnumListHandler<TModel, T>(g);
             yield return new DateTimeHandler<TModel, T>(g);

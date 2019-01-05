@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web;
-using System.Web.Mvc;
+
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
 using ChameleonForms.Utils;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ChameleonForms
 {
@@ -14,22 +17,22 @@ namespace ChameleonForms
     internal class PartialViewForm<TModel, TPartialModel> : IForm<TPartialModel>
     {
         private readonly IForm<TModel> _parentForm;
-        private readonly HtmlHelper<TPartialModel> _partialViewHtmlHelper;
+        private readonly IHtmlHelper<TPartialModel> _partialViewHtmlHelper;
         private readonly Expression<Func<TModel, TPartialModel>> _partialModelProperty;
 
-        public PartialViewForm(IForm<TModel> parentForm, HtmlHelper<TPartialModel> partialViewHtmlHelper, Expression<Func<TModel, TPartialModel>> partialModelProperty)
+        public PartialViewForm(IForm<TModel> parentForm, IHtmlHelper<TPartialModel> partialViewHtmlHelper, Expression<Func<TModel, TPartialModel>> partialModelProperty)
         {
             _parentForm = parentForm;
             _partialViewHtmlHelper = partialViewHtmlHelper;
             _partialModelProperty = partialModelProperty;
         }
 
-        public HtmlHelper<TPartialModel> HtmlHelper { get { return _partialViewHtmlHelper; } }
+        public IHtmlHelper<TPartialModel> HtmlHelper { get { return _partialViewHtmlHelper; } }
         public IFormTemplate Template { get { return _parentForm.Template; } }
 
-        public void Write(IHtmlString htmlString)
+        public void Write(IHtmlContent IHtmlContent)
         {
-            _partialViewHtmlHelper.ViewContext.Writer.Write(htmlString);
+            _partialViewHtmlHelper.ViewContext.Writer.Write(IHtmlContent);
         }
 
         public IFieldGenerator GetFieldGenerator<T>(Expression<Func<TPartialModel, T>> property)

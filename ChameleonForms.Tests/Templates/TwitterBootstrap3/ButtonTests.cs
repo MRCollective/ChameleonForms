@@ -4,6 +4,7 @@ using ApprovalTests.Reporters;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates.TwitterBootstrap3;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
@@ -57,7 +58,9 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
             var t = new TwitterBootstrapFormTemplate();
 
             var result = new ButtonHtmlAttributes(h => t.Button(new HtmlString("content"), "submit", null, null, h))
-                .WithStyle(EmphasisStyle.Danger).WithSize(ButtonSize.Large).WithIcon("star");
+                .WithStyle(EmphasisStyle.Danger)
+                .WithSize(ButtonSize.Large)
+                .WithIcon("star");
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

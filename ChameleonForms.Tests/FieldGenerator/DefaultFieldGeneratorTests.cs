@@ -4,14 +4,21 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Web;
-using System.Web.Mvc;
+
 using ApprovalTests.Reporters;
+using Autofac;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates.Default;
 using ChameleonForms.Tests.Helpers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.DataAnnotations.Internal;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using NUnit.Framework;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 
@@ -97,8 +104,6 @@ namespace ChameleonForms.Tests.FieldGenerator
         [DataType(DataType.MultilineText)]
         public string Textarea { get; set; }
 
-        public HttpPostedFileBase FileUpload { get; set; }
-
         public bool RequiredBoolean { get; set; }
 
         [Required]
@@ -140,7 +145,7 @@ namespace ChameleonForms.Tests.FieldGenerator
         [ExistsIn("IntList", "Id", "Name")]
         public ICollection<int?> OptionalNullableIntListIds { get; set; }
 
-        [ReadOnly(true)]
+        [Editable(false)]
         public int ReadonlyInt { get; set; }
 
         public ChildViewModel Child { get; set; }
@@ -176,7 +181,12 @@ namespace ChameleonForms.Tests.FieldGenerator
         public void Setup()
         {
             var autoSubstitute = AutoSubstituteContainer.Create();
+            var viewDataDictionary = new ViewDataDictionary<TestFieldViewModel>(autoSubstitute.Resolve<IModelMetadataProvider>(), new ModelStateDictionary());
+
             H = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            var viewContext = autoSubstitute.Resolve<ViewContext>(TypedParameter.From<ViewDataDictionary>(viewDataDictionary), TypedParameter.From(autoSubstitute.Resolve<ActionContext>()));
+            viewContext.ClientValidationEnabled = true;
+            H.Contextualize(viewContext);
             ExampleFieldConfiguration = new FieldConfiguration().Attr("data-attr", "value");
 
             System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
@@ -184,17 +194,15 @@ namespace ChameleonForms.Tests.FieldGenerator
 
         protected DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, params Action<TestFieldViewModel>[] vmSetter)
         {
-            H.ViewContext.UnobtrusiveJavaScriptEnabled = true;
             H.ViewContext.ClientValidationEnabled = true;
             H.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(property), "asdf");
-            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequiredFlagsEnumAttribute), typeof(RequiredAttributeAdapter));
+            //DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequiredFlagsEnumAttribute), typeof(RequiredAttributeAdapter));
             var vm = new TestFieldViewModel();
             foreach (var action in vmSetter)
             {
                 action(vm);
             }
             H.ViewData.Model = vm;
-            H.ViewData.ModelMetadata.Model = vm;
 
             return new DefaultFieldGenerator<TestFieldViewModel, T>(H, property, new DefaultFormTemplate());
         }
@@ -206,7 +214,6 @@ namespace ChameleonForms.Tests.FieldGenerator
             {
                 var generator = Arrange(m => m.Decimal);
                 H.ViewData.Model = null;
-                H.ViewData.ModelMetadata.Model = null;
 
                 generator.GetModel();
             }
@@ -216,7 +223,6 @@ namespace ChameleonForms.Tests.FieldGenerator
             {
                 var generator = Arrange(m => m.Decimal);
                 H.ViewData.Model = null;
-                H.ViewData.ModelMetadata.Model = null;
 
                 generator.GetValue();
             }

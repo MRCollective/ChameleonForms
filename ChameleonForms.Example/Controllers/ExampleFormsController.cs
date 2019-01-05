@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
-using System.Web.Mvc;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace ChameleonForms.Example.Controllers
@@ -161,6 +161,9 @@ namespace ChameleonForms.Example.Controllers
         [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
         public DateTime DateTimeWithG { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
+        public DateTime? NullableDateTimeWithG { get; set; }
+
         public bool RequiredBool { get; set; }
         [Required]
         public bool? RequiredNullableBool { get; set; }
@@ -277,10 +280,7 @@ namespace ChameleonForms.Example.Controllers
 
         public List<SomeEnum> SomeEnums { get; set; }
         public List<SomeEnum> SomeEnumsList { get; set; }
-
-        [Required]
-        public HttpPostedFileBase FileUpload { get; set; }
-        
+                
         [DataType(DataType.MultilineText)]
         public string TextAreaField { get; set; }
 

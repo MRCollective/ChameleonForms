@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Web;
-using System.Web.Mvc;
+
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates.Default;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates
@@ -193,7 +195,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Information, new HtmlString("Heading"));
+            var result = t.BeginMessage(MessageType.Information, new HtmlString("Heading"), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -203,7 +205,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Information, new HtmlString(""));
+            var result = t.BeginMessage(MessageType.Information, new HtmlString(""), true);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -213,7 +215,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Failure, new HtmlString("Heading"));
+            var result = t.BeginMessage(MessageType.Failure, new HtmlString("Heading"), false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -247,7 +249,7 @@ namespace ChameleonForms.Tests.Templates
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
-        
+
         [Test]
         public void Output_submit_input_when_button_with_no_content_and_submit_type_specified()
         {
@@ -267,7 +269,7 @@ namespace ChameleonForms.Tests.Templates
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
-        
+
         [Test]
         public void Output_submit_button_when_button_with_content_and_submit_type_specified()
         {

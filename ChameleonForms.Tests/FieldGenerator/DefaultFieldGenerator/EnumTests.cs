@@ -2,6 +2,7 @@
 using System.Web;
 using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator

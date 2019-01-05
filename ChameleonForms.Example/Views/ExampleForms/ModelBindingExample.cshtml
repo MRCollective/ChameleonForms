@@ -8,6 +8,8 @@
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredInt))
         @Model.ModifyConfig(s.FieldFor(m => m.DateTime))
         @Model.ModifyConfig(s.FieldFor(m => m.NullableDateTime))
+        @Model.ModifyConfig(s.FieldFor(m => m.DateTimeWithG))
+        @Model.ModifyConfig(s.FieldFor(m => m.NullableDateTimeWithG))
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredBool))
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredNullableBool))
         @Model.ModifyConfig(s.FieldFor(m => m.OptionalBool))
@@ -29,7 +31,7 @@
         @Model.ModifyConfig(s.FieldFor(m => m.OptionalListId))
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredListIds))
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredNullableListIds))
-@*        @Model.ModifyConfig(s.FieldFor(m => m.OptionalListIds))*@
+        @*        @Model.ModifyConfig(s.FieldFor(m => m.OptionalListIds))*@
         @Model.ModifyConfig(s.FieldFor(m => m.OptionalNullableListIds))
         @Model.ModifyConfig(s.FieldFor(m => m.Choice))
     }

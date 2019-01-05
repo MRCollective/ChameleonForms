@@ -4,9 +4,9 @@
     ViewBag.Title = "ChameleonForms Example";
 }
 
-@helper TermsAndConditions() {
-    @:Please <a href="#">read the terms and conditions</a>.
-}
+@{
+    Func<dynamic, IHtmlContent> TermsAndConditions = @:Please <a href="#">read the terms and conditions</a>
+;}
 
 <h1>ChameleonForms example</h1>
 
@@ -16,33 +16,33 @@
     {
         @m.Paragraph("Please fill in your information below to signup for an account.")
     }
-    
+
     using (var s = f.BeginSection("Your details"))
     {
         @s.FieldFor(m => m.FirstName)
         @s.FieldFor(m => m.LastName)
         @s.FieldFor(m => m.DateOfBirth).WithHint("DD/MM/YYYY")
     }
-    
+
     using (var s = f.BeginSection("Account details"))
     {
         @s.FieldFor(m => m.EmailAddress).WithHint("An email will be sent to this address to confirm you own it")
         @s.FieldFor(m => m.Password)
         @s.FieldFor(m => m.MembershipType)
     }
-    
+
     using (var s = f.BeginSection("Additional details"))
     {
         @s.FieldFor(m => m.Bio)
         @s.FieldFor(m => m.Homepage).Placeholder("http://")
     }
-    
+
     using (var m = f.BeginMessage(MessageType.Action, "Confirm the Terms & Conditions"))
     {
-        @m.Paragraph(TermsAndConditions())
+        @m.Paragraph(TermsAndConditions(null))
         @f.FieldElementFor(mm => mm.TermsAndConditions).InlineLabel("I agree to the terms and conditions")
     }
-    
+
     using (var n = f.BeginNavigation())
     {
         @n.Submit("Signup")

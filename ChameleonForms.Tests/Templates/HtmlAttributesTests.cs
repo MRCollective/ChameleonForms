@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates
