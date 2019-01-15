@@ -40,7 +40,7 @@ namespace ChameleonForms
             }
         }
 
-        public IForm<TChildPartialModel> CreatePartialForm<TChildPartialModel>(object childPartialModelExpression, HtmlHelper<TChildPartialModel> partialViewHelper)
+        public IForm<TChildPartialModel> CreatePartialForm<TChildPartialModel>(LambdaExpression childPartialModelExpression, HtmlHelper<TChildPartialModel> partialViewHelper)
         {
             var childPartialModelAsExpression = childPartialModelExpression as Expression<Func<TPartialModel, TChildPartialModel>>;
             var partialModelAsExpression = _partialModelProperty.Combine(childPartialModelAsExpression);

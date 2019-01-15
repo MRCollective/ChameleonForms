@@ -21,7 +21,7 @@ namespace ChameleonForms
         /// <typeparam name="TPartialViewModel">View model type of the partial view</typeparam>
         /// <param name="partial">View page for partial view</param>
         /// <returns>current partial view model expression</returns>
-        public static object PartialModelExpression<TPartialViewModel>(this WebViewPage<TPartialViewModel> partial)
+        public static LambdaExpression PartialModelExpression<TPartialViewModel>(this WebViewPage<TPartialViewModel> partial)
         {
             object expression;
             if (!partial.ViewData.TryGetValue(PartialViewModelExpressionViewDataKey, out expression))
@@ -29,7 +29,7 @@ namespace ChameleonForms
                 throw new InvalidOperationException("Not currently inside a form partial view.");
             }
 
-            return expression;
+            return (LambdaExpression)expression;
         }
 
         /// <summary>
