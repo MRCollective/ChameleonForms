@@ -11,3 +11,5 @@ _ReSharper.*
 packages
 *.received.*
 .vs
+/*.nupkg
+/ChameleonForms/ChameleonForms.xml
