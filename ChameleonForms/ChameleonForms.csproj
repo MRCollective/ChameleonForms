@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>D:\workshop\ChameleonForms - Copy\ChameleonForms\ChameleonForms.xml</DocumentationFile>
+    <DocumentationFile>ChameleonForms.xml</DocumentationFile>
   </PropertyGroup>
 
 
