@@ -11,7 +11,6 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace ChameleonForms
 {
@@ -170,7 +169,7 @@ namespace ChameleonForms
         public static IHtmlContent PartialFor<TModel, TPartialModel>(this IForm<TModel> form, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
         {
             var formModel = (TModel) form.HtmlHelper.ViewData.Model;
-            var expressionText = ExpressionHelper.GetExpressionText(partialModelProperty);
+            var expressionText = form.HtmlHelper.GetExpressionText(partialModelProperty);
             var viewData = new ViewDataDictionary(form.HtmlHelper.ViewData);
             viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
             viewData[WebViewPageExtensions.CurrentFormViewDataKey] = form;

@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace ChameleonForms.FieldGenerators
 {
@@ -33,7 +32,7 @@ namespace ChameleonForms.FieldGenerators
             HtmlHelper = htmlHelper;
             FieldProperty = fieldProperty;
             Template = template;
-            Metadata = ExpressionMetadataProvider.FromLambdaExpression(FieldProperty, HtmlHelper.ViewData, HtmlHelper.MetadataProvider).Metadata;
+            Metadata = ((ModelExpressionProvider)htmlHelper.ViewContext.HttpContext.RequestServices.GetService(typeof(ModelExpressionProvider))).CreateModelExpression<TModel, T>(htmlHelper.ViewData, fieldProperty).Metadata;
         }
 
         /// <inheritdoc />
@@ -58,7 +57,7 @@ namespace ChameleonForms.FieldGenerators
             else
             {
                 @for = HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
-                    ExpressionHelper.GetExpressionText(FieldProperty));
+                    HtmlHelper.GetExpressionText(FieldProperty));
             }
 
             var labelText = fieldConfiguration.LabelText
@@ -79,7 +78,7 @@ namespace ChameleonForms.FieldGenerators
         {
             return Metadata.DisplayName
                 ?? Metadata.PropertyName
-                ?? ExpressionHelper.GetExpressionText(FieldProperty).Split('.').Last();
+                ?? HtmlHelper.GetExpressionText(FieldProperty).Split('.').Last();
         }
 
         /// <inheritdoc />

@@ -1,7 +1,5 @@
 ﻿using ChameleonForms.Attributes;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.DataAnnotations.Internal;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.Localization;
 using System.ComponentModel.DataAnnotations;
 

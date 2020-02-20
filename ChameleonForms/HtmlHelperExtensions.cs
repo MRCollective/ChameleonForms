@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq.Expressions;
@@ -28,8 +28,8 @@ namespace ChameleonForms
         public static DisposableHtmlHelper<TChildModel> For<TParentModel, TChildModel>(this IHtmlHelper<TParentModel> helper,
             Expression<Func<TParentModel, TChildModel>> propertyFor, bool bindFieldsToParent)
         {
-            return helper.For(helper.ViewData.Model != null ? propertyFor.Compile().Invoke(helper.ViewData.Model) : default(TChildModel),
-                bindFieldsToParent ? ExpressionHelper.GetExpressionText(propertyFor) : null);
+            return helper.For(helper.ViewData.Model != null ? propertyFor.Compile().Invoke(helper.ViewData.Model) : default(TChildModel)
+                , bindFieldsToParent ? helper.GetExpressionText(propertyFor) : null);
         }
 
         /// <summary>
@@ -62,13 +62,14 @@ namespace ChameleonForms
             var htmlGenerator = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<IHtmlGenerator>();
             var viewEngine = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ICompositeViewEngine>();
             var bufferScope = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<IViewBufferScope>();
+            var modelExpressionProvider = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ModelExpressionProvider>();
             var ret = new DisposableHtmlHelper<TModel>(htmlGenerator
                 , viewEngine
                 , htmlHelper.MetadataProvider
                 , bufferScope
                 , HtmlEncoder.Default
                 , htmlHelper.UrlEncoder
-                , new ExpressionTextCache()
+                , modelExpressionProvider
                 );
             ret.Contextualize(newViewContext);
             return ret;
@@ -87,7 +88,7 @@ namespace ChameleonForms
             , IViewBufferScope bufferScope
             , HtmlEncoder htmlEncoder
             , UrlEncoder urlEncoder
-            , ExpressionTextCache expressionTextCache
+            , ModelExpressionProvider modelExpressionProvider
             ) 
             : base(htmlGenerator
                   , viewEngine
@@ -95,12 +96,25 @@ namespace ChameleonForms
                   , bufferScope
                   , htmlEncoder
                   , urlEncoder
-                  , expressionTextCache
+                  , modelExpressionProvider
                   )
         {
         }
 
         /// <inheritdoc />
         public void Dispose() {}
+    }
+}
+
+public static class ExpressionHelper
+{
+    public static string GetExpressionText<TModel, TResult>(
+        this IHtmlHelper<TModel> htmlHelper,
+        Expression<Func<TModel, TResult>> expression
+        )
+    {
+        var expresionProvider = htmlHelper.ViewContext.HttpContext.RequestServices.GetService(typeof(ModelExpressionProvider)) as ModelExpressionProvider;
+
+        return expresionProvider.GetExpressionText(expression);
     }
 }

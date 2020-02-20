@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace ChameleonForms.Component
 {
@@ -171,7 +170,7 @@ namespace ChameleonForms.Component
         public static IHtmlContent PartialFor<TModel, TPartialModel>(this ISection<TModel> section, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
         {
             var formModel = (TModel)section.Form.HtmlHelper.ViewData.Model;
-            var expressionText = ExpressionHelper.GetExpressionText(partialModelProperty);
+            var expressionText = section.Form.HtmlHelper.GetExpressionText(partialModelProperty);
 
             var viewData = new ViewDataDictionary(section.Form.HtmlHelper.ViewData);
             viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;

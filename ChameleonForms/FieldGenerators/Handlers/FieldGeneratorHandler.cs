@@ -10,7 +10,6 @@ using ChameleonForms.Templates;
 using System.Linq;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
@@ -218,7 +217,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             }
             else
             {
-               ModelExplorer modelExplorer = ExpressionMetadataProvider.FromLambdaExpression(fieldGenerator.FieldProperty, fieldGenerator.HtmlHelper.ViewData, fieldGenerator.HtmlHelper.MetadataProvider);
+                ModelExplorer modelExplorer = fieldGenerator.HtmlHelper.ViewContext.HttpContext.RequestServices.GetService<ModelExpressionProvider>().CreateModelExpression(fieldGenerator.HtmlHelper.ViewData, fieldGenerator.FieldProperty).ModelExplorer;
                 
                 htmlContent = fieldGenerator.HtmlHelper.TextBoxFor(fieldGenerator.FieldProperty
                     , attrs.ToDictionary()
@@ -339,7 +338,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                     AdjustHtmlForModelState(attrs, fieldGenerator);
                 var fieldHtml = HasMultipleValues(fieldGenerator)
                         ? HtmlCreator.BuildSingleCheckbox(GetFieldName(fieldGenerator), item.Selected, attrs, item.Value)
-                        : fieldGenerator.HtmlHelper.RadioButton(ExpressionHelper.GetExpressionText(fieldGenerator.FieldProperty), item.Value, item.Selected, attrs.ToDictionary()); // fieldGenerator.HtmlHelper.RadioButtonFor(fieldGenerator.FieldProperty, item.Value, attrs.ToDictionary());
+                        : fieldGenerator.HtmlHelper.RadioButton(fieldGenerator.HtmlHelper.GetExpressionText(fieldGenerator.FieldProperty), item.Value, item.Selected, attrs.ToDictionary()); // fieldGenerator.HtmlHelper.RadioButtonFor(fieldGenerator.FieldProperty, item.Value, attrs.ToDictionary());
                 if (fieldConfiguration.ShouldInlineLabelWrapElement)
                 {
                     HtmlContentBuilder bld = new HtmlContentBuilder();
@@ -368,7 +367,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <returns>The name of the field</returns>
         protected static string GetFieldName(IFieldGenerator<TModel, T> fieldGenerator)
         {
-            var name = ExpressionHelper.GetExpressionText(fieldGenerator.FieldProperty);
+            var name = fieldGenerator.HtmlHelper.GetExpressionText(fieldGenerator.FieldProperty);
             return fieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
         }
 
@@ -380,7 +379,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <param name="fieldGenerator">The field generator wrapping the field</param>
         protected static void AdjustHtmlForModelState(HtmlAttributes attrs, IFieldGenerator<TModel, T> fieldGenerator)
         {
-            var name = ExpressionHelper.GetExpressionText(fieldGenerator.FieldProperty);
+            var name = fieldGenerator.HtmlHelper.GetExpressionText(fieldGenerator.FieldProperty);
             var fullName = fieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
             ModelStateEntry modelState;
@@ -393,8 +392,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
             }
 
             var validationHtmlAttributeProvider = fieldGenerator.HtmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ValidationHtmlAttributeProvider>();
+            var modelExpressionProvider = fieldGenerator.HtmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ModelExpressionProvider>();
             validationHtmlAttributeProvider.AddAndTrackValidationAttributes(fieldGenerator.HtmlHelper.ViewContext
-                , ExpressionMetadataProvider.FromLambdaExpression(fieldGenerator.FieldProperty, fieldGenerator.HtmlHelper.ViewData, fieldGenerator.HtmlHelper.MetadataProvider)
+                , modelExpressionProvider.CreateModelExpression(fieldGenerator.HtmlHelper.ViewData, fieldGenerator.FieldProperty).ModelExplorer
                 , name
                 , attrs.Attributes);
         }
