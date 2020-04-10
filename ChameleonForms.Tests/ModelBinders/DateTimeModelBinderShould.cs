@@ -1,18 +1,14 @@
 ﻿using System;
-
 using ChameleonForms.ModelBinders;
 using ChameleonForms.Tests.Helpers;
 using NUnit.Framework;
 using System.Globalization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Primitives;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.DataAnnotations.Internal;
-using AutofacContrib.NSubstitute;
+using System.Threading;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
-using Microsoft.AspNetCore.Mvc.Internal;
 
 namespace ChameleonForms.Tests.ModelBinders
 {
@@ -21,9 +17,7 @@ namespace ChameleonForms.Tests.ModelBinders
     class DateTimeModelBinderShould<T>
     {
         #region Setup
-        private ControllerContext _context;
         private FormCollection _formCollection;
-        private AutoSubstitute _autosubstitute;
 
         private const string PropertyName = "Property";
         private const string DisplayName = "Display Name";
@@ -31,10 +25,7 @@ namespace ChameleonForms.Tests.ModelBinders
         [SetUp]
         public void Setup()
         {
-            _autosubstitute = AutoSubstituteContainer.Create();
-            _context = _autosubstitute.Resolve<ControllerContext>();
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         }
 
         private ModelBindingContext ArrangeBindingContext(Action<DefaultMetadataDetails> action = null)

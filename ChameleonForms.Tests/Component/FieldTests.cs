@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Web;
-using Autofac;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
-using ChameleonForms.Templates;
 using ChameleonForms.Tests.Helpers;
 using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -56,16 +49,10 @@ namespace ChameleonForms.Tests.Component
             _g.Metadata.Returns(_metadata);
             _g.GetFieldId().Returns(FieldId);
 
-            var autoSubstitute = AutoSubstituteContainer.Create();
+            var context = new MvcTestContext();
+            var viewContext = context.GetViewTestContext<TestFieldViewModel>();
 
-            var viewDataDictionary = new ViewDataDictionary<TestFieldViewModel>(autoSubstitute.Resolve<IModelMetadataProvider>(), new ModelStateDictionary());
-
-            var helper = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
-            var viewContext = autoSubstitute.Resolve<ViewContext>(TypedParameter.From<ViewDataDictionary>(viewDataDictionary), TypedParameter.From(autoSubstitute.Resolve<ActionContext>()));
-            viewContext.ClientValidationEnabled = true;
-            helper.Contextualize(viewContext);
-
-            _f.HtmlHelper.Returns(helper);
+            _f.HtmlHelper.Returns(viewContext.HtmlHelper);
             _f.GetFieldGenerator(Arg.Any<Expression<Func<TestFieldViewModel, string>>>()).Returns(_g);
         }
 

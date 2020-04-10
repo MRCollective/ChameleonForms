@@ -1,16 +1,10 @@
-﻿using System.Web;
-
-using Autofac;
-using AutofacContrib.NSubstitute;
-using ChameleonForms.Enums;
+﻿using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
 using ChameleonForms.Templates.Default;
 using ChameleonForms.Templates.TwitterBootstrap3;
 using ChameleonForms.Tests.Helpers;
 using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NSubstitute;
@@ -132,7 +126,6 @@ namespace ChameleonForms.Tests
             Assert.That(g, Is.TypeOf<DefaultFieldGenerator<TestFieldViewModel, string>>());
         }
 
-        private AutoSubstitute _autoSubstitute;
         private HtmlHelper<TestFieldViewModel> _h;
         private IFormTemplate _t;
 
@@ -147,28 +140,19 @@ namespace ChameleonForms.Tests
         [SetUp]
         public void Setup()
         {
-            _autoSubstitute = AutoSubstituteContainer.Create();
-            var viewDataDictionary = new ViewDataDictionary<TestFieldViewModel>(_autoSubstitute.Resolve<IModelMetadataProvider>(), new ModelStateDictionary());
+            var context = new MvcTestContext();
+            var viewContext = context.GetViewTestContext<TestFieldViewModel>();
 
-            _h = _autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
-            _autoSubstitute.Provide<IHtmlHelper<TestFieldViewModel>>(_h);
-            var viewContext = _autoSubstitute.Resolve<ViewContext>(TypedParameter.From<ViewDataDictionary>(viewDataDictionary), TypedParameter.From(_autoSubstitute.Resolve<ActionContext>()));
-            viewContext.ClientValidationEnabled = true;
-            _h.Contextualize(viewContext);
+            _h = viewContext.HtmlHelper;
 
-            _t = _autoSubstitute.Resolve<IFormTemplate>();
+            _t = Substitute.For<IFormTemplate>();
             _t.BeginForm(Action, Method, _htmlAttributes, Enctype).Returns(_beginHtml);
             _t.EndForm().Returns(_endHtml);
         }
 
         private Form<TestFieldViewModel> CreateForm()
         {
-            return _autoSubstitute.Resolve<Form<TestFieldViewModel>>(
-                new NamedParameter("action", Action),
-                new NamedParameter("method", Method),
-                new NamedParameter("htmlAttributes", _htmlAttributes),
-                new NamedParameter("enctype", Enctype)
-            );
+            return new Form<TestFieldViewModel>(_h, _t, Action, Method, _htmlAttributes, Enctype);
         }
 
         [TearDown]

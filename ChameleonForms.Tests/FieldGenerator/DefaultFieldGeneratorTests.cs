@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq.Expressions;
-using System.Web;
-
+using System.Threading;
 using ApprovalTests.Reporters;
-using Autofac;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates.Default;
 using ChameleonForms.Tests.Helpers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.DataAnnotations.Internal;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 using NUnit.Framework;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 
@@ -180,22 +173,18 @@ namespace ChameleonForms.Tests.FieldGenerator
         [SetUp]
         public void Setup()
         {
-            var autoSubstitute = AutoSubstituteContainer.Create();
-            var viewDataDictionary = new ViewDataDictionary<TestFieldViewModel>(autoSubstitute.Resolve<IModelMetadataProvider>(), new ModelStateDictionary());
+            var testContext = new MvcTestContext();
+            var testViewContext = testContext.GetViewTestContext<TestFieldViewModel>();
 
-            H = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
-            var viewContext = autoSubstitute.Resolve<ViewContext>(TypedParameter.From<ViewDataDictionary>(viewDataDictionary), TypedParameter.From(autoSubstitute.Resolve<ActionContext>()));
-            viewContext.ClientValidationEnabled = true;
-            H.Contextualize(viewContext);
+            H = testViewContext.HtmlHelper;
             ExampleFieldConfiguration = new FieldConfiguration().Attr("data-attr", "value");
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         }
 
         protected DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, params Action<TestFieldViewModel>[] vmSetter)
         {
-            H.ViewContext.ClientValidationEnabled = true;
-            H.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(property), "asdf");
+            H.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(H, property), "asdf");
             //DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequiredFlagsEnumAttribute), typeof(RequiredAttributeAdapter));
             var vm = new TestFieldViewModel();
             foreach (var action in vmSetter)

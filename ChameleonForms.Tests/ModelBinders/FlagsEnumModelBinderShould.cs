@@ -1,17 +1,15 @@
-﻿
-using ChameleonForms.ModelBinders;
+﻿using ChameleonForms.ModelBinders;
 using ChameleonForms.Tests.Helpers;
 using NUnit.Framework;
 using System.Globalization;
 using ChameleonForms.Tests.FieldGenerator;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
 using Microsoft.Extensions.Primitives;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
-using Microsoft.AspNetCore.Mvc.Internal;
 using System;
+using System.Threading;
 
 namespace ChameleonForms.Tests.ModelBinders
 {
@@ -20,7 +18,6 @@ namespace ChameleonForms.Tests.ModelBinders
     class FlagsEnumModelBinderShould<T>
     {
         #region Setup
-        private ControllerContext _context;
         private FormCollection _formCollection;
 
         private const string PropertyName = "Property";
@@ -29,9 +26,7 @@ namespace ChameleonForms.Tests.ModelBinders
         [SetUp]
         public void Setup()
         {
-            var c = AutoSubstituteContainer.Create();
-            _context = c.Resolve<ControllerContext>();
-            System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         }
 
         private ModelBindingContext ArrangeBindingContext(Action<DefaultMetadataDetails> action = null)

@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq.Expressions;
 using System.Text.Encodings.Web;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace ChameleonForms
 {
@@ -63,6 +63,7 @@ namespace ChameleonForms
             var viewEngine = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ICompositeViewEngine>();
             var bufferScope = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<IViewBufferScope>();
             var modelExpressionProvider = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ModelExpressionProvider>();
+            var expressionTextCache = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ExpressionTextCache>();
             var ret = new DisposableHtmlHelper<TModel>(htmlGenerator
                 , viewEngine
                 , htmlHelper.MetadataProvider
@@ -70,6 +71,7 @@ namespace ChameleonForms
                 , HtmlEncoder.Default
                 , htmlHelper.UrlEncoder
                 , modelExpressionProvider
+                , expressionTextCache
                 );
             ret.Contextualize(newViewContext);
             return ret;
@@ -89,6 +91,7 @@ namespace ChameleonForms
             , HtmlEncoder htmlEncoder
             , UrlEncoder urlEncoder
             , ModelExpressionProvider modelExpressionProvider
+            , ExpressionTextCache expressionTextCache
             ) 
             : base(htmlGenerator
                   , viewEngine
@@ -96,7 +99,7 @@ namespace ChameleonForms
                   , bufferScope
                   , htmlEncoder
                   , urlEncoder
-                  , modelExpressionProvider
+                  , expressionTextCache
                   )
         {
         }
@@ -113,8 +116,7 @@ public static class ExpressionHelper
         Expression<Func<TModel, TResult>> expression
         )
     {
-        var expresionProvider = htmlHelper.ViewContext.HttpContext.RequestServices.GetService(typeof(ModelExpressionProvider)) as ModelExpressionProvider;
-
-        return expresionProvider.GetExpressionText(expression);
+        var expressionProvider = htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService(typeof(ModelExpressionProvider)) as ModelExpressionProvider;
+        return expressionProvider.CreateModelExpression(htmlHelper.ViewData, expression).Name;
     }
 }

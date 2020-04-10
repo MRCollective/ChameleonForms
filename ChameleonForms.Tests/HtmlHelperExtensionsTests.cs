@@ -1,10 +1,4 @@
-﻿
-using Autofac;
-using AutofacContrib.NSubstitute;
-using ChameleonForms.Tests.Helpers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using ChameleonForms.Tests.Helpers;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NUnit.Framework;
 
@@ -112,21 +106,14 @@ namespace ChameleonForms.Tests
             Assert.That(newHtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, Is.Empty, "Prefix is correct");
         }
 
-
-        private AutoSubstitute _autoSubstitute;
         private HtmlHelper<TestViewModel> _h;
 
         [SetUp]
         public void Setup()
         {
-            _autoSubstitute = AutoSubstituteContainer.Create();
-            var viewDataDictionary = new ViewDataDictionary<TestViewModel>(_autoSubstitute.Resolve<IModelMetadataProvider>(), new ModelStateDictionary());
-
-            _h = _autoSubstitute.Resolve<HtmlHelper<TestViewModel>>();
-            _autoSubstitute.Provide<IHtmlHelper<TestViewModel>>(_h);
-            var viewContext = _autoSubstitute.Resolve<ViewContext>(TypedParameter.From<ViewDataDictionary>(viewDataDictionary), TypedParameter.From(_autoSubstitute.Resolve<ActionContext>()));
-            viewContext.ClientValidationEnabled = true;
-            _h.Contextualize(viewContext);
+            var context = new MvcTestContext();
+            var viewContext = context.GetViewTestContext<TestViewModel>();
+            _h = viewContext.HtmlHelper;
         }
 
         public class TestViewModel

@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-	<EnableDefaultRazorGenerateItems>true</EnableDefaultRazorGenerateItems>
-	<RazorCompileOnBuild>True</RazorCompileOnBuild>
-	<ApplicationIcon />
-	<OutputType>Library</OutputType>
-	<StartupObject />
-	<RazorOutputPath>d:\Workshop\ChameleonForms\ChameleonForms\bin\</RazorOutputPath>
-	<RazorTargetName>HtmlHelperRazorAssembly</RazorTargetName>
-	<EnableDefaultContentItems>True</EnableDefaultContentItems>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <EnableDefaultRazorGenerateItems>true</EnableDefaultRazorGenerateItems>
+    <RazorCompileOnBuild>True</RazorCompileOnBuild>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+    <RazorOutputPath>d:\Workshop\ChameleonForms\ChameleonForms\bin\</RazorOutputPath>
+    <RazorTargetName>HtmlHelperRazorAssembly</RazorTargetName>
+    <EnableDefaultContentItems>True</EnableDefaultContentItems>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,14 +17,11 @@
     <Compile Remove="HumanizedLabelsTests.cs" />
   </ItemGroup>
 
-
   <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="3.0.18" />
     <PackageReference Include="ApprovalUtilities" Version="3.0.18" />
-    <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
-    <PackageReference Include="AutofacContrib.NSubstitute" Version="4.0.1" />
     <PackageReference Include="Humanizer" Version="2.5.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="2.2.0" />
@@ -32,26 +29,17 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Razor" Version="2.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.Core" Version="3.1.2" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.TempData" Version="3.1.2" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.ViewComponents" Version="3.1.2" />
     <PackageReference Include="NBuilder" Version="6.0.0" />
     <PackageReference Include="NSubstitute" Version="3.1.0" />
     <PackageReference Include="NUnit" Version="3.11.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.12.0" />
   </ItemGroup>
 
-
   <ItemGroup>
     <ProjectReference Include="..\ChameleonForms.Example\ChameleonForms.Example.csproj" />
     <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj" />
   </ItemGroup>
-
-
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Mvc.Core">
-      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.core\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNetCore.Mvc.DataAnnotations">
-      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.dataannotations\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.DataAnnotations.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
