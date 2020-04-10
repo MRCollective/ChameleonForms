@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using MyTested.AspNetCore.Mvc.Internal;
 using MyTested.AspNetCore.Mvc.Internal.Application;
+using NSubstitute;
 
 namespace ChameleonForms.Tests.Helpers
 {
@@ -81,7 +82,7 @@ namespace ChameleonForms.Tests.Helpers
         {
             ViewData = new ViewDataDictionary<TModel>(modelMetadataProvider, new ModelStateDictionary());
             View = new NullView();
-            Writer = new StringWriter();
+            Writer = Substitute.For<TextWriter>();
             TempData = new TempDataDictionary(actionContext.HttpContext, new TempDataProviderMock());
             var htmlHelperOptions = new HtmlHelperOptions();
             htmlHelperOptions.ClientValidationEnabled = true;
@@ -104,9 +105,9 @@ namespace ChameleonForms.Tests.Helpers
 
         public TempDataDictionary TempData { get; }
 
-        public StringWriter Writer { get; }
+        public TextWriter Writer { get; }
 
-        public NullView View { get; }
+        public IView View { get; }
 
         public ViewDataDictionary<TModel> ViewData { get; }
 

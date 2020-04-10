@@ -25,8 +25,6 @@ namespace ChameleonForms.Tests.FieldGenerator.Handlers
         {
             var context = new MvcTestContext();
             var fg = new TestFieldGenerator<TestFieldViewModel, T>(context);
-            var metadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(T));
-            fg.Metadata.Returns(metadata);
             _handler = GetHandler(fg);
         }
 

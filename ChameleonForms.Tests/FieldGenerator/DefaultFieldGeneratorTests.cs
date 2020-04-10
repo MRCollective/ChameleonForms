@@ -185,7 +185,6 @@ namespace ChameleonForms.Tests.FieldGenerator
         protected DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, params Action<TestFieldViewModel>[] vmSetter)
         {
             H.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(H, property), "asdf");
-            //DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequiredFlagsEnumAttribute), typeof(RequiredAttributeAdapter));
             var vm = new TestFieldViewModel();
             foreach (var action in vmSetter)
             {
