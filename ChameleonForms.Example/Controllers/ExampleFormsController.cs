@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace ChameleonForms.Example.Controllers
 {
@@ -99,7 +99,7 @@ namespace ChameleonForms.Example.Controllers
         {
             ViewBag.Action = "PostDifferentModel";
             ViewBag.ModelType = vm.GetType().Name;
-            ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            ViewBag.BoundModelData = JsonSerializer.Serialize(vm, new JsonSerializerOptions{WriteIndented = true});
             ViewBag.BoundModel = vm;
             return View("ChangingContext");
         }
@@ -109,7 +109,7 @@ namespace ChameleonForms.Example.Controllers
         {
             ViewBag.Action = "PostChildViewModel";
             ViewBag.ModelType = vm.GetType().Name;
-            ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            ViewBag.BoundModelData = JsonSerializer.Serialize(vm, new JsonSerializerOptions { WriteIndented = true });
             ViewBag.BoundModel = vm;
             return View("ChangingContext");
         }
@@ -119,7 +119,7 @@ namespace ChameleonForms.Example.Controllers
         {
             ViewBag.Action = "PostParentViewModel";
             ViewBag.ModelType = vm.GetType().Name;
-            ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            ViewBag.BoundModelData = JsonSerializer.Serialize(vm, new JsonSerializerOptions { WriteIndented = true });
             ViewBag.BoundModel = vm;
             return View("ChangingContext");
         }

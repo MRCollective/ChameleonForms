@@ -1,17 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <EnableDefaultRazorGenerateItems>true</EnableDefaultRazorGenerateItems>
-    <RazorCompileOnBuild>True</RazorCompileOnBuild>
-    <ApplicationIcon />
     <OutputType>Library</OutputType>
-    <StartupObject />
-    <RazorOutputPath>d:\Workshop\ChameleonForms\ChameleonForms\bin\</RazorOutputPath>
-    <RazorTargetName>HtmlHelperRazorAssembly</RazorTargetName>
-    <EnableDefaultContentItems>True</EnableDefaultContentItems>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="HumanizedLabels.cs" />
@@ -34,13 +32,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChameleonForms.Example\ChameleonForms.Example.csproj" />
+    <ProjectReference Include="..\ChameleonForms.Generated\ChameleonForms.Generated.csproj" />
     <ProjectReference Include="..\ChameleonForms.Templates\ChameleonForms.Templates.csproj" />
     <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="ChameleonForms.Templates.Compiled">
-      <HintPath>..\ChameleonForms.Templates\bin\Debug\netcoreapp3.1\ChameleonForms.Templates.Compiled.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>
