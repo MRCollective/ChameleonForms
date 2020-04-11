@@ -8,6 +8,11 @@ using System;
 
 namespace ChameleonForms
 {
+    // todo: Add int/datetime client side validation support. Context: https://github.com/jbogard/aspnetwebstack/blob/730c683da2458430d36e3e360aba68932ba69fa4/src/System.Web.Mvc/ClientDataTypeModelValidatorProvider.cs, https://github.com/aspnet/Mvc/pull/2950, https://github.com/aspnet/Mvc/pull/2812, https://github.com/aspnet/Mvc/issues/4005, https://github.com/jquery-validation/jquery-validation/issues/626
+    // todo: Add type="email" etc. stuff
+    // todo: Add support for non jquery unobtrusive validation
+    // idea: Add support for other validation techniques e.g. Vuejs?
+
     public static class ServiceCollectionExtensions
     {
         public static void AddChameleonForms(this IServiceCollection services, bool humanizedLabels = true)
