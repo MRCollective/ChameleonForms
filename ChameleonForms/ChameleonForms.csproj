@@ -10,6 +10,7 @@
     <RazorOutputPath>d:\Workshop\ChameleonForms\ChameleonForms\bin\</RazorOutputPath>
     <RazorTargetName>HtmlHelperRazorAssembly</RazorTargetName>
     <EnableDefaultContentItems>True</EnableDefaultContentItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
