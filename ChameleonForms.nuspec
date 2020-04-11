@@ -35,9 +35,9 @@
     </dependencies>
   </metadata>
   <files>
-     <file src="ChameleonForms\bin\Release\netstandard2.0\ChameleonForms.dll" target="lib\netstandard2.0" />
-     <file src="ChameleonForms\bin\Release\netstandard2.0\ChameleonForms.pdb" target="lib\netstandard2.0" />
-     <file src="ChameleonForms\bin\Release\netstandard2.0\ChameleonForms.XML" target="lib\netstandard2.0" />
+     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.dll" target="lib\netstandard2.0" />
+     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.pdb" target="lib\netstandard2.0" />
+     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.XML" target="lib\netstandard2.0" />
      <file src="ChameleonForms\readme.txt" target="" />
   </files>
 </package>
