@@ -10,6 +10,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="RazorGenerator.Templating" Version="2.4.7" />
+    <PackageReference Include="RazorGenerator.MsBuild" Version="2.5.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <RazorSrcFiles Include="*.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <RazorViewsCodeGenDirectory>$(MsBuildProjectDirectory)\</RazorViewsCodeGenDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj" />
   </ItemGroup>
 

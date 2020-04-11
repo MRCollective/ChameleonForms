@@ -20,7 +20,8 @@ namespace ChameleonForms.Tests
             var x = Services.GetRequiredService<DefaultTemplate>();
             var y = await x.MessageParagraph(new HtmlString("test"));
 
-            var z = new ASP.();
+            var z = new AspNetCore.Views_MessageParagraph();
+            await z.ExecuteAsync();
 
         }
     }
