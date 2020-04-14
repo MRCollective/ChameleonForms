@@ -121,9 +121,9 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         }
 
         /// <inheritdoc />
-        public override IHtmlContent BeginMessage(MessageType messageType, IHtmlContent heading, bool emptyHeading)
+        public override IHtmlContent BeginMessage(MessageType messageType, IHtmlContent heading)
         {
-            return TwitterBootstrapHtmlHelpers.BeginMessage(messageType.ToTwitterEmphasisStyle(), heading, emptyHeading);
+            return TwitterBootstrapHtmlHelpers.BeginMessage(messageType.ToTwitterEmphasisStyle(), heading, string.IsNullOrEmpty(heading.ToHtmlString()));
         }
 
         /// <inheritdoc />

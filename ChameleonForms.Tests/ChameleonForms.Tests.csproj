@@ -4,7 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,7 +31,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChameleonForms.Example\ChameleonForms.Example.csproj" />
-    <ProjectReference Include="..\ChameleonForms.Generated\ChameleonForms.Generated.csproj" />
     <ProjectReference Include="..\ChameleonForms.Templates\ChameleonForms.Templates.csproj" />
     <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj" />
   </ItemGroup>

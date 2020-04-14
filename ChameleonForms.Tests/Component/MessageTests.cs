@@ -21,7 +21,7 @@ namespace ChameleonForms.Tests.Component
         public void Setup()
         {
             _f = Substitute.For<IForm<object>>();
-            _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any<IHtmlContent>(), Arg.Any<bool>()).Returns(_beginHtml);
+            _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any<IHtmlContent>()).Returns(_beginHtml);
             _f.Template.EndMessage().Returns(_endHtml);
         }
 
@@ -38,7 +38,7 @@ namespace ChameleonForms.Tests.Component
             var s = Arrange(messageType);
 
             Assert.That(s.Begin(), Is.EqualTo(_beginHtml));
-            _f.Template.Received().BeginMessage(messageType, _testHeading, false);
+            _f.Template.Received().BeginMessage(messageType, _testHeading);
         }
         
         [Test]

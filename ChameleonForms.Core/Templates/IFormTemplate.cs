@@ -3,7 +3,6 @@ using System.Web;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
-
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.FieldGenerators.Handlers;
 using Microsoft.AspNetCore.Html;
@@ -122,7 +121,7 @@ namespace ChameleonForms.Templates
         /// <param name="messageType">The type of message being displayed</param>
         /// <param name="heading">The heading for the message</param>
         /// <returns>The beginning HTML for the message</returns>
-        IHtmlContent BeginMessage(MessageType messageType, IHtmlContent heading, bool emptyHeading);
+        IHtmlContent BeginMessage(MessageType messageType, IHtmlContent heading);
 
         /// <summary>
         /// Creates the ending HTML for a message.

@@ -16,6 +16,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Tests", "Cha
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{950DEBD6-FCA3-47B8-9E1F-0005E79BD664}"
 	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
 		AppStart.cs.pp = AppStart.cs.pp
 		AppStart.TwitterBootstrap.cs.pp = AppStart.TwitterBootstrap.cs.pp
 		BREAKING_CHANGES.md = BREAKING_CHANGES.md
@@ -85,7 +87,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Generated", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Example", "ChameleonForms.Example\ChameleonForms.Example.csproj", "{10EC89A6-AFB9-4E74-B22A-5D8C42183668}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Templates", "ChameleonForms.Templates\ChameleonForms.Templates.csproj", "{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Templates", "ChameleonForms.Templates\ChameleonForms.Templates.csproj", "{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Core", "ChameleonForms.Core\ChameleonForms.Core.csproj", "{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +131,12 @@ Global
 		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

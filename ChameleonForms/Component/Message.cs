@@ -15,7 +15,6 @@ namespace ChameleonForms.Component
     {
         private readonly MessageType _messageType;
         private readonly IHtmlContent _heading;
-        private readonly bool _headingEmpty;
 
         /// <summary>
         /// Creates a message.
@@ -27,7 +26,6 @@ namespace ChameleonForms.Component
         {
             _messageType = messageType;
             _heading = heading;
-            _headingEmpty = false;
             Initialise();
         }
         /// <summary>
@@ -40,14 +38,13 @@ namespace ChameleonForms.Component
         {
             _messageType = messageType;
             _heading = new HtmlString(heading);
-            _headingEmpty = string.IsNullOrEmpty(heading);
             Initialise();
         }
 
         /// <inheritdoc />
         public override IHtmlContent Begin()
         {
-            return Form.Template.BeginMessage(_messageType, _heading, _headingEmpty);
+            return Form.Template.BeginMessage(_messageType, _heading);
         }
 
         /// <inheritdoc />

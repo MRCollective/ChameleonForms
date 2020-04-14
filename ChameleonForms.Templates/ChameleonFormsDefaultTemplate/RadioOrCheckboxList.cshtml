@@ -1,0 +1,7 @@
+﻿@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.ListParams>
+<ul>
+@foreach (var i in Model.Items)
+{
+    <li>@i</li>
+}
+</ul>

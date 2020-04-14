@@ -16,7 +16,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Information, new HtmlString("Heading"), false);
+            var result = t.BeginMessage(MessageType.Information, new HtmlString("Heading"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -26,7 +26,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Information, new HtmlString(""), true);
+            var result = t.BeginMessage(MessageType.Information, new HtmlString(""));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -36,7 +36,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         {
             var t = new TwitterBootstrapFormTemplate();
 
-            var result = t.BeginMessage(MessageType.Failure, new HtmlString("Heading"), false);
+            var result = t.BeginMessage(MessageType.Failure, new HtmlString("Heading"));
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

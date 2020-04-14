@@ -12,6 +12,10 @@ namespace ChameleonForms
     // todo: Add type="email" etc. stuff
     // todo: Add support for non jquery unobtrusive validation
     // idea: Add support for other validation techniques e.g. Vuejs?
+    // Add FormTemplate.Default setting up - perhaps this can be via DI now?
+    // Add this extension equivalent for twitter bootstrap
+    // Add bootstrap4
+    // Add source files for unobtrusive validation - add to CDN instead?
 
     public static class ServiceCollectionExtensions
     {

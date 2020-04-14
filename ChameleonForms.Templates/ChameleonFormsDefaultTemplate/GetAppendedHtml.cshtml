@@ -1,0 +1,4 @@
+﻿@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.FieldConfigurationParams>
+@foreach (var html in Model.FieldConfiguration.AppendedHtml)
+{@html
+}

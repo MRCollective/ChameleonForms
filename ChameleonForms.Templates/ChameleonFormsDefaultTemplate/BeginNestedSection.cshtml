@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Html;
+@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.BeginSectionParams>
+@if (Model.Heading != null && !string.IsNullOrWhiteSpace(Model.Heading.ToHtmlString()))
+{
+            <dt>@Model.Heading</dt>
+}
+@Raw("            <dd>")
+@if (Model.LeadingHtml != null && !string.IsNullOrWhiteSpace(Model.LeadingHtml.ToHtmlString()))
+{
+    @Raw($@"                {Model.LeadingHtml.ToHtmlString()}
+")
+}
+@Raw($"                <dl{Model.HtmlAttributes.ToHtmlString()}>")

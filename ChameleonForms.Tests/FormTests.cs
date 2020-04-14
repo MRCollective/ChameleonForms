@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NSubstitute;
 using NUnit.Framework;
+using DefaultFormTemplate = ChameleonForms.Templates.Default.DefaultFormTemplate;
 
 namespace ChameleonForms.Tests
 {

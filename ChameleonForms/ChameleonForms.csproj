@@ -25,4 +25,9 @@
     <PackageReference Include="Humanizer" Version="2.5.16" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ChameleonForms.Core\ChameleonForms.Core.csproj" />
+    <ProjectReference Include="..\ChameleonForms.Templates\ChameleonForms.Templates.csproj" />
+  </ItemGroup>
+
 </Project>

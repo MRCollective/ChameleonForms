@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Html;
 
-namespace ChameleonForms.Generated.Default
+namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params
 {
     public class MessageParagraphParams
     {

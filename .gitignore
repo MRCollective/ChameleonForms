@@ -13,3 +13,4 @@ packages
 .vs
 /*.nupkg
 /ChameleonForms/ChameleonForms.xml
+*.cshtml.cs
