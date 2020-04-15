@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ChameleonForms.Tests
@@ -7,6 +8,8 @@ namespace ChameleonForms.Tests
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
+            services.AddSingleton<DefaultTemplate>();
             services.AddMvc();
             services.AddChameleonForms(humanizedLabels: false);
         }

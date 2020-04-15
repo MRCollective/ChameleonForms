@@ -34,6 +34,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChameleonForms.Example\ChameleonForms.Example.csproj" />
+    <ProjectReference Include="..\ChameleonForms.Templates\ChameleonForms.Templates.csproj" />
     <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ChameleonForms.Templates.Compiled">
+      <HintPath>..\ChameleonForms.Templates\bin\Debug\netcoreapp3.1\ChameleonForms.Templates.Compiled.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

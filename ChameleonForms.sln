@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2041
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{07599B0A-359D-45A6-90A0-D5D2356C7DFD}"
 	ProjectSection(SolutionItems) = preProject
@@ -30,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		web.config.transform = web.config.transform
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.AcceptanceTests", "ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj", "{67A08E34-2498-404D-9869-E13F4F496B3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.AcceptanceTests", "ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj", "{67A08E34-2498-404D-9869-E13F4F496B3E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-CB64-4380-A326-C5562973F32F}"
 	ProjectSection(SolutionItems) = preProject
@@ -81,9 +81,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-C
 		docs\why.md = docs\why.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Generated", "ChameleonForms.Generated\ChameleonForms.Generated.csproj", "{4BF5B0F5-22FE-41A5-BCE9-D9BDD1AF03A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Generated", "ChameleonForms.Generated\ChameleonForms.Generated.csproj", "{4BF5B0F5-22FE-41A5-BCE9-D9BDD1AF03A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Example", "ChameleonForms.Example\ChameleonForms.Example.csproj", "{10EC89A6-AFB9-4E74-B22A-5D8C42183668}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Templates", "ChameleonForms.Templates\ChameleonForms.Templates.csproj", "{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +121,12 @@ Global
 		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
