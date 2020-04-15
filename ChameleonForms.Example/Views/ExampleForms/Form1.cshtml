@@ -30,6 +30,7 @@
         @s.FieldFor(m => m.SomeCheckbox).AsDropDown()
         using (var ss = s.BeginSection("Nested section"))
         {
+            @ss.FieldFor(m => m.FileUpload)
         }
         @s.FieldFor(m => m.RequiredStringField).OverrideFieldHtml(new HtmlString("Custom html <b>she-yeah</b>!"))
         @s.FieldFor(m => m.TextAreaField).Cols(60).Rows(5).Label("Some Label").AutoFocus().TabIndex(1)

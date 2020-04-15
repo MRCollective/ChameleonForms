@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -301,6 +301,9 @@ namespace ChameleonForms.Example.Controllers
         public int? NullableInt { get; set; }
 
         public bool Boolean { get; set; }
+
+        [Required]
+        public IFormFile FileUpload { get; set; }
 
         public ChildViewModel Child { get; set; }
 

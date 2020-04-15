@@ -1,7 +1,7 @@
-﻿using System.Web;
-using ChameleonForms.Component.Config;
+﻿using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Http;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -23,8 +23,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override bool CanHandle()
         {
-            return true;
-            //return typeof(HttpPostedFile).IsAssignableFrom(FieldGenerator.Metadata.ModelType);
+            // todo: Support IFormFileCollection / IList<IFormFile>
+            return typeof(IFormFile).IsAssignableFrom(FieldGenerator.Metadata.ModelType);
         }
 
         /// <inheritdoc />
