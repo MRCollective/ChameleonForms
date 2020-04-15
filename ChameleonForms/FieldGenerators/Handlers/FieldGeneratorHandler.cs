@@ -217,8 +217,6 @@ namespace ChameleonForms.FieldGenerators.Handlers
             }
             else
             {
-                ModelExplorer modelExplorer = fieldGenerator.HtmlHelper.ViewContext.HttpContext.RequestServices.GetService<ModelExpressionProvider>().CreateModelExpression(fieldGenerator.HtmlHelper.ViewData, fieldGenerator.FieldProperty).ModelExplorer;
-                
                 htmlContent = fieldGenerator.HtmlHelper.TextBoxFor(fieldGenerator.FieldProperty
                     , attrs.ToDictionary()
                     );
