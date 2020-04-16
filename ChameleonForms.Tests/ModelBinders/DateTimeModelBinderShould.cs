@@ -70,7 +70,8 @@ namespace ChameleonForms.Tests.ModelBinders
             var model = BindModel(context);
 
             Assert.That(model, Is.EqualTo(default(T)));
-            //Assert.That(context.ModelState.IsValid);
+            // Value required if DateTime, not if DateTime?
+            Assert.That(context.ModelState.IsValid, Is.EqualTo(typeof(T) == typeof(DateTime?)));
         }
 
         [Test]
@@ -79,7 +80,6 @@ namespace ChameleonForms.Tests.ModelBinders
             _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, "invalid" } });
             
             var context = ArrangeBindingContext(x => x.DisplayMetadata.DisplayFormatString = "{0:dd/MM/yyyy}");
-            //context.ModelMetadata.DisplayFormatString = "{0:dd/MM/yyyy}";
 
             var model = BindModel(context);
 
@@ -102,7 +102,6 @@ namespace ChameleonForms.Tests.ModelBinders
         {
             _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, "12/12/2000" } });
             var context = ArrangeBindingContext(x => x.DisplayMetadata.DisplayFormatString = "{0:dd/MM/yyyy}");
-            //context.ModelMetadata.DisplayFormatString = "{0:dd/MM/yyyy}";
 
             var model = BindModel(context);
 
@@ -115,7 +114,6 @@ namespace ChameleonForms.Tests.ModelBinders
             _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, "12/12/2000" } });
             
             var context = ArrangeBindingContext(x => x.DisplayMetadata.DisplayFormatString = "{0:dd/MM/yyyy}");
-            //context.ModelMetadata.DisplayFormatString = "{0:dd/MM/yyyy}";
 
             var model = BindModel(context);
 
@@ -128,12 +126,10 @@ namespace ChameleonForms.Tests.ModelBinders
             using (ChangeCulture.To(culture))
             {
                 var val = DateTime.UtcNow;
-                string s = val.ToString("g");
-
-                _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, s } });
+                var s = val.ToString("g");
                 val = DateTime.ParseExact(s, "g", CultureInfo.CurrentCulture);
+                _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, s } });
                 var context = ArrangeBindingContext(x => x.DisplayMetadata.DisplayFormatString = "{0:g}");
-                //context.ModelMetadata.DisplayFormatString = "{0:g}";
 
                 var model = BindModel(context);
 

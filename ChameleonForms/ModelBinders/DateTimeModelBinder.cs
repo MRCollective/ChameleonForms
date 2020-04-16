@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -21,25 +17,20 @@ namespace ChameleonForms.ModelBinders
 
             var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
             var submittedValue = value == default(ValueProviderResult) ? null : value.FirstValue;
-            var isNullable = bindingContext.ModelType.IsGenericType && bindingContext.ModelType.GetGenericTypeDefinition() == typeof(Nullable<>);
+            var isNullable = bindingContext.ModelType.IsGenericType &&
+                             bindingContext.ModelType.GetGenericTypeDefinition() == typeof(Nullable<>);
 
-            if(isNullable && string.IsNullOrEmpty(submittedValue))
+            if (isNullable && string.IsNullOrEmpty(submittedValue))
             {
                 bindingContext.Result = ModelBindingResult.Success(null);
             }
-            else if (string.IsNullOrEmpty(submittedValue) || !DateTime.TryParseExact(submittedValue
-                , formatString.Replace("{0:", "").Replace("}", "")
-                , CultureInfo.CurrentCulture.DateTimeFormat
-                , DateTimeStyles.None
-                , out DateTime parsedDate
-                ))
+            else if (string.IsNullOrEmpty(submittedValue) ||
+                !DateTime.TryParseExact(submittedValue, formatString
+                    .Replace("{0:", "")
+                    .Replace("}", ""), CultureInfo.CurrentCulture.DateTimeFormat, DateTimeStyles.None, out DateTime parsedDate))
             {
-                bindingContext.ModelState.AddModelError(bindingContext.ModelName
-                    , string.Format("The value '{0}' is not valid for {1}. Format of date is {2}."
-                        , submittedValue ?? ""
-                        , bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.PropertyName
-                        , formatString
-                    ));
+                bindingContext.ModelState.AddModelError(bindingContext.ModelName,
+                    $"The value '{submittedValue ?? ""}' is not valid for {bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.PropertyName}. Format of date is {formatString}.");
             }
             else
             {

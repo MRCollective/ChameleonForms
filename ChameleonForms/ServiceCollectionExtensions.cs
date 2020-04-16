@@ -34,6 +34,7 @@ namespace ChameleonForms
 
                 x.ModelBinderProviders.Insert(0, new DateTimeModelBinderProvider());
                 x.ModelBinderProviders.Insert(0, new FlagsEnumModelBinderProvider());
+                x.ModelBinderProviders.Insert(0, new EnumListModelBinderProvider());
             });
 
             services.AddSingleton<IValidationAttributeAdapterProvider, RequiredFlagsEnumAttributeAdapterProvider>();
