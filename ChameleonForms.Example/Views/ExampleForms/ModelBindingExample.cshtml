@@ -31,9 +31,10 @@
         @Model.ModifyConfig(s.FieldFor(m => m.OptionalListId))
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredListIds))
         @Model.ModifyConfig(s.FieldFor(m => m.RequiredNullableListIds))
-        @*        @Model.ModifyConfig(s.FieldFor(m => m.OptionalListIds))*@
+        @*Model.ModifyConfig(s.FieldFor(m => m.OptionalListIds))*@
         @Model.ModifyConfig(s.FieldFor(m => m.OptionalNullableListIds))
         @Model.ModifyConfig(s.FieldFor(m => m.Choice))
+        @Model.ModifyConfig(s.FieldFor(m => m.Textarea))
     }
     using (var n = f.BeginNavigation())
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
+namespace ChameleonForms.AcceptanceTests.Helpers.Pages
 {
     internal interface IModelFieldValue
     {
@@ -46,15 +46,9 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
             get
             {
                 if (!HasMultipleValues)
-                {
-                    return new string[] { Value };
-                }
-
+                    throw new InvalidOperationException("Field does not have multiple values!");
                 if (_value == null)
-                {
                     return new string[] { };
-                }
-
                 var underlyingType = Nullable.GetUnderlyingType(_value.GetType()) ?? _value.GetType();
                 if (underlyingType.IsEnum)
                     return Enum.GetValues(underlyingType)
@@ -71,16 +65,11 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
         {
             get
             {
-                string val = null;
+                var val = string.Empty;
                 if (HasMultipleValues)
-                {
-                    val = string.Join(", ", Values);
-                }
+                    val = string.Join(",", Values);
                 else if (_value != null)
-                {
                     val = _value is bool ? _value.ToString().ToLower() : string.Format(CultureInfo.CurrentCulture, _format, _value);
-                }
-
                 return val;
             }
         }

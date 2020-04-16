@@ -1,20 +1,21 @@
-﻿using ChameleonForms.AcceptanceTests.Helpers;
-using ChameleonForms.AcceptanceTests.ModelBinding.Pages;
-using Microsoft.AspNetCore.Mvc.Testing;
-using RazorPagesProject.Tests.Helpers;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using ChameleonForms.AcceptanceTests.Helpers;
+using ChameleonForms.AcceptanceTests.Helpers.Pages;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Shouldly;
 using Xunit;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding
+namespace ChameleonForms.AcceptanceTests.IntegrationTests
 {
-    public class ChangingContextShould : IClassFixture<WebApplicationFactory<ChameleonForms.Example.Startup>>
+    public class ChangingContextShould : IClassFixture<WebApplicationFactory<Example.Startup>>
     {
         private readonly HttpClient _client;
-        private readonly WebApplicationFactory<ChameleonForms.Example.Startup>
+        private readonly WebApplicationFactory<Example.Startup>
             _factory;
 
-        public ChangingContextShould(WebApplicationFactory<ChameleonForms.Example.Startup> factory)
+        public ChangingContextShould(WebApplicationFactory<Example.Startup> factory)
         {
             _factory = factory;
             _client = factory.CreateClient();
@@ -26,10 +27,10 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
             var enteredViewModel = ObjectMother.ChangingContextViewModels.DifferentViewModel;
 
             var page = await _client.GetPageAsync<ChangingContextPage>("/ExampleForms/ChangingContext");
-            page = await page.PostDifferentModelAsync(_client, enteredViewModel);;
+            page = await page.PostDifferentModelAsync(enteredViewModel);;
 
             IsSame.ViewModelAs(enteredViewModel, page.ReadDifferentModel());
-            Assert.False(page.HasValidationErrors());
+            page.HasValidationErrors().ShouldBeFalse();
         }
 
         [Fact]
@@ -38,10 +39,10 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
             var enteredViewModel = ObjectMother.ChangingContextViewModels.ChildViewModel;
 
             var page = await _client.GetPageAsync<ChangingContextPage>("/ExampleForms/ChangingContext");
-            page = await page.PostChildModelAsync(_client, enteredViewModel);
+            page = await page.PostChildModelAsync(enteredViewModel);
 
             IsSame.ViewModelAs(enteredViewModel, page.ReadChildModel());
-            Assert.False(page.HasValidationErrors());
+            page.HasValidationErrors().ShouldBeFalse();
         }
 
         [Fact]
@@ -50,10 +51,10 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding
             var enteredViewModel = ObjectMother.ChangingContextViewModels.ParentViewModel;
 
             var page = await _client.GetPageAsync<ChangingContextPage>("/ExampleForms/ChangingContext");
-            page = await page.PostParentModelAsync(_client, enteredViewModel);
+            page = await page.PostParentModelAsync(enteredViewModel);
             
             IsSame.ViewModelAs(enteredViewModel, page.ReadParentModel());
-            Assert.False(page.HasValidationErrors());
+            page.HasValidationErrors().ShouldBeFalse();
         }
     }
 }

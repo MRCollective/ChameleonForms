@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
+namespace ChameleonForms.AcceptanceTests.Helpers.Pages
 {
     internal interface IModelFieldType
     {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using AngleSharp.Dom.Html;
+using AngleSharp.Html.Dom;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
+namespace ChameleonForms.AcceptanceTests.Helpers.Pages.Fields
 {
     internal class SelectField : IField
     {
@@ -12,21 +12,22 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
             _select = element;
         }
 
-        //public void Set(IModelFieldValue value)
-        //{
-        //    if (!_select.IsMultiple)
-        //    {
-        //        _select.SelectByValue(value.Value);
-        //        return;
-        //    }
+        public void Set(IModelFieldValue value)
+        {
+            _select.Options.ToList().ForEach(o => o.IsSelected = false);
 
-        //    _select.DeselectAll();
-        //    if (value.HasMultipleValues)
-        //        foreach (var selectedValue in value.Values)
-        //            _select.SelectByValue(selectedValue);
-        //    else
-        //        _select.SelectByValue(value.Value);
-        //}
+            if (!_select.IsMultiple)
+            {
+                _select.Options.Single(o => o.Value == value.Value).IsSelected = true;
+                return;
+            }
+
+            if (value.HasMultipleValues)
+                foreach (var selectedValue in value.Values)
+                    _select.Options.Single(o => o.Value == selectedValue).IsSelected = true;
+            else
+                _select.Options.Single(o => o.Value == value.Value).IsSelected = true;
+        }
 
         public object Get(IModelFieldType fieldType)
         {

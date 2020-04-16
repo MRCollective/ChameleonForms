@@ -1,60 +1,68 @@
-﻿using AngleSharp.Dom.Html;
-using ChameleonForms.AcceptanceTests.ModelBinding.Pages;
-using ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields;
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
+using ChameleonForms.AcceptanceTests.Helpers.Pages.Fields;
 
 namespace ChameleonForms.AcceptanceTests.Helpers.Pages
 {
-    public abstract class ChameleongFormsPageBase
+    public interface IChameleonFormsPage {}
+
+    public abstract class ChameleonFormsPage<T> : IChameleonFormsPage where T : class, new()
     {
-        protected ChameleongFormsPageBase(IHtmlDocument content)
+        protected ChameleonFormsPage(IDocument content)
         {
-            this.Content = content;
+            Content = content;
         }
 
-        protected IHtmlDocument Content { get; set; }
+        protected IDocument Content { get; set; }
 
-        protected static void InputModel(object model, string prefix, List<KeyValuePair<string, string>> values)
+        public string Source => Content.Body.InnerHtml;
+
+        public void InputModel(T model)
+        {
+            InputModel(model, "");
+        }
+
+        private void InputModel(object model, string prefix)
         {
             foreach (var property in model.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 var propertyName = string.IsNullOrEmpty(prefix)
                     ? property.Name
-                    : string.Format("{0}.{1}", prefix, property.Name);
+                    : $"{prefix}.{property.Name}";
 
                 if (property.IsReadonly())
                     continue;
 
                 if (!property.PropertyType.IsValueType && property.PropertyType != typeof(string) && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
                 {
-                    InputModel(property.GetValue(model, null), propertyName, values);
+                    InputModel(property.GetValue(model, null), propertyName);
                     continue;
                 }
 
-                var format = PropertyExtensions.GetFormatStringForProperty(property);
-                foreach (var val in new ModelFieldValue(property.GetValue(model, null), format).Values)
-                {
-                    if (val != null)
-                    {
-                        values.Add(new KeyValuePair<string, string>(propertyName, val));
-                    }
-                }
+                var elements = Content.GetElementsByName(propertyName);
+                var format = property.GetFormatString();
+                FieldFactory.Create(elements).Set(new ModelFieldValue(property.GetValue(model, null), format));
             }
         }
 
-        protected object GetFormValues(Type typeOfModel, string prefix)
+        public T GetFormValues()
+        {
+            return (T)GetFormValues(typeof(T), "");
+        }
+
+        private object GetFormValues(Type typeOfModel, string prefix)
         {
             var vm = Activator.CreateInstance(typeOfModel);
             foreach (var property in vm.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 var propertyName = string.IsNullOrEmpty(prefix)
                     ? property.Name
-                    : string.Format("{0}.{1}", prefix, property.Name);
+                    : $"{prefix}.{property.Name}";
 
                 if (property.IsReadonly())
                     continue;
@@ -67,7 +75,7 @@ namespace ChameleonForms.AcceptanceTests.Helpers.Pages
                 }
 
                 var elements = Content.GetElementsByName(propertyName);
-                var format = PropertyExtensions.GetFormatStringForProperty(property);
+                var format = property.GetFormatString();
                 property.SetValue(vm, FieldFactory.Create(elements).Get(new ModelFieldType(property.PropertyType, format)), null);
             }
             return vm;
@@ -77,29 +85,36 @@ namespace ChameleonForms.AcceptanceTests.Helpers.Pages
         {
             return Content.QuerySelectorAll(".field-validation-error").Any();
         }
-    }
-
-    public abstract class ChameleonFormsPage<TViewModel> : ChameleongFormsPageBase
-    {
-        protected ChameleonFormsPage(IHtmlDocument content) : base(content)
+        
+        public TNewPageType GetComponent<TNewPageType, TNewModelType>() where TNewPageType : ChameleonFormsPage<TNewModelType>
+            where TNewModelType : class, new()
         {
+            return (TNewPageType) Activator.CreateInstance(typeof(TNewPageType), Content);
         }
 
-        internal static IEnumerable<KeyValuePair<string, string>> InputModel(TViewModel model, string prefix = "")
+        public TNewPageType GetComponent<TNewPageType>() where TNewPageType : ChameleonFormsPage<T>
         {
-            var list = new List<KeyValuePair<string, string>>();
-            InputModel(model, prefix, list);
-            return list;
+            return (TNewPageType)Activator.CreateInstance(typeof(TNewPageType), Content);
         }
 
-        public TViewModel GetFormValues()
+        public async Task<TNewPageType> NavigateToAsync<TNewPageType>(IElement elementToNavigateBy)
         {
-            return (TViewModel)GetFormValues(typeof(TViewModel), "");
-        }
+            IDocument newPage;
 
-        public T GetComponent<T>() where T : ChameleongFormsPageBase
-        {
-            return (T)Activator.CreateInstance(typeof(T), Content);
+            if (elementToNavigateBy is IHtmlButtonElement button)
+            {
+                newPage = await button.SubmitAsync();
+            }
+            else if (elementToNavigateBy is IHtmlInputElement input)
+            {
+                newPage = await input.SubmitAsync();
+            }
+            else
+            {
+                throw new NotSupportedException(elementToNavigateBy.GetType() + " can't be used for navigation.");
+            }
+
+            return (TNewPageType) Activator.CreateInstance(typeof(TNewPageType), newPage);
         }
     }
 }

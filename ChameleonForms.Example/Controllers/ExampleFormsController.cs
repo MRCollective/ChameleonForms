@@ -206,8 +206,9 @@ namespace ChameleonForms.Example.Controllers
         [Required]
         [ExistsIn("List", "Id", "Name")]
         public IEnumerable<int?> RequiredNullableListIds { get; set; }
-        [ExistsIn("List", "Id", "Name")]
-        public IEnumerable<int> OptionalListIds { get; set; }
+        /*todo: Support this
+         [ExistsIn("List", "Id", "Name")]
+        public IEnumerable<int> OptionalListIds { get; set; }*/
         [ExistsIn("List", "Id", "Name")]
         public IEnumerable<int?> OptionalNullableListIds { get; set; }
 
@@ -220,6 +221,9 @@ namespace ChameleonForms.Example.Controllers
         [Required]
         [ExistsIn("ChoicesAsTuples", "Item1", "Item2")]
         public Int32? Choice { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Textarea { get; set; }
     }
 
     public class BasicViewModel

@@ -1,9 +1,8 @@
 ﻿using ChameleonForms.AcceptanceTests.Helpers.Pages;
-using ChameleonForms.AcceptanceTests.ModelBinding;
 using System.Collections;
 using System.Linq;
 using System.Reflection;
-using Xunit;
+using Shouldly;
 
 namespace ChameleonForms.AcceptanceTests.Helpers
 {
@@ -34,21 +33,21 @@ namespace ChameleonForms.AcceptanceTests.Helpers
                 }
 
                 var expectedValue = property.GetValue(_expectedViewModel, null);
-                var actualValue = property.GetValue(actualViewModel, null);
+                var viewModelPropertyValue = property.GetValue(actualViewModel, null);
 
                 if (!property.PropertyType.IsValueType && property.PropertyType != typeof(string) && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
                 {
-                    IsSame.ViewModelAs(expectedValue, actualValue);
+                    IsSame.ViewModelAs(expectedValue, viewModelPropertyValue);
                     continue;
                 }
 
                 if (expectedValue is IEnumerable && !(expectedValue as IEnumerable).Cast<object>().Any())
                 {
-                    Assert.Null(actualValue);
+                    viewModelPropertyValue.ShouldBeNull(customMessage: $"View model property: {property.Name}");
                 }
                 else
                 {
-                    Assert.Equal(expectedValue, actualValue);
+                    viewModelPropertyValue.ShouldBe(expectedValue, $"View model property: {property.Name}");
                 }
             }
 

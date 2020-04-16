@@ -2,7 +2,7 @@
 using System.Linq;
 using AngleSharp.Dom;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
+namespace ChameleonForms.AcceptanceTests.Helpers.Pages.Fields
 {
     internal class MultipleFields : IField
     {
@@ -11,6 +11,14 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
         public MultipleFields(IEnumerable<IElement> elements)
         {
             _elements = elements;
+        }
+
+        public void Set(IModelFieldValue value)
+        {
+            foreach (var element in _elements)
+            {
+                FieldFactory.Create(new[] { element }).Set(value);
+            }
         }
 
         public object Get(IModelFieldType fieldType)

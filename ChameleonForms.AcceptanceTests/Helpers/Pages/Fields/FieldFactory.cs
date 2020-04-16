@@ -1,9 +1,9 @@
-﻿using AngleSharp.Dom;
-using AngleSharp.Dom.Html;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
+namespace ChameleonForms.AcceptanceTests.Helpers.Pages.Fields
 {
     internal static class FieldFactory
     {
@@ -32,8 +32,11 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
             if (tagName == "input" && (type == "checkbox" || type == "radio"))
                 return new BinaryInputField((IHtmlInputElement)element);
 
-            if (tagName == "input" || tagName == "textarea")
+            if (tagName == "input")
                 return new TextInputField((IHtmlInputElement)element);
+
+            if (tagName == "textarea")
+                return new TextInputField((IHtmlTextAreaElement)element);
 
             if (tagName == "select")
                 return new SelectField((IHtmlSelectElement)element);

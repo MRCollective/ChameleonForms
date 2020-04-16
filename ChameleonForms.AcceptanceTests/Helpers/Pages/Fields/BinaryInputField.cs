@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
-using AngleSharp.Dom;
-using AngleSharp.Dom.Html;
+using AngleSharp.Html.Dom;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
+namespace ChameleonForms.AcceptanceTests.Helpers.Pages.Fields
 {
     internal class BinaryInputField : IField
     {
@@ -16,36 +15,34 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages.Fields
             _isCheckbox = element.GetAttribute("type").ToLower() == "checkbox";
         }
 
-        //public void Set(IModelFieldValue value)
-        //{
-        //    // Deselect if selected checkbox
-        //    if (_isCheckbox && _element.IsSelected)
-        //        _element.DoClick();
+        public void Set(IModelFieldValue value)
+        {
+            // De-check everything to start with a clean slate
+            _element.IsChecked = false;
 
-        //    if (value.HasMultipleValues)
-        //    {
-        //        if (value.Values.Contains(_element.GetAttribute("value"), StringComparer.InvariantCultureIgnoreCase))
-        //            _element.DoClick();
-        //    }
-        //    else
-        //    {
-        //        // Check a single checkbox wrapping a true boolean field value
-        //        if (_isCheckbox && value.IsTrue)
-        //            _element.DoClick();
-        //        else if (_element.GetAttribute("value").Equals(value.Value, StringComparison.InvariantCultureIgnoreCase))
-        //            _element.DoClick();
-        //    }
-        //}
+            if (value.HasMultipleValues)
+            {
+                if (value.Values.Contains(_element.Value, StringComparer.InvariantCultureIgnoreCase))
+                    _element.IsChecked = true;
+            }
+            else
+            {
+                // Check a single checkbox wrapping a true boolean field value
+                if (_isCheckbox && value.IsTrue)
+                    _element.IsChecked = true;
+                else if (_element.Value.Equals(value.Value, StringComparison.InvariantCultureIgnoreCase))
+                    _element.IsChecked = true;
+            }
+        }
 
         public object Get(IModelFieldType fieldType)
         {
-            return fieldType.GetValueFromString(_element.Value);
-            //if (_isCheckbox && fieldType.IsBoolean)
-            //    return _element.IsSelected;
+            if (_isCheckbox && fieldType.IsBoolean)
+                return _element.IsChecked;
 
-            //return _element.IsSelected
-            //    ? fieldType.GetValueFromString(_element.GetAttribute("value"))
-            //    : null;
+            return _element.IsChecked
+                ? fieldType.GetValueFromString(_element.GetAttribute("value"))
+                : null;
         }
     }
 }

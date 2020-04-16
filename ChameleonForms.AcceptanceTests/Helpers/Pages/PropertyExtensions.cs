@@ -15,7 +15,7 @@ namespace ChameleonForms.AcceptanceTests.Helpers.Pages
             return false;
         }
 
-        public static string GetFormatStringForProperty(PropertyInfo property)
+        public static string GetFormatString(this PropertyInfo property)
         {
             var displayFormatAttr = property.GetCustomAttributes(typeof(DisplayFormatAttribute), false);
             var format = "{0}";

@@ -1,45 +1,36 @@
-﻿using AngleSharp.Dom.Html;
-using ChameleonForms.AcceptanceTests.Helpers.Pages;
+﻿using System.Threading.Tasks;
+using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
 using ChameleonForms.Example.Controllers;
-using RazorPagesProject.Tests.Helpers;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 
-namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
+namespace ChameleonForms.AcceptanceTests.Helpers.Pages
 {
     public class ChangingContextPage : ChameleonFormsPage<ParentViewModel>
     {
-        public ChangingContextPage(IHtmlDocument content) : base(content)
+        public ChangingContextPage(IDocument content) : base(content)
         {
         }
 
         public BasicViewModel ReadDifferentModel()
         {
-            return GetComponent<PageAsDifferentModel>().GetFormValues();
+            return GetComponent<PageAsDifferentModel, BasicViewModel>().GetFormValues();
         }
 
-        public async Task<ChangingContextPage> PostDifferentModelAsync(HttpClient client, BasicViewModel vm)
+        public async Task<ChangingContextPage> PostDifferentModelAsync(BasicViewModel vm)
         {
-            return new ChangingContextPage(await HtmlHelpers.GetDocumentAsync(await client.SendAsync(Content.QuerySelectorAll("form").OfType<IHtmlFormElement>()
-                , (IHtmlButtonElement)Content.QuerySelector("button[type=submit].different-model")
-                , PageAsDifferentModel.InputModel(vm)
-                )));
+            GetComponent<PageAsDifferentModel, BasicViewModel>().InputModel(vm);
+            return await NavigateToAsync<ChangingContextPage>(Content.QuerySelector("button[type=submit].different-model"));
         }
 
         public ChildViewModel ReadChildModel()
         {
-            return GetComponent<PageAsChildModel>().GetFormValues();
+            return GetComponent<PageAsChildModel, ChildViewModel>().GetFormValues();
         }
 
-        public async Task<ChangingContextPage> PostChildModelAsync(HttpClient client, ChildViewModel vm)
+        public async Task<ChangingContextPage> PostChildModelAsync(ChildViewModel vm)
         {
-            HttpResponseMessage response = await client.SendAsync(Content.QuerySelectorAll("form").OfType<IHtmlFormElement>()
-                , (IHtmlButtonElement)Content.QuerySelector("button[type=submit].child-model")
-                , PageAsChildModel.InputModel(vm)
-                );
-            IHtmlDocument content = await HtmlHelpers.GetDocumentAsync(response);
-            return new ChangingContextPage(content);
+            GetComponent<PageAsChildModel, ChildViewModel>().InputModel(vm);
+            return await NavigateToAsync<ChangingContextPage>(Content.QuerySelector("button[type=submit].child-model"));
         }
 
         public ParentViewModel ReadParentModel()
@@ -47,14 +38,10 @@ namespace ChameleonForms.AcceptanceTests.ModelBinding.Pages
             return GetFormValues();
         }
 
-        public async Task<ChangingContextPage> PostParentModelAsync(HttpClient client, ParentViewModel vm)
+        public async Task<ChangingContextPage> PostParentModelAsync(ParentViewModel vm)
         {
-            HttpResponseMessage response = await client.SendAsync(Content.QuerySelectorAll("form").OfType<IHtmlFormElement>()
-                , (IHtmlButtonElement)Content.QuerySelector("button[type=submit].parent-model")
-                , InputModel(vm)
-                );
-            IHtmlDocument content = await HtmlHelpers.GetDocumentAsync(response);
-            return new ChangingContextPage(content);
+            InputModel(vm);
+            return await NavigateToAsync<ChangingContextPage>(Content.QuerySelector("button[type=submit].parent-model"));
         }
 
         public class PageAsDifferentModel : ChameleonFormsPage<BasicViewModel>
