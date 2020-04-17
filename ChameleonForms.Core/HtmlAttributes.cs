@@ -104,6 +104,16 @@ namespace ChameleonForms
         }
 
         /// <summary>
+        /// Returns whether or not a value is set for the given attribute.
+        /// </summary>
+        /// <param name="key">The name of the HTML attribute to check</param>
+        /// <returns>Whether or not there is a value set for the attribute</returns>
+        public bool Has(string key)
+        {
+            return Attributes.ContainsKey(key.ToLower());
+        }
+
+        /// <summary>
         /// Adds or updates a HTML attribute with a given value.
         /// </summary>
         /// <param name="key">The name of the HTML attribute to add/update</param>

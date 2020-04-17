@@ -9,13 +9,19 @@ using System;
 namespace ChameleonForms
 {
     // todo: Add int/datetime client side validation support. Context: https://github.com/jbogard/aspnetwebstack/blob/730c683da2458430d36e3e360aba68932ba69fa4/src/System.Web.Mvc/ClientDataTypeModelValidatorProvider.cs, https://github.com/aspnet/Mvc/pull/2950, https://github.com/aspnet/Mvc/pull/2812, https://github.com/aspnet/Mvc/issues/4005, https://github.com/jquery-validation/jquery-validation/issues/626
-    // todo: Add type="email" etc. stuff
     // todo: Add support for non jquery unobtrusive validation
     // idea: Add support for other validation techniques e.g. Vuejs?
     // Add FormTemplate.Default setting up - perhaps this can be via DI now?
     // Add this extension equivalent for twitter bootstrap
     // Add bootstrap4
     // Add source files for unobtrusive validation - add to CDN instead?
+    // documentation update
+    // xmldoc comment check
+    // Add public api approval test
+    // email and url fields
+    // review the datetime "g" thing
+    // Add tag helper equivalent to the comparison example
+    // Update all dependencies to latest versions
 
     public static class ServiceCollectionExtensions
     {

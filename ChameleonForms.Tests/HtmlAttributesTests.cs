@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using ChameleonForms.Templates;
 using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Templates
+namespace ChameleonForms.Tests
 {
     [TestFixture]
     class HtmlAttributesShould
@@ -263,6 +262,29 @@ namespace ChameleonForms.Tests.Templates
             }
 
             Assert.That(h.ToHtmlString(), Is.EqualTo(" name=\"honey-badger\""));
+        }
+
+        [Test]
+        public void Has_returns_false_for_attribute_not_set()
+        {
+            var htmlAttributes = new HtmlAttributes();
+            Assert.That(htmlAttributes.Has("non-existant-attribute"), Is.False);
+        }
+
+        [Test]
+        public void Has_returns_true_for_attribute_set()
+        {
+            var htmlAttributes = new HtmlAttributes().Attr("attr", "value");
+            Assert.That(htmlAttributes.Has("attr"), Is.True);
+        }
+
+        [Test]
+        [TestCase("attr", "Attr")]
+        [TestCase("Attr", "attr")]
+        public void Has_returns_true_for_attribute_set_case_insensitive(string attribute, string attributeToCheck)
+        {
+            var htmlAttributes = new HtmlAttributes().Attr(attribute, "setvalue");
+            Assert.That(htmlAttributes.Has(attributeToCheck), Is.True);
         }
     }
 }

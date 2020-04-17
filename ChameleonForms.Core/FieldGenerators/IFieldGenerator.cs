@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
@@ -41,6 +42,12 @@ namespace ChameleonForms.FieldGenerators
         /// </summary>
         /// <returns>The id</returns>
         string GetFieldDisplayName();
+
+        /// <summary>
+        /// Returns any custom attributes against the field being generated.
+        /// </summary>
+        /// <returns>The attributes</returns>
+        IEnumerable<Attribute> GetCustomAttributes();
     }
 
     /// <summary>

@@ -142,6 +142,33 @@ namespace ChameleonForms.Tests.FieldGenerator
         public int ReadonlyInt { get; set; }
 
         public ChildViewModel Child { get; set; }
+
+        public int PropertyWithoutAttributes { get; set; }
+
+        [Required]
+        [System.ComponentModel.DataAnnotations.Range(1, 3)]
+        [DataType(DataType.PostalCode)]
+        public int PropertyWithAttributes { get; set; }
+
+        public byte ByteField { get; set; }
+        public sbyte SbyteField { get; set; }
+        public short ShortField { get; set; }
+        public ushort UshortField { get; set; }
+        public int IntField { get; set; }
+        public int? NullableIntField { get; set; }
+        public uint UintField { get; set; }
+        public long LongField { get; set; }
+        public ulong UlongField { get; set; }
+        public float FloatField { get; set; }
+        public double DoubleField { get; set; }
+        public decimal DecimalField { get; set; }
+
+        [DataType(DataType.Currency)]
+        public decimal MoneyField { get; set; }
+        [System.ComponentModel.DataAnnotations.Range(1, 10)]
+        public decimal IntWithRange { get; set; }
+        [System.ComponentModel.DataAnnotations.Range(0.1, 0.9)]
+        public decimal DecimalWithRange { get; set; }
     }
 
     public class IntListItem
@@ -244,6 +271,26 @@ namespace ChameleonForms.Tests.FieldGenerator
                 var config = generator.PrepareFieldConfiguration(fieldConfig, FieldParent.Section);
                 var actual = generator.GetLabelHtml(config).ToString();
                 Assert.That(actual, Is.EqualTo("Use this display name"));
+            }
+
+            [Test]
+            public void GetCustomAttributes_should_return_empty_list_for_property_with_no_attributes()
+            {
+                var generator = Arrange(m => m.PropertyWithoutAttributes);
+
+                var attributes = generator.GetCustomAttributes();
+
+                Assert.That(attributes, Is.Empty);
+            }
+
+            [Test]
+            public void GetCustomAttributes_should_return_attributes_for_property_with_attributes()
+            {
+                var generator = Arrange(m => m.PropertyWithAttributes);
+
+                var attributes = generator.GetCustomAttributes();
+
+                Assert.That(attributes, Has.Length.EqualTo(3));
             }
         }
     }

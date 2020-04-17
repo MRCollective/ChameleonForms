@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Web;
-
-using ChameleonForms.Templates;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NUnit.Framework;
 
-namespace ChameleonForms.Tests.Templates
+namespace ChameleonForms.Tests
 {
     class LazyHtmlAttributesShould
     {

@@ -2,13 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <EnableDefaultRazorGenerateItems>true</EnableDefaultRazorGenerateItems>
-    <RazorCompileOnBuild>True</RazorCompileOnBuild>
-    <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject />
-    <RazorOutputPath>d:\Workshop\ChameleonForms\ChameleonForms\bin\</RazorOutputPath>
-    <RazorTargetName>HtmlHelperRazorAssembly</RazorTargetName>
     <EnableDefaultContentItems>True</EnableDefaultContentItems>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>

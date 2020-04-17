@@ -97,6 +97,62 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         /// <param name="numCols">The number of cols for the textarea</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Cols(int numCols);
+        
+        /// <summary>
+        /// Sets the minimum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="min">The minimum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Min(long min);
+
+        /// <summary>
+        /// Sets the maximum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="max">The maximum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Max(long max);
+
+        /// <summary>
+        /// Sets the minimum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="min">The minimum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Min(decimal min);
+
+        /// <summary>
+        /// Sets the maximum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="max">The maximum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Max(decimal max);
+
+        /// <summary>
+        /// Sets the minimum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="min">The minimum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Min(string min);
+
+        /// <summary>
+        /// Sets the maximum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="max">The maximum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Max(string max);
+
+        /// <summary>
+        /// Sets the stepping interval to use for numeric text controls.
+        /// </summary>
+        /// <param name="step">The stepping interval</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Step(decimal step);
+
+        /// <summary>
+        /// Sets the stepping interval to use for numeric text controls.
+        /// </summary>
+        /// <param name="step">The stepping interval</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Step(long step);
 
         /// <summary>
         /// Sets the field to be disabled (value not submitted, can not click).

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
@@ -111,6 +112,11 @@ namespace ChameleonForms.Tests.FieldGenerator.Handlers
         }
 
         public string GetFieldDisplayName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Attribute> GetCustomAttributes()
         {
             throw new NotImplementedException();
         }

@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-
 using ChameleonForms.FieldGenerators.Handlers;
 using ChameleonForms.Metadata;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace ChameleonForms.Attributes

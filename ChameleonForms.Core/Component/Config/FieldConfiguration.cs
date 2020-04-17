@@ -88,6 +88,62 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Cols(int numCols);
 
         /// <summary>
+        /// Sets the minimum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="min">The minimum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Min(long min);
+
+        /// <summary>
+        /// Sets the maximum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="max">The maximum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Max(long max);
+
+        /// <summary>
+        /// Sets the minimum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="min">The minimum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Min(decimal min);
+
+        /// <summary>
+        /// Sets the maximum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="max">The maximum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Max(decimal max);
+
+        /// <summary>
+        /// Sets the minimum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="min">The minimum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Min(string min);
+
+        /// <summary>
+        /// Sets the maximum value to accept for numeric text controls.
+        /// </summary>
+        /// <param name="max">The maximum value to accept</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Max(string max);
+
+        /// <summary>
+        /// Sets the stepping interval to use for numeric text controls.
+        /// </summary>
+        /// <param name="step">The stepping interval</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Step(decimal step);
+
+        /// <summary>
+        /// Sets the stepping interval to use for numeric text controls.
+        /// </summary>
+        /// <param name="step">The stepping interval</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Step(long step);
+
+        /// <summary>
         /// Sets the field to be disabled (value not submitted, can not click).
         /// </summary>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
@@ -418,6 +474,62 @@ namespace ChameleonForms.Component.Config
         public IFieldConfiguration Cols(int numCols)
         {
             Attr("cols", numCols);
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Min(long min)
+        {
+            Attr("min", min);
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Max(long max)
+        {
+            Attr("max", max);
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Min(decimal min)
+        {
+            Attr("min", min);
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Max(decimal max)
+        {
+            Attr("max", max);
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Min(string min)
+        {
+            Attr("min", min);
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Max(string max)
+        {
+            Attr("max", max);
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Step(decimal step)
+        {
+            Attr("step", step);
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Step(long step)
+        {
+            Attr("step", step);
             return this;
         }
 

@@ -18,20 +18,20 @@ namespace ChameleonForms.FieldGenerators.Handlers
 {
     internal static class FieldGeneratorHandler
     {
-        public static readonly List<Type> NumericTypes = new List<Type>
+        public static readonly HashSet<Type> IntTypes = new HashSet<Type>(new Type[]
         {
-            typeof (byte),
-            typeof (sbyte),
-            typeof (short),
-            typeof (ushort),
-            typeof (int),
-            typeof (uint),
-            typeof (long),
-            typeof (ulong),
-            typeof (float),
-            typeof (double),
-            typeof (decimal)
-        };
+            typeof(byte), typeof(sbyte),
+            typeof(short), typeof(ushort),
+            typeof(int), typeof(uint),
+            typeof(long), typeof(ulong)
+        });
+
+        public static readonly HashSet<Type> FloatingTypes = new HashSet<Type>(new Type[]
+        {
+            typeof(float), typeof(double), typeof(decimal)
+        });
+
+        public static readonly HashSet<Type> NumericTypes = IntTypes.Union(FloatingTypes).ToHashSet();
     }
 
     /// <summary>
@@ -153,6 +153,26 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <summary>
+        /// Whether or not the field involves collection of integral number values.
+        /// </summary>
+        /// <param name="fieldGenerator">The field generator wrapping the field</param>
+        /// <returns>Whether or not the field involves collection of integral number values</returns>
+        protected static bool IsIntegralNumber(IFieldGenerator<TModel, T> fieldGenerator)
+        {
+            return FieldGeneratorHandler.IntTypes.Contains(GetUnderlyingType(fieldGenerator));
+        }
+
+        /// <summary>
+        /// Whether or not the field involves collection of floating-point number values.
+        /// </summary>
+        /// <param name="fieldGenerator">The field generator wrapping the field</param>
+        /// <returns>Whether or not the field involves collection of floating-point number values</returns>
+        protected static bool IsFloatingNumber(IFieldGenerator<TModel, T> fieldGenerator)
+        {
+            return FieldGeneratorHandler.NumericTypes.Contains(GetUnderlyingType(fieldGenerator));
+        }
+
+        /// <summary>
         /// Returns HTML for an &lt;input&gt; HTML element.
         /// </summary>
         /// <param name="inputType">The type of input to produce</param>
@@ -175,16 +195,18 @@ namespace ChameleonForms.FieldGenerators.Handlers
             IHtmlContent htmlContent;
             if (!string.IsNullOrEmpty(fieldConfiguration.FormatString))
             {
-                htmlContent = fieldGenerator.HtmlHelper.TextBoxFor(fieldGenerator.FieldProperty
-                    , fieldConfiguration.FormatString
-                    , attrs.ToDictionary()
-                    );
+                htmlContent = fieldGenerator.HtmlHelper.TextBoxFor(
+                    fieldGenerator.FieldProperty,
+                    fieldConfiguration.FormatString,
+                    attrs.ToDictionary()
+                );
             }
             else
             {
-                htmlContent = fieldGenerator.HtmlHelper.TextBoxFor(fieldGenerator.FieldProperty
-                    , attrs.ToDictionary()
-                    );
+                htmlContent = fieldGenerator.HtmlHelper.TextBoxFor(
+                    fieldGenerator.FieldProperty,
+                    attrs.ToDictionary()
+                );
             }
 
             return htmlContent;

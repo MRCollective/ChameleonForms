@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates;
@@ -127,7 +129,8 @@ namespace ChameleonForms.FieldGenerators
             if (fieldConfiguration.FieldHtml != null)
                 return fieldConfiguration.FieldHtml;
             
-            return FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this).GenerateFieldHtml(fieldConfiguration);
+            return FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this)
+                .GenerateFieldHtml(fieldConfiguration);
         }
 
         /// <inheritdoc />
@@ -142,6 +145,12 @@ namespace ChameleonForms.FieldGenerators
         public string GetFieldId()
         {
             return ((MemberExpression) FieldProperty.Body).Member.Name;
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<Attribute> GetCustomAttributes()
+        {
+            return ((MemberExpression)FieldProperty.Body).Member.GetCustomAttributes();
         }
 
         /// <inheritdoc />

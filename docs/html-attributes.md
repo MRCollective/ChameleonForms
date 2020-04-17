@@ -68,6 +68,13 @@ The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namesp
         /// </summary>
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Readonly(bool @readonly = true);
+        
+        /// <summary>
+        /// Returns whether or not a value is set for the given attribute.
+        /// </summary>
+        /// <param name="key">The name of the HTML attribute to check</param>
+        /// <returns>Whether or not there is a value set for the attribute</returns>
+        public bool Has(string key);
 
         /// <summary>
         /// Adds or updates a HTML attribute with a given value.

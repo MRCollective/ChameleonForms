@@ -53,6 +53,38 @@ namespace ChameleonForms.Tests.Component.Config
         }
 
         [Test]
+        public void Set_numeric_field_attributes_long()
+        {
+            var fc = Field.Configure()
+                .Step(1)
+                .Min(-5)
+                .Max(100);
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
+        public void Set_numeric_field_attributes_decimal()
+        {
+            var fc = Field.Configure()
+                .Step(0.01m)
+                .Min(-5.4m)
+                .Max(100.52m);
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
+        public void Set_numeric_field_attributes_string()
+        {
+            var fc = Field.Configure()
+                .Min("-23.24")
+                .Max("1000.983");
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
         public void Set_disabled_attribute()
         {
             var fc = Field.Configure()

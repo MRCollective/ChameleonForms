@@ -79,6 +79,7 @@ Examples for generating a form and each type of default component within the for
 * [Textarea fields](textarea.md) - Display textarea fields
 * [File upload fields](file-upload.md) - Display file-upload fields
 * [Password fields](password.md) - Display password fields
+* [Number fields](number.md) - Display number fields
 * [Default (`<input type="text" />`) fields](default-fields.md)
 
 ## Advanced usage

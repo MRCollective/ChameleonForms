@@ -15,6 +15,7 @@ namespace ChameleonForms.FieldGenerators
             yield return new ListHandler<TModel, T>(g);
             yield return new EnumListHandler<TModel, T>(g);
             yield return new DateTimeHandler<TModel, T>(g);
+            yield return new NumberHandler<TModel, T>(g);
             yield return new DefaultHandler<TModel, T>(g);
         }
 

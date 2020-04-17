@@ -16,6 +16,18 @@
         /// <summary>
         /// &lt;input type="file" /&gt;
         /// </summary>
-        File
+        File,
+        /// <summary>
+        /// &lt;input type="email" /&gt;
+        /// </summary>
+        Email,
+        /// <summary>
+        /// &lt;input type="url" /&gt;
+        /// </summary>
+        Url,
+        /// <summary>
+        /// &lt;input type="number" /&gt;
+        /// </summary>
+        Number
     }
 }
