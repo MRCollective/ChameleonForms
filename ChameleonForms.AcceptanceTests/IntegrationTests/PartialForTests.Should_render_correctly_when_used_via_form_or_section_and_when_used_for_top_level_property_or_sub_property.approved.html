@@ -106,15 +106,17 @@ else
 
 Rendered Source
 
-<form action="" method="post" novalidate="novalidate">    <fieldset>
+<form action="" method="post">
+    <fieldset>
         <legend>This is from a form-level partial against the top-level model</legend>
         <dl>
             <dt><label for="Int">Int</label> <em class="required">*</em></dt>
             <dd>
-                <input data-val="true" data-val-number="The field Int must be a number." data-val-required="The Int field is required." id="Int" name="Int" type="text" value="0"> <span class="field-validation-valid" data-valmsg-for="Int" data-valmsg-replace="true"></span>
+                <input data-val="true" data-val-required="The Int field is required." id="Int" name="Int" type="text" value="0"> <span class="field-validation-valid" data-valmsg-for="Int" data-valmsg-replace="true"></span>
             </dd>
         </dl>
     </fieldset>
+
     <fieldset>
         <legend>This is from a form-level partial against the top-level model casted to base class</legend>
         <dl>
@@ -124,6 +126,7 @@ Rendered Source
             </dd>
         </dl>
     </fieldset>
+
 <p>This should show the ID of the child field including the parent path: Child_ChildField</p>
 
     <fieldset>
@@ -138,6 +141,7 @@ Rendered Source
             </dd>
         </dl>
     </fieldset>
+
     <fieldset>
         <legend>This is from a form-level partial against a child model in the base class</legend>
         <dl>
@@ -154,10 +158,12 @@ Rendered Source
             <dd>
                 <input data-val="true" data-val-number="The field Decimal must be a number." data-val-required="The Decimal field is required." id="Decimal" name="Decimal" type="text" value="1.2300">in parent view <span class="field-validation-valid" data-valmsg-for="Decimal" data-valmsg-replace="true"></span>
             </dd>
+
                 <dt><label for="TextAreaField">Text area field</label></dt>
             <dd>
-                <textarea cols="20" id="TextAreaField" name="TextAreaField" rows="2">Initial value</textarea>from partial against top-level model <span class="field-validation-valid" data-valmsg-for="TextAreaField" data-valmsg-replace="true"></span>
+                <textarea id="TextAreaField" name="TextAreaField">Initial value</textarea>from partial against top-level model <span class="field-validation-valid" data-valmsg-for="TextAreaField" data-valmsg-replace="true"></span>
             </dd>
+
 
                 <dt><label for="BaseField">Base field</label></dt>
             <dd>
@@ -166,16 +172,18 @@ Rendered Source
 
             <dt><label for="ListId">List id</label> <em class="required">*</em></dt>
             <dd>
-                <select data-val="true" data-val-number="The field List id must be a number." data-val-required="The List id field is required." id="ListId" name="ListId"><option value="1">A</option>
+                <select data-val="true" data-val-required="The List id field is required." id="ListId" name="ListId"><option value="1">A</option>
 <option value="2">B</option>
 </select>in parent view <span class="field-validation-valid" data-valmsg-for="ListId" data-valmsg-replace="true"></span>
             </dd>
+
 <p>This should show the ID of the child field including the parent path: Child_ChildField</p>
 
                 <dt><label for="Child_ChildField">Child field</label> <em class="required">*</em></dt>
             <dd>
                 <input data-val="true" data-val-required="The Child field field is required." id="Child_ChildField" name="Child.ChildField" type="text" value="">From partial against child model <span class="field-validation-valid" data-valmsg-for="Child.ChildField" data-valmsg-replace="true"></span>
             </dd>
+
 
                 <dt><label for="BaseChild_BaseChildField">Base child field</label></dt>
             <dd>
