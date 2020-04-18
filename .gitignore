@@ -12,5 +12,4 @@ packages
 *.received.*
 .vs
 /*.nupkg
-/ChameleonForms/ChameleonForms.xml
 *.cshtml.cs

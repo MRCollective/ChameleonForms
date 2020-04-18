@@ -11,18 +11,16 @@
        Robert Moore, Matthew Davies
     </authors>
     <description>
-      This library will shape-shift your forms experience in ASP.NET MVC.
+      This library will shape-shift your forms experience in ASP.NET Core MVC.
       It makes it really easy to tersely output a form and easily apply a different template with a single line of code.
     </description>
     <projectUrl>
       https://github.com/MRCollective/ChameleonForms
     </projectUrl>
-    <licenseUrl>
-      https://github.com/MRCollective/ChameleonForms/blob/master/LICENSE
-    </licenseUrl>
-    <iconUrl>
-      https://raw.github.com/MRCollective/ChameleonForms/master/logo.png
-    </iconUrl>
+    <license type="expression">MIT</license>
+    <icon>
+      logo.png
+    </icon>
     <tags>
        asp.net, mvc, forms, html, template
     </tags>
@@ -30,14 +28,32 @@
        en-US
     </language>
     <dependencies>
-      <dependency id="Microsoft.AspNetCore.Mvc" version="2.2.2.0" />
-      <dependency id="Humanizer" version="2.5.16" />
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="Humanizer" version="2.5.16" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.DependencyInjection.Abstractions" version="3.1.3" exclude="Build,Analyzers" />
+      </group>
     </dependencies>
+    <frameworkReferences>
+      <group targetFramework=".NETCoreApp3.1">
+        <frameworkReference name="Microsoft.AspNetCore.App" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any\any\wwwroot\scripts\*.js" buildAction="Content" />
+    </contentFiles>
   </metadata>
   <files>
-     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.dll" target="lib\netcoreapp3.1" />
-     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.pdb" target="lib\netcoreapp3.1" />
-     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.XML" target="lib\netcoreapp3.1" />
-     <file src="ChameleonForms\readme.txt" target="" />
+    <file src="ChameleonForms.Example\wwwroot\scripts\jquery.validate.unobtrusive.chameleon.js" target="contentFiles\any\any\wwwroot\scripts" />
+    <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.dll" target="lib\netcoreapp3.1" />
+    <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.pdb" target="lib\netcoreapp3.1" />
+    <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.XML" target="lib\netcoreapp3.1" />
+    <file src="ChameleonForms.Core\bin\Release\netcoreapp3.1\ChameleonForms.Core.dll" target="lib\netcoreapp3.1" />
+    <file src="ChameleonForms.Core\bin\Release\netcoreapp3.1\ChameleonForms.Core.pdb" target="lib\netcoreapp3.1" />
+    <file src="ChameleonForms.Core\bin\Release\netcoreapp3.1\ChameleonForms.Core.XML" target="lib\netcoreapp3.1" />
+    <file src="ChameleonForms.Templates\bin\Release\netcoreapp3.1\ChameleonForms.Templates.dll" target="lib\netcoreapp3.1" />
+    <file src="ChameleonForms.Templates\bin\Release\netcoreapp3.1\ChameleonForms.Templates.pdb" target="lib\netcoreapp3.1" />
+    <file src="ChameleonForms.Templates\bin\Release\netcoreapp3.1\ChameleonForms.Templates.XML" target="lib\netcoreapp3.1" />
+    <file src="ChameleonForms\readme.txt" target="" />
+    <file src="logo.png" target="" />
   </files>
 </package>

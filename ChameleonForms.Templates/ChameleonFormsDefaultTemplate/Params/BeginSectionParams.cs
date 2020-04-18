@@ -2,7 +2,7 @@
 
 namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params
 {
-    public class BeginSectionParams
+    internal class BeginSectionParams
     {
         public IHtmlContent Heading { get; set; }
         public IHtmlContent LeadingHtml { get; set; }

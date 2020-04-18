@@ -2,7 +2,7 @@
 
 namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params
 {
-    public class FieldConfigurationParams
+    internal class FieldConfigurationParams
     {
         public IReadonlyFieldConfiguration FieldConfiguration { get; set; }
     }

@@ -43,8 +43,8 @@ namespace ChameleonForms
         /// <summary>
         /// Writes a HTML String directly to the view's output.
         /// </summary>
-        /// <param name="IHtmlContent">The HTML to write to the view's output</param>
-        void Write(IHtmlContent IHtmlContent);
+        /// <param name="htmlContent">The HTML to write to the view's output</param>
+        void Write(IHtmlContent htmlContent);
 
         /// <summary>
         /// The field generator for the given field.
@@ -84,9 +84,9 @@ namespace ChameleonForms
         }
 
         /// <inheritdoc />
-        public virtual void Write(IHtmlContent IHtmlContent)
+        public virtual void Write(IHtmlContent htmlContent)
         {
-            HtmlHelper.ViewContext.Writer.Write(IHtmlContent);
+            HtmlHelper.ViewContext.Writer.Write(htmlContent);
         }
 
         /// <inheritdoc />

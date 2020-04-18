@@ -2,7 +2,7 @@
 
 namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params
 {
-    public class MessageParagraphParams
+    internal class MessageParagraphParams
     {
         public IHtmlContent Paragraph { get; set; }
     }

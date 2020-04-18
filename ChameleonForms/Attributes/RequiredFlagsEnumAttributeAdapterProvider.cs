@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace ChameleonForms.Attributes
 {
+    /// <summary>
+    /// Provides [Required] validation for flag enums.
+    /// </summary>
     public class RequiredFlagsEnumAttributeAdapterProvider : ValidationAttributeAdapterProvider, IValidationAttributeAdapterProvider
     {
         IAttributeAdapter IValidationAttributeAdapterProvider.GetAttributeAdapter(ValidationAttribute attribute, IStringLocalizer stringLocalizer)

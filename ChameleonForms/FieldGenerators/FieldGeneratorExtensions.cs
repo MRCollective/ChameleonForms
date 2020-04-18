@@ -5,8 +5,14 @@ using System.Linq;
 
 namespace ChameleonForms.FieldGenerators
 {
+    /// <summary>
+    /// Extension methods for <see cref="IFieldGenerator"/>.
+    /// </summary>
     public static class FieldGeneratorExtensions
     {
+        /// <summary>
+        /// List of integral types.
+        /// </summary>
         public static readonly HashSet<Type> IntTypes = new HashSet<Type>(new Type[]
         {
             typeof(byte), typeof(sbyte),
@@ -15,11 +21,17 @@ namespace ChameleonForms.FieldGenerators
             typeof(long), typeof(ulong)
         });
 
+        /// <summary>
+        /// List of floating-pint types.
+        /// </summary>
         public static readonly HashSet<Type> FloatingTypes = new HashSet<Type>(new Type[]
         {
             typeof(float), typeof(double), typeof(decimal)
         });
 
+        /// <summary>
+        /// List of all numeric types.
+        /// </summary>
         public static readonly HashSet<Type> NumericTypes = IntTypes.Union(FloatingTypes).ToHashSet();
 
         /// <summary>

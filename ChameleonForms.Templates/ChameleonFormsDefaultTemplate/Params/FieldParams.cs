@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params
 {
-    public enum FieldRenderMode
+    internal enum FieldRenderMode
     {
         Field,
         BeginField
     }
 
-    public class FieldParams : FieldConfigurationParams
+    internal class FieldParams : FieldConfigurationParams
     {
         public FieldRenderMode RenderMode { get; set; }
         public IHtmlContent LabelHtml { get; set; }

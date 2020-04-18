@@ -50,6 +50,19 @@ namespace ChameleonForms.ModelBinders
             }
         }
 
+        /// <summary>
+        /// Creates a new <see cref="EnumListModelBinder{TElement}"/>.
+        /// </summary>
+        /// <param name="elementBinder">
+        /// The <see cref="IModelBinder"/> for binding <typeparamref name="T"/>.
+        /// </param>
+        /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
+        /// <param name="allowValidatingTopLevelNodes">
+        /// Indication that validation of top-level models is enabled. If <see langword="true"/> and
+        /// <see cref="ModelMetadata.IsBindingRequired"/> is <see langword="true"/> for a top-level model, the binder
+        /// adds a <see cref="ModelStateDictionary"/> error when the model is not bound.
+        /// </param>
+        /// <param name="mvcOptions">The <see cref="MvcOptions"/>.</param>
         public EnumListModelBinder(IModelBinder elementBinder, ILoggerFactory loggerFactory, bool allowValidatingTopLevelNodes, MvcOptions mvcOptions)
             : base(elementBinder, loggerFactory, allowValidatingTopLevelNodes, mvcOptions)
         {}

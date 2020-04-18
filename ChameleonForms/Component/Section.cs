@@ -114,6 +114,20 @@ namespace ChameleonForms.Component
             return new Section<TModel>(form, heading.ToHtml(), false, leadingHtml, htmlAttributes);
         }
 
+        /// <summary>
+        /// Creates a top-level form section.
+        /// </summary>
+        /// <example>
+        /// @using (var s = f.BeginSection(@<strong>Section heading</strong>)) {
+        ///     @s.FieldFor(m => m.FirstName)
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <param name="form">The form the section is being created in</param>
+        /// <param name="heading">The heading for the section</param>
+        /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
+        /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
+        /// <returns>The form section</returns>
         public static Section<TModel> BeginSection<TModel>(this IForm<TModel> form, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(form, heading ?? new HtmlString(""), false, leadingHtml, htmlAttributes);
@@ -140,6 +154,22 @@ namespace ChameleonForms.Component
             return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml, htmlAttributes);
         }
 
+        /// <summary>
+        /// Creates a nested form section.
+        /// </summary>
+        /// <example>
+        /// @using (var s = f.BeginSection("Section heading")) {
+        ///     using (var ss = s.BeginSection(@<strong>Nested section heading</strong>)) {
+        ///         @ss.FieldFor(m => m.FirstName)
+        ///     }
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <param name="section">The section the section is being created under</param>
+        /// <param name="heading">The heading for the section</param>
+        /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
+        /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
+        /// <returns>The nested form section</returns>
         public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading, true, leadingHtml, htmlAttributes);
