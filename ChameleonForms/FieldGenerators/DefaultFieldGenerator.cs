@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ChameleonForms.FieldGenerators
 {
@@ -32,7 +33,10 @@ namespace ChameleonForms.FieldGenerators
             HtmlHelper = htmlHelper;
             FieldProperty = fieldProperty;
             Template = template;
-            Metadata = ((ModelExpressionProvider)htmlHelper.ViewContext.HttpContext.RequestServices.GetService(typeof(ModelExpressionProvider))).CreateModelExpression<TModel, T>(htmlHelper.ViewData, fieldProperty).Metadata;
+            Metadata = htmlHelper.ViewContext.HttpContext.RequestServices
+                .GetRequiredService<ModelExpressionProvider>()
+                .CreateModelExpression(htmlHelper.ViewData, fieldProperty)
+                .Metadata;
         }
 
         /// <inheritdoc />

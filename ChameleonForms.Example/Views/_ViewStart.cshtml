@@ -1,7 +1,8 @@
 ﻿@using ChameleonForms.Templates
 @using ChameleonForms.Templates.Default
+@inject IFormTemplate DefaultFormTemplate
 @{
-    if (FormTemplate.Default.GetType() == typeof (DefaultFormTemplate))
+    if (DefaultFormTemplate.GetType() == typeof (DefaultFormTemplate))
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
     }

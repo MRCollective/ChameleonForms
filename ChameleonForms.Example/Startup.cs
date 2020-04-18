@@ -1,8 +1,14 @@
 ﻿using ChameleonForms.Example.Controllers.Filters;
+using ChameleonForms.Templates;
+using ChameleonForms.Templates.Default;
+using ChameleonForms.Templates.TwitterBootstrap3;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 
 namespace ChameleonForms.Example
@@ -21,7 +27,17 @@ namespace ChameleonForms.Example
         {
             services.AddMvc();
             services.AddControllersWithViews(options => { options.Filters.Add<FormTemplateFilter>(); });
-            services.AddChameleonForms();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IFormTemplate>(provider =>
+            {
+                var accessor = provider.GetRequiredService<IHttpContextAccessor>();
+                var template = accessor.HttpContext.Request.Cookies["template"] ?? "default";
+                if (template == "default")
+                    return new DefaultFormTemplate();
+
+                return new TwitterBootstrapFormTemplate();
+            });
+            services.AddChameleonForms(registerDefaultTemplate: false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

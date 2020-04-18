@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ChameleonForms.Metadata
 {

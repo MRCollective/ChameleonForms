@@ -7,6 +7,7 @@ using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.FieldGenerators.Handlers;
 using ChameleonForms.Templates;
+using ChameleonForms.Templates.Default;
 using ChameleonForms.Tests.Helpers;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -52,7 +53,7 @@ namespace ChameleonForms.Tests.FieldGenerator.Handlers
             var viewContext = context.GetViewTestContext<TModel>();
             HtmlHelper = viewContext.HtmlHelper;
             FieldProperty = null;
-            Template = FormTemplate.Default;
+            Template = new DefaultFormTemplate();
             Metadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(T));
         }
 

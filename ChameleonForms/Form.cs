@@ -138,7 +138,7 @@ namespace ChameleonForms
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
         public static IForm<TModel> BeginChameleonForm<TModel>(this IHtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
-            return new Form<TModel>(helper, FormTemplate.Default, action, method, htmlAttributes, enctype);
+            return new Form<TModel>(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace ChameleonForms
         public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this IHtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             var childHelper = helper.For(formFor, bindFieldsToParent: false);
-            return new Form<TChildModel>(childHelper, FormTemplate.Default, action, method, htmlAttributes, enctype);
+            return new Form<TChildModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace ChameleonForms
         public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this IHtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             var childHelper = helper.For(model);
-            return new Form<TNewModel>(childHelper, FormTemplate.Default, action, method, htmlAttributes, enctype);
+            return new Form<TNewModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
         }
     }
 }

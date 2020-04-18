@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text.Encodings.Web;
+using ChameleonForms.Templates;
+using ChameleonForms.Templates.TwitterBootstrap3;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -29,7 +31,9 @@ namespace ChameleonForms.Tests.Helpers
 
         public MvcTestContext()
         {
-            HttpContext = new DefaultHttpContext { RequestServices = TestApplication.Services };
+            Scope = TestApplication.Services.CreateScope();
+            Services = Scope.ServiceProvider;
+            HttpContext = new DefaultHttpContext { RequestServices = Services };
 
             RouteData = new RouteData();
             ModelState = new ModelStateDictionary();
@@ -38,8 +42,8 @@ namespace ChameleonForms.Tests.Helpers
 
             ControllerContext = new ControllerContext(ActionContext);
 
-            ModelMetadataProvider = TestApplication.Services.GetRequiredService<IModelMetadataProvider>();
-            HtmlGenerator = TestApplication.Services.GetRequiredService<IHtmlGenerator>();
+            ModelMetadataProvider = Services.GetRequiredService<IModelMetadataProvider>();
+            HtmlGenerator = Services.GetRequiredService<IHtmlGenerator>();
 
             ValidationHtmlAttributeProvider = new DefaultValidationHtmlAttributeProvider(
                 Options.Create<MvcViewOptions>(new MvcViewOptions()), ModelMetadataProvider,
@@ -47,6 +51,10 @@ namespace ChameleonForms.Tests.Helpers
 
             UrlHelper = new UrlHelper(ActionContext);
         }
+
+        public IServiceScope Scope { get; private set; }
+        public IServiceProvider Services { get; private set; }
+
 
         public MvcViewTestContext<TModel> GetViewTestContext<TModel>()
         {
@@ -73,7 +81,15 @@ namespace ChameleonForms.Tests.Helpers
 
         public DefaultHttpContext HttpContext { get; }
 
-        public void Dispose() { }
+        public void ProvideTemplate(IFormTemplate template)
+        {
+            Services.GetRequiredService<FormTemplateProvider>().Template = template;
+        }
+
+        public void Dispose()
+        {
+            Scope.Dispose();
+        }
     }
 
     public class MvcViewTestContext<TModel> : IDisposable

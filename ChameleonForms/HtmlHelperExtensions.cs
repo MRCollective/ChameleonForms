@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq.Expressions;
 using System.Text.Encodings.Web;
+using ChameleonForms.Templates;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
 namespace ChameleonForms
@@ -64,6 +65,16 @@ namespace ChameleonForms
                 UrlEncoder.Default,
                 new ModelExpressionProvider(services.GetRequiredService<IModelMetadataProvider>()), 
                 newViewContext);
+        }
+
+        /// <summary>
+        /// Gets the registered default form template from RequestServices.
+        /// </summary>
+        /// <param name="htmlHelper">The HTML Helper</param>
+        /// <returns>An instance of the default <see cref="IFormTemplate"/></returns>
+        public static IFormTemplate GetDefaultFormTemplate(this IHtmlHelper htmlHelper)
+        {
+            return htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<IFormTemplate>();
         }
     }
 

@@ -1,12 +1,12 @@
 ﻿using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
-using ChameleonForms.Templates.Default;
 using ChameleonForms.Templates.TwitterBootstrap3;
 using ChameleonForms.Tests.Helpers;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
 using NUnit.Framework;
 using DefaultFormTemplate = ChameleonForms.Templates.Default.DefaultFormTemplate;
@@ -110,7 +110,7 @@ namespace ChameleonForms.Tests
         [Test]
         public void Construct_form_via_extension_method_using_default_template_defined_by_user()
         {
-            FormTemplate.Default = new TwitterBootstrapFormTemplate();
+            _context.ProvideTemplate(new TwitterBootstrapFormTemplate());
 
             var f = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
 
@@ -137,12 +137,13 @@ namespace ChameleonForms.Tests
         private const FormMethod Method = FormMethod.Post;
         private const EncType Enctype = EncType.Multipart;
         private readonly HtmlAttributes _htmlAttributes = new HtmlAttributes();
+        private MvcTestContext _context;
 
         [SetUp]
         public void Setup()
         {
-            var context = new MvcTestContext();
-            var viewContext = context.GetViewTestContext<TestFieldViewModel>();
+            _context = new MvcTestContext();
+            var viewContext = _context.GetViewTestContext<TestFieldViewModel>();
 
             _h = viewContext.HtmlHelper;
 
@@ -159,7 +160,7 @@ namespace ChameleonForms.Tests
         [TearDown]
         public void Teardown()
         {
-            FormTemplate.Default = new DefaultFormTemplate();
+            _context.Dispose();
         }
 
         public class TestFieldViewModel

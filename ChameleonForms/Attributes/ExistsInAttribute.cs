@@ -42,11 +42,6 @@ namespace ChameleonForms.Attributes
         private readonly string _nameProperty;
         private readonly bool? _enableValidation;
 
-        static ExistsInAttribute()
-        {
-            ModelMetadataAwareDisplayMetadataProvider.RegisterMetadataAwareAttribute(typeof(ExistsInAttribute));
-        }
-
         /// <summary>
         /// Instantiates an <see cref="ExistsInAttribute"/>.
         /// </summary>
