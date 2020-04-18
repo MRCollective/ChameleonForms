@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web;
-
 using ChameleonForms.Enums;
 using Humanizer;
 using Microsoft.AspNetCore.Html;
@@ -30,6 +28,8 @@ namespace ChameleonForms.Templates
             };
             if (htmlAttributes != null)
                 tagBuilder.MergeAttributes(htmlAttributes.Attributes);
+            // todo: allow this to be toggled
+            tagBuilder.MergeAttribute("novalidate", "novalidate");
             tagBuilder.MergeAttribute("action", action);
             tagBuilder.MergeAttribute("method", HtmlHelper.GetFormMethodString(method), true);
             if (encType.HasValue)

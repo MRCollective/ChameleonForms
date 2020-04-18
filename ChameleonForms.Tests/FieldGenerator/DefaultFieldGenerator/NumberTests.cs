@@ -166,5 +166,35 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
 
             HtmlApprovals.VerifyHtml(html.ToHtmlString());
         }
+
+        [Test]
+        public void Use_correct_html_for_decimal_field_with_format_string_attribute()
+        {
+            var g = Arrange(m => m.DecimalWithFormatStringAttribute, m => m.DecimalWithFormatStringAttribute = 1.2000m);
+
+            var result = g.GetFieldHtml(default(IFieldConfiguration));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_decimal_field_with_format_string_attribute_but_overriden()
+        {
+            var g = Arrange(m => m.DecimalWithFormatStringAttribute, m => m.DecimalWithFormatStringAttribute = 1.2000m);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().WithFormatString("{0:F3}"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
+        public void Use_correct_html_for_decimal_field_with_explicit_format_string()
+        {
+            var g = Arrange(m => m.Decimal, m => m.Decimal = 1.2000m);
+
+            var result = g.GetFieldHtml(new FieldConfiguration().WithFormatString("{0:f2}"));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
     }
 }

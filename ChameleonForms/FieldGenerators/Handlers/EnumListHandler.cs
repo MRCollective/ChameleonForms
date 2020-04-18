@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using Humanizer;
@@ -29,14 +27,14 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override bool CanHandle()
         {
-            return GetUnderlyingType(FieldGenerator).IsEnum;
+            return FieldGenerator.GetUnderlyingType().IsEnum;
         }
 
         /// <inheritdoc />
         public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var selectList = GetSelectList(fieldConfiguration.ExcludedEnums);
-            return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
+            return GetSelectListHtml(selectList, fieldConfiguration);
         }
 
         /// <inheritdoc />
@@ -57,7 +55,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
         private IEnumerable<SelectListItem> GetSelectList(Enum[] excludeEnums)
         {
-            var enumValues = Enum.GetValues(GetUnderlyingType(FieldGenerator));
+            var enumValues = Enum.GetValues(FieldGenerator.GetUnderlyingType());
             foreach (var i in enumValues)
             {
                 if (excludeEnums.Contains(i))
@@ -67,7 +65,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 {
                     Text = (i as Enum).Humanize(),
                     Value = i.ToString(),
-                    Selected = IsSelected(i, FieldGenerator)
+                    Selected = FieldGenerator.IsSelected(i)
                 };
             }
         }

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Web;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component;
-using ChameleonForms.Templates;
 using Microsoft.AspNetCore.Html;
 using NSubstitute;
 using NUnit.Framework;

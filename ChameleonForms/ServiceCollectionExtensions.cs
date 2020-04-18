@@ -18,10 +18,12 @@ namespace ChameleonForms
     // documentation update
     // xmldoc comment check
     // Add public api approval test
-    // email and url fields
     // review the datetime "g" thing
     // Add tag helper equivalent to the comparison example
     // Update all dependencies to latest versions
+    // Update breaking changes
+    // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override?
+    // Make everything below configurable
 
     public static class ServiceCollectionExtensions
     {

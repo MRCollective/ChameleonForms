@@ -1,8 +1,6 @@
-﻿using System.Web;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component;
-using ChameleonForms.Component.Config;
 using ChameleonForms.Templates.TwitterBootstrap3;
 using Microsoft.AspNetCore.Html;
 using NUnit.Framework;

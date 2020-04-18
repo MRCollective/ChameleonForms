@@ -30,7 +30,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return GetInputHtml(TextInputType.File, FieldGenerator, fieldConfiguration);
+            return GetInputHtml(TextInputType.File, fieldConfiguration);
         }
 
         /// <inheritdoc />

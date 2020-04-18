@@ -104,6 +104,17 @@ namespace ChameleonForms
         }
 
         /// <summary>
+        /// Sets the required attribute.
+        /// </summary>
+        /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
+        public HtmlAttributes Required(bool required = true)
+        {
+            if (required)
+                Attr("required", "required");
+            return this;
+        }
+
+        /// <summary>
         /// Returns whether or not a value is set for the given attribute.
         /// </summary>
         /// <param name="key">The name of the HTML attribute to check</param>

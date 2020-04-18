@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
 using System.IO;
-using System.Web;
+using System.Net;
 
 namespace ChameleonForms.Example.Views.Comparison
 {
@@ -21,7 +20,7 @@ namespace ChameleonForms.Example.Views.Comparison
         public Section(TextWriter writer, string heading)
         {
             _writer = writer;
-            _writer.WriteLine("<fieldset><legend>{0}</legend><dl>", HttpUtility.HtmlEncode(heading));
+            _writer.WriteLine("<fieldset><legend>{0}</legend><dl>", WebUtility.HtmlEncode(heading));
         }
 
         public void Dispose()

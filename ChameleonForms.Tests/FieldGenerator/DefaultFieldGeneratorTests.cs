@@ -97,6 +97,15 @@ namespace ChameleonForms.Tests.FieldGenerator
         [DataType(DataType.MultilineText)]
         public string Textarea { get; set; }
 
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [DataType(DataType.Url)]
+        public string UrlAsString { get; set; }
+
+        [DataType(DataType.Url)]
+        public Uri UrlAsUri { get; set; }
+
         public bool RequiredBoolean { get; set; }
 
         [Required]

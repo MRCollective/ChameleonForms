@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using System.Globalization;
@@ -25,13 +24,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override bool CanHandle()
         {
-            return GetUnderlyingType(FieldGenerator) == typeof (DateTime);
+            return FieldGenerator.GetUnderlyingType() == typeof (DateTime);
         }
 
         /// <inheritdoc />
         public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return GetInputHtml(TextInputType.Text, FieldGenerator, fieldConfiguration);
+            return GetInputHtml(TextInputType.Text, fieldConfiguration);
         }
 
         /// <inheritdoc />

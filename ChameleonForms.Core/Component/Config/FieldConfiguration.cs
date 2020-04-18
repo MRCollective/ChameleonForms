@@ -4,7 +4,6 @@ using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text.Encodings.Web;
-using System.Web;
 using ChameleonForms.Enums;
 using Microsoft.AspNetCore.Html;
 
@@ -154,6 +153,12 @@ namespace ChameleonForms.Component.Config
         /// </summary>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Readonly(bool @readonly = true);
+
+        /// <summary>
+        /// Sets the field to be required.
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Required(bool required = true);
 
         /// <summary>
         /// Sets a hint to the user of what can be entered in the field.
@@ -544,6 +549,13 @@ namespace ChameleonForms.Component.Config
         public IFieldConfiguration Readonly(bool @readonly = true)
         {
             Attributes.Readonly(@readonly);
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Required(bool required = true)
+        {
+            Attributes.Required(required);
             return this;
         }
 

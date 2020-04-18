@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Html;
 using System;
-using System.Web;
 
 namespace ChameleonForms.Component.Config
 {

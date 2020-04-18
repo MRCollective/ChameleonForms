@@ -1,5 +1,4 @@
-﻿using System.Web;
-using ChameleonForms.Templates.Default;
+﻿using ChameleonForms.Templates.Default;
 using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Example.Forms.Templates

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Web;
-
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component.Config;

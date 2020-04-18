@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
+using ChameleonForms.Enums;
 using ChameleonForms.Templates;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -118,6 +119,13 @@ namespace ChameleonForms.FieldGenerators
             var handler = FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this);
             handler.PrepareFieldConfiguration(fieldConfiguration);
             Template.PrepareFieldConfiguration(this, handler, fieldConfiguration, fieldParent);
+
+            // Do this after the handler above since it may change FieldDisplayType
+            var disabledOrReadonly = fieldConfiguration.Attributes.Has("readonly") || fieldConfiguration.Attributes.Has("disabled");
+            var isCheckboxList = fieldConfiguration.DisplayType == FieldDisplayType.List && this.HasMultipleValues();
+            var userAlreadySpecifiedRequired = fieldConfiguration.Attributes.Has("required");
+            if (Metadata.IsRequired && !disabledOrReadonly && !userAlreadySpecifiedRequired && !isCheckboxList)
+                fieldConfiguration.Required();
 
             return fieldConfiguration;
         }

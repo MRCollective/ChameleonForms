@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using Microsoft.AspNetCore.Html;
@@ -29,7 +30,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return GetInputHtml(TextInputType.Text, FieldGenerator, fieldConfiguration);
+            var type = TextInputType.Text;
+            if (FieldGenerator.Metadata.DataTypeName == DataType.EmailAddress.ToString())
+                type = TextInputType.Email;
+            if (FieldGenerator.Metadata.DataTypeName == DataType.Url.ToString() || typeof(T) == typeof(Uri))
+                type = TextInputType.Url;
+
+            return GetInputHtml(type, fieldConfiguration);
         }
 
         /// <inheritdoc />

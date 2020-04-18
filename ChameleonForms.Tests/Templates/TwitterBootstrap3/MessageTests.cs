@@ -1,5 +1,4 @@
-﻿using System.Web;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates.TwitterBootstrap3;

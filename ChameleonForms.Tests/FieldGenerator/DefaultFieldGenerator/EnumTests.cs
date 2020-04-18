@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web;
 using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
 using Microsoft.AspNetCore.Html;

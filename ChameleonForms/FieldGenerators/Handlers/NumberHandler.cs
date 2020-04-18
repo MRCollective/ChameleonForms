@@ -25,13 +25,13 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override bool CanHandle()
         {
-            return IsNumeric(FieldGenerator);
+            return FieldGenerator.IsNumeric();
         }
 
         /// <inheritdoc />
         public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
-            return GetInputHtml(TextInputType.Number, FieldGenerator, fieldConfiguration);
+            return GetInputHtml(TextInputType.Number, fieldConfiguration);
         }
 
         /// <inheritdoc />
@@ -45,10 +45,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
         {
             if (!fieldConfiguration.Attributes.Has("step"))
             {
-                if (FieldGeneratorHandler.IntTypes.Contains(GetUnderlyingType(FieldGenerator)))
+                if (FieldGenerator.IsIntegralNumber())
                     fieldConfiguration.Attr("step", 1);
 
-                if (FieldGeneratorHandler.FloatingTypes.Contains(GetUnderlyingType(FieldGenerator)) && FieldGenerator.Metadata.DataTypeName == DataType.Currency.ToString())
+                if (FieldGenerator.IsFloatingNumber() && FieldGenerator.Metadata.DataTypeName == DataType.Currency.ToString())
                     fieldConfiguration.Attr("step", 0.01);
             }
 
@@ -59,14 +59,14 @@ namespace ChameleonForms.FieldGenerators.Handlers
 
                 if (FieldGenerator.GetCustomAttributes().OfType<RangeAttribute>().Any())
                 {
-                    var converter = TypeDescriptor.GetConverter(GetUnderlyingType(FieldGenerator));
+                    var converter = TypeDescriptor.GetConverter(FieldGenerator.GetUnderlyingType());
                     var range = FieldGenerator.GetCustomAttributes().OfType<RangeAttribute>().First();
                     min = range.Minimum;
                     max = range.Maximum;
                 }
                 else
                 {
-                    var type = GetUnderlyingType(FieldGenerator);
+                    var type = FieldGenerator.GetUnderlyingType();
 
                     // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types
                     if (type == typeof(byte))

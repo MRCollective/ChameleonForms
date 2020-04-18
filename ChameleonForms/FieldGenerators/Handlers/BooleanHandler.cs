@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
@@ -26,8 +25,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override bool CanHandle()
         {
-            return GetUnderlyingType(FieldGenerator) == typeof(bool)
-                && !HasEnumerableValues(FieldGenerator);
+            return FieldGenerator.GetUnderlyingType() == typeof(bool)
+                   && !FieldGenerator.HasEnumerableValues();
         }
 
         /// <inheritdoc />
@@ -37,7 +36,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 return GetSingleCheckboxHtml(fieldConfiguration);
 
             var selectList = GetBooleanSelectList(fieldConfiguration);
-            return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
+            return GetSelectListHtml(selectList, fieldConfiguration);
         }
 
         /// <inheritdoc />
@@ -67,8 +66,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         private IHtmlContent GetSingleCheckboxHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var attrs = new HtmlAttributes(fieldConfiguration.HtmlAttributes);
-            AdjustHtmlForModelState(attrs, FieldGenerator);
-            var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(FieldGenerator), GetValue() ?? false, attrs);
+            AdjustHtmlForModelState(attrs);
+            var fieldHtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue() ?? false, attrs);
 
             if (fieldConfiguration.HasInlineLabel)
             {
@@ -77,7 +76,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                     var inlineLabelText = fieldConfiguration.InlineLabelText;
 
                     var contentBuilder = new HtmlContentBuilder();
-                    contentBuilder.AppendHtml(fieldhtml);
+                    contentBuilder.AppendHtml(fieldHtml);
                     contentBuilder.Append(" ");
                     if(inlineLabelText != null)
                     {
@@ -92,20 +91,16 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 }
                 else
                 {
-                    HtmlContentBuilder bld = new HtmlContentBuilder();
-                    bld.AppendHtml(fieldhtml)
+                    
+                    return new HtmlContentBuilder()
+                        .AppendHtml(fieldHtml)
                         .Append(" ")
-                        .AppendHtml(HtmlCreator.BuildLabel(
-                        GetFieldName(FieldGenerator),
-                        fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
-                        null
-                        ));
-                    return bld;
+                        .AppendHtml(HtmlCreator.BuildLabel(GetFieldName(), fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),  null));
                 }
             }
             else
             {
-                return fieldhtml;
+                return fieldHtml;
             }
         }
 

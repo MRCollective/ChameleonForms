@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Web;
-using ChameleonForms.Templates;
 using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Component

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
-using System.Web;
+using System.Net;
 
 namespace ChameleonForms
 {
@@ -17,7 +17,7 @@ namespace ChameleonForms
         /// <returns>The IHtmlContent</returns>
         public static IHtmlContent ToHtml(this string content)
         {
-            return new HtmlString(HttpUtility.HtmlEncode(content ?? ""));
+            return new HtmlString(WebUtility.HtmlEncode(content ?? ""));
         }
 
         /// <summary>
