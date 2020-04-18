@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using ChameleonForms.Templates;
 using ChameleonForms.Templates.Default;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ChameleonForms
 {
@@ -98,6 +99,8 @@ namespace ChameleonForms
                 if (registerEnumListBinding)
                     x.ModelBinderProviders.Insert(0, new EnumListModelBinderProvider());
             });
+
+            services.Configure<HtmlHelperOptions>(o => o.ClientValidationEnabled = false);
 
             if (registerFlagsEnumRequiredValidation)
                 services.AddSingleton<IValidationAttributeAdapterProvider, RequiredFlagsEnumAttributeAdapterProvider>();

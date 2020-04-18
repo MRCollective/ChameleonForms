@@ -1,5 +1,4 @@
 ﻿using ApprovalTests.Html;
-using ChameleonForms.Component.Config;
 using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 

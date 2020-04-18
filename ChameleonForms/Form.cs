@@ -166,11 +166,10 @@ namespace ChameleonForms
         public static IHtmlContent PartialFor<TModel, TPartialModel>(this IForm<TModel> form, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
         {
             var formModel = (TModel) form.HtmlHelper.ViewData.Model;
-            var expressionText = form.HtmlHelper.GetExpressionText(partialModelProperty);
             var viewData = new ViewDataDictionary(form.HtmlHelper.ViewData);
             viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
             viewData[WebViewPageExtensions.CurrentFormViewDataKey] = form;
-            viewData.TemplateInfo.HtmlFieldPrefix = form.HtmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(expressionText);
+            viewData.TemplateInfo.HtmlFieldPrefix = form.HtmlHelper.GetFullHtmlFieldName(partialModelProperty);
             return form.HtmlHelper.Partial(partialViewName, partialModelProperty.Compile().Invoke(formModel), viewData);
         }
 

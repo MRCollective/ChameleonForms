@@ -60,8 +60,7 @@ namespace ChameleonForms.FieldGenerators
             }
             else
             {
-                @for = HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(
-                    HtmlHelper.GetExpressionText(FieldProperty));
+                @for = HtmlHelper.GetFullHtmlFieldName(FieldProperty);
             }
 
             var labelText = fieldConfiguration.LabelText
@@ -82,7 +81,7 @@ namespace ChameleonForms.FieldGenerators
         {
             return Metadata.DisplayName
                 ?? Metadata.PropertyName
-                ?? HtmlHelper.GetExpressionText(FieldProperty).Split('.').Last();
+                ?? HtmlHelper.GetFieldName(FieldProperty).Split('.').Last();
         }
 
         /// <inheritdoc />

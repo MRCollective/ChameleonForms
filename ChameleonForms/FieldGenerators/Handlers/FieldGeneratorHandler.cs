@@ -190,7 +190,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
                     AdjustHtmlForModelState(attrs);
                 var fieldHtml = FieldGenerator.HasMultipleValues()
                     ? HtmlCreator.BuildSingleCheckbox(GetFieldName(), item.Selected, attrs, item.Value)
-                    : FieldGenerator.HtmlHelper.RadioButton(FieldGenerator.HtmlHelper.GetExpressionText(FieldGenerator.FieldProperty), item.Value, item.Selected, attrs.ToDictionary());
+                    : FieldGenerator.HtmlHelper.RadioButton(FieldGenerator.HtmlHelper.GetFieldName(FieldGenerator.FieldProperty), item.Value, item.Selected, attrs.ToDictionary());
                 if (fieldConfiguration.ShouldInlineLabelWrapElement)
                 {
                     yield return new HtmlContentBuilder()
@@ -211,13 +211,12 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <summary>
-        /// The value to use for the name of a field (e.g. for the name attribute or looking up model state).
+        /// The value to use for the full HTML name of the field.
         /// </summary>
-        /// <returns>The name of the field</returns>
+        /// <returns>The full HTML name of the field</returns>
         protected string GetFieldName()
         {
-            var name = FieldGenerator.HtmlHelper.GetExpressionText(FieldGenerator.FieldProperty);
-            return FieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+            return FieldGenerator.HtmlHelper.GetFullHtmlFieldName(FieldGenerator.FieldProperty);
         }
 
         /// <summary>
@@ -227,8 +226,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <param name="attrs">The attributes to modify</param>
         protected void AdjustHtmlForModelState(HtmlAttributes attrs)
         {
-            var name = FieldGenerator.HtmlHelper.GetExpressionText(FieldGenerator.FieldProperty);
-            var fullName = FieldGenerator.HtmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
+            var name = FieldGenerator.HtmlHelper.GetFieldName(FieldGenerator.FieldProperty);
+            var fullName = FieldGenerator.HtmlHelper.GetFullHtmlFieldName(FieldGenerator.FieldProperty);
 
             if (FieldGenerator.HtmlHelper.ViewContext.ViewData.ModelState.TryGetValue(fullName, out var modelState))
             {
