@@ -12,9 +12,10 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace ChameleonForms
 {
     // todo: needed for beta release in priority order
+    // Collapse Template dll into single dll with no dependencies? https://www.phillipsj.net/posts/using-ilrepack-with-dotnet-core-sdk-and-dotnet-standard/, https://docs.microsoft.com/en-us/dotnet/core/whats-new/dotnet-core-3-0#assembly-linking, https://github.com/gluck/il-repack
     // Add int/datetime client side validation support. Context: https://github.com/jbogard/aspnetwebstack/blob/730c683da2458430d36e3e360aba68932ba69fa4/src/System.Web.Mvc/ClientDataTypeModelValidatorProvider.cs, https://github.com/aspnet/Mvc/pull/2950, https://github.com/aspnet/Mvc/pull/2812, https://github.com/aspnet/Mvc/issues/4005, https://github.com/jquery-validation/jquery-validation/issues/626
     // doco for email and url fields, test Uri binding
-    // content files in nuget - testing required, documentation required
+    // content files in nuget - testing required (https://github.com/NuGet/Home/issues/6743#issuecomment-378827727), documentation required
     // web config transform view namespace additions equivalent in new world
     // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation
     // Twitter bootstrap: template, service collection extension, nuspec, contentfiles, doco
