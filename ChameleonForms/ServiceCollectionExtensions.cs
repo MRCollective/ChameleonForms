@@ -11,21 +11,23 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ChameleonForms
 {
-    // todo: Add int/datetime client side validation support. Context: https://github.com/jbogard/aspnetwebstack/blob/730c683da2458430d36e3e360aba68932ba69fa4/src/System.Web.Mvc/ClientDataTypeModelValidatorProvider.cs, https://github.com/aspnet/Mvc/pull/2950, https://github.com/aspnet/Mvc/pull/2812, https://github.com/aspnet/Mvc/issues/4005, https://github.com/jquery-validation/jquery-validation/issues/626
-    // content files in nuget
-    // todo: Add support for non jquery unobtrusive validation
-    // Add this extension equivalent for twitter bootstrap
-    // Add bootstrap4
-    // Add source files for unobtrusive validation - add to CDN instead?
-    // documentation update
-    // Add public api approval test
-    // review the datetime "g" thing
-    // Add tag helper equivalent to the comparison example
+    // todo: needed for beta release in priority order
+    // Add int/datetime client side validation support. Context: https://github.com/jbogard/aspnetwebstack/blob/730c683da2458430d36e3e360aba68932ba69fa4/src/System.Web.Mvc/ClientDataTypeModelValidatorProvider.cs, https://github.com/aspnet/Mvc/pull/2950, https://github.com/aspnet/Mvc/pull/2812, https://github.com/aspnet/Mvc/issues/4005, https://github.com/jquery-validation/jquery-validation/issues/626
+    // doco for email and url fields, test Uri binding
+    // content files in nuget - testing required, documentation required
+    // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation
+    // Twitter bootstrap: template, service collection extension, nuspec, contentfiles, doco
     // Update all dependencies to latest versions
-    // Update breaking changes
-    // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? ValidationHtmlAttributeProvider
-    // doco for email and url fields, test Uri
+    // Review the datetime "g" and current culture things - remove?
+    // Test adding both packages to a fresh web project
+    // Add public api surface area approval test, compare to old library to identify gaps, update breakingchanges file
+    // End-to-end documentation review and update
+    // todo: 4.0 non-beta release
     // Generate nuget from .csproj rather than nuspec
+    // Add support for non jquery unobtrusive validation
+    // Add bootstrap4
+    // Add tag helper equivalent to the raw mvc comparison example
+    // Add tag helpers for chameleon forms
 
     /// <summary>
     /// Extension methods for <see cref="IServiceCollection"/>.
