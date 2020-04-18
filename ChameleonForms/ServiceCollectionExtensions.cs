@@ -24,7 +24,7 @@ namespace ChameleonForms
     // Add public api surface area approval test, compare to old library to identify gaps, update breakingchanges file
     // End-to-end documentation review and update
     // todo: 4.0 non-beta release
-    // Generate nuget from .csproj rather than nuspec
+    // Generate nuget from .csproj rather than nuspec like https://github.com/LazZiya/ExpressLocalization/blob/master/LazZiya.ExpressLocalization/LazZiya.ExpressLocalization.csproj
     // Add support for non jquery unobtrusive validation
     // Add bootstrap4
     // Add tag helper equivalent to the raw mvc comparison example

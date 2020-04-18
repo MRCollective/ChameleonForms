@@ -39,11 +39,11 @@
       </group>
     </frameworkReferences>
     <contentFiles>
-      <files include="any\any\wwwroot\scripts\*.js" buildAction="Content" />
+      <files include="any\any\wwwroot\lib\chameleonforms\*.js" buildAction="Content" />
     </contentFiles>
   </metadata>
   <files>
-    <file src="ChameleonForms.Example\wwwroot\scripts\jquery.validate.unobtrusive.chameleon.js" target="contentFiles\any\any\wwwroot\scripts" />
+    <file src="ChameleonForms.Example\wwwroot\scripts\jquery.validate.unobtrusive.chameleon.js" target="contentFiles\any\any\wwwroot\lib\chameleonforms" />
     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.dll" target="lib\netcoreapp3.1" />
     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.pdb" target="lib\netcoreapp3.1" />
     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.XML" target="lib\netcoreapp3.1" />
