@@ -7,14 +7,15 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using ChameleonForms.Templates;
 using ChameleonForms.Templates.Default;
+using ChameleonForms.Validators;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ChameleonForms
 {
     // todo: needed for beta release in priority order
-    // Collapse Template dll into single dll with no dependencies? https://www.phillipsj.net/posts/using-ilrepack-with-dotnet-core-sdk-and-dotnet-standard/, https://docs.microsoft.com/en-us/dotnet/core/whats-new/dotnet-core-3-0#assembly-linking, https://github.com/gluck/il-repack
     // Add int/datetime client side validation support. Context: https://github.com/jbogard/aspnetwebstack/blob/730c683da2458430d36e3e360aba68932ba69fa4/src/System.Web.Mvc/ClientDataTypeModelValidatorProvider.cs, https://github.com/aspnet/Mvc/pull/2950, https://github.com/aspnet/Mvc/pull/2812, https://github.com/aspnet/Mvc/issues/4005, https://github.com/jquery-validation/jquery-validation/issues/626
     // doco for email and url fields, test Uri binding
+    // review type="number" for floating-point types as per https://github.com/aspnet/Mvc/issues/6024, https://medium.com/samsung-internet-dev/native-form-validation-part-3-8e643e1dd06
     // content files in nuget - testing required (https://github.com/NuGet/Home/issues/6743#issuecomment-378827727), documentation required
     // web config transform view namespace additions equivalent in new world
     // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation
@@ -30,6 +31,7 @@ namespace ChameleonForms
     // Add bootstrap4
     // Add tag helper equivalent to the raw mvc comparison example
     // Add tag helpers for chameleon forms
+    // ExistsInAttribute.EnableValidation <- DI rather than static
 
     /// <summary>
     /// Extension methods for <see cref="IServiceCollection"/>.
@@ -46,13 +48,15 @@ namespace ChameleonForms
         /// <param name="registerFlagsEnumRequiredValidation">Whether or not to register flag enum [Required] validation; true by default</param>
         /// <param name="registerDateTimeBinding">Whether or not to register format aware date time model binding; true by default</param>
         /// <param name="registerEnumListBinding">Whether or not to register enum list model binding; true by default</param>
+        /// <param name="registerIntegralClientModelValidator">Whether or not to register a client model validator for integral numeric types</param>
         public static void AddChameleonForms(this IServiceCollection services,
             bool humanizeLabels = true,
             bool registerDefaultTemplate = true,
             bool registerFlagsEnumBinding = true,
             bool registerFlagsEnumRequiredValidation = true,
             bool registerDateTimeBinding = true,
-            bool registerEnumListBinding = true
+            bool registerEnumListBinding = true,
+            bool registerIntegralClientModelValidator = true
         )
         {
             services.AddChameleonForms<DefaultFormTemplate>(
@@ -61,7 +65,8 @@ namespace ChameleonForms
                 registerFlagsEnumBinding: registerFlagsEnumBinding,
                 registerFlagsEnumRequiredValidation: registerFlagsEnumRequiredValidation,
                 registerDateTimeBinding: registerDateTimeBinding,
-                registerEnumListBinding: registerEnumListBinding
+                registerEnumListBinding: registerEnumListBinding,
+                registerIntegralClientModelValidator: registerIntegralClientModelValidator
             );
         }
 
@@ -76,13 +81,15 @@ namespace ChameleonForms
         /// <param name="registerFlagsEnumRequiredValidation">Whether or not to register flag enum [Required] validation; true by default</param>
         /// <param name="registerDateTimeBinding">Whether or not to register format aware date time model binding; true by default</param>
         /// <param name="registerEnumListBinding">Whether or not to register enum list model binding; true by default</param>
+        /// <param name="registerIntegralClientModelValidator">Whether or not to register a client model validator for integral numeric types</param>
         public static void AddChameleonForms<TFormTemplate>(this IServiceCollection services,
             bool humanizeLabels = true,
             bool registerDefaultTemplate = true,
             bool registerFlagsEnumBinding = true,
             bool registerFlagsEnumRequiredValidation = true,
             bool registerDateTimeBinding = true,
-            bool registerEnumListBinding = true
+            bool registerEnumListBinding = true,
+            bool registerIntegralClientModelValidator = true
         )
             where TFormTemplate : class, IFormTemplate
         {
@@ -102,6 +109,12 @@ namespace ChameleonForms
                     x.ModelBinderProviders.Insert(0, new FlagsEnumModelBinderProvider());
                 if (registerEnumListBinding)
                     x.ModelBinderProviders.Insert(0, new EnumListModelBinderProvider());
+            });
+
+            services.Configure<MvcViewOptions>(x =>
+            {
+                if (registerIntegralClientModelValidator)
+                    x.ClientModelValidatorProviders.Add(new IntegralNumericClientModelValidatorProvider());
             });
 
             services.Configure<HtmlHelperOptions>(o => o.ClientValidationEnabled = false);

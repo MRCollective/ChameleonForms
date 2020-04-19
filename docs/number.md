@@ -35,7 +35,7 @@ For integral types (`byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, o
 For floating-point types (`float`, `double`, or `decimal`), when using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
 
 ```html
-<input type="number" %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" value="%value%" />
+<input type="number" step="any" %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" value="%value%" />
 ```
 
 ### Default min / max

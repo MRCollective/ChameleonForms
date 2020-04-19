@@ -47,9 +47,10 @@ namespace ChameleonForms.FieldGenerators.Handlers
             {
                 if (FieldGenerator.IsIntegralNumber())
                     fieldConfiguration.Attr("step", 1);
-
-                if (FieldGenerator.IsFloatingNumber() && FieldGenerator.Metadata.DataTypeName == DataType.Currency.ToString())
+                else if (FieldGenerator.Metadata.DataTypeName == DataType.Currency.ToString())
                     fieldConfiguration.Attr("step", 0.01);
+                else
+                    fieldConfiguration.Attr("step", "any");
             }
 
             if (!fieldConfiguration.Attributes.Has("min") || !fieldConfiguration.Attributes.Has("max"))

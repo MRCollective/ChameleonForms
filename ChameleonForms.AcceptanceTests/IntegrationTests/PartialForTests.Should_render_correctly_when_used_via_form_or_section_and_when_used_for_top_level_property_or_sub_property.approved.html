@@ -112,7 +112,7 @@ Rendered Source
         <dl>
             <dt><label for="Int">Int</label> <em class="required">*</em></dt>
             <dd>
-                <input data-val="true" data-val-required="The Int field is required." id="Int" name="Int" required="required" step="1" type="number" value="0"> <span class="field-validation-valid" data-valmsg-for="Int" data-valmsg-replace="true"></span>
+                <input data-val="true" data-val-number="The field Int must be a number." data-val-required="The Int field is required." id="Int" name="Int" required="required" step="1" type="number" value="0"> <span class="field-validation-valid" data-valmsg-for="Int" data-valmsg-replace="true"></span>
             </dd>
         </dl>
     </fieldset>
@@ -156,7 +156,7 @@ Rendered Source
         <dl>
             <dt><label for="Decimal">Decimal</label> <em class="required">*</em></dt>
             <dd>
-                <input data-val="true" data-val-number="The field Decimal must be a number." data-val-required="The Decimal field is required." id="Decimal" name="Decimal" required="required" type="number" value="1.2300">in parent view <span class="field-validation-valid" data-valmsg-for="Decimal" data-valmsg-replace="true"></span>
+                <input data-val="true" data-val-number="The field Decimal must be a number." data-val-required="The Decimal field is required." id="Decimal" name="Decimal" required="required" step="any" type="number" value="1.2300">in parent view <span class="field-validation-valid" data-valmsg-for="Decimal" data-valmsg-replace="true"></span>
             </dd>
 
                 <dt><label for="TextAreaField">Text area field</label></dt>
@@ -172,7 +172,7 @@ Rendered Source
 
             <dt><label for="ListId">List id</label> <em class="required">*</em></dt>
             <dd>
-                <select data-val="true" data-val-required="The List id field is required." id="ListId" name="ListId" required="required"><option value="1">A</option>
+                <select data-val="true" data-val-number="The field List id must be a number." data-val-required="The List id field is required." id="ListId" name="ListId" required="required"><option value="1">A</option>
 <option value="2">B</option>
 </select>in parent view <span class="field-validation-valid" data-valmsg-for="ListId" data-valmsg-replace="true"></span>
             </dd>
