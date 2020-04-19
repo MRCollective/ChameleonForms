@@ -2,7 +2,7 @@
 @using ChameleonForms.Templates.Default
 @inject IFormTemplate DefaultFormTemplate
 @{
-    if (ViewContext.HttpContext.Request.Cookies["template"].EndsWith("nojquery"))
+    if ((ViewContext.HttpContext.Request.Cookies["template"] ?? "").EndsWith("nojquery"))
     {
         if (DefaultFormTemplate.GetType() == typeof (DefaultFormTemplate))
         {
