@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="msbuildrazorcompiler" Version="0.2.1" />
+    <PackageReference Include="msbuildrazorcompiler" Version="0.3.0" />
   </ItemGroup>
 
   <ItemGroup>
