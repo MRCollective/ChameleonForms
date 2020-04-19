@@ -43,7 +43,7 @@
     </frameworkReferences>
   </metadata>
   <files>
-    <file src="ChameleonForms.Example\wwwroot\scripts\jquery.validate.unobtrusive.chameleon.js" target="contentCopy\wwwroot\lib\chameleonforms" />
+    <file src="ChameleonForms.Example\wwwroot\lib\chameleonforms\*.*" target="contentCopy\wwwroot\lib\chameleonforms" />
     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.dll" target="lib\netcoreapp3.1" />
     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.pdb" target="lib\netcoreapp3.1" />
     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.XML" target="lib\netcoreapp3.1" />

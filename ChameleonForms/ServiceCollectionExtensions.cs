@@ -17,6 +17,7 @@ namespace ChameleonForms
     // doco for email and url fields, test Uri binding
     // review type="number" for floating-point types as per https://github.com/aspnet/Mvc/issues/6024, https://medium.com/samsung-internet-dev/native-form-validation-part-3-8e643e1dd06
     // content files in nuget - testing required (https://github.com/NuGet/Home/issues/6743#issuecomment-378827727), documentation required
+    // https://stackoverflow.com/questions/18609565/parsejson-uncaught-syntaxerror-unexpected-token-u
     // web config transform view namespace additions equivalent in new world
     // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation
     // Twitter bootstrap: template, service collection extension, nuspec, contentfiles, doco
@@ -124,7 +125,10 @@ namespace ChameleonForms
                     x.ClientModelValidatorProviders.Add(new DateTimeClientModelValidatorProvider());
             });
 
-            services.Configure<HtmlHelperOptions>(o => o.ClientValidationEnabled = false);
+            services.Configure<HtmlHelperOptions>(o =>
+            {
+                o.ClientValidationEnabled = true;
+            });
 
             if (registerFlagsEnumRequiredValidation)
                 services.AddSingleton<IValidationAttributeAdapterProvider, RequiredFlagsEnumAttributeAdapterProvider>();

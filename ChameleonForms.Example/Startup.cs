@@ -32,7 +32,7 @@ namespace ChameleonForms.Example
             {
                 var accessor = provider.GetRequiredService<IHttpContextAccessor>();
                 var template = accessor.HttpContext.Request.Cookies["template"] ?? "default";
-                if (template == "default")
+                if (template.StartsWith("default"))
                     return new DefaultFormTemplate();
 
                 return new TwitterBootstrapFormTemplate();

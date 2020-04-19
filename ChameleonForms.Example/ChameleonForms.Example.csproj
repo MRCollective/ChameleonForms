@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj" />
+    <Folder Include="wwwroot\lib\aspnetvalidation\" />
+    <Folder Include="wwwroot\lib\bootstrap-native\dist\" />
   </ItemGroup>
 
 </Project>
