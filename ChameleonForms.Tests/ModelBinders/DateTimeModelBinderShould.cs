@@ -94,7 +94,7 @@ namespace ChameleonForms.Tests.ModelBinders
 
             BindModel(context);
 
-            AssertModelError(context, $"The value 'invalid' is not valid for {DisplayName}. Format of date is {{0:dd/MM/yyyy}}.");
+            AssertModelError(context, $"The value 'invalid' is not valid for {DisplayName}. Format of date is dd/MM/yyyy.");
         }
 
         [Test]

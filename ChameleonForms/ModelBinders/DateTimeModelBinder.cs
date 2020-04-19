@@ -14,6 +14,7 @@ namespace ChameleonForms.ModelBinders
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
             var formatString = bindingContext.ModelMetadata.DisplayFormatString;
+            var dateParseString = formatString.Replace("{0:", "").Replace("}", "");
 
             var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
             var submittedValue = value == default(ValueProviderResult) ? null : value.FirstValue;
@@ -25,12 +26,10 @@ namespace ChameleonForms.ModelBinders
                 bindingContext.Result = ModelBindingResult.Success(null);
             }
             else if (string.IsNullOrEmpty(submittedValue) ||
-                !DateTime.TryParseExact(submittedValue, formatString
-                    .Replace("{0:", "")
-                    .Replace("}", ""), CultureInfo.CurrentCulture.DateTimeFormat, DateTimeStyles.None, out DateTime parsedDate))
+                !DateTime.TryParseExact(submittedValue, dateParseString, CultureInfo.CurrentCulture.DateTimeFormat, DateTimeStyles.None, out DateTime parsedDate))
             {
                 bindingContext.ModelState.AddModelError(bindingContext.ModelName,
-                    $"The value '{submittedValue ?? ""}' is not valid for {bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.PropertyName}. Format of date is {formatString}.");
+                    $"The value '{submittedValue ?? ""}' is not valid for {bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.PropertyName}. Format of date is {dateParseString}.");
             }
             else
             {
