@@ -13,17 +13,13 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace ChameleonForms
 {
     // todo: needed for beta release in priority order
-    // Add int/datetime client side validation support. Context: https://github.com/jbogard/aspnetwebstack/blob/730c683da2458430d36e3e360aba68932ba69fa4/src/System.Web.Mvc/ClientDataTypeModelValidatorProvider.cs, https://github.com/aspnet/Mvc/pull/2950, https://github.com/aspnet/Mvc/pull/2812, https://github.com/aspnet/Mvc/issues/4005, https://github.com/jquery-validation/jquery-validation/issues/626
-    // doco for email and url fields, test Uri binding
-    // review type="number" for floating-point types as per https://github.com/aspnet/Mvc/issues/6024, https://medium.com/samsung-internet-dev/native-form-validation-part-3-8e643e1dd06
-    // content files in nuget - testing required (https://github.com/NuGet/Home/issues/6743#issuecomment-378827727), documentation required
-    // https://stackoverflow.com/questions/18609565/parsejson-uncaught-syntaxerror-unexpected-token-u
-    // web config transform view namespace additions equivalent in new world
+    // doco: int/datetime client validation support, email and url fields, client side file copying, how to set up twitter bootstrap 3, view namespace getting started
+    // test Uri binding works?
     // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation
-    // Twitter bootstrap: template, service collection extension, nuspec, contentfiles, doco
+    // Twitter bootstrap: template, service collection extension, doco
     // Update all dependencies to latest versions
     // Review the datetime "g" and current culture things - remove?
-    // Test adding both packages to a fresh web project
+    // Test adding package to a fresh web project
     // Add public api surface area approval test, compare to old library to identify gaps, update breakingchanges file
     // End-to-end documentation review and update
     // todo: 4.0 non-beta release
