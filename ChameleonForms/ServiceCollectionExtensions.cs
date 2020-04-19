@@ -49,6 +49,7 @@ namespace ChameleonForms
         /// <param name="registerDateTimeBinding">Whether or not to register format aware date time model binding; true by default</param>
         /// <param name="registerEnumListBinding">Whether or not to register enum list model binding; true by default</param>
         /// <param name="registerIntegralClientModelValidator">Whether or not to register a client model validator for integral numeric types</param>
+        /// <param name="registerDateTimeClientModelValidator">Whether or not to register a client model validator for DateTime types</param>
         public static void AddChameleonForms(this IServiceCollection services,
             bool humanizeLabels = true,
             bool registerDefaultTemplate = true,
@@ -56,7 +57,8 @@ namespace ChameleonForms
             bool registerFlagsEnumRequiredValidation = true,
             bool registerDateTimeBinding = true,
             bool registerEnumListBinding = true,
-            bool registerIntegralClientModelValidator = true
+            bool registerIntegralClientModelValidator = true,
+            bool registerDateTimeClientModelValidator = true
         )
         {
             services.AddChameleonForms<DefaultFormTemplate>(
@@ -66,7 +68,8 @@ namespace ChameleonForms
                 registerFlagsEnumRequiredValidation: registerFlagsEnumRequiredValidation,
                 registerDateTimeBinding: registerDateTimeBinding,
                 registerEnumListBinding: registerEnumListBinding,
-                registerIntegralClientModelValidator: registerIntegralClientModelValidator
+                registerIntegralClientModelValidator: registerIntegralClientModelValidator,
+                registerDateTimeClientModelValidator: registerDateTimeClientModelValidator
             );
         }
 
@@ -82,6 +85,7 @@ namespace ChameleonForms
         /// <param name="registerDateTimeBinding">Whether or not to register format aware date time model binding; true by default</param>
         /// <param name="registerEnumListBinding">Whether or not to register enum list model binding; true by default</param>
         /// <param name="registerIntegralClientModelValidator">Whether or not to register a client model validator for integral numeric types</param>
+        /// <param name="registerDateTimeClientModelValidator">Whether or not to register a client model validator for DateTime types</param>
         public static void AddChameleonForms<TFormTemplate>(this IServiceCollection services,
             bool humanizeLabels = true,
             bool registerDefaultTemplate = true,
@@ -89,7 +93,8 @@ namespace ChameleonForms
             bool registerFlagsEnumRequiredValidation = true,
             bool registerDateTimeBinding = true,
             bool registerEnumListBinding = true,
-            bool registerIntegralClientModelValidator = true
+            bool registerIntegralClientModelValidator = true,
+            bool registerDateTimeClientModelValidator = true
         )
             where TFormTemplate : class, IFormTemplate
         {
@@ -115,6 +120,8 @@ namespace ChameleonForms
             {
                 if (registerIntegralClientModelValidator)
                     x.ClientModelValidatorProviders.Add(new IntegralNumericClientModelValidatorProvider());
+                if (registerDateTimeClientModelValidator)
+                    x.ClientModelValidatorProviders.Add(new DateTimeClientModelValidatorProvider());
             });
 
             services.Configure<HtmlHelperOptions>(o => o.ClientValidationEnabled = false);

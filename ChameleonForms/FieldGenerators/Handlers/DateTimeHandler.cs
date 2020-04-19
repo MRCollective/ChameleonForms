@@ -39,10 +39,8 @@ namespace ChameleonForms.FieldGenerators.Handlers
             if (!string.IsNullOrEmpty(FieldGenerator.Metadata.DisplayFormatString))
             {
                 var format = FieldGenerator.Metadata.DisplayFormatString.Replace("{0:", "").Replace("}", "");
-                if(format == "g")
-                {
+                if (format == "g")
                     format = string.Join(" ", CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern, CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern);
-                }
 
                 fieldConfiguration.Attr("data-val-format", format);
             }
