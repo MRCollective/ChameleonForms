@@ -1,6 +1,6 @@
-﻿(function(jQuery) {
+﻿(function () {
 
-    var isValidDate = function(value, format) {
+    var isValidDate = function (value, format) {
         var getDateParser = function (regex, dayIndex, monthIndex, yearIndex) {
             return {
                 regex: regex,
@@ -108,7 +108,7 @@
                 is12HourTime: is12HourTime
             };
         };
-        
+
         var timeParser;
         switch (format) {
             case "h:mmtt":
@@ -142,7 +142,7 @@
         var match = value.match(timeParser.regex);
         if (match == null)
             return false;
-        
+
         var hour = match[timeParser.hourIndex] * 1;
         var minute = match[timeParser.minuteIndex] * 1;
         var is12Hour = timeParser.is12HourTime;
@@ -162,24 +162,58 @@
         return true;
     };
 
-    jQuery.validator.methods.date = function(value, element) {
-        if (this.optional(element))
-            return true;
+    if (window.hasOwnProperty('aspnetValidation')) {
 
-        var format = jQuery(element).data("val-format");
-        if (format == "")
-            return !/Invalid|NaN/.test(new Date(value).toString());
-        
-        var formatSplitBySpaces = format.split(" ");
-        if (formatSplitBySpaces.length > 2)
-            return true;
+        var v = new window.aspnetValidation.ValidationService();
 
-        var valueSplitBySpaces = value.split(" ");
-        if (formatSplitBySpaces.length != valueSplitBySpaces.length)
-            return false;
+        v.addProvider('date', (value, element, params) => {
+            if (!value) {
+                // Let [Required] handle validation error for empty input...
+                return true;
+            }
 
-        return isValidDate(valueSplitBySpaces[0], formatSplitBySpaces[0])
-            && (formatSplitBySpaces.length == 1 || isValidTime(valueSplitBySpaces[1], formatSplitBySpaces[1]));
-    };
+            var format = jQuery(element).data("val-format");
+            if (format === "")
+                return !/Invalid|NaN/.test(new Date(value).toString());
 
-})(jQuery);
+            var formatSplitBySpaces = format.split(" ");
+            if (formatSplitBySpaces.length > 2)
+                return true;
+
+            var valueSplitBySpaces = value.split(" ");
+            if (formatSplitBySpaces.length !== valueSplitBySpaces.length)
+                return false;
+
+            return isValidDate(valueSplitBySpaces[0], formatSplitBySpaces[0])
+                && (formatSplitBySpaces.length === 1 || isValidTime(valueSplitBySpaces[1], formatSplitBySpaces[1]));
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            v.bootstrap();
+        });
+    }
+
+    if (window.hasOwnProperty('jQuery') && jQuery.validator) {
+        jQuery.validator.methods.date = function (value, element) {
+            if (this.optional(element))
+                return true;
+
+            var format = jQuery(element).data("val-format");
+            if (format === "")
+                return !/Invalid|NaN/.test(new Date(value).toString());
+
+            var formatSplitBySpaces = format.split(" ");
+            if (formatSplitBySpaces.length > 2)
+                return true;
+
+            var valueSplitBySpaces = value.split(" ");
+            if (formatSplitBySpaces.length !== valueSplitBySpaces.length)
+                return false;
+
+            return isValidDate(valueSplitBySpaces[0], formatSplitBySpaces[0])
+                && (formatSplitBySpaces.length === 1 || isValidTime(valueSplitBySpaces[1], formatSplitBySpaces[1]));
+        };
+    }
+
+})();
