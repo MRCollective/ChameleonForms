@@ -38,12 +38,9 @@
         <frameworkReference name="Microsoft.AspNetCore.App" />
       </group>
     </frameworkReferences>
-    <contentFiles>
-      <files include="any\any\wwwroot\lib\chameleonforms\*.js" buildAction="Content" />
-    </contentFiles>
   </metadata>
   <files>
-    <file src="ChameleonForms.Example\wwwroot\scripts\jquery.validate.unobtrusive.chameleon.js" target="contentFiles\any\any\wwwroot\lib\chameleonforms" />
+    <file src="ChameleonForms.Example\wwwroot\scripts\jquery.validate.unobtrusive.chameleon.js" target="contentCopy\wwwroot\lib\chameleonforms" />
     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.dll" target="lib\netcoreapp3.1" />
     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.pdb" target="lib\netcoreapp3.1" />
     <file src="ChameleonForms\bin\Release\netcoreapp3.1\ChameleonForms.XML" target="lib\netcoreapp3.1" />
@@ -55,5 +52,6 @@
     <file src="ChameleonForms.Templates\bin\Release\netcoreapp3.1\ChameleonForms.Templates.XML" target="lib\netcoreapp3.1" />
     <file src="ChameleonForms\readme.txt" target="" />
     <file src="logo.png" target="" />
+    <file src="build\ChameleonForms.targets" target="build" />
   </files>
 </package>

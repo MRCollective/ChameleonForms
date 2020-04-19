@@ -1,0 +1,9 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemGroup>
+      <ChameleonFormsCopyContentFiles Condition="$(ChameleonFormsCopyContentFiles) == ''">true</ChameleonFormsCopyContentFiles>
+      <ContentCopyFiles Include="..\contentCopy\**\*.*"/>
+    </ItemGroup>
+    <Target Name="CopyFiles" BeforeTargets="Build" Condition="$(ChameleonFormsCopyContentFiles) == 'true'">
+      <Copy SourceFiles="@(ContentCopyFiles)" DestinationFolder="$(MSBuildProjectDirectory)" />
+    </Target>
+</Project>
