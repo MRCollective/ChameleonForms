@@ -17,7 +17,7 @@
 {
     <p>@f.LabelFor(m => m.SomeCheckbox).Label("Are you ready for: ") @f.FieldElementFor(m => m.SomeCheckbox) @f.ValidationMessageFor(m => m.SomeCheckbox)</p>
     <p>@f.FieldElementFor(m => m.RequiredStringField).TabIndex(4)</p>
-    using (var s = f.BeginSection("My Section!", InstructionalText(null), new { @class = "aClass" }.ToHtmlAttributes()))
+    using (var s = f.BeginSection("My Section!", InstructionalText, new { @class = "aClass" }.ToHtmlAttributes()))
     {
         @s.FieldFor(m => m.FlagsEnums)
         @s.FieldFor(m => m.Boolean).WithoutInlineLabel()

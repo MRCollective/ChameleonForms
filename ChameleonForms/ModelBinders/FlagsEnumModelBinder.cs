@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,24 +29,21 @@ namespace ChameleonForms.ModelBinders
                 }
                 else
                 {
-                    bindingContext.ModelState.AddModelError(bindingContext.ModelName
-                        , string.Format("The value '{0}' is not valid for {1}."
-                            , enumValue
-                            , bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.PropertyName
-                            ));
+                    bindingContext.ModelState.AddModelError(
+                        bindingContext.ModelName,
+                        string.Format("The value '{0}' is not valid for {1}.",
+                        enumValue,
+                        bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.PropertyName)
+                    );
                 }
             }
             
-            if(enumValueAsLong == null)
+            if (enumValueAsLong == null)
             {
-                if(nullable)
-                {
+                if (nullable)
                     bindingContext.Result = ModelBindingResult.Success(null);
-                }
                 else
-                {
                     bindingContext.Result = ModelBindingResult.Failed();
-                }
             }
             else
             {

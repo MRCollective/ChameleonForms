@@ -1,3 +1,6 @@
 mode: ContinuousDelivery
 next-version: 4.0.0
-branches: {}
+branches:
+  master:
+    regex: ^master
+    tag: 'beta'

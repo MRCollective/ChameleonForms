@@ -57,6 +57,16 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         }
 
         [Test]
+        public void Use_correct_html_for_textarea_with_overriden_cols_and_rows()
+        {
+            var g = Arrange(m => m.Textarea);
+
+            var result = g.GetFieldHtml(ExampleFieldConfiguration.Cols(60).Rows(5));
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Use_correct_html_for_email()
         {
             var g = Arrange(m => m.Email);

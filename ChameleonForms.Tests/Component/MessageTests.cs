@@ -66,18 +66,18 @@ namespace ChameleonForms.Tests.Component
             _f.Received().Write(_beginHtml);
         }
 
-        //[Test]
-        //public void Create_a_paragraph_with_a_string()
-        //{
-        //    var html = Substitute.For<IHtmlContent>();
-        //    var s = Arrange(MessageType.Success);
-        //    _f.Template.MessageParagraph(Arg.Is<IHtmlContent>(h => h.ToHtmlString() == "aerg&amp;%^&quot;esrg&#39;"))
-        //        .Returns(html);
+        [Test]
+        public void Create_a_paragraph_with_a_string()
+        {
+            var html = Substitute.For<IHtmlContent>();
+            var s = Arrange(MessageType.Success);
+            _f.Template.MessageParagraph(Arg.Is<IHtmlContent>(h => h.ToHtmlString() == "aerg&amp;%^&quot;esrg&#39;"))
+                .Returns(html);
 
-        //    var paragraph = s.Paragraph("aerg&%^\"esrg'");
+            var paragraph = s.Paragraph("aerg&%^\"esrg'");
 
-        //    Assert.That(paragraph, Is.EqualTo(html));
-        //}
+            Assert.That(paragraph, Is.EqualTo(html));
+        }
 
         [Test]
         public void Create_a_paragraph_with_html()

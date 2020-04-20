@@ -41,5 +41,14 @@ namespace ChameleonForms.FieldGenerators.Handlers
         {
             return FieldDisplayType.MultiLineText;
         }
+
+        public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
+        {
+            // Ensure textareas look consistent across browsers by having default values as per MDN recommendations
+            if (!fieldConfiguration.Attributes.Has("rows"))
+                fieldConfiguration.Rows(2);
+            if (!fieldConfiguration.Attributes.Has("cols"))
+                fieldConfiguration.Cols(20);
+        }
     }
 }
