@@ -13,7 +13,7 @@ namespace ChameleonForms.ModelBinders
         /// <inheritdoc />
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
-            var formatString = bindingContext.ModelMetadata.DisplayFormatString;
+            var formatString = bindingContext.ModelMetadata.EditFormatString;
             var dateParseString = formatString.Replace("{0:", "").Replace("}", "");
 
             var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);

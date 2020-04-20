@@ -7,7 +7,7 @@ namespace ChameleonForms.ModelBinders
     {
         public IModelBinder GetBinder(ModelBinderProviderContext context)
         {
-            if (context.Metadata.UnderlyingOrModelType == typeof(DateTime) && !string.IsNullOrEmpty(context.Metadata.DisplayFormatString))
+            if (context.Metadata.UnderlyingOrModelType == typeof(DateTime) && !string.IsNullOrEmpty(context.Metadata.EditFormatString))
             {
                 return new DateTimeModelBinder();
             }

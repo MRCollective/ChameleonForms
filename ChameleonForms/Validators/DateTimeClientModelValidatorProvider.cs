@@ -82,12 +82,12 @@ namespace ChameleonForms.Validators
             }
 
             var name = modelMetadata.DisplayName ?? modelMetadata.Name;
-            var formatString = modelMetadata.DisplayFormatString;
-
-            if (formatString == "g")
-                formatString = string.Join(" ", CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern, CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern);
-
+            var formatString = modelMetadata.EditFormatString;
             var dateParseString = formatString?.Replace("{0:", "")?.Replace("}", "");
+
+            if (dateParseString == "g")
+                dateParseString = string.Join(" ", CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern, CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern);
+
             var message = new StringBuilder();
 
             message.Append(name == null
@@ -95,7 +95,7 @@ namespace ChameleonForms.Validators
                 : $"The field {name} must be a date"
             );
 
-            if (!string.IsNullOrEmpty(formatString))
+            if (!string.IsNullOrEmpty(dateParseString))
                 message.Append($" with format {dateParseString}");
 
             return message.Append(".").ToString();

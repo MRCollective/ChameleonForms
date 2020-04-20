@@ -1,9 +1,9 @@
 ﻿@{
     ViewData["type"] = "date";
     var attrs = new Dictionary<string, object>();
-    if (!string.IsNullOrEmpty(ViewData.ModelMetadata.DisplayFormatString))
+    if (!string.IsNullOrEmpty(ViewData.ModelMetadata.EditFormatString))
     {
-        attrs["data-val-format"] = ViewData.ModelMetadata.DisplayFormatString.Replace("{0:", "").Replace("}", "");
+        attrs["data-val-format"] = ViewData.ModelMetadata.EditFormatString.Replace("{0:", "").Replace("}", "");
     }
     ViewData["attrs"] = attrs;
 }

@@ -36,9 +36,9 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
         {
-            if (!string.IsNullOrEmpty(FieldGenerator.Metadata.DisplayFormatString))
+            if (!string.IsNullOrEmpty(FieldGenerator.Metadata.EditFormatString))
             {
-                var format = FieldGenerator.Metadata.DisplayFormatString.Replace("{0:", "").Replace("}", "");
+                var format = FieldGenerator.Metadata.EditFormatString.Replace("{0:", "").Replace("}", "");
                 if (format == "g")
                     format = string.Join(" ", CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern, CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern);
 

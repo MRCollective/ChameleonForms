@@ -65,7 +65,7 @@ namespace ChameleonForms.Tests.ModelBinders
         {
             _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, value } });
             
-            var context = ArrangeBindingContext(x=> x.DisplayMetadata.DisplayFormatString = "{0:dd/MM/yyyy}");
+            var context = ArrangeBindingContext(x=> x.DisplayMetadata.EditFormatString = "{0:dd/MM/yyyy}");
 
             var model = BindModel(context);
 
@@ -79,7 +79,7 @@ namespace ChameleonForms.Tests.ModelBinders
         {
             _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, "invalid" } });
             
-            var context = ArrangeBindingContext(x => x.DisplayMetadata.DisplayFormatString = "{0:dd/MM/yyyy}");
+            var context = ArrangeBindingContext(x => x.DisplayMetadata.EditFormatString = "{0:dd/MM/yyyy}");
 
             var model = BindModel(context);
 
@@ -90,7 +90,7 @@ namespace ChameleonForms.Tests.ModelBinders
         public void Add_modelstate_error_when_there_is_a_display_format_and_an_invalid_value()
         {
             _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, "invalid" } });
-            var context = ArrangeBindingContext(x => x.DisplayMetadata.DisplayFormatString = "{0:dd/MM/yyyy}");
+            var context = ArrangeBindingContext(x => x.DisplayMetadata.EditFormatString = "{0:dd/MM/yyyy}");
 
             BindModel(context);
 
@@ -101,7 +101,7 @@ namespace ChameleonForms.Tests.ModelBinders
         public void Return_value_if_value_ok()
         {
             _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, "12/12/2000" } });
-            var context = ArrangeBindingContext(x => x.DisplayMetadata.DisplayFormatString = "{0:dd/MM/yyyy}");
+            var context = ArrangeBindingContext(x => x.DisplayMetadata.EditFormatString = "{0:dd/MM/yyyy}");
 
             var model = BindModel(context);
 
@@ -113,7 +113,7 @@ namespace ChameleonForms.Tests.ModelBinders
         {
             _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, "12/12/2000" } });
             
-            var context = ArrangeBindingContext(x => x.DisplayMetadata.DisplayFormatString = "{0:dd/MM/yyyy}");
+            var context = ArrangeBindingContext(x => x.DisplayMetadata.EditFormatString = "{0:dd/MM/yyyy}");
 
             var model = BindModel(context);
 
@@ -129,7 +129,7 @@ namespace ChameleonForms.Tests.ModelBinders
                 var s = val.ToString("g");
                 val = DateTime.ParseExact(s, "g", CultureInfo.CurrentCulture);
                 _formCollection = new FormCollection(new Dictionary<string, StringValues> { { PropertyName, s } });
-                var context = ArrangeBindingContext(x => x.DisplayMetadata.DisplayFormatString = "{0:g}");
+                var context = ArrangeBindingContext(x => x.DisplayMetadata.EditFormatString = "{0:g}");
 
                 var model = BindModel(context);
 
