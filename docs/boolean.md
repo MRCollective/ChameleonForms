@@ -42,6 +42,7 @@ If you are outputting a non-nullable Boolean then a label will show next to the 
 
 ```csharp
 @s.FieldFor(m => m.BooleanField).InlineLabel("override")
+@s.FieldFor(m => m.BooleanField).InlineLabel(@<strong>overriden label</strong>)
 ```
 
 ### Display as drop-down

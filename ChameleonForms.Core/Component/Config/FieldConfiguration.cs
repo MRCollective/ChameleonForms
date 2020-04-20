@@ -182,6 +182,13 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration InlineLabel(IHtmlContent labelHtml);
 
         /// <summary>
+        /// Sets an inline label for a checkbox.
+        /// </summary>
+        /// <param name="labelHtml">The html to use for the label as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration InlineLabel(Func<dynamic, IHtmlContent> labelHtml);
+
+        /// <summary>
         /// Override the default label for the field.
         /// </summary>
         /// <param name="labelText">The text to use for the label</param>
@@ -194,6 +201,13 @@ namespace ChameleonForms.Component.Config
         /// <param name="labelHtml">The text to use for the label</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Label(IHtmlContent labelHtml);
+
+        /// <summary>
+        /// Override the default label for the field.
+        /// </summary>
+        /// <param name="labelHtml">The text to use for the label as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Label(Func<dynamic, IHtmlContent> labelHtml);
 
         /// <summary>
         /// Renders the field as a list of radio options for selecting single values or checkbox items for selecting multiple values.
@@ -254,6 +268,13 @@ namespace ChameleonForms.Component.Config
         void SetField(IHtmlContent field);
 
         /// <summary>
+        /// Sets the field that the field configuration is wrapping so that
+        ///     a call to ToHtmlString() will output the given field.
+        /// </summary>
+        /// <param name="field">The field being configured as a templated razor delegate</param>
+        void SetField(Func<dynamic, IHtmlContent> field);
+
+        /// <summary>
         /// Supply a string hint to display along with the field.
         /// </summary>
         /// <param name="hint">The hint string</param>
@@ -266,6 +287,13 @@ namespace ChameleonForms.Component.Config
         /// <param name="hint">The hint markup</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithHint(IHtmlContent hint);
+
+        /// <summary>
+        /// Supply a HTML hint to display along with the field.
+        /// </summary>
+        /// <param name="hint">The hint markup as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithHint(Func<dynamic, IHtmlContent> hint);
         
         /// <summary>
         /// Prepends the given HTML to the form field.
@@ -273,6 +301,13 @@ namespace ChameleonForms.Component.Config
         /// <param name="html">The HTML to prepend</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Prepend(IHtmlContent html);
+        
+        /// <summary>
+        /// Prepends the given HTML to the form field.
+        /// </summary>
+        /// <param name="html">The HTML to prepend as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Prepend(Func<dynamic, IHtmlContent> html);
 
         /// <summary>
         /// Prepends the given string to the form field.
@@ -287,6 +322,13 @@ namespace ChameleonForms.Component.Config
         /// <param name="html">The HTML to append</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Append(IHtmlContent html);
+
+        /// <summary>
+        /// Appends the given HTML to the form field.
+        /// </summary>
+        /// <param name="html">The HTML to append as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Append(Func<dynamic, IHtmlContent> html);
 
         /// <summary>
         /// Appends the given string to the form field.
@@ -305,6 +347,17 @@ namespace ChameleonForms.Component.Config
         /// <param name="html">The HTML for the field</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration OverrideFieldHtml(IHtmlContent html);
+
+        /// <summary>
+        /// Override the HTML of the form field.
+        /// 
+        /// This gives you ultimate flexibility with your field HTML when it's
+        /// not quite what you want, but you still want the form template
+        /// (e.g. label, surrounding html and validation message).
+        /// </summary>
+        /// <param name="html">The HTML for the field as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration OverrideFieldHtml(Func<dynamic, IHtmlContent> html);
                 
         /// <summary>
         /// Uses the given format string when outputting the field value.
@@ -584,6 +637,12 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
+        public IFieldConfiguration InlineLabel(Func<dynamic, IHtmlContent> labelHtml)
+        {
+            return InlineLabel(labelHtml(null));
+        }
+
+        /// <inheritdoc />
         public IHtmlContent LabelText { get; private set; }
 
         /// <inheritdoc />
@@ -598,6 +657,12 @@ namespace ChameleonForms.Component.Config
         {
             LabelText = labelHtml;
             return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Label(Func<dynamic, IHtmlContent> labelHtml)
+        {
+            return Label(labelHtml(null));
         }
 
         /// <inheritdoc />
@@ -657,6 +722,12 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
+        public void SetField(Func<dynamic, IHtmlContent> field)
+        {
+            _field = () => field(null);
+        }
+
+        /// <inheritdoc />
         public IFieldConfiguration WithHint(string hint)
         {
             Hint = hint.ToHtml();
@@ -671,6 +742,12 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
+        public IFieldConfiguration WithHint(Func<dynamic, IHtmlContent> hint)
+        {
+            return WithHint(hint(null));
+        }
+
+        /// <inheritdoc />
         public IHtmlContent Hint { get; private set; }
 
         /// <inheritdoc />
@@ -678,6 +755,12 @@ namespace ChameleonForms.Component.Config
         {
             _prependedHtml.Add(html);
             return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Prepend(Func<dynamic, IHtmlContent> html)
+        {
+            return Prepend(html(null));
         }
 
         /// <inheritdoc />
@@ -695,6 +778,12 @@ namespace ChameleonForms.Component.Config
         {
             _appendedHtml.Add(html);
             return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Append(Func<dynamic, IHtmlContent> html)
+        {
+            return Append(html(null));
         }
 
         /// <inheritdoc />
@@ -778,6 +867,12 @@ namespace ChameleonForms.Component.Config
         {
             _fieldHtml = html;
             return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration OverrideFieldHtml(Func<dynamic, IHtmlContent> html)
+        {
+            return OverrideFieldHtml(html(null));
         }
 
         /// <inheritdoc />

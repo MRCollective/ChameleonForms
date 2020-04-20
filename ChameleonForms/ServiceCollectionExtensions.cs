@@ -21,7 +21,7 @@ namespace ChameleonForms
     // Review the datetime "g" and current culture things - remove?
     // Test adding package to a fresh web project
     // Add public api surface area approval test, compare to old library to identify gaps, update breakingchanges file
-    // End-to-end documentation review and update
+    // End-to-end documentation review and update - @helper, IHtmlString, web.config, update Message, Navigation etc.
     // todo: 4.0 non-beta release
     // Generate nuget from .csproj rather than nuspec like https://github.com/LazZiya/ExpressLocalization/blob/master/LazZiya.ExpressLocalization/LazZiya.ExpressLocalization.csproj
     // Add support for non jquery unobtrusive validation
@@ -29,6 +29,8 @@ namespace ChameleonForms
     // Add tag helper equivalent to the raw mvc comparison example
     // Add tag helpers for chameleon forms
     // ExistsInAttribute.EnableValidation <- DI rather than static
+    // support IList<nullable<value type>> similar to IList<nullable enum type> support
+    // Support Blazor, razor pages and carter
 
     /// <summary>
     /// Extension methods for <see cref="IServiceCollection"/>.

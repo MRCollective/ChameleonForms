@@ -169,18 +169,6 @@ On first glance the syntax of the Editor Templates example and the ChameleonForm
 * In order to get it working that way we had to add 27 files with a total of 227 lines of code (big thanks to [Dan Malcolm](http://www.danmalcolm.com/2013/06/using-razor-to-customise-templates-used.html) for [converting the standard Editor Templates to Razor](https://github.com/danmalcolm/mvc-razor-display-and-editor-templates)) - if you wanted to provide test coverage of the form output then you would have even more files and lines of code
     * With ChameleonForms you simply `Install-Package ChameleonForms` using NuGet Package Manager Console and you are good to go
 
-There are two things that you do get with the Editor Templates in our example that you don't currently get with ChameleonForms:
-
-* The Editor Templates automatically use HTML5 field types for numerics and dates
-* The Editor Templates understand all of the `[DataType()]` types (e.g. email address, URLs, etc.) and both uses HTML5 data-types (where appropriate) and includes relevant unobtrusive client-side validation properties (except for Password and Multiline Text, which ChameleonForms uses to output a password field and textarea field)
-
-There are [plans in the backlog](https://trello.com/b/fSuyhwNZ/) to provide support for HTML5 field types and the DataTypes, but it has been deliberately deprioritised because:
-
-* There are some annoyances and browser compatibility issues with using HTML5 field types as well as extra attributes that you can use to augment them and we want to get it right
-* The DataTypes are misleading because they don't provide server-side validation - only client-side validation - so we don't encourage use of them; again, we want to get it right
-
-Also, it's worth noting that Editor Templates can handle sub-view models that are shared across models, whereas it's difficult to do that in Chameleon (there are [plans in the backlog](https://trello.com/b/fSuyhwNZ/) to address this eventually).
-
 Further comparison
 ------------------
 

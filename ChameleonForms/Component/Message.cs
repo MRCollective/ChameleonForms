@@ -1,4 +1,5 @@
-﻿using ChameleonForms.Enums;
+﻿using System;
+using ChameleonForms.Enums;
 using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Component
@@ -22,7 +23,7 @@ namespace ChameleonForms.Component
         public Message(IForm<TModel> form, MessageType messageType, IHtmlContent heading) : base(form, false)
         {
             _messageType = messageType;
-            _heading = heading;
+            _heading = heading ?? new HtmlString("");
             Initialise();
         }
         /// <summary>
@@ -69,6 +70,16 @@ namespace ChameleonForms.Component
         {
             return Form.Template.MessageParagraph(paragraph);
         }
+
+        /// <summary>
+        /// Creates the HTML for a paragraph in the message.
+        /// </summary>
+        /// <param name="paragraph">The paragraph to output as a templated razor delegate</param>
+        /// <returns>The HTML for the paragraph</returns>
+        public virtual IHtmlContent Paragraph(Func<dynamic, IHtmlContent> paragraph)
+        {
+            return Form.Template.MessageParagraph(paragraph(null));
+        }
     }
 
     /// <summary>
@@ -92,6 +103,42 @@ namespace ChameleonForms.Component
         public static Message<TModel> BeginMessage<TModel>(this IForm<TModel> form, MessageType messageType, string heading = null)
         {
             return new Message<TModel>(form, messageType, heading);
+        }
+
+        /// <summary>
+        /// Creates a message.
+        /// </summary>
+        /// <example>
+        /// @using (var m = f.BeginMessage(MessageType.Success, new HtmlString("&lt;strong&gt;The submission was successful&lt;/strong&gt;"))) {
+        ///     @m.Paragraph(string.Format("Your item was successfully created with id {0}", Model.Id))
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <param name="form">The form the message is being created in</param>
+        /// <param name="messageType">The type of message to display</param>
+        /// <param name="heading">The heading for the message</param>
+        /// <returns>The message</returns>
+        public static Message<TModel> BeginMessage<TModel>(this IForm<TModel> form, MessageType messageType, IHtmlContent heading)
+        {
+            return new Message<TModel>(form, messageType, heading);
+        }
+
+        /// <summary>
+        /// Creates a message.
+        /// </summary>
+        /// <example>
+        /// @using (var m = f.BeginMessage(MessageType.Success, new HtmlString(@&lt;strong&gt;The submission was successful&lt;/strong&gt;))) {
+        ///     @m.Paragraph(string.Format("Your item was successfully created with id {0}", Model.Id))
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <param name="form">The form the message is being created in</param>
+        /// <param name="messageType">The type of message to display</param>
+        /// <param name="heading">The heading for the message as a templated razor delegate</param>
+        /// <returns>The message</returns>
+        public static Message<TModel> BeginMessage<TModel>(this IForm<TModel> form, MessageType messageType, Func<dynamic, IHtmlContent> heading)
+        {
+            return new Message<TModel>(form, messageType, heading(null));
         }
     }
 }

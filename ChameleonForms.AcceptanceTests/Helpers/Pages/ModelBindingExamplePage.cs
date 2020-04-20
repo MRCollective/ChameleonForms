@@ -12,7 +12,6 @@ namespace ChameleonForms.AcceptanceTests.Helpers.Pages
         public async Task<ModelBindingExamplePage> SubmitAsync(ModelBindingViewModel vm)
         {
             InputModel(vm);
-            var elements = Content.QuerySelectorAll("[name=RequiredBool]");
             return await NavigateToAsync<ModelBindingExamplePage>(Content.QuerySelector("button[type=submit]"));
         }
     }

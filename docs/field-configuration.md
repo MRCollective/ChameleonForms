@@ -602,7 +602,7 @@ This works because:
 
 * The `IFieldConfiguration` interface extends `IHtmlString`, which forces it to implement the `.ToHtmlString()` method (which will be called by razor via the `@` operator)
 * All the methods on `IFieldConfiguration` return the same instance of the `IFieldConfiguration` object so the `@` operator will apply to that Field Configuration regardless of what methods the user calls
-* The `SetField(IHtmlString)` method or the `SetField(Func<IHtmlString>)` method will be called before returning the `IFieldConfiguration` to indicate what HTML should be output by the Field Configuration when the `.ToHtmlString()` method is called
+* The `SetField(IHtmlString)` method, `SetField(Func<dynamic, IHtmlContent>)` method (for [templated razor delegates](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#directive-attributes)) or the `SetField(Func<IHtmlString>)` method will be called before returning the `IFieldConfiguration` to indicate what HTML should be output by the Field Configuration when the `.ToHtmlString()` method is called
 * The `SetField` method approach allows for lazy evaluation of the HTML to output, meaning the HTML generation can occur after all of the `IFieldConfiguration` methods have been called (allowing the Field Configuration to be mutated before eventually being used)
 
 Passing HTML to field configuration methods
@@ -611,10 +611,15 @@ Passing HTML to field configuration methods
 For all the field configuration methods that take an `IHtmlString` you have a few options available to you:
 
 * Pass the HTML as a string e.g. `.Label(new HtmlString("<strong>My label</strong>"))`
-* Pass the HTML by calling any method that returns an `IHtmlString` including a razor helper e.g.: `.Label(GetLabelHtml())`
+* Pass the HTML by calling any method that returns an `IHtmlString`
+* Over the override that takes a [templated razor delegate](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#directive-attributes), e.g.:
 ```
-    @helper GetLabelHtml() {
-		<strong>My label</strong>
-	}
+    @{
+        Func<dynamic, IHtmlContent> myLabel = @<strong>My label</strong>;
+    }
+    
+    ...
+    @s.FieldFor(m => m.MyField).Label(myLabel)
+    @s.FieldFor(m => m.MyOtherField).Label(@<text><strong>Inline</strong> templated razor delegate</text>)
+    ...
 ```
-* Passing the HTML inline using the `Func<object, IHtml>` extension method overloads e.g. `.Label(@<strong>My label</strong>)`

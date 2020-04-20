@@ -23,8 +23,11 @@ namespace ChameleonForms.Component
     /// </summary>
     public abstract class FormComponent<TModel> : IFormComponent<TModel>, IHtmlContent, IDisposable
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Whether or not the component is self-closing when instantiated or Dispose will be called later.
+        /// </summary>
         protected readonly bool IsSelfClosing;
+
         /// <inheritdoc />
         public IForm<TModel> Form { get; private set; }
 
