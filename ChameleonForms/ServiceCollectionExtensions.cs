@@ -14,16 +14,16 @@ namespace ChameleonForms
 {
     // todo: needed for beta release in priority order
     // switch datetimemodelbindershould and flagsenummodelbindershould to modelbindertestbase
-    // doco: int/datetime client validation support, email and url fields, client side file copying, how to set up twitter bootstrap 3, view namespace getting started
     // test Uri binding works?
-    // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation
     // Twitter bootstrap: template, service collection extension, doco, remove WebViewPage
+    // doco: int/datetime client validation support, email and url fields, client side file copying, how to set up twitter bootstrap 3, view namespace getting started, html5 validation off
     // Update all dependencies to latest versions
     // Review the datetime "g" and current culture things - remove? client side validation for non / separators?
-    // Test adding package to a fresh web project
-    // Add public api surface area approval test, compare to old library to identify gaps, update breakingchanges file (include textarea cols and rows)
+    // Add public api surface area approval test, compare to old library to identify gaps
+    // update breakingchanges file
     // End-to-end documentation review and update - @helper, IHtmlString, web.config, update Message, Navigation etc.
     // todo: 4.0 non-beta release
+    // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation
     // blog posts: razorgenerator, mvctestcontext, modelbindertestbase, ilmerge, client validation in aspnetcore, end-to-end test in-memory, disposablehtmlhelper
     // Generate nuget from .csproj rather than nuspec like https://github.com/LazZiya/ExpressLocalization/blob/master/LazZiya.ExpressLocalization/LazZiya.ExpressLocalization.csproj
     // [Range] client validation support
