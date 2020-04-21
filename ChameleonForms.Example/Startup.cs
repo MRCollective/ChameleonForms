@@ -37,7 +37,7 @@ namespace ChameleonForms.Example
 
                 return new TwitterBootstrapFormTemplate();
             });
-            services.AddChameleonForms(registerDefaultTemplate: false);
+            services.AddChameleonForms(b => b.WithoutTemplateTypeRegistration());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

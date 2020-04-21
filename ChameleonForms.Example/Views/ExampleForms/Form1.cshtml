@@ -49,6 +49,8 @@
         @s.FieldFor(m => m.RequiredStringField).Disabled()
         @s.FieldFor(m => m.RequiredStringField).Readonly()
         @s.FieldFor(m => m.DateField)
+        @s.FieldFor(m => m.UrlAsUri)
+        @s.FieldFor(m => m.UrlAsString)
     }
     using (var n = f.BeginNavigation())
     {

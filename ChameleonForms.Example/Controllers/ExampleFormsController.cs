@@ -312,6 +312,11 @@ namespace ChameleonForms.Example.Controllers
 
         [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
         public DateTime DateField { get; set; }
+
+        public Uri UrlAsUri { get; set; }
+
+        [DataType(DataType.Url)]
+        public string UrlAsString { get; set; }
     }
 
     public class ListItem

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
@@ -71,7 +70,11 @@ namespace ChameleonForms.Tests.ModelBinders
                 modelMetadata,
                 value: null);
 
-            return (controllerContext.ModelState, (TProperty)modelBindingResult.Model);
+            var modelToReturn = modelBindingResult.Model;
+            if (modelToReturn == null)
+                modelToReturn = default(TProperty);
+
+            return (controllerContext.ModelState, (TProperty) modelToReturn);
         }
 
         private static ServiceProvider BuildServiceProvider()
@@ -79,8 +82,7 @@ namespace ChameleonForms.Tests.ModelBinders
             var services = new ServiceCollection();
             services.AddSingleton<ILoggerFactory, NullLoggerFactory>();
             services.AddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
-            services.AddMvc();
-            services.AddChameleonForms();
+            new TestStartup().ConfigureServices(services);
             var serviceProvider = services.BuildServiceProvider();
             return serviceProvider;
         }

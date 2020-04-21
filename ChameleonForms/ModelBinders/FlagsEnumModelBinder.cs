@@ -33,7 +33,7 @@ namespace ChameleonForms.ModelBinders
                         bindingContext.ModelName,
                         string.Format("The value '{0}' is not valid for {1}.",
                         enumValue,
-                        bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.PropertyName)
+                        bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.Name)
                     );
                 }
             }

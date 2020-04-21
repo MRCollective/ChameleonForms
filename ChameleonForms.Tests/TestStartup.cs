@@ -12,7 +12,7 @@ namespace ChameleonForms.Tests
             services.AddMvc();
             services.AddScoped<FormTemplateProvider>();
             services.AddScoped(provider => provider.GetRequiredService<FormTemplateProvider>().Template);
-            services.AddChameleonForms(humanizeLabels: false, registerDefaultTemplate: false);
+            services.AddChameleonForms(b => b.WithoutTemplateTypeRegistration().WithoutHumanizedLabels());
         }
 
         public void Configure(IApplicationBuilder app)

@@ -45,8 +45,8 @@ namespace ChameleonForms.Example.Controllers
             public string FirstName { get; set; }
             [Required]
             public string LastName { get; set; }
-            [Required]
             [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
+            [Required]
             public DateTime DateOfBirth { get; set; }
 
             [Required]

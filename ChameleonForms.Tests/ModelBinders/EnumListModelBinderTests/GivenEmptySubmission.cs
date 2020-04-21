@@ -21,7 +21,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.False);
-            AssertPropertyError(state, m => m.RequiredNullableEnumList, "The Required nullable enum list field is required.");
+            AssertPropertyError(state, m => m.RequiredNullableEnumList, "The RequiredNullableEnumList field is required.");
         }
 
         [Test]
