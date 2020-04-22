@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,7 +28,7 @@ namespace ChameleonForms.ModelBinders
 
             }
 
-            if (!new[] {Uri.UriSchemeHttp, Uri.UriSchemeHttps}.Contains(uri.Scheme))
+            if (bindingContext.ModelMetadata.DataTypeName == DataType.Url.ToString() && !new[] {Uri.UriSchemeHttp, Uri.UriSchemeHttps}.Contains(uri.Scheme))
             {
                 bindingContext.ModelState.AddModelError(bindingContext.ModelName,
                     $"The value '{submittedValue ?? ""}' is not a valid HTTP(S) URL for {bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.Name}.");

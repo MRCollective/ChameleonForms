@@ -19,7 +19,7 @@ namespace ChameleonForms
     // Update all dependencies to latest versions
     // Review the datetime "g" and current culture things - remove? client side validation for non / separators?
     // Add public api surface area approval test, compare to old library to identify gaps
-    // update breakingchanges file
+    // update breakingchanges file (displayformatstring)
     // End-to-end documentation review and update - @helper, IHtmlString, web.config, update Message, Navigation etc.
     // todo: 4.0 non-beta release
     // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation

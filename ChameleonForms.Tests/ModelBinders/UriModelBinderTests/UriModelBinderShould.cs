@@ -35,17 +35,26 @@ namespace ChameleonForms.Tests.ModelBinders.UriModelBinderTests
         }
 
         [Test]
-        public async Task Use_default_value_and_add_error_when_there_is_a_non_http_uri()
+        public async Task Use_default_value_and_add_error_when_there_is_a_non_http_uri_for_a_url_field()
         {
-            var (state, model) = await BindAsync(m => m.Uri, "ftp://someserver.com/somepath");
+            var (state, model) = await BindAsync(m => m.UriAsUrl, "ftp://someserver.com/somepath");
 
             Assert.That(model, Is.EqualTo(null));
             Assert.That(state.IsValid, Is.False);
-            AssertPropertyError(state, m => m.Uri, "The value 'ftp://someserver.com/somepath' is not a valid HTTP(S) URL for Uri.");
+            AssertPropertyError(state, m => m.UriAsUrl, "The value 'ftp://someserver.com/somepath' is not a valid HTTP(S) URL for UriAsUrl.");
         }
 
         [Test]
-        public async Task Return_and_bind_valid_value_if_there_us_an_ok_value([Values("http://someserver.com/somepath", "https://someserver.com/somepath", "https://serverwithoutpath.io")] string okValue)
+        public async Task Return_and_bind_valid_value_if_there_us_an_ok_http_value_for_a_url_field([Values("http://someserver.com/somepath", "https://someserver.com/somepath", "https://serverwithoutpath.io")] string okValue)
+        {
+            var (state, model) = await BindAsync(m => m.UriAsUrl, okValue);
+
+            Assert.That(model, Is.EqualTo(new Uri(okValue)));
+            Assert.That(state.IsValid, Is.True);
+        }
+
+        [Test]
+        public async Task Return_and_bind_valid_value_if_there_us_an_ok_uri_value_for_a_uri_field([Values("http://someserver.com/somepath", "https://someserver.com/somepath", "https://serverwithoutpath.io", "ftp://someserver/somefile", "c:\\somefile.txt")] string okValue)
         {
             var (state, model) = await BindAsync(m => m.Uri, okValue);
 
