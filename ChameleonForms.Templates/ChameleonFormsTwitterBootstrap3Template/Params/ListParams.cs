@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Html;
 
-namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params
+namespace ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params
 {
     public class ListParams
     {
         public IEnumerable<IHtmlContent> Items { get; set; }
+        public bool IsCheckbox { get; set; }
     }
 }

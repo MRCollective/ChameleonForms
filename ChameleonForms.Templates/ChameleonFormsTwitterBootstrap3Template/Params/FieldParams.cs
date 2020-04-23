@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params
+namespace ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params
 {
     public enum FieldRenderMode
     {
@@ -17,5 +17,6 @@ namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params
         public IHtmlContent ValidationHtml { get; set; }
         public ModelMetadata FieldMetadata { get; set; }
         public IHtmlContent RequiredDesignator { get; set; }
+        public bool IsValid { get; set; }
     }
 }

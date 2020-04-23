@@ -3,7 +3,7 @@
 namespace ChameleonForms.Templates.TwitterBootstrap3
 {
     /// <summary>
-    /// Twitter Bootstrap button sizes: http://getbootstrap.com/css/#buttons-sizes
+    /// Twitter Bootstrap button sizes: https://getbootstrap.com/docs/3.4/css/#buttons-sizes
     /// </summary>
     public enum ButtonSize
     {

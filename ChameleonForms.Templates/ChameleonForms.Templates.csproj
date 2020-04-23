@@ -5,6 +5,7 @@
     <RazorLangVersion>3.0</RazorLangVersion>
     <RazorCompileOnBuild>false</RazorCompileOnBuild>
     <RazorCompileOnPublish>false</RazorCompileOnPublish>
+    <EnableDefaultContentItems>false</EnableDefaultContentItems>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
@@ -21,10 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChameleonForms.Core\ChameleonForms.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="ChameleonFormsDefaultTemplate\MessageParagraph.cshtml" />
   </ItemGroup>
 
 </Project>

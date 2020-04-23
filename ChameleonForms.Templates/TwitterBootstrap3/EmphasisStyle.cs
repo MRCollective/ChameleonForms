@@ -3,7 +3,7 @@
 namespace ChameleonForms.Templates.TwitterBootstrap3
 {
     /// <summary>
-    /// Twitter Bootstrap alert/emphasis colors: http://getbootstrap.com/css/#type-emphasis
+    /// Twitter Bootstrap alert/emphasis colors: https://getbootstrap.com/docs/3.4/components/#panels-alternatives
     /// </summary>
     public enum EmphasisStyle
     {

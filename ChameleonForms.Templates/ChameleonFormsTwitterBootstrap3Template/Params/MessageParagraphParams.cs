@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Html;
 
-namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params
+namespace ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params
 {
     public class MessageParagraphParams
     {
