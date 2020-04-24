@@ -14,9 +14,8 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace ChameleonForms
 {
     // todo: needed for beta release in priority order
-    // Update all dependencies to latest versions
-    // Review the datetime "g" and current culture things - remove? client side validation for non / separators?
     // Documentation:
+    // * "g" datetime
     // * int/datetime client validation support
     // * email and url fields
     // * client side file copying
@@ -28,6 +27,9 @@ namespace ChameleonForms
     // * update breakingchanges file (displayformatstring)
     // * End-to-end documentation review and update - @helper, IHtmlString, web.config, update Message, Navigation etc.
     // todo: 4.0 non-beta release
+    // Review the datetime "g" and current culture things - remove? client side validation for non / separators?
+    // Update all dependencies to latest versions
+    // Tidy up cshtml files
     // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation
     // blog posts: razorgenerator, mvctestcontext, modelbindertestbase, ilmerge, client validation in aspnetcore, end-to-end test in-memory, disposablehtmlhelper
     // Generate nuget from .csproj rather than nuspec like https://github.com/LazZiya/ExpressLocalization/blob/master/LazZiya.ExpressLocalization/LazZiya.ExpressLocalization.csproj
