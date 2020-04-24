@@ -17,7 +17,17 @@ namespace ChameleonForms.Tests
             var cfApi = typeof(ServiceCollectionExtensions).Assembly.GeneratePublicApi();
             var templateApi = typeof(DefaultFormTemplate).Assembly.GeneratePublicApi();
 
-            Approvals.Verify($"ChameleonForms.Core\n{coreApi}\n\nChameleonForms\n{cfApi}\n\nChameleonForms.Templates\n{templateApi}");
+            var apiSurface = $"ASSEMBLY ChameleonForms.Core\n{coreApi}\nASSEMBLY ChameleonForms\n{cfApi}\nASSEMBLY ChameleonForms.Templates\n{templateApi}\n";
+            apiSurface = apiSurface.Replace(@"[System.Runtime.CompilerServices.Dynamic(new bool[] {
+                false,
+                true,
+                false})] System.Func<object", "System.Func<dynamic")
+                .Replace(@"[System.Runtime.CompilerServices.Dynamic]
+        public object", "public dynamic")
+                .Replace(@"[System.Runtime.CompilerServices.Dynamic]
+        object", "dynamic");
+
+            Approvals.Verify(apiSurface);
         }
     }
 }
