@@ -14,8 +14,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace ChameleonForms
 {
     // todo: needed for beta release in priority order
-    // Twitter bootstrap: template, service collection extension, doco, remove WebViewPage
-    // doco: int/datetime client validation support, email and url fields, client side file copying, how to set up twitter bootstrap 3, view namespace getting started, html5 validation off, config, uri binding
+    // doco: int/datetime client validation support, email and url fields, client side file copying, how to set up twitter bootstrap 3, view namespace getting started, html5 validation off, config, uri binding, twitter bootstrap
     // Update all dependencies to latest versions
     // Review the datetime "g" and current culture things - remove? client side validation for non / separators?
     // Add public api surface area approval test, compare to old library to identify gaps

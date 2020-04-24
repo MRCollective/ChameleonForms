@@ -1,0 +1,723 @@
+﻿ [assembly: System.Runtime.InteropServices.ComVisible(false)]
+[assembly: System.Runtime.InteropServices.Guid("06716e17-29cc-41a8-9ea8-1cfe835d5e54")]
+[assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.0", FrameworkDisplayName=".NET Framework 4")]
+namespace ChameleonForms.Attributes
+{
+    [System.AttributeUsage(System.AttributeTargets.Property | System.AttributeTargets.All, AllowMultiple=false, Inherited=false)]
+    public class ExistsInAttribute : System.ComponentModel.DataAnnotations.ValidationAttribute, System.Web.Mvc.IMetadataAware
+    {
+        public const string ExistsKey = "ExistsInList";
+        public const string NameKey = "ExistsInNameProperty";
+        public const string PropertyKey = "ExistsInProperty";
+        public const string ValueKey = "ExistsInValueProperty";
+        public static bool EnableValidation;
+        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty) { }
+        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty, bool enableValidation) { }
+        protected override System.ComponentModel.DataAnnotations.ValidationResult IsValid(object value, System.ComponentModel.DataAnnotations.ValidationContext context) { }
+        public void OnMetadataCreated(System.Web.Mvc.ModelMetadata metadata) { }
+        public static void ValidateListConfiguration(object model, string listProperty, string valueProperty, string nameProperty, string memberName) { }
+    }
+    public class RequiredFlagsEnumAttribute : System.ComponentModel.DataAnnotations.RequiredAttribute
+    {
+        public RequiredFlagsEnumAttribute() { }
+        public override bool IsValid(object value) { }
+    }
+}
+namespace ChameleonForms
+{
+    public static class ChameleonFormExtensions
+    {
+        public static ChameleonForms.IForm<TModel> BeginChameleonForm<TModel>(this System.Web.Mvc.HtmlHelper<TModel> helper, string action = "", System.Web.Mvc.FormMethod method = 1, ChameleonForms.HtmlAttributes htmlAttributes = null, ChameleonForms.Enums.EncType? enctype = default) { }
+        public static ChameleonForms.IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this System.Web.Mvc.HtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", System.Web.Mvc.FormMethod method = 1, ChameleonForms.HtmlAttributes htmlAttributes = null, ChameleonForms.Enums.EncType? enctype = default) { }
+        public static ChameleonForms.IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this System.Web.Mvc.HtmlHelper<TParentModel> helper, System.Linq.Expressions.Expression<System.Func<TParentModel, TChildModel>> formFor, string action = "", System.Web.Mvc.FormMethod method = 1, ChameleonForms.HtmlAttributes htmlAttributes = null, ChameleonForms.Enums.EncType? enctype = default) { }
+        public static System.Web.IHtmlString Partial<TModel>(this ChameleonForms.IForm<TModel> form, string partialViewName) { }
+        public static System.Web.IHtmlString PartialFor<TModel, TPartialModel>(this ChameleonForms.IForm<TModel> form, System.Linq.Expressions.Expression<System.Func<TModel, TPartialModel>> partialModelProperty, string partialViewName) { }
+    }
+    public class DisposableHtmlHelper<TModel> : System.Web.Mvc.HtmlHelper<TModel>, System.IDisposable
+    {
+        public DisposableHtmlHelper(System.Web.Mvc.ViewContext viewContext, System.Web.Mvc.IViewDataContainer viewDataContainer) { }
+        public DisposableHtmlHelper(System.Web.Mvc.ViewContext viewContext, System.Web.Mvc.IViewDataContainer viewDataContainer, System.Web.Routing.RouteCollection routeCollection) { }
+        public void Dispose() { }
+    }
+    public static class Extensions
+    {
+        public static ChameleonForms.HtmlAttributes Attrs(this System.Web.Mvc.HtmlHelper helper, params System.Func<, >[] attrs) { }
+        public static System.Web.IHtmlString ToHtml(this string content) { }
+    }
+    public static class FormTemplate
+    {
+        public static ChameleonForms.Templates.IFormTemplate Default { get; set; }
+    }
+    public class Form<TModel> : ChameleonForms.IForm, ChameleonForms.IForm<TModel>, System.IDisposable
+    {
+        public Form(System.Web.Mvc.HtmlHelper<TModel> helper, ChameleonForms.Templates.IFormTemplate template, string action, System.Web.Mvc.FormMethod method, ChameleonForms.HtmlAttributes htmlAttributes, ChameleonForms.Enums.EncType? enctype) { }
+        public System.Web.Mvc.HtmlHelper<TModel> HtmlHelper { get; }
+        public ChameleonForms.Templates.IFormTemplate Template { get; }
+        public ChameleonForms.IForm<TPartialModel> CreatePartialForm<TPartialModel>(System.Linq.Expressions.LambdaExpression partialModelExpression, System.Web.Mvc.HtmlHelper<TPartialModel> partialViewHelper) { }
+        public void Dispose() { }
+        public virtual ChameleonForms.FieldGenerators.IFieldGenerator GetFieldGenerator<T>(System.Linq.Expressions.Expression<System.Func<TModel, T>> property) { }
+        public virtual void Write(System.Web.IHtmlString htmlString) { }
+    }
+    public class HtmlAttributes : System.Web.IHtmlString
+    {
+        public HtmlAttributes(System.Collections.Generic.IDictionary<string, object> attributes) { }
+        public HtmlAttributes(params System.Func<, >[] attributes) { }
+        public HtmlAttributes(object attributes) { }
+        public System.Collections.Generic.IDictionary<string, string> Attributes { get; }
+        public ChameleonForms.HtmlAttributes AddClass(string @class) { }
+        public ChameleonForms.HtmlAttributes Attr(System.Func<object, object> attribute) { }
+        public ChameleonForms.HtmlAttributes Attr(string key, object value) { }
+        public ChameleonForms.HtmlAttributes Attrs(System.Collections.Generic.IDictionary<string, object> attributes) { }
+        public ChameleonForms.HtmlAttributes Attrs(params System.Func<, >[] attributes) { }
+        public ChameleonForms.HtmlAttributes Attrs(object attributes) { }
+        public ChameleonForms.HtmlAttributes Disabled(bool disabled = true) { }
+        public ChameleonForms.HtmlAttributes Id(string id) { }
+        public ChameleonForms.HtmlAttributes Readonly(bool readonly = true) { }
+        public System.Collections.Generic.IDictionary<string, object> ToDictionary() { }
+        public virtual string ToHtmlString() { }
+        public override string ToString() { }
+        public static ChameleonForms.HtmlAttributes op_Implicit(System.Collections.Generic.Dictionary<string, object> attributes) { }
+    }
+    public static class HtmlAttributesExtensions
+    {
+        public static ChameleonForms.HtmlAttributes ToHtmlAttributes(this System.Collections.Generic.IDictionary<string, object> htmlAttributes) { }
+        public static ChameleonForms.HtmlAttributes ToHtmlAttributes(this object htmlAttributes) { }
+    }
+    public static class HtmlHelperExtensions
+    {
+        public static ChameleonForms.DisposableHtmlHelper<TModel> For<TModel>(this System.Web.Mvc.HtmlHelper htmlHelper, TModel model = default, string htmlFieldPrefix = null) { }
+        public static ChameleonForms.DisposableHtmlHelper<TChildModel> For<TParentModel, TChildModel>(this System.Web.Mvc.HtmlHelper<TParentModel> helper, System.Linq.Expressions.Expression<System.Func<TParentModel, TChildModel>> propertyFor, bool bindFieldsToParent) { }
+    }
+    public class HumanizedLabels : System.Web.Mvc.DataAnnotationsModelMetadataProvider
+    {
+        public HumanizedLabels() { }
+        protected override System.Web.Mvc.ModelMetadata CreateMetadata(System.Collections.Generic.IEnumerable<System.Attribute> attributes, System.Type containerType, System.Func<object> modelAccessor, System.Type modelType, string propertyName) { }
+        public static void Register(Humanizer.LetterCasing casing = 3) { }
+    }
+    public interface IForm
+    {
+        ChameleonForms.IForm<TPartialModel> CreatePartialForm<TPartialModel>(System.Linq.Expressions.LambdaExpression partialModelExpression, System.Web.Mvc.HtmlHelper<TPartialModel> partialViewHelper);
+    }
+    public interface IForm<TModel> : ChameleonForms.IForm, System.IDisposable
+    {
+        System.Web.Mvc.HtmlHelper<TModel> HtmlHelper { get; }
+        ChameleonForms.Templates.IFormTemplate Template { get; }
+        ChameleonForms.FieldGenerators.IFieldGenerator GetFieldGenerator<T>(System.Linq.Expressions.Expression<System.Func<TModel, T>> property);
+        void Write(System.Web.IHtmlString htmlString);
+    }
+    public class LazyHtmlAttributes : ChameleonForms.HtmlAttributes
+    {
+        public LazyHtmlAttributes(System.Func<ChameleonForms.HtmlAttributes, System.Web.IHtmlString> htmlGenerator) { }
+        public override string ToHtmlString() { }
+    }
+    public static class WebViewPageExtensions
+    {
+        public const string CurrentFormSectionViewDataKey = "CurrentChameleonFormSection";
+        public const string CurrentFormViewDataKey = "CurrentChameleonForm";
+        public const string PartialViewModelExpressionViewDataKey = "PartialViewModelExpression";
+        public static ChameleonForms.IForm<TPartialViewModel> Form<TPartialViewModel>(this System.Web.Mvc.WebViewPage<TPartialViewModel> partial) { }
+        public static ChameleonForms.Component.ISection<TPartialViewModel> FormSection<TPartialViewModel>(this System.Web.Mvc.WebViewPage<TPartialViewModel> partial) { }
+        public static bool IsInFormSection<TPartialViewModel>(this System.Web.Mvc.WebViewPage<TPartialViewModel> partial) { }
+        public static System.Linq.Expressions.LambdaExpression PartialModelExpression<TPartialViewModel>(this System.Web.Mvc.WebViewPage<TPartialViewModel> partial) { }
+    }
+}
+namespace ChameleonForms.Component
+{
+    public class ButtonHtmlAttributes : ChameleonForms.LazyHtmlAttributes
+    {
+        public ButtonHtmlAttributes(System.Func<ChameleonForms.HtmlAttributes, System.Web.IHtmlString> htmlGenerator) { }
+    }
+    public static class Field
+    {
+        public static ChameleonForms.Component.Config.FieldConfiguration Configure() { }
+    }
+    public static class FieldExtensions
+    {
+        public static ChameleonForms.Component.Field<TModel> BeginFieldFor<TModel, T>(this ChameleonForms.Component.ISection<TModel> section, System.Linq.Expressions.Expression<System.Func<TModel, T>> property, ChameleonForms.Component.Config.IFieldConfiguration config = null) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration FieldElementFor<TModel, T>(this ChameleonForms.IForm<TModel> form, System.Linq.Expressions.Expression<System.Func<TModel, T>> property) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration FieldFor<TModel, T>(this ChameleonForms.Component.Field<TModel> field, System.Linq.Expressions.Expression<System.Func<TModel, T>> property) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration FieldFor<TModel, T>(this ChameleonForms.Component.ISection<TModel> section, System.Linq.Expressions.Expression<System.Func<TModel, T>> property) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration LabelFor<TModel, T>(this ChameleonForms.IForm<TModel> form, System.Linq.Expressions.Expression<System.Func<TModel, T>> property) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration ValidationMessageFor<TModel, T>(this ChameleonForms.IForm<TModel> form, System.Linq.Expressions.Expression<System.Func<TModel, T>> property) { }
+    }
+    public enum FieldParent
+    {
+        Form = 0,
+        Section = 1,
+    }
+    public class Field<TModel> : ChameleonForms.Component.FormComponent<TModel>
+    {
+        public Field(ChameleonForms.IForm<TModel> form, bool isParent, ChameleonForms.FieldGenerators.IFieldGenerator fieldGenerator, ChameleonForms.Component.Config.IFieldConfiguration config) { }
+        public override System.Web.IHtmlString Begin() { }
+        public override System.Web.IHtmlString End() { }
+    }
+    public abstract class FormComponent<TModel> : ChameleonForms.Component.IFormComponent<TModel>, System.IDisposable, System.Web.IHtmlString
+    {
+        protected readonly bool IsSelfClosing;
+        protected FormComponent(ChameleonForms.IForm<TModel> form, bool isSelfClosing) { }
+        public ChameleonForms.IForm<TModel> Form { get; }
+        public abstract System.Web.IHtmlString Begin();
+        public void Dispose() { }
+        public abstract System.Web.IHtmlString End();
+        public void Initialise() { }
+        public string ToHtmlString() { }
+    }
+    public interface IFormComponent<TModel>
+    {
+        ChameleonForms.IForm<TModel> Form { get; }
+    }
+    public interface ISection
+    {
+        ChameleonForms.Component.ISection<TPartialModel> CreatePartialSection<TPartialModel>(ChameleonForms.IForm<TPartialModel> partialModelForm);
+    }
+    public interface ISection<TModel> : ChameleonForms.Component.IFormComponent<TModel> { }
+    public static class MessageExtensions
+    {
+        public static ChameleonForms.Component.Message<TModel> BeginMessage<TModel>(this ChameleonForms.IForm<TModel> form, ChameleonForms.Enums.MessageType messageType, string heading = null) { }
+    }
+    public class Message<TModel> : ChameleonForms.Component.FormComponent<TModel>
+    {
+        public Message(ChameleonForms.IForm<TModel> form, ChameleonForms.Enums.MessageType messageType, System.Web.IHtmlString heading) { }
+        public override System.Web.IHtmlString Begin() { }
+        public override System.Web.IHtmlString End() { }
+        public virtual System.Web.IHtmlString Paragraph(string paragraph) { }
+        public virtual System.Web.IHtmlString Paragraph(System.Web.IHtmlString paragraph) { }
+    }
+    public static class NavigationExtensions
+    {
+        public static ChameleonForms.Component.Navigation<TModel> BeginNavigation<TModel>(this ChameleonForms.IForm<TModel> form) { }
+    }
+    public class Navigation<TModel> : ChameleonForms.Component.FormComponent<TModel>
+    {
+        public Navigation(ChameleonForms.IForm<TModel> form) { }
+        public override System.Web.IHtmlString Begin() { }
+        public ChameleonForms.Component.ButtonHtmlAttributes Button(string text) { }
+        public ChameleonForms.Component.ButtonHtmlAttributes Button(System.Web.IHtmlString content) { }
+        public override System.Web.IHtmlString End() { }
+        public ChameleonForms.Component.ButtonHtmlAttributes Reset(string text) { }
+        public ChameleonForms.Component.ButtonHtmlAttributes Reset(System.Web.IHtmlString content) { }
+        public ChameleonForms.Component.ButtonHtmlAttributes Submit(string text) { }
+        public ChameleonForms.Component.ButtonHtmlAttributes Submit(System.Web.IHtmlString content) { }
+        public ChameleonForms.Component.ButtonHtmlAttributes Submit(string name, string value, System.Web.IHtmlString content = null) { }
+    }
+    public static class SectionExtensions
+    {
+        public static ChameleonForms.Component.Section<TModel> BeginSection<TModel>(this ChameleonForms.Component.Section<TModel> section, string heading = null, System.Web.IHtmlString leadingHtml = null, ChameleonForms.HtmlAttributes htmlAttributes = null) { }
+        public static ChameleonForms.Component.Section<TModel> BeginSection<TModel>(this ChameleonForms.IForm<TModel> form, string heading = null, System.Web.IHtmlString leadingHtml = null, ChameleonForms.HtmlAttributes htmlAttributes = null) { }
+        public static System.Web.IHtmlString Partial<TModel>(this ChameleonForms.Component.ISection<TModel> section, string partialViewName) { }
+        public static System.Web.IHtmlString PartialFor<TModel, TPartialModel>(this ChameleonForms.Component.ISection<TModel> section, System.Linq.Expressions.Expression<System.Func<TModel, TPartialModel>> partialModelProperty, string partialViewName) { }
+    }
+    public class Section<TModel> : ChameleonForms.Component.FormComponent<TModel>, ChameleonForms.Component.IFormComponent<TModel>, ChameleonForms.Component.ISection, ChameleonForms.Component.ISection<TModel>
+    {
+        public Section(ChameleonForms.IForm<TModel> form, System.Web.IHtmlString heading, bool nested, System.Web.IHtmlString leadingHtml = null, ChameleonForms.HtmlAttributes htmlAttributes = null) { }
+        public override System.Web.IHtmlString Begin() { }
+        public ChameleonForms.Component.ISection<TPartialModel> CreatePartialSection<TPartialModel>(ChameleonForms.IForm<TPartialModel> partialModelForm) { }
+        public override System.Web.IHtmlString End() { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Field(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml = null, System.Web.Mvc.ModelMetadata metadata = null, bool isValid = true) { }
+    }
+}
+namespace ChameleonForms.Component.Config
+{
+    public class FieldConfiguration : ChameleonForms.Component.Config.IFieldConfiguration, ChameleonForms.Component.Config.IReadonlyFieldConfiguration, System.Web.IHtmlString
+    {
+        public FieldConfiguration() { }
+        public System.Collections.Generic.IEnumerable<System.Web.IHtmlString> AppendedHtml { get; }
+        public ChameleonForms.HtmlAttributes Attributes { get; }
+        [System.Runtime.CompilerServices.Dynamic]
+        public object Bag { get; }
+        public ChameleonForms.Enums.FieldDisplayType DisplayType { get; }
+        public bool EmptyItemHidden { get; }
+        public System.Enum[] ExcludedEnums { get; }
+        public string FalseString { get; }
+        public string FieldContainerClasses { get; }
+        public System.Web.IHtmlString FieldHtml { get; }
+        public string FormatString { get; }
+        public bool HasInlineLabel { get; }
+        public bool HasLabelElement { get; }
+        public System.Web.IHtmlString Hint { get; }
+        public System.Collections.Generic.IDictionary<string, object> HtmlAttributes { get; }
+        public System.Web.IHtmlString InlineLabelText { get; }
+        public string LabelClasses { get; }
+        public System.Web.IHtmlString LabelText { get; }
+        public string NoneString { get; }
+        public System.Collections.Generic.IEnumerable<System.Web.IHtmlString> PrependedHtml { get; }
+        public bool ShouldInlineLabelWrapElement { get; }
+        public string TrueString { get; }
+        public string ValidationClasses { get; }
+        public ChameleonForms.Component.Config.IFieldConfiguration AddClass(string @class) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration AddFieldContainerClass(string @class) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration AddLabelClass(string @class) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration AddValidationClass(string @class) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Append(string str) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Append(System.Web.IHtmlString html) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration AsCheckboxList() { }
+        public ChameleonForms.Component.Config.IFieldConfiguration AsDropDown() { }
+        public ChameleonForms.Component.Config.IFieldConfiguration AsRadioList() { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Attr(System.Func<object, object> attribute) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Attr(string key, object value) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Attrs(System.Collections.Generic.IDictionary<string, object> attributes) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Attrs(params System.Func<, >[] attributes) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Attrs(object attributes) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Cols(int numCols) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Disabled(bool disabled = true) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Exclude(params System.Enum[] enumValues) { }
+        public TData GetBagData<TData>(string propertyName) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration HideEmptyItem() { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Id(string id) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration InlineLabel(string labelText) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration InlineLabel(System.Web.IHtmlString labelHtml) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration InlineLabelWrapsElement(bool wrapElement = true) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Label(string labelText) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Label(System.Web.IHtmlString labelHtml) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration OverrideFieldHtml(System.Web.IHtmlString html) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Placeholder(string placeholderText) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Prepend(string str) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Prepend(System.Web.IHtmlString html) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Readonly(bool readonly = true) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Rows(int numRows) { }
+        public void SetField(System.Func<System.Web.IHtmlString> field) { }
+        public void SetField(System.Web.IHtmlString field) { }
+        public string ToHtmlString() { }
+        public ChameleonForms.Component.Config.IFieldConfiguration WithFalseAs(string falseString) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration WithFormatString(string formatString) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration WithHint(string hint) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration WithHint(System.Web.IHtmlString hint) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration WithNoneAs(string noneString) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration WithTrueAs(string trueString) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration WithoutInlineLabel() { }
+        public ChameleonForms.Component.Config.IFieldConfiguration WithoutLabelElement() { }
+    }
+    public static class FieldConfigurationExtensions
+    {
+        public static ChameleonForms.Component.Config.IFieldConfiguration Append(this ChameleonForms.Component.Config.IFieldConfiguration config, System.Func<object, System.Web.IHtmlString> html) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration AutoFocus(this ChameleonForms.Component.Config.IFieldConfiguration config) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration InlineLabel(this ChameleonForms.Component.Config.IFieldConfiguration config, System.Func<object, System.Web.IHtmlString> labelHtml) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration Label(this ChameleonForms.Component.Config.IFieldConfiguration config, System.Func<object, System.Web.IHtmlString> labelHtml) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration OverrideFieldHtml(this ChameleonForms.Component.Config.IFieldConfiguration config, System.Func<object, System.Web.IHtmlString> html) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration Prepend(this ChameleonForms.Component.Config.IFieldConfiguration config, System.Func<object, System.Web.IHtmlString> html) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration TabIndex(this ChameleonForms.Component.Config.IFieldConfiguration config, int index) { }
+        public static ChameleonForms.Component.Config.IFieldConfiguration WithHint(this ChameleonForms.Component.Config.IFieldConfiguration config, System.Func<object, System.Web.IHtmlString> hint) { }
+    }
+    public interface IFieldConfiguration : ChameleonForms.Component.Config.IReadonlyFieldConfiguration, System.Web.IHtmlString
+    {
+        ChameleonForms.HtmlAttributes Attributes { get; }
+        ChameleonForms.Component.Config.IFieldConfiguration AddClass(string @class);
+        ChameleonForms.Component.Config.IFieldConfiguration AddFieldContainerClass(string @class);
+        ChameleonForms.Component.Config.IFieldConfiguration AddLabelClass(string @class);
+        ChameleonForms.Component.Config.IFieldConfiguration AddValidationClass(string @class);
+        ChameleonForms.Component.Config.IFieldConfiguration Append(string str);
+        ChameleonForms.Component.Config.IFieldConfiguration Append(System.Web.IHtmlString html);
+        ChameleonForms.Component.Config.IFieldConfiguration AsCheckboxList();
+        ChameleonForms.Component.Config.IFieldConfiguration AsDropDown();
+        ChameleonForms.Component.Config.IFieldConfiguration AsRadioList();
+        ChameleonForms.Component.Config.IFieldConfiguration Attr(System.Func<object, object> attribute);
+        ChameleonForms.Component.Config.IFieldConfiguration Attr(string key, object value);
+        ChameleonForms.Component.Config.IFieldConfiguration Attrs(System.Collections.Generic.IDictionary<string, object> attributes);
+        ChameleonForms.Component.Config.IFieldConfiguration Attrs(params System.Func<, >[] attributes);
+        ChameleonForms.Component.Config.IFieldConfiguration Attrs(object attributes);
+        ChameleonForms.Component.Config.IFieldConfiguration Cols(int numCols);
+        ChameleonForms.Component.Config.IFieldConfiguration Disabled(bool disabled = true);
+        ChameleonForms.Component.Config.IFieldConfiguration Exclude(params System.Enum[] enumValues);
+        ChameleonForms.Component.Config.IFieldConfiguration HideEmptyItem();
+        ChameleonForms.Component.Config.IFieldConfiguration Id(string id);
+        ChameleonForms.Component.Config.IFieldConfiguration InlineLabel(string labelText);
+        ChameleonForms.Component.Config.IFieldConfiguration InlineLabel(System.Web.IHtmlString labelHtml);
+        ChameleonForms.Component.Config.IFieldConfiguration InlineLabelWrapsElement(bool wrapElement = true);
+        ChameleonForms.Component.Config.IFieldConfiguration Label(string labelText);
+        ChameleonForms.Component.Config.IFieldConfiguration Label(System.Web.IHtmlString labelHtml);
+        ChameleonForms.Component.Config.IFieldConfiguration OverrideFieldHtml(System.Web.IHtmlString html);
+        ChameleonForms.Component.Config.IFieldConfiguration Placeholder(string placeholderText);
+        ChameleonForms.Component.Config.IFieldConfiguration Prepend(string str);
+        ChameleonForms.Component.Config.IFieldConfiguration Prepend(System.Web.IHtmlString html);
+        ChameleonForms.Component.Config.IFieldConfiguration Readonly(bool readonly = true);
+        ChameleonForms.Component.Config.IFieldConfiguration Rows(int numRows);
+        void SetField(System.Func<System.Web.IHtmlString> field);
+        void SetField(System.Web.IHtmlString field);
+        ChameleonForms.Component.Config.IFieldConfiguration WithFalseAs(string falseString);
+        ChameleonForms.Component.Config.IFieldConfiguration WithFormatString(string formatString);
+        ChameleonForms.Component.Config.IFieldConfiguration WithHint(string hint);
+        ChameleonForms.Component.Config.IFieldConfiguration WithHint(System.Web.IHtmlString hint);
+        ChameleonForms.Component.Config.IFieldConfiguration WithNoneAs(string noneString);
+        ChameleonForms.Component.Config.IFieldConfiguration WithTrueAs(string trueString);
+        ChameleonForms.Component.Config.IFieldConfiguration WithoutInlineLabel();
+        ChameleonForms.Component.Config.IFieldConfiguration WithoutLabelElement();
+    }
+    public interface IReadonlyFieldConfiguration
+    {
+        System.Collections.Generic.IEnumerable<System.Web.IHtmlString> AppendedHtml { get; }
+        [System.Runtime.CompilerServices.Dynamic]
+        object Bag { get; }
+        ChameleonForms.Enums.FieldDisplayType DisplayType { get; }
+        bool EmptyItemHidden { get; }
+        System.Enum[] ExcludedEnums { get; }
+        string FalseString { get; }
+        string FieldContainerClasses { get; }
+        System.Web.IHtmlString FieldHtml { get; }
+        string FormatString { get; }
+        bool HasInlineLabel { get; }
+        bool HasLabelElement { get; }
+        System.Web.IHtmlString Hint { get; }
+        System.Collections.Generic.IDictionary<string, object> HtmlAttributes { get; }
+        System.Web.IHtmlString InlineLabelText { get; }
+        string LabelClasses { get; }
+        System.Web.IHtmlString LabelText { get; }
+        string NoneString { get; }
+        System.Collections.Generic.IEnumerable<System.Web.IHtmlString> PrependedHtml { get; }
+        bool ShouldInlineLabelWrapElement { get; }
+        string TrueString { get; }
+        string ValidationClasses { get; }
+        TData GetBagData<TData>(string propertyName);
+    }
+}
+namespace ChameleonForms.Enums
+{
+    public enum EncType
+    {
+        [System.ComponentModel.Description("application/x-www-form-urlencoded")]
+        UrlEncoded = 0,
+        [System.ComponentModel.Description("multipart/form-data")]
+        Multipart = 1,
+        [System.ComponentModel.Description("text/plain")]
+        Plain = 2,
+    }
+    public enum FieldDisplayType
+    {
+        Default = 0,
+        List = 1,
+        DropDown = 2,
+        SingleLineText = 3,
+        FileUpload = 4,
+        MultiLineText = 5,
+        Checkbox = 6,
+        Custom = 7,
+    }
+    public enum MessageType
+    {
+        Action = 0,
+        Success = 1,
+        Failure = 2,
+        Information = 3,
+        Warning = 4,
+    }
+    public enum TextInputType
+    {
+        Text = 0,
+        Password = 1,
+        File = 2,
+    }
+}
+namespace ChameleonForms.FieldGenerators
+{
+    public class DefaultFieldGenerator<TModel, T> : ChameleonForms.FieldGenerators.IFieldGenerator, ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T>
+    {
+        public DefaultFieldGenerator(System.Web.Mvc.HtmlHelper<TModel> htmlHelper, System.Linq.Expressions.Expression<System.Func<TModel, T>> fieldProperty, ChameleonForms.Templates.IFormTemplate template) { }
+        public System.Linq.Expressions.Expression<System.Func<TModel, T>> FieldProperty { get; }
+        public System.Web.Mvc.HtmlHelper<TModel> HtmlHelper { get; }
+        public System.Web.Mvc.ModelMetadata Metadata { get; }
+        public ChameleonForms.Templates.IFormTemplate Template { get; }
+        public string GetFieldDisplayName() { }
+        public System.Web.IHtmlString GetFieldHtml(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration) { }
+        public System.Web.IHtmlString GetFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public string GetFieldId() { }
+        public System.Web.IHtmlString GetLabelHtml(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration) { }
+        public System.Web.IHtmlString GetLabelHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public TModel GetModel() { }
+        public System.Web.IHtmlString GetValidationHtml(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration) { }
+        public System.Web.IHtmlString GetValidationHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public T GetValue() { }
+        public ChameleonForms.Component.Config.IReadonlyFieldConfiguration PrepareFieldConfiguration(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration, ChameleonForms.Component.FieldParent fieldParent) { }
+    }
+    public interface IFieldGenerator
+    {
+        System.Web.Mvc.ModelMetadata Metadata { get; }
+        ChameleonForms.Templates.IFormTemplate Template { get; }
+        System.Web.IHtmlString GetFieldHtml(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration);
+        System.Web.IHtmlString GetFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration);
+        string GetFieldId();
+        System.Web.IHtmlString GetLabelHtml(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration);
+        System.Web.IHtmlString GetLabelHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration);
+        System.Web.IHtmlString GetValidationHtml(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration);
+        System.Web.IHtmlString GetValidationHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration);
+        ChameleonForms.Component.Config.IReadonlyFieldConfiguration PrepareFieldConfiguration(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration, ChameleonForms.Component.FieldParent fieldParent);
+    }
+    public interface IFieldGenerator<TModel, T> : ChameleonForms.FieldGenerators.IFieldGenerator
+    {
+        System.Linq.Expressions.Expression<System.Func<TModel, T>> FieldProperty { get; }
+        System.Web.Mvc.HtmlHelper<TModel> HtmlHelper { get; }
+        string GetFieldDisplayName();
+        TModel GetModel();
+        T GetValue();
+    }
+}
+namespace ChameleonForms.FieldGenerators.Handlers
+{
+    public class BooleanHandler<TModel, T> : ChameleonForms.FieldGenerators.Handlers.FieldGeneratorHandler<TModel, T>
+    {
+        public BooleanHandler(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        public override bool CanHandle() { }
+        public override System.Web.IHtmlString GenerateFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override ChameleonForms.Enums.FieldDisplayType GetDisplayType(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override void PrepareFieldConfiguration(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration) { }
+    }
+    public class DateTimeHandler<TModel, T> : ChameleonForms.FieldGenerators.Handlers.FieldGeneratorHandler<TModel, T>
+    {
+        public DateTimeHandler(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        public override bool CanHandle() { }
+        public override System.Web.IHtmlString GenerateFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override ChameleonForms.Enums.FieldDisplayType GetDisplayType(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override void PrepareFieldConfiguration(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration) { }
+    }
+    public class DefaultHandler<TModel, T> : ChameleonForms.FieldGenerators.Handlers.FieldGeneratorHandler<TModel, T>
+    {
+        public DefaultHandler(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        public override bool CanHandle() { }
+        public override System.Web.IHtmlString GenerateFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override ChameleonForms.Enums.FieldDisplayType GetDisplayType(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+    }
+    public class EnumListHandler<TModel, T> : ChameleonForms.FieldGenerators.Handlers.FieldGeneratorHandler<TModel, T>
+    {
+        public EnumListHandler(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        public override bool CanHandle() { }
+        public override System.Web.IHtmlString GenerateFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override ChameleonForms.Enums.FieldDisplayType GetDisplayType(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override void PrepareFieldConfiguration(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration) { }
+    }
+    public abstract class FieldGeneratorHandler<TModel, T> : ChameleonForms.FieldGenerators.Handlers.IFieldGeneratorHandler<TModel, T>
+    {
+        protected readonly ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> FieldGenerator;
+        protected FieldGeneratorHandler(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        public abstract bool CanHandle();
+        public abstract System.Web.IHtmlString GenerateFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration);
+        public abstract ChameleonForms.Enums.FieldDisplayType GetDisplayType(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration);
+        public virtual void PrepareFieldConfiguration(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration) { }
+        protected static void AdjustHtmlForModelState(ChameleonForms.HtmlAttributes attrs, ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        protected static System.Collections.Generic.IEnumerable<object> GetEnumerableValues(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        protected static string GetFieldName(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        protected static System.Web.IHtmlString GetInputHtml(ChameleonForms.Enums.TextInputType inputType, ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        protected static System.Web.IHtmlString GetSelectListHtml(System.Collections.Generic.IEnumerable<System.Web.Mvc.SelectListItem> selectList, ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        protected static System.Type GetUnderlyingType(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        protected static bool HasEnumerableValues(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        protected static bool HasMultipleEnumValues(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        protected static bool HasMultipleValues(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        protected static bool IsNumeric(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        protected static bool IsSelected(object value, ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+    }
+    public class FileHandler<TModel, T> : ChameleonForms.FieldGenerators.Handlers.FieldGeneratorHandler<TModel, T>
+    {
+        public FileHandler(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        public override bool CanHandle() { }
+        public override System.Web.IHtmlString GenerateFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override ChameleonForms.Enums.FieldDisplayType GetDisplayType(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+    }
+    public interface IFieldGeneratorHandler<TModel, T>
+    {
+        bool CanHandle();
+        System.Web.IHtmlString GenerateFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration);
+        ChameleonForms.Enums.FieldDisplayType GetDisplayType(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration);
+        void PrepareFieldConfiguration(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration);
+    }
+    public class ListHandler<TModel, T> : ChameleonForms.FieldGenerators.Handlers.FieldGeneratorHandler<TModel, T>
+    {
+        public ListHandler(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        public override bool CanHandle() { }
+        public override System.Web.IHtmlString GenerateFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override ChameleonForms.Enums.FieldDisplayType GetDisplayType(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override void PrepareFieldConfiguration(ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration) { }
+    }
+    public class ListPropertyNullException : System.Exception
+    {
+        public ListPropertyNullException(string listPropertyName, string propertyName) { }
+    }
+    public class ModelNullException : System.Exception
+    {
+        public ModelNullException(string propertyName) { }
+    }
+    public class PasswordHandler<TModel, T> : ChameleonForms.FieldGenerators.Handlers.FieldGeneratorHandler<TModel, T>
+    {
+        public PasswordHandler(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        public override bool CanHandle() { }
+        public override System.Web.IHtmlString GenerateFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override ChameleonForms.Enums.FieldDisplayType GetDisplayType(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+    }
+    public class TextAreaHandler<TModel, T> : ChameleonForms.FieldGenerators.Handlers.FieldGeneratorHandler<TModel, T>
+    {
+        public TextAreaHandler(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator) { }
+        public override bool CanHandle() { }
+        public override System.Web.IHtmlString GenerateFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public override ChameleonForms.Enums.FieldDisplayType GetDisplayType(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+    }
+}
+namespace ChameleonForms.ModelBinders
+{
+    public class DateTimeModelBinder : System.Web.Mvc.DefaultModelBinder
+    {
+        public DateTimeModelBinder() { }
+        public override object BindModel(System.Web.Mvc.ControllerContext controllerContext, System.Web.Mvc.ModelBindingContext bindingContext) { }
+    }
+    public class FlagsEnumModelBinder : System.Web.Mvc.DefaultModelBinder
+    {
+        public FlagsEnumModelBinder() { }
+        public override object BindModel(System.Web.Mvc.ControllerContext controllerContext, System.Web.Mvc.ModelBindingContext bindingContext) { }
+    }
+}
+namespace ChameleonForms.Templates.Default
+{
+    public class DefaultFormTemplate : ChameleonForms.Templates.IFormTemplate
+    {
+        public DefaultFormTemplate() { }
+        public virtual System.Web.IHtmlString BeginField(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid) { }
+        public virtual System.Web.IHtmlString BeginForm(string action, System.Web.Mvc.FormMethod method, ChameleonForms.HtmlAttributes htmlAttributes, ChameleonForms.Enums.EncType? enctype) { }
+        public virtual System.Web.IHtmlString BeginMessage(ChameleonForms.Enums.MessageType messageType, System.Web.IHtmlString heading) { }
+        public virtual System.Web.IHtmlString BeginNavigation() { }
+        public virtual System.Web.IHtmlString BeginNestedSection(System.Web.IHtmlString heading = null, System.Web.IHtmlString leadingHtml = null, ChameleonForms.HtmlAttributes htmlAttributes = null) { }
+        public virtual System.Web.IHtmlString BeginSection(System.Web.IHtmlString heading = null, System.Web.IHtmlString leadingHtml = null, ChameleonForms.HtmlAttributes htmlAttributes = null) { }
+        public virtual System.Web.IHtmlString Button(System.Web.IHtmlString content, string type, string id, string value, ChameleonForms.HtmlAttributes htmlAttributes) { }
+        public virtual System.Web.IHtmlString EndField() { }
+        public virtual System.Web.IHtmlString EndForm() { }
+        public virtual System.Web.IHtmlString EndMessage() { }
+        public virtual System.Web.IHtmlString EndNavigation() { }
+        public virtual System.Web.IHtmlString EndNestedSection() { }
+        public virtual System.Web.IHtmlString EndSection() { }
+        public virtual System.Web.IHtmlString Field(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid) { }
+        public virtual System.Web.IHtmlString MessageParagraph(System.Web.IHtmlString paragraph) { }
+        public virtual void PrepareFieldConfiguration<TModel, T>(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator, ChameleonForms.FieldGenerators.Handlers.IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration, ChameleonForms.Component.FieldParent fieldParent) { }
+        public virtual System.Web.IHtmlString RadioOrCheckboxList(System.Collections.Generic.IEnumerable<System.Web.IHtmlString> list, bool isCheckbox) { }
+        protected virtual System.Web.IHtmlString RequiredDesignator(System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid) { }
+    }
+    public static class DefaultHtmlHelpers
+    {
+        public static System.Web.WebPages.HelperResult BeginField(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, System.Web.IHtmlString requiredDesignator) { }
+        public static System.Web.WebPages.HelperResult BeginFieldInternal(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, System.Web.Mvc.ModelMetadata fieldMetadata, System.Web.IHtmlString requiredDesignator) { }
+        public static System.Web.WebPages.HelperResult BeginMessage(ChameleonForms.Enums.MessageType messageType, System.Web.IHtmlString heading) { }
+        public static System.Web.WebPages.HelperResult BeginNavigation() { }
+        public static System.Web.WebPages.HelperResult BeginNestedSection(System.Web.IHtmlString heading, System.Web.IHtmlString leadingHtml, ChameleonForms.HtmlAttributes htmlAttributes) { }
+        public static System.Web.WebPages.HelperResult BeginSection(System.Web.IHtmlString heading, System.Web.IHtmlString leadingHtml, ChameleonForms.HtmlAttributes htmlAttributes) { }
+        public static System.Web.WebPages.HelperResult EndField() { }
+        public static System.Web.WebPages.HelperResult EndForm() { }
+        public static System.Web.WebPages.HelperResult EndMessage() { }
+        public static System.Web.WebPages.HelperResult EndNavigation() { }
+        public static System.Web.WebPages.HelperResult EndNestedSection() { }
+        public static System.Web.WebPages.HelperResult EndSection() { }
+        public static System.Web.WebPages.HelperResult Field(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, System.Web.IHtmlString requiredDesignator) { }
+        public static System.Web.WebPages.HelperResult GetAppendedHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public static System.Web.WebPages.HelperResult GetHint(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public static System.Web.WebPages.HelperResult GetPrependedHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public static System.Web.WebPages.HelperResult MessageParagraph(System.Web.IHtmlString paragraph) { }
+        public static System.Web.WebPages.HelperResult RadioOrCheckboxList(System.Collections.Generic.IEnumerable<System.Web.IHtmlString> items) { }
+        public static System.Web.WebPages.HelperResult RenderIfNotEmpty(string mayBeEmpty, System.Func<object, System.Web.IHtmlString> template) { }
+        public static System.Web.WebPages.HelperResult RequiredDesignator() { }
+    }
+}
+namespace ChameleonForms.Templates
+{
+    public static class HtmlCreator
+    {
+        public static System.Web.IHtmlString BuildButton(string text, string type = null, string id = null, string value = null, ChameleonForms.HtmlAttributes htmlAttributes = null) { }
+        public static System.Web.IHtmlString BuildButton(System.Web.IHtmlString content, string type = null, string id = null, string value = null, ChameleonForms.HtmlAttributes htmlAttributes = null) { }
+        public static System.Web.IHtmlString BuildFormTag(string action, System.Web.Mvc.FormMethod method, ChameleonForms.HtmlAttributes htmlAttributes = null, ChameleonForms.Enums.EncType? encType = default) { }
+        public static System.Web.IHtmlString BuildInput(string name, string value, string type, ChameleonForms.HtmlAttributes htmlAttributes) { }
+        public static System.Web.IHtmlString BuildLabel(string @for, System.Web.IHtmlString labelText, ChameleonForms.HtmlAttributes htmlAttributes) { }
+        public static System.Web.IHtmlString BuildSelect(string name, System.Collections.Generic.IEnumerable<System.Web.Mvc.SelectListItem> selectListItems, bool multiple, ChameleonForms.HtmlAttributes htmlAttributes) { }
+        public static System.Web.IHtmlString BuildSingleCheckbox(string name, bool isChecked, ChameleonForms.HtmlAttributes htmlAttributes, string value = "true") { }
+    }
+    public interface IFormTemplate
+    {
+        System.Web.IHtmlString BeginField(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
+        System.Web.IHtmlString BeginForm(string action, System.Web.Mvc.FormMethod method, ChameleonForms.HtmlAttributes htmlAttributes, ChameleonForms.Enums.EncType? enctype);
+        System.Web.IHtmlString BeginMessage(ChameleonForms.Enums.MessageType messageType, System.Web.IHtmlString heading);
+        System.Web.IHtmlString BeginNavigation();
+        System.Web.IHtmlString BeginNestedSection(System.Web.IHtmlString heading = null, System.Web.IHtmlString leadingHtml = null, ChameleonForms.HtmlAttributes htmlAttributes = null);
+        System.Web.IHtmlString BeginSection(System.Web.IHtmlString heading = null, System.Web.IHtmlString leadingHtml = null, ChameleonForms.HtmlAttributes htmlAttributes = null);
+        System.Web.IHtmlString Button(System.Web.IHtmlString content, string type, string id, string value, ChameleonForms.HtmlAttributes htmlAttributes);
+        System.Web.IHtmlString EndField();
+        System.Web.IHtmlString EndForm();
+        System.Web.IHtmlString EndMessage();
+        System.Web.IHtmlString EndNavigation();
+        System.Web.IHtmlString EndNestedSection();
+        System.Web.IHtmlString EndSection();
+        System.Web.IHtmlString Field(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
+        System.Web.IHtmlString MessageParagraph(System.Web.IHtmlString paragraph);
+        void PrepareFieldConfiguration<TModel, T>(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator, ChameleonForms.FieldGenerators.Handlers.IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration, ChameleonForms.Component.FieldParent fieldParent);
+        System.Web.IHtmlString RadioOrCheckboxList(System.Collections.Generic.IEnumerable<System.Web.IHtmlString> list, bool isCheckbox);
+    }
+}
+namespace ChameleonForms.Templates.TwitterBootstrap3
+{
+    public static class ButtonHtmlAttributesExtensions
+    {
+        public static ChameleonForms.Component.ButtonHtmlAttributes WithIcon(this ChameleonForms.Component.ButtonHtmlAttributes attrs, string icon) { }
+        public static ChameleonForms.Component.ButtonHtmlAttributes WithSize(this ChameleonForms.Component.ButtonHtmlAttributes attrs, ChameleonForms.Templates.TwitterBootstrap3.ButtonSize size) { }
+        public static ChameleonForms.Component.ButtonHtmlAttributes WithStyle(this ChameleonForms.Component.ButtonHtmlAttributes attrs, ChameleonForms.Templates.TwitterBootstrap3.EmphasisStyle style) { }
+    }
+    public enum ButtonSize
+    {
+        [System.ComponentModel.Description("xs")]
+        ExtraSmall = 0,
+        [System.ComponentModel.Description("sm")]
+        Small = 1,
+        Default = 2,
+        [System.ComponentModel.Description("lg")]
+        Large = 3,
+    }
+    public enum EmphasisStyle
+    {
+        Default = 0,
+        Primary = 1,
+        Success = 2,
+        Info = 3,
+        Warning = 4,
+        Danger = 5,
+    }
+    public static class FieldConfigurationExtensions
+    {
+        public static ChameleonForms.Component.Config.IFieldConfiguration AsInputGroup(this ChameleonForms.Component.Config.IFieldConfiguration fc) { }
+    }
+    public class TwitterBootstrapFormTemplate : ChameleonForms.Templates.Default.DefaultFormTemplate
+    {
+        public const string IconAttrKey = "data-chameleonforms-twbs-icon";
+        public TwitterBootstrapFormTemplate() { }
+        public override System.Web.IHtmlString BeginField(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid) { }
+        public override System.Web.IHtmlString BeginForm(string action, System.Web.Mvc.FormMethod method, ChameleonForms.HtmlAttributes htmlAttributes, ChameleonForms.Enums.EncType? enctype) { }
+        public override System.Web.IHtmlString BeginMessage(ChameleonForms.Enums.MessageType messageType, System.Web.IHtmlString heading) { }
+        public override System.Web.IHtmlString BeginNavigation() { }
+        public override System.Web.IHtmlString BeginNestedSection(System.Web.IHtmlString heading = null, System.Web.IHtmlString leadingHtml = null, ChameleonForms.HtmlAttributes htmlAttributes = null) { }
+        public override System.Web.IHtmlString BeginSection(System.Web.IHtmlString heading = null, System.Web.IHtmlString leadingHtml = null, ChameleonForms.HtmlAttributes htmlAttributes = null) { }
+        public override System.Web.IHtmlString Button(System.Web.IHtmlString content, string type, string id, string value, ChameleonForms.HtmlAttributes htmlAttributes) { }
+        public override System.Web.IHtmlString EndField() { }
+        public override System.Web.IHtmlString EndForm() { }
+        public override System.Web.IHtmlString EndMessage() { }
+        public override System.Web.IHtmlString EndNavigation() { }
+        public override System.Web.IHtmlString EndNestedSection() { }
+        public override System.Web.IHtmlString EndSection() { }
+        public override System.Web.IHtmlString Field(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid) { }
+        public override void PrepareFieldConfiguration<TModel, T>(ChameleonForms.FieldGenerators.IFieldGenerator<TModel, T> fieldGenerator, ChameleonForms.FieldGenerators.Handlers.IFieldGeneratorHandler<TModel, T> fieldGeneratorHandler, ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration, ChameleonForms.Component.FieldParent fieldParent) { }
+        public override System.Web.IHtmlString RadioOrCheckboxList(System.Collections.Generic.IEnumerable<System.Web.IHtmlString> list, bool isCheckbox) { }
+        protected override System.Web.IHtmlString RequiredDesignator(System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid) { }
+    }
+    public static class TwitterBootstrapHtmlHelpers
+    {
+        public static System.Web.WebPages.HelperResult BeginField(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid, System.Web.IHtmlString requiredDesignator) { }
+        public static System.Web.WebPages.HelperResult BeginFieldInternal(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, System.Web.Mvc.ModelMetadata fieldMetadata, bool isValid, System.Web.IHtmlString requiredDesignator) { }
+        public static System.Web.WebPages.HelperResult BeginMessage(ChameleonForms.Templates.TwitterBootstrap3.EmphasisStyle messageType, System.Web.IHtmlString heading) { }
+        public static System.Web.WebPages.HelperResult BeginNavigation() { }
+        public static System.Web.WebPages.HelperResult BeginNestedSection(System.Web.IHtmlString heading, System.Web.IHtmlString leadingHtml, ChameleonForms.HtmlAttributes htmlAttributes) { }
+        public static System.Web.WebPages.HelperResult BeginSection(System.Web.IHtmlString heading, System.Web.IHtmlString leadingHtml, ChameleonForms.HtmlAttributes htmlAttributes) { }
+        public static System.Web.WebPages.HelperResult EndField() { }
+        public static System.Web.WebPages.HelperResult EndForm() { }
+        public static System.Web.WebPages.HelperResult EndMessage() { }
+        public static System.Web.WebPages.HelperResult EndNavigation() { }
+        public static System.Web.WebPages.HelperResult EndNestedSection() { }
+        public static System.Web.WebPages.HelperResult EndSection() { }
+        public static System.Web.WebPages.HelperResult Field(System.Web.IHtmlString labelHtml, System.Web.IHtmlString elementHtml, System.Web.IHtmlString validationHtml, System.Web.Mvc.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid, System.Web.IHtmlString requiredDesignator) { }
+        public static System.Web.WebPages.HelperResult GetAppendedHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isInputGroup) { }
+        public static System.Web.WebPages.HelperResult GetHint(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+        public static System.Web.WebPages.HelperResult GetInputGroupHtml(System.Web.IHtmlString html, bool isInputGroup) { }
+        public static System.Web.WebPages.HelperResult GetInputGroupRequiredDesignator(bool isRequired, bool isInputGroup, System.Web.IHtmlString requiredDesignator) { }
+        public static System.Web.WebPages.HelperResult GetLabelHtml(System.Web.IHtmlString labelHtml, bool hasLabel, bool isCheckboxControl, bool displayDesignator, bool isRequired, System.Web.IHtmlString requiredDesignator) { }
+        public static System.Web.WebPages.HelperResult GetPostElementRequiredDesignator(bool isRequired, bool displayDesignator, System.Web.IHtmlString requiredDesignator) { }
+        public static System.Web.WebPages.HelperResult GetPrependedHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isInputGroup) { }
+        public static System.Web.WebPages.HelperResult RadioOrCheckboxList(System.Collections.Generic.IEnumerable<System.Web.IHtmlString> items, bool isCheckbox) { }
+        public static System.Web.WebPages.HelperResult RenderIfNotEmpty(string mayBeEmpty, System.Func<object, System.Web.IHtmlString> template) { }
+        public static System.Web.WebPages.HelperResult RequiredDesignator(ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration) { }
+    }
+}
