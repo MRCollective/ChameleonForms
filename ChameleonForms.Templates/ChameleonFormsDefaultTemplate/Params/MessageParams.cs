@@ -1,4 +1,5 @@
-﻿using ChameleonForms.Enums;
+﻿#pragma warning disable 1591
+using ChameleonForms.Enums;
 using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params

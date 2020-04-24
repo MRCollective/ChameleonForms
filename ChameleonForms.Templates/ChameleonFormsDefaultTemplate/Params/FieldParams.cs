@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Html;
+﻿#pragma warning disable 1591
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params

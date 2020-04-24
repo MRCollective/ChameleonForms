@@ -1,4 +1,5 @@
-﻿using ChameleonForms.Templates.TwitterBootstrap3;
+﻿#pragma warning disable 1591
+using ChameleonForms.Templates.TwitterBootstrap3;
 using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params

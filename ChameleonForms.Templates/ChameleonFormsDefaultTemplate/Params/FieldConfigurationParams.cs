@@ -1,4 +1,5 @@
-﻿using ChameleonForms.Component.Config;
+﻿#pragma warning disable 1591
+using ChameleonForms.Component.Config;
 
 namespace ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params
 {

@@ -42,6 +42,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldDisplayType.MultiLineText;
         }
 
+        /// <inheritdoc />
         public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
         {
             // Ensure textareas look consistent across browsers by having default values as per MDN recommendations
