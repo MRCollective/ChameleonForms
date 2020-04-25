@@ -123,5 +123,10 @@ namespace ChameleonForms.Component.Config
         /// Whether or not inline &lt;label&gt; should wrap their &lt;input&gt; element.
         /// </summary>
         bool ShouldInlineLabelWrapElement { get; }
+
+        /// <summary>
+        /// The ID to use for a field hint.
+        /// </summary>
+        string HintId { get; }
     }
 }

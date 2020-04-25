@@ -30,6 +30,7 @@ namespace ChameleonForms.Component.Config
         public bool HasInlineLabel { get; }
         public bool HasLabelElement { get; }
         public Microsoft.AspNetCore.Html.IHtmlContent Hint { get; }
+        public string HintId { get; }
         public System.Collections.Generic.IDictionary<string, object> HtmlAttributes { get; }
         public Microsoft.AspNetCore.Html.IHtmlContent InlineLabelText { get; }
         public string LabelClasses { get; }
@@ -92,6 +93,7 @@ namespace ChameleonForms.Component.Config
         public ChameleonForms.Component.Config.IFieldConfiguration WithHint(Microsoft.AspNetCore.Html.IHtmlContent hint) { }
         public ChameleonForms.Component.Config.IFieldConfiguration WithHint(System.Func<dynamic, Microsoft.AspNetCore.Html.IHtmlContent> hint) { }
         public ChameleonForms.Component.Config.IFieldConfiguration WithHint(string hint) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration WithHintId(string hintId) { }
         public ChameleonForms.Component.Config.IFieldConfiguration WithNoneAs(string noneString) { }
         public ChameleonForms.Component.Config.IFieldConfiguration WithTrueAs(string trueString) { }
         public ChameleonForms.Component.Config.IFieldConfiguration WithoutInlineLabel() { }
@@ -158,6 +160,7 @@ namespace ChameleonForms.Component.Config
         ChameleonForms.Component.Config.IFieldConfiguration WithHint(Microsoft.AspNetCore.Html.IHtmlContent hint);
         ChameleonForms.Component.Config.IFieldConfiguration WithHint(System.Func<dynamic, Microsoft.AspNetCore.Html.IHtmlContent> hint);
         ChameleonForms.Component.Config.IFieldConfiguration WithHint(string hint);
+        ChameleonForms.Component.Config.IFieldConfiguration WithHintId(string hintId);
         ChameleonForms.Component.Config.IFieldConfiguration WithNoneAs(string noneString);
         ChameleonForms.Component.Config.IFieldConfiguration WithTrueAs(string trueString);
         ChameleonForms.Component.Config.IFieldConfiguration WithoutInlineLabel();
@@ -177,6 +180,7 @@ namespace ChameleonForms.Component.Config
         bool HasInlineLabel { get; }
         bool HasLabelElement { get; }
         Microsoft.AspNetCore.Html.IHtmlContent Hint { get; }
+        string HintId { get; }
         System.Collections.Generic.IDictionary<string, object> HtmlAttributes { get; }
         Microsoft.AspNetCore.Html.IHtmlContent InlineLabelText { get; }
         string LabelClasses { get; }

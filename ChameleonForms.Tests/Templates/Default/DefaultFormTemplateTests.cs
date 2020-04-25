@@ -135,6 +135,16 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
+        public void Output_field_with_hint_id()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().WithHint("hello").WithHintId("HintId"), false);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Output_field_with_prepended_and_appended_html()
         {
             var t = new DefaultFormTemplate();

@@ -118,6 +118,11 @@ namespace ChameleonForms.FieldGenerators
                 fieldConfiguration.WithNoneAs(Metadata.NullDisplayText);
             if (Metadata.IsReadOnly)
                 fieldConfiguration.Readonly();
+            if (fieldConfiguration.Hint != null)
+            {
+                var hintId = $"{HtmlHelper.GetFullHtmlFieldName(FieldProperty)}--Hint";
+                fieldConfiguration.Attr("aria-describedby", hintId).WithHintId(hintId);
+            }
 
             var handler = FieldGeneratorHandlersRouter<TModel, T>.GetHandler(this);
             handler.PrepareFieldConfiguration(fieldConfiguration);

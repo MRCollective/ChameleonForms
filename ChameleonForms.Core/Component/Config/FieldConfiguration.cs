@@ -419,6 +419,13 @@ namespace ChameleonForms.Component.Config
         /// <param name="wrapElement">True if the input element should be wrapped.</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration InlineLabelWrapsElement(bool wrapElement = true);
+
+        /// <summary>
+        /// Specify an ID to use for a field hint.
+        /// </summary>
+        /// <param name="hintId">The ID to use</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithHintId(string hintId);
     }
 
     /// <summary>
@@ -920,9 +927,19 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
+        public IFieldConfiguration WithHintId(string hintId)
+        {
+            HintId = hintId;
+            return this;
+        }
+
+        /// <inheritdoc />
         public bool HasInlineLabel { get; private set; }
 
         /// <inheritdoc />
         public bool ShouldInlineLabelWrapElement { get; private set; }
+
+        /// <inheritdoc />
+        public string HintId { get; private set; }
     }
 }

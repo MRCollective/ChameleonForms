@@ -72,5 +72,20 @@ namespace ChameleonForms.Tests.Form
 
             HtmlApprovals.VerifyHtml(html);
         }
+
+        [Test]
+        public void Output_field_with_hint_using_default_template()
+        {
+            string html;
+            using (var f = _h.BeginChameleonForm())
+            {
+                using (var s = f.BeginSection("Section"))
+                {
+                    html = s.FieldFor(m => m.NullableDateTime).WithHint("A hint").ToHtmlString();
+                }
+            }
+
+            HtmlApprovals.VerifyHtml(html);
+        }
     }
 }
