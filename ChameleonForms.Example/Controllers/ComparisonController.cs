@@ -50,7 +50,7 @@ namespace ChameleonForms.Example.Controllers
             public DateTime DateOfBirth { get; set; }
 
             [Required]
-            [DataType(DataType.EmailAddress)]
+            [EmailAddress]
             public string EmailAddress { get; set; }
             [Required]
             [DataType(DataType.Password)]
@@ -58,8 +58,8 @@ namespace ChameleonForms.Example.Controllers
             [Required]
             public MembershipType MembershipType { get; set; }
 
-            [DataType(DataType.Url)]
-            public string Homepage { get; set; }
+            [Url]
+            public Uri Homepage { get; set; }
             [DataType(DataType.MultilineText)]
             public string Bio { get; set; }
 
