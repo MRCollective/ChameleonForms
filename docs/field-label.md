@@ -67,4 +67,4 @@ The `%labelText%` will be determined by using the following (in order of prefere
 3. The `PropertyName` property in the ModelMetadata for the model property being displayed
 4. The name of the model property being displayed (all lower-case except for the first character)
 
-If you want to default the label text to the property names in sentence case then [consult the relevant documentation](auto-sentence-case).
+If you want to default the label text to the property names in sentence case then [consult the relevant documentation](labels.md).

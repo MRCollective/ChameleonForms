@@ -10,7 +10,7 @@ pages:
   - Configuring ChameleonForms: configuration.md
   - Comparison: comparison.md
   - Bootstrap Template: bootstrap-template.md
-  - Automatically sentence case form labels: auto-sentence-case.md
+  - Control field labels: labels.md
   - Field Configuration: field-configuration.md
   - HTML Attributes: html-attributes.md
   - Change the model type for HTML Helper for portions of your page: html-helper-context.md
@@ -38,6 +38,8 @@ pages:
   - File upload fields: file-upload.md
   - Password fields: password.md
   - Number fields: number.md
+  - Email fields: email.md
+  - URI fields: uri.md
   - Default fields: default-fields.md
 - Advanced usage:
   - Using different form templates: form-templates.md

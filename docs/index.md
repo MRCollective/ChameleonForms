@@ -233,7 +233,7 @@ Key things to note that ChameleonForms has automatically done (with default conf
 ## Documentation
 
 ### Philosophy
-* [Why is ChameleonForms needed](why.md) - A rant about building forms and why ChameleonForms removes a lot of the pain
+* [Why is ChameleonForms needed](why.md) - A rant about building forms and how ChameleonForms removes a lot of the pain
 * We expect that you know how to use ASP.NET Core MVC's form generation, model-binding and validation support to be able to effectively use and understand this library. If you need a hand getting started with that knowledge then check out the following: [Understanding HTML Helpers in ASP.NET MVC](https://www.dotnettricks.com/learn/mvc/understanding-html-helpers-in-aspnet-mvc) (out of date since it's targetting pre-.NET Core, but the concepts still apply in ASP.NET Core), [tag helpers](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-3.1), [model binding](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-3.1), [validation](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-3.1).
 
 ### Basic usage
@@ -241,7 +241,7 @@ Key things to note that ChameleonForms has automatically done (with default conf
 * [Configuring ChameleonForms](configuration.md) - How do I configure ChameleonForms?
 * [Comparison](comparison.md) - See an example of a ChameleonForms form versus an out-of-the-box ASp.NET MVC form (HTML Helpers, Editor Templates and *(coming soon)* Tag Helpers)
 * [Changing to Twitter Bootstrap 3 template](bootstrap-template.md) - Changing from the default template to the Twitter Bootstrap template *(Bootstrap 4 support coming soon)*
-* [Automatically sentence case form labels](auto-sentence-case.md) - Automatic sentence casing your form labels without having to annotate them with `[DisplayName]`
+* [Control form label text](labels.md) - Control how label text appears in your forms
 * [Field Configuration](field-configuration.md) - An overview of the common options available to configure a form field via the `IFieldConfiguration` interface
 * [HTML Attributes](html-attributes.md) - An overview of how to define HTML attributes using the `HtmlAttributes` class
 * [Change the model type for portions of your page](html-helper-context.md)
@@ -273,6 +273,8 @@ Examples for generating a form and each type of default component within the for
 * [File upload fields](file-upload.md) - Display file-upload fields
 * [Password fields](password.md) - Display password fields
 * [Number fields](number.md) - Display number fields
+* [Email fields](email.md) - Display email fields
+* [Uri fields](uri.md) - Display URI fields
 * [Default (`<input type="text" />`) fields](default-fields.md)
 
 ### Advanced usage

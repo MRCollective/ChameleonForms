@@ -58,7 +58,7 @@ namespace ChameleonForms.Example.Controllers
             [Required]
             public MembershipType MembershipType { get; set; }
 
-            [Url]
+            [DataType(DataType.Url)]
             public Uri Homepage { get; set; }
             [DataType(DataType.MultilineText)]
             public string Bio { get; set; }

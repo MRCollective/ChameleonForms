@@ -27,7 +27,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-CB64-4380-A326-C5562973F32F}"
 	ProjectSection(SolutionItems) = preProject
 		docs\account-signup-render.png = docs\account-signup-render.png
-		docs\auto-sentence-case.md = docs\auto-sentence-case.md
+		docs\labels.md = docs\labels.md
 		docs\boolean.md = docs\boolean.md
 		docs\bootstrap-buttons.png = docs\bootstrap-buttons.png
 		docs\bootstrap-example-banner.png = docs\bootstrap-example-banner.png
@@ -41,6 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-C
 		docs\default-fields.md = docs\default-fields.md
 		docs\Diagrams.docx = docs\Diagrams.docx
 		docs\different-form-models.md = docs\different-form-models.md
+		docs\email.md = docs\email.md
 		docs\enum.md = docs\enum.md
 		docs\extending-field-configuration.md = docs\extending-field-configuration.md
 		docs\extending-form-components.md = docs\extending-form-components.md
@@ -72,6 +73,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-C
 		docs\the-message.md = docs\the-message.md
 		docs\the-navigation.md = docs\the-navigation.md
 		docs\the-section.md = docs\the-section.md
+		docs\uri.md = docs\uri.md
 		docs\why.md = docs\why.md
 	EndProjectSection
 EndProject

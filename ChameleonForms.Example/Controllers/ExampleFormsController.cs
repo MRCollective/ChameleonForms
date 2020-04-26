@@ -28,6 +28,12 @@ namespace ChameleonForms.Example.Controllers
             return View(new BasicViewModel());
         }
 
+        [HttpPost]
+        public ActionResult BasicExample(BasicViewModel vm)
+        {
+            return View(vm);
+        }
+
         public ActionResult Labels()
         {
             return View(new BasicViewModel());

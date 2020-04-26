@@ -1,76 +1,62 @@
 Twitter Bootstrap 3 Template
 ============================
 
-ChameleonForms has a built-in Twitter Bootstrap 3 template that you can switch to with one line of code. This will allow you to rapidly develop forms for your Twitter Bootstrap 3 powered site (which we often use for quick prototyping), but give you the flexibility to easily change the template in the future if your quick prototype makes it big and warrants a custom redesign.
+ChameleonForms has a built-in Twitter Bootstrap 3 template that you can switch to as part of [global configuration](configuration.md) or on a [per-form basis](form-template.md). This will allow you to rapidly develop forms for your Twitter Bootstrap 3 powered site (useful for quick prototyping), but give you the flexibility to easily change the template in the future if your quick prototype makes it big and warrants a custom redesign.
+
+Support for Bootstrap 4 and other commonly used templates like Material will be added in the future. If you'd like to add support feel free to issue a [pull request](https://github.com/MRCollective/ChameleonForms/pulls).
 
 Getting started
 ---------------
 
-The easiest way to get up and running with Twitter Bootstrap is to:
+The easiest way to get up and running with Twitter Bootstrap is to specify it as part of the global config:
 
-1. `Install-Package ChameleonForms.TwitterBootstrap3`
-    * This includes the `bootstrap` package and the `ChameleonForms` package as dependencies
-2. If you already have Twitter Bootstrap referenced in your layout then [add the extra CSS and JavaScript files to your existing bundles](#chameleonforms-custom-css-and-javascript-to-complement-bootstrap) or if you don't then reference the `~/bundles/chameleon-bootstrapjs` JavaScript bundle and `~/bundles/chameleon-bootstrapcss` CSS bundle from your layout or your form pages
-3. [Create a ChameleonForm](getting-started#show-me-a-basic-chameleonforms-example-next-to-its-aspnet-mvc-counterpart) using the `BeginChameleonForm` extension method and you are good to go
+1. In `Startup.cs` simply change your `AddChameleonForms` call to reference the `TwitterBootstrap3FormTemplate`:
+    ```cs
+    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddChameleonForms<TwitterBootstrap3FormTemplate>(...);
+    }
+    ```
 
-For more manual steps, to understand the HTML being generated, for instructions for how to modify the template to fit your needs, or to understand what is contained in the `App_Start\TwitterBootstrap.cs` file please see the relevant documentation below.
-
-Make Twitter Bootstrap template the global default
---------------------------------------------------
-
-To easily change the form template for all forms that use the [`BeginChameleonForm` extension method](the-form) simply use this snippet in `Global.asax.cs`:
-
-```csharp
-using ChameleonForms;
-using ChameleonForms.Templates.TwitterBootstrap3;
-...
-FormTemplate.Default = new TwitterBootstrapFormTemplate();
-```
-
-Alternatively, you can use one of the other methods of [changing form template](form-templates).
+2. If you already have Twitter Bootstrap referenced in your layout then [add the extra CSS and JavaScript files to get validation highlighting looking great](#chameleonforms-custom-css-and-javascript-to-complement-bootstrap)
+3. [Create a ChameleonForm](getting-started.md) using the `BeginChameleonForm` extension method and you are good to go
 
 ChameleonForms custom CSS and JavaScript to complement Bootstrap
 ----------------------------------------------------------------
 
-There are two files that ChameleonForms provides in it's `ChameleonForms.TwitterBootstrap3` package that you can optionally include in your Chameleon-powered Twitter Bootstrap form pages (or your layout if you want to include them across the site):
+There are two files that ChameleonForms provides in the [`wwwroot/lib/chameleonforms` folder](configuration.md#msbuild-configuration) that you can optionally include in your Chameleon-powered Twitter Bootstrap form pages (or your layout if you want to include them across the site):
 
-* [chameleonforms-twitterbootstrap.css](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Content/chameleonforms-twitterbootstrap.css)
+* [chameleonforms-twitterbootstrap.css](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/wwwroot/lib/chameleonforms/chameleonforms-twitterbootstrap.css)
     * Makes form hints a light grey even when the field is invalid (otherwise it would turn red making it look like an error)
     * Makes the required designator that ChameleonForms puts in looks better
     * Makes field labels for fields that don't have a `<label>` look the same as ones that do (bold) otherwise it looks weird
-* [jquery.validate.unobtrusive.twitterbootstrap.js](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Scripts/jquery.validate.unobtrusive.twitterbootstrap.js)
+* [unobtrusive-twitterbootstrap3-validation.chameleonforms.js](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/wwwroot/lib/chameleonforms/unobtrusive-twitterbootstrap3-validation.chameleonforms.js)
     * Adds the `has-error` class to the field container when there is an unobtrusive validation error
     * Removes the `has-error` class from the field container when an invalid field (either from client-side or server-side validation) becomes valid when the user interacts with the field
-
-You can either make use of the bundles we define that group these with the Bootstrap files in our `ChameleonForms.TwitterBootstrap3` NuGet package ([described above](#getting-started)) or add these files to your existing bundles. Note: If you are using the default `~/bundles/jqueryval` that comes with the VC templates then the JavaScript file will already be included with that bundle thanks to the `.Include("~/Scripts/jquery.validate*")`.
+    * Only supports jQuery validate unobtrusive validation, doesn't yet support [aspnet-validation](https://github.com/ryanelian/aspnet-validation)
 
 HTML Generation
 ---------------
 
 You can find documentation about the HTML that is generated by the Twitter Bootstrap template across the ChameleonForms documentation:
 
-* [Form HTML](the-form#twitter-bootstrap-3-html)
-* [Message HTML](the-message#twitter-bootstrap-3-html) - including the documentation about how the ChameleonForms `MessageType` maps to the Twitter Bootstrap Emphasis Styles
-* [Section HTML](the-section#twitter-bootstrap-3-html) - including top-level and nested sections
-* [Navigation HTML](the-navigation#twitter-bootstrap-3-html) - including how to add icons to submit buttons, control their size and control their emphasis style (and a [great example of the options](the-navigation#example))
-* [Field HTML](field#twitter-bootstrap-3-html) - including:
+* [Form HTML](the-form.md#twitter-bootstrap-3-html)
+* [Message HTML](the-message.md#twitter-bootstrap-3-html) - including the documentation about how the ChameleonForms `MessageType` maps to the Twitter Bootstrap Emphasis Styles
+* [Section HTML](the-section.md#twitter-bootstrap-3-html) - including top-level and nested sections
+* [Navigation HTML](the-navigation.md#twitter-bootstrap-3-html) - including how to add icons to submit buttons, control their size and control their emphasis style (and a [great example of the options](the-navigation.md#example))
+* [Field HTML](field.md#twitter-bootstrap-3-html) - including:
     * The HTML template it uses for inputs, textareas, select boxes, single checkboxes, radio/checkbox lists, file upload controls and other controls
-    * The default required designator HTML ([which can be overriden]())
-    * [How to create input groups](field#input-groups) with the `input-group-addon` class automatically added to appended and prepended content
+    * The default required designator HTML ([which can be overriden](custom-template.md#field))
+    * [How to create input groups](field.md#input-groups) with the `input-group-addon` class automatically added to appended and prepended content
     * The HTML for nested fields
 
 Horizontal and inline forms
 ---------------------------
 
-The template doesn't currently support [horizontal](http://getbootstrap.com/css/#forms-horizontal) or [inline](http://getbootstrap.com/css/#forms-inline) forms. We will likely create separate templates to achieve that (probably by extending the base on and applying the necessary changes to support these types of forms.
-
-If you create such templates then please send them to us in a [pull request](https://github.com/MRCollective/ChameleonForms/pulls) so we can include them in the main library.
-
-If you are curious to see where this support is in our backlog then please consult our [Trello board](https://trello.com/c/hiwhUxI8/140).
+The template doesn't currently support [horizontal](https://getbootstrap.com/docs/3.4/css/#forms-horizontal) or [inline](https://getbootstrap.com/docs/3.4/css/#forms-inline) forms. If you create such templates then please send them to us in a [pull request](https://github.com/MRCollective/ChameleonForms/pulls) so we can include them in the main library.
 
 Modifications
 -------------
 
-It's worth noting that the Twitter Bootstrap 3 is a relatively new addition to ChameleonForms at 1.0 (in fact it was the last feature we actively developed in order to meet what we wanted for 1.0). As such we haven't had a chance to use the template in anger so if there is anything that you want to function differently it's entirely possible that it will be useful to other people. Consequently, we encourage you to [raise an issue](https://github.com/MRCollective/ChameleonForms/issues) if you notice something.
-
-If you think that the changes you want to make to the template are specific to your needs then you can [easily extend the template to change the bits you want](custom-template#applying-a-global-template-change) (just extend the `TwitterBootstrapFormTemplate` class), while still using the initial work we have done (and subscribing to updates when you update the ChameleonForms NuGet package).
+If you think that the changes you want to make to the template are specific to your needs then you can [easily extend the template to change the bits you want](custom-template#applying-a-global-template-change) (just extend the `TwitterBootstrapFormTemplate` class), while still using the work we have done (and subscribing to updates when you update the ChameleonForms NuGet package).

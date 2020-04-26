@@ -97,6 +97,7 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
     @section Scripts
     {
         <partial name="_ValidationScriptsPartial" />
+        @* ... or relevant equivalent *@
     }
 
     ```

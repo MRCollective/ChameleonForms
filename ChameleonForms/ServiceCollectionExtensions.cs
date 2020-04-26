@@ -24,7 +24,7 @@ namespace ChameleonForms
     // * html5 validation off
     // * config
     // * uri binding
-    // * update breakingchanges file (displayformatstring -> editformatstring, requiredflagsenum -> required, defaultformtemplate -> SCE)
+    // * update breakingchanges file (displayformatstring -> editformatstring, requiredflagsenum -> required, defaultformtemplate -> SCE, renamed and moved folders for css/js files)
     // * End-to-end documentation review and update - @helper, IHtmlString, web.config, update Message, Navigation etc.
     // todo: 4.0 non-beta release
     // Review the datetime "g" and current culture things - remove? client side validation for non / separators?

@@ -198,7 +198,7 @@ Field
 
 There are a lot of parameters passed to the field method - only use the ones that you need for your template (e.g. if you don't specify different HTML when a field is invalid just ignore the `isValid` variable).
 
-If you want the ability to specify the required designator separately within the template then make sure to call the `RequiredDesignator` method from within the `Field` method to get the HTML for the required designator.
+If you want the ability to specify the required designator separately within the template then make sure to call the `RequiredDesignator` method from within the `Field` method to get the HTML for the required designator. The templates we provide out-of-the-box do this and thus you can override just the required designator by extending the form template classes we provide and override the `GetRequiredDesignator` method.
 
 If you want a fully-fledged Field HTML implementation then you need to account for:
 

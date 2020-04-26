@@ -78,14 +78,19 @@ For more information on form templates see:
 
 By default, the global config will set up the following for you:
 
-* **Humanized labels**: The label text for fields will automatically be "[humanized](https://github.com/Humanizr/Humanizer)" from the property name using [sentence case](https://github.com/Humanizr/Humanizer#transform-string) (e.g. `public string FirstName { get; set; }` will automatically have a label of `First name`)
+* **Humanized labels**: The label text for fields will automatically be "[humanized](https://github.com/Humanizr/Humanizer)" from the property name using [sentence case](https://github.com/Humanizr/Humanizer#transform-string) (e.g. `public string FirstName { get; set; }` will automatically have a label of `First name`). See [Labels](labels.md) for more information.
     * If any of the following have been applied to a field then the humanization will be skipped: `[DisplayName(Name = "Label text)]`, `[Display(Name = "Label text")]` or you have an `IDisplayMetadataProvider` registered that either sets `context.DisplayMetadata.SimpleDisplayProperty` to a non-empty/non-null string or sets `context.DisplayMetadata.DisplayName` to a lambda that returns a non-empty/non-null string. For examples see the [relevant test](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Tests/HumanizedLabelsTests.cs).
-* **Default form template type**: The given `IFormTemplate` type will be registered as a Singleton with the service collection and will be resolved by default when creating a ChameleonForm.
-* **Flags enum support**: Any non-nullable `[Flags]` enums will automatically be validated to be `[Required]`. The default behaviour is MVC is that their `ModelMetadata` is marked `IsRequired`, but they aren't actually validated as required; ChameleonForms patches that by default.
+* **Default form template type**: The given `IFormTemplate` type will be registered as a Singleton with the service collection and will be resolved by default when creating a ChameleonForm. See [Form Templates](form-templates.md) for more information.
+* **Flags enum support**: Correctly handle model binding and server-side validation of `[Flags]` enums (including implicit `[Required]` for non-nullable, which is broken in out-of-the-box MVC). It's expected that they will be posted as multiple values and rendered as a multiple select input (`<select multiple>` or `<input type="checkbox">` list). See [Flags Enum Fields](flags-enum.md) for more information.
+* **Format-aware DateTime support**: Correctly handle model binding and server-side validation of `DateTime` values with a `[DisplayFormat(DataFormatString = "{0:SOME_FORMAT}", ApplyFormatInEditMode = true)]` attribute. See [DateTime Fields](datetime.md) for more information.
+* **Enum list support**: Correctly handle binding and server-side validation of enum lists (e.g. `IEnumerable<EnumType>`, `EnumType[]` etc.). This patches up a range of problems with the out-of-the-box MVC support for enum lists, including poor support for `[Required]` and erroneous binding of `null` values in the lists. See [Multiple-Select Enum Fields](multiple-enum.md) for more information.
+* **Uri support**: Correctly handle model binding and server-side validation of `Uri`'s. See [Uri Fields](uri.md) for more information.
+* **Integral number client validation support**: Support unobtrusive client-side validation of integral types (`byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`). This existed in ASP.NET MVC, but no longer exists in ASP.NET Core MVC because HTML5 `type="number"` has been added. This is a problem if you don't want to rely on HTML5 validation (which has a sub-par user experience in most cases).
+* **Format-aware DateTime client validation support**: Support unobtrusive client-side validation of `DateTime`'s that is format string aware. See [Client-side DateTime Validation](datetime-client-side-validation.md) for more information.
 
 ## Configuration builder
 
-The configuration builder allows you to tweak the default global config using the following fluent methods:
+The configuration builder allows you to tweak the default global config using the following self-explanatory fluent methods:
 
 ```cs
         /// <summary>
@@ -114,12 +119,6 @@ The configuration builder allows you to tweak the default global config using th
         /// </summary>
         /// <returns>The builder to allow fluent method chaining</returns>
         public ChameleonFormsConfigBuilder<TFormTemplate> WithoutFlagsEnumBinding();
-
-        /// <summary>
-        /// Turn off validation of implicit [Required] on non-nullable flag enums.
-        /// </summary>
-        /// <returns>The builder to allow fluent method chaining</returns>
-        public ChameleonFormsConfigBuilder<TFormTemplate> WithoutFlagsEnumRequiredValidation();
 
         /// <summary>
         /// Turn off model binding of <see cref="System.DateTime"/>s.
@@ -152,10 +151,21 @@ The configuration builder allows you to tweak the default global config using th
         public ChameleonFormsConfigBuilder<TFormTemplate> WithoutDateTimeClientModelValidation();
 ```
 
-
 ## MSBuild configuration
 
-## Advanced usage configuration
+When you install `ChameleonForms` it will automatically include an MSBuild `.targets` file into your project. This file provides the following functionality:
+
+* Copy ChameleonForms client-side files into `wwwroot/lib/chameleonforms/` on build unless they haven't changed.
+    * If you want to disable this simply set the following property in your `.csproj` file:
+
+    ```xml
+      <PropertyGroup>
+        <ChameleonFormsCopyContentFiles>false</ChameleonFormsCopyContentFiles>
+      </PropertyGroup>
+    ```
+
+## Advanced configuration
+
 * [Using different form templates](form-templates.md)
 * [Creating custom form templates](custom-template.md)
 * [Extending the field configuration](extending-field-configuration.md)

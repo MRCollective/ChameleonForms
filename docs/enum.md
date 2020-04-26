@@ -64,7 +64,7 @@ And you had a property on your model like:
 public AnEnum EnumValue { get; set; }
 ```
 
-Then by default the Field Element HTML would be (if you [auto-sentence case labels](auto-sentence-case) and don't specify extra HTML attributes):
+Then by default the Field Element HTML would be (if you [Automatically sentence case labels](labels.md) and don't specify extra HTML attributes):
 
 ```html
 <select data-val="true" data-val-required="The Enum value field is required." id="EnumValue" name="EnumValue">
