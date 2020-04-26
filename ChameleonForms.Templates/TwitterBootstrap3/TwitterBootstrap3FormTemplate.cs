@@ -19,7 +19,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
     /// <summary>
     /// The default Chameleon Forms form template renderer.
     /// </summary>
-    public class TwitterBootstrapFormTemplate : Default.DefaultFormTemplate
+    public class TwitterBootstrap3FormTemplate : Default.DefaultFormTemplate
     {
         /// <summary>
         /// The attribute name to use for adding an icon class to a Html Attributes object.

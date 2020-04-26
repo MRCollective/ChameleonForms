@@ -12,7 +12,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
 {
     public class PrepareFieldConfigurationTests_TwitterBootstrapTemplateShould
     {
-        private readonly TwitterBootstrapFormTemplate _t = new TwitterBootstrapFormTemplate();
+        private readonly TwitterBootstrap3FormTemplate _t = new TwitterBootstrap3FormTemplate();
         private IFieldConfiguration _fieldConfiguration;
         public class TestViewModel { }
 

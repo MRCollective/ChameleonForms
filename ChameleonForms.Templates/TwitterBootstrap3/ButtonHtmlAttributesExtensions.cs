@@ -21,7 +21,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
         public static ButtonHtmlAttributes WithIcon(this ButtonHtmlAttributes attrs, string icon)
         {
-            attrs.Attr(TwitterBootstrapFormTemplate.IconAttrKey, icon);
+            attrs.Attr(TwitterBootstrap3FormTemplate.IconAttrKey, icon);
             return attrs;
         }
 

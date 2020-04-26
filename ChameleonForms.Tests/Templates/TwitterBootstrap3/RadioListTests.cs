@@ -12,7 +12,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Render_radio_list()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.RadioOrCheckboxList(new IHtmlContent[] {new HtmlString("1"), new HtmlString("2")}, false);
 
@@ -22,7 +22,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Render_checkbox_list()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.RadioOrCheckboxList(new IHtmlContent[] { new HtmlString("1"), new HtmlString("2") }, true);
 

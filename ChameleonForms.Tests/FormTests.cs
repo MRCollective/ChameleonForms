@@ -110,11 +110,11 @@ namespace ChameleonForms.Tests
         [Test]
         public void Construct_form_via_extension_method_using_default_template_defined_by_user()
         {
-            _context.ProvideTemplate(new TwitterBootstrapFormTemplate());
+            _context.ProvideTemplate(new TwitterBootstrap3FormTemplate());
 
             var f = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
 
-            Assert.That(f.Template, Is.TypeOf<TwitterBootstrapFormTemplate>());
+            Assert.That(f.Template, Is.TypeOf<TwitterBootstrap3FormTemplate>());
         }
 
         [Test]

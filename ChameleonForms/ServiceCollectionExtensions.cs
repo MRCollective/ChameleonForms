@@ -24,9 +24,10 @@ namespace ChameleonForms
     // * html5 validation off
     // * config
     // * uri binding
-    // * update breakingchanges file (displayformatstring -> editformatstring, requiredflagsenum -> required, defaultformtemplate -> SCE, renamed and moved folders for css/js files)
+    // * update breakingchanges file (displayformatstring -> editformatstring, requiredflagsenum -> required, defaultformtemplate -> SCE, renamed and moved folders for css/js files), TwitterBootstrapFormTemplate -> TwitterBootstrap3FormTemplate (and no nuget package)
     // * End-to-end documentation review and update - @helper, IHtmlString, web.config, update Message, Navigation etc.
     // todo: 4.0 non-beta release
+    // Build-in DI support e.g. fieldgeneratorrouter
     // Review the datetime "g" and current culture things - remove? client side validation for non / separators?
     // Update all dependencies to latest versions
     // Tidy up cshtml files

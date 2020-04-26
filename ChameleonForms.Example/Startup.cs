@@ -33,7 +33,7 @@ namespace ChameleonForms.Example
                 if (template.StartsWith("default"))
                     return new DefaultFormTemplate();
 
-                return new TwitterBootstrapFormTemplate();
+                return new TwitterBootstrap3FormTemplate();
             });
             services.AddChameleonForms(b => b.WithoutTemplateTypeRegistration());
         }
