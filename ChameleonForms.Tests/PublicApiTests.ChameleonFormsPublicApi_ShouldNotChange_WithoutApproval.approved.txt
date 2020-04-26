@@ -362,15 +362,6 @@ namespace ChameleonForms.Attributes
         protected override System.ComponentModel.DataAnnotations.ValidationResult IsValid(object value, System.ComponentModel.DataAnnotations.ValidationContext context) { }
         public static void ValidateListConfiguration(object model, string listProperty, string valueProperty, string nameProperty, string memberName) { }
     }
-    public class RequiredFlagsEnumAttribute : System.ComponentModel.DataAnnotations.RequiredAttribute
-    {
-        public RequiredFlagsEnumAttribute() { }
-        public override bool IsValid(object value) { }
-    }
-    public class RequiredFlagsEnumAttributeAdapterProvider : Microsoft.AspNetCore.Mvc.DataAnnotations.ValidationAttributeAdapterProvider, Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider
-    {
-        public RequiredFlagsEnumAttributeAdapterProvider() { }
-    }
 }
 namespace ChameleonForms
 {
@@ -723,6 +714,16 @@ namespace ChameleonForms.Validators
     {
         public IntegralNumericClientModelValidatorProvider() { }
         public void CreateValidators(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientValidatorProviderContext context) { }
+    }
+    public class RequiredFlagsEnumValidator : Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator
+    {
+        public RequiredFlagsEnumValidator() { }
+        public System.Collections.Generic.IEnumerable<Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult> Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext context) { }
+    }
+    public class RequiredFlagsEnumValidatorProvider : Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidatorProvider
+    {
+        public RequiredFlagsEnumValidatorProvider() { }
+        public void CreateValidators(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidatorProviderContext context) { }
     }
 }
 ASSEMBLY ChameleonForms.Templates

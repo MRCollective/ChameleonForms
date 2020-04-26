@@ -8,7 +8,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalNullableEnumList_ThenBindEmptyListWithNoErrors()
         {
-            var (state, model) = await BindAsync(m => m.OptionalNullableEnumList, TestViewModel.EmptySubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalNullableEnumList, TestViewModel.EmptySubmission);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.True);
@@ -17,7 +17,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredNullableEnumList_ThenBindEmptyListWithError()
         {
-            var (state, model) = await BindAsync(m => m.RequiredNullableEnumList, TestViewModel.EmptySubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredNullableEnumList, TestViewModel.EmptySubmission);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.False);
@@ -27,7 +27,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalEnumList_ThenBindEmptyListWithNoErrors()
         {
-            var (state, model) = await BindAsync(m => m.OptionalEnumList, TestViewModel.EmptySubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalEnumList, TestViewModel.EmptySubmission);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.True);
@@ -36,7 +36,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredEnumList_ThenBindEmptyListWithError()
         {
-            var (state, model) = await BindAsync(m => m.RequiredEnumList, TestViewModel.EmptySubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredEnumList, TestViewModel.EmptySubmission);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.False);

@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
-using System.Linq;
-using System.Reflection;
 
 namespace ChameleonForms.ModelBinders
 {
@@ -14,7 +12,7 @@ namespace ChameleonForms.ModelBinders
                 throw new ArgumentNullException("context");
             }
 
-            if (context.Metadata.IsEnum && context.Metadata.UnderlyingOrModelType.GetCustomAttributes().OfType<FlagsAttribute>().Any())
+            if (context.Metadata.IsFlagsEnum)
             {
                 return new FlagsEnumModelBinder();
             }

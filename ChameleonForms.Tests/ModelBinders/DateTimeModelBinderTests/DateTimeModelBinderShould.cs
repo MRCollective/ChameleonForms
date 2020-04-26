@@ -20,7 +20,7 @@ namespace ChameleonForms.Tests.ModelBinders.DateTimeModelBinderTests
         [Test]
         public async Task Use_default_value_when_there_is_an_edit_format_but_no_value_submitted()
         {
-            var (state, model) = await BindAsync(m => m.DateTimeWithEditFormat);
+            var (state, model) = await BindAndValidateAsync(m => m.DateTimeWithEditFormat);
 
             Assert.That(model, Is.EqualTo(default(T)));
             // Value required if DateTime, not if DateTime?
@@ -32,7 +32,7 @@ namespace ChameleonForms.Tests.ModelBinders.DateTimeModelBinderTests
         [Test]
         public async Task Use_default_value_when_there_is_an_edit_format_but_null_value_submitted([Values("", null, "  ")] string value)
         {
-            var (state, model) = await BindAsync(m => m.DateTimeWithEditFormat, value);
+            var (state, model) = await BindAndValidateAsync(m => m.DateTimeWithEditFormat, value);
 
             Assert.That(model, Is.EqualTo(default(T)));
             // Value required if DateTime, not if DateTime?
@@ -44,7 +44,7 @@ namespace ChameleonForms.Tests.ModelBinders.DateTimeModelBinderTests
         [Test]
         public async Task Use_default_value_and_add_error_when_there_is_a_display_format_and_an_invalid_value()
         {
-            var (state, model) = await BindAsync(m => m.DateTimeWithEditFormat, "invalid");
+            var (state, model) = await BindAndValidateAsync(m => m.DateTimeWithEditFormat, "invalid");
 
             Assert.That(model, Is.EqualTo(default(T)));
             Assert.That(state.IsValid, Is.False);
@@ -54,7 +54,7 @@ namespace ChameleonForms.Tests.ModelBinders.DateTimeModelBinderTests
         [Test]
         public async Task Use_default_value_and_add_error_when_there_is_a_display_format_and_an_invalid_format()
         {
-            var (state, model) = await BindAsync(m => m.DateTimeWithEditFormat, "2000-12-12");
+            var (state, model) = await BindAndValidateAsync(m => m.DateTimeWithEditFormat, "2000-12-12");
 
             Assert.That(model, Is.EqualTo(default(T)));
             Assert.That(state.IsValid, Is.False);
@@ -64,7 +64,7 @@ namespace ChameleonForms.Tests.ModelBinders.DateTimeModelBinderTests
         [Test]
         public async Task Return_valid_value_if_value_ok()
         {
-            var (state, model) = await BindAsync(m => m.DateTimeWithEditFormat, "12/12/2000");
+            var (state, model) = await BindAndValidateAsync(m => m.DateTimeWithEditFormat, "12/12/2000");
 
             Assert.That(model, Is.EqualTo(new DateTime(2000, 12, 12)));
             Assert.That(state.IsValid, Is.True);
@@ -79,7 +79,7 @@ namespace ChameleonForms.Tests.ModelBinders.DateTimeModelBinderTests
                 var submittedValue = date.ToString("g");
                 var expectedDate = DateTime.ParseExact(submittedValue, "g", CultureInfo.CurrentCulture);
 
-                var (state, model) = await BindAsync(m => m.DateTimeWithGFormat, submittedValue);
+                var (state, model) = await BindAndValidateAsync(m => m.DateTimeWithGFormat, submittedValue);
 
                 Assert.That(model, Is.EqualTo(expectedDate));
                 Assert.That(state.IsValid, Is.True);
@@ -93,7 +93,7 @@ namespace ChameleonForms.Tests.ModelBinders.DateTimeModelBinderTests
         {
             using (ChangeCulture.To(culture))
             {
-                var (state, model) = await BindAsync(m => m.DateTimeWithGFormat, "2020-02-20 11:00");
+                var (state, model) = await BindAndValidateAsync(m => m.DateTimeWithGFormat, "2020-02-20 11:00");
 
                 Assert.That(model, Is.EqualTo(default(T)));
                 Assert.That(state.IsValid, Is.False);

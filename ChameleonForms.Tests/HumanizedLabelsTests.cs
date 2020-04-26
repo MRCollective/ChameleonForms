@@ -2,11 +2,13 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
-using ChameleonForms.Tests.Helpers;
 using Humanizer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests
@@ -14,12 +16,21 @@ namespace ChameleonForms.Tests
     [TestFixture]
     class HumanizedLabelsShould
     {
-        private MvcTestContext _scope;
+        private HumanizedLabelsDisplayMetadataProvider _provider;
+        private ServiceProvider _scope;
 
         [SetUp]
         public void Setup()
         {
-            _scope = new MvcTestContext();
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddMvc();
+            serviceCollection.AddSingleton<ILoggerFactory, NullLoggerFactory>();
+            serviceCollection.Configure<MvcOptions>(x =>
+            {
+                x.ModelMetadataDetailsProviders.Add(new AnotherModelMetadataProvider());
+                x.ModelMetadataDetailsProviders.Add(_provider);
+            });
+            _scope = serviceCollection.BuildServiceProvider();
         }
 
         [TearDown]
@@ -30,10 +41,8 @@ namespace ChameleonForms.Tests
 
         private ModelMetadata GetMetadataFor<TProperty>(Expression<Func<NonHumanizedViewModel, TProperty>> property, IStringTransformer to = null)
         {
-            var provider = _scope.Services.GetRequiredService<ModelMetadataDetailsProviderProvider>();
-            provider.DisplayMetadataProviders.Add(new HumanizedLabelsDisplayMetadataProvider(to));
-
-            var metadataProvider = _scope.Services.GetRequiredService<IModelMetadataProvider>();
+            _provider = new HumanizedLabelsDisplayMetadataProvider(to);
+            var metadataProvider = _scope.GetRequiredService<IModelMetadataProvider>();
             return metadataProvider.GetMetadataForProperty(typeof(NonHumanizedViewModel), ((MemberExpression)property.Body).Member.Name);
         }
 
@@ -54,10 +63,10 @@ namespace ChameleonForms.Tests
         }
 
         [Test]
-        [TestCase(LetterCasing.AllCaps, "SOME FIELD NAME")]
-        [TestCase(LetterCasing.LowerCase, "some field name")]
-        [TestCase(LetterCasing.Sentence, "Some field name")]
-        [TestCase(LetterCasing.Title, "Some Field Name")]
+        [TestCase(LetterCasing.AllCaps, "FIELD WITH NO ATTRIBUTES")]
+        [TestCase(LetterCasing.LowerCase, "field with no attributes")]
+        [TestCase(LetterCasing.Sentence, "Field with no attributes")]
+        [TestCase(LetterCasing.Title, "Field With No Attributes")]
         public void Humanize_model_labels_with_custom_casing(LetterCasing casing, string expected)
         {
             ModelMetadata metadata;
@@ -72,6 +81,7 @@ namespace ChameleonForms.Tests
                 case LetterCasing.Sentence:
                     metadata = GetMetadataFor(m => m.FieldWithNoAttributes, To.SentenceCase);
                     break;
+                // ReSharper disable once RedundantCaseLabel
                 case LetterCasing.Title:
                 default:
                     metadata = GetMetadataFor(m => m.FieldWithNoAttributes, To.TitleCase);
@@ -96,6 +106,54 @@ namespace ChameleonForms.Tests
 
             Assert.That(metadata.DisplayName, Is.EqualTo("Explicit display name"));
         }
+
+        [Test]
+        public void Respect_display_name_from_another_provider()
+        {
+            var metadata = GetMetadataFor(m => m.FieldWithDisplayNameFromAnotherMetadataProvider);
+
+            Assert.That(metadata.DisplayName, Is.EqualTo(AnotherModelMetadataProvider.DisplayName));
+        }
+
+        [Test]
+        public void Respect_simple_display_property_name_from_another_provider()
+        {
+            var metadata = GetMetadataFor(m => m.FieldWithSimpleDisplayPropertyFromAnotherMetadataProvider);
+
+            Assert.That(metadata.DisplayName, Is.EqualTo(null));
+            Assert.That(metadata.SimpleDisplayProperty, Is.EqualTo(AnotherModelMetadataProvider.DisplayName));
+        }
+
+        [Test]
+        public void Humanize_label_when_another_provider_results_in_null_display_name()
+        {
+            var metadata = GetMetadataFor(m => m.FieldWithNullDisplayNameFromAnotherMetadataProvider);
+
+            Assert.That(metadata.DisplayName, Is.EqualTo("Field with null display name from another metadata provider"));
+        }
+    }
+
+    class AnotherModelMetadataProvider : IDisplayMetadataProvider
+    {
+        public const string DisplayName = "Another display name";
+
+        public void CreateDisplayMetadata(DisplayMetadataProviderContext context)
+        {
+            if (context.Key.Name == nameof(NonHumanizedViewModel.FieldWithSimpleDisplayPropertyFromAnotherMetadataProvider))
+            {
+                context.DisplayMetadata.SimpleDisplayProperty = DisplayName;
+            }
+
+            if (context.Key.Name == nameof(NonHumanizedViewModel.FieldWithDisplayNameFromAnotherMetadataProvider))
+            {
+                context.DisplayMetadata.DisplayName = () => DisplayName;
+            }
+
+            if (context.Key.Name == nameof(NonHumanizedViewModel.FieldWithNullDisplayNameFromAnotherMetadataProvider))
+            {
+                context.DisplayMetadata.DisplayName = () => null;
+            }
+        }
     }
 
     internal class NonHumanizedViewModel
@@ -110,5 +168,9 @@ namespace ChameleonForms.Tests
 
         [Display(Description = "Description")]
         public string FieldWithDisplayAttributeWithoutName { get; set; }
+
+        public string FieldWithDisplayNameFromAnotherMetadataProvider { get; set; }
+        public string FieldWithSimpleDisplayPropertyFromAnotherMetadataProvider { get; set; }
+        public string FieldWithNullDisplayNameFromAnotherMetadataProvider { get; set; }
     }
 }

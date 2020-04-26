@@ -8,7 +8,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalNullableEnumList_ThenBindListWithoutErrors()
         {
-            var (state, model) = await BindAsync(m => m.OptionalNullableEnumList, TestViewModel.ValidSingleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalNullableEnumList, TestViewModel.ValidSingleSubmission);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.NullableListFromValidSingleSubmission));
             Assert.That(state.IsValid, Is.True);
@@ -17,7 +17,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredNullableEnumList_ThenBindListWithoutErrors()
         {
-            var (state, model) = await BindAsync(m => m.RequiredNullableEnumList, TestViewModel.ValidSingleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredNullableEnumList, TestViewModel.ValidSingleSubmission);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.NullableListFromValidSingleSubmission));
             Assert.That(state.IsValid, Is.True);
@@ -26,7 +26,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalEnumList_ThenBindListWithoutErrors()
         {
-            var (state, model) = await BindAsync(m => m.OptionalEnumList, TestViewModel.ValidSingleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalEnumList, TestViewModel.ValidSingleSubmission);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.ListFromValidSingleSubmission));
             Assert.That(state.IsValid, Is.True);
@@ -35,7 +35,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredEnumList_ThenBindListWithoutErrors()
         {
-            var (state, model) = await BindAsync(m => m.RequiredEnumList, TestViewModel.ValidSingleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredEnumList, TestViewModel.ValidSingleSubmission);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.ListFromValidSingleSubmission));
             Assert.That(state.IsValid, Is.True);

@@ -56,7 +56,7 @@ namespace ChameleonForms.Config
         }
 
         /// <summary>
-        /// Turn off validation of [Required] on flag enums.
+        /// Turn off validation of implicit [Required] on non-nullable flag enums.
         /// </summary>
         /// <returns>The builder to allow fluent method chaining</returns>
         public ChameleonFormsConfigBuilder<TFormTemplate> WithoutFlagsEnumRequiredValidation()

@@ -9,7 +9,7 @@ namespace ChameleonForms.Tests.ModelBinders.UriModelBinderTests
         [Test]
         public async Task Use_valid_default_value_when_there_is_empty_value([Values("", null, "  ")] string value)
         {
-            var (state, model) = await BindAsync(m => m.Uri, value);
+            var (state, model) = await BindAndValidateAsync(m => m.Uri, value);
             
             Assert.That(model, Is.EqualTo(null));
             Assert.That(state.IsValid, Is.True);
@@ -18,7 +18,7 @@ namespace ChameleonForms.Tests.ModelBinders.UriModelBinderTests
         [Test]
         public async Task Use_valid_default_value_when_there_is_no_value()
         {
-            var (state, model) = await BindAsync(m => m.Uri);
+            var (state, model) = await BindAndValidateAsync(m => m.Uri);
 
             Assert.That(model, Is.EqualTo(null));
             Assert.That(state.IsValid, Is.True);
@@ -27,7 +27,7 @@ namespace ChameleonForms.Tests.ModelBinders.UriModelBinderTests
         [Test]
         public async Task Use_default_value_and_add_error_when_there_is_an_invalid_value()
         {
-            var (state, model) = await BindAsync(m => m.Uri, "invalid");
+            var (state, model) = await BindAndValidateAsync(m => m.Uri, "invalid");
 
             Assert.That(model, Is.EqualTo(null));
             Assert.That(state.IsValid, Is.False);
@@ -37,7 +37,7 @@ namespace ChameleonForms.Tests.ModelBinders.UriModelBinderTests
         [Test]
         public async Task Use_default_value_and_add_error_when_there_is_a_non_http_uri_for_a_url_field()
         {
-            var (state, model) = await BindAsync(m => m.UriAsUrl, "ftp://someserver.com/somepath");
+            var (state, model) = await BindAndValidateAsync(m => m.UriAsUrl, "ftp://someserver.com/somepath");
 
             Assert.That(model, Is.EqualTo(null));
             Assert.That(state.IsValid, Is.False);
@@ -47,7 +47,7 @@ namespace ChameleonForms.Tests.ModelBinders.UriModelBinderTests
         [Test]
         public async Task Return_and_bind_valid_value_if_there_us_an_ok_http_value_for_a_url_field([Values("http://someserver.com/somepath", "https://someserver.com/somepath", "https://serverwithoutpath.io")] string okValue)
         {
-            var (state, model) = await BindAsync(m => m.UriAsUrl, okValue);
+            var (state, model) = await BindAndValidateAsync(m => m.UriAsUrl, okValue);
 
             Assert.That(model, Is.EqualTo(new Uri(okValue)));
             Assert.That(state.IsValid, Is.True);
@@ -56,7 +56,7 @@ namespace ChameleonForms.Tests.ModelBinders.UriModelBinderTests
         [Test]
         public async Task Return_and_bind_valid_value_if_there_us_an_ok_uri_value_for_a_uri_field([Values("http://someserver.com/somepath", "https://someserver.com/somepath", "https://serverwithoutpath.io", "ftp://someserver/somefile", "c:\\somefile.txt")] string okValue)
         {
-            var (state, model) = await BindAsync(m => m.Uri, okValue);
+            var (state, model) = await BindAndValidateAsync(m => m.Uri, okValue);
 
             Assert.That(model, Is.EqualTo(new Uri(okValue)));
             Assert.That(state.IsValid, Is.True);

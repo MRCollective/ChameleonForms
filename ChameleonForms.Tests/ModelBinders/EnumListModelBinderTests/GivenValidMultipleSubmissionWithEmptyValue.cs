@@ -8,7 +8,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalNullableEnumList_ThenBindListWithoutEmptyItemAndWithoutErrors()
         {
-            var (state, model) = await BindAsync(m => m.OptionalNullableEnumList, TestViewModel.ValidMultipleSubmissionWithEmptyValue);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalNullableEnumList, TestViewModel.ValidMultipleSubmissionWithEmptyValue);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.NullableListFromValidMultipleSubmission));
             Assert.That(state.IsValid, Is.True);
@@ -17,7 +17,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredNullableEnumList_ThenBindListWithoutEmptyItemAndWithoutErrors()
         {
-            var (state, model) = await BindAsync(m => m.RequiredNullableEnumList, TestViewModel.ValidMultipleSubmissionWithEmptyValue);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredNullableEnumList, TestViewModel.ValidMultipleSubmissionWithEmptyValue);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.NullableListFromValidMultipleSubmission));
             Assert.That(state.IsValid, Is.True);
@@ -26,7 +26,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalEnumList_ThenBindListWithoutEmptyItemAndWithoutErrors()
         {
-            var (state, model) = await BindAsync(m => m.OptionalEnumList, TestViewModel.ValidMultipleSubmissionWithEmptyValue);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalEnumList, TestViewModel.ValidMultipleSubmissionWithEmptyValue);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.ListFromValidMultipleSubmission));
             Assert.That(state.IsValid, Is.True);
@@ -35,7 +35,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredEnumList_ThenBindListWithoutEmptyItemAndWithError()
         {
-            var (state, model) = await BindAsync(m => m.RequiredEnumList, TestViewModel.ValidMultipleSubmissionWithEmptyValue);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredEnumList, TestViewModel.ValidMultipleSubmissionWithEmptyValue);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.ListFromValidMultipleSubmission));
             Assert.That(state.IsValid, Is.False);

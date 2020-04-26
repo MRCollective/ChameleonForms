@@ -8,7 +8,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalNullableEnumList_ThenBindEmptyListWithError()
         {
-            var (state, model) = await BindAsync(m => m.OptionalNullableEnumList, TestViewModel.InvalidSingleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalNullableEnumList, TestViewModel.InvalidSingleSubmission);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.False);
@@ -18,7 +18,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredNullableEnumList_ThenBindEmptyListWithError()
         {
-            var (state, model) = await BindAsync(m => m.RequiredNullableEnumList, TestViewModel.InvalidSingleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredNullableEnumList, TestViewModel.InvalidSingleSubmission);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.False);
@@ -28,7 +28,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalEnumList_ThenBindEmptyListWithError()
         {
-            var (state, model) = await BindAsync(m => m.OptionalEnumList, TestViewModel.InvalidSingleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalEnumList, TestViewModel.InvalidSingleSubmission);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.False);
@@ -38,7 +38,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredEnumList_ThenBindEmptyListWithError()
         {
-            var (state, model) = await BindAsync(m => m.RequiredEnumList, TestViewModel.InvalidSingleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredEnumList, TestViewModel.InvalidSingleSubmission);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.False);

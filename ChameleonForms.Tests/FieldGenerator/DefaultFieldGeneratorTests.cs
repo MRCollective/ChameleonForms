@@ -65,12 +65,12 @@ namespace ChameleonForms.Tests.FieldGenerator
         public DateTime DateTimeWithGFormat { get; set; }
 
         public TestEnum RequiredEnum { get; set; }
-        [RequiredFlagsEnum]
+
         public TestFlagsEnum RequiredFlagsEnum { get; set; }
 
         [Required]
         public TestEnum? RequiredNullableEnum { get; set; }
-        [RequiredFlagsEnum]
+        [Required]
         public TestFlagsEnum? RequiredNullableFlagsEnum { get; set; }
 
         [DisplayFormat(NullDisplayText = "Nothing to see here")]
@@ -195,7 +195,7 @@ namespace ChameleonForms.Tests.FieldGenerator
     public class ChildViewModel
     {
         public TestEnum RequiredChildEnum { get; set; }
-        [RequiredFlagsEnum]
+        
         public TestFlagsEnum RequiredChildFlagsEnum { get; set; }
     }
 

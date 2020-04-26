@@ -8,7 +8,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalNullableEnumList_ThenBindEmptyListWithNoErrors()
         {
-            var (state, model) = await BindAsync(m => m.OptionalNullableEnumList);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalNullableEnumList);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.True);
@@ -17,7 +17,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredNullableEnumList_ThenBindEmptyListWithError()
         {
-            var (state, model) = await BindAsync(m => m.RequiredNullableEnumList);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredNullableEnumList);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.False);
@@ -27,7 +27,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalEnumList_ThenBindEmptyListWithNoErrors()
         {
-            var (state, model) = await BindAsync(m => m.OptionalEnumList);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalEnumList);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.True);
@@ -36,7 +36,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredEnumList_ThenBindEmptyListWithError()
         {
-            var (state, model) = await BindAsync(m => m.RequiredEnumList);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredEnumList);
 
             Assert.That(model, Is.Empty);
             Assert.That(state.IsValid, Is.False);

@@ -176,9 +176,8 @@ namespace ChameleonForms.Example.Controllers
         public SomeEnum? RequiredNullableEnum { get; set; }
         public SomeEnum? OptionalEnum { get; set; }
 
-        [RequiredFlagsEnum]
         public FlagsEnum RequiredFlagsEnum { get; set; }
-        [RequiredFlagsEnum]
+        [Required]
         public FlagsEnum? RequiredNullableFlagsEnum { get; set; }
         public FlagsEnum? OptionalFlagsEnum { get; set; }
 
@@ -277,7 +276,8 @@ namespace ChameleonForms.Example.Controllers
 
         public string NestedField { get; set; }
 
-        public FlagsEnum FlagsEnums { get; set; }
+        [Required]
+        public FlagsEnum? FlagsEnums { get; set; }
 
         public SomeEnum SomeEnum { get; set; }
 

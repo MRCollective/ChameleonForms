@@ -79,6 +79,9 @@ For more information on form templates see:
 By default, the global config will set up the following for you:
 
 * **Humanized labels**: The label text for fields will automatically be "[humanized](https://github.com/Humanizr/Humanizer)" from the property name using [sentence case](https://github.com/Humanizr/Humanizer#transform-string) (e.g. `public string FirstName { get; set; }` will automatically have a label of `First name`)
+    * If any of the following have been applied to a field then the humanization will be skipped: `[DisplayName(Name = "Label text)]`, `[Display(Name = "Label text")]` or you have an `IDisplayMetadataProvider` registered that either sets `context.DisplayMetadata.SimpleDisplayProperty` to a non-empty/non-null string or sets `context.DisplayMetadata.DisplayName` to a lambda that returns a non-empty/non-null string. For examples see the [relevant test](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Tests/HumanizedLabelsTests.cs).
+* **Default form template type**: The given `IFormTemplate` type will be registered as a Singleton with the service collection and will be resolved by default when creating a ChameleonForm.
+* **Flags enum support**: Any non-nullable `[Flags]` enums will automatically be validated to be `[Required]`. The default behaviour is MVC is that their `ModelMetadata` is marked `IsRequired`, but they aren't actually validated as required; ChameleonForms patches that by default.
 
 ## Configuration builder
 
@@ -113,7 +116,7 @@ The configuration builder allows you to tweak the default global config using th
         public ChameleonFormsConfigBuilder<TFormTemplate> WithoutFlagsEnumBinding();
 
         /// <summary>
-        /// Turn off validation of [Required] on flag enums.
+        /// Turn off validation of implicit [Required] on non-nullable flag enums.
         /// </summary>
         /// <returns>The builder to allow fluent method chaining</returns>
         public ChameleonFormsConfigBuilder<TFormTemplate> WithoutFlagsEnumRequiredValidation();

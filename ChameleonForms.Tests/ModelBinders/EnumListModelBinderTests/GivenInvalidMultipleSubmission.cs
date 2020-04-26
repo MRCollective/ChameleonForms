@@ -8,7 +8,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalNullableEnumList_ThenBindPartialListWithError()
         {
-            var (state, model) = await BindAsync(m => m.OptionalNullableEnumList, TestViewModel.InvalidMultipleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalNullableEnumList, TestViewModel.InvalidMultipleSubmission);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.PartialNullableListFromInvalidMultipleSubmission));
             Assert.That(state.IsValid, Is.False);
@@ -18,7 +18,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredNullableEnumList_ThenBindPartialListWithError()
         {
-            var (state, model) = await BindAsync(m => m.RequiredNullableEnumList, TestViewModel.InvalidMultipleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredNullableEnumList, TestViewModel.InvalidMultipleSubmission);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.PartialNullableListFromInvalidMultipleSubmission));
             Assert.That(state.IsValid, Is.False);
@@ -28,7 +28,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingOptionalEnumList_ThenBindPartialListWithError()
         {
-            var (state, model) = await BindAsync(m => m.OptionalEnumList, TestViewModel.InvalidMultipleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.OptionalEnumList, TestViewModel.InvalidMultipleSubmission);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.PartialListFromInvalidMultipleSubmission));
             Assert.That(state.IsValid, Is.False);
@@ -38,7 +38,7 @@ namespace ChameleonForms.Tests.ModelBinders.EnumListModelBinderTests
         [Test]
         public async Task WhenBindingRequiredEnumList_ThenBindPartialListWithError()
         {
-            var (state, model) = await BindAsync(m => m.RequiredEnumList, TestViewModel.InvalidMultipleSubmission);
+            var (state, model) = await BindAndValidateAsync(m => m.RequiredEnumList, TestViewModel.InvalidMultipleSubmission);
 
             Assert.That(model, Is.EquivalentTo(TestViewModel.PartialListFromInvalidMultipleSubmission));
             Assert.That(state.IsValid, Is.False);
