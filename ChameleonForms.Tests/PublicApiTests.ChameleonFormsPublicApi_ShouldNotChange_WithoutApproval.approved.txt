@@ -407,7 +407,7 @@ namespace ChameleonForms
     }
     public class HumanizedLabelsDisplayMetadataProvider : Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IDisplayMetadataProvider, Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.IMetadataDetailsProvider
     {
-        public HumanizedLabelsDisplayMetadataProvider() { }
+        public HumanizedLabelsDisplayMetadataProvider(Humanizer.IStringTransformer to = null) { }
         public void CreateDisplayMetadata(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DisplayMetadataProviderContext context) { }
     }
     public interface IForm
@@ -546,6 +546,7 @@ namespace ChameleonForms.Config
         where TFormTemplate : ChameleonForms.Templates.IFormTemplate
     {
         public ChameleonFormsConfigBuilder() { }
+        public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithHumanizedLabelTransformer(Humanizer.IStringTransformer transformer) { }
         public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithoutDateTimeBinding() { }
         public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithoutDateTimeClientModelValidation() { }
         public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithoutEnumListBinding() { }

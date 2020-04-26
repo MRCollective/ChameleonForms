@@ -1,17 +1,5 @@
 # Getting Started with Chameleon Forms
 
-## What does ChameleonForms do for me?
-
-Chameleon Forms provides an object hierarchy that allows you to declaratively specify the structure of your form. From there:
-
-* It will output the boilerplate template of your form by way of a form template
-* It will discern a number of defaults about each field based on inspecting the model metadata for each property
-* It will allow you to tweak individual fields by chaining methods using the fluent api off of each field (and some other elements such as submit buttons) declaration
-* If gives you the freedom to break out into HTML/Razor anywhere in the form when the template / built-in structures don't meet your needs
-* It gives you the ability to apply global conventions across your forms
-
-It makes use of convention over configuration, `using` statements and an opinionated structure (that is easy enough to opt out of or create your own structure if you like) to make each form consistent and demonstrating a minimum of repetition.
-
 ## Getting started
 
 ### Prerequisites
@@ -183,6 +171,18 @@ The equivalent of this form with out-of-the-box ChameleonForms functionality is:
     }
 }
 ```
+
+## What does ChameleonForms do for me?
+
+Chameleon Forms provides an object hierarchy that allows you to declaratively specify the structure of your form. From there:
+
+* It will output the boilerplate template of your form by way of a form template
+* It will discern a number of defaults about each field based on inspecting the model metadata for each property
+* It will allow you to tweak individual fields by chaining methods using the fluent api off of each field (and some other elements such as submit buttons) declaration
+* If gives you the freedom to break out into HTML/Razor anywhere in the form when the template / built-in structures don't meet your needs
+* It gives you the ability to apply global conventions across your forms
+
+It makes use of convention over configuration, `using` statements and an opinionated structure (that is easy enough to opt out of or create your own structure if you like) to make each form consistent and demonstrating a minimum of repetition.
 
 ## How are ChameleonForms forms structured?
 

@@ -11,11 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="HumanizedLabels.cs" />
-    <Compile Remove="HumanizedLabelsTests.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="ApprovalTests" Version="3.0.18" />
     <PackageReference Include="ApprovalUtilities" Version="3.0.18" />
     <PackageReference Include="Humanizer" Version="2.5.16" />

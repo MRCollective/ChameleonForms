@@ -237,7 +237,8 @@ Key things to note that ChameleonForms has automatically done (with default conf
 * We expect that you know how to use ASP.NET Core MVC's form generation, model-binding and validation support to be able to effectively use and understand this library. If you need a hand getting started with that knowledge then check out the following: [Understanding HTML Helpers in ASP.NET MVC](https://www.dotnettricks.com/learn/mvc/understanding-html-helpers-in-aspnet-mvc) (out of date since it's targetting pre-.NET Core, but the concepts still apply in ASP.NET Core), [tag helpers](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-3.1), [model binding](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-3.1), [validation](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-3.1).
 
 ### Basic usage
-* [Getting started](getting-started.md) - What does ChameleonForms do for me? How are ChameleonForms forms structured? What terminology is used in ChameleonForms?
+* [Getting started](getting-started.md) - How do I get up and running with ChameleonForms? What does ChameleonForms do for me? How are ChameleonForms forms structured? What terminology is used in ChameleonForms?
+* [Configuring ChameleonForms](configuration.md) - How do I configure ChameleonForms?
 * [Comparison](comparison.md) - See an example of a ChameleonForms form versus an out-of-the-box ASp.NET MVC form (HTML Helpers, Editor Templates and *(coming soon)* Tag Helpers)
 * [Changing to Twitter Bootstrap 3 template](bootstrap-template.md) - Changing from the default template to the Twitter Bootstrap template *(Bootstrap 4 support coming soon)*
 * [Automatically sentence case form labels](auto-sentence-case.md) - Automatic sentence casing your form labels without having to annotate them with `[DisplayName]`

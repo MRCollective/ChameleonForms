@@ -7,8 +7,9 @@ pages:
   - Why is ChameleonForms needed: why.md
 - Basic usage:
   - Getting started: getting-started.md
+  - Configuring ChameleonForms: configuration.md
   - Comparison: comparison.md
-  - Twitter Bootstrap 3 Template: bootstrap-template.md
+  - Bootstrap Template: bootstrap-template.md
   - Automatically sentence case form labels: auto-sentence-case.md
   - Field Configuration: field-configuration.md
   - HTML Attributes: html-attributes.md
@@ -36,6 +37,7 @@ pages:
   - Textarea fields: textarea.md
   - File upload fields: file-upload.md
   - Password fields: password.md
+  - Number fields: number.md
   - Default fields: default-fields.md
 - Advanced usage:
   - Using different form templates: form-templates.md

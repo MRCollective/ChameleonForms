@@ -14,6 +14,13 @@ namespace ChameleonForms
     /// </summary>
     public class HumanizedLabelsDisplayMetadataProvider : IDisplayMetadataProvider
     {
+        private readonly IStringTransformer _to;
+
+        public HumanizedLabelsDisplayMetadataProvider(IStringTransformer to = null)
+        {
+            _to = to ?? To.SentenceCase;
+        }
+
         /// <summary>
         /// Creates the display metadata for a property that results in humanized labels.
         /// </summary>
@@ -26,7 +33,7 @@ namespace ChameleonForms
 
             if (IsTransformRequired(propertyName, modelMetadata, propertyAttributes))
             {
-                modelMetadata.DisplayName = () => propertyName.Humanize().Transform(To.SentenceCase);
+                modelMetadata.DisplayName = () => propertyName.Humanize().Transform(_to);
             }
         }
 
@@ -38,8 +45,11 @@ namespace ChameleonForms
             if (propertyAttributes.OfType<DisplayNameAttribute>().Any())
                 return false;
 
-            if (propertyAttributes.OfType<DisplayAttribute>().Any())
-                return false;
+            if (propertyAttributes.OfType<DisplayAttribute>().Any() || modelMetadata.DisplayName != null)
+            {
+                var displayName = modelMetadata.DisplayName?.Invoke();
+                return string.IsNullOrEmpty(displayName);
+            }
 
             if (string.IsNullOrEmpty(propertyName))
                 return false;

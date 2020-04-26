@@ -62,7 +62,7 @@ namespace ChameleonForms
         }
 
         /// <summary>
-        /// Adds ChameleonForms configuration with the <see cref="DefaultFormTemplate"/>.
+        /// Adds ChameleonForms configuration with a specified form template and a builder modification delegate.
         /// </summary>
         /// <param name="services">The service collection</param>
         /// <param name="configModifier">Lambda expression to alter configuration</param>
@@ -77,7 +77,7 @@ namespace ChameleonForms
         }
 
         /// <summary>
-        /// Adds ChameleonForms configuration with the <see cref="DefaultFormTemplate"/>.
+        /// Adds ChameleonForms configuration with a specified form template and a builder instance.
         /// </summary>
         /// <typeparam name="TFormTemplate">The form template type to register as the default template</typeparam>
         /// <param name="services">The service collection</param>
@@ -95,7 +95,7 @@ namespace ChameleonForms
             services.Configure<MvcOptions>(x =>
             {
                 if (config.HumanizeLabels)
-                    x.ModelMetadataDetailsProviders.Add(new HumanizedLabelsDisplayMetadataProvider());
+                    x.ModelMetadataDetailsProviders.Add(new HumanizedLabelsDisplayMetadataProvider(config.HumanizedLabelsTransformer));
                 
                 x.ModelMetadataDetailsProviders.Add(new ModelMetadataAwareDisplayMetadataProvider<ExistsInAttribute>());
 

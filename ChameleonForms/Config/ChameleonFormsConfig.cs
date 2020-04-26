@@ -1,4 +1,5 @@
 ﻿using ChameleonForms.Templates;
+using Humanizer;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ChameleonForms.Config
@@ -18,6 +19,19 @@ namespace ChameleonForms.Config
         public ChameleonFormsConfigBuilder<TFormTemplate> WithoutHumanizedLabels()
         {
             _config.HumanizeLabels = false;
+            return this;
+        }
+
+        /// <summary>
+        /// Humanize labels with the given transformer. Use <see cref="To"/> to access the default Humanizer ones.
+        /// </summary>
+        /// <example>
+        /// builder.WithHumanizedLabelTransformer(To.TitleCase)
+        /// </example>
+        /// <returns>The builder to allow fluent method chaining</returns>
+        public ChameleonFormsConfigBuilder<TFormTemplate> WithHumanizedLabelTransformer(IStringTransformer transformer)
+        {
+            _config.HumanizedLabelsTransformer = transformer;
             return this;
         }
 
@@ -114,6 +128,7 @@ namespace ChameleonForms.Config
     internal class ChameleonFormsConfig<TFormTemplate> where TFormTemplate : IFormTemplate
     {
         public bool HumanizeLabels { get; set; } = true;
+        public IStringTransformer HumanizedLabelsTransformer { get; set; } = null;
         public bool RegisterTemplateType { get; set; } = true;
         public bool RegisterFlagsEnumBinding { get; set; } = true;
         public bool RegisterFlagsEnumRequiredValidation { get; set; } = true;
