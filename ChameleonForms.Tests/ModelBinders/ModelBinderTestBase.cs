@@ -89,8 +89,8 @@ namespace ChameleonForms.Tests.ModelBinders
         {
             var propertyName = ((MemberExpression)property.Body).Member.Name;
             Assert.That(state.ContainsKey(propertyName), propertyName + " not present in model state");
-            Assert.That(state[propertyName].Errors.Count, Is.GreaterThanOrEqualTo(1), "Expecting an error against " + propertyName);
-            Assert.That(state[propertyName].Errors.Select(e => e.ErrorMessage), Has.All.EqualTo(error), "Expecting different error message for model state against " + propertyName);
+            Assert.That(state[propertyName].Errors.Count, Is.EqualTo(1), "Expecting an error against " + propertyName);
+            Assert.That(state[propertyName].Errors[0].ErrorMessage, Is.EqualTo(error), "Expecting different error message for model state against " + propertyName);
         }
     }
 }

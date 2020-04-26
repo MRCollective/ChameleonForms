@@ -54,17 +54,7 @@ namespace ChameleonForms.Config
             _config.RegisterFlagsEnumBinding = false;
             return this;
         }
-
-        /// <summary>
-        /// Turn off validation of implicit [Required] on non-nullable flag enums.
-        /// </summary>
-        /// <returns>The builder to allow fluent method chaining</returns>
-        public ChameleonFormsConfigBuilder<TFormTemplate> WithoutFlagsEnumRequiredValidation()
-        {
-            _config.RegisterFlagsEnumRequiredValidation = false;
-            return this;
-        }
-
+        
         /// <summary>
         /// Turn off model binding of <see cref="System.DateTime"/>s.
         /// </summary>
@@ -131,7 +121,6 @@ namespace ChameleonForms.Config
         public IStringTransformer HumanizedLabelsTransformer { get; set; } = null;
         public bool RegisterTemplateType { get; set; } = true;
         public bool RegisterFlagsEnumBinding { get; set; } = true;
-        public bool RegisterFlagsEnumRequiredValidation { get; set; } = true;
         public bool RegisterDateTimeBinding { get; set; } = true;
         public bool RegisterEnumListBinding { get; set; } = true;
         public bool RegisterUriBinding { get; set; } = true;

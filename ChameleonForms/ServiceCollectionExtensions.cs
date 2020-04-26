@@ -107,9 +107,6 @@ namespace ChameleonForms
                     x.ModelBinderProviders.Insert(0, new EnumListModelBinderProvider());
                 if (config.RegisterUriBinding)
                     x.ModelBinderProviders.Insert(0, new UriModelBinderProvider());
-
-                if (config.RegisterFlagsEnumRequiredValidation)
-                    x.ModelValidatorProviders.Insert(0, new RequiredFlagsEnumValidatorProvider());
             });
 
             services.Configure<MvcViewOptions>(x =>
