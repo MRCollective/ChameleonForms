@@ -542,7 +542,6 @@ namespace ChameleonForms.Config
         public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithoutDateTimeClientModelValidation() { }
         public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithoutEnumListBinding() { }
         public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithoutFlagsEnumBinding() { }
-        public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithoutFlagsEnumRequiredValidation() { }
         public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithoutHumanizedLabels() { }
         public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithoutIntegralClientModelValidation() { }
         public ChameleonForms.Config.ChameleonFormsConfigBuilder<TFormTemplate> WithoutTemplateTypeRegistration() { }
@@ -715,16 +714,6 @@ namespace ChameleonForms.Validators
         public IntegralNumericClientModelValidatorProvider() { }
         public void CreateValidators(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientValidatorProviderContext context) { }
     }
-    public class RequiredFlagsEnumValidator : Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator
-    {
-        public RequiredFlagsEnumValidator() { }
-        public System.Collections.Generic.IEnumerable<Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult> Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext context) { }
-    }
-    public class RequiredFlagsEnumValidatorProvider : Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidatorProvider
-    {
-        public RequiredFlagsEnumValidatorProvider() { }
-        public void CreateValidators(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidatorProviderContext context) { }
-    }
 }
 ASSEMBLY ChameleonForms.Templates
 [assembly: System.Runtime.Versioning.TargetFramework(".NETCoreApp,Version=v3.1", FrameworkDisplayName="")]
@@ -889,10 +878,10 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
     {
         public static ChameleonForms.Component.Config.IFieldConfiguration AsInputGroup(this ChameleonForms.Component.Config.IFieldConfiguration fc) { }
     }
-    public class TwitterBootstrapFormTemplate : ChameleonForms.Templates.Default.DefaultFormTemplate
+    public class TwitterBootstrap3FormTemplate : ChameleonForms.Templates.Default.DefaultFormTemplate
     {
         public const string IconAttrKey = "data-chameleonforms-twbs-icon";
-        public TwitterBootstrapFormTemplate() { }
+        public TwitterBootstrap3FormTemplate() { }
         public override Microsoft.AspNetCore.Html.IHtmlContent BeginField(Microsoft.AspNetCore.Html.IHtmlContent labelHtml, Microsoft.AspNetCore.Html.IHtmlContent elementHtml, Microsoft.AspNetCore.Html.IHtmlContent validationHtml, Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata fieldMetadata, ChameleonForms.Component.Config.IReadonlyFieldConfiguration fieldConfiguration, bool isValid) { }
         public override Microsoft.AspNetCore.Html.IHtmlContent BeginForm(string action, Microsoft.AspNetCore.Mvc.Rendering.FormMethod method, ChameleonForms.HtmlAttributes htmlAttributes, ChameleonForms.Enums.EncType? enctype) { }
         public override Microsoft.AspNetCore.Html.IHtmlContent BeginMessage(ChameleonForms.Enums.MessageType messageType, Microsoft.AspNetCore.Html.IHtmlContent heading) { }
