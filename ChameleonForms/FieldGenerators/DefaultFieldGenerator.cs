@@ -80,7 +80,7 @@ namespace ChameleonForms.FieldGenerators
         public string GetFieldDisplayName()
         {
             return Metadata.DisplayName
-                ?? Metadata.PropertyName
+                ?? Metadata.Name
                 ?? HtmlHelper.GetFieldName(FieldProperty).Split('.').Last();
         }
 
