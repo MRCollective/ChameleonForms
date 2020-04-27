@@ -2,7 +2,7 @@ using ChameleonForms;
 using ChameleonForms.Templates.TwitterBootstrap3;
 using System.Web.Optimization;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof($rootnamespace$.App_Start.ConfigureChameleonTwitterBootstrap), "Start")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof($rootnamespace$.App_Start.ConfigureChameleonTwitterBootstrap), "Start")]
 
 namespace $rootnamespace$.App_Start
 {
