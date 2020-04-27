@@ -9,7 +9,7 @@ The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namesp
     /// <summary>
     /// Represents a set of HTML attributes.
     /// </summary>
-    public class HtmlAttributes : IHtmlString
+    public class HtmlAttributes : IHtmlContent
     {
         /// <summary>
         /// Dictionary of the attributes currently stored in the object.
@@ -218,7 +218,7 @@ t.MergeAttributes(h.Attributes);
 
 ### Output it directly to the page
 
-You may notice that the `HTMLAttributes` definition above extends `IHtmlString`. As you might expect, this means you can directly output it to the page, e.g.
+You may notice that the `HTMLAttributes` definition above extends `IHtmlContent`. As you might expect, this means you can directly output it to the page, e.g.
 
 ```html
 @{
@@ -289,7 +289,7 @@ Create methods that chain HTML Attributes
 
 Returning a HTML Attributes object from a method so that the user can chain attribute methods off it before outputting it in a view (like the [Navigation Buttons](the-navigation)) can be tricky by default, so ChameleonForms provides a special way to handle this situation.
 
-If the HTML that you are outputting relies on the HTML Attributes to be defined, then you don't want to generate it until after the final chaining call is made. Luckily, you know when the final call is made because MVC will call the `ToHtmlString` method for you (since HtmlAttributes overrides the `IHtmlString` interface).
+If the HTML that you are outputting relies on the HTML Attributes to be defined, then you don't want to generate it until after the final chaining call is made. Luckily, you know when the final call is made because MVC will call the `ToHtmlString` method for you (since HtmlAttributes overrides the `IHtmlContent` interface).
 
 The only remaining problem is that you don't have control over the code in `ToHtmlString` since it's inside ChameleonForms, and in fact the `ToHtmlString` method returns the HTML for the attributes by default as shown above.
 

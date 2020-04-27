@@ -1,5 +1,4 @@
-Field Configuration
-===================
+# Field Configuration
 
 Field Configuration provides the ability to configure a [Field](field) (and its sub-components) on both an ad-hoc basis within a particular form and a convention basis across all forms. Specifying a Field Configuration is done by chaining calls to the methods on the `IFieldConfiguration` interface.
 
@@ -11,21 +10,8 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
     /// <summary>
     /// Holds configuration data for a form field.
     /// </summary>
-    public interface IFieldConfiguration : IHtmlString
+    public interface IFieldConfiguration : IHtmlContent, IReadonlyFieldConfiguration
     {
-        /// <summary>
-        /// A dynamic bag to allow for custom extensions using the field configuration.
-        /// </summary>
-        dynamic Bag { get; }
-
-        /// <summary>
-        /// Returns data from the Bag stored in the given property or default(TData) if there is none present.
-        /// </summary>
-        /// <typeparam name="TData">The type of the expected data to return</typeparam>
-        /// <param name="propertyName">The name of the property to retrieve the data for</param>
-        /// <returns>The data from the Bag or default(TData) if there was no data against that property in the bag</returns>
-        TData GetBagData<TData>(string propertyName);
-
         /// <summary>
         /// Attributes to add to the form element's HTML.
         /// </summary>
@@ -97,7 +83,7 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         /// <param name="numCols">The number of cols for the textarea</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Cols(int numCols);
-        
+
         /// <summary>
         /// Sets the minimum value to accept for numeric text controls.
         /// </summary>
@@ -167,17 +153,18 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         IFieldConfiguration Readonly(bool @readonly = true);
 
         /// <summary>
+        /// Sets the field to be required.
+        /// </summary>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Required(bool required = true);
+
+        /// <summary>
         /// Sets a hint to the user of what can be entered in the field.
         /// </summary>
         /// <param name="placeholderText">The text to use for the placeholder</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Placeholder(string placeholderText);
-
-        /// <summary>
-        /// Gets any text that has been set for an inline label.
-        /// </summary>
-        IHtmlString InlineLabelText { get; }
-
+        
         /// <summary>
         /// Sets an inline label for a checkbox.
         /// </summary>
@@ -190,12 +177,14 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         /// </summary>
         /// <param name="labelHtml">The html to use for the label</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration InlineLabel(IHtmlString labelHtml);
+        IFieldConfiguration InlineLabel(IHtmlContent labelHtml);
 
         /// <summary>
-        /// Gets any text that has been set for the label.
+        /// Sets an inline label for a checkbox.
         /// </summary>
-        IHtmlString LabelText { get; }
+        /// <param name="labelHtml">The html to use for the label as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration InlineLabel(Func<dynamic, IHtmlContent> labelHtml);
 
         /// <summary>
         /// Override the default label for the field.
@@ -209,12 +198,14 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         /// </summary>
         /// <param name="labelHtml">The text to use for the label</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration Label(IHtmlString labelHtml);
+        IFieldConfiguration Label(IHtmlContent labelHtml);
 
         /// <summary>
-        /// Returns the display type for the field.
+        /// Override the default label for the field.
         /// </summary>
-        FieldDisplayType DisplayType { get; }
+        /// <param name="labelHtml">The text to use for the label as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Label(Func<dynamic, IHtmlContent> labelHtml);
 
         /// <summary>
         /// Renders the field as a list of radio options for selecting single values or checkbox items for selecting multiple values.
@@ -240,22 +231,12 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         IFieldConfiguration AsDropDown();
 
         /// <summary>
-        /// The label that represents true.
-        /// </summary>
-        string TrueString { get; }
-
-        /// <summary>
         /// Change the label that represents true.
         /// </summary>
         /// <param name="trueString">The label to use as true</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithTrueAs(string trueString);
-
-        /// <summary>
-        /// The label that represents false.
-        /// </summary>
-        string FalseString { get; }
-
+        
         /// <summary>
         /// Change the label that represents none.
         /// </summary>
@@ -263,11 +244,6 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithNoneAs(string noneString);
         
-        /// <summary>
-        /// The label that represents none.
-        /// </summary>
-        string NoneString { get; }
-
         /// <summary>
         /// Change the label that represents false.
         /// </summary>
@@ -280,14 +256,21 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
         /// <param name="field">A lambda returning the HTML to output</param>
-        void SetField(Func<IHtmlString> field);
+        void SetField(Func<IHtmlContent> field);
 
         /// <summary>
         /// Sets the field that the field configuration is wrapping so that
         ///     a call to ToHtmlString() will output the given field.
         /// </summary>
         /// <param name="field">The field being configured</param>
-        void SetField(IHtmlString field);
+        void SetField(IHtmlContent field);
+
+        /// <summary>
+        /// Sets the field that the field configuration is wrapping so that
+        ///     a call to ToHtmlString() will output the given field.
+        /// </summary>
+        /// <param name="field">The field being configured as a templated razor delegate</param>
+        void SetField(Func<dynamic, IHtmlContent> field);
 
         /// <summary>
         /// Supply a string hint to display along with the field.
@@ -301,19 +284,28 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         /// </summary>
         /// <param name="hint">The hint markup</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration WithHint(IHtmlString hint);
+        IFieldConfiguration WithHint(IHtmlContent hint);
 
         /// <summary>
-        /// Get the hint to display with the field.
+        /// Supply a HTML hint to display along with the field.
         /// </summary>
-        IHtmlString Hint { get; }
-
+        /// <param name="hint">The hint markup as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithHint(Func<dynamic, IHtmlContent> hint);
+        
         /// <summary>
         /// Prepends the given HTML to the form field.
         /// </summary>
         /// <param name="html">The HTML to prepend</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration Prepend(IHtmlString html);
+        IFieldConfiguration Prepend(IHtmlContent html);
+        
+        /// <summary>
+        /// Prepends the given HTML to the form field.
+        /// </summary>
+        /// <param name="html">The HTML to prepend as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Prepend(Func<dynamic, IHtmlContent> html);
 
         /// <summary>
         /// Prepends the given string to the form field.
@@ -323,16 +315,18 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         IFieldConfiguration Prepend(string str);
 
         /// <summary>
-        /// A list of HTML to be prepended to the form field in ltr order.
-        /// </summary>
-        IEnumerable<IHtmlString> PrependedHtml { get; }
-
-        /// <summary>
         /// Appends the given HTML to the form field.
         /// </summary>
         /// <param name="html">The HTML to append</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration Append(IHtmlString html);
+        IFieldConfiguration Append(IHtmlContent html);
+
+        /// <summary>
+        /// Appends the given HTML to the form field.
+        /// </summary>
+        /// <param name="html">The HTML to append as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Append(Func<dynamic, IHtmlContent> html);
 
         /// <summary>
         /// Appends the given string to the form field.
@@ -340,11 +334,6 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         /// <param name="str">The string to prepend</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration Append(string str);
-
-        /// <summary>
-        /// A list of HTML to be appended to the form field in ltr order.
-        /// </summary>
-        IEnumerable<IHtmlString> AppendedHtml { get; }
 
         /// <summary>
         /// Override the HTML of the form field.
@@ -355,46 +344,38 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         /// </summary>
         /// <param name="html">The HTML for the field</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration OverrideFieldHtml(IHtmlString html);
+        IFieldConfiguration OverrideFieldHtml(IHtmlContent html);
 
         /// <summary>
-        /// The HTML to be used as the field html.
+        /// Override the HTML of the form field.
+        /// 
+        /// This gives you ultimate flexibility with your field HTML when it's
+        /// not quite what you want, but you still want the form template
+        /// (e.g. label, surrounding html and validation message).
         /// </summary>
-        IHtmlString FieldHtml { get; }
-        
+        /// <param name="html">The HTML for the field as a templated razor delegate</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration OverrideFieldHtml(Func<dynamic, IHtmlContent> html);
+                
         /// <summary>
         /// Uses the given format string when outputting the field value.
         /// </summary>
         /// <param name="formatString">The format string to use</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration WithFormatString(string formatString);
-
-        /// <summary>
-        /// The format string to use for the field.
-        /// </summary>
-        string FormatString { get; }
-
+        
         /// <summary>
         /// Hide the empty item that would normally display for the field.
         /// </summary>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration HideEmptyItem();
-
-        /// <summary>
-        /// Whether or not the empty item is hidden.
-        /// </summary>
-        bool EmptyItemHidden { get; }
-
+        
         /// <summary>
         /// Don't use a &lt;label&gt;, but still include the label text for the field.
         /// </summary>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
-        IFieldConfiguration WithoutLabel();
+        IFieldConfiguration WithoutLabelElement();
 
-        /// <summary>
-        /// Whether or not to use a &lt;label&gt;.
-        /// </summary>
-        bool HasLabel { get; }
 
         /// <summary>
         /// Specify one or more CSS classes to use for the field label.
@@ -404,55 +385,31 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         IFieldConfiguration AddLabelClass(string @class);
 
         /// <summary>
-        /// Any CSS class(es) to use for the field label.
-        /// </summary>
-        string LabelClasses { get; }
-
-        /// <summary>
         /// Specify one or more CSS classes to use for the field container element.
         /// </summary>
         /// <param name="class">Any CSS class(es) to use for the field container element</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration AddFieldContainerClass(string @class);
-
-        /// <summary>
-        /// Any CSS class(es) to use for the field container element.
-        /// </summary>
-        string FieldContainerClasses { get; }
-
+        
         /// <summary>
         /// Specify one or more CSS classes to use for the field validation message.
         /// </summary>
         /// <param name="class">Any CSS class(es) to use for the field validation message</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration AddValidationClass(string @class);
-
+        
         /// <summary>
-        /// Any CSS class(es) to use for the field validation message.
+        /// Excludes one or more Enum values from the generated field.
         /// </summary>
-        string ValidationClasses { get; }
-
-        /// <summary>
-        /// Returns readonly field configuration from the current field configuration.
-        /// </summary>
-        /// <returns>A readonly field configuration</returns>
-        IReadonlyFieldConfiguration ToReadonly();
-
-        /// <summary>
-        /// Enum value(s) to exclude from the generated field.
-        /// </summary>
-        Enum[] ExcludedEnums { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
+        /// <param name="enumValues">The value of Enum(s) to exclude from the generated field.</param>
         /// <returns></returns>
-        IFieldConfiguration WithoutInlineLabel();
-
+        IFieldConfiguration Exclude(params Enum[] enumValues);
+        
         /// <summary>
-        /// Whether or not to use an inline &lt;label&gt;.
+        /// Specify that no inline label should be generated.
         /// </summary>
-        bool HasInlineLabel { get; }
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithoutInlineLabel();
 
         /// <summary>
         /// Specify that inline labels should wrap their input element. Important for bootstrap.
@@ -460,6 +417,13 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
         /// <param name="wrapElement">True if the input element should be wrapped.</param>
         /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
         IFieldConfiguration InlineLabelWrapsElement(bool wrapElement = true);
+
+        /// <summary>
+        /// Specify an ID to use for a field hint.
+        /// </summary>
+        /// <param name="hintId">The ID to use</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration WithHintId(string hintId);
     }
 ```
 
@@ -487,18 +451,17 @@ The `IReadonlyFieldConfiguration` interface can be created by calling the `ToRea
         /// <summary>
         /// Attributes to add to the form element's HTML.
         /// </summary>
-        // todo: consider making this a readonly dictionary
         IDictionary<string, object> HtmlAttributes { get; }
 
         /// <summary>
         /// Gets any text that has been set for an inline label.
         /// </summary>
-        IHtmlString InlineLabelText { get; }
+        IHtmlContent InlineLabelText { get; }
 
         /// <summary>
         /// Gets any text that has been set for the label.
         /// </summary>
-        IHtmlString LabelText { get; }
+        IHtmlContent LabelText { get; }
 
         /// <summary>
         /// Returns the display type for the field.
@@ -523,22 +486,22 @@ The `IReadonlyFieldConfiguration` interface can be created by calling the `ToRea
         /// <summary>
         /// Get the hint to display with the field.
         /// </summary>
-        IHtmlString Hint { get; }
+        IHtmlContent Hint { get; }
 
         /// <summary>
         /// A list of HTML to be prepended to the form field in ltr order.
         /// </summary>
-        IEnumerable<IHtmlString> PrependedHtml { get; }
+        IEnumerable<IHtmlContent> PrependedHtml { get; }
 
         /// <summary>
         /// A list of HTML to be appended to the form field in ltr order.
         /// </summary>
-        IEnumerable<IHtmlString> AppendedHtml { get; }
+        IEnumerable<IHtmlContent> AppendedHtml { get; }
 
         /// <summary>
         /// The HTML to be used as the field html.
         /// </summary>
-        IHtmlString FieldHtml { get; }
+        IHtmlContent FieldHtml { get; }
 
         /// <summary>
         /// The format string to use for the field.
@@ -549,11 +512,11 @@ The `IReadonlyFieldConfiguration` interface can be created by calling the `ToRea
         /// Whether or not the empty item is hidden.
         /// </summary>
         bool EmptyItemHidden { get; }
-
+        
         /// <summary>
         /// Whether or not to use a &lt;label&gt;.
         /// </summary>
-        bool HasLabel { get; }
+        bool HasLabelElement { get; }
 
         /// <summary>
         /// Any CSS class(es) to use for the field label.
@@ -584,35 +547,38 @@ The `IReadonlyFieldConfiguration` interface can be created by calling the `ToRea
         /// Whether or not inline &lt;label&gt; should wrap their &lt;input&gt; element.
         /// </summary>
         bool ShouldInlineLabelWrapElement { get; }
+
+        /// <summary>
+        /// The ID to use for a field hint.
+        /// </summary>
+        string HintId { get; }
     }
 ```
 
 The xmldoc comments above should give a pretty good indication of how each of those methods are meant to be used. There is further documentation about the effect of the different methods in the following documentation:
 
-* [Field](field)
-* [Field Label](field-label)
+* [Field](field.md)
+* [Field Label](field-label.md)
 * [Field Types](./#field-types)
 
-How does the IFieldConfiguration output the Field HTML?
--------------------------------------------------------
+## How does the IFieldConfiguration output the Field HTML?
 
-The astute viewer will notice that the various `FieldFor`, `FieldElementFor`, `LabelFor` and `ValidationMessageFor` extension methods all return an `IFieldConfiguration` as opposed to a `string` or `IHtmlString`, yet when prefixed  with `@` (with or without chaining any Field Configuration methods) will always output the correct HTML.
+The astute viewer will notice that the various `FieldFor`, `FieldElementFor`, `LabelFor` and `ValidationMessageFor` extension methods all return an `IFieldConfiguration` as opposed to a `string` or `IHtmlContent`, yet when prefixed  with `@` in a razor view (with or without chaining any Field Configuration methods) will always output the correct HTML.
 
 This works because:
 
-* The `IFieldConfiguration` interface extends `IHtmlString`, which forces it to implement the `.ToHtmlString()` method (which will be called by razor via the `@` operator)
+* The `IFieldConfiguration` interface extends `IHtmlContent`, which forces it to implement the `.WriteTo(TextWriter writer, HtmlEncoder encoder)` method (which will be called by razor via the `@` operator)
 * All the methods on `IFieldConfiguration` return the same instance of the `IFieldConfiguration` object so the `@` operator will apply to that Field Configuration regardless of what methods the user calls
-* The `SetField(IHtmlString)` method, `SetField(Func<dynamic, IHtmlContent>)` method (for [templated razor delegates](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#directive-attributes)) or the `SetField(Func<IHtmlString>)` method will be called before returning the `IFieldConfiguration` to indicate what HTML should be output by the Field Configuration when the `.ToHtmlString()` method is called
+* The `SetField(IHtmlContent)` method, `SetField(Func<dynamic, IHtmlContent>)` method (for [templated razor delegates](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#directive-attributes)) or the `SetField(Func<IHtmlContent>)` method will be called before returning the `IFieldConfiguration` to indicate what HTML should be output by the Field Configuration if the `.ToHtmlString()` method is called
 * The `SetField` method approach allows for lazy evaluation of the HTML to output, meaning the HTML generation can occur after all of the `IFieldConfiguration` methods have been called (allowing the Field Configuration to be mutated before eventually being used)
 
-Passing HTML to field configuration methods
--------------------------------------------
+## Passing HTML to field configuration methods
 
-For all the field configuration methods that take an `IHtmlString` you have a few options available to you:
+For all the field configuration methods that take an `IHtmlContent` you have a few options available to you:
 
 * Pass the HTML as a string e.g. `.Label(new HtmlString("<strong>My label</strong>"))`
-* Pass the HTML by calling any method that returns an `IHtmlString`
-* Over the override that takes a [templated razor delegate](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#directive-attributes), e.g.:
+* Pass the HTML by calling any method that returns an `IHtmlContent`
+* Use the override that takes a [templated razor delegate](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#directive-attributes), e.g.:
 ```
     @{
         Func<dynamic, IHtmlContent> myLabel = @<strong>My label</strong>;
@@ -620,6 +586,7 @@ For all the field configuration methods that take an `IHtmlString` you have a fe
     
     ...
     @s.FieldFor(m => m.MyField).Label(myLabel)
-    @s.FieldFor(m => m.MyOtherField).Label(@<text><strong>Inline</strong> templated razor delegate</text>)
+    @s.FieldFor(m => m.MyOtherField).Label(@<strong>Inline templated razor delegate with single parent element</strong>)
+    @s.FieldFor(m => m.MyOtherField).Label(@<text><strong>Inline</strong> templated razor delegate with no single parent element</text>)
     ...
 ```

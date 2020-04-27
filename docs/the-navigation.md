@@ -31,7 +31,7 @@ The `Navigation<TModel>` class looks like this and is in the `ChameleonForms.Com
         /// </summary>
         /// <param name="content">The content to display in the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Submit(IHtmlString content) {...}
+        public ButtonHtmlAttributes Submit(IHtmlContent content) {...}
 
         /// <summary>
         /// Creates the HTML for a submit button that submits a value in the form post when clicked.
@@ -40,7 +40,7 @@ The `Navigation<TModel>` class looks like this and is in the `ChameleonForms.Com
         /// <param name="value">The value to submit with the form</param>
         /// <param name="content">The text the user sees (leave as null if you want the user to see the value instead)</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Submit(string name, string value, IHtmlString content = null) {...}
+        public ButtonHtmlAttributes Submit(string name, string value, IHtmlContent content = null) {...}
 
         /// <summary>
         /// Creates the HTML for a &lt;button&gt;.
@@ -54,7 +54,7 @@ The `Navigation<TModel>` class looks like this and is in the `ChameleonForms.Com
         /// </summary>
         /// <param name="content">The content to display in the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Button(IHtmlString content) {...}
+        public ButtonHtmlAttributes Button(IHtmlContent content) {...}
 
         /// <summary>
         /// Creates the HTML for a reset &lt;button&gt;.
@@ -68,7 +68,7 @@ The `Navigation<TModel>` class looks like this and is in the `ChameleonForms.Com
         /// </summary>
         /// <param name="content">The content to display for the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Reset(IHtmlString content) {...}
+        public ButtonHtmlAttributes Reset(IHtmlContent content) {...}
     }
 ```
 The start and end HTML of the Navigation are generated via the `BeginNavigation` and `EndNavigation` methods in the template. The HTML for the various types of buttons are all generated via the `Button` method in the template.

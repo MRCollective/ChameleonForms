@@ -32,7 +32,7 @@ It's ideally suited for situations where you want to **quickly** build forms tha
 
 ### Prerequisites
 
-This library works against netcoreapp3.1. If you are using a different version of .NET Core or are running ASP.NET Core against Full Framework then feel free to [raise an issue](https://github.com/MRCollective/ChameleonForms/issues) to discuss opening up broader support. If you are using ASP.NET MVC 5 then check out v3.0.2 of the [NuGet package](https://www.nuget.org/packages/ChameleonForms/3.0.2) and [documentation](https://chameleonforms.readthedocs.io/en/3.0.2/).
+This library works against netcoreapp3.1. If you are using a different version of .NET Core or are running ASP.NET Core against Full Framework then feel free to [raise an issue](https://github.com/MRCollective/ChameleonForms/issues) to discuss opening up broader support. If you are using ASP.NET MVC 5 then check out v3.0.3 of the [NuGet package](https://www.nuget.org/packages/ChameleonForms/3.0.3) and [documentation](https://chameleonforms.readthedocs.io/en/3.0.3/).
 
 This library works against ASP.NET Core MVC - if you want to use it for Blazor or Razor Pages then feel free to [raise an issue](https://github.com/MRCollective/ChameleonForms/issues) to discuss.
 
@@ -377,3 +377,5 @@ Some ideas for the library in the future are:
 * Tag helpers
 * Blazor, Razor Pages and Carter support
 * Support `IList<nullable<value type>>` (doesn't bind well in ASP.NET Core MVC - needs to be patched)
+* Support localisation
+* Improve configurability

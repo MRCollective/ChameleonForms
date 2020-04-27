@@ -1,5 +1,4 @@
-Boolean Fields
-==============
+# Boolean Fields
 
 If you need to collect Boolean data you can use a `bool` or `bool?` model property, e.g.:
 
@@ -8,8 +7,7 @@ If you need to collect Boolean data you can use a `bool` or `bool?` model proper
     public bool? NullableBooleanField { get; set; }
 ```
 
-Default HTML
-------------
+## Default HTML
 
 When using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
 
@@ -33,8 +31,7 @@ If the field is Required then the empty option will still show and it will be se
 </select>
 ```
 
-Configurability
----------------
+## Configurability
 
 ### Inline label
 

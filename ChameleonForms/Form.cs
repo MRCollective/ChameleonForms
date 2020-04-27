@@ -210,7 +210,7 @@ namespace ChameleonForms
         /// }
         /// </example>
         /// <remarks>
-        /// This can also be done using the For() extension method and just a type:
+        /// This can also be done using the For() HTML helper extension method and just a type:
         /// @using (var f = Html.For&lt;AnotherModelType&gt;().BeginChameleonForm(...)) {
         ///     ...
         /// }

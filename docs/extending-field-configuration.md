@@ -1,18 +1,16 @@
-Extending Field Configuration
-=============================
+# Extending Field Configuration
 
 The `Bag` property, which is `dynamic` provides a way to store arbitrary data. The [`FieldConfiguration`](field-configuration) class, which is the default implementation of `IFieldConfiguration`, instantiates this property as an `ExpandoObject`.
 
-To extend the Field Configuration you can create an extension method against `IFieldConfiguration`, which adds data to the `Bag` property (or alternatively, you can modify the `Attributes` property if you want your extension method to add HTML attributes).
+To extend the Field Configuration you can create an extension method against `IFieldConfiguration`, which adds data to the `Bag` property (or alternatively, you can modify the `Attributes` property if you want your extension method to simply add HTML attributes).
 
-If you are using the `Bag` property then you will likely need to create your own [custom template](custom-template) to then pull that data out of the `Bag` property on the `IReadonlyFieldConfiguration` (which will be referenced from the `IFieldConfiguration` when `.ToReadonly()` is called).
+If you are using the `Bag` property then you will likely need to create your own [custom template](custom-template) to then pull that data out of the `Bag` property on the `IReadonlyFieldConfiguration` (which will be copied from the `IFieldConfiguration` when `.ToReadonly()` is called before passing it to the [form template](form-templates.md) for rendering).
 
-Example
--------
+## Example
 
-For an example of this in action see the extension we added to the [Twitter Bootstrap 3 template](bootstrap-template) to allow you to [specify an input group](field#input-groups).
+For an example of this in action see the extension we added to the [Twitter Bootstrap 3 template](bootstrap-template.md) to allow you to [specify an input group](field#input-groups).
 
-Firstly, the [definition of the extension method](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Templates/TwitterBootstrap3/FieldConfigurationExtensions.cs) is:
+Firstly, the [definition of the extension method](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/TwitterBootstrap3/FieldConfigurationExtensions.cs) is:
 
 ```csharp
         /// <summary>
@@ -30,15 +28,15 @@ Firstly, the [definition of the extension method](https://github.com/MRCollectiv
         }
 ```
 
-Then the corresponding code in the [template](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Templates/TwitterBootstrap3/TwitterBootstrapHtmlHelpers.cshtml#L110) that gets the value as a local variable to switch on is:
+Then the corresponding code in the [template](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/ChameleonFormsTwitterBootstrap3Template/Field.cshtml#L10) that gets the value as a local variable to switch on is:
 
 ```csharp
-var isInputGroup = canBeInputGroup && (isRequired || fieldConfiguration.GetBagData<bool>("DisplayAsInputGroup"));
+var isInputGroup = canBeInputGroup && (isRequired || Model.FieldConfiguration.GetBagData<bool>("DisplayAsInputGroup"));
 ```
 
-Note in particular the `fieldConfiguration.GetBagData<bool>("DisplayAsInputGroup")`.
+Note in particular the `Model.FieldConfiguration.GetBagData<bool>("DisplayAsInputGroup")`.
 
 Namespaces
 ----------
 
-In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to the namespace that contains your extension meethod for each view that you instead [add the namespace to your `Views\Web.config` file](getting-started#namespaces-in-viewswebconfig).
+In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to the namespace that contains your extension method for each view that you instead add the namespace to your `_ViewImports.cshtml` file.

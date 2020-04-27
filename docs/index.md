@@ -234,7 +234,7 @@ Key things to note that ChameleonForms has automatically done (with default conf
 
 ### Philosophy
 * [Why is ChameleonForms needed](why.md) - A rant about building forms and how ChameleonForms removes a lot of the pain
-* We expect that you know how to use ASP.NET Core MVC's form generation, model-binding and validation support to be able to effectively use and understand this library. If you need a hand getting started with that knowledge then check out the following: [Understanding HTML Helpers in ASP.NET MVC](https://www.dotnettricks.com/learn/mvc/understanding-html-helpers-in-aspnet-mvc) (out of date since it's targetting pre-.NET Core, but the concepts still apply in ASP.NET Core), [tag helpers](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-3.1), [model binding](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-3.1), [validation](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-3.1).
+* We expect that you know how to use ASP.NET Core MVC's form generation, model-binding and validation support to be able to effectively use and understand this library. If you need a hand getting started with that knowledge then check out the following: [Understanding HTML Helpers in ASP.NET MVC](https://www.dotnettricks.com/learn/mvc/understanding-html-helpers-in-aspnet-mvc) (out of date since it's targetting pre-.NET Core, but the concepts still apply in ASP.NET Core), [tag helpers](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-3.1), [model binding](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-3.1), [validation](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-3.1)/[validation](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/validation?view=aspnetcore-3.1).
 
 ### Basic usage
 * [Getting started](getting-started.md) - How do I get up and running with ChameleonForms? What does ChameleonForms do for me? How are ChameleonForms forms structured? What terminology is used in ChameleonForms?
@@ -300,3 +300,5 @@ Some ideas for the library in the future are:
 * Tag helpers
 * Blazor, Razor Pages and Carter support
 * Support `IList<nullable<value type>>` (doesn't bind well in ASP.NET Core MVC - needs to be patched)
+* Support localisation
+* Improve configurability

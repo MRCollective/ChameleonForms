@@ -139,7 +139,7 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <example>
         /// @using (var f = Html.BeginChameleonForm()) {
-        ///     @f.FieldFor(m => m.PositionTitle)
+        ///     @f.FieldElementFor(m => m.PositionTitle)
         /// }
         /// </example>
         /// <typeparam name="TModel">The view model type for the current view</typeparam>        

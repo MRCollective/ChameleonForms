@@ -1,5 +1,4 @@
-Creating custom form templates
-==============================
+# Creating custom form templates
 
 To create a custom form template you need to have a class that derives from the `IFormTemplate` interface:
 
@@ -145,18 +144,15 @@ To create a custom form template you need to have a class that derives from the 
     }
 ```
 
-Recommendation
-==============
+## Recommendation
 
 To make it easy for yourself we recommend that you start by extending the `DefaultFormTemplate` class and override each method in turn that you want to change the HTML for. For an example of this approach see the [Twitter Bootstrap 3 Form Template](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/TwitterBootstrap3/TwitterBootstrap3FormTemplate.cs), which extends most, but not all methods.
 
-RazorGenerator
-==============
+## MSBuildRazorCompiler
 
 Rather than expressing all of the complex template HTML as a string we recommend that you instead use the [MSBuildRazorCompiler library](https://github.com/MRCollective/MSBuildRazorCompiler) so that you can specify the HTML using Razor syntax in a `.cshtml` file and have it statically compiled into `.cs` files that you can reference. See the `ChameleonForms.Template` [library](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates) to see how it works and use as a base to get started.
 
-PrepareFieldConfiguration
-=========================
+## PrepareFieldConfiguration
 
 The `PrepareFieldConfiguration` method allows you to make arbitrary changes to the [Field Configuration](field-configuration.md) of a field before it is rendered by the other template methods. For an example of the type of changes you can make, see the [Twitter Bootstrap 3 form template](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/TwitterBootstrap3/TwitterBootstrap3FormTemplate.cs#L36).
 
@@ -166,8 +162,7 @@ This technique allows you to take advantage of the expressiveness and flexibilit
 * Keep your templates terse and reduce the potential noise of lots of control statements
 * Apply global configuration changes that are template specific without requiring users to specify those changes for each form/field
 
-BeginSection / BeginNestedSection
-=================================
+## BeginSection / BeginNestedSection
 
 The heading is not required and we recommend having logic like the following to conditionally display the heading:
 
@@ -181,8 +176,7 @@ Similarly, the leading HTML is optional and you might want to use similar condit
 
 You should always have a container element for your section which has the `HtmlAttributes` object from that section [applied to it](html-attributes#output-it-directly-to-the-page).
 
-Field
-=====
+## Field
 
 There are a lot of parameters passed to the field method - only use the ones that you need for your template (e.g. if you don't specify different HTML when a field is invalid just ignore the `isValid` variable).
 
@@ -207,8 +201,7 @@ If you want a fully-fledged Field HTML implementation then you need to account f
 
 Obviously, if you never plan on using some of those then you can exclude them, but if you are creating a template that you want other people to use we recommend you include all of those points so people aren't surprised when they try to use the template and it doesn't behave how they expect.
 
-Nested fields
-=============
+## Nested fields
 
 If you don't want to support nested fields then we recommend you throw a `NotSupportedException` from the `BeginField` and `EndField` methods (which are only used for supporting nested fields).
 
@@ -222,26 +215,22 @@ If you do want to support them then it's likely that you will reuse a lot of the
     }
 ```
 
-Automated Testing
-=================
+## Automated Testing
 
 If you would like to have confidence in the HTML that your template generates then we recommend that you provide HTML [Approval Test](https://github.com/approvals/ApprovalTests.Net) coverage of the HTML output of your template.
 
 For an example of this see the tests for the [built-in form templates](https://github.com/MRCollective/ChameleonForms/tree/master/ChameleonForms.Tests/Templates/).
 
-Applying a global template change
-=================================
+## Applying a global template change
 
 You can often encounter the situation where the `DefaultFormTemplate` is mostly sufficient for your needs, but you want to make slight tweaks for example adding classes to all buttons, or changing the required designator. In those instances you can easily create a custom form template to use in your application that simply extends the `DefaultFormTemplate` class and overrides the relevant methods - in the above example, you would override the `Button` or `RequiredDesignator` methods respectively.
 
 Even further to that, we can change the `HtmlAttributes` object that is passed into the `Button` method and then call `base.Button(...)` to keep the original button generation code. For an example of this in action see the `Button method` in the [Twitter Bootstrap 3 template](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Templates/TwitterBootstrap3/TwitterBootstrapFormTemplate.cs#L126).
 
-Using a custom form template
-============================
+## Using a custom form template
 
 See the [Using different form templates](form-templates.md) page.
 
-Contributions
-=============
+## Contributions
 
 If you create a form template that you believe will be useful to other people then please feel free to [send us a pull request](https://github.com/MRCollective/ChameleonForms/pulls) and we will consider it for inclusion in the core package.

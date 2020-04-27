@@ -18,21 +18,21 @@ The `Message<TModel>` class looks like this and is in the `ChameleonForms.Compon
         /// <param name="form">The form the message is being created in</param>
         /// <param name="messageType">The type of message to display</param>
         /// <param name="heading">The heading for the message</param>
-        public Message(IForm<TModel> form, MessageType messageType, IHtmlString heading) : base(form, false) {...}
+        public Message(IForm<TModel> form, MessageType messageType, IHtmlContent heading) : base(form, false) {...}
 
         /// <summary>
         /// Creates the HTML for a paragraph in the message.
         /// </summary>
         /// <param name="paragraph">The paragraph to output</param>
         /// <returns>The HTML for the paragraph</returns>
-        public virtual IHtmlString Paragraph(string paragraph) {...}
+        public virtual IHtmlContent Paragraph(string paragraph) {...}
 
         /// <summary>
         /// Creates the HTML for a paragraph in the message.
         /// </summary>
         /// <param name="paragraph">The paragraph to output</param>
         /// <returns>The HTML for the paragraph</returns>
-        public virtual IHtmlString Paragraph(IHtmlString paragraph) {...}
+        public virtual IHtmlContent Paragraph(IHtmlContent paragraph) {...}
     }
 ```
 

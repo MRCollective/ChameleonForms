@@ -24,7 +24,7 @@ The `IForm<TModel>` interface looks like this and is in the `ChameleonForms` nam
         /// Writes a HTML String directly to the view's output.
         /// </summary>
         /// <param name="htmlString">The HTML to write to the view's output</param>
-        void Write(IHtmlString htmlString);
+        void Write(IHtmlContent htmlString);
 
         /// <summary>
         /// The field generator for the given field.

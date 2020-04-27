@@ -1,7 +1,6 @@
-Enum Fields
-===========
+# Enum Fields
 
-If you want the user to specify a value from an enum you can use that enum type against a model property, e.g.:
+If you want the user to specify a value from an enum you can use that enum type (or a nullable instance of it) against a model property, e.g.:
 
 ```csharp
 public enum MyEnum  { ... }
@@ -14,15 +13,14 @@ public MyEnum? NullableEnumField { get; set; } // Not required
 
 If you want the user to select multiple enum values you can either use a [flags enum](flags-enum.md) or a [list of enums](multiple-enum.md).
 
-Default HTML
-------------
+## Default HTML
 
 ### Non-nullable enum (drop-down with no empty option)
 
 When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a non-nullable enum will be:
 
 ```html
-<select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%">
+<select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required">
 %foreach enum value x%
     <option value="%x.ToString()%">%x.Humanize()%</option>
 %endforeach%
@@ -42,9 +40,11 @@ Note: See below to understand what the effect of `.ToString()` and `.Humanize()`
 </select>
 ```
 
+If the field is marked `[Required]` there will also be a `required="required"` added.
+
 ### Explanation and example
 
-`x.ToString` means the string representation of the enum value and `x.Humanize()` means converting the enum value to a human-readable string using the awesome [Humanizer](https://github.com/MehdiK/Humanizer#humanize-enums) library. This will automatically convert camel-cased enum values to sentence case and pick up any usage of `[Description]`; read the [documentation](https://github.com/MehdiK/Humanizer#humanize-enums) for more information including how to perform localisation.
+`x.ToString` means the string representation of the enum value and `x.Humanize()` means converting the enum value to a human-readable string using the awesome [Humanizer](https://github.com/MehdiK/Humanizer#humanize-enums) library. This will automatically convert camel-cased enum values to sentence case and pick up any usage of `[Description]`, `[Display]`, etc.. Read the [Humanizer documentation](https://github.com/MehdiK/Humanizer#humanize-enums) for more information including how to perform localisation.
 
 As an example, if you had the following enum:
 
@@ -64,18 +64,17 @@ And you had a property on your model like:
 public AnEnum EnumValue { get; set; }
 ```
 
-Then by default the Field Element HTML would be (if you [Automatically sentence case labels](labels.md) and don't specify extra HTML attributes):
+Then by default the Field Element HTML would be (if labels are [automatically sentence cased](labels.md) and you don't specify any extra [HTML attributes](html-attributes.md)):
 
 ```html
-<select data-val="true" data-val-required="The Enum value field is required." id="EnumValue" name="EnumValue">
+<select data-val="true" data-val-required="The Enum value field is required." id="EnumValue" name="EnumValue" required="required">
     <option value="Singleword">Singleword</option>
     <option value="MultipleWords">Multiple words</option>
     <option value="CustomDescription">Custom-description!</option>
 </select>
 ```
 
-Configurability
----------------
+## Configurability
 
 ### Display as list of radio buttons
 
@@ -91,7 +90,7 @@ This will change the default HTML for the non-nullable enum field and the Requir
 ```html
 <ul>
 %foreach enum value x with increment i %
-    <li><input %validationAttrs% %htmlAttributes% id="%propertyName%_%i%" name="%propertyName%" type="radio" value="%x.ToString()%" /> <label for="%propertyName%_%i%">%x.Humanize()%</label></li>
+    <li><input %validationAttrs% %htmlAttributes% id="%propertyName%_%i%" name="%propertyName%" required="required" type="radio" value="%x.ToString()%" /> <label for="%propertyName%_%i%">%x.Humanize()%</label></li>
 %endforeach%
 </ul>
 ```

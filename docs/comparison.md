@@ -1,5 +1,4 @@
-Compare ChameleonForms to out-of-the-box ASP.NET MVC
-====================================================
+# Compare ChameleonForms to out-of-the-box ASP.NET MVC
 
 One of the easiest ways to understand ChameleonForms is to see an equivalent sample of something you are already familiar with (e.g. out-of-the-box ASP.NET MVC) alongside the equivalent with ChameleonForms. With this in mind we have created an example comparison in the [Example project](https://github.com/MRCollective/ChameleonForms/tree/master/ChameleonForms.Example) that you can run and inspect to illustrate how to implement an example form using:
 
@@ -8,8 +7,7 @@ One of the easiest ways to understand ChameleonForms is to see an equivalent sam
 * [Abstracted and templated Editor Templates](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/Comparison/EditorTemplates.cshtml)
 * [ChameleonForms](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/Comparison/ChameleonForms.cshtml)
 
-Example Form
-------------
+## Example Form
 
 The example in question is an arbitrary signup form against the `SignupViewModel` in the [`ComparisonController`](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Controllers/ComparisonController.cs):
 
@@ -52,8 +50,7 @@ The example in question is an arbitrary signup form against the `SignupViewModel
         }
 ```
 
-Example Form Structure
-----------------------
+## Example Form Structure
 
 The sample implementation of the form has been split up as follows:
 
@@ -71,8 +68,7 @@ The sample implementation of the form has been split up as follows:
     * Navigation
         * Submit button
 
-In-depth comparison of details Form Section
--------------------------------------------
+## In-depth comparison of details Form Section
 
 In the case where we use the Form Section to ask the user to enter account details, here is a comparison of the different implementations:
 
@@ -302,8 +298,7 @@ Note: for this to work there are [a lot of extra files you need to implement](ht
     </form>
 ```
 
-Commentary
-----------
+## Commentary
 
 There is an immediately discernible difference between the Html Helpers example as compared to Editor Templates / ChameleonForms, as well as some more subtle differences between the latter two.
 

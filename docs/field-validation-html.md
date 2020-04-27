@@ -1,15 +1,13 @@
-Field Validation HTML
-=====================
+# Field Validation HTML
 
-The Field Validation HTML is markup that acts as a placeholder to display any client-side validation messages for a particular Field and displayed any server-side validation messages for that Field. The Field Validation HTML can be:
+The Field Validation HTML is markup that acts as both a placeholder to display any client-side validation messages for a particular Field as well as displaying any server-side validation messages for that Field. The Field Validation HTML can be:
 
-* [Specified manually](field#manually-specify-html)
+* [Specified manually](field.md#manually-specify-html)
 * Created by a [Field Generator](./#field-types) based on the metadata of the model property being displayed and the Field Configuration specified when it's:
-    * Displayed as part of a [Field](field)
-    * Output directly from the Form
+    * Displayed as part of a [Field](field.md)
+    * [Output directly from the Form](#outputting-directly-from-the-form)
 
-Outputting directly from the Form
----------------------------------
+## Outputting directly from the Form
 
 To use a Field Generator to output the HTML for a standalone Field Validation HTML you can use the `ValidationMessageFor` extension method on the Form, e.g.:
 
@@ -28,7 +26,7 @@ The `ValidationMessageFor` extension method looks like this:
         ///     @f.ValidationMessageFor(m => m.PositionTitle)
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="form">The form the label is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the validation message for</param>
@@ -41,13 +39,18 @@ The `ValidationMessageFor` extension method looks like this:
         }
 ```
 
-Default HTML
-------------
+## Default HTML
 
 The HTML for the Field Validation HTML is the same as calling:
 
 ```csharp
 @Html.ValidationMessageFor(m => m.SomeField, new { @class = %validationClasses% })
+```
+
+or
+
+```html
+<span asp-validation-for="SomeField" class="%validationClasses%"></span>
 ```
 
 The default Field Generator ignores all properties on the Field Configuration when generating the Field Validation HTML apart from the `ValidationClasses` property, which you can set using the `AddValidationClass` method.

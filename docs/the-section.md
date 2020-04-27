@@ -20,7 +20,7 @@ The `Section<TModel>` class looks like this and is in the `ChameleonForms.Compon
         /// <param name="nested">Whether the section is nested within another section</param>
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
-        public Section(IForm<TModel> form, IHtmlString heading, bool nested, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null) : base(form, false) {...}
+        public Section(IForm<TModel> form, IHtmlContent heading, bool nested, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null) : base(form, false) {...}
 
         /// <summary>
         /// Outputs a field with passed in HTML.
@@ -31,7 +31,7 @@ The `Section<TModel>` class looks like this and is in the `ChameleonForms.Compon
         /// <param name="metadata">Any field metadata</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
-        public IFieldConfiguration Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml = null, ModelMetadata metadata = null, bool isValid = true) {...}
+        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true) {...}
     }
 ```
 
@@ -65,7 +65,7 @@ The `BeginSection` extension method looks like this:
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this IForm<TModel> form, string heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public static Section<TModel> BeginSection<TModel>(this IForm<TModel> form, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(form, heading.ToHtml(), false, leadingHtml, htmlAttributes);
         }
@@ -102,7 +102,7 @@ The `BeginSection` extension method on Section looks like this:
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, string heading = null, IHtmlString leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml, htmlAttributes);
         }
