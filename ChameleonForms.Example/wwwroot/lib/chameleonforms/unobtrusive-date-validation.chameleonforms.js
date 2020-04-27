@@ -20,11 +20,17 @@
             case "d-M-yyyy":
                 dateParser = getDateParser(/^(\d{1,2})-(\d{1,2})-(\d{4})$/, 1, 2, 3);
                 break;
+            case "d.M.yyyy":
+                dateParser = getDateParser(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/, 1, 2, 3);
+                break;
             case "d/M/yy":
                 dateParser = getDateParser(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/, 1, 2, 3);
                 break;
             case "d-M-yy":
                 dateParser = getDateParser(/^(\d{1,2})-(\d{1,2})-(\d{2})$/, 1, 2, 3);
+                break;
+            case "d.M.yy":
+                dateParser = getDateParser(/^(\d{1,2})\.(\d{1,2})\.(\d{2})$/, 1, 2, 3);
                 break;
             case "dd/MM/yyyy":
                 dateParser = getDateParser(/^(\d{2})\/(\d{2})\/(\d{4})$/, 1, 2, 3);
@@ -32,11 +38,17 @@
             case "dd-MM-yyyy":
                 dateParser = getDateParser(/^(\d{2})-(\d{2})-(\d{4})$/, 1, 2, 3);
                 break;
+            case "dd.MM.yyyy":
+                dateParser = getDateParser(/^(\d{2})\.(\d{2})\.(\d{4})$/, 1, 2, 3);
+                break;
             case "dd/MM/yy":
                 dateParser = getDateParser(/^(\d{2})\/(\d{2})\/(\d{2})$/, 1, 2, 3);
                 break;
             case "dd-MM-yy":
                 dateParser = getDateParser(/^(\d{2})-(\d{2})-(\d{2})$/, 1, 2, 3);
+                break;
+            case "dd.MM.yy":
+                dateParser = getDateParser(/^(\d{2})\.(\d{2})\.(\d{2})$/, 1, 2, 3);
                 break;
             case "M/d/yyyy":
                 dateParser = getDateParser(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/, 2, 1, 3);
@@ -44,11 +56,17 @@
             case "M-d-yyyy":
                 dateParser = getDateParser(/^(\d{1,2})-(\d{1,2})-(\d{4})$/, 2, 1, 3);
                 break;
+            case "M.d.yyyy":
+                dateParser = getDateParser(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/, 2, 1, 3);
+                break;
             case "M/d/yy":
                 dateParser = getDateParser(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/, 2, 1, 3);
                 break;
             case "M-d-yy":
                 dateParser = getDateParser(/^(\d{1,2})-(\d{1,2})-(\d{2})$/, 2, 1, 3);
+                break;
+            case "M.d.yy":
+                dateParser = getDateParser(/^(\d{1,2})\.(\d{1,2})\.(\d{2})$/, 2, 1, 3);
                 break;
             case "MM/dd/yyyy":
                 dateParser = getDateParser(/^(\d{2})\/(\d{2})\/(\d{4})$/, 2, 1, 3);
@@ -56,11 +74,17 @@
             case "MM-dd-yyyy":
                 dateParser = getDateParser(/^(\d{2})-(\d{2})-(\d{4})$/, 2, 1, 3);
                 break;
+            case "MM.dd.yyyy":
+                dateParser = getDateParser(/^(\d{2})\.(\d{2})\.(\d{4})$/, 2, 1, 3);
+                break;
             case "MM/dd/yy":
                 dateParser = getDateParser(/^(\d{2})\/(\d{2})\/(\d{2})$/, 2, 1, 3);
                 break;
             case "MM-dd-yy":
                 dateParser = getDateParser(/^(\d{2})-(\d{2})-(\d{2})$/, 2, 1, 3);
+                break;
+            case "MM.dd.yy":
+                dateParser = getDateParser(/^(\d{2})\.(\d{2})\.(\d{2})$/, 2, 1, 3);
                 break;
             case "yyyy/MM/dd":
                 dateParser = getDateParser(/^(\d{4})\/(\d{2})\/(\d{2})$/, 3, 2, 1);
@@ -68,11 +92,17 @@
             case "yyyy-MM-dd":
                 dateParser = getDateParser(/^(\d{4})-(\d{2})-(\d{2})$/, 3, 2, 1);
                 break;
+            case "yyyy.MM.dd":
+                dateParser = getDateParser(/^(\d{4})\.(\d{2})\.(\d{2})$/, 3, 2, 1);
+                break;
             case "yyyy/M/d":
                 dateParser = getDateParser(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/, 3, 2, 1);
                 break;
             case "yyyy-M-d":
                 dateParser = getDateParser(/^(\d{4})-(\d{1,2})-(\d{1,2})$/, 3, 2, 1);
+                break;
+            case "yyyy.M.d":
+                dateParser = getDateParser(/^(\d{4})\.(\d{1,2})\.(\d{1,2})$/, 3, 2, 1);
                 break;
             default:
                 return true;
