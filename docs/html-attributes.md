@@ -1,5 +1,4 @@
-HTML Attributes
-===============
+# HTML Attributes
 
 HTML Attributes in ChameleonForms provides the ability to specify a set of HTML attributes in a fluent, expressive way. Specifying HTML Attributes is done by chaining calls to the methods on the `HtmlAttributes` class.
 
@@ -14,7 +13,7 @@ The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namesp
         /// <summary>
         /// Dictionary of the attributes currently stored in the object.
         /// </summary>
-        public IDictionary<string, string> Attributes { get; }
+        public IDictionary<string, string> Attributes { get { return _tagBuilder.Attributes; } }
 
         /// <summary>
         /// Constructs a <see cref="HtmlAttributes"/> object using lambda methods to express the attributes.
@@ -68,7 +67,13 @@ The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namesp
         /// </summary>
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Readonly(bool @readonly = true);
-        
+
+        /// <summary>
+        /// Sets the required attribute.
+        /// </summary>
+        /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
+        public HtmlAttributes Required(bool required = true);
+
         /// <summary>
         /// Returns whether or not a value is set for the given attribute.
         /// </summary>
@@ -122,6 +127,9 @@ The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namesp
         /// <returns>The new <see cref="HtmlAttributes"/> object</returns>
         public static implicit operator HtmlAttributes(Dictionary<string, object> attributes);
 
+        /// <inheritdoc />
+        public virtual void WriteTo(TextWriter writer, HtmlEncoder encoder);
+
         /// <summary>
         /// Returns the HTML attributes as a dictionary.
         /// </summary>
@@ -134,8 +142,7 @@ The xmldoc comments above should give a pretty good indication of how each of th
 
 The [Field Configuration](field-configuration) wraps a HTML Attributes object and a lot of these methods also appear on that interface. The HTML Attributes can also be passed into the [Form](the-form) and the [Section](the-section) and can be chained from [Navigation Buttons](the-navigation).
 
-Default Usage
--------------
+## Default Usage
 
 There are a number of choices when using HTML Attributes.
 
@@ -151,7 +158,19 @@ using (var n = f.BeginNavigation()) {
 
 ### Instantiation
 
-You can new up an instance and use one of the three constructors (pass in an anonymous object, pass in a dictionary, or use lambda expressions as per below), e.g.:
+You can new up an instance and use one of the four constructors (empty constructor and method chaining, pass in an anonymous object, pass in a dictionary, or use lambda expressions.
+
+### Instantiation with empty constructor and method chaining
+
+You can new up an instance and then chain methods off that instance, e.g.:
+
+```csharp
+@using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes().AddClass("form").Id("someForm")) {
+    @* ... *@
+}
+```
+
+### Instantiation with lambda expressions
 
 ```csharp
 @using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes(@class => "form", id => "someForm")) {
@@ -165,17 +184,7 @@ If you want to output a HTML Attribute that has a `-` in the name then use a `_`
 new HtmlAttributes(data_something => "value")
 ```
 
-### Instantiation with chaining
-
-You can new up an instance and then chain methods off that instance, e.g.:
-
-```csharp
-@using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes().AddClass("form").Id("someForm")) {
-    @* ... *@
-}
-```
-
-### Anonymous Object
+### Instantiation with anonymous object
 
 You can convert an anonymous object to a HTML Attributes object, e.g.:
 
@@ -191,7 +200,7 @@ If you want to output a HTML Attribute that has a `-` in the name then use a `_`
 new {data_something => "value"}.ToHtmlAttributes()
 ```
 
-### Dictionary
+### Instantiation with dictionary
 
 You can convert a dictionary to a HTML Attributes object, e.g.:
 
@@ -201,8 +210,7 @@ You can convert a dictionary to a HTML Attributes object, e.g.:
 }
 ```
 
-Outputting HTML Attributes
---------------------------
+## Outputting HTML Attributes
 
 There are a number of options when using a HTML Attributes object.
 
@@ -216,7 +224,7 @@ var t = new TagBuilder("p");
 t.MergeAttributes(h.Attributes);
 ```
 
-### Output it directly to the page
+### Output directly to the page
 
 You may notice that the `HTMLAttributes` definition above extends `IHtmlContent`. As you might expect, this means you can directly output it to the page, e.g.
 
@@ -227,6 +235,8 @@ You may notice that the `HTMLAttributes` definition above extends `IHtmlContent`
 <p @h>Text</p>
 ```
 
+It will automatically handle encoding attribute values to prevent HTML injection.
+
 ### Use the attributes as a dictionary
 
 When you need ultimate flexibility then you can get the attributes out as a dictionary, e.g.:
@@ -234,11 +244,19 @@ When you need ultimate flexibility then you can get the attributes out as a dict
 ```csharp
 var h = new HtmlAttributes().Id("id");
 var d1 = h.Attributes; // Dictionary<string, string>
-var d2 = h.ToDictionary(); // Dictionary<string, object>, most MVC methods take this type
+var d2 = h.ToDictionary(); // Dictionary<string, object>, many MVC methods take this type
 ```
 
-Extending HTML Attributes
--------------------------
+### Retrieve the attributes as an encoded string
+
+If you need to retrive the attribute values as a string (already encoded), then you can use the `.ToHtmlString()` extension method.
+
+```csharp
+var h = new HtmlAttributes().Id("id&1");
+string s = h.ToHtmlString(); // "id=\"id&amp;1\""
+```
+
+## Extending HTML Attributes
 
 You can easily create your own methods on HTML Attributes by creating an extension method, e.g.:
 
@@ -252,7 +270,7 @@ public static HtmlAttributesExtensions
 }
 ```
 
-Then you could do:
+Then you could do something like this:
 
 ```csharp
 using (var n = f.BeginNavigation()) {
@@ -284,8 +302,7 @@ using (var n = f.BeginNavigation()) {
         }
 ```
 
-Create methods that chain HTML Attributes
------------------------------------------
+## Create methods that chain HTML Attributes
 
 Returning a HTML Attributes object from a method so that the user can chain attribute methods off it before outputting it in a view (like the [Navigation Buttons](the-navigation)) can be tricky by default, so ChameleonForms provides a special way to handle this situation.
 
@@ -293,7 +310,7 @@ If the HTML that you are outputting relies on the HTML Attributes to be defined,
 
 The only remaining problem is that you don't have control over the code in `ToHtmlString` since it's inside ChameleonForms, and in fact the `ToHtmlString` method returns the HTML for the attributes by default as shown above.
 
-The class you need to use in this case is `LazyHtmlAttributes`, which is in the `ChameleonForms` namespace. If you new up one of those and return it (but make the method return type `HtmlAttributes` then you have the ability to define what HTML is output when the `ToHtmlString` method is called.
+The class you need to use in this case is `LazyHtmlAttributes`, which is in the `ChameleonForms` namespace. If you new up one of those and return it (but make the method return type `HtmlAttributes` then you have the ability to define what HTML is output when the `Write` method is called, but still allow `HtmlAttributes` method chaining until that happens.
 
 ### Simple example
 
@@ -316,7 +333,9 @@ If you created the following extension method on the HTML Helper:
     }
 ```
 
-Then if you put the following in your view:
+In this example, the lambda expression passed into the constructor is called when the eventual call to `Write` on the `HtmlAttributes` object returned from `Paragraph` is called. You can see at that point in time we can safely use the `Attributes` property since we know all of the method chaining will be finished at that point in time.
+
+In this case, if you put the following in your razor view:
 
 ```csharp
 @Html.Paragraph("Display some text").Id("paragraphId").AddClass("a-class").Attr(data_some_data => "{mydata:true}")
@@ -327,3 +346,5 @@ It would output the following HTML:
 ```html
 <p class="a-class" data-some-data="{mydata:true}" id="paragraphId">Display some text</p>
 ```
+
+Magic!
