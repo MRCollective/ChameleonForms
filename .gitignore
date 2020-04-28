@@ -13,3 +13,4 @@ packages
 .vs
 /*.nupkg
 *.cshtml.cs
+TestResults

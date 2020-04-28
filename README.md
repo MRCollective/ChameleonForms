@@ -364,6 +364,24 @@ If you would like to contribute to this project then feel free to communicate wi
 
 We have a [continuous integration build](https://ci.appveyor.com/project/MRCollective/chameleonforms) in AppVeyor that automatically builds and runs tests when we push/merge to master as well as all pull requests and generates the NuGet packages that we can publish to NuGet.org at the click of a button. This is implemented using the [MRCollective AppVeyor yml](https://github.com/MRCollective/AppVeyorConfig).
 
+### Code coverage
+
+To see code coverage, ensure you have [ReportGenerator](https://github.com/danielpalme/ReportGenerator) installed:
+
+```
+> dotnet tool install -g dotnet-reportgenerator-globaltool
+```
+
+And then run:
+
+```
+rmdir ChameleonForms.Tests/TestResults -Force
+dotnet test --collect:"XPlat Code Coverage" --settings ChameleonForms.Tests/coverlet.runsettings ChameleonForms.Tests/ChameleonForms.Tests.csproj
+reportgenerator "-reports:ChameleonForms.Tests/TestResults/**/coverage.cobertura.xml" "-targetdir:ChameleonForms.Tests/TestResults/report"
+```
+
+If you are using VSCode, then the first command can be achieved using the `test with coverage` task.
+
 ## Support
 
 If you need to raise an issue or check for an existing issue, see <https://github.com/MRCollective/ChameleonForms/issues>.
