@@ -42,6 +42,7 @@ namespace ChameleonForms
     // ExistsInAttribute.EnableValidation <- DI rather than static
     // support IList<nullable<value type>> similar to IList<nullable enum type> support
     // Support Blazor, razor pages and carter
+    // Remove ExistsInAttribute.EnableValidation as a static
 
     /// <summary>
     /// Extension methods for <see cref="IServiceCollection"/>.
