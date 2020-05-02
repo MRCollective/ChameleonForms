@@ -13,7 +13,7 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
 1. Install the NuGet package `Install-Package ChameleonForms -pre` (v4 is currently marked beta so you need to include pre-release versions)
 2. Register ChameleonForms in your `Startup.cs` file:
 
-    ```csharp
+    <pre>```csharp
     public void ConfigureServices(IServiceCollection services)
     {
         ...
@@ -21,21 +21,21 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
         ...
         services.AddChameleonForms();
     }
-    ```
+    ```</pre>
 
     Note: you can alter the configuration from the default, [see the docs](https://chameleonforms.readthedocs.io/en/latest/configuration/).
 3. Add the following to your `_ViewImports.cshtml`:
 
-    ```cshtml
+    <pre>```cs
     @using ChameleonForms;
     @using ChameleonForms.Enums;
     @using ChameleonForms.Component;
-    ```
+    ```</pre>
 
 4. Create your first form, e.g.:
 
     `~/Controllers/MyFormController.cs`:
-    ```cs
+    <pre>```cs
     using System;
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Mvc;
@@ -71,10 +71,10 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
             }
         }
     }
-    ```
+    ```</pre>
 
     `~/Views/MyForm/Index.cshtml`:
-    ```cshtml
+    <pre>```cshtml
     @model MyWebApp.Controllers.ViewModel
     @{
         ViewData["Title"] = "My Form";
@@ -100,24 +100,24 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
         @* ... or relevant equivalent *@
     }
 
-    ```
+    ```</pre>
 5. Run it!
 6. *(Optional)* If you want to add the additional client-side validation support in ChameleonForms (which supports both [jquery validate unobtrusive validation]() and [aspnet-validation]()) then add the following to your `_ValidationScriptsPartial.cshtml` or equivalent file:
 
-    ```html
+    <pre>```html
     <script src="~/lib/chameleonforms/unobtrusive-date-validation.chameleonforms.js" asp-append-version="true"></script>
-    ```
+    ```</pre>
 7. *(Optional)* If you are using Twitter Bootstrap 3 then add the following to your `_ValidationScriptsPartial.cshtml` (which only supports jquery validate unobtrusive validation for now):
 
-    ```html
+    <pre>```html
     <script src="~/lib/chameleonforms/unobtrusive-twitterbootstrap3-validation.chameleonforms.js" asp-append-version="true"></script>
-    ```
+    ```</pre>
 
     And add the following to your `_Layout.cshtml` or equivalent file:
 
-    ```html
+    <pre>```html
     <link href="~/lib/chameleonforms/chameleonforms-twitterbootstrap3.css" rel="stylesheet" type="text/css" asp-append-version="true" />
-    ```
+    ```</pre>
 
 
 ## Show me a basic ChameleonForms example next to its ASP.NET Core MVC counterpart!
