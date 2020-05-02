@@ -76,6 +76,18 @@ Client-side CSS and JavaScript files are no longer automatically registered with
 
 The client-side files are copied into `wwwroot/libs/chameleonforms` - simply reference the CSS and/or JavaScript files you want to use within the relevant parts of your site e.g. `_Layout.cshtml`, `_ValidationScriptsPartial.cshtml`, etc.
 
+## `IHtmlString` -> `IHtmlContent`
+
+All methods in ChameleonForms that returned or took `IHtmlString` parameters, and all classes that extended `IHtmlString` now return/take/extend `IHtmlContent`.
+
+### Reason
+
+`IHtmlContent` is the .NET Core equivalent of `IHtmlString`.
+
+### Workaround
+
+Change any of your classes / methods that rely on `IHtmlString` to instead use `IHtmlContent`.
+
 # Version 3.0.0
 
 ## Flags enum support
