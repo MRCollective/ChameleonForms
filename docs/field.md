@@ -32,10 +32,10 @@ The HTML for a Field is generated via the `Field` method in the [form template](
 
 A Field consists of 8 sub-components:
 
-* [Field Element](field-element) - The HTML that makes up the control(s) to accept data from the user
-* [Field Label](field-label) - Text that describes a Field Element to a user (and is linked to that Field Element)
-* [Field Validation HTML](field-validation-html) - Markup that acts as a placeholder to display any validation messages for a particular Field Element
-* [Field Configuration](field-configuration) - The configuration for a particular Field, Field Element and/or Field Label
+* [Field Element](field-element.md) - The HTML that makes up the control(s) to accept data from the user
+* [Field Label](field-label.md) - Text that describes a Field Element to a user (and is linked to that Field Element)
+* [Field Validation HTML](field-validation-html.md) - Markup that acts as a placeholder to display any validation messages for a particular Field Element
+* [Field Configuration](field-configuration.md) - The configuration for a particular Field, Field Element and/or Field Label
 * [Hint](#hint) - Any hint text that is specified against the field
 * [Required designator](#required-designator) - A visual designator to indicate that the field is required
 * Prepended and appended HTML - Any prepended or appended HTML specified against the field to be added before / after the Field Element
@@ -192,7 +192,7 @@ The `%requiredDesignator%` is shown if the field is required:
 <em class="required">*</em>
 ```
 
-If you want to override the required designator look at [Creating custom form templates > Field](custom-template.md#Field).
+If you want to override the required designator look at [Creating custom form templates > Field](custom-template.md#field).
 
 ### Hint
 

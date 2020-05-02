@@ -69,7 +69,7 @@ The `BeginChameleonForm` extension method looks like this:
         }
 ```
 
-By default a self-submitting form that performs a HTTP post with the browser's default `enctype` (usually `application/x-www-form-urlencoded`) is outputted, but you can change the submit location, HTTP verb, `enctype` and add any [HTML attributes you like](html-attributes) using the appropriate parameters.
+By default a self-submitting form that performs a HTTP post with the browser's default `enctype` (usually `application/x-www-form-urlencoded`) is outputted, but you can change the submit location, HTTP verb, `enctype` and add any [HTML attributes you like](html-attributes.md) using the appropriate parameters.
 
 You can also [create a form against a model type different from the page model](different-form-models.md).
 
@@ -106,7 +106,7 @@ services.AddChameleonForms(b => b.WithoutTemplateTypeRegistration());
 services.AddSingleton<IFormTemplate>(new MyFormTemplate(/* constructor parameters */));
 ```
 
-If you want to use multiple Form Templates across your application you can [create your own extension methods](custom-template) to allow for different form templates to be specified on a per-form basis.
+If you want to use multiple Form Templates across your application you can [create your own extension methods](custom-template.md) to allow for different form templates to be specified on a per-form basis.
 
 ## HTML5 validation
 

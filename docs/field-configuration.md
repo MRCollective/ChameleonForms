@@ -1,6 +1,6 @@
 # Field Configuration
 
-Field Configuration provides the ability to configure a [Field](field) (and its sub-components) on both an ad-hoc basis within a particular form and a convention basis across all forms. Specifying a Field Configuration is done by chaining calls to the methods on the `IFieldConfiguration` interface.
+Field Configuration provides the ability to configure a [Field](field.md) (and its sub-components) on both an ad-hoc basis within a particular form and a convention basis across all forms. Specifying a Field Configuration is done by chaining calls to the methods on the `IFieldConfiguration` interface.
 
 The `IFieldConfiguration` interface is translated to an `IReadonlyFieldConfiguration` just before it's passed to the template to make sure that modifications can't be made to it after it's processed by the template.
 
@@ -559,7 +559,7 @@ The xmldoc comments above should give a pretty good indication of how each of th
 
 * [Field](field.md)
 * [Field Label](field-label.md)
-* [Field Types](./#field-types)
+* [Field Types](index.md#field-types)
 
 ## How does the IFieldConfiguration output the Field HTML?
 

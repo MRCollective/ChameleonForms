@@ -13,7 +13,7 @@ There only difference between a `DateTime` and `DateTime?`is that a `DateTime?` 
 
 ## Default HTML
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) will be:
 
 ```html
 <input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required" type="text" value="%value%" />
@@ -29,7 +29,7 @@ If you specify a `[DisplayFormat]` with `ApplyFormatInEditMode = true` then it w
 <input %validationAttrs% data-val-format="%formatString%" %htmlAttributes% id="%propertyName%" name="%propertyName%" type="text" value="%value%" />
 ```
 
-To find out why see the [Client-side validation](#Client-side_validation) section below.
+To find out why see the [Client-side validation](#client-side-validation) section below.
 
 ## Why we use type="text"
 
@@ -79,4 +79,4 @@ For instance, here are a couple of examples of what format will be used if you s
 Client-side validation
 ----------------------
 
-Please see the [client-side validation of DateTime fields](datetime-client-side-validation) documentation.
+Please see the [client-side validation of DateTime fields](datetime-client-side-validation.md) documentation.

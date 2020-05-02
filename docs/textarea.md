@@ -9,7 +9,7 @@ public string TextareaField { get; set; }
 
 ## Default HTML
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) will be:
 
 ```html
 <textarea %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%">%value%</textarea>
@@ -19,7 +19,7 @@ When using the Default Field Generator then the default HTML of the [Field Eleme
 
 ### Specify rows and columns
 
-You can easily specify the required `rows` and `cols` HTML attributes by using the `Rows` and `Cols` methods on the [Field Configuration](field-configuration), e.g.:
+You can easily specify the required `rows` and `cols` HTML attributes by using the `Rows` and `Cols` methods on the [Field Configuration](field-configuration.md), e.g.:
 
 ```csharp
 @s.FieldFor(m => m.TextareaField).Rows(5).Cols(60)

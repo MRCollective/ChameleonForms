@@ -3,7 +3,7 @@
 The Field Validation HTML is markup that acts as both a placeholder to display any client-side validation messages for a particular Field as well as displaying any server-side validation messages for that Field. The Field Validation HTML can be:
 
 * [Specified manually](field.md#manually-specify-html)
-* Created by a [Field Generator](./#field-types) based on the metadata of the model property being displayed and the Field Configuration specified when it's:
+* Created by a [Field Generator](index.md#field-types) based on the metadata of the model property being displayed and the Field Configuration specified when it's:
     * Displayed as part of a [Field](field.md)
     * [Output directly from the Form](#outputting-directly-from-the-form)
 

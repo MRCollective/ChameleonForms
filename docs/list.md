@@ -69,7 +69,7 @@ Default HTML
 
 ### Non-nullable list id (drop-down with no empty option)
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a non-nullable list id will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) for a non-nullable list id will be:
 
 ```html
 <select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required">
@@ -92,7 +92,7 @@ So in the above example when outputting the Field Element HTML for the `ListId` 
 
 ### Nullable list id (drop-down with empty option)
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a nullable list id will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) for a nullable list id will be:
 
 ```html
 <select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%">

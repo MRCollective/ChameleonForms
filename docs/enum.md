@@ -17,7 +17,7 @@ If you want the user to select multiple enum values you can either use a [flags 
 
 ### Non-nullable enum (drop-down with no empty option)
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a non-nullable enum will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) for a non-nullable enum will be:
 
 ```html
 <select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required">

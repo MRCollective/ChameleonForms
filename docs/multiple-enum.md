@@ -45,7 +45,7 @@ To indicate that a value is required, regardless of whether you use the enum typ
 
 ### Explanation and example
 
-Please see the explanation an example on the [Enum Field](enum#explanation-and-example) page to understand what `%x.ToString()` and `%x.Humanize()%` do and how to control the description values.
+Please see the explanation an example on the [Enum Field](enum.md#explanation-and-example) page to understand what `%x.ToString()` and `%x.Humanize()%` do and how to control the description values.
 
 ## Configurability
 

@@ -20,7 +20,7 @@ ChameleonForms doesn't currently support generating the correct HTML to handle m
 
 ## Default HTML
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) will be:
 
 ```html
 <input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" type="file" value="%value%" />

@@ -3,7 +3,7 @@
 The Field Element is the HTML that makes up the control(s) to accept data from the user for a single Field. The Field Element can be:
 
 * [Specified manually](field.md#manually-specify-html)
-* Created by a [Field Generator](./#field-types) based on the metadata of the model property being displayed and the Field Configuration specified when it's:
+* Created by a [Field Generator](index.md#field-types) based on the metadata of the model property being displayed and the Field Configuration specified when it's:
     * Displayed as part of a [Field](field.md)
     * Output [directly from the Form](#outputting-directly-from-the-form)
 
@@ -41,7 +41,7 @@ The `FieldElementFor` extension method looks like this:
 
 ## Default HTML
 
-The HTML for the Field Element will be determined depending on the [metadata of the model property being specified](./#field-types) and the options in the [Field Configuration](field-configuration). The HTML of the Field Element will by default simply be:
+The HTML for the Field Element will be determined depending on the [metadata of the model property being specified](index.md#field-types) and the options in the [Field Configuration](field-configuration.md). The HTML of the Field Element will by default simply be:
 
 ```html
 %fieldElement%

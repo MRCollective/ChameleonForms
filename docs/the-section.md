@@ -144,7 +144,7 @@ The `BeginSection` extension methods look like this:
         }
 ```
 
-From within a Section you can create [Fields](the-field) and you can also create nested sections using the `BeginSection` extension method off the Section:
+From within a Section you can create [Fields](field.md) and you can also create nested sections using the `BeginSection` extension method off the Section:
 
 ```csharp
 using (var s = f.BeginSection("Heading")) {

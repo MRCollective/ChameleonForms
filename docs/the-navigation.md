@@ -146,7 +146,7 @@ The `BeginNavigation` extension method looks like this:
         }
 ```
 
-From within a section you can create Navigation Submit, Reset and normal Buttons and you can chain [HTML Attributes](html-attributes) specifiers off the end of them, e.g.:
+From within a section you can create Navigation Submit, Reset and normal Buttons and you can chain [HTML Attributes](html-attributes.md) specifiers off the end of them, e.g.:
 
 ```csharp
 using (var n = f.BeginNavigation()) {

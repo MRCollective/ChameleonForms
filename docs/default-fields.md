@@ -12,7 +12,7 @@ A non-nullable type will always be Required and a nullable type can be made to b
 Default HTML
 ------------
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) will be:
 
 ```html
 <input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" type="text" value="%value%" />

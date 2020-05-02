@@ -59,7 +59,7 @@ The default MVC model binder does **not** correctly bind flags enum values. Cham
 
 ### Explanation and example
 
-Please see the explanation an example on the [Enum Field](enum#explanation-and-example) page to understand what `%x.ToString()` and `%x.Humanize()%` do and how to control the description values.
+Please see the explanation an example on the [Enum Field](enum.md#explanation-and-example) page to understand what `%x.ToString()` and `%x.Humanize()%` do and how to control the description values.
 
 ## Configurability
 

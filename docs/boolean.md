@@ -9,7 +9,7 @@ If you need to collect Boolean data you can use a `bool` or `bool?` model proper
 
 ## Default HTML
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) will be:
 
 ### Non-nullable Boolean (checkbox)
 
