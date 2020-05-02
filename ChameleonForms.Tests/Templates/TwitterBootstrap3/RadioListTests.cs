@@ -1,7 +1,7 @@
-﻿using System.Web;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Templates.TwitterBootstrap3;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
@@ -12,9 +12,9 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Render_radio_list()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
-            var result = t.RadioOrCheckboxList(new IHtmlString[] {new HtmlString("1"), new HtmlString("2")}, false);
+            var result = t.RadioOrCheckboxList(new IHtmlContent[] {new HtmlString("1"), new HtmlString("2")}, false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -22,9 +22,9 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Render_checkbox_list()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
-            var result = t.RadioOrCheckboxList(new IHtmlString[] { new HtmlString("1"), new HtmlString("2") }, true);
+            var result = t.RadioOrCheckboxList(new IHtmlContent[] { new HtmlString("1"), new HtmlString("2") }, true);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

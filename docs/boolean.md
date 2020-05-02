@@ -1,5 +1,4 @@
-Boolean Fields
-==============
+# Boolean Fields
 
 If you need to collect Boolean data you can use a `bool` or `bool?` model property, e.g.:
 
@@ -8,8 +7,7 @@ If you need to collect Boolean data you can use a `bool` or `bool?` model proper
     public bool? NullableBooleanField { get; set; }
 ```
 
-Default HTML
-------------
+## Default HTML
 
 When using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
 
@@ -18,7 +16,7 @@ When using the Default Field Generator then the default HTML of the [Field Eleme
 This field will always be Required since it's not nullable.
 
 ```html
-<input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" type="checkbox" value="true" /> <label for="%propertyName%">%inlineLabel%</label>
+<input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required" type="checkbox" value="true" /> <label for="%propertyName%">%inlineLabel%</label>
 ```
 
 ### Nullable Boolean (drop-down with empty option)
@@ -33,15 +31,15 @@ If the field is Required then the empty option will still show and it will be se
 </select>
 ```
 
-Configurability
----------------
+## Configurability
 
 ### Inline label
 
-If you are outputting a non-nullable Boolean then a label will show next to the field as part of the Field Element. If you want to override just the label text for this label (and not the Field Label as well) then you can do so using the `InlineLabel` method in the Field Configuration, e.g.:
+If you are outputting a non-nullable Boolean then a label will show next to the field as part of the Field Element in addition to the Field Label that shows up as part of outputting the full field. If you want to override just the label text for this label (and not the Field Label as well) then you can do so using the `InlineLabel` method in the Field Configuration, e.g.:
 
 ```csharp
 @s.FieldFor(m => m.BooleanField).InlineLabel("override")
+@s.FieldFor(m => m.BooleanField).InlineLabel(@<strong>overriden label</strong>)
 ```
 
 ### Display as drop-down
@@ -55,7 +53,7 @@ You can force a Boolean field to display as a drop-down box rather than a checkb
 This will change the default HTML for the non-nullable Boolean field as shown above to:
 
 ```html
-<select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%">
+<select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required">
     <option value="true">Yes</option>
     <option value="false">No</option>
 </select>
@@ -74,8 +72,8 @@ And it will change the default HTML for the non-nullable Boolean field and the R
 
 ```html
 <ul>
-    <li><input %validationAttrs% %htmlAttributes% id="%propertyName%_1" name="%propertyName" type="radio" value="true" /> <label for="%propertyName%_1">%trueDescription%</label></li>
-    <li><input %htmlAttributes% checked="checked" id="%propertyName%_2" name="%propertyName%" type="radio" value="false" /> <label for="%propertyName%_2">%falseDescription%</label></li>
+    <li><input %validationAttrs% %htmlAttributes% id="%propertyName%_1" name="%propertyName" required="required" type="radio" value="true" /> <label for="%propertyName%_1">%trueDescription%</label></li>
+    <li><input %htmlAttributes% checked="checked" id="%propertyName%_2" name="%propertyName%" required="required" type="radio" value="false" /> <label for="%propertyName%_2">%falseDescription%</label></li>
 </ul>
 ```
 
@@ -91,7 +89,7 @@ And it will change the default HTML for the non-Required nullable Boolean field 
 
 ### Change the text descriptions of true, false and none
 
-When you display a Boolean field as a drop-down or a list of radio buttons you can change the text that is used to display the `true`, `false` and `none` values to the user. By default the text used is `Yes`, `No` and `None` (except for drop-downs, which have an empty string) respectively. To change the text simply use the `WithTrueAs`, `WithFalseAs` and `WithNoneAs` methods respectively, e.g.:
+When you display a Boolean field as a drop-down or a list of radio buttons you can change the text that is used to display the `true`, `false` and `none` values to the user. By default the text used is `Yes`, `No` and `None` (except for drop-downs, which have an empty string instead of `None`) respectively. To change the text simply use the `WithTrueAs`, `WithFalseAs` and `WithNoneAs` methods respectively, e.g.:
 
 ```csharp
 @s.FieldFor(m => m.NullableBooleanField).WithTrueAs("OK").WithFalseAs("Not OK").WithNoneAs("No comment")
@@ -133,11 +131,11 @@ If you would like to output just a checkbox for a non-nullable boolean field wit
 This will change the default HTML for the non-nullable Boolean field as shown above to:
 
 ```html
-<input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" type="checkbox" value="true" />
+<input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required" type="checkbox" value="true" />
 ```
 
 ### Wrap input with label
-If you would like to wrap the checkbox with the label you can do so with the `InlineLabelWrapsElement` method in the Field Configuration, e.g.:
+If you would like to wrap the checkbox with the inline label you can do so with the `InlineLabelWrapsElement` method in the Field Configuration, e.g.:
 
 ```csharp
 @s.FieldFor(m => m.BooleanField).InlineLabelWrapsElement()
@@ -146,5 +144,5 @@ If you would like to wrap the checkbox with the label you can do so with the `In
 This will change the default HTML for the field as shown above to:
 
 ```html
-<label><input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" type="checkbox" value="true" /> %inlineLabel%</label>
+<label><input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required" type="checkbox" value="true" /> %inlineLabel%</label>
 ```

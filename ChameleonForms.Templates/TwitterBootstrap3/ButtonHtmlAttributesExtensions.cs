@@ -1,0 +1,59 @@
+﻿using ChameleonForms.Component;
+using Humanizer;
+
+namespace ChameleonForms.Templates.TwitterBootstrap3
+{
+    /// <summary>
+    /// Extension methods on <see cref="HtmlAttributes"/> for the Twitter Bootstrap 3 template.
+    /// </summary>
+    public static class ButtonHtmlAttributesExtensions
+    {
+        /// <summary>
+        /// Adds the given icon to the start of a navigation button.
+        /// </summary>
+        /// <example>
+        /// @n.Submit("Submit").WithIcon("arrow-right")
+        /// // Output:
+        /// &lt;button type="submit">&lt;span class="glyphicon glyphicon-arrow-right">&lt;/span> Submit&lt;/button>
+        /// </example>
+        /// <param name="attrs">The Html Attributes from a navigation button</param>
+        /// <param name="icon">The icon to use; see https://getbootstrap.com/docs/3.3/components/#glyphicons</param>
+        /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
+        public static ButtonHtmlAttributes WithIcon(this ButtonHtmlAttributes attrs, string icon)
+        {
+            attrs.Attr(TwitterBootstrap3FormTemplate.IconAttrKey, icon);
+            return attrs;
+        }
+
+        /// <summary>
+        /// Adds the given emphasis to the button.
+        /// </summary>
+        /// <example>
+        /// @n.Submit("Submit").WithStyle(EmphasisStyle.Warning)
+        /// </example>
+        /// <param name="attrs">The Html Attributes from a navigation button</param>
+        /// <param name="style">The style of button</param>
+        /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
+        public static ButtonHtmlAttributes WithStyle(this ButtonHtmlAttributes attrs, EmphasisStyle style)
+        {
+            attrs.AddClass(string.Format("btn-{0}", style.ToString().ToLower()));
+            return attrs;
+        }
+
+        /// <summary>
+        /// Changes the button to use the given size.
+        /// </summary>
+        /// <example>
+        /// @n.Submit("Submit").WithSize(ButtonSize.Large)
+        /// </example>
+        /// <param name="attrs">The Html Attributes from a navigation button</param>
+        /// <param name="size">The size of button</param>
+        /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
+        public static ButtonHtmlAttributes WithSize(this ButtonHtmlAttributes attrs, ButtonSize size)
+        {
+            if (size != ButtonSize.Default)
+                attrs.AddClass(string.Format("btn-{0}", size.Humanize()));
+            return attrs;
+        }
+    }
+}

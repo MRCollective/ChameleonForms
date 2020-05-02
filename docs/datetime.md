@@ -1,26 +1,29 @@
-Datetime Fields
-===============
+# Datetime Fields
 
 If you need to collect DateTime data you can use a `DateTime` or `DateTime?` model property, e.g.:
 
 ```csharp
 public DateTime DateTimeField { get; set; }
-[DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyInEditMode = true)]
+public DateTime? NullableDateTimeField { get; set; }
+[DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
 public DateTime DateTimeFieldWithFormat { get; set;
 ```
 
-There is no difference between a `DateTime` and `DateTime?` except the latter will not be Required unless it's annotated with `[Required]`.
+There only difference between a `DateTime` and `DateTime?`is that a `DateTime?` will not be required (unless it's annotated with `[Required]`).
 
-Default HTML
-------------
+## Default HTML
 
 When using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
 
 ```html
-<input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" type="text" value="%value%" />
+<input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required" type="text" value="%value%" />
 ```
 
-If you specify a `[DisplayFormat]` then it will change the HTML to:
+If you specify a `DateTime?` without a `[Required]` attribute then it will be:
+
+<input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" type="text" value="%value%" />
+
+If you specify a `[DisplayFormat]` with `ApplyFormatInEditMode = true` then it will change the HTML to:
 
 ```html
 <input %validationAttrs% data-val-format="%formatString%" %htmlAttributes% id="%propertyName%" name="%propertyName%" type="text" value="%value%" />
@@ -28,53 +31,50 @@ If you specify a `[DisplayFormat]` then it will change the HTML to:
 
 To find out why see the [Client-side validation](#Client-side_validation) section below.
 
-Server-side validation and binding
-----------------------------------
+## Why we use type="text"
+
+We deliberately don't make use of the various date-related HTML5 types, and instead opt for use of `type="text"`, because [browser support for controlling formatting](https://developer.mozilla.org/en-US/docs/Web/HTML/Date_and_time_formats) is limited. If you want to opt into a different type then you can by chaining the `.Attr("type", "adifferenttype")` on your field definition.
+
+## Server-side validation and binding
 
 By default MVC will attempt to parse a `DateTime` with whatever culture the thread is running as. This has a number of implications:
 
 * If you want just a time, or just a date then you can't enforce that
-* If you have a different culture on a particular machine then you will get different results
+* If you have a different culture on a particular server then you will get different results
 * It's not very clear to a developer that doesn't know about that MVC behaviour what will happen
 * You don't have much control over the format that you want your users to enter the date in
 
-MVC provides the `[DisplayFormat]` attribute above, but that doesn't actually do anything apart from formatting the date nicely when the field is outputted (when using Editor Templates).
+MVC provides the `[DisplayFormat]` attribute above, but that doesn't actually do anything apart from formatting the date nicely when the field is outputted (when using Editor Templates or Tag Helpers).
 
-In order to provide a nice server-side validation experience, ChameleonForms provides first class support for `[DisplayFormat]`:
+In order to provide a nice server-side validation experience, ChameleonForms provides first class support for `[DisplayFormat(ApplyFormatInEditMode = true)]`:
 
-* It will output the date using the format string just like Editor Templates
-* It provides a model binder that will perform server-side validation using that format string as a guide
-    * By default, when you install the NuGet package this model binder will be registered for `DateTime` and `DateTime?` properties
+* It will output the date using the format string so a pre-populated model will automatically show the correct string to the user
+* It provides a model binder that will perform server-side binding and validation using that format string as a guide when parsing the text the user entered
+    * This [model](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/ModelBinders/DateTimeModelBinderProvider.cs) [binder](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/ModelBinders/DateTimeModelBinder.cs) is [registered by default](configuration.md#default-global-config), but you can turn it off
 
-You should be able to see if you have the model binder registered by searching for the `App_Start\RegisterChameleonFormsComponents.cs` file, which should look something like:
+If you'd like to register the model binder yourself rather than using the global config you can do that like so:
 
-```csharp
-using ChameleonForms.ModelBinders;
-using System;
-using System.Web.Mvc;
-
-[assembly: WebActivator.PreApplicationStartMethod(typeof(%yourNamespace%.App_Start.RegisterChameleonFormsComponents), "Start")]
- 
-namespace %yourNamespace%.App_Start
-{
-    public static class RegisterChameleonFormsComponents
+```cs
+    public void ConfigureServices(IServiceCollection services)
     {
-        public static void Start()
+        ...
+        services.AddChameleonForms(b => b.WithoutDateTimeBinding());
+        services.Configure<MvcOptions>(x =>
         {
-            ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
-            ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
-            // ...
-        }
+            x.ModelBinderProviders.Insert(0, new DateTimeModelBinderProvider());
+            ...
+        });
     }
-}
 ```
 
-Alternatively, you can simply register the model binder yourself by adding the following to `Application_Start` (or a method it calls):
+## `g` format
 
-```csharp
-ModelBinders.Binders.Add(typeof(DateTime), new DateTimeModelBinder());
-ModelBinders.Binders.Add(typeof(DateTime?), new DateTimeModelBinder());
-```
+There is support in ChameleonForms for a `g` format that uses the current thread's culture to determine the format string. That format string will then be passed to client validation so the end user has a consistent experience against what the server is expecting.
+
+For instance, here are a couple of examples of what format will be used if you set your display format string to `{0:g}`:
+
+* **en-GB**: `dd/MM/yyyy HH:mm`
+* **uk-UA**: `dd.MM.yyyy H:mm`
 
 Client-side validation
 ----------------------

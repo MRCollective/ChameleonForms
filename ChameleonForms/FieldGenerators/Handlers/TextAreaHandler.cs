@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Web;
-using System.Web.Mvc.Html;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -28,7 +28,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return FieldGenerator.HtmlHelper.TextAreaFor(
                 FieldGenerator.FieldProperty,
@@ -40,6 +40,16 @@ namespace ChameleonForms.FieldGenerators.Handlers
         public override FieldDisplayType GetDisplayType(IReadonlyFieldConfiguration fieldConfiguration)
         {
             return FieldDisplayType.MultiLineText;
+        }
+
+        /// <inheritdoc />
+        public override void PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration)
+        {
+            // Ensure textareas look consistent across browsers by having default values as per MDN recommendations
+            if (!fieldConfiguration.Attributes.Has("rows"))
+                fieldConfiguration.Rows(2);
+            if (!fieldConfiguration.Attributes.Has("cols"))
+                fieldConfiguration.Cols(20);
         }
     }
 }

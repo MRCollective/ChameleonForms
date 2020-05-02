@@ -1,5 +1,4 @@
-Navigation
-==========
+# Navigation
 
 The Navigation is a grouping of a set of navigation elements; you create a Navigation by instantiating a `Navigation<TModel>` within a `using` block. The start and end of the `using` block will output the start and end HTML for the Navigation and the inside of the `using` block will contain the Navigation elements.
 
@@ -17,64 +16,105 @@ The `Navigation<TModel>` class looks like this and is in the `ChameleonForms.Com
         /// Creates a form navigation area.
         /// </summary>
         /// <param name="form">The form the message is being created in</param>
-        public Navigation(IForm<TModel> form) : base(form, false) {...}
+        public Navigation(IForm<TModel> form);
+
+        /// <summary>
+        /// Returns the HTML representation of the beginning of the form component.
+        /// </summary>
+        /// <returns>The beginning HTML for the form component</returns>
+        public virtual IHtmlContent Begin();
+
+        /// <summary>
+        /// Returns the HTML representation of the end of the form component.
+        /// </summary>
+        /// <returns>The ending HTML for the form component</returns>
+        public virtual IHtmlContent End();
 
         /// <summary>
         /// Creates the HTML for a submit &lt;button&gt;.
         /// </summary>
         /// <param name="text">The text to display in the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Submit(string text) {...}
+        public ButtonHtmlAttributes Submit(string text);
 
         /// <summary>
         /// Creates the HTML for a submit &lt;button&gt;.
         /// </summary>
         /// <param name="content">The content to display in the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Submit(IHtmlString content) {...}
+        public ButtonHtmlAttributes Submit(IHtmlContent content);
+
+        /// <summary>
+        /// Creates the HTML for a submit &lt;button&gt;.
+        /// </summary>
+        /// <param name="content">The content to display in the button as a templated razor delegate</param>
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public ButtonHtmlAttributes Submit(Func<dynamic, IHtmlContent> content);
 
         /// <summary>
         /// Creates the HTML for a submit button that submits a value in the form post when clicked.
         /// </summary>
         /// <param name="name">The name of the element</param>
         /// <param name="value">The value to submit with the form</param>
-        /// <param name="content">The text the user sees (leave as null if you want the user to see the value instead)</param>
+        /// <param name="content">The text the user sees (leave as the default null if you want the user to see the value instead)</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Submit(string name, string value, IHtmlString content = null) {...}
+        public ButtonHtmlAttributes Submit(string name, string value, IHtmlContent content = null);
+
+        /// <summary>
+        /// Creates the HTML for a submit button that submits a value in the form post when clicked.
+        /// </summary>
+        /// <param name="name">The name of the element</param>
+        /// <param name="value">The value to submit with the form</param>
+        /// <param name="content">The text the user sees as a templated razor delegate</param>
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public ButtonHtmlAttributes Submit(string name, string value, Func<dynamic, IHtmlContent> content);
 
         /// <summary>
         /// Creates the HTML for a &lt;button&gt;.
         /// </summary>
         /// <param name="text">The text to display in the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Button(string text) {...}
+        public ButtonHtmlAttributes Button(string text);
 
         /// <summary>
         /// Creates the HTML for a &lt;button&gt;.
         /// </summary>
         /// <param name="content">The content to display in the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Button(IHtmlString content) {...}
+        public ButtonHtmlAttributes Button(IHtmlContent content);
+
+        /// <summary>
+        /// Creates the HTML for a &lt;button&gt;.
+        /// </summary>
+        /// <param name="content">The content to display in the button as a templated razor delegate</param>
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public ButtonHtmlAttributes Button(Func<dynamic, IHtmlContent> content);
 
         /// <summary>
         /// Creates the HTML for a reset &lt;button&gt;.
         /// </summary>
         /// <param name="text">The text to display for the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Reset(string text) {...}
+        public ButtonHtmlAttributes Reset(string text);
 
         /// <summary>
         /// Creates the HTML for a reset &lt;button&gt;.
         /// </summary>
         /// <param name="content">The content to display for the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Reset(IHtmlString content) {...}
+        public ButtonHtmlAttributes Reset(IHtmlContent content);
+
+        /// <summary>
+        /// Creates the HTML for a reset &lt;button&gt;.
+        /// </summary>
+        /// <param name="content">The content to display for the button as a templated razor delegate</param>
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public ButtonHtmlAttributes Reset(Func<dynamic, IHtmlContent> content);
     }
 ```
-The start and end HTML of the Navigation are generated via the `BeginNavigation` and `EndNavigation` methods in the template. The HTML for the various types of buttons are all generated via the `Button` method in the template.
+The start and end HTML of the Navigation are generated via the `BeginNavigation` and `EndNavigation` methods in the [form template](form-templates.md). The HTML for the various types of buttons are all generated via the `Button` method in the template.
 
-Default usage
--------------
+## Default usage
 
 In order to get an instance of a `Navigation<TModel>` you can use the `BeginNavigation` method on the Form, e.g.:
 
@@ -84,7 +124,7 @@ using (var n = f.BeginNavigation()) {
 }
 ```
 
-The `BeginNavigation` extension methods looks like this:
+The `BeginNavigation` extension method looks like this:
 
 ```csharp
         /// <summary>
@@ -97,7 +137,7 @@ The `BeginNavigation` extension methods looks like this:
         ///     @n.Submit("Next", "next")
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
         /// <param name="form">The form the navigation is being created in</param>
         /// <returns>The form navigation</returns>
         public static Navigation<TModel> BeginNavigation<TModel>(this IForm<TModel> form)
@@ -112,22 +152,23 @@ From within a section you can create Navigation Submit, Reset and normal Buttons
 using (var n = f.BeginNavigation()) {
     @n.Button("text button").AddClass("button").Id("button1")
     @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("button").Id("button2")
+    @n.Button(@<strong>html button</strong>)
     @n.Reset("text reset").AddClass("button").Id("button3")
     @n.Reset(new HtmlString("<strong>html reset</strong>")).AddClass("button").Id("button4")
+    @n.Reset(@<strong>html reset</strong>)
     @n.Submit(new HtmlString("<strong>html submit</strong>")).AddClass("button").Id("button5")
     @n.Submit("text submit").AddClass("button").Id("button6")
     @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>")).AddClass("button").Id("button7")
     @n.Submit("name", "value").AddClass("button").Id("button8")
+    @n.Submit(@<strong>html submit</strong>)
 }
 ```
 
-Extending Navigation Buttons
-----------------------------
+## Extending Navigation Buttons
 
 See [the HTML Attributes documentation](html-attributes.md#extending-navigation-buttons-specifically) for more information.
 
-Default HTML
-------------
+## Default HTML
 
 ### Begin HTML
 
@@ -262,7 +303,7 @@ Which would result in:
 </div>
 ```
 
-In order to be able to swap out the extension method usage across your application easily (for example, if you change your form template) we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view using the extension method you instead [add the namespace to your `Views\Web.config` file](getting-started#namespaces-in-viewswebconfig).
+In order to be able to swap out the extension method usage across your application easily (for example, if you change your form template) we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view using the extension method you instead add the namespace to your `_ViewImports.cshtml` file.
 
 ### Change button size
 
@@ -332,7 +373,7 @@ Which would result in:
 </div>
 ```
 
-In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you [add the namespace to your `Views\Web.config` file](getting-started#namespaces-in-viewswebconfig).
+In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you instead add the namespace to your `_ViewImports.cshtml` file.
 
 ### Add icon to button
 
@@ -348,16 +389,16 @@ There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3`
         /// &lt;button type="submit">&lt;span class="glyphicon glyphicon-arrow-right">&lt;/span> Submit&lt;/button>
         /// </example>
         /// <param name="attrs">The Html Attributes from a navigation button</param>
-        /// <param name="icon">The icon to use; see http://getbootstrap.com/components/#glyphicons-glyphs</param>
+        /// <param name="icon">The icon to use; see https://getbootstrap.com/docs/3.3/components/#glyphicons</param>
         /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
         public static ButtonHtmlAttributes WithIcon(this ButtonHtmlAttributes attrs, string icon)
         {
-            attrs.Attr(TwitterBootstrapFormTemplate.IconAttrKey, icon);
+            attrs.Attr(TwitterBootstrap3FormTemplate.IconAttrKey, icon);
             return attrs;
         }
 ```
 
-You can see the list of possible icon names to choose from on the [Twitter Bootstrap documentation site](http://getbootstrap.com/components/#glyphicons) (drop the `glyphicon-` from the icon names on this page e.g. use `adjust` instead of `glyphicon-adjust`).
+You can see the list of possible icon names to choose from on the [Twitter Bootstrap documentation site](https://getbootstrap.com/docs/3.3/components/#glyphicons) (drop the `glyphicon-` from the icon names on this page e.g. use `adjust` instead of `glyphicon-adjust`).
 
 You can use the extension method like this:
 
@@ -375,9 +416,10 @@ Which would result in:
 </div>
 ```
 
-In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you [add the namespace to your `Views\Web.config` file](getting-started#namespaces-in-viewswebconfig).
+In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you add the namespace to your `_ViewImports.cshtml_` file.
 
 ### Example
+
 Here is an example from the example project of what the buttons can look like:
 
 ![Screenshot of buttons generated using Twitter Bootstrap 3 template](bootstrap-buttons.png)

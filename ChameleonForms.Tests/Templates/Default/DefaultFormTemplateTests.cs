@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Web;
-using System.Web.Mvc;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates.Default;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates
@@ -135,6 +135,16 @@ namespace ChameleonForms.Tests.Templates
         }
 
         [Test]
+        public void Output_field_with_hint_id()
+        {
+            var t = new DefaultFormTemplate();
+
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().WithHint("hello").WithHintId("HintId"), false);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Output_field_with_prepended_and_appended_html()
         {
             var t = new DefaultFormTemplate();
@@ -247,7 +257,7 @@ namespace ChameleonForms.Tests.Templates
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
-        
+
         [Test]
         public void Output_submit_input_when_button_with_no_content_and_submit_type_specified()
         {
@@ -267,7 +277,7 @@ namespace ChameleonForms.Tests.Templates
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
-        
+
         [Test]
         public void Output_submit_button_when_button_with_content_and_submit_type_specified()
         {

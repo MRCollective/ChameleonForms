@@ -1,0 +1,8 @@
+﻿@using Microsoft.AspNetCore.Html;
+@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.MessageParams>
+@Raw($"      <div class=\"{Model.MessageType.ToString().ToLower()}_message\">")
+@if (!string.IsNullOrEmpty(Model.Heading.ToHtmlString()))
+{
+          <h3>@Model.Heading</h3>
+}
+@Raw("          <div class=\"message\">")

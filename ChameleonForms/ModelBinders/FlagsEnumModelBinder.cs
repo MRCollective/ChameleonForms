@@ -1,54 +1,67 @@
-﻿using System;
-using System.Globalization;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Linq;
-using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace ChameleonForms.ModelBinders
 {
     /// <summary>
     /// Binds a flags enum in a model.
     /// </summary>
-    public class FlagsEnumModelBinder : DefaultModelBinder
+    public class FlagsEnumModelBinder : IModelBinder
     {
         /// <inheritdoc />
-        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        public Task BindModelAsync(ModelBindingContext bindingContext)
         {
-            var underlyingType = Nullable.GetUnderlyingType(bindingContext.ModelType) ?? bindingContext.ModelType;
+            var nullable = bindingContext.ModelMetadata.IsNullableValueType;
+            var underlyingType = bindingContext.ModelMetadata.UnderlyingOrModelType;
             var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-            var submittedValue = value == null ? null : value.AttemptedValue;
-
-            if (
-                !underlyingType.IsEnum
-                ||
-                !underlyingType.GetCustomAttributes(typeof(FlagsAttribute), false).Any()
-                ||
-                (string.IsNullOrEmpty(submittedValue))
-            )
-                return base.BindModel(controllerContext, bindingContext);
+            var values = value.Values;
             
-            var enumValueAsLong = 0L;
-            var enumValues = submittedValue.Split(',');
-            var error = false;
+            long? enumValueAsLong = null;
 
-            foreach (var v in enumValues)
+            foreach (var enumValue in values.Where(x => !string.IsNullOrEmpty(x)))
             {
-                if (Enum.IsDefined(underlyingType, v))
+                if (Enum.IsDefined(underlyingType, enumValue))
                 {
-                    var valueAsEnum = Enum.Parse(underlyingType, v, true);
-                    enumValueAsLong |= Convert.ToInt64(valueAsEnum);
+                    var valueAsEnum = Enum.Parse(underlyingType, enumValue, true);
+                    enumValueAsLong = (enumValueAsLong ?? 0) | Convert.ToInt64(valueAsEnum);
                 }
                 else
                 {
-                    error = true;
-                    bindingContext.ModelState.AddModelError(bindingContext.ModelName, string.Format("The value '{0}' is not valid for {1}.", v, bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.PropertyName));
+                    bindingContext.ModelState.AddModelError(
+                        bindingContext.ModelName,
+                        string.Format("The value '{0}' is not valid for {1}.",
+                        enumValue,
+                        bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.Name)
+                    );
                 }
             }
+            
+            if (enumValueAsLong == null || enumValueAsLong == 0)
+            {
+                if (nullable)
+                    bindingContext.Result = ModelBindingResult.Success(null);
+                else
+                {
+                    if (!bindingContext.ModelState.ContainsKey(bindingContext.ModelName) ||
+                        !bindingContext.ModelState[bindingContext.ModelName].Errors.Any())
+                    {
+                        // Patching up the in-built support for non-nullable flags enums - they are marked as IsRequired in their ModelMetadata, but don't have required validation
+                        bindingContext.ModelState.AddModelError(
+                            value == ValueProviderResult.None ? bindingContext.OriginalModelName : bindingContext.ModelName,
+                            string.Format("The {0} field is required.", bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.Name)
+                        );
+                    }
+                    bindingContext.Result = ModelBindingResult.Failed();
+                }
+            }
+            else
+            {
+                bindingContext.Result = ModelBindingResult.Success(Enum.Parse(underlyingType, enumValueAsLong.ToString()));
+            }
 
-            if (error)
-                return Activator.CreateInstance(bindingContext.ModelType);
-
-            bindingContext.ModelMetadata.Model = Enum.Parse(underlyingType, enumValueAsLong.ToString());
-            return bindingContext.ModelMetadata.Model;
+            return Task.CompletedTask;
         }
     }
 }

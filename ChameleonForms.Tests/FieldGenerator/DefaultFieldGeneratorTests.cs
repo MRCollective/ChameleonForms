@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq.Expressions;
-using System.Web;
-using System.Web.Mvc;
+using System.Threading;
 using ApprovalTests.Reporters;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component;
@@ -12,6 +11,7 @@ using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates.Default;
 using ChameleonForms.Tests.Helpers;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NUnit.Framework;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 
@@ -65,12 +65,12 @@ namespace ChameleonForms.Tests.FieldGenerator
         public DateTime DateTimeWithGFormat { get; set; }
 
         public TestEnum RequiredEnum { get; set; }
-        [RequiredFlagsEnum]
+
         public TestFlagsEnum RequiredFlagsEnum { get; set; }
 
         [Required]
         public TestEnum? RequiredNullableEnum { get; set; }
-        [RequiredFlagsEnum]
+        [Required]
         public TestFlagsEnum? RequiredNullableFlagsEnum { get; set; }
 
         [DisplayFormat(NullDisplayText = "Nothing to see here")]
@@ -97,7 +97,14 @@ namespace ChameleonForms.Tests.FieldGenerator
         [DataType(DataType.MultilineText)]
         public string Textarea { get; set; }
 
-        public HttpPostedFileBase FileUpload { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [DataType(DataType.Url)]
+        public string UrlAsString { get; set; }
+
+        [DataType(DataType.Url)]
+        public Uri UrlAsUri { get; set; }
 
         public bool RequiredBoolean { get; set; }
 
@@ -140,10 +147,37 @@ namespace ChameleonForms.Tests.FieldGenerator
         [ExistsIn("IntList", "Id", "Name")]
         public ICollection<int?> OptionalNullableIntListIds { get; set; }
 
-        [ReadOnly(true)]
+        [Editable(false)]
         public int ReadonlyInt { get; set; }
 
         public ChildViewModel Child { get; set; }
+
+        public int PropertyWithoutAttributes { get; set; }
+
+        [Required]
+        [System.ComponentModel.DataAnnotations.Range(1, 3)]
+        [DataType(DataType.PostalCode)]
+        public int PropertyWithAttributes { get; set; }
+
+        public byte ByteField { get; set; }
+        public sbyte SbyteField { get; set; }
+        public short ShortField { get; set; }
+        public ushort UshortField { get; set; }
+        public int IntField { get; set; }
+        public int? NullableIntField { get; set; }
+        public uint UintField { get; set; }
+        public long LongField { get; set; }
+        public ulong UlongField { get; set; }
+        public float FloatField { get; set; }
+        public double DoubleField { get; set; }
+        public decimal DecimalField { get; set; }
+
+        [DataType(DataType.Currency)]
+        public decimal MoneyField { get; set; }
+        [System.ComponentModel.DataAnnotations.Range(1, 10)]
+        public decimal IntWithRange { get; set; }
+        [System.ComponentModel.DataAnnotations.Range(0.1, 0.9)]
+        public decimal DecimalWithRange { get; set; }
     }
 
     public class IntListItem
@@ -161,7 +195,7 @@ namespace ChameleonForms.Tests.FieldGenerator
     public class ChildViewModel
     {
         public TestEnum RequiredChildEnum { get; set; }
-        [RequiredFlagsEnum]
+        
         public TestFlagsEnum RequiredChildFlagsEnum { get; set; }
     }
 
@@ -175,26 +209,24 @@ namespace ChameleonForms.Tests.FieldGenerator
         [SetUp]
         public void Setup()
         {
-            var autoSubstitute = AutoSubstituteContainer.Create();
-            H = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            var testContext = new MvcTestContext();
+            var testViewContext = testContext.GetViewTestContext<TestFieldViewModel>();
+
+            H = testViewContext.HtmlHelper;
             ExampleFieldConfiguration = new FieldConfiguration().Attr("data-attr", "value");
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
         }
 
         protected DefaultFieldGenerator<TestFieldViewModel, T> Arrange<T>(Expression<Func<TestFieldViewModel,T>> property, params Action<TestFieldViewModel>[] vmSetter)
         {
-            H.ViewContext.UnobtrusiveJavaScriptEnabled = true;
-            H.ViewContext.ClientValidationEnabled = true;
-            H.ViewContext.ViewData.ModelState.AddModelError(ExpressionHelper.GetExpressionText(property), "asdf");
-            DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequiredFlagsEnumAttribute), typeof(RequiredAttributeAdapter));
+            H.ViewContext.ViewData.ModelState.AddModelError(H.GetFieldName(property), "asdf");
             var vm = new TestFieldViewModel();
             foreach (var action in vmSetter)
             {
                 action(vm);
             }
             H.ViewData.Model = vm;
-            H.ViewData.ModelMetadata.Model = vm;
 
             return new DefaultFieldGenerator<TestFieldViewModel, T>(H, property, new DefaultFormTemplate());
         }
@@ -206,7 +238,6 @@ namespace ChameleonForms.Tests.FieldGenerator
             {
                 var generator = Arrange(m => m.Decimal);
                 H.ViewData.Model = null;
-                H.ViewData.ModelMetadata.Model = null;
 
                 generator.GetModel();
             }
@@ -216,7 +247,6 @@ namespace ChameleonForms.Tests.FieldGenerator
             {
                 var generator = Arrange(m => m.Decimal);
                 H.ViewData.Model = null;
-                H.ViewData.ModelMetadata.Model = null;
 
                 generator.GetValue();
             }
@@ -250,6 +280,26 @@ namespace ChameleonForms.Tests.FieldGenerator
                 var config = generator.PrepareFieldConfiguration(fieldConfig, FieldParent.Section);
                 var actual = generator.GetLabelHtml(config).ToString();
                 Assert.That(actual, Is.EqualTo("Use this display name"));
+            }
+
+            [Test]
+            public void GetCustomAttributes_should_return_empty_list_for_property_with_no_attributes()
+            {
+                var generator = Arrange(m => m.PropertyWithoutAttributes);
+
+                var attributes = generator.GetCustomAttributes();
+
+                Assert.That(attributes, Is.Empty);
+            }
+
+            [Test]
+            public void GetCustomAttributes_should_return_attributes_for_property_with_attributes()
+            {
+                var generator = Arrange(m => m.PropertyWithAttributes);
+
+                var attributes = generator.GetCustomAttributes();
+
+                Assert.That(attributes, Has.Length.EqualTo(3));
             }
         }
     }

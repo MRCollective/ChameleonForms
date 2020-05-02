@@ -1,6 +1,8 @@
-The Field is a single data collection unit; you create a Field by either calling the `Field` method on a Section or instantiating and outputting to the page a `Field<TModel>`.
+# Fields
 
-You can also create a parent field that can have child fields nested within it by instantiating a `Field<TModel>` within a `using` block (the start and end of the `using` block will output the start and end HTML for the Field and the contents of the `using` block will output the child Fields).
+The Field is a single data collection unit; you create a Field by either calling the `Field` method on a [Section](the-section.md) or otherwise instantiating and outputting to the page a `Field<TModel>`.
+
+You can also create a parent field that can have [child fields](#use-a-field-generator-to-output-a-single-field-in-a-parent-field) nested [within it](#use-a-field-generator-to-output-a-parent-field-in-a-section) by instantiating a `Field<TModel>` within a `using` block (the start and end of the `using` block will output the start and end HTML for the Field and the contents of the `using` block will output the child Fields).
 
 The `Field<TModel>` class is defined as follows in the `ChameleonForms.Component` namespace:
 
@@ -9,6 +11,7 @@ The `Field<TModel>` class is defined as follows in the `ChameleonForms.Component
     /// Wraps the output of a single form field.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
+    
     public class Field<TModel> : FormComponent<TModel>
     {
         /// <summary>
@@ -17,29 +20,36 @@ The `Field<TModel>` class is defined as follows in the `ChameleonForms.Component
         /// <param name="form">The form the field is being created in</param>
         /// <param name="isParent">Whether or not the field has other fields nested within it</param>
         /// <param name="fieldGenerator">A field HTML generator class</param>
-        /// <param name="config"> </param>
+        /// <param name="config">The configuration values for the field</param>
         public Field(IForm<TModel> form, bool isParent, IFieldGenerator fieldGenerator, IFieldConfiguration config)
             : base(form, !isParent) {...}
+
+        ...
     }
 ```
 
-The HTML for a Field is generated via the `Field` method in the template (or `BeginField` and `EndField` for the start and end HTML for a parent field).
+The HTML for a Field is generated via the `Field` method in the [form template](form-templates.md) (or `BeginField` and `EndField` for the start and end HTML for a parent field).
 
-A Field consists of 4 main sub-components:
+A Field consists of 8 sub-components:
 
-* [Field Element](field-element) - The HTML that makes up a control that accepts data from the user
+* [Field Element](field-element) - The HTML that makes up the control(s) to accept data from the user
 * [Field Label](field-label) - Text that describes a Field Element to a user (and is linked to that Field Element)
 * [Field Validation HTML](field-validation-html) - Markup that acts as a placeholder to display any validation messages for a particular Field Element
 * [Field Configuration](field-configuration) - The configuration for a particular Field, Field Element and/or Field Label
+* [Hint](#hint) - Any hint text that is specified against the field
+* [Required designator](#required-designator) - A visual designator to indicate that the field is required
+* Prepended and appended HTML - Any prepended or appended HTML specified against the field to be added before / after the Field Element
+* Field container - The containing element surrounding the Field Element and other relevant parts of the field
 
-Default usage
--------------
+The [form template](form-templates.md) determines how to lay out these sub-components.
+
+## Default usage
 
 ### Manually specify HTML
 
 If you want to define your own HTML for the Field Element, Field Label and Field Validation HTML then you can do so by using the `Field` method on the Section, e.g.:
 
-```csharp
+```cshtml
 using (var s = f.BeginSection("Title")) {
     @s.Field(new HtmlString("label"), new HtmlString("element")).ChainFieldConfigurationMethodsHere()
     @* Or, if you want to specify all the possible values: *@
@@ -59,7 +69,7 @@ The `Field` method on the Section looks like this:
         /// <param name="metadata">Any field metadata</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
-        public IFieldConfiguration Field(IHtmlString labelHtml, IHtmlString elementHtml, IHtmlString validationHtml = null, ModelMetadata metadata = null, bool isValid = true) {...}
+        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true) {...}
 ```
 
 ### Use a Field Generator to output a single field in a Section
@@ -81,12 +91,12 @@ The `FieldFor` extension method looks like this:
         /// <example>
         /// @s.FieldFor(m => m.FirstName)
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <returns>A field configuration object that allows you to configure the field</returns>
-        public static IFieldConfiguration FieldFor<TModel, T>(this Section<TModel> section, Expression<Func<TModel, T>> property)
+        public static IFieldConfiguration FieldFor<TModel, T>(this ISection<TModel> section, Expression<Func<TModel, T>> property)
         {
             var fc = new FieldConfiguration();
             new Field<TModel>(section.Form, false, section.Form.GetFieldGenerator(property), fc);
@@ -117,13 +127,13 @@ The `BeginFieldFor` extension method looks like this:
         ///     @f.FieldFor(m => m.PositionTitle)
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="section">The section the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
         /// <param name="config">Any configuration information for the field</param>
         /// <returns>The form field</returns>
-        public static Field<TModel> BeginFieldFor<TModel, T>(this Section<TModel> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null)
+        public static Field<TModel> BeginFieldFor<TModel, T>(this ISection<TModel> section, Expression<Func<TModel, T>> property, IFieldConfiguration config = null)
         {
             return new Field<TModel>(section.Form, true, section.Form.GetFieldGenerator(property), config);
         }
@@ -150,7 +160,7 @@ The `FieldFor` extension method looks like this:
         ///     @f.FieldFor(m => m.PositionTitle)
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
         /// <typeparam name="T">The type of the field being generated</typeparam>
         /// <param name="field">The parent field the field is being created in</param>
         /// <param name="property">A lamdba expression to identify the field to render the field for</param>
@@ -163,8 +173,7 @@ The `FieldFor` extension method looks like this:
         }
 ```
 
-Default HTML
-------------
+## Default HTML
 
 ### Field
 
@@ -175,17 +184,25 @@ Default HTML
             </dd>
 ```
 
+### Required designator
+
 The `%requiredDesignator%` is shown if the field is required:
 
 ```html
 <em class="required">*</em>
 ```
 
-The `%hint%` is shown if a hint is specified in the Field Configuration:
+If you want to override the required designator look at [Creating custom form templates > Field](custom-template.md#Field).
+
+### Hint
+
+The `%hint%` is shown if a hint is specified in the [Field Configuration](field-configuration.md):
 
 ```html
-<div class="hint">%hint%</div>
+<div class="hint" id="%fieldId%--hint">%hint%</div>
 ```
+
+If a hint is added then an `aria-describedby="%fieldId%--hint"` attribute value will automatically be added to the field element to [improve accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/forms/Basic_form_hints#Describing_with_ARIA).
 
 ### Begin HTML (parent)
 
@@ -203,8 +220,7 @@ The `%hint%` is shown if a hint is specified in the Field Configuration:
             </dd>
 ```
 
-Twitter Bootstrap 3 HTML
-------------------------
+## Twitter Bootstrap 3 HTML
 
 ### Field: Input (except checkbox and file upload), textarea or select control
 
@@ -281,10 +297,10 @@ The `%requiredDesignator%` is shown if the field is required:
 <em class="required" title="Required">&lowast;</em>
 ```
 
-The `%hint%` is shown if a hint is specified in the Field Configuration:
+The `%hint%` is shown if a [hint](#hint) is specified in the Field Configuration:
 
 ```html
-<div class="help-block form-hint">%hint</div>
+<div class="help-block form-hint" id="%fieldId%--hint">%hint</div>
 ```
 
 ### Input Groups
@@ -301,25 +317,25 @@ A field is in an input group if:
     * The field is required (since the Form Template appends the required designator as an input group add-on); or
     * You use the `AsInputGroup` extension method from the `ChameleonForms.Templates.TwitterBootstrap3` namespace on the `IFieldConfiguration`
 
-In all other situations you will manually need to add wrapping HTML with the relevant classes (e.g. using `Append` and `Prepend` on the Field Configuration).
+In all other situations you will manually need to add wrapping HTML with the relevant classes (e.g. using `Append` and `Prepend` on the [Field Configuration](field-configuration.md)).
 
 As an example of what you can do with the input group consider the following:
 
 ```csharp
-@s.FieldFor(m => m.Int).AsInputGroup().Append(".00").Prepend("$")
+@s.FieldFor(m => m.Dollars).AsInputGroup().Append(".00").Prepend("$")
 ```
 
 This will render like this:
 
 ![Example of int field with input group](int-field-with-bootstrap-input-group.png)
 
-In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you [add the namespace to your `Views\Web.config` file](getting-started#namespaces-in-viewswebconfig).
+In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you instead add the namespace to your `_ViewImports.cshtml` file.
 
 ### Parent field
 
 **Begin HTML**
 
-The HTML is the same as the Field HTML specified above, but the last `<div>` is replaced with:
+The HTML is the same as the Field HTML specified above, but the last `</div>` is replaced with:
 
 ```html
             <div class="row nested-fields">

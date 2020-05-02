@@ -1,5 +1,4 @@
-Textarea Fields
-===============
+# Textarea Fields
 
 If you need to collect multi-line text data using a textarea then you can use the `[DataType]` attribute in `System.ComponentModel.DataAnnotations` to annotate that a string model property is in fact multi-line text, e.g.:
 
@@ -8,8 +7,7 @@ If you need to collect multi-line text data using a textarea then you can use th
 public string TextareaField { get; set; }
 ```
 
-Default HTML
-------------
+## Default HTML
 
 When using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
 
@@ -17,8 +15,7 @@ When using the Default Field Generator then the default HTML of the [Field Eleme
 <textarea %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%">%value%</textarea>
 ```
 
-Configurability
----------------
+## Configurability
 
 ### Specify rows and columns
 

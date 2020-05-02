@@ -1,9 +1,11 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Templates.TwitterBootstrap3;
+using ChameleonForms.Tests.Helpers;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
@@ -14,7 +16,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_field()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration(), false);
 
@@ -24,7 +26,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_field_with_container_class()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().AddFieldContainerClass("a-container-class-1").AddFieldContainerClass("a-container-class-2"), false);
 
@@ -34,7 +36,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_field_with_hint()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().WithHint("hello"), false);
 
@@ -42,16 +44,25 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         }
 
         [Test]
+        public void Output_field_with_hint_id()
+        {
+            var t = new TwitterBootstrap3FormTemplate();
+
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration().WithHint("hello").WithHintId("HintId"), false);
+
+            HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        [Test]
         public void Output_field_with_prepended_and_appended_html()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration()
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
                 .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
                 .WithHint(new HtmlString("<hint>")),
-                false
-            );
+            false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -59,17 +70,14 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_field_with_prepended_and_appended_html_when_input_group()
         {
-            var t = new TwitterBootstrapFormTemplate();
-            var metadata = new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), () => null, typeof(object), "");
-            metadata.IsRequired = true;
+            var t = new TwitterBootstrap3FormTemplate();
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), metadata, new FieldConfiguration()
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), GetRequiredMetadata(), new FieldConfiguration()
                 .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
                 .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
                 .WithHint(new HtmlString("<hint>"))
                 .AsInputGroup(), // This shouldn't take effect since we haven't specified this field can be an input group
-                false
-            );
+            false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -77,19 +85,19 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_field_with_prepended_and_appended_html_when_allowed_input_group()
         {
-            var t = new TwitterBootstrapFormTemplate();
-            var metadata = new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), () => null, typeof(object), "");
-            metadata.IsRequired = true;
+            var t = new TwitterBootstrap3FormTemplate();
+
             var fc = new FieldConfiguration();
             fc.Bag.CanBeInputGroup = true;
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), metadata, fc
-                .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
-                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), GetRequiredMetadata(), fc
+                .Prepend(new HtmlString("<1>"))
+                .Prepend(new HtmlString("<2>"))
+                .Append(new HtmlString("<3>"))
+                .Append(new HtmlString("<4>"))
                 .WithHint(new HtmlString("<hint>"))
                 .AsInputGroup(), // This shouldn't take effect since we haven't specified this field can be an input group
-                false
-            );
+            false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -97,16 +105,15 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_field_with_prepended_and_appended_html_when_required()
         {
-            var t = new TwitterBootstrapFormTemplate();
-            var metadata = new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), () => null, typeof(object), "");
-            metadata.IsRequired = true;
+            var t = new TwitterBootstrap3FormTemplate();
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration()
-                .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
-                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), GetRequiredMetadata(), new FieldConfiguration()
+                .Prepend(new HtmlString("<1>"))
+                .Prepend(new HtmlString("<2>"))
+                .Append(new HtmlString("<3>"))
+                .Append(new HtmlString("<4>"))
                 .WithHint(new HtmlString("<hint>")),
-                false
-            );
+            false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -114,18 +121,17 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_checkbox_field_with_prepended_and_appended_html_when_required()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
             var fc = new FieldConfiguration();
             fc.Bag.IsCheckboxControl = true;
-            var metadata = new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), () => null, typeof(object), "");
-            metadata.IsRequired = true;
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), metadata, fc
-                .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
-                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
-                .WithHint(new HtmlString("<hint>")),
-                false
-            );
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), GetRequiredMetadata(), fc
+                    .Prepend(new HtmlString("<1>"))
+                    .Prepend(new HtmlString("<2>"))
+                    .Append(new HtmlString("<3>"))
+                    .Append(new HtmlString("<4>"))
+                    .WithHint(new HtmlString("<hint>")),
+            false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -133,18 +139,17 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_radio_list_field_with_prepended_and_appended_html_when_required()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
             var fc = new FieldConfiguration();
             fc.Bag.IsRadioOrCheckboxList = true;
-            var metadata = new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), () => null, typeof(object), "");
-            metadata.IsRequired = true;
 
-            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), metadata, fc
-                .Prepend(new HtmlString("<1>")).Prepend(new HtmlString("<2>"))
-                .Append(new HtmlString("<3>")).Append(new HtmlString("<4>"))
+            var result = t.Field(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), GetRequiredMetadata(), fc
+                .Prepend(new HtmlString("<1>"))
+                .Prepend(new HtmlString("<2>"))
+                .Append(new HtmlString("<3>"))
+                .Append(new HtmlString("<4>"))
                 .WithHint(new HtmlString("<hint>")),
-                false
-            );
+            false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -152,7 +157,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_begin_field()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.BeginField(new HtmlString("labelhtml"), new HtmlString("elementhtml"), new HtmlString("validationhtml"), null, new FieldConfiguration(), false);
 
@@ -162,11 +167,22 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_end_field()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.EndField();
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
+        }
+
+        private ModelMetadata GetRequiredMetadata()
+        {
+            var details = new DefaultMetadataDetails(ModelMetadataIdentity.ForType(typeof(string)),
+                ModelAttributes.GetAttributesForType(typeof(string)))
+            {
+                ValidationMetadata = new ValidationMetadata {IsRequired = true}
+            };
+
+            return new DefaultModelMetadata(new EmptyModelMetadataProvider(), new DefaultCompositeMetadataDetailsProvider(new IMetadataDetailsProvider[0]), details);
         }
 
     }

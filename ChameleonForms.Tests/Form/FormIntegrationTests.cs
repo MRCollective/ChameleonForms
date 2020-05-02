@@ -1,10 +1,11 @@
-﻿using System.Web.Mvc;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Tests.FieldGenerator;
-using ChameleonForms.Tests.Helpers;
 using NUnit.Framework;
 using ChameleonForms.Component;
+using ChameleonForms.Tests.Helpers;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Tests.Form
 {
@@ -17,8 +18,9 @@ namespace ChameleonForms.Tests.Form
         [SetUp]
         public void Setup()
         {
-            var autoSubstitute = AutoSubstituteContainer.Create();
-            _h = autoSubstitute.Resolve<HtmlHelper<TestFieldViewModel>>();
+            var context = new MvcTestContext();
+            var viewContext = context.GetViewTestContext<TestFieldViewModel>();
+            _h = viewContext.HtmlHelper;
         }
 
         [Test]
@@ -65,6 +67,21 @@ namespace ChameleonForms.Tests.Form
                 using (var s = f.BeginSection("Section"))
                 {
                     html = s.FieldFor(m => m.NullableDateTime).ToHtmlString();
+                }
+            }
+
+            HtmlApprovals.VerifyHtml(html);
+        }
+
+        [Test]
+        public void Output_field_with_hint_using_default_template()
+        {
+            string html;
+            using (var f = _h.BeginChameleonForm())
+            {
+                using (var s = f.BeginSection("Section"))
+                {
+                    html = s.FieldFor(m => m.NullableDateTime).WithHint("A hint").ToHtmlString();
                 }
             }
 

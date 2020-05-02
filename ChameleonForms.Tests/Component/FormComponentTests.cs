@@ -1,6 +1,5 @@
-﻿using System.Web;
-using ChameleonForms.Component;
-using ChameleonForms.Templates;
+﻿using ChameleonForms.Component;
+using Microsoft.AspNetCore.Html;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -14,8 +13,8 @@ namespace ChameleonForms.Tests.Component
     [TestFixture]
     class FormComponentShould
     {
-       private readonly IHtmlString _beginHtml = new HtmlString("");
-       private readonly IHtmlString _endHtml = new HtmlString("");
+       private readonly IHtmlContent _beginHtml = new HtmlString("");
+       private readonly IHtmlContent _endHtml = new HtmlString("");
 
         public FormComponent<object> Arrange(bool selfClosing)
         {
@@ -33,7 +32,7 @@ namespace ChameleonForms.Tests.Component
             f.Initialise();
 
             f.Form.Received(1).Write(_beginHtml);
-            f.Form.DidNotReceive().Write(Arg.Is<IHtmlString>(h => h != _beginHtml));
+            f.Form.DidNotReceive().Write(Arg.Is<IHtmlContent>(h => h != _beginHtml));
         }
 
         [Test]
@@ -43,7 +42,7 @@ namespace ChameleonForms.Tests.Component
 
             f.Dispose();
 
-            f.Form.DidNotReceive().Write(Arg.Is<IHtmlString>(h => h != _endHtml));
+            f.Form.DidNotReceive().Write(Arg.Is<IHtmlContent>(h => h != _endHtml));
             f.Form.Received(1).Write(_endHtml);
         }
 
@@ -55,15 +54,15 @@ namespace ChameleonForms.Tests.Component
             f.Initialise();
             f.Dispose();
 
-            f.Form.DidNotReceive().Write(Arg.Any<IHtmlString>());
+            f.Form.DidNotReceive().Write(Arg.Any<IHtmlContent>());
         }
 
         [Test]
-        public void Return_null_when_serialising_html_string_if_not_self_closing()
+        public void Return_empty_string_when_serialising_html_string_if_not_self_closing()
         {
             var f = Arrange(!Self.Closing);
 
-            Assert.That(f.ToHtmlString(), Is.Null);
+            Assert.That(f.ToHtmlString(), Is.EqualTo(string.Empty));
         }
 
         [Test]

@@ -1,6 +1,7 @@
 ﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Templates.TwitterBootstrap3;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
@@ -11,7 +12,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_begin_navigation()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.BeginNavigation();
 
@@ -21,7 +22,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_end_navigation()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.EndNavigation();
 

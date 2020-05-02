@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Web;
-using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
 
 namespace ChameleonForms.Component
 {
@@ -22,13 +21,13 @@ namespace ChameleonForms.Component
         }
 
         /// <inheritdoc />
-        public override IHtmlString Begin()
+        public override IHtmlContent Begin()
         {
             return Form.Template.BeginNavigation();
         }
 
         /// <inheritdoc />
-        public override IHtmlString End()
+        public override IHtmlContent End()
         {
             return Form.Template.EndNavigation();
         }
@@ -48,7 +47,7 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="content">The content to display in the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Submit(IHtmlString content)
+        public ButtonHtmlAttributes Submit(IHtmlContent content)
         {
             if (content == null)
                 throw new ArgumentNullException("content", "Content must be specified");
@@ -57,18 +56,43 @@ namespace ChameleonForms.Component
         }
 
         /// <summary>
+        /// Creates the HTML for a submit &lt;button&gt;.
+        /// </summary>
+        /// <param name="content">The content to display in the button as a templated razor delegate</param>
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public ButtonHtmlAttributes Submit(Func<dynamic, IHtmlContent> content)
+        {
+            if (content == null)
+                throw new ArgumentNullException("content", "Content must be specified");
+
+            return Submit(content(null));
+        }
+
+        /// <summary>
         /// Creates the HTML for a submit button that submits a value in the form post when clicked.
         /// </summary>
         /// <param name="name">The name of the element</param>
         /// <param name="value">The value to submit with the form</param>
-        /// <param name="content">The text the user sees (leave as null if you want the user to see the value instead)</param>
+        /// <param name="content">The text the user sees (leave as the default null if you want the user to see the value instead)</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Submit(string name, string value, IHtmlString content = null)
+        public ButtonHtmlAttributes Submit(string name, string value, IHtmlContent content = null)
         {
             if (value == null)
                 throw new ArgumentNullException("value", "Expected value to be specified");
 
             return new ButtonHtmlAttributes(h => Form.Template.Button(content, "submit", name, value, h));
+        }
+
+        /// <summary>
+        /// Creates the HTML for a submit button that submits a value in the form post when clicked.
+        /// </summary>
+        /// <param name="name">The name of the element</param>
+        /// <param name="value">The value to submit with the form</param>
+        /// <param name="content">The text the user sees as a templated razor delegate</param>
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public ButtonHtmlAttributes Submit(string name, string value, Func<dynamic, IHtmlContent> content)
+        {
+            return Submit(name, value, content(null));
         }
 
         /// <summary>
@@ -86,12 +110,22 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="content">The content to display in the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Button(IHtmlString content)
+        public ButtonHtmlAttributes Button(IHtmlContent content)
         {
             if (content == null)
                 throw new ArgumentNullException("content", "Content must be specified");
 
             return new ButtonHtmlAttributes(h => Form.Template.Button(content, null, null, null, h));
+        }
+
+        /// <summary>
+        /// Creates the HTML for a &lt;button&gt;.
+        /// </summary>
+        /// <param name="content">The content to display in the button as a templated razor delegate</param>
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public ButtonHtmlAttributes Button(Func<dynamic, IHtmlContent> content)
+        {
+            return Button(content(null));
         }
 
         /// <summary>
@@ -109,12 +143,22 @@ namespace ChameleonForms.Component
         /// </summary>
         /// <param name="content">The content to display for the button</param>
         /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
-        public ButtonHtmlAttributes Reset(IHtmlString content)
+        public ButtonHtmlAttributes Reset(IHtmlContent content)
         {
             if (content == null)
                 throw new ArgumentNullException("content", "Content must be specified");
 
             return new ButtonHtmlAttributes(h => Form.Template.Button(content, "reset", null, null, h));
+        }
+
+        /// <summary>
+        /// Creates the HTML for a reset &lt;button&gt;.
+        /// </summary>
+        /// <param name="content">The content to display for the button as a templated razor delegate</param>
+        /// <returns>Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML</returns>
+        public ButtonHtmlAttributes Reset(Func<dynamic, IHtmlContent> content)
+        {
+            return Reset(content(null));
         }
     }
 
@@ -140,17 +184,5 @@ namespace ChameleonForms.Component
         {
             return new Navigation<TModel>(form);
         }
-    }
-
-    /// <summary>
-    /// HtmlAttributes class that is returned from button methods that allows for extension methods targetted at buttons.
-    /// </summary>
-    public class ButtonHtmlAttributes : LazyHtmlAttributes
-    {
-        /// <summary>
-        /// Construct a ButtonHtmlAttributes class.
-        /// </summary>
-        /// <param name="htmlGenerator">The generator to use to generate the HTML when .ToHtmlString() is called</param>
-        public ButtonHtmlAttributes(Func<HtmlAttributes, IHtmlString> htmlGenerator) : base(htmlGenerator) {}
     }
 }

@@ -4,20 +4,20 @@
 
 ## The core problems with HTML form development
 
-Building HTML forms is a pain. All developers know it. There are so many places where inconsistencies and repetition come into play and make it harder to read, write and maintain the code (bare with us - we know ASP.NET MVC solves a lot of this):
+Building HTML forms is a pain. All developers know it. There are so many places where inconsistencies and repetition come into play and make it harder to read, write and maintain the code (bare with us - we know ASP.NET Core MVC solves a lot of this):
 
 * There is repetition in referencing each field in the form in numerous locations - setting default values, specifying server-side validation rules, specifying client-side validation rules and printing out the HTML for each field
 * Writing out the HTML for the form is tedious because 95% of the time each field has practically the same boilerplate template HTML (e.g. `<li>` with label followed by field, `<dl>` with label in the `<dt>` and element in the `<dd>`, etc.) except for the field id (and the label - usually based on the field id) repeated a few times, and occasionally a different type of form control (e.g. `select` or `textarea`)
     * It's the other 5% of cases that are interesting and you want to spend most of your time on - not the boring 95%!
 * Similarly, the repetition between server-side and client-side validation is tedious
-* You need to be careful when printing out the HTML to ensure there is no possibility of HTML injection (i.e. you need to use `HttpUtility.HtmlEncode` (ASP.NET), `HTMLEditFormat` (ColdFusion), `htmlentities` (PHP), etc.) when printing out all variables
+* You need to be careful when printing out the HTML to ensure there is no possibility of HTML injection (i.e. you need to use `WebUtility.HtmlEncode` (ASP.NET Core), `HTMLEditFormat` (ColdFusion), `htmlentities` (PHP), etc.) when printing out all variables
 * You need to be careful to include labels for all fields for accessibility reasons and ensure their ids match up; it’s easy to miss a few if you are copying and pasting the same HTML for each field and changing a few attributes
 
 Without continuing further with other reasons, the above list serves to demonstrate that, at its core, the process of creating a form is a tedious and repetitive process and certainly does not conform to the [DRY principle](http://en.wikipedia.org/wiki/Don't_repeat_yourself). This means that (without "help") form creation is often an error-prone process, resulting in inconsistencies, hard-to-maintain code and potential security, usability and accessibility holes.
 
 ## Enter ASP.NET MVC
 
-Of course a lot of the problems that we described above are not an issue when using ASP.NET MVC:
+Of course a lot of the problems that we described above are not an issue when using ASP.NET Core MVC:
 
 * The compiler fixes a lot of the repetition issues when referencing the field in multiple places, since intellisense and the compiler make sure you consistently reference a property in your model class
 * You can easily output the HTML for the label or the field using the HTML helpers
@@ -34,15 +34,16 @@ ASP.NET MVC covers most of the pain points with building HTML forms that were de
     * You have little flexibility to account for the 5% of cases (let alone any little tweaks you want to make to fields that can't be accommodated with the attributes that Editor Templates know about - e.g. hints, html attributes, multiple fields appearing together, etc.)
     * You will have inconsistencies across the site if you sometimes use `Html.EditorForModel` and sometimes don't - this makes the site harder to understand and maintain for new developers and makes it harder to consistently apply changes to your templates
     * You need to create a [confusing editor template with reflection in it](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-3-default-templates.html) to change the default form template (but at least you can specify it in one place making it easier to modify consistently across your application when your template changes)
-* If you are not using `Html.EditorForModel` (i.e. you specify each field individually)
+* If you are not using `Html.EditorForModel` (i.e. you specify each field individually using built-in HTML Helpers or Tag Helpers)
     * It's possible to incorrectly link the wrong property for the label for a field (e.g. a copy-paste error) - usually it should be picked up though since the label text will also not match
     * You need to repeat the template boilerplate both within and across your forms (if using `Html.EditorFor` or `Html.TextBoxFor` etc.), or you are required to create a new control for every type of property you are using (if using the [master template technique](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-5-master-page-templates.html))
+    * You need to specify the type of control to output (e.g. `<select>`, `<input>`, etc. rather than having it inferred from your model)
 * You don't have support for things like enums showing as a select list
 * It's difficult to switch output behaviour on a per-field basis e.g. what if you want a particular enum field to display as a list of radio buttons rather than a select list
 * The support for all of the scenarios around handling when a field is required or not required and when to show an empty/default option are not adequately covered for (even though it's something that comes up a lot)
 
 ## Where does ChameleonForms fit in?
-ChameleonForms was created to leverage the advantages of ASP.NET MVC while bridging the gap of the deficiencies described above. It's also designed to provide a lot of nice functionality to help make form development *better*.
+ChameleonForms was created to leverage the advantages of ASP.NET Core MVC while bridging the gap of the deficiencies described above. It's also designed to provide a lot of nice functionality to help make form development *better*.
 
 ChameleonForms:
 
@@ -50,7 +51,7 @@ ChameleonForms:
 * Encourages you to specify the structure of your form in a way that provides a lot of **consistency within and across your forms**
 * Encourages a **minimum of repetition** - most of the time you only need to specify the property of the field you are outputting and it will work out everything else (label, validation HTML, field type based on model metadata, etc.)
 * Gives you the flexibility to **make tweaks to each field quickly, easily and consistently** using a discoverable, fluent API
-* Has a lot of nice support in **handling some of the things that are a pain in out-of-the-box ASP.NET MVC**:
+* Has a lot of nice support in **handling some of the things that are a pain in out-of-the-box ASP.NET Core MVC**:
     * binding and validating dates in different formats
     * showing enums as drop-down lists or lists of radio buttons
     * correctly handling multiple-select controls
@@ -70,4 +71,4 @@ At that point you have two problems:
 When this happens this is a good indicator that whatever solution you are using goes too far. Ideally, forms libraries should accept that you can't cover all cases and make it easy to opt out of using the library in the middle of a form. As explained above, addressing this is a core design element of ChameleonForms.
 
 ## Display Templates
-One aspect that hasn't been covered, which is somewhat unique to ASP.NET MVC is Display Templates. This is one area that ChameleonForms doesn't (currently - [see the backlog on Trello](https://trello.com/b/fSuyhwNZ)) cover in any way. This is actually a deliberate decision (to deprioritise that functionality) because we generally find that Display Templates aren't very useful - particularly with the terseness of Razor. Generally you will want more flexibility than Display Templates provide. If you find Display Templates useful and use them extensively then ChameleonForms might not be the right library for you (but we'd love to hear about your usecase so [please submit an issue](https://github.com/MRCollective/ChameleonForms/issues)!).
+One aspect that hasn't been covered, which is somewhat unique to ASP.NET Core MVC is Display Templates. This is one area that ChameleonForms doesn't cover in any way. This is actually a deliberate decision because we generally find that Display Templates aren't very useful - particularly with the terseness of Razor. Generally you will want more flexibility than Display Templates provide. If you find Display Templates useful and use them extensively then ChameleonForms might not be the right library for you (but we'd love to hear about your usecase so [please submit an issue](https://github.com/MRCollective/ChameleonForms/issues)!).

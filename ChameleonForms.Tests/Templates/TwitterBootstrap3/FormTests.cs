@@ -1,8 +1,10 @@
-﻿using System.Web.Mvc;
+﻿
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates.TwitterBootstrap3;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
@@ -14,7 +16,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Begin_form_with_enctype()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.BeginForm("/", FormMethod.Post, new HtmlAttributes(data_attr => "value"), EncType.Multipart);
 
@@ -24,7 +26,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Begin_form_without_enctype()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.BeginForm("/", FormMethod.Post, null, null);
 
@@ -34,7 +36,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void End_form()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.EndForm();
 

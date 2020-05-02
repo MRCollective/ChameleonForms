@@ -1,42 +1,33 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Example", "ChameleonForms.Example\ChameleonForms.Example.csproj", "{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms", "ChameleonForms\ChameleonForms.csproj", "{854754FE-F40A-47EB-B32D-646E8F35C65F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{07599B0A-359D-45A6-90A0-D5D2356C7DFD}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms", "ChameleonForms\ChameleonForms.csproj", "{854754FE-F40A-47EB-B32D-646E8F35C65F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.Tests", "ChameleonForms.Tests\ChameleonForms.Tests.csproj", "{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Tests", "ChameleonForms.Tests\ChameleonForms.Tests.csproj", "{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{950DEBD6-FCA3-47B8-9E1F-0005E79BD664}"
 	ProjectSection(SolutionItems) = preProject
-		AppStart.cs.pp = AppStart.cs.pp
-		AppStart.TwitterBootstrap.cs.pp = AppStart.TwitterBootstrap.cs.pp
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
 		BREAKING_CHANGES.md = BREAKING_CHANGES.md
 		ChameleonForms.nuspec = ChameleonForms.nuspec
-		ChameleonForms.TwitterBootstrap3.nuspec = ChameleonForms.TwitterBootstrap3.nuspec
+		build\ChameleonForms.targets = build\ChameleonForms.targets
 		GitVersionConfig.yaml = GitVersionConfig.yaml
 		LICENSE = LICENSE
 		logo.png = logo.png
 		mkdocs.yml = mkdocs.yml
 		README.md = README.md
 		ChameleonForms\readme.txt = ChameleonForms\readme.txt
-		web.config.transform = web.config.transform
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChameleonForms.AcceptanceTests", "ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj", "{67A08E34-2498-404D-9869-E13F4F496B3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.AcceptanceTests", "ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj", "{67A08E34-2498-404D-9869-E13F4F496B3E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-CB64-4380-A326-C5562973F32F}"
 	ProjectSection(SolutionItems) = preProject
-		docs\auto-sentence-case.md = docs\auto-sentence-case.md
+		docs\account-signup-render.png = docs\account-signup-render.png
+		docs\labels.md = docs\labels.md
 		docs\boolean.md = docs\boolean.md
 		docs\bootstrap-buttons.png = docs\bootstrap-buttons.png
 		docs\bootstrap-example-banner.png = docs\bootstrap-example-banner.png
@@ -50,6 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-C
 		docs\default-fields.md = docs\default-fields.md
 		docs\Diagrams.docx = docs\Diagrams.docx
 		docs\different-form-models.md = docs\different-form-models.md
+		docs\email.md = docs\email.md
 		docs\enum.md = docs\enum.md
 		docs\extending-field-configuration.md = docs\extending-field-configuration.md
 		docs\extending-form-components.md = docs\extending-form-components.md
@@ -72,6 +64,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-C
 		docs\multiple-enum.md = docs\multiple-enum.md
 		docs\multiple-list.md = docs\multiple-list.md
 		docs\navigation.png = docs\navigation.png
+		docs\number.md = docs\number.md
 		docs\partials.md = docs\partials.md
 		docs\password.md = docs\password.md
 		docs\section.png = docs\section.png
@@ -80,8 +73,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F6A47230-C
 		docs\the-message.md = docs\the-message.md
 		docs\the-navigation.md = docs\the-navigation.md
 		docs\the-section.md = docs\the-section.md
+		docs\uri.md = docs\uri.md
 		docs\why.md = docs\why.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Example", "ChameleonForms.Example\ChameleonForms.Example.csproj", "{10EC89A6-AFB9-4E74-B22A-5D8C42183668}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Templates", "ChameleonForms.Templates\ChameleonForms.Templates.csproj", "{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChameleonForms.Core", "ChameleonForms.Core\ChameleonForms.Core.csproj", "{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,12 +90,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{854754FE-F40A-47EB-B32D-646E8F35C65F}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
 		{854754FE-F40A-47EB-B32D-646E8F35C65F}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
 		{854754FE-F40A-47EB-B32D-646E8F35C65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -114,8 +108,29 @@ Global
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67A08E34-2498-404D-9869-E13F4F496B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10EC89A6-AFB9-4E74-B22A-5D8C42183668}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AC78709-0F48-4D0A-9295-A4097F9D5CAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.CodeAnalysis|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.CodeAnalysis|Any CPU.Build.0 = Debug|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE350B7C-9D41-4024-B57B-F5CF3F5270BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E5A6E79-7EDF-4105-8679-B892FD11799D}
 	EndGlobalSection
 EndGlobal

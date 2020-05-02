@@ -1,15 +1,15 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using Autofac;
-using AutofacContrib.NSubstitute;
-using ChameleonForms.Enums;
+﻿using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
-using ChameleonForms.Templates.Default;
 using ChameleonForms.Templates.TwitterBootstrap3;
 using ChameleonForms.Tests.Helpers;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
 using NUnit.Framework;
+using DefaultFormTemplate = ChameleonForms.Templates.Default.DefaultFormTemplate;
 
 namespace ChameleonForms.Tests
 {
@@ -59,7 +59,7 @@ namespace ChameleonForms.Tests
             var f2 = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
 
             Assert.That(f2, Is.Not.Null);
-            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlString>(h => h.ToHtmlString() == t.BeginForm(Action, Method, _htmlAttributes, Enctype).ToHtmlString()));
+            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlContent>(h => h.ToHtmlString() == t.BeginForm(Action, Method, _htmlAttributes, Enctype).ToHtmlString()));
         }
 
         [Test]
@@ -110,11 +110,11 @@ namespace ChameleonForms.Tests
         [Test]
         public void Construct_form_via_extension_method_using_default_template_defined_by_user()
         {
-            FormTemplate.Default = new TwitterBootstrapFormTemplate();
+            _context.ProvideTemplate(new TwitterBootstrap3FormTemplate());
 
             var f = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
 
-            Assert.That(f.Template, Is.TypeOf<TwitterBootstrapFormTemplate>());
+            Assert.That(f.Template, Is.TypeOf<TwitterBootstrap3FormTemplate>());
         }
 
         [Test]
@@ -127,42 +127,40 @@ namespace ChameleonForms.Tests
             Assert.That(g, Is.TypeOf<DefaultFieldGenerator<TestFieldViewModel, string>>());
         }
 
-        private AutoSubstitute _autoSubstitute;
         private HtmlHelper<TestFieldViewModel> _h;
         private IFormTemplate _t;
 
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
+        private readonly IHtmlContent _beginHtml = new HtmlString("");
+        private readonly IHtmlContent _endHtml = new HtmlString("");
 
         private const string Action = "/";
         private const FormMethod Method = FormMethod.Post;
         private const EncType Enctype = EncType.Multipart;
         private readonly HtmlAttributes _htmlAttributes = new HtmlAttributes();
+        private MvcTestContext _context;
 
         [SetUp]
         public void Setup()
         {
-            _autoSubstitute = AutoSubstituteContainer.Create();
-            _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<TestFieldViewModel>>();
-            _t = _autoSubstitute.Resolve<IFormTemplate>();
+            _context = new MvcTestContext();
+            var viewContext = _context.GetViewTestContext<TestFieldViewModel>();
+
+            _h = viewContext.HtmlHelper;
+
+            _t = Substitute.For<IFormTemplate>();
             _t.BeginForm(Action, Method, _htmlAttributes, Enctype).Returns(_beginHtml);
             _t.EndForm().Returns(_endHtml);
         }
 
         private Form<TestFieldViewModel> CreateForm()
         {
-            return _autoSubstitute.Resolve<Form<TestFieldViewModel>>(
-                new NamedParameter("action", Action),
-                new NamedParameter("method", Method),
-                new NamedParameter("htmlAttributes", _htmlAttributes),
-                new NamedParameter("enctype", Enctype)
-            );
+            return new Form<TestFieldViewModel>(_h, _t, Action, Method, _htmlAttributes, Enctype);
         }
 
         [TearDown]
         public void Teardown()
         {
-            FormTemplate.Default = new DefaultFormTemplate();
+            _context.Dispose();
         }
 
         public class TestFieldViewModel

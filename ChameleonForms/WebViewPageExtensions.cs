@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Web.Mvc;
+
 using ChameleonForms.Component;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ChameleonForms
 {
@@ -21,7 +23,7 @@ namespace ChameleonForms
         /// <typeparam name="TPartialViewModel">View model type of the partial view</typeparam>
         /// <param name="partial">View page for partial view</param>
         /// <returns>current partial view model expression</returns>
-        public static LambdaExpression PartialModelExpression<TPartialViewModel>(this WebViewPage<TPartialViewModel> partial)
+        public static LambdaExpression PartialModelExpression<TPartialViewModel>(this RazorPage<TPartialViewModel> partial)
         {
             object expression;
             if (!partial.ViewData.TryGetValue(PartialViewModelExpressionViewDataKey, out expression))
@@ -43,7 +45,7 @@ namespace ChameleonForms
         /// <typeparam name="TPartialViewModel">View model of the partial view</typeparam>
         /// <param name="partial">View page for partial view</param>
         /// <returns>Current form section</returns>
-        public static ISection<TPartialViewModel> FormSection<TPartialViewModel>(this WebViewPage<TPartialViewModel> partial)
+        public static ISection<TPartialViewModel> FormSection<TPartialViewModel>(this RazorPage<TPartialViewModel> partial)
         {
             object currentSection;
             if (!partial.ViewData.TryGetValue(CurrentFormSectionViewDataKey, out currentSection))
@@ -65,13 +67,15 @@ namespace ChameleonForms
         /// <typeparam name="TPartialViewModel">View model of the partial view</typeparam>
         /// <param name="partial">View page for partial view</param>
         /// <returns>Current form</returns>
-        public static IForm<TPartialViewModel> Form<TPartialViewModel>(this WebViewPage<TPartialViewModel> partial)
+        public static IForm<TPartialViewModel> Form<TPartialViewModel>(this RazorPage<TPartialViewModel> partial)
         {
             object currentForm;
             if (!partial.ViewData.TryGetValue(CurrentFormViewDataKey, out currentForm))
+            {
                 throw new InvalidOperationException("Not currently inside a form section.");
+            }
 
-            return (currentForm as IForm).CreatePartialForm(partial.PartialModelExpression(), partial.Html);
+            return (currentForm as IForm).CreatePartialForm<TPartialViewModel>(partial.PartialModelExpression(), (HtmlHelper<TPartialViewModel>)((dynamic)partial).Html);
         }
 
         /// <summary>
@@ -80,7 +84,7 @@ namespace ChameleonForms
         /// <typeparam name="TPartialViewModel">View model of the partial view</typeparam>
         /// <param name="partial">View page for partial view</param>
         /// <returns>Whether the view is within a form section</returns>
-        public static bool IsInFormSection<TPartialViewModel>(this WebViewPage<TPartialViewModel> partial)
+        public static bool IsInFormSection<TPartialViewModel>(this RazorPage<TPartialViewModel> partial)
         {
             object currentSection;
             return partial.ViewData.TryGetValue(CurrentFormSectionViewDataKey, out currentSection);

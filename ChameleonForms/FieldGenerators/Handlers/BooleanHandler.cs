@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -25,18 +25,18 @@ namespace ChameleonForms.FieldGenerators.Handlers
         /// <inheritdoc />
         public override bool CanHandle()
         {
-            return GetUnderlyingType(FieldGenerator) == typeof(bool)
-                && !HasEnumerableValues(FieldGenerator);
+            return FieldGenerator.GetUnderlyingType() == typeof(bool)
+                   && !FieldGenerator.HasEnumerableValues();
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             if (GetDisplayType(fieldConfiguration) == FieldDisplayType.Checkbox)
                 return GetSingleCheckboxHtml(fieldConfiguration);
 
             var selectList = GetBooleanSelectList(fieldConfiguration);
-            return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
+            return GetSelectListHtml(selectList, fieldConfiguration);
         }
 
         /// <inheritdoc />
@@ -63,11 +63,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
             return FieldGenerator.GetValue() as bool?;
         }
 
-        private IHtmlString GetSingleCheckboxHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        private IHtmlContent GetSingleCheckboxHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var attrs = new HtmlAttributes(fieldConfiguration.HtmlAttributes);
-            AdjustHtmlForModelState(attrs, FieldGenerator);
-            var fieldhtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(FieldGenerator), GetValue() ?? false, attrs);
+            AdjustHtmlForModelState(attrs);
+            var fieldHtml = HtmlCreator.BuildSingleCheckbox(GetFieldName(), GetValue() ?? false, attrs);
 
             if (fieldConfiguration.HasInlineLabel)
             {
@@ -75,22 +75,32 @@ namespace ChameleonForms.FieldGenerators.Handlers
                 {
                     var inlineLabelText = fieldConfiguration.InlineLabelText;
 
-                    var content = fieldhtml.ToHtmlString() + " " + (inlineLabelText != null ? inlineLabelText.ToHtmlString() : FieldGenerator.GetFieldDisplayName());
-
-                    return HtmlCreator.BuildLabel(null, new HtmlString(content), null);
+                    var contentBuilder = new HtmlContentBuilder();
+                    contentBuilder.AppendHtml(fieldHtml);
+                    contentBuilder.Append(" ");
+                    if(inlineLabelText != null)
+                    {
+                        contentBuilder.AppendHtml(inlineLabelText);
+                    }
+                    else
+                    {
+                        contentBuilder.Append(FieldGenerator.GetFieldDisplayName());
+                    }
+                    
+                    return HtmlCreator.BuildLabel(null, contentBuilder, null);
                 }
                 else
                 {
-                    return new HtmlString(string.Format("{0} {1}", fieldhtml, HtmlCreator.BuildLabel(
-                        GetFieldName(FieldGenerator),
-                        fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),
-                        null
-                        )));
+                    
+                    return new HtmlContentBuilder()
+                        .AppendHtml(fieldHtml)
+                        .Append(" ")
+                        .AppendHtml(HtmlCreator.BuildLabel(GetFieldName(), fieldConfiguration.InlineLabelText ?? FieldGenerator.GetFieldDisplayName().ToHtml(),  null));
                 }
             }
             else
             {
-                return fieldhtml;
+                return fieldHtml;
             }
         }
 

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Html;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
 using ChameleonForms.Utils;
 using JetBrains.Annotations;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ChameleonForms
 {
@@ -35,7 +35,7 @@ namespace ChameleonForms
         /// <summary>
         /// The HTML helper for the current view.
         /// </summary>
-        HtmlHelper<TModel> HtmlHelper { get; }
+        IHtmlHelper<TModel> HtmlHelper { get; }
         /// <summary>
         /// The template renderer for the current view.
         /// </summary>
@@ -43,8 +43,8 @@ namespace ChameleonForms
         /// <summary>
         /// Writes a HTML String directly to the view's output.
         /// </summary>
-        /// <param name="htmlString">The HTML to write to the view's output</param>
-        void Write(IHtmlString htmlString);
+        /// <param name="htmlContent">The HTML to write to the view's output</param>
+        void Write(IHtmlContent htmlContent);
 
         /// <summary>
         /// The field generator for the given field.
@@ -59,7 +59,7 @@ namespace ChameleonForms
     public class Form<TModel> : IForm<TModel>
     {
         /// <inheritdoc />
-        public HtmlHelper<TModel> HtmlHelper { get; private set; }
+        public IHtmlHelper<TModel> HtmlHelper { get; private set; }
         /// <inheritdoc />
         public IFormTemplate Template { get; private set; }
 
@@ -73,7 +73,7 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use expressed as an anonymous object</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
-        public Form(HtmlHelper<TModel> helper, IFormTemplate template, string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        public Form(IHtmlHelper<TModel> helper, IFormTemplate template, string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
         {
             HtmlHelper = helper;
             Template = template;
@@ -84,9 +84,9 @@ namespace ChameleonForms
         }
 
         /// <inheritdoc />
-        public virtual void Write(IHtmlString htmlString)
+        public virtual void Write(IHtmlContent htmlContent)
         {
-            HtmlHelper.ViewContext.Writer.Write(htmlString);
+            HtmlHelper.ViewContext.Writer.Write(htmlContent);
         }
 
         /// <inheritdoc />
@@ -136,9 +136,9 @@ namespace ChameleonForms
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TModel> BeginChameleonForm<TModel>(this HtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TModel> BeginChameleonForm<TModel>(this IHtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
-            return new Form<TModel>(helper, FormTemplate.Default, action, method, htmlAttributes, enctype);
+            return new Form<TModel>(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace ChameleonForms
         /// <param name="form">The form</param>
         /// <param name="partialViewName">The name of the partial view to render</param>
         /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlString Partial<TModel>(this IForm<TModel> form, [AspMvcPartialView] string partialViewName)
+        public static IHtmlContent Partial<TModel>(this IForm<TModel> form, [AspMvcPartialView] string partialViewName)
         {
             return PartialFor(form, m => m, partialViewName);
         }
@@ -163,16 +163,13 @@ namespace ChameleonForms
         /// <param name="partialModelProperty">The property to use for the partial model</param>
         /// <param name="partialViewName">The name of the partial view to render</param>
         /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlString PartialFor<TModel, TPartialModel>(this IForm<TModel> form, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
+        public static IHtmlContent PartialFor<TModel, TPartialModel>(this IForm<TModel> form, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
         {
-            var formModel = (TModel) form.HtmlHelper.ViewData.ModelMetadata.Model;
-            var expressionText = ExpressionHelper.GetExpressionText(partialModelProperty);
+            var formModel = (TModel) form.HtmlHelper.ViewData.Model;
             var viewData = new ViewDataDictionary(form.HtmlHelper.ViewData);
             viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
             viewData[WebViewPageExtensions.CurrentFormViewDataKey] = form;
-            viewData.TemplateInfo = new TemplateInfo {
-                HtmlFieldPrefix = form.HtmlHelper.ViewData.TemplateInfo.GetFullHtmlFieldName(expressionText),
-            };
+            viewData.TemplateInfo.HtmlFieldPrefix = form.HtmlHelper.GetFullHtmlFieldName(partialModelProperty);
             return form.HtmlHelper.Partial(partialViewName, partialModelProperty.Compile().Invoke(formModel), viewData);
         }
 
@@ -194,10 +191,10 @@ namespace ChameleonForms
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this HtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this IHtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             var childHelper = helper.For(formFor, bindFieldsToParent: false);
-            return new Form<TChildModel>(childHelper, FormTemplate.Default, action, method, htmlAttributes, enctype);
+            return new Form<TChildModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
         }
 
         /// <summary>
@@ -213,7 +210,7 @@ namespace ChameleonForms
         /// }
         /// </example>
         /// <remarks>
-        /// This can also be done using the For() extension method and just a type:
+        /// This can also be done using the For() HTML helper extension method and just a type:
         /// @using (var f = Html.For&lt;AnotherModelType&gt;().BeginChameleonForm(...)) {
         ///     ...
         /// }
@@ -227,10 +224,10 @@ namespace ChameleonForms
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this HtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this IHtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
             var childHelper = helper.For(model);
-            return new Form<TNewModel>(childHelper, FormTemplate.Default, action, method, htmlAttributes, enctype);
+            return new Form<TNewModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
         }
     }
 }

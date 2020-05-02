@@ -1,225 +1,37 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2C424EBF-3B1E-4E01-AAFC-5407EC9B4CD0}</ProjectGuid>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChameleonForms.Tests</RootNamespace>
-    <AssemblyName>ChameleonForms.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <TargetFrameworkProfile />
-    <RestorePackages>true</RestorePackages>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="ApprovalTests, Version=3.0.0.0, Culture=neutral, PublicKeyToken=11bd7d124fc62e0f, processorArchitecture=MSIL">
-      <HintPath>..\packages\ApprovalTests.3.0.9\lib\net40\ApprovalTests.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ApprovalUtilities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=11bd7d124fc62e0f, processorArchitecture=MSIL">
-      <HintPath>..\packages\ApprovalUtilities.3.0.9\lib\net35\ApprovalUtilities.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="AutofacContrib.NSubstitute, Version=3.1.3.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AutofacContrib.NSubstitute.3.1.3\lib\NET40\AutofacContrib.NSubstitute.dll</HintPath>
-    </Reference>
-    <Reference Include="FizzWare.NBuilder">
-      <HintPath>..\packages\NBuilder.3.0.1.1\lib\FizzWare.NBuilder.dll</HintPath>
-    </Reference>
-    <Reference Include="Humanizer">
-      <HintPath>..\packages\Humanizer.1.28.0\lib\portable-win+net40+sl50+wp8+wpa81\Humanizer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="NSubstitute, Version=1.6.1.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NSubstitute.1.6.1.0\lib\NET40\NSubstitute.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IO">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.6\lib\net40\System.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http, Version=2.2.18.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Extensions, Version=2.2.18.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\net40\System.Net.Http.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Primitives, Version=2.2.18.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\net40\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest, Version=2.2.18.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.6\lib\net40\System.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.6\lib\net40\System.Threading.Tasks.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Attributes\ExistsInAttributeTests.cs" />
-    <Compile Include="Attributes\RequiredFlagsEnumAttributeTests.cs" />
-    <Compile Include="Component\Config\FieldConfigurationTests.cs" />
-    <Compile Include="Component\NavigationTests.cs" />
-    <Compile Include="Component\MessageTests.cs" />
-    <Compile Include="Component\FieldTests.cs" />
-    <Compile Include="Component\FormComponentTests.cs" />
-    <Compile Include="Component\SectionTests.cs" />
-    <Compile Include="ExtensionsTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGeneratorTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\BooleanTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\DateTimeTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\FlagsEnumTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\EnumTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\FieldGeneratorTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\InputTests.cs" />
-    <Compile Include="FieldGenerator\DefaultFieldGenerator\ListTests.cs" />
-    <Compile Include="FieldGenerator\Handlers\BooleanHandlerTests.cs" />
-    <Compile Include="FieldGenerator\Handlers\ListHandlerTests.cs" />
-    <Compile Include="FieldGenerator\Handlers\EnumListHandlerTests.cs" />
-    <Compile Include="FieldGenerator\Handlers\TextAreaHandlerTests.cs" />
-    <Compile Include="FieldGenerator\Handlers\PasswordHandlerTests.cs" />
-    <Compile Include="FieldGenerator\Handlers\FileHandlerTests.cs" />
-    <Compile Include="FieldGenerator\Handlers\DefaultHandlerTests.cs" />
-    <Compile Include="FieldGenerator\Handlers\DateTimeHandlerTests.cs" />
-    <Compile Include="FieldGenerator\Handlers\FieldGeneratorHandlerTest.cs" />
-    <Compile Include="Form\FormIntegrationTests.cs" />
-    <Compile Include="FormTests.cs" />
-    <Compile Include="Helpers\AutoSubstituteHelper.cs" />
-    <Compile Include="Helpers\ChangeCulture.cs" />
-    <Compile Include="HtmlHelperExtensionsTests.cs" />
-    <Compile Include="HumanizedLabelsTests.cs" />
-    <Compile Include="ModelBinders\FlagsEnumModelBinderShould.cs" />
-    <Compile Include="ModelBinders\DateTimeModelBinderShould.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Templates\LazyHtmlAttributesTests.cs" />
-    <Compile Include="Templates\TwitterBootstrap3\ButtonTests.cs" />
-    <Compile Include="Templates\TwitterBootstrap3\FieldTests.cs" />
-    <Compile Include="Templates\TwitterBootstrap3\FormTests.cs" />
-    <Compile Include="Templates\TwitterBootstrap3\MessageTests.cs" />
-    <Compile Include="Templates\TwitterBootstrap3\NavigationTests.cs" />
-    <Compile Include="Templates\TwitterBootstrap3\PrepareFieldConfigurationTests.cs" />
-    <Compile Include="Templates\TwitterBootstrap3\RadioListTests.cs" />
-    <Compile Include="Templates\TwitterBootstrap3\SectionTests.cs" />
-    <Content Include="Scripts\fixtures\DateTimeValidationFixtures.js" />
-    <Compile Include="Templates\Default\DefaultFormTemplateTests.cs" />
-    <Compile Include="Templates\HtmlCreatorTests.cs" />
-    <Compile Include="Templates\HtmlAttributesTests.cs" />
+    <PackageReference Include="ApprovalTests" Version="3.0.18" />
+    <PackageReference Include="ApprovalUtilities" Version="3.0.18" />
+    <PackageReference Include="coverlet.collector" Version="1.2.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Humanizer" Version="2.5.16" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.Core" Version="3.1.2" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.TempData" Version="3.1.2" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.ViewComponents" Version="3.1.2" />
+    <PackageReference Include="NBuilder" Version="6.0.0" />
+    <PackageReference Include="NSubstitute" Version="3.1.0" />
+    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.12.0" />
+    <PackageReference Include="PublicApiGenerator" Version="10.0.2" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\ChameleonForms.AcceptanceTests\ChameleonForms.AcceptanceTests.csproj">
-      <Project>{67A08E34-2498-404D-9869-E13F4F496B3E}</Project>
-      <Name>ChameleonForms.AcceptanceTests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ChameleonForms.Example\ChameleonForms.Example.csproj">
-      <Project>{A51A9FA4-12D6-4980-BEF9-D1DED004F16C}</Project>
-      <Name>ChameleonForms.Example</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj">
-      <Project>{854754fe-f40a-47eb-b32d-646e8f35c65f}</Project>
-      <Name>ChameleonForms</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\ChameleonForms.Example\ChameleonForms.Example.csproj" />
+    <ProjectReference Include="..\ChameleonForms.Templates\ChameleonForms.Templates.csproj" />
+    <ProjectReference Include="..\ChameleonForms\ChameleonForms.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="Scripts\chutzpah.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\lib\data-driven.js" />
-    <Content Include="Scripts\lib\jasmine-2.0.0\boot.js" />
-    <Content Include="Scripts\lib\jasmine-2.0.0\console.js" />
-    <Content Include="Scripts\lib\jasmine-2.0.0\jasmine-html.js" />
-    <Content Include="Scripts\lib\jasmine-2.0.0\jasmine.css" />
-    <Content Include="Scripts\lib\jasmine-2.0.0\jasmine.js" />
-    <Content Include="Scripts\lib\jasmine-2.0.0\jasmine_favicon.png" />
-    <Content Include="Scripts\ManuallyRunSpecs.html" />
-    <Content Include="Scripts\spec\DateTimeValidationSpec.js" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" />
-  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
-    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.13\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

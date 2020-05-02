@@ -1,15 +1,17 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
 using System.IO;
-using System.Web.Mvc;
+
 
 namespace ChameleonForms.Utils
 {
     internal class SwapHtmlHelperWriter<TModel> : IDisposable
     {
-        private readonly HtmlHelper<TModel> _htmlHelper;
+        private readonly IHtmlHelper<TModel> _htmlHelper;
         private readonly TextWriter _oldWriter;
 
-        public SwapHtmlHelperWriter(HtmlHelper<TModel> htmlHelper, TextWriter writer)
+        public SwapHtmlHelperWriter(IHtmlHelper<TModel> htmlHelper, TextWriter writer)
         {
             _htmlHelper = htmlHelper;
             _oldWriter = htmlHelper.ViewContext.Writer;

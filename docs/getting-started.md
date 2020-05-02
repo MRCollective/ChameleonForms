@@ -1,17 +1,126 @@
 # Getting Started with Chameleon Forms
 
-## What does ChameleonForms do for me?
+## Getting started
 
-Chameleon Forms provides an object hierarchy that allows you to declaratively specify the structure of your form. From there:
+### Prerequisites
 
-* It will output the boilerplate template of your form by way of a form template
-* It will discern a number of defaults about each field based on inspecting the model metadata for each property
-* It will allow you to tweak individual fields by chaining methods using the fluent api off of each field (and some other elements such as submit buttons) declaration
-* If gives you the freedom to break out into HTML/Razor anywhere in the form when the template / built-in structures don't meet your needs
+This library works against netcoreapp3.1. If you are using a different version of .NET Core or are running ASP.NET Core against Full Framework then feel free to [raise an issue](https://github.com/MRCollective/ChameleonForms/issues) to discuss opening up broader support. If you are using ASP.NET MVC 5 then check out v3.0.3 of the [NuGet package](https://www.nuget.org/packages/ChameleonForms/3.0.3) and [documentation](https://chameleonforms.readthedocs.io/en/3.0.3/).
 
-It makes use of convention over configuration, `using` statements and an opinionated structure (that is easy enough to opt out of or create your own structure if you like) to make each form consistent and demonstrating a minimum of repetition.
+This library works against ASP.NET Core MVC - if you want to use it for Blazor or Razor Pages then feel free to [raise an issue](https://github.com/MRCollective/ChameleonForms/issues) to discuss.
 
-## Show me a basic ChameleonForms example next to it's ASP.NET MVC counterpart!
+### Getting it running
+
+1. Install the NuGet package `Install-Package ChameleonForms -pre` (v4 is currently marked beta so you need to include pre-release versions)
+2. Register ChameleonForms in your `Startup.cs` file:
+
+    ```csharp
+    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddMvc(...);
+        ...
+        services.AddChameleonForms();
+    }
+    ```
+
+    Note: you can alter the configuration from the default, [see the docs](https://chameleonforms.readthedocs.io/en/latest/configuration/).
+3. Add the following to your `_ViewImports.cshtml`:
+
+    ```cshtml
+    @using ChameleonForms;
+    @using ChameleonForms.Enums;
+    @using ChameleonForms.Component;
+    ```
+
+4. Create your first form, e.g.:
+
+    `~/Controllers/MyFormController.cs`:
+    ```cs
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Mvc;
+
+    namespace MyWebApp.Controllers
+    {
+        public class MyFormViewModel
+        {
+            [Required]
+            public string Name { get; set; }
+
+            public int FavouriteNumber { get; set; }
+
+            [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
+            public DateTime DateOfBirth { get; set; }
+        }
+        public class MyFormController : Controller
+        {
+            public IActionResult Index()
+            {
+                return View();
+            }
+
+            [HttpPost]
+            public IActionResult Index(MyFormViewModel vm)
+            {
+                if (ModelState.IsValid)
+                {
+                    // Do stuff
+                    return RedirectToAction("Index");
+                }
+                return View(vm);
+            }
+        }
+    }
+    ```
+
+    `~/Views/MyForm/Index.cshtml`:
+    ```cshtml
+    @model MyWebApp.Controllers.ViewModel
+    @{
+        ViewData["Title"] = "My Form";
+    }
+
+    @using (var f = Html.BeginChameleonForm())
+    {
+        using (var s = f.BeginSection("About you!?"))
+        {
+            @s.FieldFor(m => m.Name)
+            @s.FieldFor(m => m.FavouriteNumber)
+            @s.FieldFor(m => m.DateOfBirth)
+        }
+        using (var n = f.BeginNavigation())
+        {
+            @n.Submit("Submit")
+        }
+    }
+
+    @section Scripts
+    {
+        <partial name="_ValidationScriptsPartial" />
+        @* ... or relevant equivalent *@
+    }
+
+    ```
+5. Run it!
+6. *(Optional)* If you want to add the additional client-side validation support in ChameleonForms (which supports both [jquery validate unobtrusive validation]() and [aspnet-validation]()) then add the following to your `_ValidationScriptsPartial.cshtml` or equivalent file:
+
+    ```html
+    <script src="~/lib/chameleonforms/unobtrusive-date-validation.chameleonforms.js" asp-append-version="true"></script>
+    ```
+7. *(Optional)* If you are using Twitter Bootstrap 3 then add the following to your `_ValidationScriptsPartial.cshtml` (which only supports jquery validate unobtrusive validation for now):
+
+    ```html
+    <script src="~/lib/chameleonforms/unobtrusive-twitterbootstrap3-validation.chameleonforms.js" asp-append-version="true"></script>
+    ```
+
+    And add the following to your `_Layout.cshtml` or equivalent file:
+
+    ```html
+    <link href="~/lib/chameleonforms/chameleonforms-twitterbootstrap3.css" rel="stylesheet" type="text/css" asp-append-version="true" />
+    ```
+
+
+## Show me a basic ChameleonForms example next to its ASP.NET Core MVC counterpart!
 
 Say you had the following view model:
 
@@ -63,6 +172,18 @@ The equivalent of this form with out-of-the-box ChameleonForms functionality is:
     }
 }
 ```
+
+## What does ChameleonForms do for me?
+
+Chameleon Forms provides an object hierarchy that allows you to declaratively specify the structure of your form. From there:
+
+* It will output the boilerplate template of your form by way of a form template
+* It will discern a number of defaults about each field based on inspecting the model metadata for each property
+* It will allow you to tweak individual fields by chaining methods using the fluent api off of each field (and some other elements such as submit buttons) declaration
+* If gives you the freedom to break out into HTML/Razor anywhere in the form when the template / built-in structures don't meet your needs
+* It gives you the ability to apply global conventions across your forms
+
+It makes use of convention over configuration, `using` statements and an opinionated structure (that is easy enough to opt out of or create your own structure if you like) to make each form consistent and demonstrating a minimum of repetition.
 
 ## How are ChameleonForms forms structured?
 
@@ -190,15 +311,3 @@ Some of the terminology around the structure of ChameleonForms forms are defined
 * Field Generator Handler - A class that generates HTML for a particular type of Field Element
 * Form Template - A class that defines the HTML boilerplate to render Forms, Form Components, Fields and Navigation elements
 * HTML Attributes - A class that defines a set of HTML attributes to apply to a HTML element
-
-## Namespaces in Views/web.config
-
-A lot of the functionality in ChameleonForms is exposed as extension methods to allow flexibility for people to define their own extension methods and extend the default behaviour of ChameleonForms. This has the downside that a lot of the functionality of ChameleonForms isn't discoverable unless you have `using` statements for the correct namespaces in your page. Having to remember to add these to each page is tedious, repetitive and not discoverable.
-
-To overcome this problem, ChameleonForms will (when installed via NuGet) look for a `Views\web.config` file and apply an XML transformation to add the following namespaces so they are available automatically from every page in your application:
-
-* `ChameleonForms`
-* `ChameleonForms.Component`
-* `ChameleonForms.Enums`
-
-If you use a Form Template with template-specific extension methods then we recommend that you add the namespace(s) involved in your `Views\web.config` file rather than namespaces in each view - that way you can easily swap Form Templates.

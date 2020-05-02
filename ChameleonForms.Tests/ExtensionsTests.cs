@@ -1,6 +1,7 @@
-﻿using System.Web.Mvc;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests

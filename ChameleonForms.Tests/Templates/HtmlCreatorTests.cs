@@ -1,7 +1,7 @@
-﻿using System.Web;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Templates;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates

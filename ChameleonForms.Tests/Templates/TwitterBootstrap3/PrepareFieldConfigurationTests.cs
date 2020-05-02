@@ -4,6 +4,7 @@ using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.FieldGenerators.Handlers;
 using ChameleonForms.Templates.TwitterBootstrap3;
+using Microsoft.AspNetCore.Html;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -11,7 +12,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
 {
     public class PrepareFieldConfigurationTests_TwitterBootstrapTemplateShould
     {
-        private readonly TwitterBootstrapFormTemplate _t = new TwitterBootstrapFormTemplate();
+        private readonly TwitterBootstrap3FormTemplate _t = new TwitterBootstrap3FormTemplate();
         private IFieldConfiguration _fieldConfiguration;
         public class TestViewModel { }
 

@@ -1,8 +1,8 @@
-﻿using System.Web;
-using ApprovalTests.Html;
+﻿using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Enums;
 using ChameleonForms.Templates.TwitterBootstrap3;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
@@ -13,7 +13,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_begin_information_message()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.BeginMessage(MessageType.Information, new HtmlString("Heading"));
 
@@ -23,7 +23,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_begin_information_message_without_heading()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.BeginMessage(MessageType.Information, new HtmlString(""));
 
@@ -33,7 +33,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_begin_failure_message()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.BeginMessage(MessageType.Failure, new HtmlString("Heading"));
 
@@ -43,7 +43,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_end_message()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.EndMessage();
 
@@ -53,7 +53,7 @@ namespace ChameleonForms.Tests.Templates.TwitterBootstrap3
         [Test]
         public void Output_message_paragraph()
         {
-            var t = new TwitterBootstrapFormTemplate();
+            var t = new TwitterBootstrap3FormTemplate();
 
             var result = t.MessageParagraph(new HtmlString("<strong>asdf</strong>"));
 

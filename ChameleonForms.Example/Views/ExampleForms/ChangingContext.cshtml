@@ -9,7 +9,7 @@
 
 <p>There are three separate forms tied to three different post actions. Turn off JavaScript, clear all the text fields and hit each of the three submit buttons and also play with putting in values and submitting the values to see how they are bound back.</p>
 
-@if (Request.HttpMethod == "POST")
+@if (Context.Request.Method.ToUpperInvariant() == "POST")
 {
     if (ViewBag.Action == "PostDifferentModel")
     {

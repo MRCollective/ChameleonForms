@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace ChameleonForms.Example.Controllers
 {
@@ -45,12 +45,12 @@ namespace ChameleonForms.Example.Controllers
             public string FirstName { get; set; }
             [Required]
             public string LastName { get; set; }
+            [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
             [Required]
-            [DisplayFormat(DataFormatString = "d/M/yyyy", ApplyFormatInEditMode = true)]
             public DateTime DateOfBirth { get; set; }
 
             [Required]
-            [DataType(DataType.EmailAddress)]
+            [EmailAddress]
             public string EmailAddress { get; set; }
             [Required]
             [DataType(DataType.Password)]
@@ -59,7 +59,7 @@ namespace ChameleonForms.Example.Controllers
             public MembershipType MembershipType { get; set; }
 
             [DataType(DataType.Url)]
-            public string Homepage { get; set; }
+            public Uri Homepage { get; set; }
             [DataType(DataType.MultilineText)]
             public string Bio { get; set; }
 

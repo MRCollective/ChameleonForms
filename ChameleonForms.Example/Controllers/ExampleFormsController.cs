@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
-using System.Web.Mvc;
+using System.Text.Json;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ChameleonForms.Example.Controllers
 {
@@ -26,6 +26,12 @@ namespace ChameleonForms.Example.Controllers
         public ActionResult BasicExample()
         {
             return View(new BasicViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult BasicExample(BasicViewModel vm)
+        {
+            return View(vm);
         }
 
         public ActionResult Labels()
@@ -99,7 +105,7 @@ namespace ChameleonForms.Example.Controllers
         {
             ViewBag.Action = "PostDifferentModel";
             ViewBag.ModelType = vm.GetType().Name;
-            ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            ViewBag.BoundModelData = JsonSerializer.Serialize(vm, new JsonSerializerOptions{WriteIndented = true});
             ViewBag.BoundModel = vm;
             return View("ChangingContext");
         }
@@ -109,7 +115,7 @@ namespace ChameleonForms.Example.Controllers
         {
             ViewBag.Action = "PostChildViewModel";
             ViewBag.ModelType = vm.GetType().Name;
-            ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            ViewBag.BoundModelData = JsonSerializer.Serialize(vm, new JsonSerializerOptions { WriteIndented = true });
             ViewBag.BoundModel = vm;
             return View("ChangingContext");
         }
@@ -119,7 +125,7 @@ namespace ChameleonForms.Example.Controllers
         {
             ViewBag.Action = "PostParentViewModel";
             ViewBag.ModelType = vm.GetType().Name;
-            ViewBag.BoundModelData = JsonConvert.SerializeObject(vm, Formatting.Indented);
+            ViewBag.BoundModelData = JsonSerializer.Serialize(vm, new JsonSerializerOptions { WriteIndented = true });
             ViewBag.BoundModel = vm;
             return View("ChangingContext");
         }
@@ -161,6 +167,9 @@ namespace ChameleonForms.Example.Controllers
         [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
         public DateTime DateTimeWithG { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
+        public DateTime? NullableDateTimeWithG { get; set; }
+
         public bool RequiredBool { get; set; }
         [Required]
         public bool? RequiredNullableBool { get; set; }
@@ -173,9 +182,8 @@ namespace ChameleonForms.Example.Controllers
         public SomeEnum? RequiredNullableEnum { get; set; }
         public SomeEnum? OptionalEnum { get; set; }
 
-        [RequiredFlagsEnum]
         public FlagsEnum RequiredFlagsEnum { get; set; }
-        [RequiredFlagsEnum]
+        [Required]
         public FlagsEnum? RequiredNullableFlagsEnum { get; set; }
         public FlagsEnum? OptionalFlagsEnum { get; set; }
 
@@ -203,9 +211,9 @@ namespace ChameleonForms.Example.Controllers
         [Required]
         [ExistsIn("List", "Id", "Name")]
         public IEnumerable<int?> RequiredNullableListIds { get; set; }
-        //Todo: Work around the fact that this list should be empty if no value submitted, but instead is a list with a 0 value element
-        //[ExistsIn("List", "Id", "Name")]
-        //public IEnumerable<int> OptionalListIds { get; set; }
+        /*todo: Support this
+         [ExistsIn("List", "Id", "Name")]
+        public IEnumerable<int> OptionalListIds { get; set; }*/
         [ExistsIn("List", "Id", "Name")]
         public IEnumerable<int?> OptionalNullableListIds { get; set; }
 
@@ -218,6 +226,9 @@ namespace ChameleonForms.Example.Controllers
         [Required]
         [ExistsIn("ChoicesAsTuples", "Item1", "Item2")]
         public Int32? Choice { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Textarea { get; set; }
     }
 
     public class BasicViewModel
@@ -271,16 +282,14 @@ namespace ChameleonForms.Example.Controllers
 
         public string NestedField { get; set; }
 
-        public FlagsEnum FlagsEnums { get; set; }
+        [Required]
+        public FlagsEnum? FlagsEnums { get; set; }
 
         public SomeEnum SomeEnum { get; set; }
 
         public List<SomeEnum> SomeEnums { get; set; }
         public List<SomeEnum> SomeEnumsList { get; set; }
-
-        [Required]
-        public HttpPostedFileBase FileUpload { get; set; }
-        
+                
         [DataType(DataType.MultilineText)]
         public string TextAreaField { get; set; }
 
@@ -302,10 +311,18 @@ namespace ChameleonForms.Example.Controllers
 
         public bool Boolean { get; set; }
 
+        [Required]
+        public IFormFile FileUpload { get; set; }
+
         public ChildViewModel Child { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:g}", ApplyFormatInEditMode = true)]
         public DateTime DateField { get; set; }
+
+        public Uri UrlAsUri { get; set; }
+
+        [DataType(DataType.Url)]
+        public string UrlAsString { get; set; }
     }
 
     public class ListItem

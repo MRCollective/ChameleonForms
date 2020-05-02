@@ -1,7 +1,6 @@
-Flags Enum Fields
-=================
+# Flags Enum Fields
 
-If you want the user to specify multiple values from an enum you can either use a [non-flags enum against any property with a type convertible to `IEnumerable<%enumType%>`](multiple-enum.md) or use a flags enum, e.g.:
+If you want the user to specify multiple values from an enum you can either use a [non-flags enum against any property with a type convertible to `IEnumerable<%enumType%>`](multiple-enum.md) (separate page) or use a flags enum (this page), e.g.:
 
 ```csharp
 [Flags]
@@ -13,65 +12,34 @@ public enum MyFlagsEnum
     ...
 }
 ...
-[RequiredFlagsEnum]
-public MyFlagsEnum RequiredFlagsEnumWithZeroAsUnselectedValue { get; set; }
+public MyFlagsEnum RequiredWithZeroAsUnselectedValue { get; set; }
 
-[RequiredFlagsEnum]
-public MyFlagsEnum? RequiredFlagsEnumWithNullAsUnselectedValue { get; set; }
+[Required]
+public MyFlagsEnum? RequiredWithNullAsUnselectedValue { get; set; }
 
-public MyFlagsEnum? NonRequiredFlagsEnumAndNullAsUnselectedValue { get; set; }
+public MyFlagsEnum? NonRequiredAndNullAsUnselectedValue { get; set; }
 ```
 
 Flags enums have a few rough edges on them if you aren't careful so it's a good idea to read the [guidance](https://msdn.microsoft.com/en-us/library/ms229062(v=vs.100).aspx) [for](https://msdn.microsoft.com/en-us/library/system.flagsattribute.aspx) how to use them. In particular, make sure that none of your values have a value of 0 and you explicitly assign integer values to all enum values in multiples of 2.
 
+The out-of-the-box ASP.NET Core MVC support for flags enums leave sa lot to be desired, but ChameleonForms provides first-class model binding and validation support for flags enums [by default](configuration.md#default-global-config) to patch the default MVC behaviour.
+
 If you want the user to specify a single value from an enum then you can [use the enum type directly](enum.md).
 
-Required validation
--------------------
+## Required validation
 
-ASP.NET MVC's default validation doesn't pick up `0` for a flags enum as the field not being specified, thus you need to alter the validation for requires flags enums. ChameleonForms provides the `[RequiredFlagsEnum]` attribute to overcome that problem. This might look like:
+ASP.NET MVC's default validation doesn't pick up `0` for a flags enum as the field not being specified, thus you need to alter the validation for requires flags enums. ChameleonForms patches this problem [by default](configuration.md#default-global-config). It will correctly flag an error for both a non-nullable flags enum field or a flags enum field with `[Required]` specified.
 
-```csharp
-[RequiredFlagsEnum]
-public MyFlagsEnum FlagsEnumField { get; set; }
-```
+## Model binding
 
-In order for this attribute to correctly apply client side validation you need to ensure the following call is made on your application start (this should be automatically added when installing ChameleonForms, but if you are upgrading from before version 3 it's possible it won't be added automatically):
+The default MVC model binder does **not** correctly bind flags enum values. ChameleonForms provides the [`FlagsEnumModelBinder`](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/ModelBinders/FlagsEnumModelBinder.cs) ([and the provider](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/ModelBinders/FlagsEnumModelBinderProvider.cs)) to assist with that. This is registered for you [by default](configuration.md#default-global-config).
 
-```csharp
-DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(RequiredFlagsEnumAttribute), typeof(RequiredAttributeAdapter));
-```
-
-Model binding
--------------
-
-The default MVC model binder does **not** correctly bind flags enum values. ChameleonForms provides the `FlagsEnumModelBinder` to assist with that.
-
-When you install ChameleonForms it should automatically register this model binder for all of the flags enum types registered in your MVC project within the `RegisterChameleonFormsComponents.cs` file. If you are upgrading from a pre version 3.0 version of ChameleonForms then the registration may not automatically add itself. Also, if you have view models / flags enums defined outside of your MVC project then the default registration won't work. This is the registration code we add (you may need to alter the assembly being scanned or alternatively explicitly register the model binder for the flags enums in question):
-
-```csharp
-    typeof(RegisterChameleonFormsComponents).Assembly.GetTypes().Where(t => t.IsEnum && t.GetCustomAttributes(typeof(FlagsAttribute), false).Any())
-        .ToList().ForEach(t =>
-        {
-            ModelBinders.Binders.Add(t, new FlagsEnumModelBinder());
-            ModelBinders.Binders.Add(typeof(Nullable<>).MakeGenericType(t), new FlagsEnumModelBinder());
-        });
-```
-
-If registering a specifc flags enum type you can simply use:
-
-```csharp
-	ModelBinders.Binders.Add(typeof(MyFlagsEnum), new FlagsEnumModelBinder());
-	ModelBinders.Binders.Add(typeof(MyFlagsEnum?), new FlagsEnumModelBinder());
-```
-
-Default HTML
-------------
+## Default HTML
 
 ### Required nullable or non-nullable enum (multi-select drop-down with no empty option)
 
 ```html
-<select %validationAttrs% %htmlAttributes% multiple="multiple" id="%propertyName%" name="%propertyName%">
+<select %validationAttrs% %htmlAttributes% multiple="multiple" id="%propertyName%" name="%propertyName%" required="required">
 %foreach enum value x%
     <option value="%x.ToString()%">%x.Humanize()%</option>
 %endforeach%
@@ -91,10 +59,9 @@ Default HTML
 
 ### Explanation and example
 
-Please see the explanation an example on the [Enum Field](enum#explanation-and-example) page.
+Please see the explanation an example on the [Enum Field](enum#explanation-and-example) page to understand what `%x.ToString()` and `%x.Humanize()%` do and how to control the description values.
 
-Configurability
----------------
+## Configurability
 
 ### Display as list of checkboxes
 

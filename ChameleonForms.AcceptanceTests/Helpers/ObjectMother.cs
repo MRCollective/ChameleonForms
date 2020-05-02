@@ -40,7 +40,8 @@ namespace ChameleonForms.AcceptanceTests.Helpers
                         //OptionalListIds = null,
                         OptionalNullableListIds = null,
                         DateTime = new DateTime(2010, 1, 13),
-                        Choice = 1
+                        Choice = 1,
+                        Textarea = "value"
                     };
                 }
             }

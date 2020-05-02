@@ -1,12 +1,28 @@
 ﻿@using ChameleonForms.Templates
 @using ChameleonForms.Templates.Default
+@inject IFormTemplate DefaultFormTemplate
 @{
-    if (FormTemplate.Default.GetType() == typeof (DefaultFormTemplate))
+    if ((ViewContext.HttpContext.Request.Cookies["template"] ?? "").EndsWith("nojquery"))
     {
-        Layout = "~/Views/Shared/_Layout.cshtml";
+        if (DefaultFormTemplate.GetType() == typeof (DefaultFormTemplate))
+        {
+            Layout = "~/Views/Shared/_LayoutWithoutJQuery.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Shared/_Bootstrap3LayoutWithoutJQuery.cshtml";
+        }
     }
     else
     {
-        Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+        if (DefaultFormTemplate.GetType() == typeof (DefaultFormTemplate))
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+        else
+        {
+            Layout = "~/Views/Shared/_Bootstrap3Layout.cshtml";
+        }
+
     }
 }

@@ -1,6 +1,5 @@
-﻿using System.Web.Mvc;
-using AutofacContrib.NSubstitute;
-using ChameleonForms.Tests.Helpers;
+﻿using ChameleonForms.Tests.Helpers;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests
@@ -18,16 +17,10 @@ namespace ChameleonForms.Tests
         public void Create_html_helper_against_same_request_context_with_different_type()
         {
             var newHtmlHelper = _h.For<AnotherViewModel>();
-            Assert.That(newHtmlHelper.ViewContext.RequestContext, Is.SameAs(_h.ViewContext.RequestContext));
+            Assert.That(newHtmlHelper.ViewContext.RouteData, Is.SameAs(_h.ViewContext.RouteData));
+            Assert.That(newHtmlHelper.ViewContext.HttpContext, Is.SameAs(_h.ViewContext.HttpContext));
         }
-
-        [Test]
-        public void Create_html_helper_against_same_route_collection_with_different_type()
-        {
-            var newHtmlHelper = _h.For<AnotherViewModel>();
-            Assert.That(newHtmlHelper.RouteCollection, Is.SameAs(_h.RouteCollection));
-        }
-
+        
         [Test]
         public void Create_html_helper_with_empty_prefix_with_different_type()
         {
@@ -113,15 +106,14 @@ namespace ChameleonForms.Tests
             Assert.That(newHtmlHelper.ViewData.TemplateInfo.HtmlFieldPrefix, Is.Empty, "Prefix is correct");
         }
 
-
-        private AutoSubstitute _autoSubstitute;
         private HtmlHelper<TestViewModel> _h;
 
         [SetUp]
         public void Setup()
         {
-            _autoSubstitute = AutoSubstituteContainer.Create();
-            _h = _autoSubstitute.ResolveAndSubstituteFor<HtmlHelper<TestViewModel>>();
+            var context = new MvcTestContext();
+            var viewContext = context.GetViewTestContext<TestViewModel>();
+            _h = viewContext.HtmlHelper;
         }
 
         public class TestViewModel

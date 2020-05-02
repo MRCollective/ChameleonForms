@@ -1,5 +1,4 @@
-Multiple-Select List Fields
-===========================
+# Multiple-Select List Fields
 
 If you want the user to specify multiple values from items in an arbitrary list of objects you can use the `[ExistsIn]` attribute against a model property that enumerates the type of the value property, e.g.:
 
@@ -24,35 +23,34 @@ public class MyViewModel
     ...
     public List<MyObject> ListValues { get; set; }
 
-    [ExistsIn("ListValues", "Id", "Name")]
+    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name))]
     public IEnumerable<int> EnumerableListId { get; set; }
 
-    [ExistsIn("ListValues", "Id", "Name")]
+    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name))]
     public List<int> ListListId { get; set; }
 
     // Or, alternatively - we recommend using nullable types for multi-select items that aren't enums
 
-    [ExistsIn("ListValues", "Id", "Name")]
+    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name))]
     public IEnumerable<int?> NullableEnumerableListId { get; set; }
 
-    [ExistsIn("ListValues", "Id", "Name")]
+    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name))]
     public List<int?> NullableListListId { get; set; }
 }
 ```
 
-Note: as you will see below - there isn't much difference in specifying a nullable vs non-nullable type as the type being collected, except if you specify a non-nullable type and the list of items is not Required then the default MVC model binder doesn't work very well (if you are using a drop-down) and will conflict with the `[ExistsIn]` validation.
+Note: as you will see below - there isn't much difference in specifying a nullable vs non-nullable type as the type being collected, except if you specify a non-nullable type and the list of items is not Required then the default MVC model binder doesn't work very well (if you are using a drop-down) and will conflict with the `[ExistsIn]` validation. It's our intention to provide a model binder in the future that rectifies this issue.
 
 There is a definition for the `[ExistsIn]` attribute on the [List](list) page.
 
-Default HTML
-------------
+## Default HTML
 
 ### Required nullable or non-nullable list id (multi-select drop-down with no empty option)
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a Required nullable or non-nullable list id will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a Required (i.e. tagged with `[Required]`) nullable or non-nullable list id will be:
 
 ```html
-<select %validationAttrs% %htmlAttributes% multiple="multiple" id="%propertyName%" name="%propertyName%">
+<select %validationAttrs% %htmlAttributes% multiple="multiple" id="%propertyName%" name="%propertyName%" required="required">
 %foreach item x in Model.{ListProperty}%
     <option value="%x.{ValueProperty}%">%x.{NameProperty}%</option>
 %endforeach%
@@ -72,15 +70,11 @@ When using the Default Field Generator then the default HTML of the [Field Eleme
 </select>
 ```
 
-Server-side validation
-----------------------
+## Server-side validation
 
-If you want to provide server-side validation protection of the value the user submitted then the `[ExistsIn]` attribute will automatically take care of this for you by default.
+If you want to provide server-side validation protection of the value the user submitted then the `[ExistsIn]` attribute will automatically take care of this for you by default assuming that the list is populated at the correct point. The documentation for how to use and configure server-side validation can be found on the [List](list) page.
 
-The documentation for how to use and configure server-side validation can be found on the [List](list) page.
-
-Configurability
----------------
+## Configurability
 
 ### Display as list of checkboxes
 

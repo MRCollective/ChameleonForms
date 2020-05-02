@@ -1,8 +1,7 @@
-﻿using System.Web;
-using ChameleonForms.Component;
+﻿using ChameleonForms.Component;
 using ChameleonForms.Enums;
-using ChameleonForms.Templates;
 using FizzWare.NBuilder;
+using Microsoft.AspNetCore.Html;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -11,16 +10,16 @@ namespace ChameleonForms.Tests.Component
     [TestFixture]
     public class MessageShould
     {
-        private readonly IHtmlString _testHeading = new HtmlString("TestHeading");
-        private readonly IHtmlString _beginHtml = new HtmlString("");
-        private readonly IHtmlString _endHtml = new HtmlString("");
+        private readonly IHtmlContent _testHeading = new HtmlString("TestHeading");
+        private readonly IHtmlContent _beginHtml = new HtmlString("");
+        private readonly IHtmlContent _endHtml = new HtmlString("");
         private IForm<object> _f;
 
         [SetUp]
         public void Setup()
         {
             _f = Substitute.For<IForm<object>>();
-            _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any<IHtmlString>()).Returns(_beginHtml);
+            _f.Template.BeginMessage(Arg.Any<MessageType>(), Arg.Any<IHtmlContent>()).Returns(_beginHtml);
             _f.Template.EndMessage().Returns(_endHtml);
         }
 
@@ -52,7 +51,7 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Construct_section_via_extension_method_with_heading([ValueSource("MessageTypes")] MessageType messageType)
         {
-            var s = _f.BeginMessage(messageType, _testHeading.ToHtmlString());
+            var s = _f.BeginMessage(messageType, "TestHeading");
 
             Assert.That(s, Is.Not.Null);
             _f.Received().Write(_beginHtml);
@@ -70,9 +69,9 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Create_a_paragraph_with_a_string()
         {
-            var html = Substitute.For<IHtmlString>();
+            var html = Substitute.For<IHtmlContent>();
             var s = Arrange(MessageType.Success);
-            _f.Template.MessageParagraph(Arg.Is<IHtmlString>(h => h.ToHtmlString() == "aerg&amp;%^&quot;esrg&#39;"))
+            _f.Template.MessageParagraph(Arg.Is<IHtmlContent>(h => h.ToHtmlString() == "aerg&amp;%^&quot;esrg&#39;"))
                 .Returns(html);
 
             var paragraph = s.Paragraph("aerg&%^\"esrg'");
@@ -83,8 +82,8 @@ namespace ChameleonForms.Tests.Component
         [Test]
         public void Create_a_paragraph_with_html()
         {
-            var inputHtml = Substitute.For<IHtmlString>();
-            var outputHtml = Substitute.For<IHtmlString>();
+            var inputHtml = Substitute.For<IHtmlContent>();
+            var outputHtml = Substitute.For<IHtmlContent>();
             var s = Arrange(MessageType.Success);
             _f.Template.MessageParagraph(inputHtml).Returns(outputHtml);
 

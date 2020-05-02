@@ -1,0 +1,2 @@
+﻿@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params.FieldConfigurationParams>
+@foreach (var html in Model.FieldConfiguration.AppendedHtml){if (Model.IsInputGroup) {@Raw("<div class=\"input-group-addon\">")}@html@if(Model.IsInputGroup) {@Raw("</div>")}}

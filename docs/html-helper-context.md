@@ -1,7 +1,6 @@
 # Change the model type for HTML Helper for portions of your page
 
-
-Sometimes it's useful to include forms in a page or use other HTMLHelper functionality against a different model type than the parent model of the page. This different model type might be a completely arbitrary model unrelated to the page model type or it may be a sub-property of the parent model.
+Sometimes it's useful to include multiple forms in a page or use other HTML Helper functionality against a different model type than the parent model of the page. This different model type might be a completely arbitrary model unrelated to the page model type or it may be a sub-property of the parent model.
 
 Consider this example:
 
@@ -41,7 +40,7 @@ Another example - if you decide to make all form fields part of an "input model"
 }
 ```
 
-There are two problems here - firstly, the `.InputModel.` is very repetitive and adds a lot of noise and secondly, the post action forces you to bind to the `SomeViewModel` model type, which means technically, you need to remember to mark `Title` and other read-only values with the `[ReadOnly(true)]` attribute to prevent an [over-posting / mass-assignment vulnerability](https://en.wikipedia.org/wiki/Mass_assignment_vulnerability). It would be much simpler if you could specify that the form is against the `InputModel` sub-property of the main form.
+There are two problems here - firstly, the `.InputModel.` is very repetitive and adds a lot of noise and secondly, the post action forces you to bind to the `SomeViewModel` model type, which means technically, you need to remember to mark `Title` and other read-only values with the `[ReadOnly(true)]` attribute to prevent an [over-posting / mass-assignment vulnerability](https://en.wikipedia.org/wiki/Mass_assignment_vulnerability). It would be much simpler if you could specify that the form is against the `InputModel` sub-property of the main form and bind just the `InputModel` on the round-trip back to the server.
 
 ## HtmlHelper<TModel>.For extensions
 

@@ -1,14 +1,13 @@
-List Fields
-===========
+# List Fields
 
-If you want the user to specify an item from an arbitrary list of objects you can use the `[ExistsIn]` attribute against a model property of the type of the value property, e.g.:
+If you want the user to specify an item from an arbitrary list of objects you can use the `[ExistsIn]` attribute against a model property. The property just needs to be the same type as the property of the list element type that represents the "value" of the object, e.g.:
 
 ```csharp
 
 public class MyObject
 {
     public string Name { get; set; }
-    public int Id { get; set; }
+    public int Id { get; set; } // This is the "value" of the object
 }
 
 public class MyViewModel
@@ -24,11 +23,11 @@ public class MyViewModel
     ...
     public List<MyObject> ListValues { get; set; }
 
-    [ExistsIn("ListValues", "Id", "Name")]
-    public int ListId { get; set; }
+    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name))]
+    public int ListId { get; set; } // Same type as Id
 
-    [ExistsIn("ListValues", "Id", "Name")]
-    public int? NullableListId { get; set; }
+    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name))]
+    public int? NullableListId { get; set; } // You can specify the same type with the Nullable modifier
 }
 ```
 
@@ -39,7 +38,7 @@ The `ExistsIn` attribute looks like this:
     /// Indicates that the attributed property value should exist within the list property referenced by the attribute.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class ExistsInAttribute : ValidationAttribute, IMetadataAware
+    public class ExistsInAttribute : ValidationAttribute, IModelMetadataAware
     {
         /// <summary>
         /// Application-wide configuration for whether or not to enable ExistsIn validation.
@@ -52,7 +51,7 @@ The `ExistsIn` attribute looks like this:
         /// <param name="listProperty">The name of the property containing the list this property should reference.</param>
         /// <param name="valueProperty">The name of the property of the list items to use for the value</param>
         /// <param name="nameProperty">The name of the property of the list items to use for the name/label</param>
-        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty) { ... }
+        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty);
 
         /// <summary>
         /// Instantiates an <see cref="ExistsInAttribute"/>.
@@ -61,7 +60,7 @@ The `ExistsIn` attribute looks like this:
         /// <param name="valueProperty">The name of the property of the list items to use for the value</param>
         /// <param name="nameProperty">The name of the property of the list items to use for the name/label</param>
         /// <param name="enableValidation">Optional override for ExistsIn server-side validation configuration (if not specified, static configuration setting ExistsInAttribute.EnableValidation is used)</param>
-        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty, bool enableValidation) { ... }
+        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty, bool enableValidation);
     }
 ```
 
@@ -73,7 +72,7 @@ Default HTML
 When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a non-nullable list id will be:
 
 ```html
-<select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%">
+<select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required">
 %foreach item x in Model.{ListProperty}%
     <option value="%x.{ValueProperty}%">%x.{NameProperty}%</option>
 %endforeach%
@@ -85,7 +84,7 @@ If the list id is non-nullable then the field will be Required regardless of whe
 So in the above example when outputting the Field Element HTML for the `ListId` property it would have (assuming you didn't specify any additional HTML attributes):
 
 ```html
-<select data-val="true" data-val-number="The field List id must be a number." data-val-required="The List id field is required." id="ListId" name="ListId">
+<select data-val="true" data-val-number="The field List id must be a number." data-val-required="The List id field is required." id="ListId" name="ListId" required="required">
     <option value="1">First item</option>
     <option value="2">Second item</option>
 </select>
@@ -114,8 +113,7 @@ So in the above example when outputting the Field Element HTML for the `ListId` 
 </select>
 ```
 
-Server-side validation
-----------------------
+## Server-side validation
 
 If you want to provide server-side validation protection of the value the user submitted then the `[ExistsIn]` attribute will automatically take care of this for you by default.
 
@@ -127,7 +125,7 @@ ExistsInAttribute.EnableValidation = false;
 ```
 * Turn off validation on a per-usage basis by setting `false` to the `enableValidation` value when adding the attribute, e.g.:
 ```csharp
-    [ExistsIn("ListValues", "Id", "Name", enableValidation: false)]
+    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name), enableValidation: false)]
     public int ListId { get; set; }
 ```
 
@@ -135,14 +133,20 @@ If you turn off validation globally, but want to enable it for a specific usage 
 
 If you want to take advantage of the server-side validation then the list needs to be populated when the `DefaultModelBinder` binds the property with the `[ExistsIn]` attribute specified. If the list is null at that point and validation is enabled then an exception will be thrown. If you want to specify the list at the right time then you have two options:
 
-1. Define the list in the constructor (like the above example)
+1. Define the list in the model constructor (like the above example)
 2. Create a custom model binder for your model type that creates the list first
-    * This allows you to populate the list using the database by dependency injecting your database access component into the model binder (assuming you have model binders set up with your DI framework)
-    * This also allows you to [easily unit test the model binder](http://blog.mdavies.net/2013/06/07/unit-testing-mvc3mvc4-model-binders/)
+    * This allows you to populate the list using the database by dependency injecting your database access component into the model binder
+    * This also allows you to [easily unit test the model binder](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Tests/ModelBinders/)
 
 For example:
 
 ```csharp
+    [ModelBinder(BinderType = typeof(InvoiceSelectionViewModelBinder))]
+    public class InvoiceSelectionViewModel
+    {
+        ...
+    }
+    ...
     public class InvoiceSelectionViewModelBinder : DefaultModelBinder
     {
         private readonly IQueryExecutor _queryExecutor;
@@ -152,28 +156,20 @@ For example:
             _queryExecutor = queryExecutor;
         }
 
-        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        public Task BindModelAsync(ModelBindingContext bindingContext)
         {
             var model = new InvoiceSelectionViewModel
             {
-                Invoices = _queryExecutor.Execute(new GetInvoices(controllerContext.HttpContext.User.Identity.Name))
+                Invoices = _queryExecutor.Execute(new GetInvoices(bindingContext.HttpContext.User.Identity))
             };
 
-            bindingContext.ModelMetadata.Model = model;
-
-            return base.BindModel(controllerContext, bindingContext);
+            bindingContext.Model = model;
+            return base.BindModelAsync(bindingContext);
         }
     }
 ```
 
-Remember to register the model binder with your type by using the following in `Global.asax.cs` (or, if you want dependency injection getting your DI framework to do it for you using attributes, e.g. [Autofac](http://alexmg.com/post/2010/12/08/Model-Binder-Injection-in-Autofac-ASPNET-MVC-3-Integration.aspx)):
-
-```csharp
-ModelBinders.Binders.Add(typeof(%yourModelType%), new %modelBinderType%());
-```
-
-Configurability
----------------
+## Configurability
 
 ### Display as list of radio buttons
 
@@ -189,7 +185,7 @@ This will change the default HTML for the non-nullable list id field and the Req
 ```html
 <ul>
 %foreach item x in Model.{ListProperty} with increment i%
-    <li><input %validationAttrs% %htmlAttributes% id="%propertyName%_%i%" name="%propertyName%" type="radio" value="%x.{ValueProperty}%"> <label for="%propertyName%_%i%">%x.{NameProperty}%</label></li>
+    <li><input %validationAttrs% %htmlAttributes% id="%propertyName%_%i%" name="%propertyName%" required="required" type="radio" value="%x.{ValueProperty}%"> <label for="%propertyName%_%i%">%x.{NameProperty}%</label></li>
 %endforeach%
 </ul>
 ```

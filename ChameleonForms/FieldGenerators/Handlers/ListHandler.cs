@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Web;
-using System.Web.Mvc;
 using ChameleonForms.Attributes;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChameleonForms.FieldGenerators.Handlers
 {
@@ -32,11 +32,11 @@ namespace ChameleonForms.FieldGenerators.Handlers
         }
 
         /// <inheritdoc />
-        public override IHtmlString GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
+        public override IHtmlContent GenerateFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)
         {
             var model = FieldGenerator.GetModel();
             var selectList = GetSelectList(model);
-            return GetSelectListHtml(selectList, FieldGenerator, fieldConfiguration);
+            return GetSelectListHtml(selectList, fieldConfiguration);
         }
 
         /// <inheritdoc />
@@ -46,7 +46,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             //  when there is a radio button for "no value selected" i.e. value="" then it can't be selected
             //  as an option since it tries to validate the empty string as a number.
             // This turns off unobtrusive validation in that circumstance
-            if (fieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && IsNumeric(FieldGenerator) && !HasMultipleValues(FieldGenerator))
+            if (fieldConfiguration.DisplayType == FieldDisplayType.List && !FieldGenerator.Metadata.IsRequired && FieldGenerator.IsNumeric() && !FieldGenerator.HasMultipleValues())
                 fieldConfiguration.Attr("data-val", "false");
 
             // If a list is being displayed there is no element for the label to point to so drop it
@@ -86,7 +86,7 @@ namespace ChameleonForms.FieldGenerators.Handlers
             {
                 var name = item.GetType().GetProperty(nameProperty).GetValue(item, null);
                 var value = item.GetType().GetProperty(valueProperty).GetValue(item, null);
-                yield return new SelectListItem { Selected = IsSelected(value, FieldGenerator), Value = value.ToString(), Text = name.ToString() };
+                yield return new SelectListItem { Selected = FieldGenerator.IsSelected(value), Value = value.ToString(), Text = name.ToString() };
             }
         }
 

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using ApprovalTests.Html;
 using ApprovalTests.Reporters;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.Component.Config
@@ -47,6 +47,38 @@ namespace ChameleonForms.Tests.Component.Config
             var fc = Field.Configure()
                 .Rows(5)
                 .Cols(60);
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
+        public void Set_numeric_field_attributes_long()
+        {
+            var fc = Field.Configure()
+                .Step(1)
+                .Min(-5)
+                .Max(100);
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
+        public void Set_numeric_field_attributes_decimal()
+        {
+            var fc = Field.Configure()
+                .Step(0.01m)
+                .Min(-5.4m)
+                .Max(100.52m);
+
+            HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
+        }
+
+        [Test]
+        public void Set_numeric_field_attributes_string()
+        {
+            var fc = Field.Configure()
+                .Min("-23.24")
+                .Max("1000.983");
 
             HtmlApprovals.VerifyHtml(fc.Attributes.ToHtmlString());
         }

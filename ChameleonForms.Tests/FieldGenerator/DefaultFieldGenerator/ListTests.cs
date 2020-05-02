@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Web;
 using ApprovalTests.Html;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators.Handlers;
+using Microsoft.AspNetCore.Html;
 using NUnit.Framework;
 
 namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
@@ -215,7 +215,6 @@ namespace ChameleonForms.Tests.FieldGenerator.DefaultFieldGenerator
         {
             var g = Arrange(m => m.RequiredIntListId);
             H.ViewData.Model = null;
-            H.ViewData.ModelMetadata.Model = null;
 
             var ex = Assert.Throws<ModelNullException>(() => g.GetFieldHtml(default(IFieldConfiguration)));
 

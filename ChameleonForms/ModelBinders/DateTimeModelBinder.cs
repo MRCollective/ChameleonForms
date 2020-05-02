@@ -1,43 +1,54 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Globalization;
-using System.Web.Mvc;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace ChameleonForms.ModelBinders
 {
     /// <summary>
     /// Binds a datetime in a model using the display format string.
     /// </summary>
-    public class DateTimeModelBinder : DefaultModelBinder
+    public class DateTimeModelBinder : IModelBinder
     {
         /// <inheritdoc />
-        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        public Task BindModelAsync(ModelBindingContext bindingContext)
         {
-            var underlyingType = Nullable.GetUnderlyingType(bindingContext.ModelType) ?? bindingContext.ModelType;
+            var formatString = bindingContext.ModelMetadata.EditFormatString;
+            var dateParseString = formatString.Replace("{0:", "").Replace("}", "");
+
+            if (dateParseString == "g")
+                dateParseString = string.Join(" ", CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern, CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern);
+
             var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-            var submittedValue = value == null ? null : value.AttemptedValue;
-            var formatString = bindingContext.ModelMetadata.DisplayFormatString;
-
-            if (
-                underlyingType != typeof(DateTime)
-                ||
-                string.IsNullOrEmpty(formatString)
-                ||
-                string.IsNullOrEmpty(submittedValue)
-            )
-                return base.BindModel(controllerContext, bindingContext);
-
-            DateTime parsedDate;
-            if (!DateTime.TryParseExact(submittedValue, formatString.Replace("{0:", "").Replace("}", ""), CultureInfo.CurrentCulture.DateTimeFormat, DateTimeStyles.None, out parsedDate))
+            // Patching issue where no value submitted results in a valid state for a DateTime (i.e. [Required] gets skipped)
+            if (value == ValueProviderResult.None && !bindingContext.ModelMetadata.IsReferenceOrNullableType)
             {
-                bindingContext.ModelState.AddModelError(bindingContext.ModelName, string.Format("The value '{0}' is not valid for {1}.", submittedValue, bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.PropertyName));
-                bindingContext.ModelMetadata.Model = bindingContext.ModelType.IsValueType
-                    ? Activator.CreateInstance(bindingContext.ModelType)
-                    : null;
-                return bindingContext.ModelMetadata.Model;
+                bindingContext.ModelState.AddModelError(bindingContext.OriginalModelName,
+                    bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(null));
+                return Task.CompletedTask;
             }
 
-            bindingContext.ModelMetadata.Model = parsedDate;
-            return parsedDate;
+            var submittedValue = value.FirstValue;
+            if (string.IsNullOrWhiteSpace(submittedValue))
+            {
+                return new SimpleTypeModelBinder(typeof(DateTime), bindingContext.HttpContext.RequestServices.GetRequiredService<ILoggerFactory>())
+                    .BindModelAsync(bindingContext);
+            }
+
+            if (!DateTime.TryParseExact(submittedValue, dateParseString, CultureInfo.CurrentCulture.DateTimeFormat, DateTimeStyles.None, out DateTime parsedDate))
+            {
+                bindingContext.ModelState.AddModelError(bindingContext.ModelName,
+                    $"The value '{submittedValue ?? ""}' is not valid for {bindingContext.ModelMetadata.DisplayName ?? bindingContext.ModelMetadata.Name}. Format of date is {dateParseString}.");
+            }
+            else
+            {
+                bindingContext.Result = ModelBindingResult.Success(parsedDate);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }
