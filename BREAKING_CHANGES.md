@@ -88,6 +88,30 @@ All methods in ChameleonForms that returned or took `IHtmlString` parameters, an
 
 Change any of your classes / methods that rely on `IHtmlString` to instead use `IHtmlContent`.
 
+## Twitter Bootstrap template
+
+The `TwitterBootstrapFormTemplate` has been renamed to `TwitterBootstrap3FormTemplate` and no longer has a seprate NuGet package.
+
+### Reason
+
+Bootstrap has a version 4 and soon a version 5 now so it made sense to be explicit about the version number. The separate NuGet package mostly was about adding in CSS / JavaScript files, which is taken care of differently now (see above).
+
+### Workaround
+
+Rename any usage of `TwitterBootstrapFormTemplate` to `TwitterBootstrap3FormTemplate`. Manually add in references to relevant CSS and JS files. See [Twitter Bootstrap Template](https://chameleonforms.readthedocs.io/en/latest/bootstrap-template/) for more details.
+
+## HTML5 validation turned off
+
+The `DeFaultFormTemplate` and `TwitterBootstrapFormTemplate` now add `novalidate="novalidate"` to the `<form>` element outputted from `Html.BeginChameleonForm`.
+
+### Reason
+
+We now make use of HTML5 attributes like `required`, `type="number"`, etc. and the user experience for HTML5 validation is poor compared to things like unobtrusive validation. Beause of this we turn off HTML5 validation by default.
+
+### Workaround
+
+If you want to have HTML5 validation you can create your own form template that doesn't add the `novalidate` attribute. We plan on adding configurability to the specification of the client-side validation in the future, so if you are in this situation feel free to [raise an issue](https://github.com/MRCollective/ChameleonForms/issues) to discuss adding that support.
+
 # Version 3.0.0
 
 ## Flags enum support
