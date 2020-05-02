@@ -13,111 +13,114 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
 1. Install the NuGet package `Install-Package ChameleonForms -pre` (v4 is currently marked beta so you need to include pre-release versions)
 2. Register ChameleonForms in your `Startup.cs` file:
 
-    <pre>```csharp
-    public void ConfigureServices(IServiceCollection services)
-    {
-        ...
-        services.AddMvc(...);
-        ...
-        services.AddChameleonForms();
-    }
-    ```</pre>
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddMvc(...);
+    ...
+    services.AddChameleonForms();
+}
+```
 
-    Note: you can alter the configuration from the default, [see the docs](https://chameleonforms.readthedocs.io/en/latest/configuration/).
+Note: you can alter the configuration from the default, [see the docs](https://chameleonforms.readthedocs.io/en/latest/configuration/).
+
 3. Add the following to your `_ViewImports.cshtml`:
 
-    <pre>```cs
-    @using ChameleonForms;
-    @using ChameleonForms.Enums;
-    @using ChameleonForms.Component;
-    ```</pre>
+```cshtml
+@using ChameleonForms;
+@using ChameleonForms.Enums;
+@using ChameleonForms.Component;
+```
 
 4. Create your first form, e.g.:
 
-    `~/Controllers/MyFormController.cs`:
-    <pre>```cs
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using Microsoft.AspNetCore.Mvc;
+`~/Controllers/MyFormController.cs`:
+```cs
+using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
-    namespace MyWebApp.Controllers
+namespace MyWebApp.Controllers
+{
+    public class MyFormViewModel
     {
-        public class MyFormViewModel
+        [Required]
+        public string Name { get; set; }
+
+        public int FavouriteNumber { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DateOfBirth { get; set; }
+    }
+    public class MyFormController : Controller
+    {
+        public IActionResult Index()
         {
-            [Required]
-            public string Name { get; set; }
-
-            public int FavouriteNumber { get; set; }
-
-            [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
-            public DateTime DateOfBirth { get; set; }
+            return View();
         }
-        public class MyFormController : Controller
+
+        [HttpPost]
+        public IActionResult Index(MyFormViewModel vm)
         {
-            public IActionResult Index()
+            if (ModelState.IsValid)
             {
-                return View();
+                // Do stuff
+                return RedirectToAction("Index");
             }
-
-            [HttpPost]
-            public IActionResult Index(MyFormViewModel vm)
-            {
-                if (ModelState.IsValid)
-                {
-                    // Do stuff
-                    return RedirectToAction("Index");
-                }
-                return View(vm);
-            }
+            return View(vm);
         }
     }
-    ```</pre>
+}
+```
 
-    `~/Views/MyForm/Index.cshtml`:
-    <pre>```cshtml
-    @model MyWebApp.Controllers.ViewModel
-    @{
-        ViewData["Title"] = "My Form";
-    }
+`~/Views/MyForm/Index.cshtml`:
+```cshtml
+@model MyWebApp.Controllers.ViewModel
+@{
+    ViewData["Title"] = "My Form";
+}
 
-    @using (var f = Html.BeginChameleonForm())
+@using (var f = Html.BeginChameleonForm())
+{
+    using (var s = f.BeginSection("About you!?"))
     {
-        using (var s = f.BeginSection("About you!?"))
-        {
-            @s.FieldFor(m => m.Name)
-            @s.FieldFor(m => m.FavouriteNumber)
-            @s.FieldFor(m => m.DateOfBirth)
-        }
-        using (var n = f.BeginNavigation())
-        {
-            @n.Submit("Submit")
-        }
+        @s.FieldFor(m => m.Name)
+        @s.FieldFor(m => m.FavouriteNumber)
+        @s.FieldFor(m => m.DateOfBirth)
     }
-
-    @section Scripts
+    using (var n = f.BeginNavigation())
     {
-        <partial name="_ValidationScriptsPartial" />
-        @* ... or relevant equivalent *@
+        @n.Submit("Submit")
     }
+}
 
-    ```</pre>
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    @* ... or relevant equivalent *@
+}
+
+```
+
 5. Run it!
 6. *(Optional)* If you want to add the additional client-side validation support in ChameleonForms (which supports both [jquery validate unobtrusive validation]() and [aspnet-validation]()) then add the following to your `_ValidationScriptsPartial.cshtml` or equivalent file:
 
-    <pre>```html
-    <script src="~/lib/chameleonforms/unobtrusive-date-validation.chameleonforms.js" asp-append-version="true"></script>
-    ```</pre>
+```html
+<script src="~/lib/chameleonforms/unobtrusive-date-validation.chameleonforms.js" asp-append-version="true"></script>
+```
+
 7. *(Optional)* If you are using Twitter Bootstrap 3 then add the following to your `_ValidationScriptsPartial.cshtml` (which only supports jquery validate unobtrusive validation for now):
 
-    <pre>```html
-    <script src="~/lib/chameleonforms/unobtrusive-twitterbootstrap3-validation.chameleonforms.js" asp-append-version="true"></script>
-    ```</pre>
+```html
+<script src="~/lib/chameleonforms/unobtrusive-twitterbootstrap3-validation.chameleonforms.js" asp-append-version="true"></script>
+```
 
-    And add the following to your `_Layout.cshtml` or equivalent file:
+And add the following to your `_Layout.cshtml` or equivalent file:
 
-    <pre>```html
-    <link href="~/lib/chameleonforms/chameleonforms-twitterbootstrap3.css" rel="stylesheet" type="text/css" asp-append-version="true" />
-    ```</pre>
+```html
+<link href="~/lib/chameleonforms/chameleonforms-twitterbootstrap3.css" rel="stylesheet" type="text/css" asp-append-version="true" />
+```
 
 
 ## Show me a basic ChameleonForms example next to its ASP.NET Core MVC counterpart!

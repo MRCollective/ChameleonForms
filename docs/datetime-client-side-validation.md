@@ -8,7 +8,7 @@ If you want support added for other validation libraries then please [raise an i
 
 In order for this to work you need to:
 
-1. Ensure the client validation provider is registered, this is on by default](configuration.md#default-global-config)
+1. Ensure the client validation provider is registered, this is [on by default](configuration.md#default-global-config)
 2. Ensure you have either jQuery validation unobtrusive or aspnet-validation working
 3. Reference the [unobtrusive-date-validation.chameleonforms.js](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/wwwroot/lib/chameleonforms/unobtrusive-date-validation.chameleonforms.js) file
     * By default, when you [install ChameleonForms by NuGet](getting-started.md) this file will be placed into `wwwroot/lib/chameleonforms/unobtrusive-date-validation.chameleonforms.js` for you when you build. If you don't want that to happen check out [configuration](configuration.md#msbuild-configuration).

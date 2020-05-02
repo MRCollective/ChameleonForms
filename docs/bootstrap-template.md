@@ -9,13 +9,14 @@ Support for Bootstrap 4 and other commonly used templates like Material will be 
 The easiest way to get up and running with Twitter Bootstrap is to specify it as part of the global config:
 
 1. In `Startup.cs` simply change your `AddChameleonForms` call to reference the `TwitterBootstrap3FormTemplate`:
-    ```cs
-    public void ConfigureServices(IServiceCollection services)
-    {
-        ...
-        services.AddChameleonForms<TwitterBootstrap3FormTemplate>(...);
-    }
-    ```
+
+```cs
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddChameleonForms<TwitterBootstrap3FormTemplate>(...);
+}
+```
 
 2. If you already have Twitter Bootstrap referenced in your layout then [add the extra CSS and JavaScript files to get validation highlighting looking great](#chameleonforms-custom-css-and-javascript-to-complement-bootstrap)
 3. [Create a ChameleonForm](getting-started.md) using the `BeginChameleonForm` extension method and you are good to go
