@@ -1,6 +1,6 @@
 # Email Fields
 
-If you need to collect emails then that will automatically be handled for you with a HTML 5 `<input type="email">` field if you annotate your model field correctly:
+If you need to collect emails then that will automatically be handled for you with a HTML5 `<input type="email">` field if you annotate your model field correctly:
 
 ```csharp
 [DataType(DataType.EmailAddress)]

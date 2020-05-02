@@ -1,6 +1,6 @@
 # Flags Enum Fields
 
-If you want the user to specify multiple values from an enum you can either use a [non-flags enum against any property with a type convertible to `IEnumerable<%enumType%>`](multiple-enum.md) or use a flags enum, e.g.:
+If you want the user to specify multiple values from an enum you can either use a [non-flags enum against any property with a type convertible to `IEnumerable<%enumType%>`](multiple-enum.md) (separate page) or use a flags enum (this page), e.g.:
 
 ```csharp
 [Flags]

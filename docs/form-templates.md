@@ -4,7 +4,7 @@
 
 The `DefaultFormTemplate` outputs a sensible default that looks good without any / with minimal CSS and is a nice way to semantically describe a form. It makes use of definition lists to do this.
 
-See [Configuring the Default Form Template](the-form#configuring-the-default-form-template) / [Default global config](configuration.md#default-global-config).
+See [Configuring the Default Form Template](the-form#configuring-the-form-template) / [Default global config](configuration.md#default-global-config).
 
 To see examples of the HTML this template outputs check out:
 
@@ -46,19 +46,7 @@ If you'd like to use the [globally configured](configuration.md#default-global-c
 htmlHelper.GetDefaultFormTemplate()
 ```
 
-Which is an extension method on `IHtmlHelper` in the `ChameleonForms` namespace, which resolves `IFormTemplate` from the request services collection:
-
-```cs
-        /// <summary>
-        /// Gets the registered default form template from RequestServices.
-        /// </summary>
-        /// <param name="htmlHelper">The HTML Helper</param>
-        /// <returns>An instance of the default <see cref="IFormTemplate"/></returns>
-        public static IFormTemplate GetDefaultFormTemplate(this IHtmlHelper htmlHelper)
-        {
-            return htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<IFormTemplate>();
-        }
-```
+Which is an extension method on `IHtmlHelper` in the `ChameleonForms` namespace, which resolves `IFormTemplate` from the request services collection. For more information see [Configuring the form template](the-form.md#configuring-the-form-template).
 
 ## Using multiple templates in a single application
 

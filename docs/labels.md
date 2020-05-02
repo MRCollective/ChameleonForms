@@ -1,4 +1,4 @@
-# Cotnrolling labels
+# Controlling labels
 
 By default ASP.NET Core MVC will use the property name that you specify in your model as the label when using
 

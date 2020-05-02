@@ -13,19 +13,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ChameleonForms
 {
-    // todo: needed for beta release in priority order
-    // Documentation:
-    // * "g" datetime
-    // * int/datetime client validation support
-    // * email and url fields
-    // * client side file copying
-    // * how to set up twitter bootstrap 3
-    // * view namespace getting started
-    // * html5 validation off
-    // * config
-    // * uri binding
-    // * update breakingchanges file (displayformatstring -> editformatstring, requiredflagsenum -> required, defaultformtemplate -> SCE, renamed and moved folders for css/js files), TwitterBootstrapFormTemplate -> TwitterBootstrap3FormTemplate (and no nuget package)
-    // * End-to-end documentation review and update - @helper, IHtmlString, web.config, update Message, Navigation etc.
     // todo: 4.0 non-beta release
     // Build-in DI support e.g. fieldgeneratorrouter
     // Review the datetime "g" and current culture things - remove? client side validation for non / separators?

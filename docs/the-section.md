@@ -1,5 +1,4 @@
-Section
-=======
+# Section
 
 The Section is a grouping of a set of fields; you create a Section by instantiating a `Section<TModel>` within a `using` block. The start and end of the `using` block will output the start and end HTML for the Section and the inside of the `using` block will contain the Section fields.
 
@@ -10,7 +9,7 @@ The `Section<TModel>` class looks like this and is in the `ChameleonForms.Compon
     /// Wraps the output of a form section.
     /// </summary>
     /// <typeparam name="TModel">The view model type for the current view</typeparam>
-    public class Section<TModel> : FormComponent<TModel>
+    public class Section<TModel> : FormComponent<TModel>, ISection, ISection<TModel>
     {
         /// <summary>
         /// Creates a form section
@@ -20,7 +19,7 @@ The `Section<TModel>` class looks like this and is in the `ChameleonForms.Compon
         /// <param name="nested">Whether the section is nested within another section</param>
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
-        public Section(IForm<TModel> form, IHtmlContent heading, bool nested, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null) : base(form, false) {...}
+        public Section(IForm<TModel> form, IHtmlContent heading, bool nested, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null);
 
         /// <summary>
         /// Outputs a field with passed in HTML.
@@ -31,14 +30,31 @@ The `Section<TModel>` class looks like this and is in the `ChameleonForms.Compon
         /// <param name="metadata">Any field metadata</param>
         /// <param name="isValid">Whether or not the field is valid</param>
         /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
-        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true) {...}
-    }
+        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true);
+
+        /// <summary>
+        /// Returns the HTML representation of the beginning of the form component.
+        /// </summary>
+        /// <returns>The beginning HTML for the form component</returns>
+        public virtual IHtmlContent Begin();
+
+        /// <summary>
+        /// Returns the HTML representation of the end of the form component.
+        /// </summary>
+        /// <returns>The ending HTML for the form component</returns>
+        public virtual IHtmlContent End();
+
+        /// <summary>
+        /// Returns a section with the same characteristics as the current section, but using the given partial form.
+        /// </summary>
+        /// <typeparam name="TPartialModel">The model type of the partial view</typeparam>
+        /// <returns>A section with the same characteristics as the current section, but using the given partial form</returns>
+        public ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm);
 ```
 
-The start and end HTML of the Section are generated via the `BeginSection` and `EndSection` methods in the template (or `BeginNestedSection` and `EndNestedSection` if the Section is a child of another Section). The field HTML is generated via the `Field` method in the template.
+The start and end HTML of the Section are generated via the `BeginSection` and `EndSection` methods in the [form template](form-templates.md) (or `BeginNestedSection` and `EndNestedSection` if the Section is a child of another Section). The field HTML is generated via the `Field` method in the template.
 
-Default usage
--------------
+## Default usage
 
 In order to get an instance of a `Section<TModel>` you can use the `BeginSection` method on the Form, e.g.
 
@@ -48,18 +64,18 @@ using (var s = f.BeginSection("Heading")) {
 }
 ```
 
-The `BeginSection` extension method looks like this:
+The `BeginSection` extension methods look like this:
 
 ```csharp
         /// <summary>
         /// Creates a top-level form section.
         /// </summary>
         /// <example>
-        /// @using (var s = f.BeginSection("Section Heading")) {
+        /// @using (var s = f.BeginSection("Section heading")) {
         ///     @s.FieldFor(m => m.FirstName)
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
         /// <param name="form">The form the section is being created in</param>
         /// <param name="heading">The heading for the section</param>
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
@@ -68,6 +84,63 @@ The `BeginSection` extension method looks like this:
         public static Section<TModel> BeginSection<TModel>(this IForm<TModel> form, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(form, heading.ToHtml(), false, leadingHtml, htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates a top-level form section.
+        /// </summary>
+        /// <example>
+        /// @using (var s = f.BeginSection("Section heading", leadingHtml: @&lt;p&gt;Leading html...&lt;/p&gt;)) {
+        ///     @s.FieldFor(m => m.FirstName)
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <param name="form">The form the section is being created in</param>
+        /// <param name="heading">The heading for the section</param>
+        /// <param name="leadingHtml">Any HTML to output at the start of the section as a templated razor delegate</param>
+        /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
+        /// <returns>The form section</returns>
+        public static Section<TModel> BeginSection<TModel>(this IForm<TModel> form, string heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section<TModel>(form, heading.ToHtml(), false, leadingHtml(null), htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates a top-level form section.
+        /// </summary>
+        /// <example>
+        /// @using (var s = f.BeginSection(new HtmlString("&lt;strong&gt;Section heading&lt;/strong&gt;"))) {
+        ///     @s.FieldFor(m => m.FirstName)
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <param name="form">The form the section is being created in</param>
+        /// <param name="heading">The heading for the section</param>
+        /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
+        /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
+        /// <returns>The form section</returns>
+        public static Section<TModel> BeginSection<TModel>(this IForm<TModel> form, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section<TModel>(form, heading ?? new HtmlString(""), false, leadingHtml, htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates a top-level form section.
+        /// </summary>
+        /// <example>
+        /// @using (var s = f.BeginSection(@&lt;strong&gt;Section heading&lt;/strong&gt;, leadingHtml: @&lt;p&gt;Leading html...&lt;/p&gt;)) {
+        ///     @s.FieldFor(m => m.FirstName)
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <param name="form">The form the section is being created in</param>
+        /// <param name="heading">The heading for the section as a templated razor delegate</param>
+        /// <param name="leadingHtml">Any HTML to output at the start of the section as a templated razor delegate</param>
+        /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
+        /// <returns>The form section</returns>
+        public static Section<TModel> BeginSection<TModel>(this IForm<TModel> form, Func<dynamic, IHtmlContent> heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section<TModel>(form, heading(null), false, leadingHtml(null), htmlAttributes);
         }
 ```
 
@@ -83,7 +156,7 @@ using (var s = f.BeginSection("Heading")) {
 }
 ```
 
-The `BeginSection` extension method on Section looks like this:
+The `BeginSection` extension methods on Section look like this:
 
 ```csharp
         /// <summary>
@@ -96,7 +169,7 @@ The `BeginSection` extension method on Section looks like this:
         ///     }
         /// }
         /// </example>
-        /// <typeparam name="TModel">The view model type for the current view</typeparam>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
         /// <param name="section">The section the section is being created under</param>
         /// <param name="heading">The heading for the section</param>
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
@@ -106,10 +179,72 @@ The `BeginSection` extension method on Section looks like this:
         {
             return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml, htmlAttributes);
         }
+
+        /// <summary>
+        /// Creates a nested form section.
+        /// </summary>
+        /// <example>
+        /// @using (var s = f.BeginSection("Section heading")) {
+        ///     using (var ss = s.BeginSection("Nested section heading", leadingHtml: @&lt;p&gt;Leading html...&lt;/p&gt;)) {
+        ///         @ss.FieldFor(m => m.FirstName)
+        ///     }
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <param name="section">The section the section is being created under</param>
+        /// <param name="heading">The heading for the section</param>
+        /// <param name="leadingHtml">Any HTML to output at the start of the section as a templated razor delegate</param>
+        /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
+        /// <returns>The nested form section</returns>
+        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, string heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml(null), htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates a nested form section.
+        /// </summary>
+        /// <example>
+        /// @using (var s = f.BeginSection("Section heading")) {
+        ///     using (var ss = s.BeginSection(new HtmlString("&lt;strong&gt;Nested section heading&lt;/strong&gt;"))) {
+        ///         @ss.FieldFor(m => m.FirstName)
+        ///     }
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <param name="section">The section the section is being created under</param>
+        /// <param name="heading">The heading for the section</param>
+        /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
+        /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
+        /// <returns>The nested form section</returns>
+        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section<TModel>(section.Form, heading, true, leadingHtml, htmlAttributes);
+        }
+
+        /// <summary>
+        /// Creates a nested form section.
+        /// </summary>
+        /// <example>
+        /// @using (var s = f.BeginSection("Section heading")) {
+        ///     using (var ss = s.BeginSection(@&lt;strong&gt;Nested section heading&lt;/strong&gt;, leadingHtml: &lt;p&gt;Leading html...&lt;/p&gt;)) {
+        ///         @ss.FieldFor(m => m.FirstName)
+        ///     }
+        /// }
+        /// </example>
+        /// <typeparam name="TModel">The view model type for the current view</typeparam>        
+        /// <param name="section">The section the section is being created under</param>
+        /// <param name="heading">The heading for the section</param>
+        /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
+        /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
+        /// <returns>The nested form section</returns>
+        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, Func<dynamic, IHtmlContent> heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section<TModel>(section.Form, heading(null), true, leadingHtml(null), htmlAttributes);
+        }
 ```
 
-Default HTML
-------------
+## Default HTML
 
 ### Begin HTML
 
@@ -143,8 +278,7 @@ Default HTML
             </dd>
 ```
 
-Twitter Bootstrap 3 HTML
-------------------------
+## Twitter Bootstrap 3 HTML
 
 ### Begin HTML
 

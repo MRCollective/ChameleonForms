@@ -1,7 +1,6 @@
-Number Fields
-===============
+# Number Fields
 
-If you need to collect numeric data then that will automatically be handled for you with a HTML 5 `<input type="number">` field.
+If you need to collect numeric data then that will automatically be handled for you with a HTML5 `<input type="number">` field.
 
 Any one of the following model types will trigger one of these fields:
 
@@ -19,15 +18,14 @@ public double DoubleField { get; set; }
 public decimal DecimalField { get; set; }
 ```
 
-Default HTML
-------------
+## Default HTML
 
 ### Integral types
 
 For integral types (`byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, or `ulong`), when using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
 
 ```html
-<input type="number" step="1" %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" value="%value%" />
+<input type="number" step="1" %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required" value="%value%" />
 ```
 
 ### Floating-point types
@@ -35,7 +33,7 @@ For integral types (`byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, o
 For floating-point types (`float`, `double`, or `decimal`), when using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
 
 ```html
-<input type="number" step="any" %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" value="%value%" />
+<input type="number" step="any" %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required" value="%value%" />
 ```
 
 ### Default min / max
@@ -49,8 +47,7 @@ The `min` and `max` attributes will automatically be set in the following instan
 * `uint`: `min="0"`
 * `ulong`: `min="0"`
 
-Configurability
----------------
+## Configurability
 
 ### Specify currency step
 
@@ -63,7 +60,7 @@ public decimal DecimalField { get; set; }
 
 ### Specify step
 
-You can easily specify the `step` HTML: attribute by using the `Step` method on the [Field Configuration](field-configuration), e.g.:
+You can easily specify the `step` HTML attribute by using the `Step` method on the [Field Configuration](field-configuration), e.g.:
 
 ```csharp
 @s.FieldFor(m => m.IntField).Step(2)

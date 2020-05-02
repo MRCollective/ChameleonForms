@@ -1,7 +1,6 @@
-URI Fields
-===============
+# URI Fields
 
-If you need to collect URI/URL data then that will automatically be handled for you with a HTML 5 `<input type="url">` field.
+If you need to collect URI/URL data then that will automatically be handled for you with a HTML5 `<input type="url">` field.
 
 Any one of the following model types will trigger one of these fields:
 
@@ -17,15 +16,13 @@ public string Url { get; set; }
 
 With the [default global configuration](configuration.md), using a `Uri` will also result in server-side validation - the value will get parsed by the `Uri` class to check validity. The `[Url]` against a `string` will also result in (rudimentary) validation (starts with `http://`, `https://` or `ftp://`).
 
-Default HTML
-------------
+## Default HTML
 
 ```html
 <input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" type="url" value="%value%" />
 ```
 
-Configurability
----------------
+## Configurability
 
 ### Specify URL
 

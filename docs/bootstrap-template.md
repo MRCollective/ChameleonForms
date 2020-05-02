@@ -53,4 +53,4 @@ The template doesn't currently support [horizontal](https://getbootstrap.com/doc
 
 ## Modifications
 
-If you think that the changes you want to make to the template are specific to your needs then you can [easily extend the template to change the bits you want](custom-template#applying-a-global-template-change) (just extend the `TwitterBootstrapFormTemplate` class), while still using the work we have done (and subscribing to updates when you update the ChameleonForms NuGet package).
+If you think that the changes you want to make to the template are specific to your needs then you can [easily extend the template to change the bits you want](custom-template#applying-a-global-template-change) (just extend the `TwitterBootstrap3FormTemplate` class), while still using the work we have done (and subscribing to updates when you update the ChameleonForms NuGet package).

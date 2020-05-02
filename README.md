@@ -323,7 +323,7 @@ Here's what the HTML looks like (using the default form template, which you can 
 
 Key things to note that ChameleonForms has automatically done (with default configuration):
 
-* HTML 5 validation turned off (instead unobtrusive validation provides a better exerience)
+* HTML5 validation turned off (instead unobtrusive validation provides a better exerience)
 * The form performs a POST to the current URL (i.e. self-submitting form)
 * Fields are grouped into sections with fieldsets
 * All boilerplate HTML surrounding a field, its label (with correct `for`), its hint (if any) and its validation message is added for you just by specifying the view model property - this means:
@@ -331,7 +331,7 @@ Key things to note that ChameleonForms has automatically done (with default conf
     * You can be confident all fields have labels, validation HTML etc. that are correctly hooked up and you haven't misspelt any IDs etc.
     * Similarly, you can be sure that all fields will definitely bind to the view model when posted back to the server
     * The form is much quicker to write and read since it's way terser
-* The correct field types have automatically been inferred, including HTML 5 field types where they are useful (e.g. not for dates since you have no control over date format):
+* The correct field types have automatically been inferred, including HTML5 field types where they are useful (e.g. not for dates since you have no control over date format):
     * `string` -> `<input type="text">`
     * `[EmailAddress]` -> `<input type="email">`
     * `[DataType(DataType.Password)]` -> `<input type="password">`
@@ -390,7 +390,7 @@ If you need to raise an issue or check for an existing issue, see <https://githu
 
 Some ideas for the library in the future are:
 
-* Ability to opt-in to switch on HTML 5 validation and switch off client validation
+* Ability to opt-in to switch on HTML5 validation and switch off client validation
 * Bootstrap 4 and Material UI support
 * Tag helpers
 * Blazor, Razor Pages and Carter support

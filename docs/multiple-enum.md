@@ -1,29 +1,31 @@
-Multiple-Select Enum Fields
-===========================
+# Multiple-Select Enum Fields
 
-If you want the user to specify multiple values from an enum you can either use a [flags enum](flags-enum.md) or use a non-flags enum against any property with a type convertible to `IEnumerable<%enumType%>`, e.g.:
+If you want the user to specify multiple values from an enum you can either use a [flags enum](flags-enum.md) (separate page) or use a non-flags enum against any property with a type convertible to `IEnumerable<%enumType%>` (this page), e.g.:
 
 ```csharp
 public enum MyEnum  { ... }
 ...
 public IEnumerable<MyEnum> EnumEnumerableField { get; set; }
 public List<MyEnum> EnumListField { get; set; }
+public MyEnum[] EnumArrayField { get; set; }
 // Or, alternatively:
 public IEnumerable<MyEnum?> NullableEnumEnumerableField { get; set; }
 public List<MyEnum?> NullableEnumListField { get; set; }
+public MyEnum?[] NullableEnumArrayField { get; set; }
 ```
 
-Note: as you will see below - there isn't much point in specifying a nullable enum for the enum type in the enumerable/list - we recommend you always use the enum type directly.
+**Note:** as you will see below - there isn't much point in specifying a nullable enum for the enum type in the enumerable/list - we recommend you always use the enum type directly.
 
-If you want the user to specify a single value from an enum then you can [use the enum type directly](enum.md).
+If you want the user to specify a single value only from an enum then you can [use the enum type directly](enum.md) without the collection modifier.
 
-Default HTML
-------------
+## Default HTML
 
 ### Required nullable or non-nullable enum (multi-select drop-down with no empty option)
 
+To indicate that a value is required, regardless of whether you use the enum type or nullable variant of the enum type, you need to mark the field with `[Required]`.
+
 ```html
-<select %validationAttrs% %htmlAttributes% multiple="multiple" id="%propertyName%" name="%propertyName%">
+<select %validationAttrs% %htmlAttributes% multiple="multiple" id="%propertyName%" name="%propertyName%" required="required">
 %foreach enum value x%
     <option value="%x.ToString()%">%x.Humanize()%</option>
 %endforeach%
@@ -43,10 +45,9 @@ Default HTML
 
 ### Explanation and example
 
-Please see the explanation an example on the [Enum Field](enum#explanation-and-example) page.
+Please see the explanation an example on the [Enum Field](enum#explanation-and-example) page to understand what `%x.ToString()` and `%x.Humanize()%` do and how to control the description values.
 
-Configurability
----------------
+## Configurability
 
 ### Display as list of checkboxes
 

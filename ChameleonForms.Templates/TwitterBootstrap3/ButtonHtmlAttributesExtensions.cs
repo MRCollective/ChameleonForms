@@ -17,7 +17,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         /// &lt;button type="submit">&lt;span class="glyphicon glyphicon-arrow-right">&lt;/span> Submit&lt;/button>
         /// </example>
         /// <param name="attrs">The Html Attributes from a navigation button</param>
-        /// <param name="icon">The icon to use; see http://getbootstrap.com/components/#glyphicons-glyphs</param>
+        /// <param name="icon">The icon to use; see https://getbootstrap.com/docs/3.3/components/#glyphicons</param>
         /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
         public static ButtonHtmlAttributes WithIcon(this ButtonHtmlAttributes attrs, string icon)
         {

@@ -225,7 +225,7 @@ For an example of this see the tests for the [built-in form templates](https://g
 
 You can often encounter the situation where the `DefaultFormTemplate` is mostly sufficient for your needs, but you want to make slight tweaks for example adding classes to all buttons, or changing the required designator. In those instances you can easily create a custom form template to use in your application that simply extends the `DefaultFormTemplate` class and overrides the relevant methods - in the above example, you would override the `Button` or `RequiredDesignator` methods respectively.
 
-Even further to that, we can change the `HtmlAttributes` object that is passed into the `Button` method and then call `base.Button(...)` to keep the original button generation code. For an example of this in action see the `Button method` in the [Twitter Bootstrap 3 template](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Templates/TwitterBootstrap3/TwitterBootstrapFormTemplate.cs#L126).
+Even further to that, we can change the `HtmlAttributes` object that is passed into the `Button` method and then call `base.Button(...)` to keep the original button generation code. For an example of this in action see the `Button method` in the [Twitter Bootstrap 3 template](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Templates/TwitterBootstrap3/TwitterBootstrap3FormTemplate.cs#L126).
 
 ## Using a custom form template
 
