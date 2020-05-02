@@ -1,8 +1,16 @@
-﻿@model dynamic
+﻿@model ViewModelExample
 
 @{
     ViewBag.Title = "ChameleonForms";
+    Func<dynamic, IHtmlContent> x = @<strong>Supppp</strong>;
 }
+
+<chameleon-form enctype="EncType.UrlEncoded" action="@Url.Action("Index")" method="Post">
+    <section heading="Wassup" leading-html="x">
+        <p>Yo</p>
+        <field for="Decimal" />
+    </section>
+</chameleon-form>
 
 <h1>ChameleonForms</h1>
 

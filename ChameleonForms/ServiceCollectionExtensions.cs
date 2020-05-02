@@ -31,6 +31,7 @@ namespace ChameleonForms
     // Support Blazor, razor pages and carter
     // Remove ExistsInAttribute.EnableValidation as a static
     // Investigate better documentation using the .net doc generator along with something like https://github.com/koumoul-dev/gh-pages-multi to support multiple versions, just check linking between .md files works and how to support menu hierarchy
+    // Recreate FormMethod enum
 
     /// <summary>
     /// Extension methods for <see cref="IServiceCollection"/>.
