@@ -33,13 +33,29 @@ namespace ChameleonForms.Example
             var helper = ViewContext.HttpContext.RequestServices.GetRequiredService<IHtmlHelper<TModel>>();
             (helper as HtmlHelper<TModel>)?.Contextualize(ViewContext);
             var f = ViewContext.ViewData["ChameleonForm"] as Form<TModel>;
-            using (var s = f.BeginSection(heading: Heading, leadingHtml: LeadingHtml))
+            if (LeadingHtml == null)
             {
-                helper.ViewData["ChameleonFormSection"] = s;
-                output.GetChildContentAsync().GetAwaiter().GetResult()
-                    .WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);
+                using (var s = f.BeginSection(heading: Heading))
+                {
+                    OutputSection(output, helper, s);
+                }
+            }
+            else
+            {
+                using (var s = f.BeginSection(heading: Heading, leadingHtml: LeadingHtml))
+                {
+                    OutputSection(output, helper, s);
+                }
             }
             output.SuppressOutput();
+        }
+
+        private void OutputSection<TModel>(TagHelperOutput output, IHtmlHelper<TModel> helper, Section<TModel> s)
+        {
+            helper.ViewData["ChameleonFormSection"] = s;
+            output.GetChildContentAsync().GetAwaiter().GetResult()
+                .WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);
+            ViewContext.ViewData.Remove("ChameleonFormSection");
         }
     }
 }

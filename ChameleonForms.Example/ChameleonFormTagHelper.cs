@@ -37,6 +37,7 @@ namespace ChameleonForms.Example
                 helper.ViewData["ChameleonForm"] = f;
                 output.GetChildContentAsync().GetAwaiter().GetResult()
                     .WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);
+                ViewContext.ViewData.Remove("ChameleonForm");
             }
             output.SuppressOutput();
         }

@@ -12,8 +12,13 @@
         <field for="Int">
             <field for="NullableInt" />
         </field>
+        <partial name="_Child" />
+        <partial-form name="_Child2" for="Child" />
     </section>
+    <partial-form name="_Child2" for="Child" />
 </chameleon-form>
+
+<partial name="_OtherForm" model="new ComparisonController.SignupViewModel()" />
 
 <h1>ChameleonForms</h1>
 

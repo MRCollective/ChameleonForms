@@ -75,6 +75,7 @@ namespace ChameleonForms.Example
                     {
                         ViewContext.ViewData["ChameleonFormField"] = field;
                         ViewContext.Writer.WriteLine(output.GetChildContentAsync().GetAwaiter().GetResult());
+                        ViewContext.ViewData.Remove("ChameleonFormField");
                     }
                 }
             }
