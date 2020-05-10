@@ -47,6 +47,18 @@ namespace ChameleonForms
         }
 
         /// <summary>
+        /// Constructs a <see cref="HtmlAttributes"/> object using a dictionary to express the attributes.
+        /// </summary>
+        /// <example>
+        /// var h = new HtmlAttributes(new Dictionary&lt;string, string&gt; {{"style", "width: 100%;"}, {"cellpadding", "0"}, {"class", "class1 class2"}, {"src", "http://url/"}, {"data-somedata", "\"rubbi&amp;h\""}});
+        /// </example>
+        /// <param name="attributes">A dictionary of attributes</param>
+        public HtmlAttributes(IDictionary<string, string> attributes)
+        {
+            Attrs(attributes);
+        }
+
+        /// <summary>
         /// Constructs a <see cref="HtmlAttributes"/> object using an anonymous object to express the attributes.
         /// </summary>
         /// <example>
@@ -181,6 +193,18 @@ namespace ChameleonForms
         }
 
         /// <summary>
+        /// Adds or updates a set of HTML attributes using a dictionary to express the attributes.
+        /// </summary>
+        /// <param name="attributes">A dictionary of attributes</param>
+        /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
+        public HtmlAttributes Attrs(IDictionary<string, string> attributes)
+        {
+            _tagBuilder.MergeAttributes(attributes, true);
+
+            return this;
+        }
+
+        /// <summary>
         /// Adds or updates a set of HTML attributes using anonymous objects to express the attributes.
         /// </summary>
         /// <param name="attributes">An anonymous object of attributes</param>
@@ -200,6 +224,16 @@ namespace ChameleonForms
         /// <param name="attributes">The dictionary of HTML attributes</param>
         /// <returns>The new <see cref="HtmlAttributes"/> object</returns>
         public static implicit operator HtmlAttributes(Dictionary<string, object> attributes)
+        {
+            return new HtmlAttributes(attributes);
+        }
+
+        /// <summary>
+        /// Implicitly convert from a dictionary to a new <see cref="HtmlAttributes"/> object.
+        /// </summary>
+        /// <param name="attributes">The dictionary of HTML attributes</param>
+        /// <returns>The new <see cref="HtmlAttributes"/> object</returns>
+        public static implicit operator HtmlAttributes(Dictionary<string, string> attributes)
         {
             return new HtmlAttributes(attributes);
         }

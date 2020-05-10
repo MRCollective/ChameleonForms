@@ -17,6 +17,7 @@ namespace ChameleonForms.Component
         /// <param name="form">The form the message is being created in</param>
         public Navigation(IForm<TModel> form) : base(form, false)
         {
+            form.HtmlHelper.ViewData[Constants.ViewDataNavigationKey] = this;
             Initialise();
         }
 
@@ -159,6 +160,12 @@ namespace ChameleonForms.Component
         public ButtonHtmlAttributes Reset(Func<dynamic, IHtmlContent> content)
         {
             return Reset(content(null));
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            Form.HtmlHelper.ViewData.Remove(Constants.ViewDataNavigationKey);
         }
     }
 

@@ -2,11 +2,11 @@ using System;
 using System.Linq.Expressions;
 using System.Text.Encodings.Web;
 using ChameleonForms.Component;
+using ChameleonForms.Utils;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ChameleonForms.Example
 {
@@ -31,30 +31,21 @@ namespace ChameleonForms.Example
 
         public void ProcessInternal<TModel, TPartialModel>(TagHelperContext context, TagHelperOutput output, Expression<Func<TModel, TPartialModel>> @for)
         {
-            var helper = ViewContext.HttpContext.RequestServices.GetRequiredService<IHtmlHelper<TModel>>();
-            (helper as HtmlHelper<TModel>)?.Contextualize(ViewContext);
-            var f = ViewContext.ViewData["ChameleonForm"] as Form<TModel>;
-            var s = ViewContext.ViewData["ChameleonFormSection"] as Section<TModel>;
-            if (s != null)
+            var helper = ViewContext.GetHtmlHelper<TModel>();
+            if (helper.IsInChameleonFormsSection())
             {
+                var s = helper.GetChameleonFormsSection();
                 output.TagMode = TagMode.StartTagAndEndTag;
                 output.TagName = null;
                 output.Content.SetHtmlContent(s.PartialFor(@for, Name));
             }
             else
             {
+                var f = helper.GetChameleonForm();
                 output.TagMode = TagMode.StartTagAndEndTag;
                 output.TagName = null;
                 output.Content.SetHtmlContent(f.PartialFor(@for, Name));
             }
-        }
-
-        private void OutputSection<TModel>(TagHelperOutput output, IHtmlHelper<TModel> helper, Section<TModel> s)
-        {
-            helper.ViewData["ChameleonFormSection"] = s;
-            output.GetChildContentAsync().GetAwaiter().GetResult()
-                .WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);
-            ViewContext.ViewData.Remove("ChameleonFormSection");
         }
 
         static Expression GetPropertySelector(Type modelType, string propertyName)

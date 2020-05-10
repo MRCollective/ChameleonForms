@@ -35,6 +35,7 @@ namespace ChameleonForms.Component
     {
         private readonly IHtmlContent _heading;
         private readonly bool _nested;
+        private readonly object _parentSection;
         private readonly IHtmlContent _leadingHtml;
         private readonly HtmlAttributes _htmlAttributes;
 
@@ -48,6 +49,9 @@ namespace ChameleonForms.Component
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         public Section(IForm<TModel> form, IHtmlContent heading, bool nested, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null) : base(form, false)
         {
+            if (nested)
+                _parentSection = form.HtmlHelper.ViewData[Constants.ViewDataSectionKey];
+            form.HtmlHelper.ViewData[Constants.ViewDataSectionKey] = this;
             _heading = heading;
             _nested = nested;
             _leadingHtml = leadingHtml;
@@ -87,6 +91,16 @@ namespace ChameleonForms.Component
         public ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm)
         {
             return new PartialViewSection<TPartialModel>(partialModelForm);
+        }
+
+        /// <inheritdoc />
+        public override void Dispose()
+        {
+            base.Dispose();
+            if (_nested && _parentSection != null)
+                Form.HtmlHelper.ViewData[Constants.ViewDataSectionKey] = _parentSection;
+            else
+                Form.HtmlHelper.ViewData.Remove(Constants.ViewDataSectionKey);
         }
     }
 

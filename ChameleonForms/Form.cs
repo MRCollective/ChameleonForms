@@ -75,6 +75,7 @@ namespace ChameleonForms
         /// <param name="enctype">The encoding type the form submission should use</param>
         public Form(IHtmlHelper<TModel> helper, IFormTemplate template, string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
         {
+            helper.ViewData[Constants.ViewDataFormKey] = this;
             HtmlHelper = helper;
             Template = template;
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
@@ -99,6 +100,7 @@ namespace ChameleonForms
         public void Dispose()
         {
             Write(Template.EndForm());
+            HtmlHelper.ViewData.Remove(Constants.ViewDataFormKey);
         }
 
         /// <inheritdoc />

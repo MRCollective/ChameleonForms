@@ -75,7 +75,7 @@ namespace ChameleonForms.Component
         }
 
         /// <inheritdoc />
-        public void Dispose()
+        public virtual void Dispose()
         {
             if (!IsSelfClosing)
                 Form.Write(End());

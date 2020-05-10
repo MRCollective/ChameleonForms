@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
+using ChameleonForms.Utils;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -44,6 +45,8 @@ namespace ChameleonForms.Example
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
+        public IFieldConfigurableTagHelper Config { get; set; }
+
 
         public ModelExpression For { get; set; }
         public IFieldConfiguration Configuration { get; set; }
@@ -56,13 +59,11 @@ namespace ChameleonForms.Example
 
         public void ProcessInternal<TModel, TField>(TagHelperContext context, TagHelperOutput output, Expression<Func<TModel, TField>> @for)
         {
-            var helper = ViewContext.HttpContext.RequestServices.GetRequiredService<IHtmlHelper<TModel>>();
-            (helper as HtmlHelper<TModel>)?.Contextualize(ViewContext);
-            var s = ViewContext.ViewData["ChameleonFormSection"] as Section<TModel>;
-            var ff = ViewContext.ViewData["ChameleonFormField"] as Field<TModel>;
+            var helper = ViewContext.GetHtmlHelper<TModel>();
 
-            if (s != null)
+            if (helper.IsInChameleonFormsSection())
             {
+                var s = helper.GetChameleonFormsSection();
                 if (output.TagMode == TagMode.SelfClosing)
                 {
                     output.TagMode = TagMode.StartTagAndEndTag;
@@ -81,6 +82,7 @@ namespace ChameleonForms.Example
             }
             else
             {
+                var ff = ViewContext.ViewData["ChameleonFormField"] as Field<TModel>;
                 output.TagMode = TagMode.StartTagAndEndTag;
                 output.TagName = null;
                 output.Content.SetHtmlContent(ff.FieldFor(@for).Configure(this));

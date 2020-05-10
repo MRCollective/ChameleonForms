@@ -1,22 +1,46 @@
-﻿@model ViewModelExample
+﻿@using ChameleonForms.Utils
+@model ViewModelExample
 
 @{
     ViewBag.Title = "ChameleonForms";
     Func<dynamic, IHtmlContent> x = @<strong>Supppp</strong>;
 }
 
-<chameleon-form enctype="EncType.UrlEncoded" action="@Url.Action("Index")" method="Post">
-    <section heading="Wassup" leading-html="x">
+<chameleon-form>
+    <form-section heading="Wassup" leading-html="x">
         <p>Yo</p>
         <field for="Decimal" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup" />
         <field for="Int">
             <field for="NullableInt" />
         </field>
+        <form-section heading-html="x">
+            <field for="TextAreaField" />
+        </form-section>
         <partial name="_Child" />
         <partial-form name="_Child2" for="Child" />
-    </section>
+    </form-section>
     <partial-form name="_Child2" for="Child" />
+    @* Mix and match helper syntax with tag helpers and vice versa *@
+    @Html.GetChameleonForm().FieldElementFor(m => m.ListId)
+    @using (var s = Html.GetChameleonForm().BeginSection("Section from helper syntax"))
+    {
+        @s.FieldFor(m => m.SomeEnum)
+        <field for="Boolean" />
+    }
+    <form-navigation>
+        @{ var n = Html.GetChameleonFormsNavigation();}
+        @n.Submit("asdf")
+        @n.Reset("Reset")
+    </form-navigation>
 </chameleon-form>
+
+
+@* Not possible - compile error, model has to be the page model with tag helpers
+<chameleon-form enctype="EncType.UrlEncoded" action="@Url.Action("ChameleonForms", "Comparison")" method="Post" model="new SignupViewModel()">
+    <section heading="asdf">
+        <field for="FirstName" />
+    </section>
+</chameleon-form>*@
 
 <partial name="_OtherForm" model="new ComparisonController.SignupViewModel()" />
 
