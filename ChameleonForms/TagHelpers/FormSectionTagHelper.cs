@@ -35,16 +35,16 @@ namespace ChameleonForms.TagHelpers
         public Func<dynamic, IHtmlContent> LeadingHtml { get; set; }
 
         /// <summary>
+        /// Leading HTML for the section, provided as an <see cref="IHtmlContent"/>.
+        /// </summary>
+        public IHtmlContent LeadingHtmlContent { get; set; }
+
+        /// <summary>
         /// HTML attributes to apply to the section. You can either pass them in as a dictionary (attrs="@dictionary"), or
         /// you can pass them in as individual attributes via attr-attribute-name="attributevalue" ...
         /// </summary>
         [HtmlAttributeName("attrs", DictionaryAttributePrefix = "attr-")]
         public IDictionary<string, string> Attrs { get; set; } = new Dictionary<string, string>();
-
-        /// <summary>
-        /// Leading HTML for the section, provided as an <see cref="IHtmlContent"/>.
-        /// </summary>
-        public IHtmlContent LeadingHtmlContent { get; set; }
 
         /// <inheritdoc />
         public override async Task ProcessWhileAwareOfModelTypeAsync<TModel>(TagHelperContext context, TagHelperOutput output)

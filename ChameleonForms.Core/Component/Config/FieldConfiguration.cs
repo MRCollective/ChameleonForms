@@ -66,6 +66,13 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Attrs(IDictionary<string, object> attributes);
 
         /// <summary>
+        /// Adds or updates a set of HTML attributes using a dictionary to express the attributes.
+        /// </summary>
+        /// <param name="attributes">A dictionary of attributes</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Attrs(IDictionary<string, string> attributes);
+
+        /// <summary>
         /// Adds or updates a set of HTML attributes using anonymous objects to express the attributes.
         /// </summary>
         /// <param name="attributes">An anonymous object of attributes</param>
@@ -516,6 +523,13 @@ namespace ChameleonForms.Component.Config
 
         /// <inheritdoc />
         public IFieldConfiguration Attrs(IDictionary<string, object> attributes)
+        {
+            Attributes.Attrs(attributes);
+            return this;
+        }
+
+        /// <inheritdoc />
+        public IFieldConfiguration Attrs(IDictionary<string, string> attributes)
         {
             Attributes.Attrs(attributes);
             return this;

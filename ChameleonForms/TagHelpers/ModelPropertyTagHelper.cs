@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
+using ChameleonForms.Utils;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -27,9 +29,18 @@ namespace ChameleonForms.TagHelpers
         /// <inheritdoc />
         public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
+            var modelType = ViewContext.ViewData.ModelMetadata.ModelType;
+            var propertyType = For.Metadata.ModelType;
+            var propertyPath = For.Name;
+
             // ReSharper disable once PossibleNullReferenceException
-            return GetType().GetMethod(nameof(ProcessUsingModelPropertyAsync)).MakeGenericMethod(ViewContext.ViewData.ModelMetadata.ModelType)
-                .Invoke(this, new object[] { context, output }) as Task;
+            var lambda = typeof(ExpressionBuilder).GetMethod(nameof(ExpressionBuilder.CreateAccessor), BindingFlags.Static | BindingFlags.Public)
+                .MakeGenericMethod(modelType, propertyType)
+                .Invoke(null, new[] { (object)propertyPath });
+
+            // ReSharper disable once PossibleNullReferenceException
+            return GetType().GetMethod(nameof(ProcessUsingModelPropertyAsync)).MakeGenericMethod(modelType, propertyType)
+                .Invoke(this, new object[] { context, output, lambda }) as Task;
         }
 
         /// <summary>
