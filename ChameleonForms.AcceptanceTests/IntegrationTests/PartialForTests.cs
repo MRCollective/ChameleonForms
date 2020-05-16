@@ -36,6 +36,13 @@ namespace ChameleonForms.AcceptanceTests.IntegrationTests
             HtmlApprovals.VerifyHtml($"Partials.cshtml\r\n\r\n{GetViewContents("Partials")}\r\n=====\r\n\r\n_ParentPartial.cshtml\r\n\r\n{GetViewContents("_ParentPartial")}\r\n=====\r\n\r\n_ChildPartial.cshtml\r\n\r\n{GetViewContents("_ChildPartial")}\r\n=====\r\n\r\n_BaseParentPartial.cshtml\r\n\r\n{GetViewContents("_BaseParentPartial")}\r\n=====\r\n\r\n_BaseChildPartial.cshtml\r\n\r\n{GetViewContents("_BaseChildPartial")}\r\n=====\r\n\r\nRendered Source\r\n\r\n{renderedSource}");
         }
 
+        [Fact]
+        public void Should_render_correctly_when_used_via_form_or_section_and_when_used_for_top_level_property_or_sub_property_via_tag_helpers()
+        {
+            var renderedSource = GetRenderedSourceAsync("/ExampleForms/PartialsTH").Result;
+            HtmlApprovals.VerifyHtml($"PartialsTH.cshtml\r\n\r\n{GetViewContents("PartialsTH")}\r\n=====\r\n\r\n_ParentPartialTH.cshtml\r\n\r\n{GetViewContents("_ParentPartialTH")}\r\n=====\r\n\r\n_ChildPartialTH.cshtml\r\n\r\n{GetViewContents("_ChildPartial")}\r\n=====\r\n\r\n_BaseParentPartialTH.cshtml\r\n\r\n{GetViewContents("_BaseParentPartialTH")}\r\n=====\r\n\r\n_BaseChildPartialTH.cshtml\r\n\r\n{GetViewContents("_BaseChildPartialTH")}\r\n=====\r\n\r\nRendered Source\r\n\r\n{renderedSource}");
+        }
+
         private async Task<string> GetRenderedSourceAsync(string url)
         {
             var defaultPage = await _client.GetAsync(url);

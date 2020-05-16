@@ -19,5 +19,10 @@
         /// The key that is used to stash a ChameleonForm <see cref="Component.Navigation{TModel}"/> within ViewData.
         /// </summary>
         public const string ViewDataNavigationKey = "ChameleonForms_Navigation";
+
+        /// <summary>
+        /// The key that is used to stash a ChameleonForm <see cref="Component.Field{TModel}"/> within ViewData.
+        /// </summary>
+        public const string ViewDataFieldKey = "ChameleonForms_Field";
     }
 }

@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Utils;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace ChameleonForms.TagHelpers
 {
+    /// <summary>
+    /// Creates a ChameleonForms form field context, use within a ChameleonForm form section or form field context.
+    /// </summary>
     public class FieldTagHelper : ModelPropertyTagHelper
     {
 
@@ -17,6 +21,20 @@ namespace ChameleonForms.TagHelpers
 
         public string AddClass { get; set; }
         public string Label { get; set; }
+        /// <summary>
+        /// Appended HTML as a <see cref="String"/>.
+        /// </summary>
+        public string Append { get; set; }
+
+        /// <summary>
+        /// Appended HTML as templated razor delegate.
+        /// </summary>
+        public Func<dynamic, IHtmlContent> AppendHtml { get; set; }
+
+        /// <summary>
+        /// Appended HTML as a <see cref="IHtmlContent"/>.
+        /// </summary>
+        public IHtmlContent AppendHtmlContent { get; set; }
 
         [HtmlAttributeName("attrs", DictionaryAttributePrefix = "attr-")]
         public IDictionary<string, string> Attrs { get; set; } = new Dictionary<string, string>();
@@ -37,18 +55,16 @@ namespace ChameleonForms.TagHelpers
                 }
                 else
                 {
-                    using (var field = s.BeginFieldFor(modelProperty, Field.Configure().Configure(this)))
+                    using (s.BeginFieldFor(modelProperty, Field.Configure().Configure(this)))
                     {
-                        ViewContext.ViewData["ChameleonFormField"] = field;
                         var childContent = await output.GetChildContentAsync();
                         childContent.WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);
-                        ViewContext.ViewData.Remove("ChameleonFormField");
                     }
                 }
             }
             else
             {
-                var ff = ViewContext.ViewData["ChameleonFormField"] as Field<TModel>;
+                var ff = helper.GetChameleonFormsField();
                 output.TagMode = TagMode.StartTagAndEndTag;
                 output.TagName = null;
                 output.Content.SetHtmlContent(ff.FieldFor(modelProperty).Configure(this));
@@ -65,6 +81,15 @@ namespace ChameleonForms.TagHelpers
 
             if (th.AddClass != null)
                 fc.AddClass(th.AddClass);
+
+            if (th.Append != null)
+                fc.Append(th.Append.ToHtml());
+
+            if (th.AppendHtml != null)
+                fc.Append(th.AppendHtml);
+
+            if (th.AppendHtmlContent != null)
+                fc.Append(th.AppendHtmlContent);
 
             fc.Attrs(th.Attrs);
 

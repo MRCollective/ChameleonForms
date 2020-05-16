@@ -1,59 +1,52 @@
 using System;
 using System.Linq.Expressions;
-using System.Text.Encodings.Web;
-using ChameleonForms.Component;
+using System.Threading.Tasks;
+using ChameleonForms.TagHelpers;
 using ChameleonForms.Utils;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Razor.TagHelpers;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace ChameleonForms.Example
 {
-    //[HtmlTargetElement(TagStructure = TagStructure.WithoutEndTag)]
-    public class PartialFormTagHelper : TagHelper
+    public class FormPartialTagHelper : ModelPropertyTagHelper
     {
+        /// <summary>
+        /// The partial view name.
+        /// </summary>
         [AspMvcPartialView]
         public string Name { get; set; }
 
-        [HtmlAttributeNotBound]
-        [ViewContext]
-        public ViewContext ViewContext { get; set; }
-
-
-        public ModelExpression For { get; set; }
-        
-        public override void Process(TagHelperContext context, TagHelperOutput output)
-        {
-            GetType().GetMethod(nameof(ProcessInternal)).MakeGenericMethod(ViewContext.ViewData.ModelMetadata.ModelType, For.Metadata.ModelType)
-                .Invoke(this, new object[] {context, output, GetPropertySelector(ViewContext.ViewData.ModelMetadata.ModelType, For.Name)});
-        }
-
-        public void ProcessInternal<TModel, TPartialModel>(TagHelperContext context, TagHelperOutput output, Expression<Func<TModel, TPartialModel>> @for)
+        public override async Task ProcessUsingModelPropertyAsync<TModel, TProperty>(TagHelperContext context, TagHelperOutput output,
+            Expression<Func<TModel, TProperty>> modelProperty)
         {
             var helper = ViewContext.GetHtmlHelper<TModel>();
-            if (helper.IsInChameleonFormsSection())
-            {
-                var s = helper.GetChameleonFormsSection();
-                output.TagMode = TagMode.StartTagAndEndTag;
-                output.TagName = null;
-                output.Content.SetHtmlContent(s.PartialFor(@for, Name));
-            }
-            else
-            {
-                var f = helper.GetChameleonForm();
-                output.TagMode = TagMode.StartTagAndEndTag;
-                output.TagName = null;
-                output.Content.SetHtmlContent(f.PartialFor(@for, Name));
-            }
-        }
 
-        static Expression GetPropertySelector(Type modelType, string propertyName)
-        {
-            var arg = Expression.Parameter(modelType, "x");
-            var property = Expression.Property(arg, propertyName);
-            var exp = Expression.Lambda(property, arg);
-            return exp;
+            using (var h = helper.For((TProperty) For.Model, For.Name))
+            {
+                Func<Task> render = async () =>
+                {
+                    var content = await h.PartialAsync(Name, For.Model, h.ViewData);
+                    output.TagMode = TagMode.StartTagAndEndTag;
+                    output.TagName = null;
+                    output.Content.SetHtmlContent(content);
+                };
+
+                using (var f = helper.GetChameleonForm().CreatePartialForm(modelProperty, h))
+                {
+                    if (helper.IsInChameleonFormsSection())
+                    {
+                        using (var s = helper.GetChameleonFormsSection().CreatePartialSection(f))
+                        {
+                            await render();
+                        }
+                    }
+                    else
+                    {
+                        await render();
+                    }
+                }
+            }
         }
     }
 }

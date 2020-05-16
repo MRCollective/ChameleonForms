@@ -1,0 +1,13 @@
+﻿@using ChameleonForms.Utils
+@model ViewModelExampleBaseChild
+
+@if (Html.IsInChameleonFormsSection())
+{
+    <field for="BaseChildField" append="From partial against child model in the base class" />
+}
+else
+{
+    <form-section heading="This is from a form-level partial against a child model in the base class">
+        <field for="BaseChildField2" />
+    </form-section>
+}

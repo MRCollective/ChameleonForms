@@ -8,24 +8,24 @@
 
 @using (var f = Html.BeginChameleonForm())
 {
-    @f.Partial("_ParentPartial")
-    @f.Partial("_BaseParentPartial")
-    @f.PartialFor(m => m.Child, "_ChildPartial")
-    @f.PartialFor(m => m.BaseChild, "_BaseChildPartial")
+    @(await Html.PartialAsync("_ParentPartial"))
+    @(await Html.PartialAsync("_BaseParentPartial"))
+    @(await f.PartialForAsync(m => m.Child, "_ChildPartial"))
+    @(await f.PartialForAsync(m => m.BaseChild, "_BaseChildPartial"))
 
     using (var s = f.BeginSection("This is in the parent view"))
     {
         @s.FieldFor(m => m.Decimal).Append("in parent view")
-        @s.Partial("_ParentPartial")
-        @s.Partial("_BaseParentPartial")
+        @(await Html.PartialAsync("_ParentPartial"))
+        @(await Html.PartialAsync("_BaseParentPartial"))
         @s.FieldFor(m => m.ListId).Append("in parent view")
-        @s.PartialFor(m => m.Child, "_ChildPartial")
-        @s.PartialFor(m => m.BaseChild, "_BaseChildPartial")
+        @(await s.PartialForAsync(m => m.Child, "_ChildPartial"))
+        @(await s.PartialForAsync(m => m.BaseChild, "_BaseChildPartial"))
         @s.FieldFor(m => m.SomeCheckbox).Append(" in parent view")
     }
 
     using (var n = f.BeginNavigation())
     {
-         @n.Submit("Submit")
+        @n.Submit("Submit")
     }
 }

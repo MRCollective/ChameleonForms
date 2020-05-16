@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using ChameleonForms.Component.Config;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Html;
@@ -25,7 +26,10 @@ namespace ChameleonForms.Component
     /// <summary>
     /// Tagging interface for a ChameleonForms Section with a model type.
     /// </summary>
-    public interface ISection<TModel> : IFormComponent<TModel> {}
+    public interface ISection<TModel> : IFormComponent<TModel>, IDisposable
+    {
+        ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm);
+    }
 
     /// <summary>
     /// Wraps the output of a form section.
@@ -201,7 +205,7 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public static Section<TModel> BeginSection<TModel>(this ISection<TModel> section, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml, htmlAttributes);
         }
@@ -222,7 +226,7 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section as a templated razor delegate</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, string heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
+        public static Section<TModel> BeginSection<TModel>(this ISection<TModel> section, string heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml(null), htmlAttributes);
         }
@@ -243,7 +247,7 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public static Section<TModel> BeginSection<TModel>(this ISection<TModel> section, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading, true, leadingHtml, htmlAttributes);
         }
@@ -264,21 +268,9 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, Func<dynamic, IHtmlContent> heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
+        public static Section<TModel> BeginSection<TModel>(this ISection<TModel> section, Func<dynamic, IHtmlContent> heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading(null), true, leadingHtml(null), htmlAttributes);
-        }
-
-        /// <summary>
-        /// Renders the given partial in the context of the parent model.
-        /// </summary>
-        /// <typeparam name="TModel">The form model type</typeparam>
-        /// <param name="section">The current section</param>
-        /// <param name="partialViewName">The name of the partial view to render</param>
-        /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlContent Partial<TModel>(this ISection<TModel> section, [AspMvcPartialView] string partialViewName)
-        {
-            return PartialFor(section, m => m, partialViewName);
         }
 
         /// <summary>
@@ -291,16 +283,20 @@ namespace ChameleonForms.Component
         /// <param name="partialModelProperty">The property to use for the partial model</param>
         /// <param name="partialViewName">The name of the partial view to render</param>
         /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlContent PartialFor<TModel, TPartialModel>(this ISection<TModel> section, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
+        public static Task<IHtmlContent> PartialForAsync<TModel, TPartialModel>(this ISection<TModel> section, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
         {
             var formModel = section.Form.HtmlHelper.ViewData.Model;
 
-            var viewData = new ViewDataDictionary(section.Form.HtmlHelper.ViewData);
-            viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
-            viewData[WebViewPageExtensions.CurrentFormViewDataKey] = section.Form;
-            viewData[WebViewPageExtensions.CurrentFormSectionViewDataKey] = section;
-            viewData.TemplateInfo.HtmlFieldPrefix = section.Form.HtmlHelper.GetFullHtmlFieldName(partialModelProperty);
-            return section.Form.HtmlHelper.Partial(partialViewName, partialModelProperty.Compile().Invoke(formModel), viewData);
+            using (var h = section.Form.HtmlHelper.For(partialModelProperty, bindFieldsToParent: true))
+            {
+                using (var f = section.Form.CreatePartialForm(partialModelProperty, h))
+                {
+                    using (section.CreatePartialSection(f))
+                    {
+                        return h.PartialAsync(partialViewName, partialModelProperty.Compile().Invoke(formModel), h.ViewData);
+                    }
+                }
+            }
         }
     }
 }

@@ -42,6 +42,8 @@ namespace ChameleonForms.Component
         public Field(IForm<TModel> form, bool isParent, IFieldGenerator fieldGenerator, IFieldConfiguration config)
             : base(form, !isParent)
         {
+            form.HtmlHelper.ViewData[Constants.ViewDataFieldKey] = this;
+
             _fieldGenerator = fieldGenerator;
             _config = config;
             if (_config != null)
@@ -65,6 +67,13 @@ namespace ChameleonForms.Component
             return !IsParent
                 ? new HtmlString(string.Empty)
                 : Form.Template.EndField();
+        }
+
+        /// <inheritdoc />
+        public override void Dispose()
+        {
+            base.Dispose();
+            Form.HtmlHelper.ViewData.Remove(Constants.ViewDataFieldKey);
         }
     }
 

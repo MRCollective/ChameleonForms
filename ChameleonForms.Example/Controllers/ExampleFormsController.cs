@@ -89,6 +89,11 @@ namespace ChameleonForms.Example.Controllers
             return View(new ViewModelExample{TextAreaField = "Initial value"});
         }
 
+        public ActionResult PartialsTH()
+        {
+            return View(new ViewModelExample { TextAreaField = "Initial value" });
+        }
+
         [HttpPost]
         public ActionResult Partials(ViewModelExample vm)
         {

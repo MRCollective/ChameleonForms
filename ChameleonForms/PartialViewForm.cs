@@ -20,6 +20,7 @@ namespace ChameleonForms
 
         public PartialViewForm(IForm<TModel> parentForm, IHtmlHelper<TPartialModel> partialViewHtmlHelper, Expression<Func<TModel, TPartialModel>> partialModelProperty)
         {
+            partialViewHtmlHelper.ViewData[Constants.ViewDataFormKey] = this;
             _parentForm = parentForm;
             _partialViewHtmlHelper = partialViewHtmlHelper;
             _partialModelProperty = partialModelProperty;
@@ -41,13 +42,16 @@ namespace ChameleonForms
             }
         }
 
-        public IForm<TChildPartialModel> CreatePartialForm<TChildPartialModel>(LambdaExpression childPartialModelExpression, HtmlHelper<TChildPartialModel> partialViewHelper)
+        public IForm<TChildPartialModel> CreatePartialForm<TChildPartialModel>(LambdaExpression childPartialModelExpression, IHtmlHelper<TChildPartialModel> partialViewHelper)
         {
             var childPartialModelAsExpression = childPartialModelExpression as Expression<Func<TPartialModel, TChildPartialModel>>;
             var partialModelAsExpression = _partialModelProperty.Combine(childPartialModelAsExpression);
             return new PartialViewForm<TModel, TChildPartialModel>(_parentForm, partialViewHelper, partialModelAsExpression);
         }
 
-        public void Dispose() {}
+        public void Dispose()
+        {
+            _partialViewHtmlHelper.ViewData[Constants.ViewDataFormKey] = _parentForm;
+        }
     }
 }

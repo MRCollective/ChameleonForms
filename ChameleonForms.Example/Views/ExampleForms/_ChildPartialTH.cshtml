@@ -1,0 +1,15 @@
+﻿@using ChameleonForms.Utils
+@model ChildViewModel
+
+<p>This should show the ID of the child field including the parent path: @Html.IdFor(m => m.ChildField)</p>
+
+@if (Html.IsInChameleonFormsSection())
+{
+    <field for="ChildField" append="From partial against child model" />
+}
+else
+{
+    <form-section heading="This is from a form-level partial against a child model">
+        <field for="SomeEnum" />
+    </form-section>
+}

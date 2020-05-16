@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
@@ -23,7 +24,7 @@ namespace ChameleonForms
         /// <param name="partialModelExpression">The expression that identifies the partial model</param>
         /// <param name="partialViewHelper">The HTML Helper from the partial view</param>
         /// <returns>The PartialViewForm wrapping the original form</returns>
-        IForm<TPartialModel> CreatePartialForm<TPartialModel>(LambdaExpression partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper);
+        IForm<TPartialModel> CreatePartialForm<TPartialModel>(LambdaExpression partialModelExpression, IHtmlHelper<TPartialModel> partialViewHelper);
     }
 
     /// <summary>
@@ -104,7 +105,7 @@ namespace ChameleonForms
         }
 
         /// <inheritdoc />
-        public IForm<TPartialModel> CreatePartialForm<TPartialModel>(LambdaExpression partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper)
+        public IForm<TPartialModel> CreatePartialForm<TPartialModel>(LambdaExpression partialModelExpression, IHtmlHelper<TPartialModel> partialViewHelper)
         {
             var partialModelAsExpression = partialModelExpression as Expression<Func<TModel, TPartialModel>>;
             if (partialModelAsExpression == null
@@ -144,18 +145,6 @@ namespace ChameleonForms
         }
 
         /// <summary>
-        /// Renders the given partial in the context of the parent model.
-        /// </summary>
-        /// <typeparam name="TModel">The form model type</typeparam>
-        /// <param name="form">The form</param>
-        /// <param name="partialViewName">The name of the partial view to render</param>
-        /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlContent Partial<TModel>(this IForm<TModel> form, [AspMvcPartialView] string partialViewName)
-        {
-            return PartialFor(form, m => m, partialViewName);
-        }
-
-        /// <summary>
         /// Renders the given partial in the context of the given property.
         /// Use PartialFor(m => m, ...) pr Partial(...) to render a partial for the model itself rather than a child property.
         /// </summary>
@@ -165,14 +154,17 @@ namespace ChameleonForms
         /// <param name="partialModelProperty">The property to use for the partial model</param>
         /// <param name="partialViewName">The name of the partial view to render</param>
         /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlContent PartialFor<TModel, TPartialModel>(this IForm<TModel> form, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
+        public static Task<IHtmlContent> PartialForAsync<TModel, TPartialModel>(this IForm<TModel> form, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
         {
-            var formModel = (TModel) form.HtmlHelper.ViewData.Model;
-            var viewData = new ViewDataDictionary(form.HtmlHelper.ViewData);
-            viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
-            viewData[WebViewPageExtensions.CurrentFormViewDataKey] = form;
-            viewData.TemplateInfo.HtmlFieldPrefix = form.HtmlHelper.GetFullHtmlFieldName(partialModelProperty);
-            return form.HtmlHelper.Partial(partialViewName, partialModelProperty.Compile().Invoke(formModel), viewData);
+            var formModel = form.HtmlHelper.ViewData.Model;
+
+            using (var h = form.HtmlHelper.For(partialModelProperty, bindFieldsToParent: true))
+            {
+                using (form.CreatePartialForm(partialModelProperty, h))
+                {
+                    return h.PartialAsync(partialViewName, partialModelProperty.Compile().Invoke(formModel), h.ViewData);
+                }
+            }
         }
 
         /// <summary>

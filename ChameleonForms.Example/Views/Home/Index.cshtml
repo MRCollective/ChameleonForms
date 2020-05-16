@@ -12,15 +12,17 @@
         <field for="Decimal" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup" />
         <field for="Int">
             <field for="NullableInt" />
+            <partial name="_Child" />
         </field>
         <form-section heading-html="x">
             <field for="TextAreaField" />
             <field for="Child.ChildField" />
+            <partial name="_Child" />
         </form-section>
         <partial name="_Child" />
-        <partial-form name="_Child2" for="Child" />
+        <form-partial name="_Child2" for="Child" />
     </form-section>
-    <partial-form name="_Child2" for="Child" />
+    <form-partial name="_Child2" for="Child" />
     @* Mix and match helper syntax with tag helpers and vice versa *@
     @Html.GetChameleonForm().FieldElementFor(m => m.ListId)
     @using (var s = Html.GetChameleonForm().BeginSection("Section from helper syntax"))
@@ -70,7 +72,7 @@
     <li>@Html.ActionLink("Null model with list", "NullModelWithList", "ExampleForms")</li>
     <li>@Html.ActionLink("Null list", "NullList", "ExampleForms")</li>
     <li>@Html.ActionLink("Buttons", "Buttons", "ExampleForms")</li>
-    <li>@Html.ActionLink("Partials", "Partials", "ExampleForms")</li>
+    <li>@Html.ActionLink("Partials", "Partials", "ExampleForms") | @Html.ActionLink("Partials - Tag Helpers", "PartialsTH", "ExampleForms")</li>
     <li>@Html.ActionLink("Changing HTML Helper context", "ChangingContext", "ExampleForms")</li>
 </ul>
 
