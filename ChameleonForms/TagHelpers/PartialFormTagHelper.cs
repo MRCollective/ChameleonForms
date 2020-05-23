@@ -1,13 +1,11 @@
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using ChameleonForms.TagHelpers;
 using ChameleonForms.Utils;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace ChameleonForms.Example
+namespace ChameleonForms.TagHelpers
 {
     public class FormPartialTagHelper : ModelPropertyTagHelper
     {
@@ -48,18 +46,5 @@ namespace ChameleonForms.Example
                 }
             }
         }
-    }
-}
-namespace JetBrains.Annotations
-{
-    /// <summary>
-    /// ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
-    /// partial view. If applied to a method, the MVC partial view name is calculated implicitly
-    /// from the context. Use this attribute for custom wrappers similar to
-    /// <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
-    public sealed class AspMvcPartialViewAttribute : Attribute
-    {
     }
 }
