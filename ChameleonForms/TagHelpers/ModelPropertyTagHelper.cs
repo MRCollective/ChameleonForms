@@ -29,6 +29,9 @@ namespace ChameleonForms.TagHelpers
         /// <inheritdoc />
         public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
+            if (For == null)
+                throw new ArgumentNullException(nameof(For), $"No `for` specified on <{context.TagName} />");
+
             var modelType = ViewContext.ViewData.ModelMetadata.ModelType;
             var propertyType = For.Metadata.ModelType;
             var propertyPath = For.Name;

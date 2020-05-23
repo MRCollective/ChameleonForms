@@ -25,6 +25,7 @@
     <form-partial name="_Child2" for="Child" />
     @* Mix and match helper syntax with tag helpers and vice versa *@
     @Html.GetChameleonForm().FieldElementFor(m => m.ListId)
+    <field-element for="Boolean" />
     @using (var s = Html.GetChameleonForm().BeginSection("Section from helper syntax"))
     {
         @s.FieldFor(m => m.SomeEnum)

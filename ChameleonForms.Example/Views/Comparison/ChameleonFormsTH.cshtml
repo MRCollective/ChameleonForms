@@ -31,7 +31,7 @@
 
     <form-message type="Action" heading="Confirm the Terms & Conditions">
         <message-paragraph>Please <a href="#">read the terms and conditions</a></message-paragraph>
-        @Html.GetChameleonForm().FieldElementFor(mm => mm.TermsAndConditions).InlineLabel("I agree to the terms and conditions")
+        <field-element for="TermsAndConditions" inline-label="I agree to the terms and conditions" />
     </form-message>
 
     <form-navigation>

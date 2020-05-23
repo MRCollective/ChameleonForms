@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace ChameleonForms.TagHelpers
 {
+    /// <summary>
+    /// Includes a partial view that is a different type to the parent form.
+    /// </summary>
     public class FormPartialTagHelper : ModelPropertyTagHelper
     {
         /// <summary>
@@ -15,6 +18,7 @@ namespace ChameleonForms.TagHelpers
         [AspMvcPartialView]
         public string Name { get; set; }
 
+        /// <inheritdoc />
         public override async Task ProcessUsingModelPropertyAsync<TModel, TProperty>(TagHelperContext context, TagHelperOutput output,
             Expression<Func<TModel, TProperty>> modelProperty)
         {
