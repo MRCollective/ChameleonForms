@@ -28,7 +28,20 @@ namespace ChameleonForms.Component
     /// </summary>
     public interface ISection<TModel> : IFormComponent<TModel>, IDisposable
     {
+        /// <summary>
+        /// Returns a section with the same characteristics as the current section, but using the given partial form.
+        /// </summary>
+        /// <typeparam name="TPartialModel">The model type of the partial view</typeparam>
+        /// <param name="partialModelForm">The <see cref="Form{TModel}"/> from the partial view</param>
+        /// <returns>A section with the same characteristics as the current section, but using the given partial form</returns>
         ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm);
+
+        /// <summary>
+        /// Returns a section with the same characteristics as the current section, but using the given partial form.
+        /// </summary>
+        /// <param name="partialHelper">The HTML helper from the partial view</param>
+        /// <returns>A section with the same characteristics as the current section, but using the given partial form</returns>
+        ISection<TModel> CreatePartialSection(IHtmlHelper<TModel> partialHelper);
     }
 
     /// <summary>
@@ -95,6 +108,12 @@ namespace ChameleonForms.Component
         public ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm)
         {
             return new PartialViewSection<TPartialModel>(partialModelForm);
+        }
+
+        /// <inheritdoc />
+        public ISection<TModel> CreatePartialSection(IHtmlHelper<TModel> partialHelper)
+        {
+            return new PartialViewSection<TModel>(Form.CreatePartialForm(partialHelper));
         }
 
         /// <inheritdoc />

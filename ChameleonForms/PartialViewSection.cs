@@ -1,4 +1,5 @@
 ﻿using ChameleonForms.Component;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChameleonForms
 {
@@ -18,6 +19,13 @@ namespace ChameleonForms
         public ISection<TPartialModel1> CreatePartialSection<TPartialModel1>(IForm<TPartialModel1> partialModelForm)
         {
             return new PartialViewSection<TPartialModel1>(partialModelForm);
+        }
+
+        public ISection<TPartialModel> CreatePartialSection(IHtmlHelper<TPartialModel> partialHelper)
+        {
+            return partialHelper == Form.HtmlHelper
+                ? this
+                : new PartialViewSection<TPartialModel>(Form.CreatePartialForm(partialHelper));
         }
 
         public void Dispose()

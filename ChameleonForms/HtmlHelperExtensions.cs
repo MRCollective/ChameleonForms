@@ -135,7 +135,15 @@ namespace ChameleonForms
 
             var form = helper.ViewData[Constants.ViewDataFormKey];
             if (form is IForm<TModel> castedForm)
+            {
+                // The HTML helper is different - this probably means this section is being created from a partial view
+                // We need to switch the HTML helper otherwise the output will be out of order
+                if (castedForm.HtmlHelper != helper)
+                    return castedForm.CreatePartialForm(helper);
+
                 return castedForm;
+
+            }
 
             // It's not an IForm<TModel>, but it is an IForm<Something>
             if (form.GetType().GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IForm<>)))
@@ -182,7 +190,14 @@ namespace ChameleonForms
 
             var section = helper.ViewData[Constants.ViewDataSectionKey];
             if (section is ISection<TModel> castedSection)
+            {
+                // The HTML helper is different - this probably means this section is being created from a partial view
+                // We need to switch the HTML helper otherwise the output will be out of order
+                if (castedSection.Form.HtmlHelper != helper)
+                    return castedSection.CreatePartialSection(helper);
+
                 return castedSection;
+            }
 
             // It's not an ISection<TModel>, but it is an ISection<Something>
             if (section.GetType().GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ISection<>)))

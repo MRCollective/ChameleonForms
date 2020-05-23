@@ -52,6 +52,13 @@ namespace ChameleonForms
         /// </summary>
         /// <param name="property">The property to return the field generator for</param>
         IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property);
+
+        /// <summary>
+        /// Returns a wrapped <see cref="PartialViewForm{TModel}"/> for the given partial view helper.
+        /// </summary>
+        /// <param name="partialViewHelper">The HTML Helper from the partial view</param>
+        /// <returns>The PartialViewForm wrapping the original form</returns>
+        IForm<TModel> CreatePartialForm(IHtmlHelper<TModel> partialViewHelper);
     }
 
     /// <summary>
@@ -116,6 +123,12 @@ namespace ChameleonForms
                 partialModelAsExpression = partialModelAsUnboxedExpression.AddCast<TModel, TPartialModel>();
             }
             return new PartialViewForm<TModel, TPartialModel>(this, partialViewHelper, partialModelAsExpression);
+        }
+
+        /// <inheritdoc />
+        public IForm<TModel> CreatePartialForm(IHtmlHelper<TModel> partialViewHelper)
+        {
+            return new PartialViewForm<TModel>(this, partialViewHelper);
         }
     }
 
