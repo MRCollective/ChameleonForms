@@ -162,6 +162,7 @@ namespace ChameleonForms.Component
             return Reset(content(null));
         }
 
+        /// <inheritdoc />
         public override void Dispose()
         {
             base.Dispose();

@@ -24,5 +24,11 @@
         /// The key that is used to stash a ChameleonForm <see cref="Component.Field{TModel}"/> within ViewData.
         /// </summary>
         public const string ViewDataFieldKey = "ChameleonForms_Field";
+
+        /// <summary>
+        /// The key that is used to stash a ChameleonForm <see cref="Component.Message{TModel}"/> within ViewData.
+        /// </summary>
+        public const string ViewDataMessageKey = "ChameleonForms_Message";
+
     }
 }

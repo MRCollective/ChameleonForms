@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +20,13 @@ namespace ChameleonForms.Utils
         public static IHtmlHelper<TModel> GetHtmlHelper<TModel>(this ViewContext viewContext)
         {
             var helper = viewContext.HttpContext.RequestServices.GetRequiredService<IHtmlHelper<TModel>>();
+            // If the view data dictionary isn't typed correctly, then replace it with the correctly-typed version
+            // This can happen when you have a partial view which is a base type of the model type
+            var viewDataType = viewContext.ViewData.GetType();
+            if (viewDataType.IsGenericType && viewDataType.GetGenericTypeDefinition() == typeof(ViewDataDictionary<>) && viewDataType.GetGenericArguments()[0] != typeof(TModel) && viewContext.ViewData.ModelMetadata.ModelType == typeof(TModel))
+            {
+                viewContext.ViewData = new ViewDataDictionary<TModel>(viewContext.ViewData);
+            }
             (helper as HtmlHelper<TModel>)?.Contextualize(viewContext);
             return helper;
         }

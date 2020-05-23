@@ -16,11 +16,21 @@ namespace ChameleonForms.TagHelpers
     /// </summary>
     public class FieldTagHelper : ModelPropertyTagHelper
     {
-
+        /// <summary>
+        /// Field configuration.
+        /// </summary>
         public IFieldConfiguration Configuration { get; set; }
 
+        /// <summary>
+        /// Class(es) to add to the field element.
+        /// </summary>
         public string AddClass { get; set; }
+
+        /// <summary>
+        /// Label text override
+        /// </summary>
         public string Label { get; set; }
+
         /// <summary>
         /// Appended HTML as a <see cref="String"/>.
         /// </summary>
@@ -35,6 +45,26 @@ namespace ChameleonForms.TagHelpers
         /// Appended HTML as a <see cref="IHtmlContent"/>.
         /// </summary>
         public IHtmlContent AppendHtmlContent { get; set; }
+
+        /// <summary>
+        /// Hint as a <see cref="String"/>.
+        /// </summary>
+        public string Hint { get; set; }
+
+        /// <summary>
+        /// Hint HTML as templated razor delegate.
+        /// </summary>
+        public Func<dynamic, IHtmlContent> HintHtml { get; set; }
+
+        /// <summary>
+        /// Hint HTML as a <see cref="IHtmlContent"/>.
+        /// </summary>
+        public IHtmlContent HintHtmlContent { get; set; }
+
+        /// <summary>
+        /// Placeholder text for the field.
+        /// </summary>
+        public string Placeholder { get; set; }
 
         [HtmlAttributeName("attrs", DictionaryAttributePrefix = "attr-")]
         public IDictionary<string, string> Attrs { get; set; } = new Dictionary<string, string>();
@@ -90,6 +120,18 @@ namespace ChameleonForms.TagHelpers
 
             if (th.AppendHtmlContent != null)
                 fc.Append(th.AppendHtmlContent);
+
+            if (th.Hint != null)
+                fc.WithHint(th.Hint);
+
+            if (th.HintHtml != null)
+                fc.WithHint(th.HintHtml);
+
+            if (th.HintHtmlContent != null)
+                fc.WithHint(th.HintHtmlContent);
+
+            if (th.Placeholder != null)
+                fc.Placeholder(th.Placeholder);
 
             fc.Attrs(th.Attrs);
 

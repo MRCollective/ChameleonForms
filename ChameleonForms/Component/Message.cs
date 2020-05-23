@@ -22,6 +22,7 @@ namespace ChameleonForms.Component
         /// <param name="heading">The heading for the message</param>
         public Message(IForm<TModel> form, MessageType messageType, IHtmlContent heading) : base(form, false)
         {
+            form.HtmlHelper.ViewData[Constants.ViewDataMessageKey] = this;
             _messageType = messageType;
             _heading = heading ?? new HtmlString("");
             Initialise();
@@ -79,6 +80,13 @@ namespace ChameleonForms.Component
         public virtual IHtmlContent Paragraph(Func<dynamic, IHtmlContent> paragraph)
         {
             return Form.Template.MessageParagraph(paragraph(null));
+        }
+        
+        /// <inheritdoc />
+        public override void Dispose()
+        {
+            base.Dispose();
+            Form.HtmlHelper.ViewData.Remove(Constants.ViewDataMessageKey);
         }
     }
 

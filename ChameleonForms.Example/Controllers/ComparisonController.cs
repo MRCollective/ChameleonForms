@@ -17,6 +17,17 @@ namespace ChameleonForms.Example.Controllers
             return View(vm);
         }
 
+        public ActionResult ChameleonFormsTH()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChameleonFormsTH(SignupViewModel vm)
+        {
+            return View(vm);
+        }
+
         public ActionResult EditorTemplates()
         {
             return View();

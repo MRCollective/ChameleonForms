@@ -262,5 +262,34 @@ namespace ChameleonForms
 
             throw new InvalidOperationException($"Attempted to retrieve a ChameleonForms form navigation instance as Navigation<{typeof(TModel).Name}>, but instead found a {navigation.GetType().Name}.");
         }
+
+        /// <summary>
+        /// Returns whether or not the view is currently within the context of a ChameleonForms form message.
+        /// If this returns true then you can safely call <see cref="GetChameleonFormsMessage{TModel}"/>.
+        /// </summary>
+        /// <param name="helper">The current HTML helper</param>
+        /// <returns>Whether or not there is a ChameleonForms form message in context</returns>
+        public static bool IsInChameleonFormsMessage(this IHtmlHelper helper)
+        {
+            return helper.ViewData.ContainsKey(Constants.ViewDataMessageKey);
+        }
+
+        /// <summary>
+        /// Returns the current ChameleonForms message that is in context for the view.
+        /// </summary>
+        /// <typeparam name="TModel">The page model type</typeparam>
+        /// <param name="helper">The current HTML helper</param>
+        /// <returns>The ChameleonForms <see cref="Message{TModel}"/> instance</returns>
+        public static Message<TModel> GetChameleonFormsMessage<TModel>(this IHtmlHelper<TModel> helper)
+        {
+            if (!helper.IsInChameleonFormsMessage())
+                throw new InvalidOperationException("Attempted to retrieve a ChameleonForms form message instance, but one wasn't in context.");
+
+            var message = helper.ViewData[Constants.ViewDataMessageKey];
+            if (message is Message<TModel> castedMessage)
+                return castedMessage;
+
+            throw new InvalidOperationException($"Attempted to retrieve a ChameleonForms form message instance as Message<{typeof(TModel).Name}>, but instead found a {message.GetType().Name}.");
+        }
     }
 }

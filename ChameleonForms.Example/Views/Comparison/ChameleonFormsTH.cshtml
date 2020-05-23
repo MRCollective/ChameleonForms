@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Mvc.Razor
+@model ComparisonController.SignupViewModel
+
+@{
+    ViewBag.Title = "ChameleonForms Example";
+}
+
+<h1>ChameleonForms TagHelpers example</h1>
+
+<chameleon-form attr-id="signup-form">
+    <form-message type="Information" heading="Signup for an account">
+        <message-paragraph>Please fill in your information below to signup for an account.</message-paragraph>
+    </form-message>
+
+    <form-section heading="Your details">
+        <field for="FirstName" />
+        <field for="LastName" />
+        <field for="DateOfBirth" hint="DD/MM/YYYY" />
+    </form-section>
+
+    <form-section heading="Account details">
+        <field for="EmailAddress" hint="An email will be sent to this address to confirm you own it" />
+        <field for="Password" />
+        <field for="MembershipType" />
+    </form-section>
+
+    <form-section heading="Additional details">
+        <field for="Bio" />
+        <field for="Homepage" placeholder="http://" />
+    </form-section>
+
+    <form-message type="Action" heading="Confirm the Terms & Conditions">
+        <message-paragraph>Please <a href="#">read the terms and conditions</a></message-paragraph>
+        @Html.GetChameleonForm().FieldElementFor(mm => mm.TermsAndConditions).InlineLabel("I agree to the terms and conditions")
+    </form-message>
+
+    <form-navigation>
+        <button type="submit">Signup</button>
+    </form-navigation>
+</chameleon-form>

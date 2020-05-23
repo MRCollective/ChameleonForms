@@ -24,7 +24,12 @@ namespace ChameleonForms.Example
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddControllersWithViews(options => { options.Filters.Add<FormTemplateFilter>(); });
+            var views = services.AddControllersWithViews(options => { options.Filters.Add<FormTemplateFilter>(); });
+
+            #if (DEBUG)
+                views.AddRazorRuntimeCompilation();
+            #endif
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IFormTemplate>(provider =>
             {

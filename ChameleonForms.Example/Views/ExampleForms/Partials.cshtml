@@ -8,7 +8,7 @@
 
 @using (var f = Html.BeginChameleonForm())
 {
-    @(await Html.PartialAsync("_ParentPartial"))
+    @Html.Partial("_ParentPartial")
     @(await Html.PartialAsync("_BaseParentPartial"))
     @(await f.PartialForAsync(m => m.Child, "_ChildPartial"))
     @(await f.PartialForAsync(m => m.BaseChild, "_BaseChildPartial"))
