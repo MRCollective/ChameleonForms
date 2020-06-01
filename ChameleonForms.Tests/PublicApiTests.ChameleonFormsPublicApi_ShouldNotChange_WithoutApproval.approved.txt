@@ -750,6 +750,7 @@ namespace ChameleonForms.TagHelpers
     public class FieldConfigurationTagHelper : Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
     {
         public FieldConfigurationTagHelper() { }
+        public string AddContainerClass { get; set; }
         public string Append { get; set; }
         [System.Runtime.CompilerServices.Dynamic(new bool[] {
                 false,
@@ -764,6 +765,13 @@ namespace ChameleonForms.TagHelpers
                 false})]
         public System.Func<object, Microsoft.AspNetCore.Html.IHtmlContent> HintHtml { get; set; }
         public Microsoft.AspNetCore.Html.IHtmlContent HintHtmlContent { get; set; }
+        public string HintId { get; set; }
+        [System.Runtime.CompilerServices.Dynamic(new bool[] {
+                false,
+                true,
+                false})]
+        public System.Func<object, Microsoft.AspNetCore.Html.IHtmlContent> OverrideFieldHtml { get; set; }
+        public Microsoft.AspNetCore.Html.IHtmlContent OverrideFieldHtmlContent { get; set; }
         public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
     [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("field")]
@@ -772,8 +780,16 @@ namespace ChameleonForms.TagHelpers
     {
         public FieldElementConfigurationTagHelper() { }
         public string AddClass { get; set; }
+        public ChameleonForms.TagHelpers.RenderAs As { get; set; }
         [Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeName("attrs", DictionaryAttributePrefix="attr-")]
         public System.Collections.Generic.IDictionary<string, string> Attrs { get; set; }
+        public int? Cols { get; set; }
+        public bool? Disabled { get; set; }
+        public System.Enum[] Exclude { get; set; }
+        public string FalseLabel { get; set; }
+        public string FormatString { get; set; }
+        public bool HideEmptyItem { get; set; }
+        public string Id { get; set; }
         public string InlineLabel { get; set; }
         [System.Runtime.CompilerServices.Dynamic(new bool[] {
                 false,
@@ -781,7 +797,17 @@ namespace ChameleonForms.TagHelpers
                 false})]
         public System.Func<object, Microsoft.AspNetCore.Html.IHtmlContent> InlineLabelHtml { get; set; }
         public Microsoft.AspNetCore.Html.IHtmlContent InlineLabelHtmlContent { get; set; }
+        public bool? InlineLabelWrapsElement { get; set; }
+        public string Max { get; set; }
+        public string Min { get; set; }
+        public string NoneLabel { get; set; }
         public string Placeholder { get; set; }
+        public bool? Readonly { get; set; }
+        public bool? Required { get; set; }
+        public int? Rows { get; set; }
+        public decimal? Step { get; set; }
+        public string TrueLabel { get; set; }
+        public bool WithoutInlineLabel { get; set; }
         public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
     public class FieldElementTagHelper : ChameleonForms.TagHelpers.ModelPropertyTagHelper
@@ -794,6 +820,7 @@ namespace ChameleonForms.TagHelpers
     public class FieldLabelConfigurationTagHelper : Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
     {
         public FieldLabelConfigurationTagHelper() { }
+        public string AddLabelClass { get; set; }
         public string Label { get; set; }
         [System.Runtime.CompilerServices.Dynamic(new bool[] {
                 false,
@@ -801,6 +828,7 @@ namespace ChameleonForms.TagHelpers
                 false})]
         public System.Func<object, Microsoft.AspNetCore.Html.IHtmlContent> LabelHtml { get; set; }
         public Microsoft.AspNetCore.Html.IHtmlContent LabelHtmlContent { get; set; }
+        public bool WithoutLabelElement { get; set; }
         public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
     public class FieldLabelTagHelper : ChameleonForms.TagHelpers.ModelPropertyTagHelper
@@ -812,6 +840,14 @@ namespace ChameleonForms.TagHelpers
     {
         public FieldTagHelper() { }
         public override System.Threading.Tasks.Task ProcessUsingModelPropertyAsync<TModel, TProperty>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output, System.Linq.Expressions.Expression<System.Func<TModel, TProperty>> modelProperty) { }
+    }
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("field")]
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("field-validation")]
+    public class FieldValidationConfigurationTagHelper : Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+    {
+        public FieldValidationConfigurationTagHelper() { }
+        public string AddValidationClass { get; set; }
+        public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
     public class FieldValidationTagHelper : ChameleonForms.TagHelpers.ModelPropertyTagHelper
     {
@@ -896,6 +932,13 @@ namespace ChameleonForms.TagHelpers
         public Microsoft.AspNetCore.Mvc.Rendering.ViewContext ViewContext { get; set; }
         public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
         public abstract System.Threading.Tasks.Task ProcessUsingModelPropertyAsync<TModel, TProperty>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output, System.Linq.Expressions.Expression<System.Func<TModel, TProperty>> modelProperty);
+    }
+    public enum RenderAs
+    {
+        Default = 0,
+        RadioList = 1,
+        CheckboxList = 2,
+        Dropdown = 3,
     }
     public class ResetButtonTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
     {
