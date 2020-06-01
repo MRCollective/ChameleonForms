@@ -27,6 +27,16 @@ namespace ChameleonForms.TagHelpers
         /// </summary>
         public IHtmlContent LabelHtmlContent { get; set; }
 
+        /// <summary>
+        /// Don't use a &lt;label&gt;, but still include the label text for the field.
+        /// </summary>
+        public bool WithoutLabelElement { get; set; }
+
+        /// <summary>
+        /// Specify one or more CSS classes to use for the field label.
+        /// </summary>
+        public string AddLabelClass { get; set; }
+
         public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             var fc = context.GetFieldConfiguration();
@@ -40,6 +50,11 @@ namespace ChameleonForms.TagHelpers
             if (LabelHtmlContent != null)
                 fc.Label(LabelHtmlContent);
 
+            if (WithoutLabelElement)
+                fc.WithoutLabelElement();
+
+            if (!string.IsNullOrWhiteSpace(AddLabelClass))
+                fc.AddLabelClass(AddLabelClass);
 
             return Task.CompletedTask;
         }

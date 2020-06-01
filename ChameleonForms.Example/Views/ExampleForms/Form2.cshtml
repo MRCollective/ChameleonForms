@@ -15,8 +15,8 @@
     @* Various incarnations of nested sections and fields and partials mixed in *@
     <form-section heading="Wassup" leading-html="InstructionalText">
         <p>Yo</p>
-        <field for="Decimal" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup" append="aaa" />
-        <field for="Int" label="asdf" append="asdffff">
+        <field for="ListId" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup" append="aaa" as="RadioList" />
+        <field for="Decimal" label="asdf" append="asdffff" step="1.2m">
             <field for="NullableInt"/>
             <partial name="_Child"/>
         </field>
