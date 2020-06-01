@@ -21,18 +21,19 @@ namespace ChameleonForms.TagHelpers
         /// <returns>The field configuration</returns>
         public static IFieldConfiguration GetFieldConfiguration(this TagHelperContext context)
         {
-            if (context.Items.ContainsKey(FieldConfigurationItemsKey))
+            var key = $"{FieldConfigurationItemsKey}:{context.UniqueId}";
+            if (context.Items.ContainsKey(key))
             {
-                var fc = context.Items[FieldConfigurationItemsKey] as IFieldConfiguration;
+                var fc = context.Items[key] as IFieldConfiguration;
                 if (fc == null)
-                    throw new InvalidOperationException($"Found object in context.Items.{FieldConfigurationItemsKey} that wasn't of type IFieldConfiguration, but instead was {context.Items[FieldConfigurationItemsKey]?.GetType()}");
+                    throw new InvalidOperationException($"Found object in context.Items.{key} that wasn't of type IFieldConfiguration, but instead was {context.Items[key]?.GetType()}");
 
                 return fc;
             }
             else
             {
                 var fc = new FieldConfiguration();
-                context.Items[FieldConfigurationItemsKey] = fc;
+                context.Items[key] = fc;
                 return fc;
             }
         }

@@ -10,7 +10,7 @@ namespace ChameleonForms.TagHelpers
     /// <summary>
     /// Creates a ChameleonForms form field label, use within a ChameleonForm form context.
     /// </summary>
-    public class FieldLabelTagHelper : FieldConfigurationTagHelper
+    public class FieldLabelTagHelper : ModelPropertyTagHelper
     {
         public override Task ProcessUsingModelPropertyAsync<TModel, TProperty>(TagHelperContext context, TagHelperOutput output,
             Expression<Func<TModel, TProperty>> modelProperty)
@@ -19,7 +19,7 @@ namespace ChameleonForms.TagHelpers
             var f = helper.GetChameleonForm();
             output.TagMode = TagMode.StartTagAndEndTag;
             output.TagName = null;
-            output.Content.SetHtmlContent(f.LabelFor(modelProperty).Configure(this));
+            output.Content.SetHtmlContent(f.LabelFor(modelProperty, context.GetFieldConfiguration()));
             return Task.CompletedTask;
         }
     }

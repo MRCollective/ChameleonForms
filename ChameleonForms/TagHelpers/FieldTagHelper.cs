@@ -11,7 +11,7 @@ namespace ChameleonForms.TagHelpers
     /// <summary>
     /// Creates a ChameleonForms form field context, use within a ChameleonForm form section or form field context.
     /// </summary>
-    public class FieldTagHelper : FieldConfigurationTagHelper
+    public class FieldTagHelper : ModelPropertyTagHelper
     {
         public override async Task ProcessUsingModelPropertyAsync<TModel, TProperty>(TagHelperContext context, TagHelperOutput output,
             Expression<Func<TModel, TProperty>> modelProperty)
@@ -25,15 +25,17 @@ namespace ChameleonForms.TagHelpers
                 {
                     output.TagMode = TagMode.StartTagAndEndTag;
                     output.TagName = null;
-                    output.Content.SetHtmlContent(s.FieldFor(modelProperty).Configure(this));
+                    output.Content.SetHtmlContent(s.FieldFor(modelProperty, context.GetFieldConfiguration()));
                 }
                 else
                 {
-                    using (s.BeginFieldFor(modelProperty, Field.Configure().Configure(this)))
+                    using (s.BeginFieldFor(modelProperty, context.GetFieldConfiguration()))
                     {
                         var childContent = await output.GetChildContentAsync();
                         childContent.WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);
                     }
+
+                    output.Content.SetContent("");
                     output.TagName = null;
                 }
             }
@@ -42,7 +44,7 @@ namespace ChameleonForms.TagHelpers
                 var ff = helper.GetChameleonFormsField();
                 output.TagMode = TagMode.StartTagAndEndTag;
                 output.TagName = null;
-                output.Content.SetHtmlContent(ff.FieldFor(modelProperty).Configure(this));
+                output.Content.SetHtmlContent(ff.FieldFor(modelProperty, context.GetFieldConfiguration()));
             }
         }
     }

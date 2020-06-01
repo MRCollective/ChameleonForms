@@ -10,7 +10,7 @@ namespace ChameleonForms.TagHelpers
     /// <summary>
     /// Creates a ChameleonForms form reset button, use within a ChameleonForm form navigation context.
     /// </summary>
-    public class FormResetTagHelper : ModelAwareTagHelper
+    public class ResetButtonTagHelper : ModelAwareTagHelper
     {
         /// <summary>
         /// Button label (if text, otherwise make it the content within the button)

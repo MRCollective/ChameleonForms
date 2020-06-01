@@ -15,19 +15,24 @@
     @* Various incarnations of nested sections and fields and partials mixed in *@
     <form-section heading="Wassup" leading-html="InstructionalText">
         <p>Yo</p>
-        <field for="Decimal" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup"/>
-        <field for="Int">
+        <field for="Decimal" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup" append="aaa" />
+        <field for="Int" label="asdf" append="asdffff">
             <field for="NullableInt"/>
             <partial name="_Child"/>
         </field>
         <form-section heading-html="InstructionalText">
-            <field for="TextAreaField"/>
+            <field for="TextAreaField" />
             <field for="Child.ChildField"/>
             <partial name="_Child"/>
         </form-section>
         <partial name="_Child"/>
         <form-partial name="_Child2" for="Child"/>
     </form-section>
+    <form-message heading="Heading" type="Action">
+        <field-label for="UrlAsString" label="Overridden" />
+        <field-element for="UrlAsString" add-class="addedclass" />
+        <field-validation for="UrlAsString" fluent-config='fc  => fc.AddValidationClass("asdf")' />
+    </form-message>
     <form-partial name="_Child2" for="Child"/>
     @* Mix and match helper syntax with tag helpers and vice versa *@
     @Html.GetChameleonForm().FieldElementFor(m => m.ListId)

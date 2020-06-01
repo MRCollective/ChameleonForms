@@ -1,56 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using ChameleonForms.Component.Config;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace ChameleonForms.TagHelpers
 {
     /// <summary>
-    /// Tag helper that accepts field configuration attributes.
+    /// Tag helper that accepts field configuration attributes for a <field />.
     /// </summary>
-    public abstract class FieldConfigurationTagHelper : ModelPropertyTagHelper
+    [HtmlTargetElement("field")]
+    public class FieldConfigurationTagHelper : TagHelper
     {
-        /// <summary>
-        /// Field configuration.
-        /// </summary>
-        public IFieldConfiguration Configuration { get; set; }
-
-        /// <summary>
-        /// Class(es) to add to the field element.
-        /// </summary>
-        public string AddClass { get; set; }
-
-        /// <summary>
-        /// Label text override
-        /// </summary>
-        public string Label { get; set; }
-
-        /// <summary>
-        /// Label as templated razor delegate.
-        /// </summary>
-        public Func<dynamic, IHtmlContent> LabelHtml { get; set; }
-
-        /// <summary>
-        /// Label as a <see cref="IHtmlContent"/>.
-        /// </summary>
-        public IHtmlContent LabelHtmlContent { get; set; }
-
-        /// <summary>
-        /// Inline label text override
-        /// </summary>
-        public string InlineLabel { get; set; }
-
-        /// <summary>
-        /// Inline label as templated razor delegate.
-        /// </summary>
-        public Func<dynamic, IHtmlContent> InlineLabelHtml { get; set; }
-
-        /// <summary>
-        /// Inline label as a <see cref="IHtmlContent"/>.
-        /// </summary>
-        public IHtmlContent InlineLabelHtmlContent { get; set; }
-
         /// <summary>
         /// Appended HTML as a <see cref="String"/>.
         /// </summary>
@@ -81,64 +41,29 @@ namespace ChameleonForms.TagHelpers
         /// </summary>
         public IHtmlContent HintHtmlContent { get; set; }
 
-        /// <summary>
-        /// Placeholder text for the field.
-        /// </summary>
-        public string Placeholder { get; set; }
-
-        [HtmlAttributeName("attrs", DictionaryAttributePrefix = "attr-")]
-        public IDictionary<string, string> Attrs { get; set; } = new Dictionary<string, string>();
-    }
-
-    internal static class FieldConfigurationExtensions
-    {
-        public static IFieldConfiguration Configure(this IFieldConfiguration fc, FieldConfigurationTagHelper th)
+        public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            if (th.Label != null)
-                fc.Label(th.Label);
+            var fc = context.GetFieldConfiguration();
 
-            if (th.LabelHtml != null)
-                fc.Label(th.LabelHtml);
+            if (Append != null)
+                fc.Append(Append.ToHtml());
 
-            if (th.LabelHtmlContent != null)
-                fc.Label(th.LabelHtmlContent);
+            if (AppendHtml != null)
+                fc.Append(AppendHtml);
 
-            if (th.InlineLabel != null)
-                fc.InlineLabel(th.InlineLabel);
+            if (AppendHtmlContent != null)
+                fc.Append(AppendHtmlContent);
 
-            if (th.InlineLabelHtml != null)
-                fc.InlineLabel(th.InlineLabelHtml);
+            if (Hint != null)
+                fc.WithHint(Hint);
 
-            if (th.InlineLabelHtmlContent != null)
-                fc.InlineLabel(th.InlineLabelHtmlContent);
+            if (HintHtml != null)
+                fc.WithHint(HintHtml);
 
-            if (th.AddClass != null)
-                fc.AddClass(th.AddClass);
+            if (HintHtmlContent != null)
+                fc.WithHint(HintHtmlContent);
 
-            if (th.Append != null)
-                fc.Append(th.Append.ToHtml());
-
-            if (th.AppendHtml != null)
-                fc.Append(th.AppendHtml);
-
-            if (th.AppendHtmlContent != null)
-                fc.Append(th.AppendHtmlContent);
-
-            if (th.Hint != null)
-                fc.WithHint(th.Hint);
-
-            if (th.HintHtml != null)
-                fc.WithHint(th.HintHtml);
-
-            if (th.HintHtmlContent != null)
-                fc.WithHint(th.HintHtmlContent);
-
-            if (th.Placeholder != null)
-                fc.Placeholder(th.Placeholder);
-
-            fc.Attrs(th.Attrs);
-
-            return fc;
+            return Task.CompletedTask;
         }
     }
 }
