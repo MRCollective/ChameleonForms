@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace ChameleonForms
 {
     // todo: 4.0 non-beta release
+    // Doco: HtmlAttrs Dictionary<string, string>, TagHelpers for everything, partials - new syntax, can use them natively, need special one when changing model, Html.GetChameleonFormsSection etc. extensions
+    // Breaking changes: Removed non-async partial and non `For` partial - can just use partials directly, removed WebViewPage.Form / .FormSection / .IsInFormSection / .PartialModelExpression
     // Build-in DI support e.g. fieldgeneratorrouter
     // Review the datetime "g" and current culture things - remove? client side validation for non / separators?
     // Update all dependencies to latest versions
