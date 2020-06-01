@@ -793,6 +793,13 @@ namespace ChameleonForms.TagHelpers
         public FieldValidationTagHelper() { }
         public override System.Threading.Tasks.Task ProcessUsingModelPropertyAsync<TModel, TProperty>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output, System.Linq.Expressions.Expression<System.Func<TModel, TProperty>> modelProperty) { }
     }
+    public class FormButtonTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
+    {
+        public FormButtonTagHelper() { }
+        public System.Func<ChameleonForms.Component.ButtonHtmlAttributes, ChameleonForms.Component.ButtonHtmlAttributes> FluentAttrs { get; set; }
+        public string Label { get; set; }
+        public override System.Threading.Tasks.Task ProcessWhileAwareOfModelTypeAsync<TModel>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
+    }
     public class FormMessageTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
     {
         public FormMessageTagHelper() { }
@@ -818,6 +825,13 @@ namespace ChameleonForms.TagHelpers
         public string Name { get; set; }
         public override System.Threading.Tasks.Task ProcessUsingModelPropertyAsync<TModel, TProperty>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output, System.Linq.Expressions.Expression<System.Func<TModel, TProperty>> modelProperty) { }
     }
+    public class FormResetTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
+    {
+        public FormResetTagHelper() { }
+        public System.Func<ChameleonForms.Component.ButtonHtmlAttributes, ChameleonForms.Component.ButtonHtmlAttributes> FluentAttrs { get; set; }
+        public string Label { get; set; }
+        public override System.Threading.Tasks.Task ProcessWhileAwareOfModelTypeAsync<TModel>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
+    }
     public class FormSectionTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
     {
         public FormSectionTagHelper() { }
@@ -836,6 +850,15 @@ namespace ChameleonForms.TagHelpers
                 false})]
         public System.Func<object, Microsoft.AspNetCore.Html.IHtmlContent> LeadingHtml { get; set; }
         public Microsoft.AspNetCore.Html.IHtmlContent LeadingHtmlContent { get; set; }
+        public override System.Threading.Tasks.Task ProcessWhileAwareOfModelTypeAsync<TModel>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
+    }
+    public class FormSubmitTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
+    {
+        public FormSubmitTagHelper() { }
+        public System.Func<ChameleonForms.Component.ButtonHtmlAttributes, ChameleonForms.Component.ButtonHtmlAttributes> FluentAttrs { get; set; }
+        public string Label { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
         public override System.Threading.Tasks.Task ProcessWhileAwareOfModelTypeAsync<TModel>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
     public class MessageParagraphTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
@@ -861,6 +884,27 @@ namespace ChameleonForms.TagHelpers
         public Microsoft.AspNetCore.Mvc.Rendering.ViewContext ViewContext { get; set; }
         public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
         public abstract System.Threading.Tasks.Task ProcessUsingModelPropertyAsync<TModel, TProperty>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output, System.Linq.Expressions.Expression<System.Func<TModel, TProperty>> modelProperty);
+    }
+    public static class TagHelperContextExtensions
+    {
+        public const string FieldConfigurationItemsKey = "ChameleonForms:FieldConfiguration";
+        public static ChameleonForms.Component.Config.IFieldConfiguration GetFieldConfiguration(this Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context) { }
+        public static ChameleonForms.HtmlAttributes GetHtmlAttributes(this Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context) { }
+    }
+}
+namespace ChameleonForms.Templates.TwitterBootstrap3
+{
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("form-button")]
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("form-reset")]
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("form-submit")]
+    public class TwitterBootstrap3SubmitButtonTagHelper : Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+    {
+        public TwitterBootstrap3SubmitButtonTagHelper() { }
+        public ChameleonForms.Templates.TwitterBootstrap3.EmphasisStyle EmphasisStyle { get; set; }
+        public string Icon { get; set; }
+        public override int Order { get; }
+        public ChameleonForms.Templates.TwitterBootstrap3.ButtonSize Size { get; set; }
+        public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
 }
 namespace ChameleonForms.Utils
@@ -1034,13 +1078,15 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
     }
     public enum ButtonSize
     {
+        [System.ComponentModel.Description("")]
+        NoneSpecified = 0,
         [System.ComponentModel.Description("xs")]
-        ExtraSmall = 0,
+        ExtraSmall = 1,
         [System.ComponentModel.Description("sm")]
-        Small = 1,
-        Default = 2,
+        Small = 2,
+        Default = 3,
         [System.ComponentModel.Description("lg")]
-        Large = 3,
+        Large = 4,
     }
     public enum EmphasisStyle
     {

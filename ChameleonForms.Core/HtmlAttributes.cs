@@ -160,9 +160,14 @@ namespace ChameleonForms
         public HtmlAttributes Attr(Func<object, object> attribute)
         {
             var item = attribute(null);
-            _tagBuilder.MergeAttribute(attribute.Method.GetParameters()[0].Name.Replace("_", "-").ToLower(), item == null ? string.Empty : item.ToString(), true);
+            _tagBuilder.MergeAttribute(GetAttributeName(attribute), item == null ? string.Empty : item.ToString(), true);
 
             return this;
+        }
+
+        private string GetAttributeName(Func<object, object> attribute)
+        {
+            return attribute.Method.GetParameters()[0].Name.Replace("_", "-").ToLower();
         }
 
         /// <summary>
@@ -173,7 +178,12 @@ namespace ChameleonForms
         public HtmlAttributes Attrs(params Func<object, object>[] attributes)
         {
             foreach (var func in attributes)
-                Attr(func);
+            {
+                if (GetAttributeName(func) == "class")
+                    AddClass(func(null) as string);
+                else
+                    Attr(func);
+            }
 
             return this;
         }
@@ -185,9 +195,14 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attrs(IDictionary<string, object> attributes)
         {
-            attributes = attributes.ToDictionary(d => d.Key.ToLower(), d => d.Value);
+            var attributesToMerge = attributes
+                .Where(x => x.Key != "class")
+                .ToDictionary(d => d.Key.ToLower(), d => d.Value);
 
-            _tagBuilder.MergeAttributes(attributes, true);
+            _tagBuilder.MergeAttributes(attributesToMerge, true);
+
+            if (attributes.ContainsKey("class"))
+                AddClass(attributes["class"] as string);
 
             return this;
         }
@@ -199,7 +214,14 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attrs(IDictionary<string, string> attributes)
         {
-            _tagBuilder.MergeAttributes(attributes, true);
+            var attributesToMerge = attributes
+                .Where(k => k.Key != "class")
+                .ToDictionary(x => x.Key.ToLower(), x => x.Value);
+
+            _tagBuilder.MergeAttributes(attributesToMerge, true);
+
+            if (attributes.ContainsKey("class"))
+                AddClass(attributes["class"]);
 
             return this;
         }
@@ -211,9 +233,15 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attrs(object attributes)
         {
-            var attrs = HtmlHelper.AnonymousObjectToHtmlAttributes(attributes)
+            var attrs = HtmlHelper.AnonymousObjectToHtmlAttributes(attributes);
+
+            var attrsToMerge = attrs
+                .Where(x => x.Key != "class")
                 .ToDictionary(d => d.Key.ToLower(), d => d.Value);
-            _tagBuilder.MergeAttributes(attrs, true);
+            _tagBuilder.MergeAttributes(attrsToMerge, true);
+
+            if (attrs.ContainsKey("class"))
+                AddClass(attrs["class"] as string);
 
             return this;
         }

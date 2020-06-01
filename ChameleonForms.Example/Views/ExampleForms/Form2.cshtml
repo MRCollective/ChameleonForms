@@ -1,4 +1,5 @@
-﻿@model ViewModelExample
+﻿@using ChameleonForms.Templates.TwitterBootstrap3
+@model ViewModelExample
 
 @{
     ViewBag.Title = "Example Form 2";
@@ -38,12 +39,11 @@
     }
     @* Navigation *@
     <form-navigation>
-        @{ var n = Html.GetChameleonFormsNavigation();}
-        @n.Submit("asdf")
-        @n.Reset("Reset")
+        <form-submit label="Submit" size="Large" emphasis-style="Info" icon="calendar" />
+        <form-button label="Button" fluent-attrs='b => b.WithStyle(EmphasisStyle.Primary)' />
+        <form-reset size="ExtraSmall" icon="person"><strong>Hello</strong> World! Reset</form-reset>
     </form-navigation>
 </chameleon-form>
-
 
 @* Not possible - compile error, model has to be the page model with tag helpers
     <chameleon-form enctype="EncType.UrlEncoded" action="@Url.Action("ChameleonForms", "Comparison")" method="Post" model="new SignupViewModel()">

@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Razor
+@using ChameleonForms.Templates.TwitterBootstrap3
 @model ComparisonController.SignupViewModel
 
 @{
@@ -42,6 +43,6 @@
 
     using (var n = f.BeginNavigation())
     {
-        @n.Submit("Signup")
+        @n.Submit("Signup").WithStyle(EmphasisStyle.Primary)
     }
 }

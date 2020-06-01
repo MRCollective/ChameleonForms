@@ -8,6 +8,11 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
     public enum ButtonSize
     {
         /// <summary>
+        /// None specified.
+        /// </summary>
+        [Description("")]
+        NoneSpecified,
+        /// <summary>
         /// Extra small button size.
         /// </summary>
         [Description("xs")]
