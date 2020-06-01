@@ -20,10 +20,9 @@ namespace ChameleonForms.AcceptanceTests.IntegrationTests
 
         private readonly ITestOutputHelper _outputHelper;
 
-        public TagHelperTests(WebApplicationFactory<Example.Startup> factory, ITestOutputHelper outputHelper)
+        public TagHelperTests(WebApplicationFactory<Example.Startup> factory)
         {
             _factory = factory;
-            _outputHelper = outputHelper;
             _client = factory.CreateClient(new WebApplicationFactoryClientOptions
             {
                 AllowAutoRedirect = false
@@ -39,11 +38,8 @@ namespace ChameleonForms.AcceptanceTests.IntegrationTests
 
         private async Task<string> GetRenderedSourceAsync(string url)
         {
-            _outputHelper.WriteLine("1");
             var defaultPage = await _client.GetAsync(url);
-            _outputHelper.WriteLine("2");
             var content = await HtmlHelpers.GetDocumentAsync(_client, defaultPage);
-            _outputHelper.WriteLine("3");
 
             var renderedSource = content.Body.InnerHtml;
             var getFormContent = new Regex(@".*?(<form(.|\n|\r)+?<\/form>).*", RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);

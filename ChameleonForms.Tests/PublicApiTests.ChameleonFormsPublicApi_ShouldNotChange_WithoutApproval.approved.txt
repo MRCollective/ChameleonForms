@@ -793,6 +793,7 @@ namespace ChameleonForms.TagHelpers
         public FieldValidationTagHelper() { }
         public override System.Threading.Tasks.Task ProcessUsingModelPropertyAsync<TModel, TProperty>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output, System.Linq.Expressions.Expression<System.Func<TModel, TProperty>> modelProperty) { }
     }
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("form-button")]
     public class FormButtonTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
     {
         public FormButtonTagHelper() { }
@@ -852,15 +853,6 @@ namespace ChameleonForms.TagHelpers
         public Microsoft.AspNetCore.Html.IHtmlContent LeadingHtmlContent { get; set; }
         public override System.Threading.Tasks.Task ProcessWhileAwareOfModelTypeAsync<TModel>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
-    public class FormSubmitTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
-    {
-        public FormSubmitTagHelper() { }
-        public System.Func<ChameleonForms.Component.ButtonHtmlAttributes, ChameleonForms.Component.ButtonHtmlAttributes> FluentAttrs { get; set; }
-        public string Label { get; set; }
-        public string Name { get; set; }
-        public string Value { get; set; }
-        public override System.Threading.Tasks.Task ProcessWhileAwareOfModelTypeAsync<TModel>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
-    }
     public class MessageParagraphTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
     {
         public MessageParagraphTagHelper() { }
@@ -869,6 +861,7 @@ namespace ChameleonForms.TagHelpers
     public abstract class ModelAwareTagHelper : Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
     {
         protected ModelAwareTagHelper() { }
+        public override int Order { get; }
         [Microsoft.AspNetCore.Mvc.ViewFeatures.ViewContext]
         [Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNotBound]
         public Microsoft.AspNetCore.Mvc.Rendering.ViewContext ViewContext { get; set; }
@@ -879,11 +872,21 @@ namespace ChameleonForms.TagHelpers
     {
         protected ModelPropertyTagHelper() { }
         public Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression For { get; set; }
+        public override int Order { get; }
         [Microsoft.AspNetCore.Mvc.ViewFeatures.ViewContext]
         [Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNotBound]
         public Microsoft.AspNetCore.Mvc.Rendering.ViewContext ViewContext { get; set; }
         public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
         public abstract System.Threading.Tasks.Task ProcessUsingModelPropertyAsync<TModel, TProperty>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output, System.Linq.Expressions.Expression<System.Func<TModel, TProperty>> modelProperty);
+    }
+    public class SubmitButtonTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
+    {
+        public SubmitButtonTagHelper() { }
+        public System.Func<ChameleonForms.Component.ButtonHtmlAttributes, ChameleonForms.Component.ButtonHtmlAttributes> FluentAttrs { get; set; }
+        public string Label { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
+        public override System.Threading.Tasks.Task ProcessWhileAwareOfModelTypeAsync<TModel>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
     public static class TagHelperContextExtensions
     {
@@ -895,14 +898,13 @@ namespace ChameleonForms.TagHelpers
 namespace ChameleonForms.Templates.TwitterBootstrap3
 {
     [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("form-button")]
-    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("form-reset")]
-    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("form-submit")]
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("reset-button")]
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("submit-button")]
     public class TwitterBootstrap3SubmitButtonTagHelper : Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
     {
         public TwitterBootstrap3SubmitButtonTagHelper() { }
         public ChameleonForms.Templates.TwitterBootstrap3.EmphasisStyle EmphasisStyle { get; set; }
         public string Icon { get; set; }
-        public override int Order { get; }
         public ChameleonForms.Templates.TwitterBootstrap3.ButtonSize Size { get; set; }
         public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }

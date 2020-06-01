@@ -10,6 +10,7 @@ namespace ChameleonForms.TagHelpers
     /// <summary>
     /// Creates a ChameleonForms form button, use within a ChameleonForm form navigation context.
     /// </summary>
+    [HtmlTargetElement("form-button")]
     public class FormButtonTagHelper : ModelAwareTagHelper
     {
         /// <summary>

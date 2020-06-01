@@ -10,7 +10,7 @@ namespace ChameleonForms.TagHelpers
     /// <summary>
     /// Creates a ChameleonForms form submit button, use within a ChameleonForm form navigation context.
     /// </summary>
-    public class FormSubmitTagHelper : ModelAwareTagHelper
+    public class SubmitButtonTagHelper : ModelAwareTagHelper
     {
         /// <summary>
         /// Name to submit value for.

@@ -8,14 +8,11 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
     /// <summary>
     /// Adds Boostrap 3 properties to ChameleonForms form buttons.
     /// </summary>
-    [HtmlTargetElement("form-submit")]
+    [HtmlTargetElement("submit-button")]
     [HtmlTargetElement("form-button")]
-    [HtmlTargetElement("form-reset")]
+    [HtmlTargetElement("reset-button")]
     public class TwitterBootstrap3SubmitButtonTagHelper : TagHelper
     {
-        /// <inheritdoc />
-        public override int Order => -1;
-
         /// <summary>
         /// Button size for Bootstrap 3 form button.
         /// </summary>

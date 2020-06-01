@@ -14,6 +14,10 @@ namespace ChameleonForms.TagHelpers
     /// </summary>
     public abstract class ModelPropertyTagHelper : TagHelper
     {
+
+        /// <inheritdoc />
+        public override int Order => 10;
+
         /// <summary>
         /// The page's <see cref="Microsoft.AspNetCore.Mvc.Rendering.ViewContext"/>.
         /// </summary>
