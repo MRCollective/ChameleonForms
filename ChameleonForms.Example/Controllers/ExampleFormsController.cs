@@ -23,6 +23,17 @@ namespace ChameleonForms.Example.Controllers
             return View(vm);
         }
 
+        public ActionResult Form2()
+        {
+            return View(new ViewModelExample());
+        }
+
+        [HttpPost]
+        public ActionResult Form2(ViewModelExample vm)
+        {
+            return View(vm);
+        }
+
         public ActionResult BasicExample()
         {
             return View(new BasicViewModel());

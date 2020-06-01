@@ -3,50 +3,7 @@
 
 @{
     ViewBag.Title = "ChameleonForms";
-    Func<dynamic, IHtmlContent> x = @<strong>Supppp</strong>;
 }
-
-<chameleon-form>
-    <form-section heading="Wassup" leading-html="x">
-        <p>Yo</p>
-        <field for="Decimal" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup" />
-        <field for="Int">
-            <field for="NullableInt" />
-            <partial name="_Child" />
-        </field>
-        <form-section heading-html="x">
-            <field for="TextAreaField" />
-            <field for="Child.ChildField" />
-            <partial name="_Child" />
-        </form-section>
-        <partial name="_Child" />
-        <form-partial name="_Child2" for="Child" />
-    </form-section>
-    <form-partial name="_Child2" for="Child" />
-    @* Mix and match helper syntax with tag helpers and vice versa *@
-    @Html.GetChameleonForm().FieldElementFor(m => m.ListId)
-    <field-element for="Boolean" />
-    @using (var s = Html.GetChameleonForm().BeginSection("Section from helper syntax"))
-    {
-        @s.FieldFor(m => m.SomeEnum)
-        <field for="Boolean" />
-    }
-    <form-navigation>
-        @{ var n = Html.GetChameleonFormsNavigation();}
-        @n.Submit("asdf")
-        @n.Reset("Reset")
-    </form-navigation>
-</chameleon-form>
-
-
-@* Not possible - compile error, model has to be the page model with tag helpers
-<chameleon-form enctype="EncType.UrlEncoded" action="@Url.Action("ChameleonForms", "Comparison")" method="Post" model="new SignupViewModel()">
-    <section heading="asdf">
-        <field for="FirstName" />
-    </section>
-</chameleon-form>*@
-
-<partial name="_OtherForm" model="new ComparisonController.SignupViewModel()" />
 
 <h1>ChameleonForms</h1>
 
@@ -80,7 +37,8 @@
 
 <h2>Random forms and UI tests</h2>
 <ul>
-    <li>@Html.ActionLink("Complex form and test-bed", "Form1", "ExampleForms")</li>
+    <li>@Html.ActionLink("HTML Helpers kitchen sink", "Form1", "ExampleForms")</li>
+    <li>@Html.ActionLink("Tag Helpers kitchen sink", "Form2", "ExampleForms")</li>
     <li>@Html.ActionLink("Model Binding Example", "ModelBindingExample", "ExampleForms")</li>
     <li>@Html.ActionLink("Model Binding Example with lists", "ModelBindingExample2", "ExampleForms")</li>
 </ul>

@@ -6,7 +6,7 @@ namespace ChameleonForms.Example.Controllers
     {
         public ActionResult Index()
         {
-            return View(new ViewModelExample());
+            return View();
         }
     }
 }

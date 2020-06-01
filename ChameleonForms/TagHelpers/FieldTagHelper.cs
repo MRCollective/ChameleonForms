@@ -34,6 +34,7 @@ namespace ChameleonForms.TagHelpers
                         var childContent = await output.GetChildContentAsync();
                         childContent.WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);
                     }
+                    output.TagName = null;
                 }
             }
             else

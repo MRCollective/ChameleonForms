@@ -1,0 +1,55 @@
+﻿@model ViewModelExample
+
+@{
+    ViewBag.Title = "Example Form 2";
+}
+
+@{
+    Func<dynamic, IHtmlContent> InstructionalText = @<p>Leading instructional text.</p>;
+}
+
+<h1>Tag Helpers kitchen sink</h1>
+
+<chameleon-form>
+    @* Various incarnations of nested sections and fields and partials mixed in *@
+    <form-section heading="Wassup" leading-html="InstructionalText">
+        <p>Yo</p>
+        <field for="Decimal" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup"/>
+        <field for="Int">
+            <field for="NullableInt"/>
+            <partial name="_Child"/>
+        </field>
+        <form-section heading-html="InstructionalText">
+            <field for="TextAreaField"/>
+            <field for="Child.ChildField"/>
+            <partial name="_Child"/>
+        </form-section>
+        <partial name="_Child"/>
+        <form-partial name="_Child2" for="Child"/>
+    </form-section>
+    <form-partial name="_Child2" for="Child"/>
+    @* Mix and match helper syntax with tag helpers and vice versa *@
+    @Html.GetChameleonForm().FieldElementFor(m => m.ListId)
+    <field-element for="Boolean"/>
+    @using (var s = Html.GetChameleonForm().BeginSection("Section from helper syntax"))
+    {
+        @s.FieldFor(m => m.SomeEnum)
+        <field for="Boolean"/>
+    }
+    @* Navigation *@
+    <form-navigation>
+        @{ var n = Html.GetChameleonFormsNavigation();}
+        @n.Submit("asdf")
+        @n.Reset("Reset")
+    </form-navigation>
+</chameleon-form>
+
+
+@* Not possible - compile error, model has to be the page model with tag helpers
+    <chameleon-form enctype="EncType.UrlEncoded" action="@Url.Action("ChameleonForms", "Comparison")" method="Post" model="new SignupViewModel()">
+        <section heading="asdf">
+            <field for="FirstName" />
+        </section>
+    </chameleon-form>*@
+
+<partial name="_OtherForm" model="new ComparisonController.SignupViewModel()" />

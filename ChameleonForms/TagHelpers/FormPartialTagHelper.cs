@@ -10,6 +10,7 @@ namespace ChameleonForms.TagHelpers
     /// <summary>
     /// Includes a partial view that is a different type to the parent form.
     /// </summary>
+    [HtmlTargetElement("form-partial", TagStructure = TagStructure.WithoutEndTag)]
     public class FormPartialTagHelper : ModelPropertyTagHelper
     {
         /// <summary>
