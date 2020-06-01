@@ -7,6 +7,7 @@ using ApprovalTests.Reporters;
 using ChameleonForms.AcceptanceTests.Helpers;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace ChameleonForms.AcceptanceTests.IntegrationTests
 {
@@ -17,9 +18,12 @@ namespace ChameleonForms.AcceptanceTests.IntegrationTests
         private readonly WebApplicationFactory<Example.Startup>
             _factory;
 
-        public TagHelperTests(WebApplicationFactory<Example.Startup> factory)
+        private readonly ITestOutputHelper _outputHelper;
+
+        public TagHelperTests(WebApplicationFactory<Example.Startup> factory, ITestOutputHelper outputHelper)
         {
             _factory = factory;
+            _outputHelper = outputHelper;
             _client = factory.CreateClient(new WebApplicationFactoryClientOptions
             {
                 AllowAutoRedirect = false
@@ -27,16 +31,19 @@ namespace ChameleonForms.AcceptanceTests.IntegrationTests
         }
 
         [Fact]
-        public void Should_render_correctly()
+        public async Task Should_render_correctly()
         {
-            var renderedSource = GetRenderedSourceAsync("/Comparison/ChameleonFormsTH").Result;
+            var renderedSource = await GetRenderedSourceAsync("/Comparison/ChameleonFormsTH");
             HtmlApprovals.VerifyHtml($"ChameleonFormsTH.cshtml\r\n\r\n{GetViewContents("Comparison/ChameleonFormsTH")}\r\n=====\r\n\r\nRendered Source\r\n\r\n{renderedSource}");
         }
 
         private async Task<string> GetRenderedSourceAsync(string url)
         {
+            _outputHelper.WriteLine("1");
             var defaultPage = await _client.GetAsync(url);
+            _outputHelper.WriteLine("2");
             var content = await HtmlHelpers.GetDocumentAsync(_client, defaultPage);
+            _outputHelper.WriteLine("3");
 
             var renderedSource = content.Body.InnerHtml;
             var getFormContent = new Regex(@".*?(<form(.|\n|\r)+?<\/form>).*", RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant);
