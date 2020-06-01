@@ -27,7 +27,7 @@ namespace ChameleonForms.AcceptanceTests.IntegrationTests
         }
 
         [Fact]
-        public void Should_render_correctly_when_used_via_form_or_section_and_when_used_for_top_level_property_or_sub_property()
+        public void Should_render_correctly()
         {
             var renderedSource = GetRenderedSourceAsync("/Comparison/ChameleonFormsTH").Result;
             HtmlApprovals.VerifyHtml($"ChameleonFormsTH.cshtml\r\n\r\n{GetViewContents("Comparison/ChameleonFormsTH")}\r\n=====\r\n\r\nRendered Source\r\n\r\n{renderedSource}");
