@@ -13,7 +13,7 @@
 
 <chameleon-form>
     @* Various incarnations of nested sections and fields and partials mixed in *@
-    <form-section heading="Wassup" leading-html="InstructionalText">
+    <form-section heading="Wassup" leading-html="InstructionalText" add-class="xyz" id="aaaaa" attr-style="border-top:red;" fluent-config='h => h.Attr(data_x => "y")'>
         <p>Yo</p>
         <field for="ListId" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup" append="aaa" as="RadioList" />
         <field for="SomeEnum" exclude="new Enum[]{SomeEnum.SomeOtherValue}" />
@@ -47,7 +47,7 @@
     <form-navigation>
         <submit-button label="Submit" size="Large" emphasis-style="Info" icon="calendar" />
         <form-button label="Button" fluent-attrs='b => b.WithStyle(EmphasisStyle.Primary)' />
-        <reset-button size="ExtraSmall" icon="person"><strong>Hello</strong> World! Reset</reset-button>
+        <reset-button size="ExtraSmall" icon="person" disabled="true"><strong>Hello</strong> World! Reset</reset-button>
     </form-navigation>
 </chameleon-form>
 

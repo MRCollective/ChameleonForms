@@ -39,13 +39,6 @@ namespace ChameleonForms.TagHelpers
         /// </summary>
         public IHtmlContent LeadingHtmlContent { get; set; }
 
-        /// <summary>
-        /// HTML attributes to apply to the section. You can either pass them in as a dictionary (attrs="@dictionary"), or
-        /// you can pass them in as individual attributes via attr-attribute-name="attributevalue" ...
-        /// </summary>
-        [HtmlAttributeName("attrs", DictionaryAttributePrefix = "attr-")]
-        public IDictionary<string, string> Attrs { get; set; } = new Dictionary<string, string>();
-
         /// <inheritdoc />
         public override async Task ProcessWhileAwareOfModelTypeAsync<TModel>(TagHelperContext context, TagHelperOutput output)
         {
@@ -57,7 +50,7 @@ namespace ChameleonForms.TagHelpers
             if (helper.IsInChameleonFormsSection())
             {
                 var s = helper.GetChameleonFormsSection();
-                using (s.BeginSection(heading: heading, leadingHtml: leadingHtml, new HtmlAttributes(Attrs)))
+                using (s.BeginSection(heading: heading, leadingHtml: leadingHtml, context.GetHtmlAttributes()))
                 {
                     var childContent = await output.GetChildContentAsync();
                     childContent.WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);
@@ -66,7 +59,7 @@ namespace ChameleonForms.TagHelpers
             else
             {
                 var f = helper.GetChameleonForm();
-                using (f.BeginSection(heading: heading, leadingHtml: leadingHtml, new HtmlAttributes(Attrs)))
+                using (f.BeginSection(heading: heading, leadingHtml: leadingHtml, context.GetHtmlAttributes()))
                 {
                     var childContent = await output.GetChildContentAsync();
                     childContent.WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);

@@ -890,8 +890,6 @@ namespace ChameleonForms.TagHelpers
     public class FormSectionTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
     {
         public FormSectionTagHelper() { }
-        [Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeName("attrs", DictionaryAttributePrefix="attr-")]
-        public System.Collections.Generic.IDictionary<string, string> Attrs { get; set; }
         public string Heading { get; set; }
         [System.Runtime.CompilerServices.Dynamic(new bool[] {
                 false,
@@ -906,6 +904,21 @@ namespace ChameleonForms.TagHelpers
         public System.Func<object, Microsoft.AspNetCore.Html.IHtmlContent> LeadingHtml { get; set; }
         public Microsoft.AspNetCore.Html.IHtmlContent LeadingHtmlContent { get; set; }
         public override System.Threading.Tasks.Task ProcessWhileAwareOfModelTypeAsync<TModel>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
+    }
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("form-button")]
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("form-section")]
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("reset-button")]
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("submit-button")]
+    public class HtmlAttributesTagHelper : Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+    {
+        public HtmlAttributesTagHelper() { }
+        public string AddClass { get; set; }
+        [Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeName("attrs", DictionaryAttributePrefix="attr-")]
+        public System.Collections.Generic.IDictionary<string, string> Attrs { get; set; }
+        public bool? Disabled { get; set; }
+        public System.Func<ChameleonForms.HtmlAttributes, ChameleonForms.HtmlAttributes> FluentConfig { get; set; }
+        public string Id { get; set; }
+        public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
     public class MessageParagraphTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
     {
