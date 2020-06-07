@@ -10,7 +10,7 @@
           ]
         }
       ],
-      "dest": "api",
+      "dest": "apidocs",
       "disableGitFeatures": false,
       "disableDefaultFilter": false
     }
@@ -19,8 +19,8 @@
     "content": [
       {
         "files": [
-          "api/**.yml",
-          "api/index.md"
+          "apidocs/**.yml",
+          "apidocs/index.md"
         ]
       },
       {
@@ -36,14 +36,16 @@
       {
         "files": [
           "docs/*.png",
-          "docs/*.jpg"
+          "docs/*.jpg",
+          "docs/*.ico",
+          "docs/templates/chameleonforms/styles/cshtml-razor.js"
         ]
       }
     ],
     "overwrite": [
       {
         "files": [
-          "apidoc/**.md"
+          "apidocs/**.md"
         ],
         "exclude": [
           "obj/**",
@@ -52,11 +54,30 @@
       }
     ],
     "dest": "_site",
+    "globalMetadata": {
+      "_appTitle": "ChameleonForms",
+      "_appFooter": "© Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.",
+      "_appLogoPath": "docs/logo-small.png",
+      "_enableSearch": true,
+      "_appFaviconPath": "docs/favicon.ico"
+    },
+    "fileMetadata": {
+      "_disableNavbar": {
+        "index.md": true
+      },
+      "_disableBreadcrumb": {
+        "index.md": true
+      },
+      "_disableToc": {
+        "index.md": true
+      },
+      "_disableAffix": {
+        "index.md": true
+      }     
+    },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
-    "template": [
-      "default"
-    ],
+    "template": ["default", "docs/templates/chameleonforms"],
     "postProcessors": [],
     "markdownEngineName": "markdig",
     "noLangKeyword": false,

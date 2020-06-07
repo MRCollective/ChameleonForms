@@ -4,7 +4,6 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/0pnpmjpkybb99ac3?svg=true)](https://ci.appveyor.com/project/MRCollective/chameleonforms)
 [![NuGet version](https://img.shields.io/nuget/vpre/ChameleonForms.svg)](https://www.nuget.org/packages/ChameleonForms)
-[![Documentation status](https://readthedocs.org/projects/chameleonforms/badge/?version=latest)](http://chameleonforms.readthedocs.org/en/latest/)
 
 ChameleonForms takes away the pain and repetition of building forms with ASP.NET Core MVC by following a philosophy of:
 

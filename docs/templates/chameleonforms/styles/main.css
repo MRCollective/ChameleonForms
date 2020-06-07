@@ -1,0 +1,172 @@
+.navbar-brand img {
+    height: 50px;
+}
+.clearfix {
+  clear: both;
+}
+#home {
+  padding-top: 35px;
+  padding-bottom: 100px;
+  color: #ffffff;
+  font-family: "Segoe UI", Helvetica, serif;
+  font-weight: 100;
+  background-color: #000;
+  background-image: url("../docs/bg-gr-v.png"),
+    url("../docs/chameleon.jpg");
+  background-attachment: scroll, scroll;
+  background-position: left top, center -75px;
+  background-repeat: repeat-y, no-repeat;
+  background-size: contain, cover;
+}
+#home-spacer {
+  margin-top: -100px;
+}
+.container-width {
+  width: 90%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+.logo-container {
+  float: left;
+}
+.logo {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px 30px;
+  text-align: center;
+  line-height: 30px;
+  color: #008000;
+  font-size: 23px;
+}
+.logo img {
+  height: 30px;
+}
+.menu {
+  float: right;
+}
+.menu-item {
+  display: inline-block;
+}
+.menu-item a {
+  font-size: 15px;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  line-height: 30px;
+  font-weight: 400;
+  border-radius: 5px;
+}
+.menu-item a:hover {
+  color: #008800;
+  background: #FFF;
+}
+.lead-title {
+  margin: 150px 0 30px 0;
+  font-size: 40px;
+}
+.sub-lead-title {
+  max-width: 650px;
+  line-height: 30px;
+  margin-bottom: 30px;
+  color: #FFF;
+  font-size: 20px;
+}
+.lead-btn {
+  display: block;
+  margin-top: 15px;
+  padding: 10px;
+  width: 190px;
+  min-height: 30px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 30px;
+  color: #008800;
+  background-color: #FFF;
+  border-radius: 5px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  font-weight: bold;
+}
+.lead-btn:active {
+  background-color: #008800;
+  color: #fff;
+}
+.lead-btn:hover {
+  background-color: #004700;
+  color: #fff;
+}
+
+@media(max-width: 1150px) {
+  .lead-title {
+    font-size: 35px;
+  }
+  .sub-lead-title {
+    font-size: 18px;
+  }
+  .lead-title {
+    margin-top: 100px;
+  }
+  #home {
+    background-position: left top, center top;
+  }
+}
+
+@media (max-width: 768px) {
+  #home {
+    margin: -30px -15px 0 -15px;
+    padding-top: 60px;
+    padding-bottom: 30px;
+    background-position: left top, center top;
+  }
+  .article {
+    margin-top: 0!important;
+  }
+  .logo-container, .menu {
+    float: none;
+  }
+  .lead-title {
+    margin-top: 30px;
+  }
+  .menu {
+    text-align: center;
+  }
+  .menu a:hover {
+    background: none;
+    color: #fff;
+    text-decoration: underline;
+  }
+  .lead-title {
+    font-size: 30px;
+  }
+  .sub-lead-title {
+    font-size: 15px;
+  }
+  #home-spacer {
+    display: none;
+  }
+}
+
+@media(max-height: 800px) {
+  #home {
+    padding-top: 60px;
+    padding-bottom: 30px;
+  }
+  .lead-title {
+    margin-top: 50px;
+  }
+  #home-spacer {
+    margin-top: -60px;
+  }
+}
+
+@media(max-height: 600px) {
+  #home {
+    position: static;
+  }
+  #home-spacer {
+    display: none;
+  }
+  .home-article {
+    margin-top: 0;
+  }
+}

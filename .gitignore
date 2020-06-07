@@ -15,4 +15,4 @@ packages
 *.cshtml.cs
 TestResults
 _site
-api
+apidocs
