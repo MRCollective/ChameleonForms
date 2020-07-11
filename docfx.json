@@ -73,7 +73,10 @@
       },
       "_disableAffix": {
         "index.md": true
-      }     
+      },
+      "_home": {
+        "index.md": true
+      }    
     },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
