@@ -59,7 +59,7 @@ This can be achieved using the default form template by using these overloads to
 
 The examples on the [documentation for changing HTML helper model types](html-helper-context.md) are restated below, but in terms of a ChameleonForm instead of using `Html` to output the form:
 
-```html
+```cshtml
 @model LoginViewModel
 
 <h1>Login</h1>
@@ -87,7 +87,7 @@ The examples on the [documentation for changing HTML helper model types](html-he
 
 and:
 
-```html
+```cshtml
 @model SomeViewModel
 
 <h1>Creating new xyz against @Model.Title</h1>
@@ -111,6 +111,6 @@ See also the examples in the [source code](https://github.com/MRCollective/Chame
 
 This is still easily possible, but it's just a little more verbose since it's likely to be a less common use case:
 
-```html
+```cshtml
 @using (var f = Html.For(m => m.Child, bindFieldsToParent: true).BeginChameleonForm(...)) { ... }
 ```

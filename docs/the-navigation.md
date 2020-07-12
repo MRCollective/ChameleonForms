@@ -118,8 +118,8 @@ The start and end HTML of the Navigation are generated via the `BeginNavigation`
 
 In order to get an instance of a `Navigation<TModel>` you can use the `BeginNavigation` method on the Form, e.g.:
 
-```csharp
-using (var n = f.BeginNavigation()) {
+```cshtml
+@using (var n = f.BeginNavigation()) {
     @* Navigation elements go here *@
 }
 ```
@@ -148,8 +148,8 @@ The `BeginNavigation` extension method looks like this:
 
 From within a section you can create Navigation Submit, Reset and normal Buttons and you can chain [HTML Attributes](html-attributes.md) specifiers off the end of them, e.g.:
 
-```csharp
-using (var n = f.BeginNavigation()) {
+```cshtml
+@using (var n = f.BeginNavigation()) {
     @n.Button("text button").AddClass("button").Id("button1")
     @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("button").Id("button2")
     @n.Button(@<strong>html button</strong>)
@@ -289,7 +289,7 @@ The `EmphasisStyle` enum is as follows:
 
 You can use the extension method like this:
 
-```csharp
+```cshtml
 @using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").WithStyle(EmphasisStyle.Primary)
 }
@@ -359,7 +359,7 @@ The `ButtonSize` enum is as follows:
 
 You can use the extension method like this:
 
-```csharp
+```cshtml
 @using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").WithSize(ButtonSize.Large)
 }
@@ -402,7 +402,7 @@ You can see the list of possible icon names to choose from on the [Twitter Boots
 
 You can use the extension method like this:
 
-```csharp
+```cshtml
 @using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").WithIcon("adjust")
 }
@@ -426,8 +426,8 @@ Here is an example from the example project of what the buttons can look like:
 
 Here is the code that generated the above screenshot:
 
-```csharp
-    using (var n = f.BeginNavigation())
+```cshtml
+    @using (var n = f.BeginNavigation())
     {
         @n.Button("text button").WithStyle(EmphasisStyle.Primary).WithSize(ButtonSize.Default)
         @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("random-class")
@@ -439,19 +439,19 @@ Here is the code that generated the above screenshot:
         @n.Submit("name", "value").WithIcon("star").WithStyle(EmphasisStyle.Success)
     }
     
-    using (var n = f.BeginNavigation())
+    @using (var n = f.BeginNavigation())
     {
         @n.Button("Small button 1").WithSize(ButtonSize.Small)
         @n.Button("Small button 2").WithSize(ButtonSize.Small)
     }
     
-    using (var n = f.BeginNavigation())
+    @using (var n = f.BeginNavigation())
     {
         @n.Button("Extra small button 1").WithSize(ButtonSize.ExtraSmall)
         @n.Button("Extra small button 2").WithSize(ButtonSize.ExtraSmall)
     }
     
-    using (var n = f.BeginNavigation())
+    @using (var n = f.BeginNavigation())
     {
         @n.Button("Large button 1").WithSize(ButtonSize.Large)
         @n.Button("Large button 2").WithSize(ButtonSize.Large)

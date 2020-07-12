@@ -163,7 +163,7 @@ And assuming for a moment you used definition lists to wrap your HTML fields the
 
 The equivalent of this form with out-of-the-box ChameleonForms functionality is:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm()) {
     using (var s = f.BeginSection("A form")) {
         @s.FieldFor(m => m.RequiredString).Label("Some string")
@@ -206,7 +206,7 @@ The Form Components that come with ChameleonForms out of the box are:
 
 To create a Form simply use the `BeginChameleonForms` extension method off of the Html helper:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm()) {
     @* The form ... *@
 }
@@ -214,7 +214,7 @@ To create a Form simply use the `BeginChameleonForms` extension method off of th
 
 Random Field Elements, Field Labels and Field Validation HTML that don't fit in to a Section (see below) can be output from the Form object anywhere within your form like so:
 
-```csharp
+```cshtml
 <p>@f.LabelFor(m => m.SomeCheckbox).Label("Hello!") @f.FieldFor(m => m.SomeCheckbox) @f.ValidationMessageFor(m => m.SomeCheckbox)</p>
 ```
 
@@ -236,8 +236,8 @@ You can output different HTML in your form template depending on the type of mes
 
 To create a Message simply use the `BeginMessage` extension method off of the Form object:
 
-```csharp
-using (var m = f.BeginMessage(MessageType.Success, "Submission successful")) {
+```cshtml
+@using (var m = f.BeginMessage(MessageType.Success, "Submission successful")) {
     @m.Paragraph("Some sort of success message")
     @* Other Paragraph's or any HTML at all really ... *@
 }
@@ -251,8 +251,8 @@ A Section component holds a set of Fields (see below for definition of Field) or
 
 To create a Section simply use the `BeginSection` extension method off of the Form object (or off of the Section object to create a nested one):
 
-```csharp
-using (var s = f.BeginSection("Basic information")) {
+```cshtml
+@using (var s = f.BeginSection("Basic information")) {
     using (var ss = s.BeginSection("Nested section")) {
         @* Fields... *@
     }
@@ -268,9 +268,9 @@ Fields can have other Fields nested within them (to one level deep).
 
 To create a Field simply use the `FieldFor` extension method off of the Section object or the `BeginFieldFor` extension method off of the Section object to start a Field with nested Fields:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.SomeField).FieldConfigurationMethodsCanBeChainedOffOfTheEnd()
-using (var ff = s.BeginFieldFor(m => m.AnotherField, Field.Configure().FieldConfigurationMethodsCanBeChainedHere()) {
+@using (var ff = s.BeginFieldFor(m => m.AnotherField, Field.Configure().FieldConfigurationMethodsCanBeChainedHere()) {
     @ff.FieldFor(m => m.ChildField)
 }
 ```
@@ -283,8 +283,8 @@ A Navigation component will usually be placed at the end of the form (although t
 
 To create a Navigation simply use the `BeginNavigation` extension method off of the Form object:
 
-```csharp
-using (var n = f.BeginNavigation()) {
+```cshtml
+@using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").ChainHtmlAttributesOffOfTheEnd()
     @n.Reset("Reset").ChainHtmlAttributesOffOfTheEnd()
     @n.Button("A button").ChainHtmlAttributesOffOfTheEnd()

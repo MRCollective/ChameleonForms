@@ -78,7 +78,7 @@ public enum MembershipType
 
 ### Razor view
 
-```csharp
+```cshtml
 @model SignupViewModel
 <h1>Account signup</h1>
 @using (var f = Html.BeginChameleonForm(htmlAttributes: Html.Attrs().Id("signup-form")))

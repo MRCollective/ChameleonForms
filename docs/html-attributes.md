@@ -150,8 +150,8 @@ There are a number of choices when using HTML Attributes.
 
 If you are interacting with a method that returns a HTML Attributes object then you can simply chain method calls, e.g.:
 
-```csharp
-using (var n = f.BeginNavigation()) {
+```cshtml
+@using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").Attr("data-something", "value").AddClass("a-class").Id("buttonId")
 }
 ```
@@ -164,7 +164,7 @@ You can new up an instance and use one of the four constructors (empty construct
 
 You can new up an instance and then chain methods off that instance, e.g.:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes().AddClass("form").Id("someForm")) {
     @* ... *@
 }
@@ -172,7 +172,7 @@ You can new up an instance and then chain methods off that instance, e.g.:
 
 ### Instantiation with lambda expressions
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes(@class => "form", id => "someForm")) {
     @* ... *@
 }
@@ -188,7 +188,7 @@ new HtmlAttributes(data_something => "value")
 
 You can convert an anonymous object to a HTML Attributes object, e.g.:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(htmlAttributes: new { @class="form", id="someForm" }.ToHtmlAttributes())) {
     @* ... *@
 }
@@ -204,7 +204,7 @@ new {data_something => "value"}.ToHtmlAttributes()
 
 You can convert a dictionary to a HTML Attributes object, e.g.:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(htmlAttributes: new Dictionary<string, object>{ {"class", "form"}, {"id", "someForm"} }.ToHtmlAttributes())) {
     @* ... *@
 }
@@ -228,7 +228,7 @@ t.MergeAttributes(h.Attributes);
 
 You may notice that the `HTMLAttributes` definition above extends `IHtmlContent`. As you might expect, this means you can directly output it to the page, e.g.
 
-```html
+```cshtml
 @{
     var h = new HtmlAttributes().Id("id");
 }
@@ -272,8 +272,8 @@ public static HtmlAttributesExtensions
 
 Then you could do something like this:
 
-```csharp
-using (var n = f.BeginNavigation()) {
+```cshtml
+@using (var n = f.BeginNavigation()) {
     @n.Button(Model.Coordinate1.ToString()).Coordinate(Model.Coordinate1)
     @n.Button(Model.Coordinate2.ToString()).Coordinate(Model.Coordinate2)
     @n.Button(Model.Coordinate3.ToString()).Coordinate(Model.Coordinate2)
@@ -337,7 +337,7 @@ In this example, the lambda expression passed into the constructor is called whe
 
 In this case, if you put the following in your razor view:
 
-```csharp
+```cshtml
 @Html.Paragraph("Display some text").Id("paragraphId").AddClass("a-class").Attr(data_some_data => "{mydata:true}")
 ```
 

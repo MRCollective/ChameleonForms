@@ -11,7 +11,7 @@ The Field Label is the HTML that makes up a label for a single Field. This Field
 
 To use a Field Generator to output the HTML for a standalone Field Label you can use the `LabelFor` extension method on the Form, e.g.:
 
-```csharp
+```cshtml
 @f.LabelFor(m => m.SomeField).ChainFieldConfigurationMethodsHere()
 ```
 

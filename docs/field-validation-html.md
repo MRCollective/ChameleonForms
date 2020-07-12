@@ -11,7 +11,7 @@ The Field Validation HTML is markup that acts as both a placeholder to display a
 
 To use a Field Generator to output the HTML for a standalone Field Validation HTML you can use the `ValidationMessageFor` extension method on the Form, e.g.:
 
-```csharp
+```cshtml
 @f.ValidationMessageFor(m => m.SomeField).ChainedFieldConfigurationMethodsHereAreIgnored()
 ```
 
@@ -43,7 +43,7 @@ The `ValidationMessageFor` extension method looks like this:
 
 The HTML for the Field Validation HTML is the same as calling:
 
-```csharp
+```cshtml
 @Html.ValidationMessageFor(m => m.SomeField, new { @class = %validationClasses% })
 ```
 

@@ -62,7 +62,7 @@ public decimal DecimalField { get; set; }
 
 You can easily specify the `step` HTML attribute by using the `Step` method on the [Field Configuration](field-configuration.md), e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.IntField).Step(2)
 ```
 
@@ -72,7 +72,7 @@ If you specify this, it will override any default step value.
 
 You can easily specify the `min` and `max` HTML attributes by using the `Min` and `Max` methods on the [Field Configuration](field-configuration.md), e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.IntField).Min(5).Max(60)
 @s.FieldFor(m => m.DecimalField).Min(1.1).Max(1.9)
 ```

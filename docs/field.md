@@ -50,7 +50,7 @@ The [form template](form-templates.md) determines how to lay out these sub-compo
 If you want to define your own HTML for the Field Element, Field Label and Field Validation HTML then you can do so by using the `Field` method on the Section, e.g.:
 
 ```cshtml
-using (var s = f.BeginSection("Title")) {
+@using (var s = f.BeginSection("Title")) {
     @s.Field(new HtmlString("label"), new HtmlString("element")).ChainFieldConfigurationMethodsHere()
     @* Or, if you want to specify all the possible values: *@
     @s.Field(new HtmlString("label"), new HtmlString("element"), new HtmlString("validation"), new ModelMetadata(...), isValid: false).ChainFieldConfigurationMethodsHere()
@@ -76,8 +76,8 @@ The `Field` method on the Section looks like this:
 
 If you would like ChameleonForms to use a Field Generator to generate the HTML for the Field Element, Field Label and Field Validation HTML from a field on the model then you can use the `FieldFor` extension method on the Section, e.g.:
 
-```csharp
-using (var s = f.BeginSection("Title")) {
+```cshtml
+@using (var s = f.BeginSection("Title")) {
     @s.FieldFor(m => m.FieldOnTheModel).ChainFieldConfigurationMethodsHere()
 }
 ```
@@ -108,8 +108,8 @@ The `FieldFor` extension method looks like this:
 
 If you want to use a Field Generator and want to nest child Fields under a Field then you can use the `BeginFieldFor` extension method on the Section (optionally with a Field Configuration), e.g.:
 
-```csharp
-using (var s = f.BeginSection("Title")) {
+```cshtml
+@using (var s = f.BeginSection("Title")) {
     using (var ff = s.BeginFieldFor(m => m.FieldOnTheModel, Field.Configure().ChainFieldConfigurationMethodsHere())) {
         @* Child Fields *@
     }
@@ -143,8 +143,8 @@ The `BeginFieldFor` extension method looks like this:
 
 If you want to use a Field Generator to create nested Fields under a parent Field then you can use the `BeginFieldFor` extension method on the Field (with an optional Field Configuration), e.g.:
 
-```csharp
-using (var ff = s.BeginFieldFor(m => m.FieldOnTheModel)) {
+```cshtml
+@using (var ff = s.BeginFieldFor(m => m.FieldOnTheModel)) {
     @ff.FieldFor(m => m.ChildField).ChainFieldConfigurationMethodsHere()
 }
 ```
@@ -321,7 +321,7 @@ In all other situations you will manually need to add wrapping HTML with the rel
 
 As an example of what you can do with the input group consider the following:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.Dollars).AsInputGroup().Append(".00").Prepend("$")
 ```
 

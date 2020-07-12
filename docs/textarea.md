@@ -21,6 +21,6 @@ When using the Default Field Generator then the default HTML of the [Field Eleme
 
 You can easily specify the required `rows` and `cols` HTML attributes by using the `Rows` and `Cols` methods on the [Field Configuration](field-configuration.md), e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.TextareaField).Rows(5).Cols(60)
 ```

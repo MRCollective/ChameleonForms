@@ -11,7 +11,7 @@ The Field Element is the HTML that makes up the control(s) to accept data from t
 
 To use a Field Generator to output the HTML for a standalone Field Element you can use the `FieldElementFor` extension method on the Form (with optional Field Configuration), e.g.:
 
-```csharp
+```cshtml
 @f.FieldElementFor(m => m.SomeField).ChainFieldConfigurationMethodsHere()
 ```
 

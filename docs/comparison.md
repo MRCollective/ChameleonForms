@@ -137,7 +137,7 @@ In the case where we use the Form Section to ask the user to enter account detai
 
 Note: for this to work there are [a lot of extra files you need to implement](https://github.com/MRCollective/ChameleonForms/tree/master/ChameleonForms.Example/Views/Comparison/EditorTemplates).
 
-```csharp
+```cshtml
 @using (Html.BeginForm("EditorTemplates", "Comparison", FormMethod.Post, new {id = "signup-form"}))
 {
     <div class="information_message">
@@ -180,7 +180,7 @@ Note: for this to work there are [a lot of extra files you need to implement](ht
 
 ### ChameleonForms
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(htmlAttributes: Html.Attrs().Id("signup-form")))
 {
     using (var m = f.BeginMessage(MessageType.Information, "Signup for an account"))

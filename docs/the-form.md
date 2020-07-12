@@ -39,7 +39,7 @@ ChameleonForms comes with a standard implementation of the `IForm<TModel>` inter
 
 In order to get an instance of an `IForm<TModel>` using the [default form template](configuration.md#default-global-config) (see below if [you want to adjust it on a per-form basis](#configuring-the-form-template)) you can use the `BeginChameleonForm` extension method on the `HtmlHelper` that appears in MVC views, e.g.:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm()) {
     @* Form content goes here *@
 }

@@ -8,7 +8,7 @@ public IFormFile FileUpload { get; set; }
 
 In order for file uploads to work you will need to set the encoding type on the form to `multipart/form-data` ([as opposed to the default](http://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean)), e.g.:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(encType: EncType.Multipart)) {
     @* ... *@
 }

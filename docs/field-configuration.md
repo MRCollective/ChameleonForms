@@ -579,7 +579,7 @@ For all the field configuration methods that take an `IHtmlContent` you have a f
 * Pass the HTML as a string e.g. `.Label(new HtmlString("<strong>My label</strong>"))`
 * Pass the HTML by calling any method that returns an `IHtmlContent`
 * Use the override that takes a [templated razor delegate](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#directive-attributes), e.g.:
-```
+```cshtml
     @{
         Func<dynamic, IHtmlContent> myLabel = @<strong>My label</strong>;
     }
