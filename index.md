@@ -3,7 +3,7 @@
     <h2>Model-driven forms</h2>
     <p>Spend less time with tedious reptition by letting your view models do the hard work for you.</p>
 </div>
-<div class="col-md-8">
+<div class="col-md-8 equal-heights">
 
 # [View Model](#tab/model-1)
 ```c#
@@ -36,7 +36,7 @@ public enum MembershipClass
 **HTML helpers variant**
 
 ```cshtml
-using (var s = f.BeginSection("Form section")) {
+@using (var s = f.BeginSection("Form section")) {
     @s.FieldFor(m => m.MembershipType)
 }
 ```

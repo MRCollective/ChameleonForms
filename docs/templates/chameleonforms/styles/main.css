@@ -18,9 +18,6 @@
   background-repeat: repeat-y, no-repeat;
   background-size: contain, cover;
 }
-#home-spacer {
-  margin-top: -100px;
-}
 .container-width {
   width: 90%;
   max-width: 1150px;
@@ -141,9 +138,6 @@
   .sub-lead-title {
     font-size: 15px;
   }
-  #home-spacer {
-    display: none;
-  }
 }
 
 @media(max-height: 800px) {
@@ -153,20 +147,5 @@
   }
   .lead-title {
     margin-top: 50px;
-  }
-  #home-spacer {
-    margin-top: -60px;
-  }
-}
-
-@media(max-height: 600px) {
-  #home {
-    position: static;
-  }
-  #home-spacer {
-    display: none;
-  }
-  .home-article {
-    margin-top: 0;
   }
 }

@@ -37,8 +37,7 @@
         "files": [
           "docs/*.png",
           "docs/*.jpg",
-          "docs/*.ico",
-          "docs/templates/chameleonforms/styles/cshtml-razor.js"
+          "docs/*.ico"
         ]
       }
     ],
