@@ -149,3 +149,20 @@
     margin-top: 50px;
   }
 }
+
+pre {
+  background: #FDFDFD;
+}
+
+.hljs-string {
+  color: #d14;
+}
+
+.home-buttons .btn {
+  background: #008800;
+  border: 0;
+}
+
+.home-buttons .btn:hover, .home-buttons .btn:active {
+  background: #004700;
+}

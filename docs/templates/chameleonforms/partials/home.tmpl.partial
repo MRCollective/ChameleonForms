@@ -11,6 +11,6 @@
         <div class="clearfix"></div>
         <div class="lead-title">Shape-shifting your forms experience in ASP.NET Core.</div>
         <div class="sub-lead-title">ChameleonForms makes building consistent, correct forms that work well client-side and server-side easy and quick by using model-driven defaults, conventions, templates and terse, declarative, type-safe syntax.</div>
-            <a class="lead-btn" href="docs/">Dive in</a>
+            <a class="lead-btn" href="docs/getting-started.html">Dive in</a>
         </div>
     </div>

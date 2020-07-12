@@ -13,13 +13,9 @@ ChameleonForms takes away the pain and repetition of building forms with ASP.NET
 
 It's ideally suited for situations where you want to **quickly** build forms that are highly consistent and maintainable. If you are trying to build highly specialised forms that are individually, painstakingly crafted then that's not what this library is for. That's where it makes sense to break out your JavaScript library of choice.
 
-Here's a quick example of what ChameleonForms looks like compared to a traditional ASP.NET MVC approach:
-
-![Example of the code and display of a Chameleon-powered Bootstrap form compared to traditional approach](bootstrap-example-banner.png)
-
 ## Contents
 
-* [Example](#example)
+* [Example in detail](#example)
     * [View model class](#view-model-class)
     * [Razor view](#razor-view)
     * [Rendered result](#rendered-result)
