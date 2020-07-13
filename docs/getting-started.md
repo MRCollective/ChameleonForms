@@ -13,114 +13,114 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
 1. Install the NuGet package `Install-Package ChameleonForms -pre` (v4 is currently marked beta so you need to include pre-release versions)
 2. Register ChameleonForms in your `Startup.cs` file:
 
-```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    ...
-    services.AddMvc(...);
-    ...
-    services.AddChameleonForms();
-}
-```
+    ```csharp
+    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddMvc(...);
+        ...
+        services.AddChameleonForms();
+    }
+    ```
 
-Note: you can alter the configuration from the default, [see the docs](https://chameleonforms.readthedocs.io/en/latest/configuration/).
+    Note: you can alter the configuration from the default, [see the docs](https://chameleonforms.readthedocs.io/en/latest/configuration/).
 
 3. Add the following to your `_ViewImports.cshtml`:
 
-```cshtml
-@using ChameleonForms;
-@using ChameleonForms.Enums;
-@using ChameleonForms.Component;
-```
+    ```cshtml
+    @using ChameleonForms;
+    @using ChameleonForms.Enums;
+    @using ChameleonForms.Component;
+    ```
 
 4. Create your first form, e.g.:
 
-`~/Controllers/MyFormController.cs`:
-```cs
-using System;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
+    `~/Controllers/MyFormController.cs`:
+    ```cs
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Mvc;
 
-namespace MyWebApp.Controllers
-{
-    public class MyFormViewModel
+    namespace MyWebApp.Controllers
     {
-        [Required]
-        public string Name { get; set; }
-
-        public int FavouriteNumber { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DateOfBirth { get; set; }
-    }
-    public class MyFormController : Controller
-    {
-        public IActionResult Index()
+        public class MyFormViewModel
         {
-            return View();
+            [Required]
+            public string Name { get; set; }
+
+            public int FavouriteNumber { get; set; }
+
+            [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]
+            public DateTime DateOfBirth { get; set; }
         }
-
-        [HttpPost]
-        public IActionResult Index(MyFormViewModel vm)
+        public class MyFormController : Controller
         {
-            if (ModelState.IsValid)
+            public IActionResult Index()
             {
-                // Do stuff
-                return RedirectToAction("Index");
+                return View();
             }
-            return View(vm);
+
+            [HttpPost]
+            public IActionResult Index(MyFormViewModel vm)
+            {
+                if (ModelState.IsValid)
+                {
+                    // Do stuff
+                    return RedirectToAction("Index");
+                }
+                return View(vm);
+            }
         }
     }
-}
-```
+    ```
 
-`~/Views/MyForm/Index.cshtml`:
-```cshtml
-@model MyWebApp.Controllers.ViewModel
-@{
-    ViewData["Title"] = "My Form";
-}
-
-@using (var f = Html.BeginChameleonForm())
-{
-    using (var s = f.BeginSection("About you!?"))
-    {
-        @s.FieldFor(m => m.Name)
-        @s.FieldFor(m => m.FavouriteNumber)
-        @s.FieldFor(m => m.DateOfBirth)
+    `~/Views/MyForm/Index.cshtml`:
+    ```cshtml
+    @model MyWebApp.Controllers.ViewModel
+    @{
+        ViewData["Title"] = "My Form";
     }
-    using (var n = f.BeginNavigation())
+
+    @using (var f = Html.BeginChameleonForm())
     {
-        @n.Submit("Submit")
+        using (var s = f.BeginSection("About you!?"))
+        {
+            @s.FieldFor(m => m.Name)
+            @s.FieldFor(m => m.FavouriteNumber)
+            @s.FieldFor(m => m.DateOfBirth)
+        }
+        using (var n = f.BeginNavigation())
+        {
+            @n.Submit("Submit")
+        }
     }
-}
 
-@section Scripts
-{
-    <partial name="_ValidationScriptsPartial" />
-    @* ... or relevant equivalent *@
-}
+    @section Scripts
+    {
+        <partial name="_ValidationScriptsPartial" />
+        @* ... or relevant equivalent *@
+    }
 
-```
+    ```
 
 5. Run it!
 6. *(Optional)* If you want to add the additional client-side validation support in ChameleonForms (which supports both [jquery validate unobtrusive validation]() and [aspnet-validation]()) then add the following to your `_ValidationScriptsPartial.cshtml` or equivalent file:
 
-```html
-<script src="~/lib/chameleonforms/unobtrusive-date-validation.chameleonforms.js" asp-append-version="true"></script>
-```
+    ```html
+    <script src="~/lib/chameleonforms/unobtrusive-date-validation.chameleonforms.js" asp-append-version="true"></script>
+    ```
 
 7. *(Optional)* If you are using Twitter Bootstrap 3 then add the following to your `_ValidationScriptsPartial.cshtml` (which only supports jquery validate unobtrusive validation for now):
 
-```html
-<script src="~/lib/chameleonforms/unobtrusive-twitterbootstrap3-validation.chameleonforms.js" asp-append-version="true"></script>
-```
+    ```html
+    <script src="~/lib/chameleonforms/unobtrusive-twitterbootstrap3-validation.chameleonforms.js" asp-append-version="true"></script>
+    ```
 
-And add the following to your `_Layout.cshtml` or equivalent file:
+    And add the following to your `_Layout.cshtml` or equivalent file:
 
-```html
-<link href="~/lib/chameleonforms/chameleonforms-twitterbootstrap3.css" rel="stylesheet" type="text/css" asp-append-version="true" />
-```
+    ```html
+    <link href="~/lib/chameleonforms/chameleonforms-twitterbootstrap3.css" rel="stylesheet" type="text/css" asp-append-version="true" />
+    ```
 
 
 ## Show me a basic ChameleonForms example next to its ASP.NET Core MVC counterpart!
@@ -163,7 +163,7 @@ And assuming for a moment you used definition lists to wrap your HTML fields the
 
 The equivalent of this form with out-of-the-box ChameleonForms functionality is:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm()) {
     using (var s = f.BeginSection("A form")) {
         @s.FieldFor(m => m.RequiredString).Label("Some string")
@@ -206,7 +206,7 @@ The Form Components that come with ChameleonForms out of the box are:
 
 To create a Form simply use the `BeginChameleonForms` extension method off of the Html helper:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm()) {
     @* The form ... *@
 }
@@ -214,7 +214,7 @@ To create a Form simply use the `BeginChameleonForms` extension method off of th
 
 Random Field Elements, Field Labels and Field Validation HTML that don't fit in to a Section (see below) can be output from the Form object anywhere within your form like so:
 
-```csharp
+```cshtml
 <p>@f.LabelFor(m => m.SomeCheckbox).Label("Hello!") @f.FieldFor(m => m.SomeCheckbox) @f.ValidationMessageFor(m => m.SomeCheckbox)</p>
 ```
 
@@ -236,8 +236,8 @@ You can output different HTML in your form template depending on the type of mes
 
 To create a Message simply use the `BeginMessage` extension method off of the Form object:
 
-```csharp
-using (var m = f.BeginMessage(MessageType.Success, "Submission successful")) {
+```cshtml
+@using (var m = f.BeginMessage(MessageType.Success, "Submission successful")) {
     @m.Paragraph("Some sort of success message")
     @* Other Paragraph's or any HTML at all really ... *@
 }
@@ -251,8 +251,8 @@ A Section component holds a set of Fields (see below for definition of Field) or
 
 To create a Section simply use the `BeginSection` extension method off of the Form object (or off of the Section object to create a nested one):
 
-```csharp
-using (var s = f.BeginSection("Basic information")) {
+```cshtml
+@using (var s = f.BeginSection("Basic information")) {
     using (var ss = s.BeginSection("Nested section")) {
         @* Fields... *@
     }
@@ -268,9 +268,9 @@ Fields can have other Fields nested within them (to one level deep).
 
 To create a Field simply use the `FieldFor` extension method off of the Section object or the `BeginFieldFor` extension method off of the Section object to start a Field with nested Fields:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.SomeField).FieldConfigurationMethodsCanBeChainedOffOfTheEnd()
-using (var ff = s.BeginFieldFor(m => m.AnotherField, Field.Configure().FieldConfigurationMethodsCanBeChainedHere()) {
+@using (var ff = s.BeginFieldFor(m => m.AnotherField, Field.Configure().FieldConfigurationMethodsCanBeChainedHere()) {
     @ff.FieldFor(m => m.ChildField)
 }
 ```
@@ -283,8 +283,8 @@ A Navigation component will usually be placed at the end of the form (although t
 
 To create a Navigation simply use the `BeginNavigation` extension method off of the Form object:
 
-```csharp
-using (var n = f.BeginNavigation()) {
+```cshtml
+@using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").ChainHtmlAttributesOffOfTheEnd()
     @n.Reset("Reset").ChainHtmlAttributesOffOfTheEnd()
     @n.Button("A button").ChainHtmlAttributesOffOfTheEnd()

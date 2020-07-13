@@ -8,7 +8,7 @@ public IFormFile FileUpload { get; set; }
 
 In order for file uploads to work you will need to set the encoding type on the form to `multipart/form-data` ([as opposed to the default](http://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean)), e.g.:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(encType: EncType.Multipart)) {
     @* ... *@
 }
@@ -20,7 +20,7 @@ ChameleonForms doesn't currently support generating the correct HTML to handle m
 
 ## Default HTML
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) will be:
 
 ```html
 <input %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" type="file" value="%value%" />

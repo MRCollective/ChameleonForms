@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -9,56 +7,39 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="256"
-   height="256"
-   id="svg2"
-   version="1.1"
-   inkscape:version="0.48.4 r9939"
    sodipodi:docname="logo.svg"
-   inkscape:export-filename="C:\dev\Community\ChameleonForms\logo.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   inkscape:export-ydpi="300"
+   inkscape:export-xdpi="300"
+   inkscape:export-filename="C:\Users\robmo\Downloads\bitmap.png"
+   id="svg204"
+   version="1.1"
+   viewBox="0 0 210 297"
+   height="297mm"
+   width="210mm">
   <defs
-     id="defs4" />
+     id="defs198" />
   <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="1"
-     inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="794.69586"
-     inkscape:cy="312.94258"
-     inkscape:document-units="px"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     showguides="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:guide-bbox="true">
-    <sodipodi:guide
-       orientation="0,1"
-       position="-65.714286,256"
-       id="guide3147" />
-    <sodipodi:guide
-       orientation="0,1"
-       position="-178.57143,0"
-       id="guide3149" />
-    <sodipodi:guide
-       orientation="1,0"
-       position="0,318.57143"
-       id="guide3151" />
-    <sodipodi:guide
-       orientation="1,0"
-       position="256,2"
-       id="guide3153" />
-  </sodipodi:namedview>
+     inkscape:window-y="-11"
+     inkscape:window-x="-11"
+     inkscape:window-height="1706"
+     inkscape:window-width="2880"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="mm"
+     inkscape:cy="572.00483"
+     inkscape:cx="390.94025"
+     inkscape:zoom="7.9195959"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
   <metadata
-     id="metadata7">
+     id="metadata201">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -70,438 +51,40 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-796.36215)">
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:none"
-       id="rect4062-4-3-3-9"
-       width="226.05779"
-       height="226.05779"
-       x="23.550468"
-       y="797.43909"
-       ry="0.32340229" />
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke:none"
-       id="rect4062"
-       width="226.05779"
-       height="226.05779"
-       x="523.53845"
-       y="674.13251"
-       ry="0.32340229" />
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
     <text
+       inkscape:export-ydpi="96"
+       inkscape:export-xdpi="96"
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="65.234283"
-       y="395.05954"
-       id="text2987"
-       sodipodi:linespacing="125%"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:98%;font-family:'Segoe UI Mono';-inkscape-font-specification:'Segoe UI Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="138.92422"
+       y="146.81781"
+       id="text2987-11-6"><tspan
          sodipodi:role="line"
-         x="65.234283"
-         y="395.05954"
-         id="tspan2992"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"><tspan
-           id="tspan2994"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono">CHAMELEON</tspan><tspan
-           style="font-weight:bold;-inkscape-font-specification:Segoe UI Mono Bold"
-           id="tspan2996">FORMS</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="221.04054"
-       y="567.86768"
-       id="text2987-11"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="221.04054"
-         y="567.86768"
-         id="tspan2992-5"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono">CHAMELE N</tspan><tspan
-         sodipodi:role="line"
-         x="221.04054"
-         y="607.06769"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan3137">FORMS</tspan></text>
-    <path
-       sodipodi:type="spiral"
-       style="fill:#008000;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       id="path3135"
-       sodipodi:cx="459.61942"
-       sodipodi:cy="158.37717"
-       sodipodi:expansion="1"
-       sodipodi:revolution="3"
-       sodipodi:radius="19.704449"
-       sodipodi:argument="-17.304396"
-       sodipodi:t0="0"
-       d="m 459.61942,158.37717 c 0.0253,0.98762 -1.31881,0.52139 -1.6415,0.0421 -0.87448,-1.29889 0.2959,-2.88765 1.55731,-3.32509 2.25638,-0.78247 4.49273,0.99928 5.00868,3.15672 0.75718,3.16614 -1.70525,6.12617 -4.75613,6.69227 -4.06634,0.75452 -7.77054,-2.41124 -8.37585,-6.35554 -0.76173,-4.96349 3.11701,-9.42033 7.95494,-10.05944 5.85938,-0.77405 11.07322,3.82263 11.74303,9.55435 0.78935,6.75464 -4.52813,12.72805 -11.15376,13.42662 -7.64955,0.80653 -14.38417,-5.23355 -15.11021,-12.75317 -0.82496,-8.54426 5.93893,-16.04119 14.35258,-16.79379 9.43884,-0.8443 17.69888,6.64427 18.47738,15.95198 0.86428,10.33332 -7.34958,19.35706 -17.55139,20.16097"
-       transform="matrix(0.78054694,0,0,0.78054694,-176.45438,428.9026)" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="223.19896"
-       y="671.4696"
-       id="text2987-11-6"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="223.19896"
-         y="671.4696"
+         x="138.92422"
+         y="146.81781"
          id="tspan2992-5-1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono">CHAMELE N</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:98%;font-family:'Segoe UI Mono';-inkscape-font-specification:'Segoe UI Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;text-anchor:end;fill:#008000;stroke-width:0.264583">CHAMELE  N</tspan><tspan
          sodipodi:role="line"
-         x="223.19896"
-         y="710.66962"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
+         x="138.92422"
+         y="157.18945"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:98%;font-family:'Segoe UI Mono';-inkscape-font-specification:'Segoe UI Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:end;text-anchor:end;stroke-width:0.264583"
          id="tspan3137-4">FORMS</tspan></text>
     <path
+       inkscape:export-ydpi="96"
+       inkscape:export-xdpi="96"
        sodipodi:type="spiral"
-       style="fill:none;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:none;stroke:#008000;stroke-width:0.4;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
        id="path3135-2"
-       sodipodi:cx="459.61942"
-       sodipodi:cy="158.37717"
+       sodipodi:cx="127.07054"
+       sodipodi:cy="142.75798"
        sodipodi:expansion="1"
        sodipodi:revolution="3"
-       sodipodi:radius="19.704449"
+       sodipodi:radius="4.0693569"
        sodipodi:argument="-17.304396"
        sodipodi:t0="0"
-       d="m 459.61942,158.37717 c 0.0253,0.98762 -1.31881,0.52139 -1.6415,0.0421 -0.87448,-1.29889 0.2959,-2.88765 1.55731,-3.32509 2.25638,-0.78247 4.49273,0.99928 5.00868,3.15672 0.75718,3.16614 -1.70525,6.12617 -4.75613,6.69227 -4.06634,0.75452 -7.77054,-2.41124 -8.37585,-6.35554 -0.76173,-4.96349 3.11701,-9.42033 7.95494,-10.05944 5.85938,-0.77405 11.07322,3.82263 11.74303,9.55435 0.78935,6.75464 -4.52813,12.72805 -11.15376,13.42662 -7.64955,0.80653 -14.38417,-5.23355 -15.11021,-12.75317 -0.82496,-8.54426 5.93893,-16.04119 14.35258,-16.79379 9.43884,-0.8443 17.69888,6.64427 18.47738,15.95198 0.86428,10.33332 -7.34958,19.35706 -17.55139,20.16097"
-       transform="matrix(0.78054694,0,0,0.78054694,-174.29598,532.50456)" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="217.45506"
-       y="469.35818"
-       id="text2987-11-6-3-6"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="217.45506"
-         y="469.35818"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#000000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan3961-5">CHAMELEON</tspan><tspan
-         sodipodi:role="line"
-         x="217.45506"
-         y="508.5582"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#000000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan3137-4-2-7">F RMS</tspan></text>
-    <path
-       sodipodi:type="spiral"
-       style="fill:none;stroke:#008000;stroke-width:2.92230988;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path3135-2-1-1"
-       sodipodi:cx="459.61942"
-       sodipodi:cy="158.37717"
-       sodipodi:expansion="1"
-       sodipodi:revolution="3"
-       sodipodi:radius="19.704449"
-       sodipodi:argument="-17.304396"
-       sodipodi:t0="0"
-       d="m 459.61942,158.37717 c 0.0253,0.98762 -1.31881,0.52139 -1.6415,0.0421 -0.87448,-1.29889 0.2959,-2.88765 1.55731,-3.32509 2.25638,-0.78247 4.49273,0.99928 5.00868,3.15672 0.75718,3.16614 -1.70525,6.12617 -4.75613,6.69227 -4.06634,0.75452 -7.77054,-2.41124 -8.37585,-6.35554 -0.76173,-4.96349 3.11701,-9.42033 7.95494,-10.05944 5.85938,-0.77405 11.07322,3.82263 11.74303,9.55435 0.78935,6.75464 -4.52813,12.72805 -11.15376,13.42662 -7.64955,0.80653 -14.38417,-5.23355 -15.11021,-12.75317 -0.82496,-8.54426 5.93893,-16.04119 14.35258,-16.79379 9.43884,-0.8443 17.69888,6.64427 18.47738,15.95198 0.86428,10.33332 -7.34958,19.35706 -17.55139,20.16097"
-       transform="matrix(0.78054694,0,0,0.78054694,-226.70511,370.39189)" />
-    <path
-       sodipodi:type="spiral"
-       style="fill:none;stroke:#ffffff;stroke-width:3.29212046;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path3135-2-8"
-       sodipodi:cx="459.61942"
-       sodipodi:cy="158.37717"
-       sodipodi:expansion="1"
-       sodipodi:revolution="3"
-       sodipodi:radius="19.704449"
-       sodipodi:argument="-17.304396"
-       sodipodi:t0="0"
-       d="m 459.61942,158.37717 c 0.0253,0.98762 -1.31881,0.52139 -1.6415,0.0421 -0.87448,-1.29889 0.2959,-2.88765 1.55731,-3.32509 2.25638,-0.78247 4.49273,0.99928 5.00868,3.15672 0.75718,3.16614 -1.70525,6.12617 -4.75613,6.69227 -4.06634,0.75452 -7.77054,-2.41124 -8.37585,-6.35554 -0.76173,-4.96349 3.11701,-9.42033 7.95494,-10.05944 5.85938,-0.77405 11.07322,3.82263 11.74303,9.55435 0.78935,6.75464 -4.52813,12.72805 -11.15376,13.42662 -7.64955,0.80653 -14.38417,-5.23355 -15.11021,-12.75317 -0.82496,-8.54426 5.93893,-16.04119 14.35258,-16.79379 9.43884,-0.8443 17.69888,6.64427 18.47738,15.95198 0.86428,10.33332 -7.34958,19.35706 -17.55139,20.16097"
-       transform="matrix(2.9730758,-0.17663255,0.81780305,2.9601047,-906.49792,437.65069)" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="743.90405"
-       y="723.2359"
-       id="text2987-11-6-3-6-9"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="743.90405"
-         y="723.2359"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan3961-5-2">CHAMELEON</tspan><tspan
-         sodipodi:role="line"
-         x="743.90405"
-         y="762.43591"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#ffffff;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan3137-4-2-7-7">FORMS</tspan></text>
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke:none"
-       id="rect4062-4"
-       width="226.05779"
-       height="226.05779"
-       x="788.19843"
-       y="674.63757"
-       ry="0.32340229" />
-    <path
-       sodipodi:type="spiral"
-       style="fill:none;stroke:#ffffff;stroke-width:3.29212046;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path3135-2-8-3"
-       sodipodi:cx="459.61942"
-       sodipodi:cy="158.37717"
-       sodipodi:expansion="1"
-       sodipodi:revolution="3"
-       sodipodi:radius="19.704449"
-       sodipodi:argument="-17.304396"
-       sodipodi:t0="0"
-       d="m 459.61942,158.37717 c 0.0253,0.98762 -1.31881,0.52139 -1.6415,0.0421 -0.87448,-1.29889 0.2959,-2.88765 1.55731,-3.32509 2.25638,-0.78247 4.49273,0.99928 5.00868,3.15672 0.75718,3.16614 -1.70525,6.12617 -4.75613,6.69227 -4.06634,0.75452 -7.77054,-2.41124 -8.37585,-6.35554 -0.76173,-4.96349 3.11701,-9.42033 7.95494,-10.05944 5.85938,-0.77405 11.07322,3.82263 11.74303,9.55435 0.78935,6.75464 -4.52813,12.72805 -11.15376,13.42662 -7.64955,0.80653 -14.38417,-5.23355 -15.11021,-12.75317 -0.82496,-8.54426 5.93893,-16.04119 14.35258,-16.79379 9.43884,-0.8443 17.69888,6.64427 18.47738,15.95198 0.86428,10.33332 -7.34958,19.35706 -17.55139,20.16097"
-       transform="matrix(5.5288774,-0.28454453,1.5208266,4.7685526,-1882.1213,258.8694)" />
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:none"
-       id="rect4062-1"
-       width="226.05779"
-       height="226.05779"
-       x="1032.9893"
-       y="199.90161"
-       ry="0.32340229" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="891.89142"
-       y="711.86481"
-       id="text2987-11-6-3-6-9-2"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="891.89142"
-         y="711.86481"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#ffffff;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan3961-5-2-3">CHAM</tspan><tspan
-         sodipodi:role="line"
-         x="891.89142"
-         y="751.06482"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#ffffff;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan4178">ELEO</tspan><tspan
-         sodipodi:role="line"
-         x="891.89142"
-         y="790.26477"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan3137-4-2-7-7-3"><tspan
-   style="fill:#ffffff"
-   id="tspan4172">N</tspan>FOR</tspan><tspan
-         sodipodi:role="line"
-         x="891.89142"
-         y="829.46478"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan4166" /></text>
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="941.28168"
-       y="751.98206"
-       id="text2987-11-6-3-6-9-2-4"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="941.28168"
-         y="751.98206"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan3137-4-2-7-7-3-3" /><tspan
-         sodipodi:role="line"
-         x="941.28168"
-         y="791.18207"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan4166-7">MS</tspan></text>
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke:none"
-       id="rect4062-4-3"
-       width="226.05779"
-       height="226.05779"
-       x="1085.4357"
-       y="672.61731"
-       ry="0.32340229" />
-    <path
-       sodipodi:type="spiral"
-       style="fill:none;stroke:#ffffff;stroke-width:3.29212046;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path3135-2-8-3-4"
-       sodipodi:cx="459.61942"
-       sodipodi:cy="158.37717"
-       sodipodi:expansion="1"
-       sodipodi:revolution="3"
-       sodipodi:radius="19.704449"
-       sodipodi:argument="-17.304396"
-       sodipodi:t0="0"
-       d="m 459.61942,158.37717 c 0.0253,0.98762 -1.31881,0.52139 -1.6415,0.0421 -0.87448,-1.29889 0.2959,-2.88765 1.55731,-3.32509 2.25638,-0.78247 4.49273,0.99928 5.00868,3.15672 0.75718,3.16614 -1.70525,6.12617 -4.75613,6.69227 -4.06634,0.75452 -7.77054,-2.41124 -8.37585,-6.35554 -0.76173,-4.96349 3.11701,-9.42033 7.95494,-10.05944 5.85938,-0.77405 11.07322,3.82263 11.74303,9.55435 0.78935,6.75464 -4.52813,12.72805 -11.15376,13.42662 -7.64955,0.80653 -14.38417,-5.23355 -15.11021,-12.75317 -0.82496,-8.54426 5.93893,-16.04119 14.35258,-16.79379 9.43884,-0.8443 17.69888,6.64427 18.47738,15.95198 0.86428,10.33332 -7.34958,19.35706 -17.55139,20.16097"
-       transform="matrix(5.5288774,-0.28454453,1.5208266,4.7685526,-1634.9024,238.56482)" />
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:none"
-       id="rect4062-1-4"
-       width="226.05779"
-       height="226.05779"
-       x="1330.2266"
-       y="197.88132"
-       ry="0.32340229" />
-    <text
-       xml:space="preserve"
-       style="font-size:42.58360291px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="1305.9977"
-       y="710.95599"
-       id="text2987-11-6-3-6-9-2-6"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="1305.9977"
-         y="710.95599"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#008000;font-family:Segoe UI;-inkscape-font-specification:Segoe UI Bold"
-         id="tspan3137-4-2-7-7-3-6">chameleon</tspan><tspan
-         sodipodi:role="line"
-         x="1305.9977"
-         y="752.68793"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#ffffff;font-family:Segoe UI;-inkscape-font-specification:Segoe UI Bold"
-         id="tspan4166-8">forms</tspan></text>
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:none"
-       id="rect4062-4-3-3"
-       width="226.05779"
-       height="226.05779"
-       x="1471.2979"
-       y="678.84412"
-       ry="0.32340229" />
-    <path
-       sodipodi:type="spiral"
-       style="fill:none;stroke:#000000;stroke-width:3.29212046;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path3135-2-8-3-4-7"
-       sodipodi:cx="459.61942"
-       sodipodi:cy="158.37717"
-       sodipodi:expansion="1"
-       sodipodi:revolution="3"
-       sodipodi:radius="19.704449"
-       sodipodi:argument="-17.304396"
-       sodipodi:t0="0"
-       d="m 459.61942,158.37717 c 0.0253,0.98762 -1.31881,0.52139 -1.6415,0.0421 -0.87448,-1.29889 0.2959,-2.88765 1.55731,-3.32509 2.25638,-0.78247 4.49273,0.99928 5.00868,3.15672 0.75718,3.16614 -1.70525,6.12617 -4.75613,6.69227 -4.06634,0.75452 -7.77054,-2.41124 -8.37585,-6.35554 -0.76173,-4.96349 3.11701,-9.42033 7.95494,-10.05944 5.85938,-0.77405 11.07322,3.82263 11.74303,9.55435 0.78935,6.75464 -4.52813,12.72805 -11.15376,13.42662 -7.64955,0.80653 -14.38417,-5.23355 -15.11021,-12.75317 -0.82496,-8.54426 5.93893,-16.04119 14.35258,-16.79379 9.43884,-0.8443 17.69888,6.64427 18.47738,15.95198 0.86428,10.33332 -7.34958,19.35706 -17.55139,20.16097"
-       transform="matrix(5.5288774,-0.28454453,1.5208266,4.7685526,-1263.0402,244.79166)" />
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:none"
-       id="rect4062-1-4-8"
-       width="226.05779"
-       height="226.05779"
-       x="1714.0887"
-       y="204.10814"
-       ry="0.32340229" />
-    <text
-       xml:space="preserve"
-       style="font-size:42.58360291px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="1691.8599"
-       y="717.18286"
-       id="text2987-11-6-3-6-9-2-6-8"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="1691.8599"
-         y="717.18286"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#008000;font-family:Segoe UI;-inkscape-font-specification:Segoe UI Bold"
-         id="tspan3137-4-2-7-7-3-6-2">chameleon</tspan><tspan
-         sodipodi:role="line"
-         x="1691.8599"
-         y="758.91479"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#000000;font-family:Segoe UI;-inkscape-font-specification:Segoe UI Bold"
-         id="tspan4166-8-9">forms</tspan></text>
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:none"
-       id="rect4062-1-4-1"
-       width="119.62921"
-       height="226.05779"
-       x="1351.9711"
-       y="708.61902"
-       ry="0.32340229" />
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke:none"
-       id="rect4062-4-35"
-       width="226.05779"
-       height="226.05779"
-       x="1770.0667"
-       y="672.5788"
-       ry="0.32340229" />
-    <text
-       xml:space="preserve"
-       style="font-size:72.43733215px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-       x="1779.8658"
-       y="738.95947"
-       id="text2987-11-6-3-6-9-2-8"
-       sodipodi:linespacing="98.000002%"><tspan
-         sodipodi:role="line"
-         x="1779.8658"
-         y="738.95947"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:98.00000191%;text-anchor:start;fill:#ffffff;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan4178-0"><tspan
-   style="fill:#008000"
-   id="tspan4660">C</tspan>HAM</tspan><tspan
-         sodipodi:role="line"
-         x="1779.8658"
-         y="809.94806"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:98.00000191%;text-anchor:start;fill:#ffffff;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan4572"><tspan
-   style="fill:#008000"
-   id="tspan4662">E</tspan>LEO</tspan><tspan
-         sodipodi:role="line"
-         x="1779.8658"
-         y="880.93665"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:98.00000191%;text-anchor:start;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan4566">N</tspan><tspan
-         sodipodi:role="line"
-         x="1779.8658"
-         y="951.92523"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:98.00000191%;text-anchor:start;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-         id="tspan4166-3" /></text>
-    <g
-       id="g3184"
-       transform="translate(-4.1054292,0)">
-      <text
-         sodipodi:linespacing="98.000002%"
-         id="text2987-11-6-1"
-         y="841.60663"
-         x="255.99998"
-         style="font-size:45.9541893px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Segoe UI;-inkscape-font-specification:Segoe UI"
-         xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;fill:#008000;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-           id="tspan2992-5-1-7"
-           y="841.60663"
-           x="256"
-           sodipodi:role="line">CHAMELE N</tspan><tspan
-           id="tspan3137-4-4"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:end;line-height:98.00000191%;text-anchor:end;font-family:Segoe UI Mono;-inkscape-font-specification:Segoe UI Mono"
-           y="886.64172"
-           x="255.99998"
-           sodipodi:role="line">FORMS</tspan></text>
-      <path
-         transform="matrix(0.89673503,0,0,0.89673503,-199.34519,682.09541)"
-         d="m 459.61942,158.37717 c 0.0253,0.98762 -1.31881,0.52139 -1.6415,0.0421 -0.87448,-1.29889 0.2959,-2.88765 1.55731,-3.32509 2.25638,-0.78247 4.49273,0.99928 5.00868,3.15672 0.75718,3.16614 -1.70525,6.12617 -4.75613,6.69227 -4.06634,0.75452 -7.77054,-2.41124 -8.37585,-6.35554 -0.76173,-4.96349 3.11701,-9.42033 7.95494,-10.05944 5.85938,-0.77405 11.07322,3.82263 11.74303,9.55435 0.78935,6.75464 -4.52813,12.72805 -11.15376,13.42662 -7.64955,0.80653 -14.38417,-5.23355 -15.11021,-12.75317 -0.82496,-8.54426 5.93893,-16.04119 14.35258,-16.79379 9.43884,-0.8443 17.69888,6.64427 18.47738,15.95198 0.86428,10.33332 -7.34958,19.35706 -17.55139,20.16097"
-         sodipodi:t0="0"
-         sodipodi:argument="-17.304396"
-         sodipodi:radius="19.704449"
-         sodipodi:revolution="3"
-         sodipodi:expansion="1"
-         sodipodi:cy="158.37717"
-         sodipodi:cx="459.61942"
-         id="path3135-2-0"
-         style="fill:none;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         sodipodi:type="spiral" />
-    </g>
-    <path
-       sodipodi:type="spiral"
-       style="fill:none;stroke:#000000;stroke-width:3.29212046;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       id="path3135-2-8-3-4-7-4"
-       sodipodi:cx="459.61942"
-       sodipodi:cy="158.37717"
-       sodipodi:expansion="1"
-       sodipodi:revolution="3"
-       sodipodi:radius="19.704449"
-       sodipodi:argument="-17.304396"
-       sodipodi:t0="0"
-       d="m 459.61942,158.37717 c 0.0253,0.98762 -1.31881,0.52139 -1.6415,0.0421 -0.87448,-1.29889 0.2959,-2.88765 1.55731,-3.32509 2.25638,-0.78247 4.49273,0.99928 5.00868,3.15672 0.75718,3.16614 -1.70525,6.12617 -4.75613,6.69227 -4.06634,0.75452 -7.77054,-2.41124 -8.37585,-6.35554 -0.76173,-4.96349 3.11701,-9.42033 7.95494,-10.05944 5.85938,-0.77405 11.07322,3.82263 11.74303,9.55435 0.78935,6.75464 -4.52813,12.72805 -11.15376,13.42662 -7.64955,0.80653 -14.38417,-5.23355 -15.11021,-12.75317 -0.82496,-8.54426 5.93893,-16.04119 14.35258,-16.79379 9.43884,-0.8443 17.69888,6.64427 18.47738,15.95198 0.86428,10.33332 -7.34958,19.35706 -17.55139,20.16097"
-       transform="matrix(5.5288774,-0.28454453,1.5208266,4.7685526,-2733.011,396.72165)" />
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:none"
-       id="rect4062-1-4-1-4"
-       width="382.48636"
-       height="226.05779"
-       x="-45.528877"
-       y="1053.619"
-       ry="0.32340229" />
-    <rect
-       style="fill:#ffffff;fill-opacity:1;stroke:none"
-       id="rect4062-1-4-1-4-5"
-       width="131.96852"
-       height="428.08832"
-       x="-131.64418"
-       y="767.60736"
-       ry="0.61243075" />
+       d="m 127.07054,142.75798 c 0.005,0.20396 -0.27236,0.10768 -0.339,0.009 -0.1806,-0.26824 0.0611,-0.59635 0.32162,-0.68669 0.46598,-0.1616 0.92783,0.20637 1.03439,0.65192 0.15637,0.65387 -0.35217,1.26518 -0.98224,1.38209 -0.83978,0.15582 -1.60477,-0.49797 -1.72978,-1.31255 -0.15731,-1.02506 0.64373,-1.94548 1.64286,-2.07747 1.21007,-0.15986 2.28683,0.78945 2.42516,1.97316 0.16302,1.39497 -0.93514,2.6286 -2.30347,2.77286 -1.57978,0.16657 -2.97061,-1.08083 -3.12055,-2.63378 -0.17038,-1.76456 1.2265,-3.31282 2.96409,-3.46825 1.9493,-0.17436 3.65516,1.37218 3.81594,3.2944 0.17849,2.13404 -1.51783,3.99762 -3.62471,4.16364" />
   </g>
 </svg>

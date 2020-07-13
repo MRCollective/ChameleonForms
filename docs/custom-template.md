@@ -174,7 +174,7 @@ The heading is not required and we recommend having logic like the following to 
 
 Similarly, the leading HTML is optional and you might want to use similar conditional logic for that field (unless you don't wrap it in any HTML in which case you can simply output it e.g. `@Model.LeadingHtml`).
 
-You should always have a container element for your section which has the `HtmlAttributes` object from that section [applied to it](html-attributes#output-directly-to-the-page).
+You should always have a container element for your section which has the `HtmlAttributes` object from that section [applied to it](html-attributes.md#output-directly-to-the-page).
 
 ## Field
 

@@ -14,3 +14,6 @@ packages
 /*.nupkg
 *.cshtml.cs
 TestResults
+_site
+apidocs
+

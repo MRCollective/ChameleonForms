@@ -41,13 +41,13 @@ public class MyViewModel
 
 Note: as you will see below - there isn't much difference in specifying a nullable vs non-nullable type as the type being collected, except if you specify a non-nullable type and the list of items is not Required then the default MVC model binder doesn't work very well (if you are using a drop-down) and will conflict with the `[ExistsIn]` validation. It's our intention to provide a model binder in the future that rectifies this issue.
 
-There is a definition for the `[ExistsIn]` attribute on the [List](list) page.
+There is a definition for the `[ExistsIn]` attribute on the [List](list.md) page.
 
 ## Default HTML
 
 ### Required nullable or non-nullable list id (multi-select drop-down with no empty option)
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a Required (i.e. tagged with `[Required]`) nullable or non-nullable list id will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) for a Required (i.e. tagged with `[Required]`) nullable or non-nullable list id will be:
 
 ```html
 <select %validationAttrs% %htmlAttributes% multiple="multiple" id="%propertyName%" name="%propertyName%" required="required">
@@ -59,7 +59,7 @@ When using the Default Field Generator then the default HTML of the [Field Eleme
 
 ### Non-Required nullable or non-nullable list id (multi-select drop-down with empty option)
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a Non-Required nullable or non-nullable list id will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) for a Non-Required nullable or non-nullable list id will be:
 
 ```html
 <select %validationAttrs% %htmlAttributes% multiple="multiple" id="%propertyName%" name="%propertyName%">
@@ -72,7 +72,7 @@ When using the Default Field Generator then the default HTML of the [Field Eleme
 
 ## Server-side validation
 
-If you want to provide server-side validation protection of the value the user submitted then the `[ExistsIn]` attribute will automatically take care of this for you by default assuming that the list is populated at the correct point. The documentation for how to use and configure server-side validation can be found on the [List](list) page.
+If you want to provide server-side validation protection of the value the user submitted then the `[ExistsIn]` attribute will automatically take care of this for you by default assuming that the list is populated at the correct point. The documentation for how to use and configure server-side validation can be found on the [List](list.md) page.
 
 ## Configurability
 
@@ -80,7 +80,7 @@ If you want to provide server-side validation protection of the value the user s
 
 You can force a list of list items field to display as a list of checkboxes (say that 10 times fast!) rather than a drop-down using the `AsCheckboxList` method on the Field Configuration, e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.EnumerableListId).AsCheckboxList()
 @s.FieldFor(m => m.ListListId).AsCheckboxList()
 @s.FieldFor(m => m.NullableEnumerableListId).AsCheckboxList()
@@ -101,7 +101,7 @@ This will change the default HTML for both Required and non-Required fields with
 
 When you display a non-Required list of list values field as a drop-down you can change the text that is used to display the `none` value to the user. By default the text used is `None`. To change the text simply use the `WithNoneAs` method, e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.EnumerableListId).WithNoneAs("No value")
 ```
 
@@ -117,7 +117,7 @@ This will change the default HTML for the enumerable list id field as shown abov
 ### Hide empty item
 If you have a non-Required list of list values field as a drop-down then it will show the empty item and this item will be selected by default if there are no values selected. If for some reason you want one of these fields, but you would also like to hide the empty item you can do so with the `HideEmptyItem` method in the Field Configuration, e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.EnumerableListId).HideEmptyItem()
 ```
 
