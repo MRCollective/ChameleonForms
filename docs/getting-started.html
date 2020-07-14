@@ -1,0 +1,368 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Getting Started with Chameleon Forms | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Getting Started with Chameleon Forms | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="getting-started-with-chameleon-forms">Getting Started with Chameleon Forms</h1>
+
+<h2 id="getting-started">Getting started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>This library works against netcoreapp3.1. If you are using a different version of .NET Core or are running ASP.NET Core against Full Framework then feel free to <a href="https://github.com/MRCollective/ChameleonForms/issues">raise an issue</a> to discuss opening up broader support. If you are using ASP.NET MVC 5 then check out v3.0.3 of the <a href="https://www.nuget.org/packages/ChameleonForms/3.0.3">NuGet package</a> and <a href="https://chameleonforms.readthedocs.io/en/3.0.3/">documentation</a>.</p>
+<p>This library works against ASP.NET Core MVC - if you want to use it for Blazor or Razor Pages then feel free to <a href="https://github.com/MRCollective/ChameleonForms/issues">raise an issue</a> to discuss.</p>
+<h3 id="getting-it-running">Getting it running</h3>
+<ol>
+<li><p>Install the NuGet package <code>Install-Package ChameleonForms -pre</code> (v4 is currently marked beta so you need to include pre-release versions)</p>
+</li>
+<li><p>Register ChameleonForms in your <code>Startup.cs</code> file:</p>
+<pre><code class="lang-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddMvc(...);
+    ...
+    services.AddChameleonForms();
+}
+</code></pre>
+<p>Note: you can alter the configuration from the default, <a href="https://chameleonforms.readthedocs.io/en/latest/configuration/">see the docs</a>.</p>
+</li>
+<li><p>Add the following to your <code>_ViewImports.cshtml</code>:</p>
+<pre><code class="lang-cshtml">@using ChameleonForms;
+@using ChameleonForms.Enums;
+@using ChameleonForms.Component;
+</code></pre>
+</li>
+<li><p>Create your first form, e.g.:</p>
+<p><code>~/Controllers/MyFormController.cs</code>:</p>
+<pre><code class="lang-cs">using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+
+namespace MyWebApp.Controllers
+{
+    public class MyFormViewModel
+    {
+        [Required]
+        public string Name { get; set; }
+
+        public int FavouriteNumber { get; set; }
+
+        [DisplayFormat(DataFormatString = &quot;{0:d/M/yyyy}&quot;, ApplyFormatInEditMode = true)]
+        public DateTime DateOfBirth { get; set; }
+    }
+    public class MyFormController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(MyFormViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                // Do stuff
+                return RedirectToAction(&quot;Index&quot;);
+            }
+            return View(vm);
+        }
+    }
+}
+</code></pre>
+<p><code>~/Views/MyForm/Index.cshtml</code>:</p>
+<pre><code class="lang-cshtml">@model MyWebApp.Controllers.ViewModel
+@{
+    ViewData[&quot;Title&quot;] = &quot;My Form&quot;;
+}
+
+@using (var f = Html.BeginChameleonForm())
+{
+    using (var s = f.BeginSection(&quot;About you!?&quot;))
+    {
+        @s.FieldFor(m =&gt; m.Name)
+        @s.FieldFor(m =&gt; m.FavouriteNumber)
+        @s.FieldFor(m =&gt; m.DateOfBirth)
+    }
+    using (var n = f.BeginNavigation())
+    {
+        @n.Submit(&quot;Submit&quot;)
+    }
+}
+
+@section Scripts
+{
+    &lt;partial name=&quot;_ValidationScriptsPartial&quot; /&gt;
+    @* ... or relevant equivalent *@
+}
+
+</code></pre>
+</li>
+<li><p>Run it!</p>
+</li>
+<li><p><em>(Optional)</em> If you want to add the additional client-side validation support in ChameleonForms (which supports both <a href="">jquery validate unobtrusive validation</a> and <a href="">aspnet-validation</a>) then add the following to your <code>_ValidationScriptsPartial.cshtml</code> or equivalent file:</p>
+<pre><code class="lang-html">&lt;script src=&quot;~/lib/chameleonforms/unobtrusive-date-validation.chameleonforms.js&quot; asp-append-version=&quot;true&quot;&gt;&lt;/script&gt;
+</code></pre>
+</li>
+<li><p><em>(Optional)</em> If you are using Twitter Bootstrap 3 then add the following to your <code>_ValidationScriptsPartial.cshtml</code> (which only supports jquery validate unobtrusive validation for now):</p>
+<pre><code class="lang-html">&lt;script src=&quot;~/lib/chameleonforms/unobtrusive-twitterbootstrap3-validation.chameleonforms.js&quot; asp-append-version=&quot;true&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>And add the following to your <code>_Layout.cshtml</code> or equivalent file:</p>
+<pre><code class="lang-html">&lt;link href=&quot;~/lib/chameleonforms/chameleonforms-twitterbootstrap3.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; asp-append-version=&quot;true&quot; /&gt;
+</code></pre>
+</li>
+</ol>
+<h2 id="show-me-a-basic-chameleonforms-example-next-to-its-aspnet-core-mvc-counterpart">Show me a basic ChameleonForms example next to its ASP.NET Core MVC counterpart!</h2>
+<p>Say you had the following view model:</p>
+<pre><code class="lang-csharp">    public class BasicViewModel
+    {
+        [Required]
+        public string RequiredString { get; set; }
+
+        public SomeEnum SomeEnum { get; set; }
+
+        public bool SomeCheckbox { get; set; }
+    }
+</code></pre>
+<p>And assuming for a moment you used definition lists to wrap your HTML fields then you might end up with something like this in your Razor view:</p>
+<pre><code class="lang-html">@using (Html.BeginForm())
+{
+    &lt;fieldset&gt;
+        &lt;legend&gt;A form&lt;/legend&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;@Html.LabelFor(m =&gt; m.RequiredString, &quot;Some string&quot;)&lt;/dt&gt;
+            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.RequiredString) @Html.ValidationMessageFor(m =&gt; m.RequiredString)&lt;/dd&gt;
+            &lt;dt&gt;@Html.LabelFor(m =&gt; m.SomeEnum)&lt;/dt&gt;
+            &lt;dd&gt;@Html.DropDownListFor(m =&gt; m.SomeEnum, Enum.GetNames(typeof(SomeEnum)).Select(x =&gt; new SelectListItem {Text = ((SomeEnum)Enum.Parse(typeof(SomeEnum), x)).Humanize(), Value = x})) @Html.ValidationMessageFor(m =&gt; m.SomeEnum)&lt;/dd&gt;
+            &lt;dt&gt;@Html.LabelFor(m =&gt; m.SomeCheckbox)&lt;/dt&gt;
+            &lt;dd&gt;@Html.CheckBoxFor(m =&gt; m.SomeCheckbox) @Html.LabelFor(m =&gt; m.SomeCheckbox, &quot;Are you sure?&quot;) @Html.ValidationMessageFor(m =&gt; m.SomeCheckbox)&lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/fieldset&gt;
+    &lt;div class=&quot;form_navigation&quot;&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+    &lt;/div&gt;
+}
+</code></pre>
+<p>The equivalent of this form with out-of-the-box ChameleonForms functionality is:</p>
+<pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm()) {
+    using (var s = f.BeginSection(&quot;A form&quot;)) {
+        @s.FieldFor(m =&gt; m.RequiredString).Label(&quot;Some string&quot;)
+        @s.FieldFor(m =&gt; m.SomeEnum)
+        @s.FieldFor(m =&gt; m.SomeCheckbox).InlineLabel(&quot;Are you sure?&quot;)
+    }
+    using (var n = f.BeginNavigation()) {
+        @n.Submit(&quot;Submit&quot;)
+    }
+}
+</code></pre>
+<h2 id="what-does-chameleonforms-do-for-me">What does ChameleonForms do for me?</h2>
+<p>Chameleon Forms provides an object hierarchy that allows you to declaratively specify the structure of your form. From there:</p>
+<ul>
+<li>It will output the boilerplate template of your form by way of a form template</li>
+<li>It will discern a number of defaults about each field based on inspecting the model metadata for each property</li>
+<li>It will allow you to tweak individual fields by chaining methods using the fluent api off of each field (and some other elements such as submit buttons) declaration</li>
+<li>If gives you the freedom to break out into HTML/Razor anywhere in the form when the template / built-in structures don't meet your needs</li>
+<li>It gives you the ability to apply global conventions across your forms</li>
+</ul>
+<p>It makes use of convention over configuration, <code>using</code> statements and an opinionated structure (that is easy enough to opt out of or create your own structure if you like) to make each form consistent and demonstrating a minimum of repetition.</p>
+<h2 id="how-are-chameleonforms-forms-structured">How are ChameleonForms forms structured?</h2>
+<p>There is a general structure that ChameleonForms encourages with the out-of-the-box setup that can be described by the following diagrams. In reality you can use any structure you like and you can break out into plain old HTML any time you need to, but this explains the default structure that ChameleonForms empowers you to specify by default.</p>
+<h3 id="form">Form</h3>
+<p>At the top level is the Form - a Form can have any number of Form Components underneath it or, for ultimate flexibility, the separate components that make up a Field on an ad hoc basis(using the Field Element, the Field Label and the Field Validation HTML).</p>
+<p><img src="form.png" alt="Form contains any number of Form Components, Field Elements, Field Labels and Field Validation HTML"></p>
+<p>The Form Components that come with ChameleonForms out of the box are:</p>
+<ul>
+<li>Message</li>
+<li>Section</li>
+<li>Navigation</li>
+</ul>
+<p>To create a Form simply use the <code>BeginChameleonForms</code> extension method off of the Html helper:</p>
+<pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm()) {
+    @* The form ... *@
+}
+</code></pre>
+<p>Random Field Elements, Field Labels and Field Validation HTML that don't fit in to a Section (see below) can be output from the Form object anywhere within your form like so:</p>
+<pre><code class="lang-cshtml">&lt;p&gt;@f.LabelFor(m =&gt; m.SomeCheckbox).Label(&quot;Hello!&quot;) @f.FieldFor(m =&gt; m.SomeCheckbox) @f.ValidationMessageFor(m =&gt; m.SomeCheckbox)&lt;/p&gt;
+</code></pre>
+<h3 id="message">Message</h3>
+<p>At any point in the form you can create a Message component - a Message always has a type as well as a Heading and inside of the message you can add any content you like, but ChameleonForms gives you the option of easily specifying Message Paragraph's - the HTML for which is defined in your form template.</p>
+<p><img src="message.png" alt="Message components have a Heading and any number of Paragraphs"></p>
+<p>The message types available are:</p>
+<ul>
+<li>Action - User action required</li>
+<li>Success - Action successful</li>
+<li>Failure - Action failed</li>
+<li>Information - Informational message</li>
+<li>Warning - Warning message</li>
+</ul>
+<p>You can output different HTML in your form template depending on the type of message (e.g. different class or completely different HTML structure).</p>
+<p>To create a Message simply use the <code>BeginMessage</code> extension method off of the Form object:</p>
+<pre><code class="lang-cshtml">@using (var m = f.BeginMessage(MessageType.Success, &quot;Submission successful&quot;)) {
+    @m.Paragraph(&quot;Some sort of success message&quot;)
+    @* Other Paragraph's or any HTML at all really ... *@
+}
+</code></pre>
+<h3 id="section">Section</h3>
+<p>A Section component holds a set of Fields (see below for definition of Field) or nested sections (to no more than one level deep). A Section will start with a Heading. The default form template that comes with Chameleon Forms defines a top-level section as a <code>fieldset</code>.</p>
+<p><img src="section.png" alt="Section components have a Heading followed by any number of Fields or single level deep nested Sections"></p>
+<p>To create a Section simply use the <code>BeginSection</code> extension method off of the Form object (or off of the Section object to create a nested one):</p>
+<pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Basic information&quot;)) {
+    using (var ss = s.BeginSection(&quot;Nested section&quot;)) {
+        @* Fields... *@
+    }
+    @* Fields... *@
+}
+</code></pre>
+<h3 id="field">Field</h3>
+<p>A Field is a single data collection unit within a Section and comprises of an Element, a Label, Validation HTML and a Field Configuration.</p>
+<p>Fields can have other Fields nested within them (to one level deep).</p>
+<p>To create a Field simply use the <code>FieldFor</code> extension method off of the Section object or the <code>BeginFieldFor</code> extension method off of the Section object to start a Field with nested Fields:</p>
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.SomeField).FieldConfigurationMethodsCanBeChainedOffOfTheEnd()
+@using (var ff = s.BeginFieldFor(m =&gt; m.AnotherField, Field.Configure().FieldConfigurationMethodsCanBeChainedHere()) {
+    @ff.FieldFor(m =&gt; m.ChildField)
+}
+</code></pre>
+<h3 id="navigation">Navigation</h3>
+<p>A Navigation component will usually be placed at the end of the form (although there is nothing stopping you placing it elsewhere or even multiple times on the form - e.g. top and bottom). The Navigation component allows you to easily create Submit buttons, Reset buttons and normal Buttons.</p>
+<p><img src="navigation.png" alt="Navigation components can have Submit buttons, Reset buttons and normal Buttons"></p>
+<p>To create a Navigation simply use the <code>BeginNavigation</code> extension method off of the Form object:</p>
+<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
+    @n.Submit(&quot;Submit&quot;).ChainHtmlAttributesOffOfTheEnd()
+    @n.Reset(&quot;Reset&quot;).ChainHtmlAttributesOffOfTheEnd()
+    @n.Button(&quot;A button&quot;).ChainHtmlAttributesOffOfTheEnd()
+}
+</code></pre>
+<h2 id="what-terminology-is-used-in-chameleonforms">What terminology is used in ChameleonForms?</h2>
+<p>Some of the terminology around the structure of ChameleonForms forms are defined above, but following is a more comprehensive list of terms that the library uses:</p>
+<ul>
+<li>Form - The container of a single form</li>
+<li>Form Component - Some sort of container nested within a Form</li>
+<li>Heading - A title given to a Form Component (not all Form Components have one though)</li>
+<li>Message - A message to show the user</li>
+<li>Message Paragraph - A discrete part of a message to show the user</li>
+<li>Section - A grouping for a set of Fields</li>
+<li>Field - A single data collection unit</li>
+<li>Field Element - The HTML that makes up a control to accept data from the user</li>
+<li>Field Label - Text that describes a Field Element to a user (and is linked to a Field Element)</li>
+<li>Field Validation HTML - Markup that acts as a placeholder to display any validation messages for a particular Field Element</li>
+<li>Field Configuration - The configuration for a particular Field, Field Element and/or Field Label</li>
+<li>Navigation - A grouping for a set of Navigation elements</li>
+<li>Navigation Submit - A button that will submit the form</li>
+<li>Navigation Reset - A button that will reset the form to it's initial state</li>
+<li>Navigation Button - A button that has a user-defined behaviour</li>
+<li>Field Generator - A class that generates HTML for a single Field</li>
+<li>Field Generator Handler - A class that generates HTML for a particular type of Field Element</li>
+<li>Form Template - A class that defines the HTML boilerplate to render Forms, Form Components, Fields and Navigation elements</li>
+<li>HTML Attributes - A class that defines a set of HTML attributes to apply to a HTML element</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/getting-started.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

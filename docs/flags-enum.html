@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Flags Enum Fields | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Flags Enum Fields | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="flags-enum-fields">Flags Enum Fields</h1>
+
+<p>If you want the user to specify multiple values from an enum you can either use a <a href="multiple-enum.html">non-flags enum against any property with a type convertible to <code>IEnumerable&lt;%enumType%&gt;</code></a> (separate page) or use a flags enum (this page), e.g.:</p>
+<pre><code class="lang-csharp">[Flags]
+public enum MyFlagsEnum
+{
+    ValueOne = 1 &lt;&lt; 0,
+    ValueTwo = 1 &lt;&lt; 1,
+    ValueThree = 1 &lt;&lt; 2,
+    ...
+}
+...
+public MyFlagsEnum RequiredWithZeroAsUnselectedValue { get; set; }
+
+[Required]
+public MyFlagsEnum? RequiredWithNullAsUnselectedValue { get; set; }
+
+public MyFlagsEnum? NonRequiredAndNullAsUnselectedValue { get; set; }
+</code></pre>
+<p>Flags enums have a few rough edges on them if you aren't careful so it's a good idea to read the <a href="https://msdn.microsoft.com/en-us/library/ms229062(v=vs.100).aspx">guidance</a> <a href="https://msdn.microsoft.com/en-us/library/system.flagsattribute.aspx">for</a> how to use them. In particular, make sure that none of your values have a value of 0 and you explicitly assign integer values to all enum values in multiples of 2.</p>
+<p>The out-of-the-box ASP.NET Core MVC support for flags enums leave sa lot to be desired, but ChameleonForms provides first-class model binding and validation support for flags enums <a href="configuration.html#default-global-config">by default</a> to patch the default MVC behaviour.</p>
+<p>If you want the user to specify a single value from an enum then you can <a href="enum.html">use the enum type directly</a>.</p>
+<h2 id="required-validation">Required validation</h2>
+<p>ASP.NET MVC's default validation doesn't pick up <code>0</code> for a flags enum as the field not being specified, thus you need to alter the validation for requires flags enums. ChameleonForms patches this problem <a href="configuration.html#default-global-config">by default</a>. It will correctly flag an error for both a non-nullable flags enum field or a flags enum field with <code>[Required]</code> specified.</p>
+<h2 id="model-binding">Model binding</h2>
+<p>The default MVC model binder does <strong>not</strong> correctly bind flags enum values. ChameleonForms provides the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/ModelBinders/FlagsEnumModelBinder.cs"><code>FlagsEnumModelBinder</code></a> (<a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/ModelBinders/FlagsEnumModelBinderProvider.cs">and the provider</a>) to assist with that. This is registered for you <a href="configuration.html#default-global-config">by default</a>.</p>
+<h2 id="default-html">Default HTML</h2>
+<h3 id="required-nullable-or-non-nullable-enum-multi-select-drop-down-with-no-empty-option">Required nullable or non-nullable enum (multi-select drop-down with no empty option)</h3>
+<pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% multiple=&quot;multiple&quot; id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot; required=&quot;required&quot;&gt;
+%foreach enum value x%
+    &lt;option value=&quot;%x.ToString()%&quot;&gt;%x.Humanize()%&lt;/option&gt;
+%endforeach%
+&lt;/select&gt;
+</code></pre>
+<h3 id="non-required-nullable-enum-multi-select-drop-down-with-empty-option">Non-Required nullable enum (multi-select drop-down with empty option)</h3>
+<pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% multiple=&quot;multiple&quot; id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
+    &lt;option selected=&quot;selected&quot; value=&quot;&quot;&gt;%noneDescription%&lt;/option&gt;
+%foreach enum value x%
+    &lt;option value=&quot;%x.ToString()%&quot;&gt;%x.Humanize()%&lt;/option&gt;
+%endforeach%
+&lt;/select&gt;
+</code></pre>
+<h3 id="explanation-and-example">Explanation and example</h3>
+<p>Please see the explanation an example on the <a href="enum.html#explanation-and-example">Enum Field</a> page to understand what <code>%x.ToString()</code> and <code>%x.Humanize()%</code> do and how to control the description values.</p>
+<h2 id="configurability">Configurability</h2>
+<h3 id="display-as-list-of-checkboxes">Display as list of checkboxes</h3>
+<p>You can force a list of enums field to display as a list of checkboxes rather than a multi-select drop-down using the <code>AsCheckboxList</code> method on the Field Configuration, e.g.:</p>
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.FlagsEnum).AsCheckboxList()
+</code></pre>
+<p>This will change the default HTML for a both Required and non-Required list of enums (both nullable and non-nullable) fields as shown above to:</p>
+<pre><code class="lang-html">&lt;ul&gt;
+%foreach enum value x with increment i %
+    &lt;li&gt;&lt;input %validationAttrs% %htmlAttributes% id=&quot;%propertyName%_%i%&quot; name=&quot;%propertyName%&quot; type=&quot;checkbox&quot; value=&quot;%x.ToString()%&quot; /&gt; &lt;label for=&quot;%propertyName%_%i%&quot;&gt;%x.Humanize()%&lt;/label&gt;&lt;/li&gt;
+%endforeach%
+&lt;/ul&gt;
+</code></pre>
+<h3 id="change-the-text-description-of-none">Change the text description of none</h3>
+<p>When you display a non-Required list of enums field as a drop-down you can change the text that is used to display the <code>none</code> value to the user. By default the text used is <code>None</code>. To change the text simply use the <code>WithNoneAs</code> method, e.g.:</p>
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NonRequiredNullableFlagsEnum).WithNoneAs(&quot;No value&quot;)
+</code></pre>
+<p>This will change the default HTML for the non-Required drop-down list of enum field as shown above to:</p>
+<pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% multiple=&quot;multiple&quot; id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
+    &lt;option selected=&quot;selected&quot; value=&quot;&quot;&gt;No value&lt;/option&gt;
+    @* Enum values as &lt;options&gt;... *@
+&lt;/select&gt;
+</code></pre>
+<h3 id="hide-empty-item">Hide empty item</h3>
+<p>If you have a non-Required list of enums field then it will show the empty item and this item will be selected by default if no values are selected. If for some reason you want a non-Required list of enums field, but you would also like to hide the empty item you can do so with the <code>HideEmptyItem</code> method in the Field Configuration, e.g.:</p>
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NullableEnumListField).HideEmptyItem()
+</code></pre>
+<p>This will change the default HTML for the non-Required drop-down list of enum field as shown above to:</p>
+<pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% multiple=&quot;multiple&quot; id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
+    @* Enum values as &lt;options&gt;... *@
+&lt;/select&gt;
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/flags-enum.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

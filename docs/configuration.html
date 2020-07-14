@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Configuration | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Configuration | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="configuration">Configuration</h1>
+
+<p>There are a number of different configuration options to tweak the out-of-the-box functionality in ChameleonForms.</p>
+<h2 id="addservices-overloads"><code>AddServices</code> overloads</h2>
+<p>ChameleonForms <a href="getting-started.html">gets registered</a> in <code>Startup.cs</code> within the <code>AddServices</code> method, e.g.:</p>
+<pre><code class="lang-cs">    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddChameleonForms();
+    }
+</code></pre>
+<p>There are actually 3 different overloads of the <code>AddChameleonForms</code> method that you can use:</p>
+<pre><code class="lang-cs">        /// &lt;summary&gt;
+        /// Adds ChameleonForms configuration with the &lt;see cref=&quot;DefaultFormTemplate&quot;/&gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;services&quot;&gt;The service collection&lt;/param&gt;
+        /// &lt;param name=&quot;configModifier&quot;&gt;Lambda expression to alter configuration&lt;/param&gt;
+        public static void AddChameleonForms(this IServiceCollection services,
+            Func&lt;ChameleonFormsConfigBuilder&lt;DefaultFormTemplate&gt;, ChameleonFormsConfigBuilder&lt;DefaultFormTemplate&gt;&gt; configModifier = null
+        ) {...}
+
+        /// &lt;summary&gt;
+        /// Adds ChameleonForms configuration with a specified form template and a builder modification delegate.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;services&quot;&gt;The service collection&lt;/param&gt;
+        /// &lt;param name=&quot;configModifier&quot;&gt;Lambda expression to alter configuration&lt;/param&gt;
+        public static void AddChameleonForms&lt;TFormTemplate&gt;(this IServiceCollection services,
+            Func&lt;ChameleonFormsConfigBuilder&lt;TFormTemplate&gt;, ChameleonFormsConfigBuilder&lt;TFormTemplate&gt;&gt; configModifier = null
+        )
+            where TFormTemplate : class, IFormTemplate {...}
+
+        /// &lt;summary&gt;
+        /// Adds ChameleonForms configuration with a specified form template and a builder instance.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name=&quot;TFormTemplate&quot;&gt;The form template type to register as the default template&lt;/typeparam&gt;
+        /// &lt;param name=&quot;services&quot;&gt;The service collection&lt;/param&gt;
+        /// &lt;param name=&quot;configBuilder&quot;&gt;The configuration builder to use to specify the Chameleon Forms configuration&lt;/param&gt;
+        public static void AddChameleonForms&lt;TFormTemplate&gt;(this IServiceCollection services,
+            ChameleonFormsConfigBuilder&lt;TFormTemplate&gt; configBuilder
+        )
+            where TFormTemplate : class, IFormTemplate {...}
+</code></pre>
+<p>The first one (which is used in the above example) adds ChameleonForms with the <code>DefaultFormTemplate</code> as the default template and has an optional property to allow you to tweak the global configuration of ChameleonForms using the configuration builder class. For example that might look like:</p>
+<pre><code class="lang-cs">services.AddChameleonForms(b =&gt; b.WithoutHumanizedLabels());
+</code></pre>
+<p>The other overloads of <code>AddChameleonForms</code> allow you to specify the form template type, which allows you to specify a different default template to use. For example that might look like one of these:</p>
+<pre><code class="lang-cs">// Just specify the default template type
+services.AddChameleonForms&lt;TwitterBootstrap3FormTemplate&gt;();
+
+// 
+services.AddChameleonForms&lt;TwitterBootstrap3FormTemplate&gt;(b =&gt; b.WithoutHumanizedLabels());
+
+// 
+var configBuilder = new ChameleonFormsConfigBuilder&lt;TwitterBootstrap3FormTemplate&gt;();
+// Do stuff with configBuilder
+services.AddChameleonForms&lt;TwitterBootstrap3FormTemplate&gt;(configBuilder);
+</code></pre>
+<p>For more information on form templates see:</p>
+<ul>
+<li><a href="form-templates.html">Using different form templates</a></li>
+<li><a href="custom-template.html">Creating custom form templates</a></li>
+</ul>
+<h2 id="default-global-config">Default global config</h2>
+<p>By default, the global config will set up the following for you:</p>
+<ul>
+<li><strong>Humanized labels</strong>: The label text for fields will automatically be &quot;<a href="https://github.com/Humanizr/Humanizer">humanized</a>&quot; from the property name using <a href="https://github.com/Humanizr/Humanizer#transform-string">sentence case</a> (e.g. <code>public string FirstName { get; set; }</code> will automatically have a label of <code>First name</code>). See <a href="labels.html">Controlling labels</a> for more information.
+<ul>
+<li>If any of the following have been applied to a field then the humanization will be skipped: <code>[DisplayName(Name = &quot;Label text)]</code>, <code>[Display(Name = &quot;Label text&quot;)]</code> or you have an <code>IDisplayMetadataProvider</code> registered that either sets <code>context.DisplayMetadata.SimpleDisplayProperty</code> to a non-empty/non-null string or sets <code>context.DisplayMetadata.DisplayName</code> to a lambda that returns a non-empty/non-null string. For examples see the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Tests/HumanizedLabelsTests.cs">relevant test</a>.</li>
+</ul>
+</li>
+<li><strong>Default form template type</strong>: The given <code>IFormTemplate</code> type will be registered as a Singleton with the service collection and will be resolved by default when creating a ChameleonForm. See <a href="form-templates.html">Form Templates</a> for more information.</li>
+<li><strong>Flags enum support</strong>: Correctly handle model binding and server-side validation of <code>[Flags]</code> enums (including implicit <code>[Required]</code> for non-nullable, which is broken in out-of-the-box MVC). It's expected that they will be posted as multiple values and rendered as a multiple select input (<code>&lt;select multiple&gt;</code> or <code>&lt;input type=&quot;checkbox&quot;&gt;</code> list). See <a href="flags-enum.html">Flags Enum Fields</a> for more information.</li>
+<li><strong>Format-aware DateTime support</strong>: Correctly handle model binding and server-side validation of <code>DateTime</code> values with a <code>[DisplayFormat(DataFormatString = &quot;{0:SOME_FORMAT}&quot;, ApplyFormatInEditMode = true)]</code> attribute. See <a href="datetime.html">DateTime Fields</a> for more information.</li>
+<li><strong>Enum list support</strong>: Correctly handle binding and server-side validation of enum lists (e.g. <code>IEnumerable&lt;EnumType&gt;</code>, <code>EnumType[]</code> etc.). This patches up a range of problems with the out-of-the-box MVC support for enum lists, including poor support for <code>[Required]</code> and erroneous binding of <code>null</code> values in the lists. See <a href="multiple-enum.html">Multiple-Select Enum Fields</a> for more information.</li>
+<li><strong>Uri support</strong>: Correctly handle model binding and server-side validation of <code>Uri</code>'s. See <a href="uri.html">Uri Fields</a> for more information.</li>
+<li><strong>Integral number client validation support</strong>: Support unobtrusive client-side validation of integral types (<code>byte</code>, <code>sbyte</code>, <code>short</code>, <code>ushort</code>, <code>int</code>, <code>uint</code>, <code>long</code>, <code>ulong</code>). This existed in ASP.NET MVC, but no longer exists in ASP.NET Core MVC because HTML5 <code>type=&quot;number&quot;</code> has been added. This is a problem if you don't want to rely on HTML5 validation (which has a sub-par user experience in most cases).</li>
+<li><strong>Format-aware DateTime client validation support</strong>: Support unobtrusive client-side validation of <code>DateTime</code>'s that is format string aware. See <a href="datetime-client-side-validation.html">Client-side DateTime Validation</a> for more information.</li>
+</ul>
+<h2 id="configuration-builder">Configuration builder</h2>
+<p>The configuration builder allows you to tweak the default global config using the following self-explanatory fluent methods:</p>
+<pre><code class="lang-cs">        /// &lt;summary&gt;
+        /// Turn off humanized labels.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The builder to allow fluent method chaining&lt;/returns&gt;
+        public ChameleonFormsConfigBuilder&lt;TFormTemplate&gt; WithoutHumanizedLabels();
+
+        /// &lt;summary&gt;
+        /// Humanize labels with the given transformer. Use &lt;see cref=&quot;To&quot;/&gt; to access the default Humanizer ones.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// builder.WithHumanizedLabelTransformer(To.TitleCase)
+        /// &lt;/example&gt;
+        /// &lt;returns&gt;The builder to allow fluent method chaining&lt;/returns&gt;
+        public ChameleonFormsConfigBuilder&lt;TFormTemplate&gt; WithHumanizedLabelTransformer(IStringTransformer transformer);
+
+        /// &lt;summary&gt;
+        /// Don't register the template type with the &lt;see cref=&quot;ServiceCollection&quot;/&gt;.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The builder to allow fluent method chaining&lt;/returns&gt;
+        public ChameleonFormsConfigBuilder&lt;TFormTemplate&gt; WithoutTemplateTypeRegistration();
+
+        /// &lt;summary&gt;
+        /// Turn off model binding of flag enums.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The builder to allow fluent method chaining&lt;/returns&gt;
+        public ChameleonFormsConfigBuilder&lt;TFormTemplate&gt; WithoutFlagsEnumBinding();
+
+        /// &lt;summary&gt;
+        /// Turn off model binding of &lt;see cref=&quot;System.DateTime&quot;/&gt;s.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The builder to allow fluent method chaining&lt;/returns&gt;
+        public ChameleonFormsConfigBuilder&lt;TFormTemplate&gt; WithoutDateTimeBinding();
+
+        /// &lt;summary&gt;
+        /// Turn off model binding of enum lists.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The builder to allow fluent method chaining&lt;/returns&gt;
+        public ChameleonFormsConfigBuilder&lt;TFormTemplate&gt; WithoutEnumListBinding();
+
+        /// &lt;summary&gt;
+        /// Turn off model binding of &lt;see cref=&quot;System.Uri&quot;/&gt;s.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The builder to allow fluent method chaining&lt;/returns&gt;
+        public ChameleonFormsConfigBuilder&lt;TFormTemplate&gt; WithoutUriBinding();
+
+        /// &lt;summary&gt;
+        /// Turn off client model validation of integral numerics.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The builder to allow fluent method chaining&lt;/returns&gt;
+        public ChameleonFormsConfigBuilder&lt;TFormTemplate&gt; WithoutIntegralClientModelValidation();
+
+        /// &lt;summary&gt;
+        /// Turn off client model validation of &lt;see cref=&quot;System.DateTime&quot;/&gt;s.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The builder to allow fluent method chaining&lt;/returns&gt;
+        public ChameleonFormsConfigBuilder&lt;TFormTemplate&gt; WithoutDateTimeClientModelValidation();
+</code></pre>
+<h2 id="msbuild-configuration">MSBuild configuration</h2>
+<p>When you install <code>ChameleonForms</code> it will automatically include an MSBuild <code>.targets</code> file into your project. This file provides the following functionality:</p>
+<ul>
+<li><p>Copy ChameleonForms client-side files into <code>wwwroot/lib/chameleonforms/</code> on build unless they haven't changed.</p>
+<ul>
+<li>If you want to disable this simply set the following property in your <code>.csproj</code> file:</li>
+</ul>
+<pre><code class="lang-xml">  &lt;PropertyGroup&gt;
+    &lt;ChameleonFormsCopyContentFiles&gt;false&lt;/ChameleonFormsCopyContentFiles&gt;
+  &lt;/PropertyGroup&gt;
+</code></pre>
+</li>
+</ul>
+<h2 id="advanced-configuration">Advanced configuration</h2>
+<ul>
+<li><a href="form-templates.html">Using different form templates</a></li>
+<li><a href="custom-template.html">Creating custom form templates</a></li>
+<li><a href="extending-field-configuration.html">Extending the field configuration</a></li>
+<li><a href="extending-form-components.html">Extending the form components</a></li>
+<li><a href="custom-field-generator.html">Creating and using a custom field generator</a></li>
+<li><a href="custom-field-generator-handlers.html">Creating and using custom field generator handlers</a></li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/configuration.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

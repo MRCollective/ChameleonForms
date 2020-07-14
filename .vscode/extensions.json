@@ -1,7 +1,0 @@
-{
-    "recommendations": [
-        "formulahendry.dotnet-test-explorer",
-        "ms-dotnettools.csharp",
-        "ryanluker.vscode-coverage-gutters"
-    ]
-}

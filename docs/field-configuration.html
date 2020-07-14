@@ -1,0 +1,699 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Field Configuration | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Field Configuration | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="field-configuration">Field Configuration</h1>
+
+<p>Field Configuration provides the ability to configure a <a href="field.html">Field</a> (and its sub-components) on both an ad-hoc basis within a particular form and a convention basis across all forms. Specifying a Field Configuration is done by chaining calls to the methods on the <code>IFieldConfiguration</code> interface.</p>
+<p>The <code>IFieldConfiguration</code> interface is translated to an <code>IReadonlyFieldConfiguration</code> just before it's passed to the template to make sure that modifications can't be made to it after it's processed by the template.</p>
+<p>The <code>IFieldConfiguration</code> interface looks like this and is in the <code>ChameleonForms.Component.Config</code> namespace:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+    /// Holds configuration data for a form field.
+    /// &lt;/summary&gt;
+    public interface IFieldConfiguration : IHtmlContent, IReadonlyFieldConfiguration
+    {
+        /// &lt;summary&gt;
+        /// Attributes to add to the form element's HTML.
+        /// &lt;/summary&gt;
+        HtmlAttributes Attributes { get; }
+
+        /// &lt;summary&gt;
+        /// Override the default id for the field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;id&quot;&gt;The text to use for the id&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Id(string id);
+
+        /// &lt;summary&gt;
+        /// Adds a CSS class (or a number of CSS classes) to the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;class&quot;&gt;The CSS class(es) to add&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration AddClass(string @class);
+
+        /// &lt;summary&gt;
+        /// Adds or updates a HTML attribute with a given value.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;key&quot;&gt;The name of the HTML attribute to add/update&lt;/param&gt;
+        /// &lt;param name=&quot;value&quot;&gt;The value of the HTML attribute to add/update&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Attr(string key, object value);
+
+        /// &lt;summary&gt;
+        /// Adds or updates a HTML attribute with using a lambda method to express the attribute.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// h.Attr(style =&gt; &quot;width: 100%;&quot;)
+        /// &lt;/example&gt;
+        /// &lt;param name=&quot;attribute&quot;&gt;A lambda expression representing the attribute to set and its value&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Attr(Func&lt;object, object&gt; attribute);
+
+        /// &lt;summary&gt;
+        /// Adds or updates a set of HTML attributes using lambda methods to express the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;attributes&quot;&gt;A list of lambas where the lambda variable name is the name of the attribute and the value is the value&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Attrs(params Func&lt;object, object&gt;[] attributes);
+
+        /// &lt;summary&gt;
+        /// Adds or updates a set of HTML attributes using a dictionary to express the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;attributes&quot;&gt;A dictionary of attributes&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Attrs(IDictionary&lt;string, object&gt; attributes);
+
+        /// &lt;summary&gt;
+        /// Adds or updates a set of HTML attributes using anonymous objects to express the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;attributes&quot;&gt;An anonymous object of attributes&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Attrs(object attributes);
+
+        /// &lt;summary&gt;
+        /// Sets the number of rows for a textarea to use.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;numRows&quot;&gt;The number of rows for the textarea&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Rows(int numRows);
+
+        /// &lt;summary&gt;
+        /// Sets the number of cols for a textarea to use.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;numCols&quot;&gt;The number of cols for the textarea&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Cols(int numCols);
+
+        /// &lt;summary&gt;
+        /// Sets the minimum value to accept for numeric text controls.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;min&quot;&gt;The minimum value to accept&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Min(long min);
+
+        /// &lt;summary&gt;
+        /// Sets the maximum value to accept for numeric text controls.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;max&quot;&gt;The maximum value to accept&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Max(long max);
+
+        /// &lt;summary&gt;
+        /// Sets the minimum value to accept for numeric text controls.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;min&quot;&gt;The minimum value to accept&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Min(decimal min);
+
+        /// &lt;summary&gt;
+        /// Sets the maximum value to accept for numeric text controls.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;max&quot;&gt;The maximum value to accept&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Max(decimal max);
+
+        /// &lt;summary&gt;
+        /// Sets the minimum value to accept for numeric text controls.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;min&quot;&gt;The minimum value to accept&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Min(string min);
+
+        /// &lt;summary&gt;
+        /// Sets the maximum value to accept for numeric text controls.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;max&quot;&gt;The maximum value to accept&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Max(string max);
+
+        /// &lt;summary&gt;
+        /// Sets the stepping interval to use for numeric text controls.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;step&quot;&gt;The stepping interval&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Step(decimal step);
+
+        /// &lt;summary&gt;
+        /// Sets the stepping interval to use for numeric text controls.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;step&quot;&gt;The stepping interval&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Step(long step);
+
+        /// &lt;summary&gt;
+        /// Sets the field to be disabled (value not submitted, can not click).
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Disabled(bool disabled = true);
+
+        /// &lt;summary&gt;
+        /// Sets the field to be readonly (value can not be modified).
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Readonly(bool @readonly = true);
+
+        /// &lt;summary&gt;
+        /// Sets the field to be required.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Required(bool required = true);
+
+        /// &lt;summary&gt;
+        /// Sets a hint to the user of what can be entered in the field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;placeholderText&quot;&gt;The text to use for the placeholder&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Placeholder(string placeholderText);
+        
+        /// &lt;summary&gt;
+        /// Sets an inline label for a checkbox.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;labelText&quot;&gt;The text to use for the label&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration InlineLabel(string labelText);
+
+        /// &lt;summary&gt;
+        /// Sets an inline label for a checkbox.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;labelHtml&quot;&gt;The html to use for the label&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration InlineLabel(IHtmlContent labelHtml);
+
+        /// &lt;summary&gt;
+        /// Sets an inline label for a checkbox.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;labelHtml&quot;&gt;The html to use for the label as a templated razor delegate&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration InlineLabel(Func&lt;dynamic, IHtmlContent&gt; labelHtml);
+
+        /// &lt;summary&gt;
+        /// Override the default label for the field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;labelText&quot;&gt;The text to use for the label&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Label(string labelText);
+
+        /// &lt;summary&gt;
+        /// Override the default label for the field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;labelHtml&quot;&gt;The text to use for the label&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Label(IHtmlContent labelHtml);
+
+        /// &lt;summary&gt;
+        /// Override the default label for the field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;labelHtml&quot;&gt;The text to use for the label as a templated razor delegate&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Label(Func&lt;dynamic, IHtmlContent&gt; labelHtml);
+
+        /// &lt;summary&gt;
+        /// Renders the field as a list of radio options for selecting single values or checkbox items for selecting multiple values.
+        /// Use for a list or boolean value.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        /// &lt;seealso cref=&quot;AsCheckboxList&quot;/&gt;
+        IFieldConfiguration AsRadioList();
+
+        /// &lt;summary&gt;
+        /// Renders the field as a list of radio options for selecting single values or checkbox items for selecting multiple values.
+        /// Use for a list or boolean value.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        /// &lt;seealso cref=&quot;AsRadioList&quot;/&gt;
+        IFieldConfiguration AsCheckboxList();
+
+        /// &lt;summary&gt;
+        /// Renders the field as a drop-down control.
+        /// Use for a list or boolean value.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration AsDropDown();
+
+        /// &lt;summary&gt;
+        /// Change the label that represents true.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;trueString&quot;&gt;The label to use as true&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration WithTrueAs(string trueString);
+        
+        /// &lt;summary&gt;
+        /// Change the label that represents none.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;noneString&quot;&gt;The label to use as none&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration WithNoneAs(string noneString);
+        
+        /// &lt;summary&gt;
+        /// Change the label that represents false.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;falseString&quot;&gt;The label to use as false&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration WithFalseAs(string falseString);
+        
+        /// &lt;summary&gt;
+        /// Sets a lambda expression to get the field that the field configuration is wrapping so that
+        ///     a call to ToHtmlString() will output the given field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;field&quot;&gt;A lambda returning the HTML to output&lt;/param&gt;
+        void SetField(Func&lt;IHtmlContent&gt; field);
+
+        /// &lt;summary&gt;
+        /// Sets the field that the field configuration is wrapping so that
+        ///     a call to ToHtmlString() will output the given field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;field&quot;&gt;The field being configured&lt;/param&gt;
+        void SetField(IHtmlContent field);
+
+        /// &lt;summary&gt;
+        /// Sets the field that the field configuration is wrapping so that
+        ///     a call to ToHtmlString() will output the given field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;field&quot;&gt;The field being configured as a templated razor delegate&lt;/param&gt;
+        void SetField(Func&lt;dynamic, IHtmlContent&gt; field);
+
+        /// &lt;summary&gt;
+        /// Supply a string hint to display along with the field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;hint&quot;&gt;The hint string&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration WithHint(string hint);
+
+        /// &lt;summary&gt;
+        /// Supply a HTML hint to display along with the field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;hint&quot;&gt;The hint markup&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration WithHint(IHtmlContent hint);
+
+        /// &lt;summary&gt;
+        /// Supply a HTML hint to display along with the field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;hint&quot;&gt;The hint markup as a templated razor delegate&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration WithHint(Func&lt;dynamic, IHtmlContent&gt; hint);
+        
+        /// &lt;summary&gt;
+        /// Prepends the given HTML to the form field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;html&quot;&gt;The HTML to prepend&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Prepend(IHtmlContent html);
+        
+        /// &lt;summary&gt;
+        /// Prepends the given HTML to the form field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;html&quot;&gt;The HTML to prepend as a templated razor delegate&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Prepend(Func&lt;dynamic, IHtmlContent&gt; html);
+
+        /// &lt;summary&gt;
+        /// Prepends the given string to the form field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;str&quot;&gt;The string to prepend&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Prepend(string str);
+
+        /// &lt;summary&gt;
+        /// Appends the given HTML to the form field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;html&quot;&gt;The HTML to append&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Append(IHtmlContent html);
+
+        /// &lt;summary&gt;
+        /// Appends the given HTML to the form field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;html&quot;&gt;The HTML to append as a templated razor delegate&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Append(Func&lt;dynamic, IHtmlContent&gt; html);
+
+        /// &lt;summary&gt;
+        /// Appends the given string to the form field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;str&quot;&gt;The string to prepend&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration Append(string str);
+
+        /// &lt;summary&gt;
+        /// Override the HTML of the form field.
+        /// 
+        /// This gives you ultimate flexibility with your field HTML when it's
+        /// not quite what you want, but you still want the form template
+        /// (e.g. label, surrounding html and validation message).
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;html&quot;&gt;The HTML for the field&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration OverrideFieldHtml(IHtmlContent html);
+
+        /// &lt;summary&gt;
+        /// Override the HTML of the form field.
+        /// 
+        /// This gives you ultimate flexibility with your field HTML when it's
+        /// not quite what you want, but you still want the form template
+        /// (e.g. label, surrounding html and validation message).
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;html&quot;&gt;The HTML for the field as a templated razor delegate&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration OverrideFieldHtml(Func&lt;dynamic, IHtmlContent&gt; html);
+                
+        /// &lt;summary&gt;
+        /// Uses the given format string when outputting the field value.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;formatString&quot;&gt;The format string to use&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration WithFormatString(string formatString);
+        
+        /// &lt;summary&gt;
+        /// Hide the empty item that would normally display for the field.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration HideEmptyItem();
+        
+        /// &lt;summary&gt;
+        /// Don't use a &amp;lt;label&amp;gt;, but still include the label text for the field.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration WithoutLabelElement();
+
+
+        /// &lt;summary&gt;
+        /// Specify one or more CSS classes to use for the field label.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;class&quot;&gt;Any CSS class(es) to use for the field label&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration AddLabelClass(string @class);
+
+        /// &lt;summary&gt;
+        /// Specify one or more CSS classes to use for the field container element.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;class&quot;&gt;Any CSS class(es) to use for the field container element&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration AddFieldContainerClass(string @class);
+        
+        /// &lt;summary&gt;
+        /// Specify one or more CSS classes to use for the field validation message.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;class&quot;&gt;Any CSS class(es) to use for the field validation message&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration AddValidationClass(string @class);
+        
+        /// &lt;summary&gt;
+        /// Excludes one or more Enum values from the generated field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;enumValues&quot;&gt;The value of Enum(s) to exclude from the generated field.&lt;/param&gt;
+        /// &lt;returns&gt;&lt;/returns&gt;
+        IFieldConfiguration Exclude(params Enum[] enumValues);
+        
+        /// &lt;summary&gt;
+        /// Specify that no inline label should be generated.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration WithoutInlineLabel();
+
+        /// &lt;summary&gt;
+        /// Specify that inline labels should wrap their input element. Important for bootstrap.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;wrapElement&quot;&gt;True if the input element should be wrapped.&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration InlineLabelWrapsElement(bool wrapElement = true);
+
+        /// &lt;summary&gt;
+        /// Specify an ID to use for a field hint.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;hintId&quot;&gt;The ID to use&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; to allow for method chaining&lt;/returns&gt;
+        IFieldConfiguration WithHintId(string hintId);
+    }
+</code></pre>
+<p>The <code>IReadonlyFieldConfiguration</code> interface can be created by calling the <code>ToReadonly()</code> method on the <code>IFieldConfiguration</code>; it is in the <code>ChameleonForms.Component.Config</code> namespace and looks like this:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+    /// Immutable field configuration for use when generating a field's HTML.
+    /// &lt;/summary&gt;
+    public interface IReadonlyFieldConfiguration
+    {
+        /// &lt;summary&gt;
+        /// A dynamic bag to allow for custom extensions using the field configuration.
+        /// &lt;/summary&gt;
+        dynamic Bag { get; }
+
+        /// &lt;summary&gt;
+        /// Returns data from the Bag stored in the given property or default(TData) if there is none present.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name=&quot;TData&quot;&gt;The type of the expected data to return&lt;/typeparam&gt;
+        /// &lt;param name=&quot;propertyName&quot;&gt;The name of the property to retrieve the data for&lt;/param&gt;
+        /// &lt;returns&gt;The data from the Bag or default(TData) if there was no data against that property in the bag&lt;/returns&gt;
+        TData GetBagData&lt;TData&gt;(string propertyName);
+
+        /// &lt;summary&gt;
+        /// Attributes to add to the form element's HTML.
+        /// &lt;/summary&gt;
+        IDictionary&lt;string, object&gt; HtmlAttributes { get; }
+
+        /// &lt;summary&gt;
+        /// Gets any text that has been set for an inline label.
+        /// &lt;/summary&gt;
+        IHtmlContent InlineLabelText { get; }
+
+        /// &lt;summary&gt;
+        /// Gets any text that has been set for the label.
+        /// &lt;/summary&gt;
+        IHtmlContent LabelText { get; }
+
+        /// &lt;summary&gt;
+        /// Returns the display type for the field.
+        /// &lt;/summary&gt;
+        FieldDisplayType DisplayType { get; }
+
+        /// &lt;summary&gt;
+        /// The label that represents true.
+        /// &lt;/summary&gt;
+        string TrueString { get; }
+
+        /// &lt;summary&gt;
+        /// The label that represents false.
+        /// &lt;/summary&gt;
+        string FalseString { get; }
+
+        /// &lt;summary&gt;
+        /// The label that represents none.
+        /// &lt;/summary&gt;
+        string NoneString { get; }
+
+        /// &lt;summary&gt;
+        /// Get the hint to display with the field.
+        /// &lt;/summary&gt;
+        IHtmlContent Hint { get; }
+
+        /// &lt;summary&gt;
+        /// A list of HTML to be prepended to the form field in ltr order.
+        /// &lt;/summary&gt;
+        IEnumerable&lt;IHtmlContent&gt; PrependedHtml { get; }
+
+        /// &lt;summary&gt;
+        /// A list of HTML to be appended to the form field in ltr order.
+        /// &lt;/summary&gt;
+        IEnumerable&lt;IHtmlContent&gt; AppendedHtml { get; }
+
+        /// &lt;summary&gt;
+        /// The HTML to be used as the field html.
+        /// &lt;/summary&gt;
+        IHtmlContent FieldHtml { get; }
+
+        /// &lt;summary&gt;
+        /// The format string to use for the field.
+        /// &lt;/summary&gt;
+        string FormatString { get; }
+
+        /// &lt;summary&gt;
+        /// Whether or not the empty item is hidden.
+        /// &lt;/summary&gt;
+        bool EmptyItemHidden { get; }
+        
+        /// &lt;summary&gt;
+        /// Whether or not to use a &amp;lt;label&amp;gt;.
+        /// &lt;/summary&gt;
+        bool HasLabelElement { get; }
+
+        /// &lt;summary&gt;
+        /// Any CSS class(es) to use for the field label.
+        /// &lt;/summary&gt;
+        string LabelClasses { get; }
+
+        /// &lt;summary&gt;
+        /// Any CSS class(es) to use for the field container element.
+        /// &lt;/summary&gt;
+        string FieldContainerClasses { get; }
+
+        /// &lt;summary&gt;
+        /// Any CSS class(es) to use for the field validation message.
+        /// &lt;/summary&gt;
+        string ValidationClasses { get; }
+
+        /// &lt;summary&gt;
+        /// Enum value(s) to exclude from the generated field.
+        /// &lt;/summary&gt;
+        Enum[] ExcludedEnums { get; }
+
+        /// &lt;summary&gt;
+        /// Whether or not to use an inline &amp;lt;label&amp;gt;.
+        /// &lt;/summary&gt;
+        bool HasInlineLabel { get; }
+
+        /// &lt;summary&gt;
+        /// Whether or not inline &amp;lt;label&amp;gt; should wrap their &amp;lt;input&amp;gt; element.
+        /// &lt;/summary&gt;
+        bool ShouldInlineLabelWrapElement { get; }
+
+        /// &lt;summary&gt;
+        /// The ID to use for a field hint.
+        /// &lt;/summary&gt;
+        string HintId { get; }
+    }
+</code></pre>
+<p>The xmldoc comments above should give a pretty good indication of how each of those methods are meant to be used. There is further documentation about the effect of the different methods in the following documentation:</p>
+<ul>
+<li><a href="field.html">Field</a></li>
+<li><a href="field-label.html">Field Label</a></li>
+<li><a href="index.html#field-types">Field Types</a></li>
+</ul>
+<h2 id="how-does-the-ifieldconfiguration-output-the-field-html">How does the IFieldConfiguration output the Field HTML?</h2>
+<p>The astute viewer will notice that the various <code>FieldFor</code>, <code>FieldElementFor</code>, <code>LabelFor</code> and <code>ValidationMessageFor</code> extension methods all return an <code>IFieldConfiguration</code> as opposed to a <code>string</code> or <code>IHtmlContent</code>, yet when prefixed  with <code>@</code> in a razor view (with or without chaining any Field Configuration methods) will always output the correct HTML.</p>
+<p>This works because:</p>
+<ul>
+<li>The <code>IFieldConfiguration</code> interface extends <code>IHtmlContent</code>, which forces it to implement the <code>.WriteTo(TextWriter writer, HtmlEncoder encoder)</code> method (which will be called by razor via the <code>@</code> operator)</li>
+<li>All the methods on <code>IFieldConfiguration</code> return the same instance of the <code>IFieldConfiguration</code> object so the <code>@</code> operator will apply to that Field Configuration regardless of what methods the user calls</li>
+<li>The <code>SetField(IHtmlContent)</code> method, <code>SetField(Func&lt;dynamic, IHtmlContent&gt;)</code> method (for <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#directive-attributes">templated razor delegates</a>) or the <code>SetField(Func&lt;IHtmlContent&gt;)</code> method will be called before returning the <code>IFieldConfiguration</code> to indicate what HTML should be output by the Field Configuration if the <code>.ToHtmlString()</code> method is called</li>
+<li>The <code>SetField</code> method approach allows for lazy evaluation of the HTML to output, meaning the HTML generation can occur after all of the <code>IFieldConfiguration</code> methods have been called (allowing the Field Configuration to be mutated before eventually being used)</li>
+</ul>
+<h2 id="passing-html-to-field-configuration-methods">Passing HTML to field configuration methods</h2>
+<p>For all the field configuration methods that take an <code>IHtmlContent</code> you have a few options available to you:</p>
+<ul>
+<li>Pass the HTML as a string e.g. <code>.Label(new HtmlString(&quot;&lt;strong&gt;My label&lt;/strong&gt;&quot;))</code></li>
+<li>Pass the HTML by calling any method that returns an <code>IHtmlContent</code></li>
+<li>Use the override that takes a <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#directive-attributes">templated razor delegate</a>, e.g.:</li>
+</ul>
+<pre><code class="lang-cshtml">    @{
+        Func&lt;dynamic, IHtmlContent&gt; myLabel = @&lt;strong&gt;My label&lt;/strong&gt;;
+    }
+    
+    ...
+    @s.FieldFor(m =&gt; m.MyField).Label(myLabel)
+    @s.FieldFor(m =&gt; m.MyOtherField).Label(@&lt;strong&gt;Inline templated razor delegate with single parent element&lt;/strong&gt;)
+    @s.FieldFor(m =&gt; m.MyOtherField).Label(@&lt;text&gt;&lt;strong&gt;Inline&lt;/strong&gt; templated razor delegate with no single parent element&lt;/text&gt;)
+    ...
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/field-configuration.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

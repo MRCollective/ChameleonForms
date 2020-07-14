@@ -1,0 +1,484 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Navigation | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Navigation | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="navigation">Navigation</h1>
+
+<p>The Navigation is a grouping of a set of navigation elements; you create a Navigation by instantiating a <code>Navigation&lt;TModel&gt;</code> within a <code>using</code> block. The start and end of the <code>using</code> block will output the start and end HTML for the Navigation and the inside of the <code>using</code> block will contain the Navigation elements.</p>
+<p>The <code>Navigation&lt;TModel&gt;</code> class looks like this and is in the <code>ChameleonForms.Component</code> namespace:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+    /// Wraps the output of the navigation area of a form.
+    /// For example the area with submit buttons.
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;
+    public class Navigation&lt;TModel&gt; : FormComponent&lt;TModel&gt;
+    {
+        /// &lt;summary&gt;
+        /// Creates a form navigation area.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;form&quot;&gt;The form the message is being created in&lt;/param&gt;
+        public Navigation(IForm&lt;TModel&gt; form);
+
+        /// &lt;summary&gt;
+        /// Returns the HTML representation of the beginning of the form component.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The beginning HTML for the form component&lt;/returns&gt;
+        public virtual IHtmlContent Begin();
+
+        /// &lt;summary&gt;
+        /// Returns the HTML representation of the end of the form component.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The ending HTML for the form component&lt;/returns&gt;
+        public virtual IHtmlContent End();
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a submit &amp;lt;button&amp;gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;text&quot;&gt;The text to display in the button&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Submit(string text);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a submit &amp;lt;button&amp;gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;content&quot;&gt;The content to display in the button&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Submit(IHtmlContent content);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a submit &amp;lt;button&amp;gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;content&quot;&gt;The content to display in the button as a templated razor delegate&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Submit(Func&lt;dynamic, IHtmlContent&gt; content);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a submit button that submits a value in the form post when clicked.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;name&quot;&gt;The name of the element&lt;/param&gt;
+        /// &lt;param name=&quot;value&quot;&gt;The value to submit with the form&lt;/param&gt;
+        /// &lt;param name=&quot;content&quot;&gt;The text the user sees (leave as the default null if you want the user to see the value instead)&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Submit(string name, string value, IHtmlContent content = null);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a submit button that submits a value in the form post when clicked.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;name&quot;&gt;The name of the element&lt;/param&gt;
+        /// &lt;param name=&quot;value&quot;&gt;The value to submit with the form&lt;/param&gt;
+        /// &lt;param name=&quot;content&quot;&gt;The text the user sees as a templated razor delegate&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Submit(string name, string value, Func&lt;dynamic, IHtmlContent&gt; content);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a &amp;lt;button&amp;gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;text&quot;&gt;The text to display in the button&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Button(string text);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a &amp;lt;button&amp;gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;content&quot;&gt;The content to display in the button&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Button(IHtmlContent content);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a &amp;lt;button&amp;gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;content&quot;&gt;The content to display in the button as a templated razor delegate&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Button(Func&lt;dynamic, IHtmlContent&gt; content);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a reset &amp;lt;button&amp;gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;text&quot;&gt;The text to display for the button&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Reset(string text);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a reset &amp;lt;button&amp;gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;content&quot;&gt;The content to display for the button&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Reset(IHtmlContent content);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a reset &amp;lt;button&amp;gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;content&quot;&gt;The content to display for the button as a templated razor delegate&lt;/param&gt;
+        /// &lt;returns&gt;Html attributes class to chain modifications to the button's attributes; call .ToHtmlString() to generate the button HTML&lt;/returns&gt;
+        public ButtonHtmlAttributes Reset(Func&lt;dynamic, IHtmlContent&gt; content);
+    }
+</code></pre>
+<p>The start and end HTML of the Navigation are generated via the <code>BeginNavigation</code> and <code>EndNavigation</code> methods in the <a href="form-templates.html">form template</a>. The HTML for the various types of buttons are all generated via the <code>Button</code> method in the template.</p>
+<h2 id="default-usage">Default usage</h2>
+<p>In order to get an instance of a <code>Navigation&lt;TModel&gt;</code> you can use the <code>BeginNavigation</code> method on the Form, e.g.:</p>
+<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
+    @* Navigation elements go here *@
+}
+</code></pre>
+<p>The <code>BeginNavigation</code> extension method looks like this:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Creates a navigation section.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var n = f.BeginNavigation()) {
+        ///     @n.Submit(&quot;Previous&quot;, &quot;previous&quot;)
+        ///     @n.Submit(&quot;Save&quot;, &quot;save&quot;)
+        ///     @n.Submit(&quot;Next&quot;, &quot;next&quot;)
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;param name=&quot;form&quot;&gt;The form the navigation is being created in&lt;/param&gt;
+        /// &lt;returns&gt;The form navigation&lt;/returns&gt;
+        public static Navigation&lt;TModel&gt; BeginNavigation&lt;TModel&gt;(this IForm&lt;TModel&gt; form)
+        {
+            return new Navigation&lt;TModel&gt;(form);
+        }
+</code></pre>
+<p>From within a section you can create Navigation Submit, Reset and normal Buttons and you can chain <a href="html-attributes.html">HTML Attributes</a> specifiers off the end of them, e.g.:</p>
+<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
+    @n.Button(&quot;text button&quot;).AddClass(&quot;button&quot;).Id(&quot;button1&quot;)
+    @n.Button(new HtmlString(&quot;&lt;strong&gt;html button&lt;/strong&gt;&quot;)).AddClass(&quot;button&quot;).Id(&quot;button2&quot;)
+    @n.Button(@&lt;strong&gt;html button&lt;/strong&gt;)
+    @n.Reset(&quot;text reset&quot;).AddClass(&quot;button&quot;).Id(&quot;button3&quot;)
+    @n.Reset(new HtmlString(&quot;&lt;strong&gt;html reset&lt;/strong&gt;&quot;)).AddClass(&quot;button&quot;).Id(&quot;button4&quot;)
+    @n.Reset(@&lt;strong&gt;html reset&lt;/strong&gt;)
+    @n.Submit(new HtmlString(&quot;&lt;strong&gt;html submit&lt;/strong&gt;&quot;)).AddClass(&quot;button&quot;).Id(&quot;button5&quot;)
+    @n.Submit(&quot;text submit&quot;).AddClass(&quot;button&quot;).Id(&quot;button6&quot;)
+    @n.Submit(&quot;name&quot;, &quot;value&quot;, new HtmlString(&quot;&lt;strong&gt;html submit with value&lt;/strong&gt;&quot;)).AddClass(&quot;button&quot;).Id(&quot;button7&quot;)
+    @n.Submit(&quot;name&quot;, &quot;value&quot;).AddClass(&quot;button&quot;).Id(&quot;button8&quot;)
+    @n.Submit(@&lt;strong&gt;html submit&lt;/strong&gt;)
+}
+</code></pre>
+<h2 id="extending-navigation-buttons">Extending Navigation Buttons</h2>
+<p>See <a href="html-attributes.html#extending-navigation-buttons-specifically">the HTML Attributes documentation</a> for more information.</p>
+<h2 id="default-html">Default HTML</h2>
+<h3 id="begin-html">Begin HTML</h3>
+<pre><code class="lang-html">        &lt;div class=&quot;form_navigation&quot;&gt;
+</code></pre>
+<h3 id="end-html">End HTML</h3>
+<pre><code class="lang-html">        &lt;/div&gt;
+</code></pre>
+<h3 id="button-html">Button HTML</h3>
+<pre><code class="lang-html">&lt;button (%htmlAttributes%)&gt;%content%&lt;/button&gt;
+</code></pre>
+<h3 id="reset-html">Reset HTML</h3>
+<pre><code class="lang-html">&lt;button type=&quot;reset&quot; (%htmlAttributes%)&gt;%content%&lt;/button&gt;
+</code></pre>
+<h3 id="submit-html">Submit HTML</h3>
+<pre><code class="lang-html">&lt;button type=&quot;submit&quot; (%htmlAttributes%)&gt;%content%&lt;/button&gt;
+</code></pre>
+<p>If you specify a name and value to submit when the form is submitted via the button and you don't provide content then the HTML will be (<a href="http://rommelsantor.com/clog/2012/03/12/fixing-the-ie7-submit-value/">see why</a>):</p>
+<pre><code class="lang-html">&lt;input type=&quot;submit&quot; name=&quot;%name%&quot; id=&quot;%name%&quot; value=&quot;%value%&quot; /&gt;
+</code></pre>
+<p>If you specify a name, value and content the HTML will be (if you call this method you are opting out of IE7 support for capturing the submitted value on the server-side):</p>
+<pre><code class="lang-html">&lt;button type=&quot;submit&quot; name=&quot;%name%&quot; id=&quot;%name%&quot; value=&quot;%value%&quot; (%htmlAttributes%)&gt;%content%&lt;/button&gt;
+</code></pre>
+<h2 id="twitter-bootstrap-3-html">Twitter Bootstrap 3 HTML</h2>
+<h3 id="begin-html-1">Begin HTML</h3>
+<pre><code class="lang-html">        &lt;div class=&quot;btn-group&quot;&gt;
+</code></pre>
+<h3 id="end-html-1">End HTML</h3>
+<pre><code class="lang-html">        &lt;/div&gt;
+</code></pre>
+<h3 id="buttonresetsubmit-html">Button/Reset/Submit HTML</h3>
+<p>The HTML is the same as the default except a class of <code>btn</code> will always be added and if no emphasis classes are added (see below) then a class of <code>btn-default</code> will be added.</p>
+<h3 id="add-emphasis-style">Add emphasis style</h3>
+<p>There is an extension method in the <code>ChameleonForms.Templates.TwitterBootstrap3</code> namespace that allows you to add an emphasis style to the buttons:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Adds the given emphasis to the button.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @n.Submit(&quot;Submit&quot;).WithStyle(EmphasisStyle.Warning)
+        /// &lt;/example&gt;
+        /// &lt;param name=&quot;attrs&quot;&gt;The Html Attributes from a navigation button&lt;/param&gt;
+        /// &lt;param name=&quot;style&quot;&gt;The style of button&lt;/param&gt;
+        /// &lt;returns&gt;The Html Attribute object so other methods can be chained off of it&lt;/returns&gt;
+        public static ButtonHtmlAttributes WithStyle(this ButtonHtmlAttributes attrs, EmphasisStyle style)
+        {
+            attrs.AddClass(string.Format(&quot;btn-{0}&quot;, style.ToString().ToLower()));
+            return attrs;
+        }
+</code></pre>
+<p>The <code>EmphasisStyle</code> enum is as follows:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+    /// Twitter Bootstrap alert/emphasis colors: http://getbootstrap.com/css/#type-emphasis
+    /// &lt;/summary&gt;
+    public enum EmphasisStyle
+    {
+        /// &lt;summary&gt;
+        /// Default styling.
+        /// &lt;/summary&gt;
+        Default,
+        /// &lt;summary&gt;
+        /// Primary action styling.
+        /// &lt;/summary&gt;
+        Primary,
+        /// &lt;summary&gt;
+        /// Success styling.
+        /// &lt;/summary&gt;
+        Success,
+        /// &lt;summary&gt;
+        /// Information styling.
+        /// &lt;/summary&gt;
+        Info,
+        /// &lt;summary&gt;
+        /// Warning styling.
+        /// &lt;/summary&gt;
+        Warning,
+        /// &lt;summary&gt;
+        /// Danger styling.
+        /// &lt;/summary&gt;
+        Danger
+    }
+</code></pre>
+<p>You can use the extension method like this:</p>
+<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
+    @n.Submit(&quot;Submit&quot;).WithStyle(EmphasisStyle.Primary)
+}
+</code></pre>
+<p>Which would result in:</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>In order to be able to swap out the extension method usage across your application easily (for example, if you change your form template) we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view using the extension method you instead add the namespace to your <code>_ViewImports.cshtml</code> file.</p>
+<h3 id="change-button-size">Change button size</h3>
+<p>There is an extension method in the <code>ChameleonForms.Templates.TwitterBootstrap3</code> namespace that allows you to change the size of your buttons:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Changes the button to use the given size.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @n.Submit(&quot;Submit&quot;).WithSize(ButtonSize.Large)
+        /// &lt;/example&gt;
+        /// &lt;param name=&quot;attrs&quot;&gt;The Html Attributes from a navigation button&lt;/param&gt;
+        /// &lt;param name=&quot;size&quot;&gt;The size of button&lt;/param&gt;
+        /// &lt;returns&gt;The Html Attribute object so other methods can be chained off of it&lt;/returns&gt;
+        public static ButtonHtmlAttributes WithSize(this ButtonHtmlAttributes attrs, ButtonSize size)
+        {
+            if (size != ButtonSize.Default)
+                attrs.AddClass(string.Format(&quot;btn-{0}&quot;, size.Humanize()));
+            return attrs;
+        }
+</code></pre>
+<p>The <code>ButtonSize</code> enum is as follows:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+    /// Twitter Bootstrap button sizes: http://getbootstrap.com/css/#buttons-sizes
+    /// &lt;/summary&gt;
+    public enum ButtonSize
+    {
+        /// &lt;summary&gt;
+        /// Extra small button size.
+        /// &lt;/summary&gt;
+        [Description(&quot;xs&quot;)]
+        ExtraSmall,
+        /// &lt;summary&gt;
+        /// Small button size.
+        /// &lt;/summary&gt;
+        [Description(&quot;sm&quot;)]
+        Small,
+        /// &lt;summary&gt;
+        /// Default button size.
+        /// &lt;/summary&gt;
+        Default,
+        /// &lt;summary&gt;
+        /// Large button size.
+        /// &lt;/summary&gt;
+        [Description(&quot;lg&quot;)]
+        Large
+    }
+</code></pre>
+<p>You can use the extension method like this:</p>
+<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
+    @n.Submit(&quot;Submit&quot;).WithSize(ButtonSize.Large)
+}
+</code></pre>
+<p>Which would result in:</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button type=&quot;submit&quot; class=&quot;btn btn-default btn-lg&quot;&gt;Submit&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view that has a form using the extension method you instead add the namespace to your <code>_ViewImports.cshtml</code> file.</p>
+<h3 id="add-icon-to-button">Add icon to button</h3>
+<p>There is an extension method in the <code>ChameleonForms.Templates.TwitterBootstrap3</code> namespace that allows you to add icons to your buttons:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Adds the given icon to the start of a navigation button.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @n.Submit(&quot;Submit&quot;).WithIcon(&quot;arrow-right&quot;)
+        /// // Output:
+        /// &amp;lt;button type=&quot;submit&quot;&gt;&amp;lt;span class=&quot;glyphicon glyphicon-arrow-right&quot;&gt;&amp;lt;/span&gt; Submit&amp;lt;/button&gt;
+        /// &lt;/example&gt;
+        /// &lt;param name=&quot;attrs&quot;&gt;The Html Attributes from a navigation button&lt;/param&gt;
+        /// &lt;param name=&quot;icon&quot;&gt;The icon to use; see https://getbootstrap.com/docs/3.3/components/#glyphicons&lt;/param&gt;
+        /// &lt;returns&gt;The Html Attribute object so other methods can be chained off of it&lt;/returns&gt;
+        public static ButtonHtmlAttributes WithIcon(this ButtonHtmlAttributes attrs, string icon)
+        {
+            attrs.Attr(TwitterBootstrap3FormTemplate.IconAttrKey, icon);
+            return attrs;
+        }
+</code></pre>
+<p>You can see the list of possible icon names to choose from on the <a href="https://getbootstrap.com/docs/3.3/components/#glyphicons">Twitter Bootstrap documentation site</a> (drop the <code>glyphicon-</code> from the icon names on this page e.g. use <code>adjust</code> instead of <code>glyphicon-adjust</code>).</p>
+<p>You can use the extension method like this:</p>
+<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
+    @n.Submit(&quot;Submit&quot;).WithIcon(&quot;adjust&quot;)
+}
+</code></pre>
+<p>Which would result in:</p>
+<pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-adjust&quot;&gt;&lt;/span&gt; Submit&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<p>In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view that has a form using the extension method you add the namespace to your <code>_ViewImports.cshtml_</code> file.</p>
+<h3 id="example">Example</h3>
+<p>Here is an example from the example project of what the buttons can look like:</p>
+<p><img src="bootstrap-buttons.png" alt="Screenshot of buttons generated using Twitter Bootstrap 3 template"></p>
+<p>Here is the code that generated the above screenshot:</p>
+<pre><code class="lang-cshtml">    @using (var n = f.BeginNavigation())
+    {
+        @n.Button(&quot;text button&quot;).WithStyle(EmphasisStyle.Primary).WithSize(ButtonSize.Default)
+        @n.Button(new HtmlString(&quot;&lt;strong&gt;html button&lt;/strong&gt;&quot;)).AddClass(&quot;random-class&quot;)
+        @n.Reset(&quot;text reset&quot;).WithIcon(&quot;refresh&quot;)
+        @n.Reset(new HtmlString(&quot;&lt;strong&gt;html reset&lt;/strong&gt;&quot;))
+        @n.Submit(new HtmlString(&quot;&lt;strong&gt;html submit&lt;/strong&gt;&quot;))
+        @n.Submit(&quot;text submit&quot;).WithStyle(EmphasisStyle.Danger)
+        @n.Submit(&quot;name&quot;, &quot;value&quot;, new HtmlString(&quot;&lt;strong&gt;html submit with value&lt;/strong&gt;&quot;))
+        @n.Submit(&quot;name&quot;, &quot;value&quot;).WithIcon(&quot;star&quot;).WithStyle(EmphasisStyle.Success)
+    }
+    
+    @using (var n = f.BeginNavigation())
+    {
+        @n.Button(&quot;Small button 1&quot;).WithSize(ButtonSize.Small)
+        @n.Button(&quot;Small button 2&quot;).WithSize(ButtonSize.Small)
+    }
+    
+    @using (var n = f.BeginNavigation())
+    {
+        @n.Button(&quot;Extra small button 1&quot;).WithSize(ButtonSize.ExtraSmall)
+        @n.Button(&quot;Extra small button 2&quot;).WithSize(ButtonSize.ExtraSmall)
+    }
+    
+    @using (var n = f.BeginNavigation())
+    {
+        @n.Button(&quot;Large button 1&quot;).WithSize(ButtonSize.Large)
+        @n.Button(&quot;Large button 2&quot;).WithSize(ButtonSize.Large)
+    }
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/the-navigation.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Create a form against a model type different from the page model | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Create a form against a model type different from the page model | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="create-a-form-against-a-model-type-different-from-the-page-model">Create a form against a model type different from the page model</h1>
+
+<p>Similar to the examples and reasoning discussed <a href="html-helper-context.html">in the documentation for changing HTML helper model types</a> it's useful to be able to create forms against an arbitrary model unrelated to the page model or create a form against a subproperty of the parent model.</p>
+<p>This can be achieved using the default form template by using these overloads to the <code>BeginChameleonForms</code> <a href="the-form.html">extension method</a>:</p>
+<pre><code class="lang-csharp">/// &lt;summary&gt;
+        /// Constructs a &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with the default ChameleonForms template renderer using a sub-property of the current model as the model.
+        /// Values will bind back to the model type of the sub-property as if that was the model all along.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var f = Html.BeginChameleonFormFor(m =&gt; m.Subproperty, ...)) {
+        ///     ...
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TParentModel&quot;&gt;The model type of the view&lt;/typeparam&gt;
+        /// &lt;typeparam name=&quot;TChildModel&quot;&gt;The model type of the sub-property to construct the form for&lt;/typeparam&gt;
+        /// &lt;param name=&quot;helper&quot;&gt;The HTML Helper for the current view&lt;/param&gt;
+        /// &lt;param name=&quot;formFor&quot;&gt;A lambda expression identifying the sub-property to construct the form for&lt;/param&gt;
+        /// &lt;param name=&quot;action&quot;&gt;The action the form should submit to&lt;/param&gt;
+        /// &lt;param name=&quot;method&quot;&gt;The HTTP method the form submission should use&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes the form should use&lt;/param&gt;
+        /// &lt;param name=&quot;enctype&quot;&gt;The encoding type the form submission should use&lt;/param&gt;
+        /// &lt;returns&gt;A &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with an instance of the default form template renderer.&lt;/returns&gt;
+        public static IForm&lt;TChildModel&gt; BeginChameleonFormFor&lt;TParentModel, TChildModel&gt;(this IHtmlHelper&lt;TParentModel&gt; helper, Expression&lt;Func&lt;TParentModel, TChildModel&gt;&gt; formFor, string action = &quot;&quot;, FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+
+        /// &lt;summary&gt;
+        /// Constructs a &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with the default ChameleonForms template renderer using the given model type and instance.
+        /// Values will bind back to the model type specified as if that was the model all along.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var f = Html.BeginChameleonFormFor(new AnotherModelType(), ...)) {
+        ///     ...
+        /// }
+        /// @using (var f = Html.BeginChameleonFormFor(default(AnotherModelType), ...)) {
+        ///     ...
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;remarks&gt;
+        /// This can also be done using the For() HTML helper extension method and just a type:
+        /// @using (var f = Html.For&amp;lt;AnotherModelType&amp;gt;().BeginChameleonForm(...)) {
+        ///     ...
+        /// }
+        /// &lt;/remarks&gt;
+        /// &lt;typeparam name=&quot;TOriginalModel&quot;&gt;The model type of the view&lt;/typeparam&gt;
+        /// &lt;typeparam name=&quot;TNewModel&quot;&gt;The model type of the sub-property to construct the form for&lt;/typeparam&gt;
+        /// &lt;param name=&quot;helper&quot;&gt;The HTML Helper for the current view&lt;/param&gt;
+        /// &lt;param name=&quot;model&quot;&gt;The model to use for the form&lt;/param&gt;
+        /// &lt;param name=&quot;action&quot;&gt;The action the form should submit to&lt;/param&gt;
+        /// &lt;param name=&quot;method&quot;&gt;The HTTP method the form submission should use&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes the form should use&lt;/param&gt;
+        /// &lt;param name=&quot;enctype&quot;&gt;The encoding type the form submission should use&lt;/param&gt;
+        /// &lt;returns&gt;A &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with an instance of the default form template renderer.&lt;/returns&gt;
+        public static IForm&lt;TNewModel&gt; BeginChameleonFormFor&lt;TOriginalModel, TNewModel&gt;(this IHtmlHelper&lt;TOriginalModel&gt; helper, TNewModel model, string action = &quot;&quot;, FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+</code></pre>
+<h2 id="examples">Examples</h2>
+<p>The examples on the <a href="html-helper-context.html">documentation for changing HTML helper model types</a> are restated below, but in terms of a ChameleonForm instead of using <code>Html</code> to output the form:</p>
+<pre><code class="lang-cshtml">@model LoginViewModel
+
+&lt;h1&gt;Login&lt;/h1&gt;
+@using (var f = Html.BeginChameleonForm()) {
+    using (var s = f.BeginSection()) {
+        @s.FieldFor(m =&gt; m.Username)
+        @s.FieldFor(m =&gt; m.Password)
+    }
+    using (var n = f.BeginNavigation()) {
+        @n.Submit(&quot;Login&quot;)
+    }
+}
+
+&lt;h2&gt;Don't have an account?&lt;/h2&gt;
+&lt;p&gt;You can easily create a new account in seconds - just start by selecting a username below.&lt;/p&gt;
+@using (var f = Html.BeginChameleonFor(default(SignupStep1ViewModel), Url.Action(&quot;Step1&quot;, &quot;Signup&quot;))) {
+    using (var s = f.BeginSection) {
+        @s.FieldFor(m =&gt; m.Username).Placeholder(&quot;Enter your preferred username&quot;)
+    }
+    using (var n = f.BeginNavigation()) {
+        @n.Submit(&quot;Begin signup - check if my username is available &amp;raquo;&quot;.ToHtml())
+    }
+}
+</code></pre>
+<p>and:</p>
+<pre><code class="lang-cshtml">@model SomeViewModel
+
+&lt;h1&gt;Creating new xyz against @Model.Title&lt;/h1&gt;
+@using (var f = Html.BeginChameleonFormFor(m =&gt; m.InputModel)) {
+    using (var s = f.BeginSection()) {
+        @s.FieldFor(m =&gt; m.Property1)
+        @s.FieldFor(m =&gt; m.Property2)
+        @s.FieldFor(m =&gt; m.Property3)
+        @s.FieldFor(m =&gt; m.Property4)
+        @s.FieldFor(m =&gt; m.Property5)
+    }
+    using (var n = f.BeginNavigation()) {
+        @n.Submit()
+    }
+}
+</code></pre>
+<p>See also the examples in the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/ExampleForms/ChangingContext.cshtml">source code</a>.</p>
+<h2 id="creating-a-form-for-a-sub-property-that-binds-back-to-the-parent">Creating a form for a sub-property that binds back to the parent</h2>
+<p>This is still easily possible, but it's just a little more verbose since it's likely to be a less common use case:</p>
+<pre><code class="lang-cshtml">@using (var f = Html.For(m =&gt; m.Child, bindFieldsToParent: true).BeginChameleonForm(...)) { ... }
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/different-form-models.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

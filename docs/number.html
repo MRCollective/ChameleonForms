@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Number Fields | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Number Fields | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="number-fields">Number Fields</h1>
+
+<p>If you need to collect numeric data then that will automatically be handled for you with a HTML5 <code>&lt;input type=&quot;number&quot;&gt;</code> field.</p>
+<p>Any one of the following model types will trigger one of these fields:</p>
+<pre><code class="lang-csharp">public byte ByteField { get; set; }
+public sbyte SbyteField { get; set; }
+public short ShortField { get; set; }
+public ushort UshortField { get; set; }
+public int IntField { get; set; }
+public uint UintField { get; set; }
+public long LongField { get; set; }
+public ulong UlongField { get; set; }
+public float FloatField { get; set; }
+public double DoubleField { get; set; }
+public decimal DecimalField { get; set; }
+</code></pre>
+<h2 id="default-html">Default HTML</h2>
+<h3 id="integral-types">Integral types</h3>
+<p>For integral types (<code>byte</code>, <code>sbyte</code>, <code>short</code>, <code>ushort</code>, <code>int</code>, <code>uint</code>, <code>long</code>, or <code>ulong</code>), when using the Default Field Generator then the default HTML of the <a href="field-element.html">Field Element</a> will be:</p>
+<pre><code class="lang-html">&lt;input type=&quot;number&quot; step=&quot;1&quot; %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot; required=&quot;required&quot; value=&quot;%value%&quot; /&gt;
+</code></pre>
+<h3 id="floating-point-types">Floating-point types</h3>
+<p>For floating-point types (<code>float</code>, <code>double</code>, or <code>decimal</code>), when using the Default Field Generator then the default HTML of the <a href="field-element.html">Field Element</a> will be:</p>
+<pre><code class="lang-html">&lt;input type=&quot;number&quot; step=&quot;any&quot; %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot; required=&quot;required&quot; value=&quot;%value%&quot; /&gt;
+</code></pre>
+<h3 id="default-min--max">Default min / max</h3>
+<p>The <code>min</code> and <code>max</code> attributes will automatically be set in the following instances:</p>
+<ul>
+<li><code>byte</code>: <code>min=&quot;0&quot; max=&quot;255&quot;</code></li>
+<li><code>sbyte</code>: <code>min=&quot;-128&quot; max=&quot;127&quot;</code></li>
+<li><code>short</code>: <code>min=&quot;-32768&quot; max=&quot;32767&quot;</code></li>
+<li><code>ushort</code>: <code>min=&quot;0&quot; max=&quot;65535&quot;</code></li>
+<li><code>uint</code>: <code>min=&quot;0&quot;</code></li>
+<li><code>ulong</code>: <code>min=&quot;0&quot;</code></li>
+</ul>
+<h2 id="configurability">Configurability</h2>
+<h3 id="specify-currency-step">Specify currency step</h3>
+<p>You can specify your property as a currency value, which will automatically set the <code>step</code> attribute for you to <code>0.01</code>:</p>
+<pre><code class="lang-csharp">[DataType(DataType.Currency)]
+public decimal DecimalField { get; set; }
+</code></pre>
+<h3 id="specify-step">Specify step</h3>
+<p>You can easily specify the <code>step</code> HTML attribute by using the <code>Step</code> method on the <a href="field-configuration.html">Field Configuration</a>, e.g.:</p>
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.IntField).Step(2)
+</code></pre>
+<p>If you specify this, it will override any default step value.</p>
+<h3 id="specify-min-and-max">Specify min and max</h3>
+<p>You can easily specify the <code>min</code> and <code>max</code> HTML attributes by using the <code>Min</code> and <code>Max</code> methods on the <a href="field-configuration.html">Field Configuration</a>, e.g.:</p>
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.IntField).Min(5).Max(60)
+@s.FieldFor(m =&gt; m.DecimalField).Min(1.1).Max(1.9)
+</code></pre>
+<p>If you specify these, it will override any default min/max values.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/number.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

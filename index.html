@@ -1,0 +1,487 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Model-driven forms | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Model-driven forms | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="docs/favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+      </header>
+          <div id="home">
+              <div class="container-width">
+              <div class="logo-container">
+                  <div class="logo"><img src="docs/logo-small.png" alt="ChameleonForms logo"> ChameleonForms</div>
+              </div>
+              <nav class="menu">
+                  <div class="menu-item"><a href="docs/">Documentation</a></div>
+                  <div class="menu-item"><a href="apidocs/ChameleonForms.html">API Documentation</a></div>
+                  <div class="menu-item"><a href="https://github.com/MRCollective/ChameleonForms">GitHub</a></div>
+              </nav>
+              <div class="clearfix"></div>
+              <div class="lead-title">Shape-shifting your forms experience in ASP.NET Core.</div>
+              <div class="sub-lead-title">ChameleonForms makes building consistent, correct forms that work well client-side and server-side easy and quick by using model-driven defaults, conventions, templates and terse, declarative, type-safe syntax.</div>
+                  <a class="lead-btn" href="docs/getting-started.html">Dive in</a>
+              </div>
+          </div>      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-12">
+            <article class="content wrap" id="_content" data-uid="">
+
+<div class="row">
+<div class="col-md-4">
+    <h2>Model-driven forms</h2>
+    <p>Spend less time with tedious reptition by letting your view models do the hard work for you.</p>
+</div>
+<div class="col-md-8 equal-heights">
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_model-1" role="tab" aria-controls="tabpanel_CeZOj-G++Q_model-1" data-tab="model-1" tabindex="0" aria-selected="true">View Model</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_model-2" role="tab" aria-controls="tabpanel_CeZOj-G++Q_model-2" data-tab="model-2" tabindex="-1">View</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_model-3" role="tab" aria-controls="tabpanel_CeZOj-G++Q_model-3" data-tab="model-3" tabindex="-1">HTML output</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_model-4" role="tab" aria-controls="tabpanel_CeZOj-G++Q_model-4" data-tab="model-4" tabindex="-1">Notes</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_model-5" role="tab" aria-controls="tabpanel_CeZOj-G++Q_model-5" data-tab="model-5" tabindex="-1">Further reading</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_model-1" role="tabpanel" data-tab="model-1">
+
+<pre><code class="lang-c#">public class SignupViewModel
+{
+    [Required]
+    public MembershipClass? MembershipType { get; set; }
+}
+
+public enum MembershipClass
+{
+    Standard,
+    Bonze,
+    Silver,
+    Gold,
+    Platinum
+}
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_model-2" role="tabpanel" data-tab="model-2" aria-hidden="true" hidden="hidden">
+
+<p><strong>Tag helpers variant</strong></p>
+<pre><code class="lang-html">&lt;form-section heading=&quot;Form section&quot;&gt;
+    &lt;field for=&quot;MembershipType&quot; /&gt;
+&lt;/form-section&gt;
+</code></pre>
+<p><strong>HTML helpers variant</strong></p>
+<pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Form section&quot;)) {
+    @s.FieldFor(m =&gt; m.MembershipType)
+}
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_model-3" role="tabpanel" data-tab="model-3" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-html">&lt;fieldset&gt;
+    &lt;legend&gt;Form section&lt;/legend&gt;
+    &lt;dl&gt;
+        &lt;dt&gt;&lt;label for=&quot;MembershipType&quot;&gt;Membership type&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+        &lt;dd&gt;
+            &lt;select data-val=&quot;true&quot; data-val-required=&quot;The Membership type field is required.&quot; id=&quot;MembershipType&quot; name=&quot;MembershipType&quot; required=&quot;required&quot;&gt;
+                &lt;option selected=&quot;selected&quot; value=&quot;Standard&quot;&gt;Standard&lt;/option&gt;
+                &lt;option value=&quot;Bonze&quot;&gt;Bonze&lt;/option&gt;
+                &lt;option value=&quot;Silver&quot;&gt;Silver&lt;/option&gt;
+                &lt;option value=&quot;Gold&quot;&gt;Gold&lt;/option&gt;
+                &lt;option value=&quot;Platinum&quot;&gt;Platinum&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;MembershipType&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+        &lt;/dd&gt;
+    &lt;/dl&gt;
+&lt;/fieldset&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_model-4" role="tabpanel" data-tab="model-4" aria-hidden="true" hidden="hidden">
+
+<p>Here are the things that ChameleonForms has done for us based on the model:</p>
+<ul>
+<li>The field label is based on the field name, but humanised (e.g. <code>MembershipType</code> -&gt; <code>Membership type</code>)</li>
+<li>The <code>[Required]</code> attribute results in a required designator (<code>&lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;</code>), required attribute on the field (<code>required=&quot;required&quot;</code>) required unobtrusive client-side validation attributes (<code>data-val</code> and <code>data-val-required</code>)</li>
+<li>The enum type automatically results in a <code>&lt;select&gt;</code> with the different enum values translated to <code>&lt;option&gt;</code>'s</li>
+</ul>
+</section>
+<section id="tabpanel_CeZOj-G++Q_model-5" role="tabpanel" data-tab="model-5" aria-hidden="true" hidden="hidden">
+
+<p>Other model-driven form features you can explore:</p>
+<ul>
+<li><a href="docs/getting-started.html">Getting started</a></li>
+<li>Inference from model type to output <a href="docs/boolean.html">Boolean fields</a>, <a href="docs/datetime.html">DateTime fields</a>, <a href="docs/enum.html">Enum fields</a>, <a href="docs/list.html">List fields</a>, <a href="docs/file-upload.html">File upload fields</a> and <a href="docs/number.html">Number fields</a></li>
+<li>Multiple-select: <a href="docs/flags-enum.html">Flags enum fields</a>, <a href="docs/multiple-enum.html">Multiple-select enum fields</a> and <a href="docs/multiple-list.html">Multiple-select list fields</a></li>
+<li>Inference from model property attributes to output <a href="docs/textarea.html">Textarea fields</a>, <a href="docs/password.html">Password fields</a>, <a href="docs/email.html">Email fields</a> and <a href="docs/uri.html">Uri fields</a> as well as supporting controlling the client-side and server-side validation of <a href="docs/datetime.html">DateTime fields</a></li>
+<li>Client-side and server-side validation is given to us from the model metadata based on the <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-3.1">built-in ASP.NET Core MVC features</a>.</li>
+<li>The HTML that is rendered will always bind correctly to the view model on the ASP.NET Core MVC controller using the <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-3.1">built-in model binding</a>.</li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="row">
+<div class="col-md-4">
+    <h2>Rapid, consistent, correct forms</h2>
+    <p>Use terse, declarative, type-safe, intellisense-friendly syntax to quickly define your forms and let conventions and templates take care of the detail so you don't have to.</p>
+    <p>Your forms will be quicker to write and easier to maintain and you won't get stuck writing the same form boilerplate markup form after form after form. Plus, you can build in accessibility and consistency as cross-cutting concerns.</p>
+    <p><strong>ChameleonForms really shines when you need to build a lot of forms quickly and consistently.</strong></p>
+</div>
+<div class="col-md-8">
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_rapid-1" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_rapid-1" data-tab="rapid-1" tabindex="0" aria-selected="true">View (TH)</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_rapid-2" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_rapid-2" data-tab="rapid-2" tabindex="-1">View (HH)</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_rapid-3" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_rapid-3" data-tab="rapid-3" tabindex="-1">Visual result</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_rapid-4" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_rapid-4" data-tab="rapid-4" tabindex="-1">HTML output</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_rapid-5" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_rapid-5" data-tab="rapid-5" tabindex="-1">Startup / VM</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_rapid-6" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_rapid-6" data-tab="rapid-6" tabindex="-1">Notes</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_rapid-1" role="tabpanel" data-tab="rapid-1">
+
+<p><strong>Tag helpers variant</strong></p>
+<pre><code class="lang-cshtml">@model SignupViewModel
+&lt;h1&gt;Account signup&lt;/h1&gt;
+&lt;chameleon-form attr-id=&quot;signup-form&quot;&gt;
+    &lt;form-message type=&quot;Information&quot; heading=&quot;Signup for an account&quot;&gt;
+        &lt;message-paragraph&gt;Please fill in your information below to signup for an account.&lt;/message-paragraph&gt;
+    &lt;/form-message&gt;
+
+    &lt;form-section heading=&quot;Your details&quot;&gt;
+        &lt;field for=&quot;FirstName&quot; /&gt;
+        &lt;field for=&quot;LastName&quot; /&gt;
+        &lt;field for=&quot;DateOfBirth&quot; hint=&quot;DD/MM/YYYY&quot; /&gt;
+    &lt;/form-section&gt;
+
+    &lt;form-section heading=&quot;Account details&quot;&gt;
+        &lt;field for=&quot;EmailAddress&quot; hint=&quot;An email will be sent to this address to confirm you own it&quot; /&gt;
+        &lt;field for=&quot;Password&quot; /&gt;
+        &lt;field for=&quot;MembershipType&quot; /&gt;
+    &lt;/form-section&gt;
+
+    &lt;form-section heading=&quot;Additional details&quot;&gt;
+        &lt;field for=&quot;Bio&quot; /&gt;
+        &lt;field for=&quot;Homepage&quot; placeholder=&quot;https://&quot; /&gt;
+    &lt;/form-section&gt;
+
+    &lt;form-message type=&quot;Action&quot; heading=&quot;Confirm the Terms &amp; Conditions&quot;&gt;
+        &lt;message-paragraph&gt;Please &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;&lt;/message-paragraph&gt;
+        &lt;field-element for=&quot;TermsAndConditions&quot; inline-label=&quot;I agree to the terms and conditions&quot; /&gt;
+    &lt;/form-message&gt;
+
+    &lt;form-navigation&gt;
+        &lt;submit-button label=&quot;Signup&quot; emphasis-style=&quot;Primary&quot; /&gt;
+    &lt;/form-navigation&gt;
+&lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_rapid-2" role="tabpanel" data-tab="rapid-2" aria-hidden="true" hidden="hidden">
+
+<p><strong>HTML helpers variant</strong></p>
+<pre><code class="lang-cshtml">@model SignupViewModel
+&lt;h1&gt;Account signup&lt;/h1&gt;
+@using (var f = Html.BeginChameleonForm(htmlAttributes: Html.Attrs().Id(&quot;signup-form&quot;)))
+{
+    using (var m = f.BeginMessage(MessageType.Information, &quot;Signup for an account&quot;))
+    {
+        @m.Paragraph(&quot;Please fill in your information below to signup for an account.&quot;)
+    }
+
+    using (var s = f.BeginSection(&quot;Your details&quot;))
+    {
+        @s.FieldFor(m =&gt; m.FirstName)
+        @s.FieldFor(m =&gt; m.LastName)
+        @s.FieldFor(m =&gt; m.DateOfBirth).WithHint(&quot;DD/MM/YYYY&quot;)
+    }
+
+    using (var s = f.BeginSection(&quot;Account details&quot;))
+    {
+        @s.FieldFor(m =&gt; m.EmailAddress).WithHint(&quot;An email will be sent to this address to confirm you own it&quot;)
+        @s.FieldFor(m =&gt; m.Password)
+        @s.FieldFor(m =&gt; m.MembershipType)
+    }
+
+    using (var s = f.BeginSection(&quot;Additional details&quot;))
+    {
+        @s.FieldFor(m =&gt; m.Bio).Rows(2).Cols(60)
+        @s.FieldFor(m =&gt; m.Homepage).Placeholder(&quot;https://&quot;)
+    }
+
+    using (var m = f.BeginMessage(MessageType.Action, &quot;Confirm the Terms &amp; Conditions&quot;))
+    {
+        @m.Paragraph(@&lt;text&gt;Please &lt;a href=&quot;/terms&quot;&gt;read the terms and conditions&lt;/a&gt;&lt;/text&gt;)
+        @f.FieldElementFor(mm =&gt; mm.TermsAndConditions).InlineLabel(&quot;I agree to the terms and conditions&quot;)
+    }
+
+    using (var n = f.BeginNavigation())
+    {
+        @n.Submit(&quot;Signup&quot;).WithStyle(EmphasisStyle.Primary)
+    }
+}
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_rapid-3" role="tabpanel" data-tab="rapid-3" aria-hidden="true" hidden="hidden">
+
+<p><img src="docs/signup-example-render.png" alt="Screenshot of the rendered form"></p>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_rapid-4" role="tabpanel" data-tab="rapid-4" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-html">&lt;h1&gt;Account signup&lt;/h1&gt;
+&lt;form action=&quot;&quot; enctype=&quot;application/x-www-form-urlencoded&quot; id=&quot;signup-form&quot; method=&quot;post&quot; novalidate=&quot;novalidate&quot;&gt;
+  &lt;div class=&quot;panel panel-info&quot;&gt;
+    &lt;div class=&quot;panel-heading&quot;&gt;
+      &lt;h4 class=&quot;panel-title&quot;&gt;Signup for an account&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-body&quot;&gt;
+      &lt;p&gt;
+        Please fill in your information below to signup for an account.
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Your details&lt;/legend&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;FirstName&quot;&gt;First name&lt;/label&gt;
+      &lt;div class=&quot;input-group&quot;&gt;
+        &lt;input class=&quot;form-control&quot; data-val=&quot;true&quot; data-val-required=&quot;The First name field is required.&quot; id=&quot;FirstName&quot; name=&quot;FirstName&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt;
+        &lt;div class=&quot;input-group-addon required&quot;&gt;
+          &lt;em class=&quot;required&quot; title=&quot;Required&quot;&gt;&amp;lowast;&lt;/em&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;span class=&quot;field-validation-valid help-block&quot; data-valmsg-for=&quot;FirstName&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;LastName&quot;&gt;Last name&lt;/label&gt;
+      &lt;div class=&quot;input-group&quot;&gt;
+        &lt;input class=&quot;form-control&quot; data-val=&quot;true&quot; data-val-required=&quot;The Last name field is required.&quot; id=&quot;LastName&quot; name=&quot;LastName&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt;
+        &lt;div class=&quot;input-group-addon required&quot;&gt;
+          &lt;em class=&quot;required&quot; title=&quot;Required&quot;&gt;&amp;lowast;&lt;/em&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;span class=&quot;field-validation-valid help-block&quot; data-valmsg-for=&quot;LastName&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;DateOfBirth&quot;&gt;Date of birth&lt;/label&gt;
+      &lt;div class=&quot;input-group&quot;&gt;
+        &lt;input aria-describedby=&quot;DateOfBirth--Hint&quot; class=&quot;form-control&quot; data-val=&quot;true&quot; data-val-date=&quot;The field Date of birth must be a date with format d/M/yyyy.&quot; data-val-format=&quot;d/M/yyyy&quot; data-val-required=&quot;The Date of birth field is required.&quot; id=&quot;DateOfBirth&quot; name=&quot;DateOfBirth&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt;
+        &lt;div class=&quot;input-group-addon required&quot;&gt;
+          &lt;em class=&quot;required&quot; title=&quot;Required&quot;&gt;&amp;lowast;&lt;/em&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;help-block form-hint&quot; id=&quot;DateOfBirth--Hint&quot;&gt;DD/MM/YYYY&lt;/div&gt;
+      &lt;span class=&quot;field-validation-valid help-block&quot; data-valmsg-for=&quot;DateOfBirth&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Account details&lt;/legend&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;EmailAddress&quot;&gt;Email address&lt;/label&gt;
+      &lt;div class=&quot;input-group&quot;&gt;
+        &lt;input aria-describedby=&quot;EmailAddress--Hint&quot; class=&quot;form-control&quot; data-val=&quot;true&quot; data-val-email=&quot;The Email address field is not a valid e-mail address.&quot; data-val-required=&quot;The Email address field is required.&quot; id=&quot;EmailAddress&quot; name=&quot;EmailAddress&quot; required=&quot;required&quot; type=&quot;email&quot; value=&quot;&quot; /&gt;
+        &lt;div class=&quot;input-group-addon required&quot;&gt;
+          &lt;em class=&quot;required&quot; title=&quot;Required&quot;&gt;&amp;lowast;&lt;/em&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;help-block form-hint&quot; id=&quot;EmailAddress--Hint&quot;&gt;An email will be sent to this address to confirm you own it&lt;/div&gt;
+      &lt;span class=&quot;field-validation-valid help-block&quot; data-valmsg-for=&quot;EmailAddress&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;Password&quot;&gt;Password&lt;/label&gt;
+      &lt;div class=&quot;input-group&quot;&gt;
+        &lt;input class=&quot;form-control&quot; data-val=&quot;true&quot; data-val-required=&quot;The Password field is required.&quot; id=&quot;Password&quot; name=&quot;Password&quot; required=&quot;required&quot; type=&quot;password&quot; /&gt;
+        &lt;div class=&quot;input-group-addon required&quot;&gt;
+          &lt;em class=&quot;required&quot; title=&quot;Required&quot;&gt;&amp;lowast;&lt;/em&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;span class=&quot;field-validation-valid help-block&quot; data-valmsg-for=&quot;Password&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;MembershipType&quot;&gt;Membership type&lt;/label&gt;
+      &lt;div class=&quot;input-group&quot;&gt;
+        &lt;select class=&quot;form-control&quot; data-val=&quot;true&quot; data-val-required=&quot;The Membership type field is required.&quot; id=&quot;MembershipType&quot; name=&quot;MembershipType&quot; required=&quot;required&quot;&gt;
+          &lt;option selected=&quot;selected&quot; value=&quot;Standard&quot;&gt;Standard&lt;/option&gt;
+          &lt;option value=&quot;Bonze&quot;&gt;Bonze&lt;/option&gt;
+          &lt;option value=&quot;Silver&quot;&gt;Silver&lt;/option&gt;
+          &lt;option value=&quot;Gold&quot;&gt;Gold&lt;/option&gt;
+          &lt;option value=&quot;Platinum&quot;&gt;Platinum&lt;/option&gt;
+        &lt;/select&gt;
+        &lt;div class=&quot;input-group-addon required&quot;&gt;
+          &lt;em class=&quot;required&quot; title=&quot;Required&quot;&gt;&amp;lowast;&lt;/em&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;span class=&quot;field-validation-valid help-block&quot; data-valmsg-for=&quot;MembershipType&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;Additional details&lt;/legend&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;Bio&quot;&gt;Bio&lt;/label&gt;
+      &lt;textarea class=&quot;form-control&quot; cols=&quot;20&quot; id=&quot;Bio&quot; name=&quot;Bio&quot; rows=&quot;2&quot;&gt;&lt;/textarea&gt;
+      &lt;span class=&quot;field-validation-valid help-block&quot; data-valmsg-for=&quot;Bio&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label class=&quot;control-label&quot; for=&quot;Homepage&quot;&gt;Homepage&lt;/label&gt;
+      &lt;input class=&quot;form-control&quot; id=&quot;Homepage&quot; name=&quot;Homepage&quot; placeholder=&quot;http://&quot; type=&quot;url&quot; value=&quot;&quot; /&gt;
+      &lt;span class=&quot;field-validation-valid help-block&quot; data-valmsg-for=&quot;Homepage&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+  &lt;div class=&quot;panel panel-primary&quot;&gt;
+    &lt;div class=&quot;panel-heading&quot;&gt;
+      &lt;h4 class=&quot;panel-title&quot;&gt;Confirm the Terms &amp;amp; Conditions&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-body&quot;&gt;
+      &lt;p&gt;
+        Please 
+        &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;
+      &lt;/p&gt;
+      &lt;input data-val=&quot;true&quot; data-val-required=&quot;The Terms and conditions field is required.&quot; id=&quot;TermsAndConditions&quot; name=&quot;TermsAndConditions&quot; required=&quot;required&quot; type=&quot;checkbox&quot; value=&quot;true&quot; /&gt;
+      &lt;label for=&quot;TermsAndConditions&quot;&gt;I agree to the terms and conditions&lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button class=&quot;btn btn-primary&quot; type=&quot;submit&quot;&gt;Signup&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_rapid-5" role="tabpanel" data-tab="rapid-5" aria-hidden="true" hidden="hidden">
+
+<p><strong>Startup</strong></p>
+<pre><code class="lang-c#">    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddChameleonForms&lt;TwitterBootstrap3FormTemplate&gt;();
+    }
+</code></pre>
+<p><strong>View model</strong></p>
+<pre><code class="lang-c#">public class SignupViewModel
+{
+    [Required]
+    public string FirstName { get; set; }
+    [Required]
+    public string LastName { get; set; }
+    [DisplayFormat(DataFormatString = &quot;{0:d/M/yyyy}&quot;, ApplyFormatInEditMode = true)]
+    public DateTime DateOfBirth { get; set; }
+
+    [Required]
+    [EmailAddress]
+    public string EmailAddress { get; set; }
+    [Required]
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
+    public MembershipType MembershipType { get; set; }
+
+    [Url]
+    public Uri Homepage { get; set; }
+    [DataType(DataType.MultilineText)]
+    public string Bio { get; set; }
+
+    [Required]
+    public bool TermsAndConditions { get; set; }
+}
+public enum MembershipType
+{
+    Standard,
+    Bonze,
+    Silver,
+    Gold,
+    Platinum
+}
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_rapid-6" role="tabpanel" data-tab="rapid-6" aria-hidden="true" hidden="hidden">
+
+<p>Here are the things that ChameleonForms has done for us:</p>
+<ul>
+<li>We've been able to declaratively declare the structure of the form rather than the presentation of the form - this is akin to the separation we get from declarative HTML separated from CSS and JS.</li>
+<li>The resulting markup for the form itself, the user messages, form sections, fields and navigation have all been sorted out, consistently, for us using a form template we've been able to select in <code>Startup.cs</code> (in this case using Bootstrap). The amount of HTML that is required to render that form (see HTML output tab) is a lot - it's easy to parts of that wrong if you need to specify the boilerplate manually, plus it then couples all of your forms to that specific template. With ChameleonForms we can swap out the template with a single line of code, for instance when you want to switch from Bootstrap to a more customised setup if you make it big and want to add some bespoke design love.</li>
+<li>All of the syntax is type-safe and thus benefits from a combination of intellisense to speed up writing and protection from runtime mistakes (e.g. id mismatches etc.). We also know that the form will definitely correctly bind to the view model on the server-side MVC controller without needing to perform slow UI or manual tests.</li>
+<li>All fields automatically have a combination of server-side validation and client-side validation logic and messages added in for us built on top of the ASP.NET Core MVC features.</li>
+<li>All fields are easily and tersely configurable to include hints and other tweaks to the rendered markup using typesafe / intellisense code.</li>
+</ul>
+<p>Documentation worth exploring to dive into more detail includes:</p>
+<ul>
+<li><a href="docs/index.html">Deep-dive on the example</a></li>
+<li><a href="docs/configuration.html">Configuring ChameleonForms</a></li>
+<li><a href="docs/bootstrap-template.html">Bootstrap template</a></li>
+<li><a href="docs/field-configuration.html">Field Configuration</a></li>
+<li><a href="docs/getting-started.html#how-are-chameleonforms-forms-structured">Form structure</a>: <a href="docs/the-form.html">Form</a>, <a href="docs/the-message.html">Message</a>, <a href="docs/the-section.html">Section</a>, <a href="docs/the-navigation.html">Navigation</a>, <a href="docs/field.html">Field</a>, <a href="docs/field-element.html">Field Element</a>, <a href="docs/field-label.html">Field Label</a> and <a href="docs/field-validation-html.html">Field Validation HTML</a></li>
+<li><a href="docs/form-templates.html">Using different form templates</a> and <a href="docs/custom-template.html">creating custom form templates</a></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p class="home-buttons"><a href="docs/index.html" class="btn btn-primary btn-lg">Tell me more?!</a> <a href="docs/getting-started.html" class="btn btn-primary btn-lg">I want to get started!</a></p>
+</article>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

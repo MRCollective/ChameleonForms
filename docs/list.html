@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>List Fields | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="List Fields | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="list-fields">List Fields</h1>
+
+<p>If you want the user to specify an item from an arbitrary list of objects you can use the <code>[ExistsIn]</code> attribute against a model property. The property just needs to be the same type as the property of the list element type that represents the &quot;value&quot; of the object, e.g.:</p>
+<pre><code class="lang-csharp">
+public class MyObject
+{
+    public string Name { get; set; }
+    public int Id { get; set; } // This is the &quot;value&quot; of the object
+}
+
+public class MyViewModel
+{
+    public MyViewModel() {
+        ListValues = new List&lt;MyObject&gt;
+        {
+            new MyObject { Id = 1, Name = &quot;First item&quot; },
+            new MyObject { Id = 2, Name = &quot;Second item&quot; },
+        };
+    }
+
+    ...
+    public List&lt;MyObject&gt; ListValues { get; set; }
+
+    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name))]
+    public int ListId { get; set; } // Same type as Id
+
+    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name))]
+    public int? NullableListId { get; set; } // You can specify the same type with the Nullable modifier
+}
+</code></pre>
+<p>The <code>ExistsIn</code> attribute looks like this:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+    /// Indicates that the attributed property value should exist within the list property referenced by the attribute.
+    /// &lt;/summary&gt;
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public class ExistsInAttribute : ValidationAttribute, IModelMetadataAware
+    {
+        /// &lt;summary&gt;
+        /// Application-wide configuration for whether or not to enable ExistsIn validation.
+        /// &lt;/summary&gt;
+        public static bool EnableValidation = true;
+
+        /// &lt;summary&gt;
+        /// Instantiates an &lt;see cref=&quot;ExistsInAttribute&quot;/&gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;listProperty&quot;&gt;The name of the property containing the list this property should reference.&lt;/param&gt;
+        /// &lt;param name=&quot;valueProperty&quot;&gt;The name of the property of the list items to use for the value&lt;/param&gt;
+        /// &lt;param name=&quot;nameProperty&quot;&gt;The name of the property of the list items to use for the name/label&lt;/param&gt;
+        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty);
+
+        /// &lt;summary&gt;
+        /// Instantiates an &lt;see cref=&quot;ExistsInAttribute&quot;/&gt;.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;listProperty&quot;&gt;The name of the property containing the list this property should reference.&lt;/param&gt;
+        /// &lt;param name=&quot;valueProperty&quot;&gt;The name of the property of the list items to use for the value&lt;/param&gt;
+        /// &lt;param name=&quot;nameProperty&quot;&gt;The name of the property of the list items to use for the name/label&lt;/param&gt;
+        /// &lt;param name=&quot;enableValidation&quot;&gt;Optional override for ExistsIn server-side validation configuration (if not specified, static configuration setting ExistsInAttribute.EnableValidation is used)&lt;/param&gt;
+        public ExistsInAttribute(string listProperty, string valueProperty, string nameProperty, bool enableValidation);
+    }
+</code></pre>
+<h2 id="default-html">Default HTML</h2>
+<h3 id="non-nullable-list-id-drop-down-with-no-empty-option">Non-nullable list id (drop-down with no empty option)</h3>
+<p>When using the Default Field Generator then the default HTML of the <a href="field-element.html">Field Element</a> for a non-nullable list id will be:</p>
+<pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot; required=&quot;required&quot;&gt;
+%foreach item x in Model.{ListProperty}%
+    &lt;option value=&quot;%x.{ValueProperty}%&quot;&gt;%x.{NameProperty}%&lt;/option&gt;
+%endforeach%
+&lt;/select&gt;
+</code></pre>
+<p>If the list id is non-nullable then the field will be Required regardless of whether you specified the <code>[Required]</code> attribute.</p>
+<p>So in the above example when outputting the Field Element HTML for the <code>ListId</code> property it would have (assuming you didn't specify any additional HTML attributes):</p>
+<pre><code class="lang-html">&lt;select data-val=&quot;true&quot; data-val-number=&quot;The field List id must be a number.&quot; data-val-required=&quot;The List id field is required.&quot; id=&quot;ListId&quot; name=&quot;ListId&quot; required=&quot;required&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;First item&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Second item&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+<h3 id="nullable-list-id-drop-down-with-empty-option">Nullable list id (drop-down with empty option)</h3>
+<p>When using the Default Field Generator then the default HTML of the <a href="field-element.html">Field Element</a> for a nullable list id will be:</p>
+<pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
+    &lt;option selected=&quot;selected&quot; value=&quot;&quot;&gt;%noneDescription%&lt;/option&gt;
+%foreach item x in Model.{ListProperty}%
+    &lt;option value=&quot;%x.{ValueProperty}%&quot;&gt;%x.{NameProperty}%&lt;/option&gt;
+%endforeach%
+&lt;/select&gt;
+</code></pre>
+<p>So in the above example when outputting the Field Element HTML for the <code>ListId</code> property it would have (assuming you didn't specify any additional HTML attributes):</p>
+<pre><code class="lang-html">&lt;select data-val=&quot;true&quot; data-val-number=&quot;The field List id must be a number.&quot; id=&quot;ListId&quot; name=&quot;ListId&quot;&gt;
+    &lt;option selected=&quot;selected&quot; value=&quot;&quot;&gt;&lt;/option&gt;
+    &lt;option value=&quot;1&quot;&gt;First item&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Second item&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+<h2 id="server-side-validation">Server-side validation</h2>
+<p>If you want to provide server-side validation protection of the value the user submitted then the <code>[ExistsIn]</code> attribute will automatically take care of this for you by default.</p>
+<p>If you don't want to perform server-side validation then you can either:</p>
+<ul>
+<li>Turn off Exists In validation globally by setting the appropriate setting in your <code>Application_Start</code> function (or a method it calls) within <code>Global.asax.cs</code>:</li>
+</ul>
+<pre><code class="lang-csharp">ExistsInAttribute.EnableValidation = false;
+</code></pre>
+<ul>
+<li>Turn off validation on a per-usage basis by setting <code>false</code> to the <code>enableValidation</code> value when adding the attribute, e.g.:</li>
+</ul>
+<pre><code class="lang-csharp">    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name), enableValidation: false)]
+    public int ListId { get; set; }
+</code></pre>
+<p>If you turn off validation globally, but want to enable it for a specific usage then you can pass <code>true</code> to the <code>enableValidation</code> attribute - any value specified for it will override the global default.</p>
+<p>If you want to take advantage of the server-side validation then the list needs to be populated when the <code>DefaultModelBinder</code> binds the property with the <code>[ExistsIn]</code> attribute specified. If the list is null at that point and validation is enabled then an exception will be thrown. If you want to specify the list at the right time then you have two options:</p>
+<ol>
+<li>Define the list in the model constructor (like the above example)</li>
+<li>Create a custom model binder for your model type that creates the list first
+<ul>
+<li>This allows you to populate the list using the database by dependency injecting your database access component into the model binder</li>
+<li>This also allows you to <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Tests/ModelBinders/">easily unit test the model binder</a></li>
+</ul>
+</li>
+</ol>
+<p>For example:</p>
+<pre><code class="lang-csharp">    [ModelBinder(BinderType = typeof(InvoiceSelectionViewModelBinder))]
+    public class InvoiceSelectionViewModel
+    {
+        ...
+    }
+    ...
+    public class InvoiceSelectionViewModelBinder : DefaultModelBinder
+    {
+        private readonly IQueryExecutor _queryExecutor;
+
+        public InvoiceSelectionViewModelBinder(IQueryExecutor queryExecutor)
+        {
+            _queryExecutor = queryExecutor;
+        }
+
+        public Task BindModelAsync(ModelBindingContext bindingContext)
+        {
+            var model = new InvoiceSelectionViewModel
+            {
+                Invoices = _queryExecutor.Execute(new GetInvoices(bindingContext.HttpContext.User.Identity))
+            };
+
+            bindingContext.Model = model;
+            return base.BindModelAsync(bindingContext);
+        }
+    }
+</code></pre>
+<h2 id="configurability">Configurability</h2>
+<h3 id="display-as-list-of-radio-buttons">Display as list of radio buttons</h3>
+<p>You can force a list field to display as a list of radio buttons rather than a drop-down using the <code>AsRadioList</code> method on the Field Configuration, e.g.:</p>
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.ListId).AsRadioList()
+@s.FieldFor(m =&gt; m.NullableListId).AsRadioList()
+</code></pre>
+<p>This will change the default HTML for the non-nullable list id field and the Required nullable list id field as shown above to:</p>
+<pre><code class="lang-html">&lt;ul&gt;
+%foreach item x in Model.{ListProperty} with increment i%
+    &lt;li&gt;&lt;input %validationAttrs% %htmlAttributes% id=&quot;%propertyName%_%i%&quot; name=&quot;%propertyName%&quot; required=&quot;required&quot; type=&quot;radio&quot; value=&quot;%x.{ValueProperty}%&quot;&gt; &lt;label for=&quot;%propertyName%_%i%&quot;&gt;%x.{NameProperty}%&lt;/label&gt;&lt;/li&gt;
+%endforeach%
+&lt;/ul&gt;
+</code></pre>
+<p>And it will change the default HTML for the non-Required nullable list id field as shown above to:</p>
+<pre><code class="lang-html">&lt;ul&gt;
+    &lt;li&gt;&lt;input %validationAttrs% %htmlAttributes% id=&quot;%propertyName%_1&quot; name=&quot;%propertyName%&quot; type=&quot;radio&quot; value=&quot;&quot;&gt; &lt;label for=&quot;%propertyName%_1&quot;&gt;%noneDescription%&lt;/label&gt;&lt;/li&gt;
+%foreach item x in Model.{ListProperty} with increment i%
+    &lt;li&gt;&lt;input %htmlAttributes% id=&quot;%propertyName%_%i+1%&quot; name=&quot;%propertyName%&quot; type=&quot;radio&quot; value=&quot;%x.{ValueProperty}%&quot;&gt; &lt;label for=&quot;%propertyName%_%i+1%&quot;&gt;%x.{NameProperty}%&lt;/label&gt;&lt;/li&gt;
+%endforeach%
+&lt;/ul&gt;
+</code></pre>
+<h3 id="change-the-text-description-of-none">Change the text description of none</h3>
+<p>When you display a nullable list id field as a drop-down or a non-Required nullable list id field as a list of radio buttons you can change the text that is used to display the <code>none</code> value to the user. By default the text used is an empty string for the drop-down and <code>None</code> for the radio button. To change the text simply use the <code>WithNoneAs</code> method, e.g.:</p>
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NullableListId).WithNoneAs(&quot;No value&quot;)
+</code></pre>
+<p>This will change the default HTML for the nullable list id field as shown above to:</p>
+<pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
+    &lt;option selected=&quot;selected&quot; value=&quot;&quot;&gt;No value&lt;/option&gt;
+    @* List item values as &lt;options&gt;... *@
+&lt;/select&gt;
+</code></pre>
+<h3 id="hide-empty-item">Hide empty item</h3>
+<p>If you have a nullable list id field as a drop-down or a non-Required nullable list id field as a list of radio buttons then it will show the empty item and this item will be selected by default if the field value is null. If for some reason you want one of these fields, but you would also like to hide the empty item you can do so with the <code>HideEmptyItem</code> method in the Field Configuration, e.g.:</p>
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NullableListId).HideEmptyItem()
+</code></pre>
+<p>This will change the default HTML for the nullable list id field as shown above to:</p>
+<pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
+    @* List item values as &lt;options&gt;... *@
+&lt;/select&gt;
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/list.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

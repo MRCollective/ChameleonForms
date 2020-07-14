@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Form | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Form | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="form">Form</h1>
+
+<p>The Form is the root element of a ChameleonForms form; you create a Form by instantiating an <code>IForm&lt;TModel&gt;</code> within a <code>using</code> block. The start and end of the <code>using</code> block will output the start and end HTML for the form and the inside of the <code>using</code> block will contain the Form content.</p>
+<p>The <code>IForm&lt;TModel&gt;</code> interface looks like this and is in the <code>ChameleonForms</code> namespace:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+    /// Interface for a Chameleon Form.
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;    
+    public interface IForm&lt;TModel&gt; : IForm, IDisposable
+    {
+        /// &lt;summary&gt;
+        /// The HTML helper for the current view.
+        /// &lt;/summary&gt;
+        IHtmlHelper&lt;TModel&gt; HtmlHelper { get; }
+        /// &lt;summary&gt;
+        /// The template renderer for the current view.
+        /// &lt;/summary&gt;
+        IFormTemplate Template { get; }
+        /// &lt;summary&gt;
+        /// Writes a HTML String directly to the view's output.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;htmlContent&quot;&gt;The HTML to write to the view's output&lt;/param&gt;
+        void Write(IHtmlContent htmlContent);
+
+        /// &lt;summary&gt;
+        /// The field generator for the given field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;property&quot;&gt;The property to return the field generator for&lt;/param&gt;
+        IFieldGenerator GetFieldGenerator&lt;T&gt;(Expression&lt;Func&lt;TModel, T&gt;&gt; property);
+    }
+</code></pre>
+<p>ChameleonForms comes with a standard implementation of the <code>IForm&lt;TModel&gt;</code> interface that uses the <code>BeginForm</code> and <code>EndForm</code> methods in the given <a href="form-templates.html">form template</a> and returns an instance of the <code>DefaultFieldGenerator</code> class when asked for a Field Generator.</p>
+<h2 id="default-usage">Default usage</h2>
+<p>In order to get an instance of an <code>IForm&lt;TModel&gt;</code> using the <a href="configuration.html#default-global-config">default form template</a> (see below if <a href="#configuring-the-form-template">you want to adjust it on a per-form basis</a>) you can use the <code>BeginChameleonForm</code> extension method on the <code>HtmlHelper</code> that appears in MVC views, e.g.:</p>
+<pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm()) {
+    @* Form content goes here *@
+}
+</code></pre>
+<p>The <code>BeginChameleonForm</code> extension method looks like this:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Constructs a &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with the default ChameleonForms template renderer.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var f = Html.BeginChameleonForm(...)) {
+        ///     ...
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;
+        /// &lt;param name=&quot;helper&quot;&gt;The HTML Helper for the current view&lt;/param&gt;
+        /// &lt;param name=&quot;action&quot;&gt;The action the form should submit to&lt;/param&gt;
+        /// &lt;param name=&quot;method&quot;&gt;The HTTP method the form submission should use&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes the form should use&lt;/param&gt;
+        /// &lt;param name=&quot;enctype&quot;&gt;The encoding type the form submission should use&lt;/param&gt;
+        /// &lt;returns&gt;A &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with an instance of the default form template renderer.&lt;/returns&gt;
+        public static IForm&lt;TModel&gt; BeginChameleonForm&lt;TModel&gt;(this IHtmlHelper&lt;TModel&gt; helper, string action = &quot;&quot;, FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        {
+            return new Form&lt;TModel&gt;(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
+        }
+</code></pre>
+<p>By default a self-submitting form that performs a HTTP post with the browser's default <code>enctype</code> (usually <code>application/x-www-form-urlencoded</code>) is outputted, but you can change the submit location, HTTP verb, <code>enctype</code> and add any <a href="html-attributes.html">HTML attributes you like</a> using the appropriate parameters.</p>
+<p>You can also <a href="different-form-models.html">create a form against a model type different from the page model</a>.</p>
+<h2 id="configuring-the-form-template">Configuring the form template</h2>
+<p>As you can see above, when using the <code>BeginChameleonForm</code> extension method it uses <code>helper.GetDefaultFormTemplate()</code> to determine what form template to use. <a href="configuration.html#default-global-config">By default</a> this is set to an instance of the <code>DefaultFormTemplate</code> class from the <code>ChameleonForms.Templates.Default</code> namespace.</p>
+<p>The way this works is the <a href="configuration.html">global configuration</a> will register an implementation of <code>IFormTemplate</code> with the service collection within your ASP.NET Core web application. The <code>helper.GetDefaultFormTemplate()</code> extension will then resolve that default template implementation from the request services:</p>
+<pre><code class="lang-cs">        /// &lt;summary&gt;
+        /// Gets the registered default form template from RequestServices.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;htmlHelper&quot;&gt;The HTML Helper&lt;/param&gt;
+        /// &lt;returns&gt;An instance of the default &lt;see cref=&quot;IFormTemplate&quot;/&gt;&lt;/returns&gt;
+        public static IFormTemplate GetDefaultFormTemplate(this IHtmlHelper htmlHelper)
+        {
+            return htmlHelper.ViewContext.HttpContext.RequestServices.GetRequiredService&lt;IFormTemplate&gt;();
+        }
+</code></pre>
+<p>If you would like to change the form template that is used then simply specify a different type when <a href="configuration.html#addservices-overloads">registering ChameleonForms with the service collection</a>:</p>
+<pre><code class="lang-cs">services.AddChameleonForms&lt;MyFormTemplate&gt;();
+</code></pre>
+<p>This will new up your form template using a parameterless constructor and then register it as a singleton against <code>IFormTemplate</code>.</p>
+<p>If you want more control on how your template is instantiated and/or registered then you can opt out of ChameleonForms registering your template and instead register it yourself, e.g.:</p>
+<pre><code class="lang-cs">services.AddChameleonForms(b =&gt; b.WithoutTemplateTypeRegistration());
+services.AddSingleton&lt;IFormTemplate&gt;(new MyFormTemplate(/* constructor parameters */));
+</code></pre>
+<p>If you want to use multiple Form Templates across your application you can <a href="custom-template.html">create your own extension methods</a> to allow for different form templates to be specified on a per-form basis.</p>
+<h2 id="html5-validation">HTML5 validation</h2>
+<p>By default, ChameleonForms opts out of HTML5 validation for you via the <code>novalidate=&quot;novalidate&quot;</code> attribute on the <code>&lt;form&gt;</code>. It does this so that you can retain control of client-side validation (e.g. through unobtrusive validation), which is typically able to yield a better user experience than HTML5 validation.</p>
+<p>If you want to override this behaviour you can configure your own form template.</p>
+<h2 id="default-html">Default HTML</h2>
+<h3 id="begin-html">Begin HTML</h3>
+<pre><code class="lang-html">&lt;form action=&quot;%action%&quot; method=&quot;%method%&quot; (enctype=&quot;%enctype%&quot;) (%htmlAttributes%) novalidate=&quot;novalidate&quot;&gt;
+</code></pre>
+<h3 id="end-html">End HTML</h3>
+<pre><code class="lang-html">&lt;/form&gt;
+</code></pre>
+<h2 id="twitter-bootstrap-3-html">Twitter Bootstrap 3 HTML</h2>
+<p>Same as default.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/the-form.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

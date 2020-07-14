@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ChameleonForms Breaking Changes | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="ChameleonForms Breaking Changes | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="docs/favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="chameleonforms-breaking-changes">ChameleonForms Breaking Changes</h1>
+
+<p>This file has all breaking changes across ChameleonForms versions.</p>
+<h1 id="version-400-beta">Version 4.0.0-beta</h1>
+<h2 id="net-framework-no-longer-supported">.NET Framework no longer supported</h2>
+<p>.NET Framework is no longer supported. ChameleonForms now works against .NET Core 3.1 onwards.</p>
+<h3 id="reason">Reason</h3>
+<p>ChameleonForms has been upgraded to support ASP.NET Core MVC. It's much easier to just support .NET Core 3.1 rather than try and target older versions of .NET Core or .NET Framework.</p>
+<h3 id="workaround">Workaround</h3>
+<p>If you want to support .NET Full Framework with MVC 5 then check out v3.0.3 of the <a href="https://www.nuget.org/packages/ChameleonForms/3.0.3">NuGet package</a> and <a href="https://chameleonforms.readthedocs.io/en/3.0.3/">documentation</a>. If you want to use a different version of .NET Core then <a href="https://github.com/MRCollective/ChameleonForms/issues">raise an issue</a> to discuss adding that support.</p>
+<h2 id="displayformatstring-no-longer-used">DisplayFormatString no longer used</h2>
+<p>Support in ChameleonForms for detecting format strings for display of value in the form field as well as DateTime support has been modified to use <code>EditFormatString</code> rather than <code>DisplayFormatString</code>.</p>
+<h3 id="reason-1">Reason</h3>
+<p>Given ChameleonForms is used for edit scenarios it made sense to use the edit format string rather than the display format string.</p>
+<h3 id="workaround-1">Workaround</h3>
+<p>Change all affected instances of <code>[DisplayFormat(...)]</code> to use the format for editing via the <code>ApplyFormatInEditMode = true</code> property on the attribute.</p>
+<h2 id="removed-requiredflagsenum">Removed <code>[RequiredFlagsEnum]</code></h2>
+<p>The <code>[RequiredFlagsEnum]</code> attribute has been removed in favour of support for using the standard <code>[Required]</code> attribute on flags enum fields with server-side validation.</p>
+<h3 id="reason-2">Reason</h3>
+<p>It's much more intuitive and discoverable to use <code>[Required]</code> than the strange <code>[RequiredFlagsEnum]</code> deviation. Upgrading to .NET Core made it possible to implement this support.</p>
+<h3 id="workaround-2">Workaround</h3>
+<p>Find all instances of <code>[RequiredFlagsEnum]</code> and replace with <code>[Required]</code>.</p>
+<h2 id="removed-formtemplatedefault">Removed <code>FormTemplate.Default</code></h2>
+<p>Overriding the default form template is no longer done using <code>FormTemplate.Default</code>, which has been removed.</p>
+<h3 id="reason-3">Reason</h3>
+<p>It's much nicer to move away from non-threadsafe statics and instead use dependency injection. The migration to .NET Core allowed this to be easily implemented and is a more idiomatic way of configuring the library.</p>
+<h3 id="workaround-3">Workaround</h3>
+<p>Change any call to <code>FormTemplate.Default</code> with an appropriate <a href="https://chameleonforms.readthedocs.io/en/latest/configuration/">ChameleonForms configuration call</a>.</p>
+<h2 id="chameleonforms-requires-registration">ChameleonForms requires registration</h2>
+<p>ChameleonForms now needs to be registered to work, rather than automatic registration via WebActivator.</p>
+<h3 id="reason-4">Reason</h3>
+<p>The idiomatic way to register libraries in .NET Core is via the service collection. This also gives much more explicit control over configuration.</p>
+<h3 id="workaround-4">Workaround</h3>
+<p>Remove any existing <code>AppStart.cs</code> or <code>AppStart.TwitterBootstrap.cs</code> files added by ChameleonForms and instead call <code>services.AddChameleonForms()</code> in your <code>Startup.cs</code> <a href="https://chameleonforms.readthedocs.io/en/latest/configuration/">or one of the variants of that call</a>. See also <a href="https://chameleonforms.readthedocs.io/en/latest/getting-started/">Getting Started</a></p>
+<h2 id="client-side-css-and-javascript-no-longer-automatically-registered">Client-side CSS and JavaScript no longer automatically registered</h2>
+<p>Client-side CSS and JavaScript files are no longer automatically registered with a bundle.</p>
+<h3 id="reason-5">Reason</h3>
+<p>.NET Core doesn't use bundles anymore.</p>
+<h3 id="workaround-5">Workaround</h3>
+<p>The client-side files are copied into <code>wwwroot/libs/chameleonforms</code> - simply reference the CSS and/or JavaScript files you want to use within the relevant parts of your site e.g. <code>_Layout.cshtml</code>, <code>_ValidationScriptsPartial.cshtml</code>, etc.</p>
+<h2 id="ihtmlstring---ihtmlcontent"><code>IHtmlString</code> -&gt; <code>IHtmlContent</code></h2>
+<p>All methods in ChameleonForms that returned or took <code>IHtmlString</code> parameters, and all classes that extended <code>IHtmlString</code> now return/take/extend <code>IHtmlContent</code>.</p>
+<h3 id="reason-6">Reason</h3>
+<p><code>IHtmlContent</code> is the .NET Core equivalent of <code>IHtmlString</code>.</p>
+<h3 id="workaround-6">Workaround</h3>
+<p>Change any of your classes / methods that rely on <code>IHtmlString</code> to instead use <code>IHtmlContent</code>.</p>
+<h2 id="twitter-bootstrap-template">Twitter Bootstrap template</h2>
+<p>The <code>TwitterBootstrapFormTemplate</code> has been renamed to <code>TwitterBootstrap3FormTemplate</code> and no longer has a seprate NuGet package.</p>
+<h3 id="reason-7">Reason</h3>
+<p>Bootstrap has a version 4 and soon a version 5 now so it made sense to be explicit about the version number. The separate NuGet package mostly was about adding in CSS / JavaScript files, which is taken care of differently now (see above).</p>
+<h3 id="workaround-7">Workaround</h3>
+<p>Rename any usage of <code>TwitterBootstrapFormTemplate</code> to <code>TwitterBootstrap3FormTemplate</code>. Manually add in references to relevant CSS and JS files. See <a href="https://chameleonforms.readthedocs.io/en/latest/bootstrap-template/">Twitter Bootstrap Template</a> for more details.</p>
+<h2 id="html5-validation-turned-off">HTML5 validation turned off</h2>
+<p>The <code>DeFaultFormTemplate</code> and <code>TwitterBootstrapFormTemplate</code> now add <code>novalidate=&quot;novalidate&quot;</code> to the <code>&lt;form&gt;</code> element outputted from <code>Html.BeginChameleonForm</code>.</p>
+<h3 id="reason-8">Reason</h3>
+<p>We now make use of HTML5 attributes like <code>required</code>, <code>type=&quot;number&quot;</code>, etc. and the user experience for HTML5 validation is poor compared to things like unobtrusive validation. Beause of this we turn off HTML5 validation by default.</p>
+<h3 id="workaround-8">Workaround</h3>
+<p>If you want to have HTML5 validation you can create your own form template that doesn't add the <code>novalidate</code> attribute. We plan on adding configurability to the specification of the client-side validation in the future, so if you are in this situation feel free to <a href="https://github.com/MRCollective/ChameleonForms/issues">raise an issue</a> to discuss adding that support.</p>
+<h1 id="version-300">Version 3.0.0</h1>
+<h2 id="flags-enum-support">Flags enum support</h2>
+<p>Enums marked with the <code>[Flags]</code> attribute will now show as multiple select elements (or checkboxes when displaying as a list).</p>
+<h3 id="reason-9">Reason</h3>
+<p>Support has been added for flags enums; these make sense as multiple-select controls since a flags enum can support multiple values.</p>
+<h3 id="workaround-9">Workaround</h3>
+<p>Create a enum class without the <code>[Flags]</code> attribute with the same values and bind to that instead.</p>
+<h1 id="version-200">Version 2.0.0</h1>
+<h2 id="deprecated-withoutlabel">Deprecated <code>WithoutLabel</code></h2>
+<p>Deprecated <code>WithoutLabel</code> method on <code>IFieldConfiguration</code>. It still works (for now), but the method has been marked with the <code>[Obsolete]</code> attribute.</p>
+<h3 id="reason-10">Reason</h3>
+<p>The method has been renamed to <code>WithoutLabelElement</code> since it more closely reflects what the method does.</p>
+<h3 id="workaround-10">Workaround</h3>
+<p>Change all instances of <code>WithoutLabel</code> to <code>WithoutLabelElement</code>.</p>
+<h2 id="removed-readonlyconfiguration-class">Removed <code>ReadOnlyConfiguration</code> class</h2>
+<p>Remove the <code>ReadOnlyConfiguration</code> public class.</p>
+<h3 id="reason-11">Reason</h3>
+<p>The class was redundant, because it just wrapped calls to <code>FieldConfiguration</code> instance. Implementing <code>IReadOnlyConfiguration</code> in <code>FieldCofiguration</code> class has more sense</p>
+<h3 id="workaround-11">Workaround</h3>
+<p>The <code>ReadonlyConfiguration</code> class expected not to be widely using. In case of using remove reference to he class and/or move possible implementation to custom wrapper around <code>FieldConfiguration</code></p>
+<h2 id="removed-ttemplate-type-parameter-from-form-component-classes">Removed <code>TTemplate</code> type parameter from form component classes</h2>
+<p>Removed the <code>TTemplate</code> type parameter from all of the form component classes. This will only affect you if you created custom form components e.g. you extended <code>Component</code>, <code>Form</code>, <code>Section</code>, <code>Naviation</code>, etc.</p>
+<h3 id="reason-12">Reason</h3>
+<p>It made extensibility harder to have to pass that type around everywhere and it wasn't really being used. Using polymorphism with a property of type <code>IFormTemplate</code> made more sense.</p>
+<h3 id="workaround-12">Workaround</h3>
+<p>You need to change any custom components to simply remove the template type. If you custom component relied on that template type for strong typing then you can follow the example of the <code>RandomComponent</code> example in the source: <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Forms/Components/RandomComponent.cs">https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Forms/Components/RandomComponent.cs</a>.</p>
+<h1 id="version-09116">Version 0.9.116</h1>
+<h2 id="removed-aslist">Removed <code>AsList</code></h2>
+<p>The <code>AsList</code> method on the <code>IFieldConfiguration</code> interface has been removed in favour of <code>AsRadioList</code> and <code>AsCheckboxList</code>.</p>
+<h3 id="reason-13">Reason</h3>
+<p>We feel this is more discoverable and intention revealing than <code>AsList</code>.</p>
+<h3 id="workaround-13">Workaround</h3>
+<p>Change any instances of using <code>@s.FieldFor(m =&gt; m.SomeField).AsList()</code> to <code>@s.FieldFor(m =&gt; m.SomeField).AsRadioList()</code> or <code>@s.FieldFor(m =&gt; m.SomeField).AsCheckboxList()</code>.</p>
+<h1 id="version-0989">Version 0.9.89</h1>
+<h2 id="removed-fieldfor-extension-method-from-form">Removed <code>FieldFor</code> extension method from <code>Form</code></h2>
+<p>The <code>FieldFor</code> extension method on the <code>Form</code> has been deprecated in favour of a <code>FieldElementFor</code> method.</p>
+<h3 id="reason-14">Reason</h3>
+<p>This fits in more consistently with the nomenclature of ChameleonForms given that the method outputs the Field Element rather than the Field.</p>
+<h3 id="workaround-14">Workaround</h3>
+<p>Change any instances of using <code>@f.FieldFor(m =&gt; m.SomeField)</code> to <code>@f.FieldElementFor(m =&gt; m.SomeField)</code>.</p>
+<h1 id="version-0981">Version 0.9.81</h1>
+<h2 id="moved-defaultformtemplate-to-chameleonformstemplatesdefault">Moved <code>DefaultFormTemplate</code> to <code>ChameleonForms.Templates.Default</code></h2>
+<p>The <code>DefaultFormTemplate</code> class has been moved to the <code>ChameleonForms.Templates.Default</code> namespace.</p>
+<h3 id="reason-15">Reason</h3>
+<p>ChameleonForms now has more than one built-in template so it made sense to move them into their own namespaces.</p>
+<h3 id="workaround-15">Workaround</h3>
+<p>If you referenced the <code>DefaultFormTemplate</code> at all then you will need to change the using statement from <code>ChameleonForms.Templates</code> to <code>ChameleonForms.Templates.Default</code>.</p>
+<h1 id="version-0939">Version 0.9.39</h1>
+<h2 id="existsin-server-side-validation"><code>[ExistsIn]</code> server-side validation</h2>
+<p>The <code>[ExistsIn]</code> attribute now performs server-side validation by default to ensure the selected value is in the list.</p>
+<p>You can opt-out of this validation globally by setting ExistsInAttribute.EnableValidation or per-usage by passing a boolean enableValidation parameter to the ExistsIn attribute.</p>
+<p>If you do use validation, the attribute requires that the list is populated at validation time in the ASP.NET MVC pipeline. This requires you to either fill the list in the constructor of your view model or to create a model binder to populate the list.</p>
+<p>If you don't populate the list before the validator runs then ExistsIn will throw an exception on trying to validate - you should either populate the list or disable validation to resolve this.</p>
+<h3 id="reason-16">Reason</h3>
+<p>We wanted to provide in-built server-side validation of fields using the <code>[ExistsIn]</code> attribute and the easiest way to do that is to hook into the validation pipeline in ASP.NET MVC.</p>
+<h3 id="workaround-16">Workaround</h3>
+<p>If for some reason you don't want server-side validation to run then don't populate your list until after the validation pipeline runs. If you need to be able to opt out of validation, but still populate the list before then or to tweak the validation in some other way then <a href="https://github.com/MRCollective/ChameleonForms/issues">raise an issue</a> so we can add that functionality.</p>
+<h1 id="version-0920">Version 0.9.20</h1>
+<h2 id="buttons-chain-htmlattributes-methods-rather-than-taking-as-parameter">Buttons chain HtmlAttributes methods rather than taking as parameter</h2>
+<p>The submit/reset/button methods in Navigation now chain <code>HtmlAttributes</code> methods off the end rather than taking them as a parameter.</p>
+<h3 id="reason-17">Reason</h3>
+<p>This provides a much nicer experience when using these methods in your view - you don't have to new up a <code>HtmlAttributes</code> object anymore.</p>
+<h3 id="workaround-17">Workaround</h3>
+<p>If you are using the old methods then change your <code>HtmlAttributes</code> object to use the same parameters that were in there, but by chaining method calls off of the end of the method.</p>
+<p>For example:</p>
+<pre><code>@n.Submit(&quot;Submit&quot;, new HtmlAttributes().AddClass(&quot;btn&quot;))
+</code></pre>
+<p>Becomes:</p>
+<pre><code>@n.Submit(&quot;Submit&quot;).AddClass(&quot;btn&quot;)
+</code></pre>
+<p>If you were passing in the <code>HtmlAttributes</code> object to the view rather than generating it inline then use <code>.Attrs(existingHtmlAttributesObject)</code></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/BREAKING_CHANGES.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

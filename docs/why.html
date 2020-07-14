@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Why is ChameleonForms needed? | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Why is ChameleonForms needed? | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="why-is-chameleonforms-needed">Why is ChameleonForms needed?</h1>
+
+<p><a href="why.html#where-does-chameleonforms-fit-in">tl;dr</a></p>
+<h2 id="the-core-problems-with-html-form-development">The core problems with HTML form development</h2>
+<p>Building HTML forms is a pain. All developers know it. There are so many places where inconsistencies and repetition come into play and make it harder to read, write and maintain the code (bare with us - we know ASP.NET Core MVC solves a lot of this):</p>
+<ul>
+<li>There is repetition in referencing each field in the form in numerous locations - setting default values, specifying server-side validation rules, specifying client-side validation rules and printing out the HTML for each field</li>
+<li>Writing out the HTML for the form is tedious because 95% of the time each field has practically the same boilerplate template HTML (e.g. <code>&lt;li&gt;</code> with label followed by field, <code>&lt;dl&gt;</code> with label in the <code>&lt;dt&gt;</code> and element in the <code>&lt;dd&gt;</code>, etc.) except for the field id (and the label - usually based on the field id) repeated a few times, and occasionally a different type of form control (e.g. <code>select</code> or <code>textarea</code>)
+<ul>
+<li>It's the other 5% of cases that are interesting and you want to spend most of your time on - not the boring 95%!</li>
+</ul>
+</li>
+<li>Similarly, the repetition between server-side and client-side validation is tedious</li>
+<li>You need to be careful when printing out the HTML to ensure there is no possibility of HTML injection (i.e. you need to use <code>WebUtility.HtmlEncode</code> (ASP.NET Core), <code>HTMLEditFormat</code> (ColdFusion), <code>htmlentities</code> (PHP), etc.) when printing out all variables</li>
+<li>You need to be careful to include labels for all fields for accessibility reasons and ensure their ids match up; it’s easy to miss a few if you are copying and pasting the same HTML for each field and changing a few attributes</li>
+</ul>
+<p>Without continuing further with other reasons, the above list serves to demonstrate that, at its core, the process of creating a form is a tedious and repetitive process and certainly does not conform to the <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY principle</a>. This means that (without &quot;help&quot;) form creation is often an error-prone process, resulting in inconsistencies, hard-to-maintain code and potential security, usability and accessibility holes.</p>
+<h2 id="enter-aspnet-mvc">Enter ASP.NET MVC</h2>
+<p>Of course a lot of the problems that we described above are not an issue when using ASP.NET Core MVC:</p>
+<ul>
+<li>The compiler fixes a lot of the repetition issues when referencing the field in multiple places, since intellisense and the compiler make sure you consistently reference a property in your model class</li>
+<li>You can easily output the HTML for the label or the field using the HTML helpers</li>
+<li>The <a href="http://robdmoore.id.au/blog/2012/04/27/unobtrusive-validation-in-asp-net-mvc-3-and-4/">validation annotations and the validation model</a> allows you to easily and tersely specify server-side validation rules</li>
+<li>The unobtrusive client-side validation model allows you to leverage your server-side validation rules in the client-side</li>
+<li>The Razor templating language (assuming it's being used correctly) pretty much <a href="http://www.bryanavery.co.uk/post/2013/05/15/Cross-Site-Attacks-XSS-.aspx">removes all risk of unescaped HTML appearing on the page</a> (in combination with the HTML form helpers providing adequate protection internally)</li>
+<li>It's more likely that the label <code>for</code> will match the field <code>id</code> given both are generated by a lambda expression referencing a class property - you just need to make sure the selected property matches up</li>
+<li>Using EditorTemplates it is possible (albeit a lot of work) to specify the <a href="http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-1-introduction.html">template that you want to use for your boilerplate across the whole application</a></li>
+</ul>
+<h2 id="so-whats-the-problem-then-lets-go-home">So what's the problem then; let's go home</h2>
+<p>ASP.NET MVC covers most of the pain points with building HTML forms that were described above. There are however a few areas that we feel aren't covered adequately:</p>
+<ul>
+<li>If you are using <code>Html.EditorForModel</code>
+<ul>
+<li>You have little flexibility to account for the 5% of cases (let alone any little tweaks you want to make to fields that can't be accommodated with the attributes that Editor Templates know about - e.g. hints, html attributes, multiple fields appearing together, etc.)</li>
+<li>You will have inconsistencies across the site if you sometimes use <code>Html.EditorForModel</code> and sometimes don't - this makes the site harder to understand and maintain for new developers and makes it harder to consistently apply changes to your templates</li>
+<li>You need to create a <a href="http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-3-default-templates.html">confusing editor template with reflection in it</a> to change the default form template (but at least you can specify it in one place making it easier to modify consistently across your application when your template changes)</li>
+</ul>
+</li>
+<li>If you are not using <code>Html.EditorForModel</code> (i.e. you specify each field individually using built-in HTML Helpers or Tag Helpers)
+<ul>
+<li>It's possible to incorrectly link the wrong property for the label for a field (e.g. a copy-paste error) - usually it should be picked up though since the label text will also not match</li>
+<li>You need to repeat the template boilerplate both within and across your forms (if using <code>Html.EditorFor</code> or <code>Html.TextBoxFor</code> etc.), or you are required to create a new control for every type of property you are using (if using the <a href="http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-5-master-page-templates.html">master template technique</a>)</li>
+<li>You need to specify the type of control to output (e.g. <code>&lt;select&gt;</code>, <code>&lt;input&gt;</code>, etc. rather than having it inferred from your model)</li>
+</ul>
+</li>
+<li>You don't have support for things like enums showing as a select list</li>
+<li>It's difficult to switch output behaviour on a per-field basis e.g. what if you want a particular enum field to display as a list of radio buttons rather than a select list</li>
+<li>The support for all of the scenarios around handling when a field is required or not required and when to show an empty/default option are not adequately covered for (even though it's something that comes up a lot)</li>
+</ul>
+<h2 id="where-does-chameleonforms-fit-in">Where does ChameleonForms fit in?</h2>
+<p>ChameleonForms was created to leverage the advantages of ASP.NET Core MVC while bridging the gap of the deficiencies described above. It's also designed to provide a lot of nice functionality to help make form development <em>better</em>.</p>
+<p>ChameleonForms:</p>
+<ul>
+<li>Provides a first-class templating model that allows you to <strong>quickly and easily define new form templates and swap them out</strong></li>
+<li>Encourages you to specify the structure of your form in a way that provides a lot of <strong>consistency within and across your forms</strong></li>
+<li>Encourages a <strong>minimum of repetition</strong> - most of the time you only need to specify the property of the field you are outputting and it will work out everything else (label, validation HTML, field type based on model metadata, etc.)</li>
+<li>Gives you the flexibility to <strong>make tweaks to each field quickly, easily and consistently</strong> using a discoverable, fluent API</li>
+<li>Has a lot of nice support in <strong>handling some of the things that are a pain in out-of-the-box ASP.NET Core MVC</strong>:
+<ul>
+<li>binding and validating dates in different formats</li>
+<li>showing enums as drop-down lists or lists of radio buttons</li>
+<li>correctly handling multiple-select controls</li>
+<li>correctly handling default options in drop-down lists and radio/checkbox lists</li>
+</ul>
+</li>
+<li>Has an extensibility model that allows you to <strong>redefine and extend it at almost every level</strong></li>
+<li>Has a very <strong>comprehensive set of unit tests and UI-automation tests</strong> to give confidence that it has been produced to a high standard of quality and is unlikely to have regressions</li>
+<li>Deliberately doesn't provide a equivalent of the &quot;magic&quot; <code>Html.EditorForModel</code> since we believe that you should be able to <strong>break out into HTML at any point in the form</strong> as well as have the per-field flexibility described above</li>
+</ul>
+<h2 id="flexibility">Flexibility</h2>
+<p>We've mentioned it a few times in this post, but the 5% of cases where you need to break the mould and do something a bit different is a really important consideration. All too often people use forms solutions that are over-generalised and over-architected; this will <em>always</em> lead to situations where it doesn't quite fit and you have to abandon the whole library for a particular form.</p>
+<p>At that point you have two problems:</p>
+<ul>
+<li>You have inconsistencies in the codebase (making understandability and maintainability harder)</li>
+<li>You have whole forms that duplicate the boilerplate template</li>
+</ul>
+<p>When this happens this is a good indicator that whatever solution you are using goes too far. Ideally, forms libraries should accept that you can't cover all cases and make it easy to opt out of using the library in the middle of a form. As explained above, addressing this is a core design element of ChameleonForms.</p>
+<h2 id="display-templates">Display Templates</h2>
+<p>One aspect that hasn't been covered, which is somewhat unique to ASP.NET Core MVC is Display Templates. This is one area that ChameleonForms doesn't cover in any way. This is actually a deliberate decision because we generally find that Display Templates aren't very useful - particularly with the terseness of Razor. Generally you will want more flexibility than Display Templates provide. If you find Display Templates useful and use them extensively then ChameleonForms might not be the right library for you (but we'd love to hear about your usecase so <a href="https://github.com/MRCollective/ChameleonForms/issues">please submit an issue</a>!).</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/why.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

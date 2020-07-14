@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>HTML Attributes | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="HTML Attributes | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="html-attributes">HTML Attributes</h1>
+
+<p>HTML Attributes in ChameleonForms provides the ability to specify a set of HTML attributes in a fluent, expressive way. Specifying HTML Attributes is done by chaining calls to the methods on the <code>HtmlAttributes</code> class.</p>
+<p>The <code>HtmlAttributes</code> class looks like this and is in the <code>ChameleonForms</code> namespace:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+    /// Represents a set of HTML attributes.
+    /// &lt;/summary&gt;
+    public class HtmlAttributes : IHtmlContent
+    {
+        /// &lt;summary&gt;
+        /// Dictionary of the attributes currently stored in the object.
+        /// &lt;/summary&gt;
+        public IDictionary&lt;string, string&gt; Attributes { get { return _tagBuilder.Attributes; } }
+
+        /// &lt;summary&gt;
+        /// Constructs a &lt;see cref=&quot;HtmlAttributes&quot;/&gt; object using lambda methods to express the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// var h = new HtmlAttributes(style =&gt; &quot;width: 100%;&quot;, cellpadding =&gt; 0, @class =&gt; &quot;class1 class2&quot;, src =&gt; &quot;http://url/&quot;, data_somedata =&gt; &quot;\&quot;rubbi&amp;amp;h\&quot;&quot;);
+        /// &lt;/example&gt;
+        /// &lt;param name=&quot;attributes&quot;&gt;A list of lambas where the lambda variable name is the name of the attribute and the value is the value&lt;/param&gt;
+        public HtmlAttributes(params Func&lt;object, object&gt;[] attributes);
+
+        /// &lt;summary&gt;
+        /// Constructs a &lt;see cref=&quot;HtmlAttributes&quot;/&gt; object using a dictionary to express the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// var h = new HtmlAttributes(new Dictionary&amp;lt;string, object&amp;gt; {{&quot;style&quot;, &quot;width: 100%;&quot;}, {&quot;cellpadding&quot;, 0}, {&quot;class&quot;, &quot;class1 class2&quot;}, {&quot;src&quot;, &quot;http://url/&quot;}, {&quot;data-somedata&quot;, &quot;\&quot;rubbi&amp;amp;h\&quot;&quot;}});
+        /// &lt;/example&gt;
+        /// &lt;param name=&quot;attributes&quot;&gt;A dictionary of attributes&lt;/param&gt;
+        public HtmlAttributes(IDictionary&lt;string, object&gt; attributes);
+
+        /// &lt;summary&gt;
+        /// Constructs a &lt;see cref=&quot;HtmlAttributes&quot;/&gt; object using an anonymous object to express the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// var h = new HtmlAttributes(new { style = &quot;width: 100%;&quot;, cellpadding = 0, @class = &quot;class1 class2&quot;, src = &quot;http://url/&quot;, data_somedata = &quot;\&quot;rubbi&amp;amp;h\&quot;&quot; });
+        /// &lt;/example&gt;
+        /// &lt;param name=&quot;attributes&quot;&gt;An anonymous object of attributes&lt;/param&gt;
+        public HtmlAttributes(object attributes);
+
+        /// &lt;summary&gt;
+        /// Adds a CSS class (or a number of CSS classes) to the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;class&quot;&gt;The CSS class(es) to add&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;HtmlAttributes&quot;/&gt; attribute to allow for method chaining&lt;/returns&gt;
+        public HtmlAttributes AddClass(string @class);
+        
+        /// &lt;summary&gt;
+        /// Set the id attribute.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;id&quot;&gt;The text to use for the id&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;HtmlAttributes&quot;/&gt; attribute to allow for method chaining&lt;/returns&gt;
+        public HtmlAttributes Id(string id);
+
+        /// &lt;summary&gt;
+        /// Sets the disabled attribute.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;HtmlAttributes&quot;/&gt; attribute to allow for method chaining&lt;/returns&gt;
+        public HtmlAttributes Disabled(bool disabled = true);
+
+        /// &lt;summary&gt;
+        /// Sets the readonly attribute.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;HtmlAttributes&quot;/&gt; attribute to allow for method chaining&lt;/returns&gt;
+        public HtmlAttributes Readonly(bool @readonly = true);
+
+        /// &lt;summary&gt;
+        /// Sets the required attribute.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;HtmlAttributes&quot;/&gt; attribute to allow for method chaining&lt;/returns&gt;
+        public HtmlAttributes Required(bool required = true);
+
+        /// &lt;summary&gt;
+        /// Returns whether or not a value is set for the given attribute.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;key&quot;&gt;The name of the HTML attribute to check&lt;/param&gt;
+        /// &lt;returns&gt;Whether or not there is a value set for the attribute&lt;/returns&gt;
+        public bool Has(string key);
+
+        /// &lt;summary&gt;
+        /// Adds or updates a HTML attribute with a given value.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;key&quot;&gt;The name of the HTML attribute to add/update&lt;/param&gt;
+        /// &lt;param name=&quot;value&quot;&gt;The value of the HTML attribute to add/update&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;HtmlAttributes&quot;/&gt; attribute to allow for method chaining&lt;/returns&gt;
+        public HtmlAttributes Attr(string key, object value);
+
+        /// &lt;summary&gt;
+        /// Adds or updates a HTML attribute with using a lambda method to express the attribute.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// h.Attr(style =&gt; &quot;width: 100%;&quot;)
+        /// &lt;/example&gt;
+        /// &lt;param name=&quot;attribute&quot;&gt;A lambda expression representing the attribute to set and its value&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;HtmlAttributes&quot;/&gt; attribute to allow for method chaining&lt;/returns&gt;
+        public HtmlAttributes Attr(Func&lt;object, object&gt; attribute);
+
+        /// &lt;summary&gt;
+        /// Adds or updates a set of HTML attributes using lambda methods to express the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;attributes&quot;&gt;A list of lambas where the lambda variable name is the name of the attribute and the value is the value&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;HtmlAttributes&quot;/&gt; attribute to allow for method chaining&lt;/returns&gt;
+        public HtmlAttributes Attrs(params Func&lt;object, object&gt;[] attributes);
+
+        /// &lt;summary&gt;
+        /// Adds or updates a set of HTML attributes using a dictionary to express the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;attributes&quot;&gt;A dictionary of attributes&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;HtmlAttributes&quot;/&gt; attribute to allow for method chaining&lt;/returns&gt;
+        public HtmlAttributes Attrs(IDictionary&lt;string, object&gt; attributes);
+
+        /// &lt;summary&gt;
+        /// Adds or updates a set of HTML attributes using anonymous objects to express the attributes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;attributes&quot;&gt;An anonymous object of attributes&lt;/param&gt;
+        /// &lt;returns&gt;The &lt;see cref=&quot;HtmlAttributes&quot;/&gt; attribute to allow for method chaining&lt;/returns&gt;
+        public HtmlAttributes Attrs(object attributes);
+
+        /// &lt;summary&gt;
+        /// Implicitly convert from a dictionary to a new &lt;see cref=&quot;HtmlAttributes&quot;/&gt; object.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;attributes&quot;&gt;The dictionary of HTML attributes&lt;/param&gt;
+        /// &lt;returns&gt;The new &lt;see cref=&quot;HtmlAttributes&quot;/&gt; object&lt;/returns&gt;
+        public static implicit operator HtmlAttributes(Dictionary&lt;string, object&gt; attributes);
+
+        /// &lt;inheritdoc /&gt;
+        public virtual void WriteTo(TextWriter writer, HtmlEncoder encoder);
+
+        /// &lt;summary&gt;
+        /// Returns the HTML attributes as a dictionary.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;A dictionary of HTML attributes compatible with the standard ASP.NET MVC method signatures&lt;/returns&gt;
+        public IDictionary&lt;string, object&gt; ToDictionary();
+    }
+</code></pre>
+<p>The xmldoc comments above should give a pretty good indication of how each of those methods are meant to be used.</p>
+<p>The <a href="field-configuration.html">Field Configuration</a> wraps a HTML Attributes object and a lot of these methods also appear on that interface. The HTML Attributes can also be passed into the <a href="the-form.html">Form</a> and the <a href="the-section.html">Section</a> and can be chained from <a href="the-navigation.html">Navigation Buttons</a>.</p>
+<h2 id="default-usage">Default Usage</h2>
+<p>There are a number of choices when using HTML Attributes.</p>
+<h3 id="chaining">Chaining</h3>
+<p>If you are interacting with a method that returns a HTML Attributes object then you can simply chain method calls, e.g.:</p>
+<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
+    @n.Submit(&quot;Submit&quot;).Attr(&quot;data-something&quot;, &quot;value&quot;).AddClass(&quot;a-class&quot;).Id(&quot;buttonId&quot;)
+}
+</code></pre>
+<h3 id="instantiation">Instantiation</h3>
+<p>You can new up an instance and use one of the four constructors (empty constructor and method chaining, pass in an anonymous object, pass in a dictionary, or use lambda expressions.</p>
+<h3 id="instantiation-with-empty-constructor-and-method-chaining">Instantiation with empty constructor and method chaining</h3>
+<p>You can new up an instance and then chain methods off that instance, e.g.:</p>
+<pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes().AddClass(&quot;form&quot;).Id(&quot;someForm&quot;)) {
+    @* ... *@
+}
+</code></pre>
+<h3 id="instantiation-with-lambda-expressions">Instantiation with lambda expressions</h3>
+<pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes(@class =&gt; &quot;form&quot;, id =&gt; &quot;someForm&quot;)) {
+    @* ... *@
+}
+</code></pre>
+<p>If you want to output a HTML Attribute that has a <code>-</code> in the name then use a <code>_</code> in the variable name, e.g.:</p>
+<pre><code class="lang-csharp">new HtmlAttributes(data_something =&gt; &quot;value&quot;)
+</code></pre>
+<h3 id="instantiation-with-anonymous-object">Instantiation with anonymous object</h3>
+<p>You can convert an anonymous object to a HTML Attributes object, e.g.:</p>
+<pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm(htmlAttributes: new { @class=&quot;form&quot;, id=&quot;someForm&quot; }.ToHtmlAttributes())) {
+    @* ... *@
+}
+</code></pre>
+<p>If you want to output a HTML Attribute that has a <code>-</code> in the name then use a <code>_</code> in the property name, e.g.:</p>
+<pre><code class="lang-csharp">new {data_something =&gt; &quot;value&quot;}.ToHtmlAttributes()
+</code></pre>
+<h3 id="instantiation-with-dictionary">Instantiation with dictionary</h3>
+<p>You can convert a dictionary to a HTML Attributes object, e.g.:</p>
+<pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm(htmlAttributes: new Dictionary&lt;string, object&gt;{ {&quot;class&quot;, &quot;form&quot;}, {&quot;id&quot;, &quot;someForm&quot;} }.ToHtmlAttributes())) {
+    @* ... *@
+}
+</code></pre>
+<h2 id="outputting-html-attributes">Outputting HTML Attributes</h2>
+<p>There are a number of options when using a HTML Attributes object.</p>
+<h3 id="use-the-attributes-in-a-tag-builder">Use the attributes in a tag builder</h3>
+<p>You can use the HTML Attributes object with the <code>TagBuilder</code> class in MVC, e.g.:</p>
+<pre><code class="lang-csharp">var h = new HtmlAttributes().Id(&quot;id&quot;);
+var t = new TagBuilder(&quot;p&quot;);
+t.MergeAttributes(h.Attributes);
+</code></pre>
+<h3 id="output-directly-to-the-page">Output directly to the page</h3>
+<p>You may notice that the <code>HTMLAttributes</code> definition above extends <code>IHtmlContent</code>. As you might expect, this means you can directly output it to the page, e.g.</p>
+<pre><code class="lang-cshtml">@{
+    var h = new HtmlAttributes().Id(&quot;id&quot;);
+}
+&lt;p @h&gt;Text&lt;/p&gt;
+</code></pre>
+<p>It will automatically handle encoding attribute values to prevent HTML injection.</p>
+<h3 id="use-the-attributes-as-a-dictionary">Use the attributes as a dictionary</h3>
+<p>When you need ultimate flexibility then you can get the attributes out as a dictionary, e.g.:</p>
+<pre><code class="lang-csharp">var h = new HtmlAttributes().Id(&quot;id&quot;);
+var d1 = h.Attributes; // Dictionary&lt;string, string&gt;
+var d2 = h.ToDictionary(); // Dictionary&lt;string, object&gt;, many MVC methods take this type
+</code></pre>
+<h3 id="retrieve-the-attributes-as-an-encoded-string">Retrieve the attributes as an encoded string</h3>
+<p>If you need to retrive the attribute values as a string (already encoded), then you can use the <code>.ToHtmlString()</code> extension method.</p>
+<pre><code class="lang-csharp">var h = new HtmlAttributes().Id(&quot;id&amp;1&quot;);
+string s = h.ToHtmlString(); // &quot;id=\&quot;id&amp;amp;1\&quot;&quot;
+</code></pre>
+<h2 id="extending-html-attributes">Extending HTML Attributes</h2>
+<p>You can easily create your own methods on HTML Attributes by creating an extension method, e.g.:</p>
+<pre><code class="lang-csharp">public static HtmlAttributesExtensions 
+{
+    public static HtmlAttributes Coordinate(this HtmlAttributes attrs, Coordinate c)
+    {
+        return attrs.Attr(data_coordinate =&gt; JsonConvert.Serialize(c));
+    }
+}
+</code></pre>
+<p>Then you could do something like this:</p>
+<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
+    @n.Button(Model.Coordinate1.ToString()).Coordinate(Model.Coordinate1)
+    @n.Button(Model.Coordinate2.ToString()).Coordinate(Model.Coordinate2)
+    @n.Button(Model.Coordinate3.ToString()).Coordinate(Model.Coordinate2)
+}
+</code></pre>
+<h3 id="extending-navigation-buttons-specifically">Extending Navigation Buttons specifically</h3>
+<p><a href="the-navigation.html">Navigation Buttons</a> return a sub-class of <code>HtmlAttributes</code> called <code>ButtonHtmlAttributes</code>. This allows you to target extension methods specifically for buttons, which must then be invoked first before any of the methods targeting the more general <code>HtmlAttributes</code>. As an example consider the following extension method in the Twitter Bootstrap 3 template to add a size to the button:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Changes the button to use the given size.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @n.Submit(&quot;Submit&quot;).WithSize(ButtonSize.Large)
+        /// &lt;/example&gt;
+        /// &lt;param name=&quot;attrs&quot;&gt;The Html Attributes from a navigation button&lt;/param&gt;
+        /// &lt;param name=&quot;size&quot;&gt;The size of button&lt;/param&gt;
+        /// &lt;returns&gt;The Html Attribute object so other methods can be chained off of it&lt;/returns&gt;
+        public static ButtonHtmlAttributes WithSize(this ButtonHtmlAttributes attrs, ButtonSize size)
+        {
+            if (size != ButtonSize.Default)
+                attrs.AddClass(string.Format(&quot;btn-{0}&quot;, size.Humanize()));
+            return attrs;
+        }
+</code></pre>
+<h2 id="create-methods-that-chain-html-attributes">Create methods that chain HTML Attributes</h2>
+<p>Returning a HTML Attributes object from a method so that the user can chain attribute methods off it before outputting it in a view (like the <a href="the-navigation.html">Navigation Buttons</a>) can be tricky by default, so ChameleonForms provides a special way to handle this situation.</p>
+<p>If the HTML that you are outputting relies on the HTML Attributes to be defined, then you don't want to generate it until after the final chaining call is made. Luckily, you know when the final call is made because MVC will call the <code>ToHtmlString</code> method for you (since HtmlAttributes overrides the <code>IHtmlContent</code> interface).</p>
+<p>The only remaining problem is that you don't have control over the code in <code>ToHtmlString</code> since it's inside ChameleonForms, and in fact the <code>ToHtmlString</code> method returns the HTML for the attributes by default as shown above.</p>
+<p>The class you need to use in this case is <code>LazyHtmlAttributes</code>, which is in the <code>ChameleonForms</code> namespace. If you new up one of those and return it (but make the method return type <code>HtmlAttributes</code> then you have the ability to define what HTML is output when the <code>Write</code> method is called, but still allow <code>HtmlAttributes</code> method chaining until that happens.</p>
+<h3 id="simple-example">Simple example</h3>
+<p>If you created the following extension method on the HTML Helper:</p>
+<pre><code class="lang-csharp">    public static class HtmlExtensions
+    {
+        public static HtmlAttributes Paragraph(this HtmlHelper h, string paragraphText)
+        {
+            return new LazyHtmlAttributes(a =&gt;
+                {
+                    var t = new TagBuilder(&quot;p&quot;);
+                    t.SetInnerText(paragraphText);
+                    t.MergeAttributes(a.Attributes);
+                    return new HtmlString(t.ToString());
+                }
+            );
+        }
+    }
+</code></pre>
+<p>In this example, the lambda expression passed into the constructor is called when the eventual call to <code>Write</code> on the <code>HtmlAttributes</code> object returned from <code>Paragraph</code> is called. You can see at that point in time we can safely use the <code>Attributes</code> property since we know all of the method chaining will be finished at that point in time.</p>
+<p>In this case, if you put the following in your razor view:</p>
+<pre><code class="lang-cshtml">@Html.Paragraph(&quot;Display some text&quot;).Id(&quot;paragraphId&quot;).AddClass(&quot;a-class&quot;).Attr(data_some_data =&gt; &quot;{mydata:true}&quot;)
+</code></pre>
+<p>It would output the following HTML:</p>
+<pre><code class="lang-html">&lt;p class=&quot;a-class&quot; data-some-data=&quot;{mydata:true}&quot; id=&quot;paragraphId&quot;&gt;Display some text&lt;/p&gt;
+</code></pre>
+<p>Magic!</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/html-attributes.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

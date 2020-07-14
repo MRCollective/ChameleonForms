@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Creating custom form templates | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Creating custom form templates | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="creating-custom-form-templates">Creating custom form templates</h1>
+
+<p>To create a custom form template you need to have a class that derives from the <code>IFormTemplate</code> interface:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+        /// Allows the template the modify the field configuration for a particular field.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The type of model the form is being displayed for&lt;/typeparam&gt;
+        /// &lt;typeparam name=&quot;T&quot;&gt;The type of the property the field is being generated against&lt;/typeparam&gt;
+        /// &lt;param name=&quot;fieldGenerator&quot;&gt;The instance of the field generator that will be used to generate the field&lt;/param&gt;
+        /// &lt;param name=&quot;fieldGeneratorHandler&quot;&gt;The instance of the field generator handler that will be used to generate the field element&lt;/param&gt;
+        /// &lt;param name=&quot;fieldConfiguration&quot;&gt;The field configuration that is being used to configure the field&lt;/param&gt;
+        /// &lt;param name=&quot;fieldParent&quot;&gt;The parent component of the field&lt;/param&gt;
+        void PrepareFieldConfiguration&lt;TModel, T&gt;(IFieldGenerator&lt;TModel, T&gt; fieldGenerator, IFieldGeneratorHandler&lt;TModel, T&gt; fieldGeneratorHandler, IFieldConfiguration fieldConfiguration, FieldParent fieldParent);
+
+        /// &lt;summary&gt;
+        /// Creates the starting HTML for a form.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;action&quot;&gt;The form action&lt;/param&gt;
+        /// &lt;param name=&quot;method&quot;&gt;The form method&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes the form should use; specified as an anonymous object&lt;/param&gt;
+        /// &lt;param name=&quot;enctype&quot;&gt;The encoding type for the form&lt;/param&gt;
+        /// &lt;returns&gt;The starting HTML for a form&lt;/returns&gt;
+        IHtmlContent BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype);
+
+        /// &lt;summary&gt;
+        /// Creates the ending HTML for a form.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The ending HTML for a form&lt;/returns&gt;
+        IHtmlContent EndForm();
+
+        /// &lt;summary&gt;
+        /// Creates the beginning HTML for a section.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading of the section&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the section&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes the section container should use; specified as an anonymous object&lt;/param&gt;
+        /// &lt;returns&gt;The beginning HTML for a section&lt;/returns&gt;
+        IHtmlContent BeginSection(IHtmlContent heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null);
+
+        /// &lt;summary&gt;
+        /// Creates the ending HTML for a section.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The ending HTML for a section&lt;/returns&gt;
+        IHtmlContent EndSection();
+
+        /// &lt;summary&gt;
+        /// Creates the beginning HTML for a section that is nested within another section.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading of the nested section&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the nested section&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes the nested section container should use; specified as an anaonymous object&lt;/param&gt;
+        /// &lt;returns&gt;The beginning HTML for a nested section&lt;/returns&gt;
+        IHtmlContent BeginNestedSection(IHtmlContent heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null);
+
+        /// &lt;summary&gt;
+        /// Creates the ending HTML for a section that is nested within another section.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The ending HTML for a nested section&lt;/returns&gt;
+        IHtmlContent EndNestedSection();
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a single form field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;labelHtml&quot;&gt;The HTML that comprises the form label&lt;/param&gt;
+        /// &lt;param name=&quot;elementHtml&quot;&gt;The HTML that comprieses the field itself&lt;/param&gt;
+        /// &lt;param name=&quot;validationHtml&quot;&gt;The HTML that comprises the field's validation messages&lt;/param&gt;
+        /// &lt;param name=&quot;fieldMetadata&quot;&gt;The metadata for the field being created&lt;/param&gt;
+        /// &lt;param name=&quot;fieldConfiguration&quot;&gt;Configuration for the field&lt;/param&gt;
+        /// &lt;param name=&quot;isValid&quot;&gt;Whether or not the field is valid&lt;/param&gt;
+        /// &lt;returns&gt;The HTML for the field&lt;/returns&gt;
+        IHtmlContent Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
+
+        /// &lt;summary&gt;
+        /// Creates the beginning HTML for a single form field that contains other fields nested within it.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;labelHtml&quot;&gt;The HTML that comprises the form label&lt;/param&gt;
+        /// &lt;param name=&quot;elementHtml&quot;&gt;The HTML that comprieses the field itself&lt;/param&gt;
+        /// &lt;param name=&quot;validationHtml&quot;&gt;The HTML that comprises the field's validation messages&lt;/param&gt;
+        /// &lt;param name=&quot;fieldMetadata&quot;&gt;The metadata for the field being created&lt;/param&gt;
+        /// &lt;param name=&quot;fieldConfiguration&quot;&gt;Configuration for the field&lt;/param&gt;
+        /// &lt;param name=&quot;isValid&quot;&gt;Whether or not the field is valid&lt;/param&gt;
+        /// &lt;returns&gt;The beginning HTML for the parent field&lt;/returns&gt;
+        IHtmlContent BeginField(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml, ModelMetadata fieldMetadata, IReadonlyFieldConfiguration fieldConfiguration, bool isValid);
+
+        /// &lt;summary&gt;
+        /// Creates the ending HTML for a single form field that contains other fields nested within it.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The ending HTML for the parent field&lt;/returns&gt;
+        IHtmlContent EndField();
+
+        /// &lt;summary&gt;
+        /// Creates the beginning HTML for a navigation section.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The beginning HTML for a navigation section&lt;/returns&gt;
+        IHtmlContent BeginNavigation();
+
+        /// &lt;summary&gt;
+        /// Creates the ending HTML for a navigation section.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The ending HTML for a navigation section&lt;/returns&gt;
+        IHtmlContent EndNavigation();
+
+        /// &lt;summary&gt;
+        /// Creates the beginning HTML for a message.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;messageType&quot;&gt;The type of message being displayed&lt;/param&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading for the message&lt;/param&gt;
+        /// &lt;returns&gt;The beginning HTML for the message&lt;/returns&gt;
+        IHtmlContent BeginMessage(MessageType messageType, IHtmlContent heading);
+
+        /// &lt;summary&gt;
+        /// Creates the ending HTML for a message.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The ending HTML for the message&lt;/returns&gt;
+        IHtmlContent EndMessage();
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a paragraph in a message.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;paragraph&quot;&gt;The paragraph HTML&lt;/param&gt;
+        /// &lt;returns&gt;The HTML for the message paragraph&lt;/returns&gt;
+        IHtmlContent MessageParagraph(IHtmlContent paragraph);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a button.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;content&quot;&gt;The content for the user to see or null if the value should be used instead&lt;/param&gt;
+        /// &lt;param name=&quot;type&quot;&gt;The type of button or null if a generic button should be used&lt;/param&gt;
+        /// &lt;param name=&quot;id&quot;&gt;The name/id of the button or null if one shouldn't be set&lt;/param&gt;
+        /// &lt;param name=&quot;value&quot;&gt;The value to submit if the button is clicked or null if one shouldn't be set&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes to add to the button or null if there are none&lt;/param&gt;
+        /// &lt;returns&gt;The HTML for the button&lt;/returns&gt;
+        IHtmlContent Button(IHtmlContent content, string type, string id, string value, HtmlAttributes htmlAttributes);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for a list of radio buttons or checkboxes.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;list&quot;&gt;The list of HTML items (one per radio/checkbox)&lt;/param&gt;
+        /// &lt;param name=&quot;isCheckbox&quot;&gt;Whether the list is for checkboxes rather than radio buttons&lt;/param&gt;
+        /// &lt;returns&gt;The HTML for the radio list&lt;/returns&gt;
+        IHtmlContent RadioOrCheckboxList(IEnumerable&lt;IHtmlContent&gt; list, bool isCheckbox);
+    }
+</code></pre>
+<h2 id="recommendation">Recommendation</h2>
+<p>To make it easy for yourself we recommend that you start by extending the <code>DefaultFormTemplate</code> class and override each method in turn that you want to change the HTML for. For an example of this approach see the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/TwitterBootstrap3/TwitterBootstrap3FormTemplate.cs">Twitter Bootstrap 3 Form Template</a>, which extends most, but not all methods.</p>
+<h2 id="msbuildrazorcompiler">MSBuildRazorCompiler</h2>
+<p>Rather than expressing all of the complex template HTML as a string we recommend that you instead use the <a href="https://github.com/MRCollective/MSBuildRazorCompiler">MSBuildRazorCompiler library</a> so that you can specify the HTML using Razor syntax in a <code>.cshtml</code> file and have it statically compiled into <code>.cs</code> files that you can reference. See the <code>ChameleonForms.Template</code> <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates">library</a> to see how it works and use as a base to get started.</p>
+<h2 id="preparefieldconfiguration">PrepareFieldConfiguration</h2>
+<p>The <code>PrepareFieldConfiguration</code> method allows you to make arbitrary changes to the <a href="field-configuration.html">Field Configuration</a> of a field before it is rendered by the other template methods. For an example of the type of changes you can make, see the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/TwitterBootstrap3/TwitterBootstrap3FormTemplate.cs#L36">Twitter Bootstrap 3 form template</a>.</p>
+<p>This technique allows you to take advantage of the expressiveness and flexibility afforded by the Field Configuration to:</p>
+<ul>
+<li>Make easily unit testable changes</li>
+<li>Keep your templates terse and reduce the potential noise of lots of control statements</li>
+<li>Apply global configuration changes that are template specific without requiring users to specify those changes for each form/field</li>
+</ul>
+<h2 id="beginsection--beginnestedsection">BeginSection / BeginNestedSection</h2>
+<p>The heading is not required and we recommend having logic like the following to conditionally display the heading:</p>
+<pre><code class="lang-html">@if (Model.Heading != null &amp;&amp; !string.IsNullOrWhiteSpace(Model.Heading.ToString())) {
+    @* heading html here *@
+}
+</code></pre>
+<p>Similarly, the leading HTML is optional and you might want to use similar conditional logic for that field (unless you don't wrap it in any HTML in which case you can simply output it e.g. <code>@Model.LeadingHtml</code>).</p>
+<p>You should always have a container element for your section which has the <code>HtmlAttributes</code> object from that section <a href="html-attributes.html#output-directly-to-the-page">applied to it</a>.</p>
+<h2 id="field">Field</h2>
+<p>There are a lot of parameters passed to the field method - only use the ones that you need for your template (e.g. if you don't specify different HTML when a field is invalid just ignore the <code>isValid</code> variable).</p>
+<p>If you want the ability to specify the required designator separately within the template then make sure to call the <code>RequiredDesignator</code> method from within the <code>Field</code> method to get the HTML for the required designator. The templates we provide out-of-the-box do this and thus you can override just the required designator by extending the form template classes we provide and override the <code>GetRequiredDesignator</code> method.</p>
+<p>Given you will likely need to split up your HTML into multiple files with mismatching start and end tags it's recommended you make use of the <code>@:</code> operator e.g.:</p>
+<pre><code class="lang-cs">@{
+@:    &lt;div&gt;
+}
+</code></pre>
+<p>If you want a fully-fledged Field HTML implementation then you need to account for:</p>
+<ul>
+<li>Outputting the Field Label HTML, Field Element HTML and Field Validation Message HTML</li>
+<li>Outputting the Field Container Classes from field configuration onto whatever the containing element is (e.g. <code>&lt;div class=&quot;@Model.FieldConfiguration.FieldContainerClasses&quot;&gt;</code>)</li>
+<li>Outputting the required designator if the field is required (e.g. <code>@(new HtmlString(Model.FieldMetadata != null &amp;&amp; Model.FieldMetadata.IsRequired ? requiredDesignator.ToHtmlString() : &quot;&quot;))</code>)</li>
+<li>Outputting the prepended HTML before the field (e.g. <code>foreach (var html in Model.FieldConfiguration.PrependedHtml) {@html}</code>)</li>
+<li>Outputting the appended HTML after the field (e.g. <code>foreach (var html in Model.FieldConfiguration.AppendedHtml) {@html}</code>)</li>
+<li>Outputting the hint, including its ID (e.g. <code>if (Model.FieldConfigurationModel.FieldConfiguration.Hint != null) {&lt;div class=&quot;hint&quot; id=&quot;@Model.FieldConfiguration.HintId&quot;&gt;@Model.FieldConfiguration.Hint&lt;/div&gt;}</code>)</li>
+</ul>
+<p>Obviously, if you never plan on using some of those then you can exclude them, but if you are creating a template that you want other people to use we recommend you include all of those points so people aren't surprised when they try to use the template and it doesn't behave how they expect.</p>
+<h2 id="nested-fields">Nested fields</h2>
+<p>If you don't want to support nested fields then we recommend you throw a <code>NotSupportedException</code> from the <code>BeginField</code> and <code>EndField</code> methods (which are only used for supporting nested fields).</p>
+<p>If you do want to support them then it's likely that you will reuse a lot of the same HTML for a normal field and a parent field. The Twitter Bootstrap 3 form template and the Default form template both use a single <code>Field.cshtml</code> file, but passing in a <code>FieldRenderMode</code> enum into the template model to switch the relevant output:</p>
+<pre><code class="lang-cs">    public enum FieldRenderMode
+    {
+        Field,
+        BeginField
+    }
+</code></pre>
+<h2 id="automated-testing">Automated Testing</h2>
+<p>If you would like to have confidence in the HTML that your template generates then we recommend that you provide HTML <a href="https://github.com/approvals/ApprovalTests.Net">Approval Test</a> coverage of the HTML output of your template.</p>
+<p>For an example of this see the tests for the <a href="https://github.com/MRCollective/ChameleonForms/tree/master/ChameleonForms.Tests/Templates/">built-in form templates</a>.</p>
+<h2 id="applying-a-global-template-change">Applying a global template change</h2>
+<p>You can often encounter the situation where the <code>DefaultFormTemplate</code> is mostly sufficient for your needs, but you want to make slight tweaks for example adding classes to all buttons, or changing the required designator. In those instances you can easily create a custom form template to use in your application that simply extends the <code>DefaultFormTemplate</code> class and overrides the relevant methods - in the above example, you would override the <code>Button</code> or <code>RequiredDesignator</code> methods respectively.</p>
+<p>Even further to that, we can change the <code>HtmlAttributes</code> object that is passed into the <code>Button</code> method and then call <code>base.Button(...)</code> to keep the original button generation code. For an example of this in action see the <code>Button method</code> in the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Templates/TwitterBootstrap3/TwitterBootstrap3FormTemplate.cs#L126">Twitter Bootstrap 3 template</a>.</p>
+<h2 id="using-a-custom-form-template">Using a custom form template</h2>
+<p>See the <a href="form-templates.html">Using different form templates</a> page.</p>
+<h2 id="contributions">Contributions</h2>
+<p>If you create a form template that you believe will be useful to other people then please feel free to <a href="https://github.com/MRCollective/ChameleonForms/pulls">send us a pull request</a> and we will consider it for inclusion in the core package.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/custom-template.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

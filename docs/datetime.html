@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Datetime Fields | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Datetime Fields | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="datetime-fields">Datetime Fields</h1>
+
+<p>If you need to collect DateTime data you can use a <code>DateTime</code> or <code>DateTime?</code> model property, e.g.:</p>
+<pre><code class="lang-csharp">public DateTime DateTimeField { get; set; }
+public DateTime? NullableDateTimeField { get; set; }
+[DisplayFormat(DataFormatString = &quot;{0:d/M/yyyy}&quot;, ApplyFormatInEditMode = true)]
+public DateTime DateTimeFieldWithFormat { get; set;
+</code></pre>
+<p>There only difference between a <code>DateTime</code> and <code>DateTime?</code>is that a <code>DateTime?</code> will not be required (unless it's annotated with <code>[Required]</code>).</p>
+<h2 id="default-html">Default HTML</h2>
+<p>When using the Default Field Generator then the default HTML of the <a href="field-element.html">Field Element</a> will be:</p>
+<pre><code class="lang-html">&lt;input %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;%value%&quot; /&gt;
+</code></pre>
+<p>If you specify a <code>DateTime?</code> without a <code>[Required]</code> attribute then it will be:</p>
+<p>&lt;input %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot; type=&quot;text&quot; value=&quot;%value%&quot; /&gt;</p>
+<p>If you specify a <code>[DisplayFormat]</code> with <code>ApplyFormatInEditMode = true</code> then it will change the HTML to:</p>
+<pre><code class="lang-html">&lt;input %validationAttrs% data-val-format=&quot;%formatString%&quot; %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot; type=&quot;text&quot; value=&quot;%value%&quot; /&gt;
+</code></pre>
+<p>To find out why see the <a href="#client-side-validation">Client-side validation</a> section below.</p>
+<h2 id="why-we-use-typetext">Why we use type=&quot;text&quot;</h2>
+<p>We deliberately don't make use of the various date-related HTML5 types, and instead opt for use of <code>type=&quot;text&quot;</code>, because <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Date_and_time_formats">browser support for controlling formatting</a> is limited. If you want to opt into a different type then you can by chaining the <code>.Attr(&quot;type&quot;, &quot;adifferenttype&quot;)</code> on your field definition.</p>
+<h2 id="server-side-validation-and-binding">Server-side validation and binding</h2>
+<p>By default MVC will attempt to parse a <code>DateTime</code> with whatever culture the thread is running as. This has a number of implications:</p>
+<ul>
+<li>If you want just a time, or just a date then you can't enforce that</li>
+<li>If you have a different culture on a particular server then you will get different results</li>
+<li>It's not very clear to a developer that doesn't know about that MVC behaviour what will happen</li>
+<li>You don't have much control over the format that you want your users to enter the date in</li>
+</ul>
+<p>MVC provides the <code>[DisplayFormat]</code> attribute above, but that doesn't actually do anything apart from formatting the date nicely when the field is outputted (when using Editor Templates or Tag Helpers).</p>
+<p>In order to provide a nice server-side validation experience, ChameleonForms provides first class support for <code>[DisplayFormat(ApplyFormatInEditMode = true)]</code>:</p>
+<ul>
+<li>It will output the date using the format string so a pre-populated model will automatically show the correct string to the user</li>
+<li>It provides a model binder that will perform server-side binding and validation using that format string as a guide when parsing the text the user entered
+<ul>
+<li>This <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/ModelBinders/DateTimeModelBinderProvider.cs">model</a> <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/ModelBinders/DateTimeModelBinder.cs">binder</a> is <a href="configuration.html#default-global-config">registered by default</a>, but you can turn it off</li>
+</ul>
+</li>
+</ul>
+<p>If you'd like to register the model binder yourself rather than using the global config you can do that like so:</p>
+<pre><code class="lang-cs">    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddChameleonForms(b =&gt; b.WithoutDateTimeBinding());
+        services.Configure&lt;MvcOptions&gt;(x =&gt;
+        {
+            x.ModelBinderProviders.Insert(0, new DateTimeModelBinderProvider());
+            ...
+        });
+    }
+</code></pre>
+<h2 id="g-format"><code>g</code> format</h2>
+<p>There is support in ChameleonForms for a <code>g</code> format that uses the current thread's culture to determine the format string. That format string will then be passed to client validation so the end user has a consistent experience against what the server is expecting.</p>
+<p>For instance, here are a couple of examples of what format will be used if you set your display format string to <code>{0:g}</code>:</p>
+<ul>
+<li><strong>en-GB</strong>: <code>dd/MM/yyyy HH:mm</code></li>
+<li><strong>uk-UA</strong>: <code>dd.MM.yyyy H:mm</code></li>
+</ul>
+<h2 id="client-side-validation">Client-side validation</h2>
+<p>Please see the <a href="datetime-client-side-validation.html">client-side validation of DateTime fields</a> documentation.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/datetime.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

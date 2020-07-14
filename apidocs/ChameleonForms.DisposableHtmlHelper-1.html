@@ -1,0 +1,615 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DisposableHtmlHelper&lt;TModel&gt;
+   | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DisposableHtmlHelper&lt;TModel&gt;
+   | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ChameleonForms.DisposableHtmlHelper`1">
+  
+  
+  <h1 id="ChameleonForms_DisposableHtmlHelper_1" data-uid="ChameleonForms.DisposableHtmlHelper`1" class="text-break">Class DisposableHtmlHelper&lt;TModel&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>HTML helper that can be created in a using block.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper</span></div>
+    <div class="level2"><span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper</span>&lt;TModel&gt;</div>
+    <div class="level3"><span class="xref">DisposableHtmlHelper&lt;TModel&gt;</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.IViewContextAware</span></div>
+    <div><span class="xref">Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper</span>&lt;TModel&gt;</div>
+    <div><span class="xref">Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper</span></div>
+    <div><span class="xref">System.IDisposable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.CheckBoxFor(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, System.Boolean&gt;&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.Contextualize(Microsoft.AspNetCore.Mvc.Rendering.ViewContext)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.DisplayFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.String, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.DisplayNameForInnerType&lt;TModelItem, TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModelItem, TResult&gt;&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.DisplayNameFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.DisplayTextFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.DropDownListFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.Collections.Generic.IEnumerable&lt;Microsoft.AspNetCore.Mvc.Rendering.SelectListItem&gt;, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.EditorFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.String, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.GetExpressionName&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.GetModelExplorer&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.HiddenFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.IdFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.LabelFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.ListBoxFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.Collections.Generic.IEnumerable&lt;Microsoft.AspNetCore.Mvc.Rendering.SelectListItem&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.NameFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.PasswordFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.RadioButtonFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.TextAreaFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.Int32, System.Int32, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.TextBoxFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.ValidationMessageFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.String, System.Object, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.ValueFor&lt;TResult&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;TModel, TResult&gt;&gt;, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper&lt;TModel&gt;.ViewData</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ValidationInputCssClassName</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ValidationInputValidCssClassName</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ValidationMessageCssClassName</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ValidationMessageValidCssClassName</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ValidationSummaryCssClassName</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ValidationSummaryValidCssClassName</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ActionLink(System.String, System.String, System.String, System.String, System.String, System.String, System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.AnonymousObjectToHtmlAttributes(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.AntiForgeryToken()</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.BeginForm(System.String, System.String, System.Object, Microsoft.AspNetCore.Mvc.Rendering.FormMethod, System.Nullable&lt;System.Boolean&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.BeginRouteForm(System.String, System.Object, Microsoft.AspNetCore.Mvc.Rendering.FormMethod, System.Nullable&lt;System.Boolean&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.CheckBox(System.String, System.Nullable&lt;System.Boolean&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.CreateForm()</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Display(System.String, System.String, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.DisplayName(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.DisplayText(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.DropDownList(System.String, System.Collections.Generic.IEnumerable&lt;Microsoft.AspNetCore.Mvc.Rendering.SelectListItem&gt;, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Editor(System.String, System.String, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Encode(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Encode(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.EndForm()</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.FormatValue(System.Object, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateCheckBox(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.Nullable&lt;System.Boolean&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateDisplay(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateDisplayName(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateDisplayText(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateDropDown(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.Collections.Generic.IEnumerable&lt;Microsoft.AspNetCore.Mvc.Rendering.SelectListItem&gt;, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateEditor(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateForm(System.String, System.String, System.Object, Microsoft.AspNetCore.Mvc.Rendering.FormMethod, System.Nullable&lt;System.Boolean&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateHidden(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.Object, System.Boolean, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateId(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateIdFromName(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateLabel(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateListBox(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.Collections.Generic.IEnumerable&lt;Microsoft.AspNetCore.Mvc.Rendering.SelectListItem&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateName(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GeneratePassword(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateRadioButton(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.Object, System.Nullable&lt;System.Boolean&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateRouteForm(System.String, System.Object, Microsoft.AspNetCore.Mvc.Rendering.FormMethod, System.Nullable&lt;System.Boolean&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateTextArea(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.Int32, System.Int32, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateTextBox(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.Object, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateValidationMessage(Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExplorer, System.String, System.String, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateValidationSummary(System.Boolean, System.String, System.Object, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GenerateValue(System.String, System.Object, System.String, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GetEnumSelectList(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GetEnumSelectList(System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GetEnumSelectList&lt;TEnum&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.GetFormMethodString(Microsoft.AspNetCore.Mvc.Rendering.FormMethod)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Hidden(System.String, System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Id(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Label(System.String, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ListBox(System.String, System.Collections.Generic.IEnumerable&lt;Microsoft.AspNetCore.Mvc.Rendering.SelectListItem&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Name(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ObjectToDictionary(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.PartialAsync(System.String, System.Object, Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Password(System.String, System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.RadioButton(System.String, System.Object, System.Nullable&lt;System.Boolean&gt;, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Raw(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Raw(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.RenderPartialAsync(System.String, System.Object, Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.RenderPartialCoreAsync(System.String, System.Object, Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary, System.IO.TextWriter)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.RouteLink(System.String, System.String, System.String, System.String, System.String, System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.TextArea(System.String, System.String, System.Int32, System.Int32, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.TextBox(System.String, System.Object, System.String, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ValidationMessage(System.String, System.String, System.Object, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ValidationSummary(System.Boolean, System.String, System.Object, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Value(System.String, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.Html5DateRenderingMode</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.IdAttributeDotReplacement</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.MetadataProvider</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.TempData</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.UrlEncoder</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ViewBag</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper.ViewContext</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="ChameleonForms.html">ChameleonForms</a></h6>
+  <h6><strong>Assembly</strong>: ChameleonForms.dll</h6>
+  <h5 id="ChameleonForms_DisposableHtmlHelper_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DisposableHtmlHelper&lt;TModel&gt; : HtmlHelper&lt;TModel&gt;, IViewContextAware, IHtmlHelper&lt;TModel&gt;, IHtmlHelper, IDisposable</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TModel</span></td>
+        <td><p>The model type of the HTML helper</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_DisposableHtmlHelper_1__ctor_Microsoft_AspNetCore_Mvc_ViewFeatures_IHtmlGenerator_Microsoft_AspNetCore_Mvc_ViewEngines_ICompositeViewEngine_Microsoft_AspNetCore_Mvc_ModelBinding_IModelMetadataProvider_Microsoft_AspNetCore_Mvc_ViewFeatures_Buffers_IViewBufferScope_System_Text_Encodings_Web_HtmlEncoder_System_Text_Encodings_Web_UrlEncoder_Microsoft_AspNetCore_Mvc_ViewFeatures_ModelExpressionProvider_Microsoft_AspNetCore_Mvc_Rendering_ViewContext_.md&amp;value=---%0Auid%3A%20ChameleonForms.DisposableHtmlHelper%601.%23ctor(Microsoft.AspNetCore.Mvc.ViewFeatures.IHtmlGenerator%2CMicrosoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine%2CMicrosoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider%2CMicrosoft.AspNetCore.Mvc.ViewFeatures.Buffers.IViewBufferScope%2CSystem.Text.Encodings.Web.HtmlEncoder%2CSystem.Text.Encodings.Web.UrlEncoder%2CMicrosoft.AspNetCore.Mvc.ViewFeatures.ModelExpressionProvider%2CMicrosoft.AspNetCore.Mvc.Rendering.ViewContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/HtmlHelperExtensions.cs/#L129">View Source</a>
+  </span>
+  <a id="ChameleonForms_DisposableHtmlHelper_1__ctor_" data-uid="ChameleonForms.DisposableHtmlHelper`1.#ctor*"></a>
+  <h4 id="ChameleonForms_DisposableHtmlHelper_1__ctor_Microsoft_AspNetCore_Mvc_ViewFeatures_IHtmlGenerator_Microsoft_AspNetCore_Mvc_ViewEngines_ICompositeViewEngine_Microsoft_AspNetCore_Mvc_ModelBinding_IModelMetadataProvider_Microsoft_AspNetCore_Mvc_ViewFeatures_Buffers_IViewBufferScope_System_Text_Encodings_Web_HtmlEncoder_System_Text_Encodings_Web_UrlEncoder_Microsoft_AspNetCore_Mvc_ViewFeatures_ModelExpressionProvider_Microsoft_AspNetCore_Mvc_Rendering_ViewContext_" data-uid="ChameleonForms.DisposableHtmlHelper`1.#ctor(Microsoft.AspNetCore.Mvc.ViewFeatures.IHtmlGenerator,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers.IViewBufferScope,System.Text.Encodings.Web.HtmlEncoder,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpressionProvider,Microsoft.AspNetCore.Mvc.Rendering.ViewContext)">DisposableHtmlHelper(IHtmlGenerator, ICompositeViewEngine, IModelMetadataProvider, IViewBufferScope, HtmlEncoder, UrlEncoder, ModelExpressionProvider, ViewContext)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="ChameleonForms.DisposableHtmlHelper-1.html">DisposableHtmlHelper&lt;TModel&gt;</a> to wrap a scope around a new HtmlHelper instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisposableHtmlHelper(IHtmlGenerator htmlGenerator, ICompositeViewEngine viewEngine, IModelMetadataProvider metadataProvider, IViewBufferScope bufferScope, HtmlEncoder htmlEncoder, UrlEncoder urlEncoder, ModelExpressionProvider modelExpressionProvider, ViewContext viewContext)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.IHtmlGenerator</span></td>
+        <td><span class="parametername">htmlGenerator</span></td>
+        <td><p>The HTML generator to use</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine</span></td>
+        <td><span class="parametername">viewEngine</span></td>
+        <td><p>The view engine to use</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider</span></td>
+        <td><span class="parametername">metadataProvider</span></td>
+        <td><p>The metadata provider to use</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers.IViewBufferScope</span></td>
+        <td><span class="parametername">bufferScope</span></td>
+        <td><p>The buffer scope to use</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Text.Encodings.Web.HtmlEncoder</span></td>
+        <td><span class="parametername">htmlEncoder</span></td>
+        <td><p>The HTML encoder to use</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Text.Encodings.Web.UrlEncoder</span></td>
+        <td><span class="parametername">urlEncoder</span></td>
+        <td><p>The URL encoder to use</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpressionProvider</span></td>
+        <td><span class="parametername">modelExpressionProvider</span></td>
+        <td><p>The model expression provider</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.Rendering.ViewContext</span></td>
+        <td><span class="parametername">viewContext</span></td>
+        <td><p>The new view context to wrap</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_DisposableHtmlHelper_1_Dispose.md&amp;value=---%0Auid%3A%20ChameleonForms.DisposableHtmlHelper%601.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/HtmlHelperExtensions.cs/#L138">View Source</a>
+  </span>
+  <a id="ChameleonForms_DisposableHtmlHelper_1_Dispose_" data-uid="ChameleonForms.DisposableHtmlHelper`1.Dispose*"></a>
+  <h4 id="ChameleonForms_DisposableHtmlHelper_1_Dispose" data-uid="ChameleonForms.DisposableHtmlHelper`1.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Dispose of the scope.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.IViewContextAware</span>
+  </div>
+  <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper&lt;TModel&gt;</span>
+  </div>
+  <div>
+      <span class="xref">Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper</span>
+  </div>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="ChameleonForms.Extensions.html#ChameleonForms_Extensions_Attrs_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper_System_Func_System_Object_System_Object____">Extensions.Attrs(IHtmlHelper, Func&lt;Object, Object&gt;[])</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.HtmlAttributesExtensions.html#ChameleonForms_HtmlAttributesExtensions_ToHtmlAttributes_System_Object_">HtmlAttributesExtensions.ToHtmlAttributes(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.ChameleonFormExtensions.html#ChameleonForms_ChameleonFormExtensions_BeginChameleonForm__1_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper___0__System_String_Microsoft_AspNetCore_Mvc_Rendering_FormMethod_ChameleonForms_HtmlAttributes_System_Nullable_ChameleonForms_Enums_EncType__">ChameleonFormExtensions.BeginChameleonForm&lt;TModel&gt;(IHtmlHelper&lt;TModel&gt;, String, FormMethod, HtmlAttributes, Nullable&lt;EncType&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.ChameleonFormExtensions.html#ChameleonForms_ChameleonFormExtensions_BeginChameleonFormFor__2_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper___0__System_Linq_Expressions_Expression_System_Func___0___1___System_String_Microsoft_AspNetCore_Mvc_Rendering_FormMethod_ChameleonForms_HtmlAttributes_System_Nullable_ChameleonForms_Enums_EncType__">ChameleonFormExtensions.BeginChameleonFormFor&lt;TParentModel, TChildModel&gt;(IHtmlHelper&lt;TParentModel&gt;, Expression&lt;Func&lt;TParentModel, TChildModel&gt;&gt;, String, FormMethod, HtmlAttributes, Nullable&lt;EncType&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.ChameleonFormExtensions.html#ChameleonForms_ChameleonFormExtensions_BeginChameleonFormFor__2_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper___0____1_System_String_Microsoft_AspNetCore_Mvc_Rendering_FormMethod_ChameleonForms_HtmlAttributes_System_Nullable_ChameleonForms_Enums_EncType__">ChameleonFormExtensions.BeginChameleonFormFor&lt;TOriginalModel, TNewModel&gt;(IHtmlHelper&lt;TOriginalModel&gt;, TNewModel, String, FormMethod, HtmlAttributes, Nullable&lt;EncType&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.HtmlHelperExtensions.html#ChameleonForms_HtmlHelperExtensions_For__2_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper___0__System_Linq_Expressions_Expression_System_Func___0___1___System_Boolean_">HtmlHelperExtensions.For&lt;TParentModel, TChildModel&gt;(IHtmlHelper&lt;TParentModel&gt;, Expression&lt;Func&lt;TParentModel, TChildModel&gt;&gt;, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.HtmlHelperExtensions.html#ChameleonForms_HtmlHelperExtensions_For__1_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper___0_System_String_">HtmlHelperExtensions.For&lt;TModel&gt;(IHtmlHelper, TModel, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.HtmlHelperExtensions.html#ChameleonForms_HtmlHelperExtensions_GetDefaultFormTemplate_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper_">HtmlHelperExtensions.GetDefaultFormTemplate(IHtmlHelper)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.HtmlHelperExtensions.html#ChameleonForms_HtmlHelperExtensions_GetFullHtmlFieldName__2_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper___0__System_Linq_Expressions_Expression_System_Func___0___1___">HtmlHelperExtensions.GetFullHtmlFieldName&lt;TModel, TResult&gt;(IHtmlHelper&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TResult&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.HtmlHelperExtensions.html#ChameleonForms_HtmlHelperExtensions_GetFieldName__2_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper___0__System_Linq_Expressions_Expression_System_Func___0___1___">HtmlHelperExtensions.GetFieldName&lt;TModel, TResult&gt;(IHtmlHelper&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TResult&gt;&gt;)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_DisposableHtmlHelper_1.md&amp;value=---%0Auid%3A%20ChameleonForms.DisposableHtmlHelper%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/HtmlHelperExtensions.cs/#L116" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

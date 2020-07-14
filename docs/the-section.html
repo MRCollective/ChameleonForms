@@ -1,0 +1,386 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Section | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Section | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="section">Section</h1>
+
+<p>The Section is a grouping of a set of fields; you create a Section by instantiating a <code>Section&lt;TModel&gt;</code> within a <code>using</code> block. The start and end of the <code>using</code> block will output the start and end HTML for the Section and the inside of the <code>using</code> block will contain the Section fields.</p>
+<p>The <code>Section&lt;TModel&gt;</code> class looks like this and is in the <code>ChameleonForms.Component</code> namespace:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+    /// Wraps the output of a form section.
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;
+    public class Section&lt;TModel&gt; : FormComponent&lt;TModel&gt;, ISection, ISection&lt;TModel&gt;
+    {
+        /// &lt;summary&gt;
+        /// Creates a form section
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;form&quot;&gt;The form the message is being created in&lt;/param&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading for the section&lt;/param&gt;
+        /// &lt;param name=&quot;nested&quot;&gt;Whether the section is nested within another section&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the section&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes to apply to the section container&lt;/param&gt;
+        public Section(IForm&lt;TModel&gt; form, IHtmlContent heading, bool nested, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null);
+
+        /// &lt;summary&gt;
+        /// Outputs a field with passed in HTML.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;labelHtml&quot;&gt;The HTML for the label part of the field&lt;/param&gt;
+        /// &lt;param name=&quot;elementHtml&quot;&gt;The HTML for the field element part of the field&lt;/param&gt;
+        /// &lt;param name=&quot;validationHtml&quot;&gt;The HTML for the validation markup part of the field&lt;/param&gt;
+        /// &lt;param name=&quot;metadata&quot;&gt;Any field metadata&lt;/param&gt;
+        /// &lt;param name=&quot;isValid&quot;&gt;Whether or not the field is valid&lt;/param&gt;
+        /// &lt;returns&gt;A field configuration that can be used to output the field as well as configure it fluently&lt;/returns&gt;
+        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true);
+
+        /// &lt;summary&gt;
+        /// Returns the HTML representation of the beginning of the form component.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The beginning HTML for the form component&lt;/returns&gt;
+        public virtual IHtmlContent Begin();
+
+        /// &lt;summary&gt;
+        /// Returns the HTML representation of the end of the form component.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The ending HTML for the form component&lt;/returns&gt;
+        public virtual IHtmlContent End();
+
+        /// &lt;summary&gt;
+        /// Returns a section with the same characteristics as the current section, but using the given partial form.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name=&quot;TPartialModel&quot;&gt;The model type of the partial view&lt;/typeparam&gt;
+        /// &lt;returns&gt;A section with the same characteristics as the current section, but using the given partial form&lt;/returns&gt;
+        public ISection&lt;TPartialModel&gt; CreatePartialSection&lt;TPartialModel&gt;(IForm&lt;TPartialModel&gt; partialModelForm);
+</code></pre>
+<p>The start and end HTML of the Section are generated via the <code>BeginSection</code> and <code>EndSection</code> methods in the <a href="form-templates.html">form template</a> (or <code>BeginNestedSection</code> and <code>EndNestedSection</code> if the Section is a child of another Section). The field HTML is generated via the <code>Field</code> method in the template.</p>
+<h2 id="default-usage">Default usage</h2>
+<p>In order to get an instance of a <code>Section&lt;TModel&gt;</code> you can use the <code>BeginSection</code> method on the Form, e.g.</p>
+<pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Heading&quot;)) {
+    @* Section fields go here *@
+}
+</code></pre>
+<p>The <code>BeginSection</code> extension methods look like this:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Creates a top-level form section.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var s = f.BeginSection(&quot;Section heading&quot;)) {
+        ///     @s.FieldFor(m =&gt; m.FirstName)
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;param name=&quot;form&quot;&gt;The form the section is being created in&lt;/param&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading for the section&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the section&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes to apply to the section container&lt;/param&gt;
+        /// &lt;returns&gt;The form section&lt;/returns&gt;
+        public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this IForm&lt;TModel&gt; form, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section&lt;TModel&gt;(form, heading.ToHtml(), false, leadingHtml, htmlAttributes);
+        }
+
+        /// &lt;summary&gt;
+        /// Creates a top-level form section.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var s = f.BeginSection(&quot;Section heading&quot;, leadingHtml: @&amp;lt;p&amp;gt;Leading html...&amp;lt;/p&amp;gt;)) {
+        ///     @s.FieldFor(m =&gt; m.FirstName)
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;param name=&quot;form&quot;&gt;The form the section is being created in&lt;/param&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading for the section&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the section as a templated razor delegate&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes to apply to the section container&lt;/param&gt;
+        /// &lt;returns&gt;The form section&lt;/returns&gt;
+        public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this IForm&lt;TModel&gt; form, string heading, Func&lt;dynamic, IHtmlContent&gt; leadingHtml, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section&lt;TModel&gt;(form, heading.ToHtml(), false, leadingHtml(null), htmlAttributes);
+        }
+
+        /// &lt;summary&gt;
+        /// Creates a top-level form section.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var s = f.BeginSection(new HtmlString(&quot;&amp;lt;strong&amp;gt;Section heading&amp;lt;/strong&amp;gt;&quot;))) {
+        ///     @s.FieldFor(m =&gt; m.FirstName)
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;param name=&quot;form&quot;&gt;The form the section is being created in&lt;/param&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading for the section&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the section&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes to apply to the section container&lt;/param&gt;
+        /// &lt;returns&gt;The form section&lt;/returns&gt;
+        public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this IForm&lt;TModel&gt; form, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section&lt;TModel&gt;(form, heading ?? new HtmlString(&quot;&quot;), false, leadingHtml, htmlAttributes);
+        }
+
+        /// &lt;summary&gt;
+        /// Creates a top-level form section.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var s = f.BeginSection(@&amp;lt;strong&amp;gt;Section heading&amp;lt;/strong&amp;gt;, leadingHtml: @&amp;lt;p&amp;gt;Leading html...&amp;lt;/p&amp;gt;)) {
+        ///     @s.FieldFor(m =&gt; m.FirstName)
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;param name=&quot;form&quot;&gt;The form the section is being created in&lt;/param&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading for the section as a templated razor delegate&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the section as a templated razor delegate&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes to apply to the section container&lt;/param&gt;
+        /// &lt;returns&gt;The form section&lt;/returns&gt;
+        public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this IForm&lt;TModel&gt; form, Func&lt;dynamic, IHtmlContent&gt; heading, Func&lt;dynamic, IHtmlContent&gt; leadingHtml, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section&lt;TModel&gt;(form, heading(null), false, leadingHtml(null), htmlAttributes);
+        }
+</code></pre>
+<p>From within a Section you can create <a href="field.html">Fields</a> and you can also create nested sections using the <code>BeginSection</code> extension method off the Section:</p>
+<pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Heading&quot;)) {
+    @* Fields... *@
+    using (var ss = s.BeginSection(&quot;Inner Heading&quot;)) {
+        @* Fields... *@
+    }
+    @* Fields... *@
+}
+</code></pre>
+<p>The <code>BeginSection</code> extension methods on Section look like this:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Creates a nested form section.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var s = f.BeginSection(&quot;Section heading&quot;)) {
+        ///     using (var ss = s.BeginSection(&quot;Nested section heading&quot;)) {
+        ///         @ss.FieldFor(m =&gt; m.FirstName)
+        ///     }
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;param name=&quot;section&quot;&gt;The section the section is being created under&lt;/param&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading for the section&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the section&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes to apply to the section container&lt;/param&gt;
+        /// &lt;returns&gt;The nested form section&lt;/returns&gt;
+        public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this Section&lt;TModel&gt; section, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section&lt;TModel&gt;(section.Form, heading.ToHtml(), true, leadingHtml, htmlAttributes);
+        }
+
+        /// &lt;summary&gt;
+        /// Creates a nested form section.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var s = f.BeginSection(&quot;Section heading&quot;)) {
+        ///     using (var ss = s.BeginSection(&quot;Nested section heading&quot;, leadingHtml: @&amp;lt;p&amp;gt;Leading html...&amp;lt;/p&amp;gt;)) {
+        ///         @ss.FieldFor(m =&gt; m.FirstName)
+        ///     }
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;param name=&quot;section&quot;&gt;The section the section is being created under&lt;/param&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading for the section&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the section as a templated razor delegate&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes to apply to the section container&lt;/param&gt;
+        /// &lt;returns&gt;The nested form section&lt;/returns&gt;
+        public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this Section&lt;TModel&gt; section, string heading, Func&lt;dynamic, IHtmlContent&gt; leadingHtml, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section&lt;TModel&gt;(section.Form, heading.ToHtml(), true, leadingHtml(null), htmlAttributes);
+        }
+
+        /// &lt;summary&gt;
+        /// Creates a nested form section.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var s = f.BeginSection(&quot;Section heading&quot;)) {
+        ///     using (var ss = s.BeginSection(new HtmlString(&quot;&amp;lt;strong&amp;gt;Nested section heading&amp;lt;/strong&amp;gt;&quot;))) {
+        ///         @ss.FieldFor(m =&gt; m.FirstName)
+        ///     }
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;param name=&quot;section&quot;&gt;The section the section is being created under&lt;/param&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading for the section&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the section&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes to apply to the section container&lt;/param&gt;
+        /// &lt;returns&gt;The nested form section&lt;/returns&gt;
+        public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this Section&lt;TModel&gt; section, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section&lt;TModel&gt;(section.Form, heading, true, leadingHtml, htmlAttributes);
+        }
+
+        /// &lt;summary&gt;
+        /// Creates a nested form section.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var s = f.BeginSection(&quot;Section heading&quot;)) {
+        ///     using (var ss = s.BeginSection(@&amp;lt;strong&amp;gt;Nested section heading&amp;lt;/strong&amp;gt;, leadingHtml: &amp;lt;p&amp;gt;Leading html...&amp;lt;/p&amp;gt;)) {
+        ///         @ss.FieldFor(m =&gt; m.FirstName)
+        ///     }
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;param name=&quot;section&quot;&gt;The section the section is being created under&lt;/param&gt;
+        /// &lt;param name=&quot;heading&quot;&gt;The heading for the section&lt;/param&gt;
+        /// &lt;param name=&quot;leadingHtml&quot;&gt;Any HTML to output at the start of the section&lt;/param&gt;
+        /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes to apply to the section container&lt;/param&gt;
+        /// &lt;returns&gt;The nested form section&lt;/returns&gt;
+        public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this Section&lt;TModel&gt; section, Func&lt;dynamic, IHtmlContent&gt; heading, Func&lt;dynamic, IHtmlContent&gt; leadingHtml, HtmlAttributes htmlAttributes = null)
+        {
+            return new Section&lt;TModel&gt;(section.Form, heading(null), true, leadingHtml(null), htmlAttributes);
+        }
+</code></pre>
+<h2 id="default-html">Default HTML</h2>
+<h3 id="begin-html">Begin HTML</h3>
+<pre><code class="lang-html">    &lt;fieldset %htmlAttributes%&gt;
+        %if heading%&lt;legend&gt;%heading%&lt;/legend&gt;%endif%
+        %leadingHtml%
+        &lt;dl&gt;
+</code></pre>
+<h3 id="end-html">End HTML</h3>
+<pre><code class="lang-html">        &lt;/dl&gt;
+    &lt;/fieldset&gt;
+</code></pre>
+<h3 id="begin-html-nested">Begin HTML (nested)</h3>
+<pre><code class="lang-html">            %if heading%&lt;dt&gt;%heading%&lt;/dt&gt;%endif%
+            &lt;dd&gt;
+                %leadingHtml%
+                &lt;dl %htmlAttributes%&gt;
+</code></pre>
+<h3 id="end-html-nested">End HTML (nested)</h3>
+<pre><code class="lang-html">                &lt;/dl&gt;
+            &lt;/dd&gt;
+</code></pre>
+<h2 id="twitter-bootstrap-3-html">Twitter Bootstrap 3 HTML</h2>
+<h3 id="begin-html-1">Begin HTML</h3>
+<pre><code class="lang-html">    &lt;fieldset %htmlAttributes%&gt;
+        %if heading%&lt;legend&gt;%heading%&lt;/legend&gt;%endif%
+        %leadingHtml%
+</code></pre>
+<h3 id="end-html-1">End HTML</h3>
+<pre><code class="lang-html">    &lt;/fieldset&gt;
+</code></pre>
+<h3 id="begin-html-nested-1">Begin HTML (nested)</h3>
+<pre><code class="lang-html">    &lt;div class=&quot;panel panel-default&quot; %htmlAttributes%&gt;
+        %if heading%&lt;div class=&quot;panel-heading&quot;&gt;%heading%&lt;/div&gt;%endif%
+        &lt;div class=&quot;panel-body&quot;&gt;
+        %leadingHtml%
+</code></pre>
+<h3 id="end-html-nested-1">End HTML (nested)</h3>
+<pre><code class="lang-html">        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/the-section.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

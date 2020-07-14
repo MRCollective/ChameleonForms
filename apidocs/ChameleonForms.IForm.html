@@ -1,0 +1,214 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IForm
+   | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IForm
+   | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ChameleonForms.IForm">
+  
+  
+  <h1 id="ChameleonForms_IForm" data-uid="ChameleonForms.IForm" class="text-break">Interface IForm
+  </h1>
+  <div class="markdown level0 summary"><p>Interface for a modeless cast of a Chameleon Form.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="ChameleonForms.html">ChameleonForms</a></h6>
+  <h6><strong>Assembly</strong>: ChameleonForms.dll</h6>
+  <h5 id="ChameleonForms_IForm_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IForm</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_IForm_CreatePartialForm__1_System_Linq_Expressions_LambdaExpression_Microsoft_AspNetCore_Mvc_ViewFeatures_HtmlHelper___0__.md&amp;value=---%0Auid%3A%20ChameleonForms.IForm.CreatePartialForm%60%601(System.Linq.Expressions.LambdaExpression%2CMicrosoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L26">View Source</a>
+  </span>
+  <a id="ChameleonForms_IForm_CreatePartialForm_" data-uid="ChameleonForms.IForm.CreatePartialForm*"></a>
+  <h4 id="ChameleonForms_IForm_CreatePartialForm__1_System_Linq_Expressions_LambdaExpression_Microsoft_AspNetCore_Mvc_ViewFeatures_HtmlHelper___0__" data-uid="ChameleonForms.IForm.CreatePartialForm``1(System.Linq.Expressions.LambdaExpression,Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper{``0})">CreatePartialForm&lt;TPartialModel&gt;(LambdaExpression, HtmlHelper&lt;TPartialModel&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns a wrapped <span class="xref">ChameleonForms.PartialViewForm`2</span> for the given partial view information.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IForm&lt;TPartialModel&gt; CreatePartialForm&lt;TPartialModel&gt;(LambdaExpression partialModelExpression, HtmlHelper&lt;TPartialModel&gt; partialViewHelper)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.LambdaExpression</span></td>
+        <td><span class="parametername">partialModelExpression</span></td>
+        <td><p>The expression that identifies the partial model</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper</span>&lt;TPartialModel&gt;</td>
+        <td><span class="parametername">partialViewHelper</span></td>
+        <td><p>The HTML Helper from the partial view</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.IForm-1.html">IForm</a>&lt;TPartialModel&gt;</td>
+        <td><p>The PartialViewForm wrapping the original form</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TPartialModel</span></td>
+        <td><p>The model type of the partial view</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="ChameleonForms.HtmlAttributesExtensions.html#ChameleonForms_HtmlAttributesExtensions_ToHtmlAttributes_System_Object_">HtmlAttributesExtensions.ToHtmlAttributes(Object)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_IForm.md&amp;value=---%0Auid%3A%20ChameleonForms.IForm%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L17" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

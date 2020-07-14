@@ -1,0 +1,892 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IReadonlyFieldConfiguration
+   | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IReadonlyFieldConfiguration
+   | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration">
+  
+  
+  <h1 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration" class="text-break">Interface IReadonlyFieldConfiguration
+  </h1>
+  <div class="markdown level0 summary"><p>Immutable field configuration for use when generating a field's HTML.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="ChameleonForms.Component.Config.html">ChameleonForms.Component.Config</a></h6>
+  <h6><strong>Assembly</strong>: ChameleonForms.Core.dll</h6>
+  <h5 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IReadonlyFieldConfiguration</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_AppendedHtml.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.AppendedHtml%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L75">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_AppendedHtml_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.AppendedHtml*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_AppendedHtml" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.AppendedHtml">AppendedHtml</h4>
+  <div class="markdown level1 summary"><p>A list of HTML to be appended to the form field in ltr order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;IHtmlContent&gt; AppendedHtml { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_Bag.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.Bag%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L16">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_Bag_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.Bag*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_Bag" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.Bag">Bag</h4>
+  <div class="markdown level1 summary"><p>A dynamic bag to allow for custom extensions using the field configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">dynamic Bag { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_DisplayType.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.DisplayType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L45">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_DisplayType_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.DisplayType*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_DisplayType" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.DisplayType">DisplayType</h4>
+  <div class="markdown level1 summary"><p>Returns the display type for the field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">FieldDisplayType DisplayType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Enums.FieldDisplayType.html">FieldDisplayType</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_EmptyItemHidden.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.EmptyItemHidden%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L90">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_EmptyItemHidden_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.EmptyItemHidden*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_EmptyItemHidden" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.EmptyItemHidden">EmptyItemHidden</h4>
+  <div class="markdown level1 summary"><p>Whether or not the empty item is hidden.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool EmptyItemHidden { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_ExcludedEnums.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.ExcludedEnums%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L115">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_ExcludedEnums_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.ExcludedEnums*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_ExcludedEnums" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.ExcludedEnums">ExcludedEnums</h4>
+  <div class="markdown level1 summary"><p>Enum value(s) to exclude from the generated field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Enum[] ExcludedEnums { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Enum</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FalseString.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FalseString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L55">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FalseString_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FalseString*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FalseString" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FalseString">FalseString</h4>
+  <div class="markdown level1 summary"><p>The label that represents false.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string FalseString { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FieldContainerClasses.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FieldContainerClasses%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L105">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FieldContainerClasses_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FieldContainerClasses*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FieldContainerClasses" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FieldContainerClasses">FieldContainerClasses</h4>
+  <div class="markdown level1 summary"><p>Any CSS class(es) to use for the field container element.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string FieldContainerClasses { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FieldHtml.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FieldHtml%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L80">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FieldHtml_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FieldHtml*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FieldHtml" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FieldHtml">FieldHtml</h4>
+  <div class="markdown level1 summary"><p>The HTML to be used as the field html.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IHtmlContent FieldHtml { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FormatString.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FormatString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L85">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FormatString_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FormatString*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_FormatString" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.FormatString">FormatString</h4>
+  <div class="markdown level1 summary"><p>The format string to use for the field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string FormatString { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HasInlineLabel.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HasInlineLabel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L120">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HasInlineLabel_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HasInlineLabel*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HasInlineLabel" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HasInlineLabel">HasInlineLabel</h4>
+  <div class="markdown level1 summary"><p>Whether or not to use an inline &lt;label&gt;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool HasInlineLabel { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HasLabelElement.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HasLabelElement%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L95">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HasLabelElement_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HasLabelElement*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HasLabelElement" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HasLabelElement">HasLabelElement</h4>
+  <div class="markdown level1 summary"><p>Whether or not to use a &lt;label&gt;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool HasLabelElement { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_Hint.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.Hint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L65">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_Hint_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.Hint*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_Hint" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.Hint">Hint</h4>
+  <div class="markdown level1 summary"><p>Get the hint to display with the field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IHtmlContent Hint { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HintId.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HintId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L130">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HintId_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HintId*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HintId" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HintId">HintId</h4>
+  <div class="markdown level1 summary"><p>The ID to use for a field hint.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string HintId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HtmlAttributes.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HtmlAttributes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L30">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HtmlAttributes_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HtmlAttributes*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_HtmlAttributes" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.HtmlAttributes">HtmlAttributes</h4>
+  <div class="markdown level1 summary"><p>Attributes to add to the form element's HTML.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IDictionary&lt;string, object&gt; HtmlAttributes { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_InlineLabelText.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.InlineLabelText%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L35">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_InlineLabelText_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.InlineLabelText*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_InlineLabelText" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.InlineLabelText">InlineLabelText</h4>
+  <div class="markdown level1 summary"><p>Gets any text that has been set for an inline label.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IHtmlContent InlineLabelText { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_LabelClasses.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.LabelClasses%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L100">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_LabelClasses_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.LabelClasses*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_LabelClasses" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.LabelClasses">LabelClasses</h4>
+  <div class="markdown level1 summary"><p>Any CSS class(es) to use for the field label.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string LabelClasses { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_LabelText.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.LabelText%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L40">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_LabelText_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.LabelText*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_LabelText" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.LabelText">LabelText</h4>
+  <div class="markdown level1 summary"><p>Gets any text that has been set for the label.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IHtmlContent LabelText { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_NoneString.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.NoneString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L60">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_NoneString_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.NoneString*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_NoneString" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.NoneString">NoneString</h4>
+  <div class="markdown level1 summary"><p>The label that represents none.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string NoneString { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_PrependedHtml.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.PrependedHtml%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L70">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_PrependedHtml_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.PrependedHtml*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_PrependedHtml" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.PrependedHtml">PrependedHtml</h4>
+  <div class="markdown level1 summary"><p>A list of HTML to be prepended to the form field in ltr order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerable&lt;IHtmlContent&gt; PrependedHtml { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_ShouldInlineLabelWrapElement.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.ShouldInlineLabelWrapElement%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L125">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_ShouldInlineLabelWrapElement_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.ShouldInlineLabelWrapElement*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_ShouldInlineLabelWrapElement" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.ShouldInlineLabelWrapElement">ShouldInlineLabelWrapElement</h4>
+  <div class="markdown level1 summary"><p>Whether or not inline &lt;label&gt; should wrap their &lt;input&gt; element.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool ShouldInlineLabelWrapElement { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_TrueString.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.TrueString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L50">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_TrueString_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.TrueString*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_TrueString" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.TrueString">TrueString</h4>
+  <div class="markdown level1 summary"><p>The label that represents true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string TrueString { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_ValidationClasses.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.ValidationClasses%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L110">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_ValidationClasses_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.ValidationClasses*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_ValidationClasses" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.ValidationClasses">ValidationClasses</h4>
+  <div class="markdown level1 summary"><p>Any CSS class(es) to use for the field validation message.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string ValidationClasses { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration_GetBagData__1_System_String_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration.GetBagData%60%601(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L24">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_GetBagData_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.GetBagData*"></a>
+  <h4 id="ChameleonForms_Component_Config_IReadonlyFieldConfiguration_GetBagData__1_System_String_" data-uid="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.GetBagData``1(System.String)">GetBagData&lt;TData&gt;(String)</h4>
+  <div class="markdown level1 summary"><p>Returns data from the Bag stored in the given property or default(TData) if there is none present.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">TData GetBagData&lt;TData&gt;(string propertyName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">propertyName</span></td>
+        <td><p>The name of the property to retrieve the data for</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TData</span></td>
+        <td><p>The data from the Bag or default(TData) if there was no data against that property in the bag</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TData</span></td>
+        <td><p>The type of the expected data to return</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="ChameleonForms.HtmlAttributesExtensions.html#ChameleonForms_HtmlAttributesExtensions_ToHtmlAttributes_System_Object_">HtmlAttributesExtensions.ToHtmlAttributes(Object)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Config_IReadonlyFieldConfiguration.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Config.IReadonlyFieldConfiguration%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Core/Component/Config/ReadonlyFieldConfiguration.cs/#L11" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

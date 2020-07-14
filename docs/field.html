@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Fields | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Fields | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="fields">Fields</h1>
+
+<p>The Field is a single data collection unit; you create a Field by either calling the <code>Field</code> method on a <a href="the-section.html">Section</a> or otherwise instantiating and outputting to the page a <code>Field&lt;TModel&gt;</code>.</p>
+<p>You can also create a parent field that can have <a href="#use-a-field-generator-to-output-a-single-field-in-a-parent-field">child fields</a> nested <a href="#use-a-field-generator-to-output-a-parent-field-in-a-section">within it</a> by instantiating a <code>Field&lt;TModel&gt;</code> within a <code>using</code> block (the start and end of the <code>using</code> block will output the start and end HTML for the Field and the contents of the <code>using</code> block will output the child Fields).</p>
+<p>The <code>Field&lt;TModel&gt;</code> class is defined as follows in the <code>ChameleonForms.Component</code> namespace:</p>
+<pre><code class="lang-csharp">    /// &lt;summary&gt;
+    /// Wraps the output of a single form field.
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;
+    
+    public class Field&lt;TModel&gt; : FormComponent&lt;TModel&gt;
+    {
+        /// &lt;summary&gt;
+        /// Creates a form field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;form&quot;&gt;The form the field is being created in&lt;/param&gt;
+        /// &lt;param name=&quot;isParent&quot;&gt;Whether or not the field has other fields nested within it&lt;/param&gt;
+        /// &lt;param name=&quot;fieldGenerator&quot;&gt;A field HTML generator class&lt;/param&gt;
+        /// &lt;param name=&quot;config&quot;&gt;The configuration values for the field&lt;/param&gt;
+        public Field(IForm&lt;TModel&gt; form, bool isParent, IFieldGenerator fieldGenerator, IFieldConfiguration config)
+            : base(form, !isParent) {...}
+
+        ...
+    }
+</code></pre>
+<p>The HTML for a Field is generated via the <code>Field</code> method in the <a href="form-templates.html">form template</a> (or <code>BeginField</code> and <code>EndField</code> for the start and end HTML for a parent field).</p>
+<p>A Field consists of 8 sub-components:</p>
+<ul>
+<li><a href="field-element.html">Field Element</a> - The HTML that makes up the control(s) to accept data from the user</li>
+<li><a href="field-label.html">Field Label</a> - Text that describes a Field Element to a user (and is linked to that Field Element)</li>
+<li><a href="field-validation-html.html">Field Validation HTML</a> - Markup that acts as a placeholder to display any validation messages for a particular Field Element</li>
+<li><a href="field-configuration.html">Field Configuration</a> - The configuration for a particular Field, Field Element and/or Field Label</li>
+<li><a href="#hint">Hint</a> - Any hint text that is specified against the field</li>
+<li><a href="#required-designator">Required designator</a> - A visual designator to indicate that the field is required</li>
+<li>Prepended and appended HTML - Any prepended or appended HTML specified against the field to be added before / after the Field Element</li>
+<li>Field container - The containing element surrounding the Field Element and other relevant parts of the field</li>
+</ul>
+<p>The <a href="form-templates.html">form template</a> determines how to lay out these sub-components.</p>
+<h2 id="default-usage">Default usage</h2>
+<h3 id="manually-specify-html">Manually specify HTML</h3>
+<p>If you want to define your own HTML for the Field Element, Field Label and Field Validation HTML then you can do so by using the <code>Field</code> method on the Section, e.g.:</p>
+<pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Title&quot;)) {
+    @s.Field(new HtmlString(&quot;label&quot;), new HtmlString(&quot;element&quot;)).ChainFieldConfigurationMethodsHere()
+    @* Or, if you want to specify all the possible values: *@
+    @s.Field(new HtmlString(&quot;label&quot;), new HtmlString(&quot;element&quot;), new HtmlString(&quot;validation&quot;), new ModelMetadata(...), isValid: false).ChainFieldConfigurationMethodsHere()
+}
+</code></pre>
+<p>The <code>Field</code> method on the Section looks like this:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Outputs a field with passed in HTML.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;labelHtml&quot;&gt;The HTML for the label part of the field&lt;/param&gt;
+        /// &lt;param name=&quot;elementHtml&quot;&gt;The HTML for the field element part of the field&lt;/param&gt;
+        /// &lt;param name=&quot;validationHtml&quot;&gt;The HTML for the validation markup part of the field&lt;/param&gt;
+        /// &lt;param name=&quot;metadata&quot;&gt;Any field metadata&lt;/param&gt;
+        /// &lt;param name=&quot;isValid&quot;&gt;Whether or not the field is valid&lt;/param&gt;
+        /// &lt;returns&gt;A field configuration that can be used to output the field as well as configure it fluently&lt;/returns&gt;
+        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true) {...}
+</code></pre>
+<h3 id="use-a-field-generator-to-output-a-single-field-in-a-section">Use a Field Generator to output a single field in a Section</h3>
+<p>If you would like ChameleonForms to use a Field Generator to generate the HTML for the Field Element, Field Label and Field Validation HTML from a field on the model then you can use the <code>FieldFor</code> extension method on the Section, e.g.:</p>
+<pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Title&quot;)) {
+    @s.FieldFor(m =&gt; m.FieldOnTheModel).ChainFieldConfigurationMethodsHere()
+}
+</code></pre>
+<p>The <code>FieldFor</code> extension method looks like this:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Creates a single form field as a child of a form section.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @s.FieldFor(m =&gt; m.FirstName)
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;typeparam name=&quot;T&quot;&gt;The type of the field being generated&lt;/typeparam&gt;
+        /// &lt;param name=&quot;section&quot;&gt;The section the field is being created in&lt;/param&gt;
+        /// &lt;param name=&quot;property&quot;&gt;A lamdba expression to identify the field to render the field for&lt;/param&gt;
+        /// &lt;returns&gt;A field configuration object that allows you to configure the field&lt;/returns&gt;
+        public static IFieldConfiguration FieldFor&lt;TModel, T&gt;(this ISection&lt;TModel&gt; section, Expression&lt;Func&lt;TModel, T&gt;&gt; property)
+        {
+            var fc = new FieldConfiguration();
+            new Field&lt;TModel&gt;(section.Form, false, section.Form.GetFieldGenerator(property), fc);
+            return fc;
+        }
+</code></pre>
+<h3 id="use-a-field-generator-to-output-a-parent-field-in-a-section">Use a Field Generator to output a parent field in a Section</h3>
+<p>If you want to use a Field Generator and want to nest child Fields under a Field then you can use the <code>BeginFieldFor</code> extension method on the Section (optionally with a Field Configuration), e.g.:</p>
+<pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Title&quot;)) {
+    using (var ff = s.BeginFieldFor(m =&gt; m.FieldOnTheModel, Field.Configure().ChainFieldConfigurationMethodsHere())) {
+        @* Child Fields *@
+    }
+}
+</code></pre>
+<p>The <code>BeginFieldFor</code> extension method looks like this:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Creates a single form field as a child of a form section that can have other form fields nested within it.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var f = s.BeginFieldFor(m =&gt; m.Company)) {
+        ///     @f.FieldFor(m =&gt; m.PositionTitle)
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;typeparam name=&quot;T&quot;&gt;The type of the field being generated&lt;/typeparam&gt;
+        /// &lt;param name=&quot;section&quot;&gt;The section the field is being created in&lt;/param&gt;
+        /// &lt;param name=&quot;property&quot;&gt;A lamdba expression to identify the field to render the field for&lt;/param&gt;
+        /// &lt;param name=&quot;config&quot;&gt;Any configuration information for the field&lt;/param&gt;
+        /// &lt;returns&gt;The form field&lt;/returns&gt;
+        public static Field&lt;TModel&gt; BeginFieldFor&lt;TModel, T&gt;(this ISection&lt;TModel&gt; section, Expression&lt;Func&lt;TModel, T&gt;&gt; property, IFieldConfiguration config = null)
+        {
+            return new Field&lt;TModel&gt;(section.Form, true, section.Form.GetFieldGenerator(property), config);
+        }
+</code></pre>
+<h3 id="use-a-field-generator-to-output-a-single-field-in-a-parent-field">Use a Field Generator to output a single field in a parent Field</h3>
+<p>If you want to use a Field Generator to create nested Fields under a parent Field then you can use the <code>BeginFieldFor</code> extension method on the Field (with an optional Field Configuration), e.g.:</p>
+<pre><code class="lang-cshtml">@using (var ff = s.BeginFieldFor(m =&gt; m.FieldOnTheModel)) {
+    @ff.FieldFor(m =&gt; m.ChildField).ChainFieldConfigurationMethodsHere()
+}
+</code></pre>
+<p>The <code>FieldFor</code> extension method looks like this:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Creates a single form field as a child of another form field.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @using (var f = s.BeginFieldFor(m =&gt; m.Company)) {
+        ///     @f.FieldFor(m =&gt; m.PositionTitle)
+        /// }
+        /// &lt;/example&gt;
+        /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;        
+        /// &lt;typeparam name=&quot;T&quot;&gt;The type of the field being generated&lt;/typeparam&gt;
+        /// &lt;param name=&quot;field&quot;&gt;The parent field the field is being created in&lt;/param&gt;
+        /// &lt;param name=&quot;property&quot;&gt;A lamdba expression to identify the field to render the field for&lt;/param&gt;
+        /// &lt;returns&gt;A field configuration object that allows you to configure the field&lt;/returns&gt;
+        public static IFieldConfiguration FieldFor&lt;TModel, T&gt;(this Field&lt;TModel&gt; field, Expression&lt;Func&lt;TModel, T&gt;&gt; property)
+        {
+            var config = new FieldConfiguration();
+            new Field&lt;TModel&gt;(field.Form, false, field.Form.GetFieldGenerator(property), config);
+            return config;
+        }
+</code></pre>
+<h2 id="default-html">Default HTML</h2>
+<h3 id="field">Field</h3>
+<pre><code class="lang-html">            &lt;dt&gt;%labelHtml% %requiredDesignator%&lt;/dt&gt;
+            &lt;dd class=&quot;%fieldContainerClasses%&quot;&gt;
+                %prependedHtml% %fieldElement% %appendedHtml% %hint% %validationHtml%
+            &lt;/dd&gt;
+</code></pre>
+<h3 id="required-designator">Required designator</h3>
+<p>The <code>%requiredDesignator%</code> is shown if the field is required:</p>
+<pre><code class="lang-html">&lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;
+</code></pre>
+<p>If you want to override the required designator look at <a href="custom-template.html#field">Creating custom form templates &gt; Field</a>.</p>
+<h3 id="hint">Hint</h3>
+<p>The <code>%hint%</code> is shown if a hint is specified in the <a href="field-configuration.html">Field Configuration</a>:</p>
+<pre><code class="lang-html">&lt;div class=&quot;hint&quot; id=&quot;%fieldId%--hint&quot;&gt;%hint%&lt;/div&gt;
+</code></pre>
+<p>If a hint is added then an <code>aria-describedby=&quot;%fieldId%--hint&quot;</code> attribute value will automatically be added to the field element to <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/forms/Basic_form_hints#Describing_with_ARIA">improve accessibility</a>.</p>
+<h3 id="begin-html-parent">Begin HTML (parent)</h3>
+<pre><code class="lang-html">            &lt;dt&gt;%labelHtml% %requiredDesignator%&lt;/dt&gt;
+            &lt;dd class=&quot;%fieldContainerClasses%&quot;&gt;
+                %prependedHtml% %fieldElement% %appendedHtml% %hint% %validationHtml%
+                &lt;dl&gt;
+</code></pre>
+<h3 id="end-html-parent">End HTML (parent)</h3>
+<pre><code class="lang-html">                &lt;/dl&gt;
+            &lt;/dd&gt;
+</code></pre>
+<h2 id="twitter-bootstrap-3-html">Twitter Bootstrap 3 HTML</h2>
+<h3 id="field-input-except-checkbox-and-file-upload-textarea-or-select-control">Field: Input (except checkbox and file upload), textarea or select control</h3>
+<pre><code class="lang-html">        &lt;div class=&quot;form-group%if !isValid% has-error%endif%%fieldContainerClasses%&quot;&gt;
+            %if withoutLabel%&lt;span class=&quot;control-label&quot;&gt;%endif%
+                %labelHtml class=&quot;control-label&quot;%
+            %if withoutLabel%&lt;/span&gt;%endif%
+            %if isInputGroup or isRequired%
+                &lt;div class=&quot;input-group&quot;&gt;
+            %endif%
+                %prependedHtml%
+                %fieldElement class=&quot;form-control&quot;%
+                %appendedHtml%
+                %if isRequired%
+                    &lt;div class=&quot;input-group-addon required&quot;&gt;%requiredDesignator%&lt;/div&gt;
+                %endif%
+            %if isInputGroup or isRequired%
+                &lt;/div&gt;
+            %endif%
+            %hint%
+            %validationHtml class=&quot;help-block&quot;%
+        &lt;/div&gt;
+</code></pre>
+<h3 id="field-single-checkbox">Field: Single checkbox</h3>
+<pre><code class="lang-html">        &lt;div class=&quot;checkbox%if !isValid% has-error%endif%%fieldContainerClasses%&quot;&gt;
+            %prependedHtml%
+            %fieldElement%
+            %requiredDesignator%
+            %appendedHtml%
+            %hint%
+            %validationHtml class=&quot;help-block&quot;%
+        &lt;/div&gt;
+</code></pre>
+<h3 id="field-radiocheckbox-list">Field: Radio/Checkbox list</h3>
+<pre><code class="lang-html">        &lt;div class=&quot;form-group%if !isValid% has-error%endif%%fieldContainerClasses%&quot;&gt;
+            &lt;span class=&quot;control-label&quot;&gt;
+                %labelHtml% %requiredDesignator%
+            &lt;/span&gt;
+            %prependedHtml%
+            %fieldElement%
+            %appendedHtml%
+            %hint%
+            %validationHtml class=&quot;help-block&quot;%
+        &lt;/div&gt;
+</code></pre>
+<h3 id="field-other-eg-file-upload">Field: Other (e.g. file upload)</h3>
+<pre><code class="lang-html">        &lt;div class=&quot;form-group%if !isValid% has-error%endif%%fieldContainerClasses%&quot;&gt;
+            %if withoutLabel%&lt;span class=&quot;control-label&quot;&gt;%endif%
+                %labelHtml% %requiredDesignator%
+            %if withoutLabel%&lt;/span&gt;%endif%
+            %prependedHtml%
+            %fieldElement%
+            %appendedHtml%
+            %hint%
+            %validationHtml class=&quot;help-block&quot;%
+        &lt;/div&gt;
+</code></pre>
+<h3 id="common-elements">Common elements</h3>
+<p>The <code>%requiredDesignator%</code> is shown if the field is required:</p>
+<pre><code class="lang-html">&lt;em class=&quot;required&quot; title=&quot;Required&quot;&gt;&amp;lowast;&lt;/em&gt;
+</code></pre>
+<p>The <code>%hint%</code> is shown if a <a href="#hint">hint</a> is specified in the Field Configuration:</p>
+<pre><code class="lang-html">&lt;div class=&quot;help-block form-hint&quot; id=&quot;%fieldId%--hint&quot;&gt;%hint&lt;/div&gt;
+</code></pre>
+<h3 id="input-groups">Input Groups</h3>
+<p>If the Field Element is within an <a href="http://getbootstrap.com/components/#input-groups">input group</a> then the prepended and appended HTML will be wrapped in the following:</p>
+<pre><code class="lang-html">&lt;div class=&quot;input-group-addon&quot;&gt;%html%&lt;/div&gt;
+</code></pre>
+<p>A field is in an input group if:</p>
+<ul>
+<li>The field is an input (except checkbox and file upload), textarea or select control and:
+<ul>
+<li>The field is required (since the Form Template appends the required designator as an input group add-on); or</li>
+<li>You use the <code>AsInputGroup</code> extension method from the <code>ChameleonForms.Templates.TwitterBootstrap3</code> namespace on the <code>IFieldConfiguration</code></li>
+</ul>
+</li>
+</ul>
+<p>In all other situations you will manually need to add wrapping HTML with the relevant classes (e.g. using <code>Append</code> and <code>Prepend</code> on the <a href="field-configuration.html">Field Configuration</a>).</p>
+<p>As an example of what you can do with the input group consider the following:</p>
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.Dollars).AsInputGroup().Append(&quot;.00&quot;).Prepend(&quot;$&quot;)
+</code></pre>
+<p>This will render like this:</p>
+<p><img src="int-field-with-bootstrap-input-group.png" alt="Example of int field with input group"></p>
+<p>In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view that has a form using the extension method you instead add the namespace to your <code>_ViewImports.cshtml</code> file.</p>
+<h3 id="parent-field">Parent field</h3>
+<p><strong>Begin HTML</strong></p>
+<p>The HTML is the same as the Field HTML specified above, but the last <code>&lt;/div&gt;</code> is replaced with:</p>
+<pre><code class="lang-html">            &lt;div class=&quot;row nested-fields&quot;&gt;
+                &lt;div class=&quot;col-xs-1&quot;&gt;&lt;/div&gt;
+                &lt;div class=&quot;col-xs-11&quot;&gt;
+</code></pre>
+<p><strong>End HTML</strong></p>
+<pre><code class="lang-html">                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/field.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

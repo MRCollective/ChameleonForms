@@ -1,0 +1,915 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DefaultFieldGenerator&lt;TModel, T&gt;
+   | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DefaultFieldGenerator&lt;TModel, T&gt;
+   | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2">
+  
+  
+  <h1 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2" class="text-break">Class DefaultFieldGenerator&lt;TModel, T&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>The default field HTML generator.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">DefaultFieldGenerator&lt;TModel, T&gt;</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="ChameleonForms.FieldGenerators.IFieldGenerator-2.html">IFieldGenerator</a>&lt;TModel, T&gt;</div>
+    <div><a class="xref" href="ChameleonForms.FieldGenerators.IFieldGenerator.html">IFieldGenerator</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="ChameleonForms.FieldGenerators.html">ChameleonForms.FieldGenerators</a></h6>
+  <h6><strong>Assembly</strong>: ChameleonForms.dll</h6>
+  <h5 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DefaultFieldGenerator&lt;TModel, T&gt; : IFieldGenerator&lt;TModel, T&gt;, IFieldGenerator</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TModel</span></td>
+        <td><p>The type of the view model for the form</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of the field being generated</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2__ctor_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper__0__System_Linq_Expressions_Expression_System_Func__0__1___ChameleonForms_Templates_IFormTemplate_.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.%23ctor(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper%7B%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%600%2C%601%7D%7D%2CChameleonForms.Templates.IFormTemplate)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L31">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2__ctor_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.#ctor*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2__ctor_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper__0__System_Linq_Expressions_Expression_System_Func__0__1___ChameleonForms_Templates_IFormTemplate_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.#ctor(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{`0},System.Linq.Expressions.Expression{System.Func{`0,`1}},ChameleonForms.Templates.IFormTemplate)">DefaultFieldGenerator(IHtmlHelper&lt;TModel&gt;, Expression&lt;Func&lt;TModel, T&gt;&gt;, IFormTemplate)</h4>
+  <div class="markdown level1 summary"><p>Constructs the field generator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DefaultFieldGenerator(IHtmlHelper&lt;TModel&gt; htmlHelper, Expression&lt;Func&lt;TModel, T&gt;&gt; fieldProperty, IFormTemplate template)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper</span>&lt;TModel&gt;</td>
+        <td><span class="parametername">htmlHelper</span></td>
+        <td><p>The HTML helper for the current view</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TModel, T&gt;&gt;</td>
+        <td><span class="parametername">fieldProperty</span></td>
+        <td><p>Expression to identify the property to generate the field for</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Templates.IFormTemplate.html">IFormTemplate</a></td>
+        <td><span class="parametername">template</span></td>
+        <td><p>The template being used to output the form</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_FieldProperty.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.FieldProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L47">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_FieldProperty_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.FieldProperty*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_FieldProperty" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.FieldProperty">FieldProperty</h4>
+  <div class="markdown level1 summary"><p>The expression that identifies the property in the model being output.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Expression&lt;Func&lt;TModel, T&gt;&gt; FieldProperty { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TModel, T&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_HtmlHelper.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.HtmlHelper%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L45">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_HtmlHelper_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.HtmlHelper*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_HtmlHelper" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.HtmlHelper">HtmlHelper</h4>
+  <div class="markdown level1 summary"><p>A HTML helper for the model.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IHtmlHelper&lt;TModel&gt; HtmlHelper { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper</span>&lt;TModel&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_Metadata.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.Metadata%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L43">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_Metadata_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.Metadata*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_Metadata" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.Metadata">Metadata</h4>
+  <div class="markdown level1 summary"><p>The metadata for the form field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ModelMetadata Metadata { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_Template.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.Template%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L49">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_Template_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.Template*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_Template" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.Template">Template</h4>
+  <div class="markdown level1 summary"><p>The form template that will be used to render the form.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IFormTemplate Template { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Templates.IFormTemplate.html">IFormTemplate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetCustomAttributes.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetCustomAttributes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L167">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetCustomAttributes_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetCustomAttributes*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetCustomAttributes" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetCustomAttributes">GetCustomAttributes()</h4>
+  <div class="markdown level1 summary"><p>Returns any custom attributes against the field being generated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;Attribute&gt; GetCustomAttributes()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.Attribute</span>&gt;</td>
+        <td><p>The attributes</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldDisplayName.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetFieldDisplayName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L80">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldDisplayName_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetFieldDisplayName*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldDisplayName" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetFieldDisplayName">GetFieldDisplayName()</h4>
+  <div class="markdown level1 summary"><p>Returns the displayable name of the field being generated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetFieldDisplayName()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The id</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldHtml_ChameleonForms_Component_Config_IFieldConfiguration_.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetFieldHtml(ChameleonForms.Component.Config.IFieldConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L94">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldHtml_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetFieldHtml*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldHtml_ChameleonForms_Component_Config_IFieldConfiguration_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetFieldHtml(ChameleonForms.Component.Config.IFieldConfiguration)">GetFieldHtml(IFieldConfiguration)</h4>
+  <div class="markdown level1 summary"><p>Creates the HTML for the field control after preparing the given field configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IHtmlContent GetFieldHtml(IFieldConfiguration fieldConfiguration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.Config.IFieldConfiguration.html">IFieldConfiguration</a></td>
+        <td><span class="parametername">fieldConfiguration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td><p>The HTML for the field control</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldHtml_ChameleonForms_Component_Config_IReadonlyFieldConfiguration_.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L142">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldHtml_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetFieldHtml*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldHtml_ChameleonForms_Component_Config_IReadonlyFieldConfiguration_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetFieldHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration)">GetFieldHtml(IReadonlyFieldConfiguration)</h4>
+  <div class="markdown level1 summary"><p>Creates the HTML for the field control.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IHtmlContent GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.html">IReadonlyFieldConfiguration</a></td>
+        <td><span class="parametername">fieldConfiguration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td><p>The HTML for the field control</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldId.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetFieldId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L161">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldId_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetFieldId*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetFieldId" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetFieldId">GetFieldId()</h4>
+  <div class="markdown level1 summary"><p>Returns the id of the field being generated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GetFieldId()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>The id</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetLabelHtml_ChameleonForms_Component_Config_IFieldConfiguration_.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetLabelHtml(ChameleonForms.Component.Config.IFieldConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L100">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetLabelHtml_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetLabelHtml*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetLabelHtml_ChameleonForms_Component_Config_IFieldConfiguration_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetLabelHtml(ChameleonForms.Component.Config.IFieldConfiguration)">GetLabelHtml(IFieldConfiguration)</h4>
+  <div class="markdown level1 summary"><p>Creates the HTML for the field label after preparing the given field configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IHtmlContent GetLabelHtml(IFieldConfiguration fieldConfiguration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.Config.IFieldConfiguration.html">IFieldConfiguration</a></td>
+        <td><span class="parametername">fieldConfiguration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td><p>The HTML for the field label</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetLabelHtml_ChameleonForms_Component_Config_IReadonlyFieldConfiguration_.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetLabelHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L52">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetLabelHtml_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetLabelHtml*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetLabelHtml_ChameleonForms_Component_Config_IReadonlyFieldConfiguration_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetLabelHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration)">GetLabelHtml(IReadonlyFieldConfiguration)</h4>
+  <div class="markdown level1 summary"><p>Creates the HTML for the field label.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IHtmlContent GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.html">IReadonlyFieldConfiguration</a></td>
+        <td><span class="parametername">fieldConfiguration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td><p>The HTML for the field label</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetModel.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetModel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L173">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetModel_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetModel*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetModel" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetModel">GetModel()</h4>
+  <div class="markdown level1 summary"><p>Returns a model with the current values for the form.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TModel GetModel()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TModel</span></td>
+        <td><p>The current model</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetValidationHtml_ChameleonForms_Component_Config_IFieldConfiguration_.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetValidationHtml(ChameleonForms.Component.Config.IFieldConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L106">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetValidationHtml_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetValidationHtml*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetValidationHtml_ChameleonForms_Component_Config_IFieldConfiguration_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetValidationHtml(ChameleonForms.Component.Config.IFieldConfiguration)">GetValidationHtml(IFieldConfiguration)</h4>
+  <div class="markdown level1 summary"><p>Creates the HTML for the field's validation messages after preparing the given field configuration.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IHtmlContent GetValidationHtml(IFieldConfiguration fieldConfiguration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.Config.IFieldConfiguration.html">IFieldConfiguration</a></td>
+        <td><span class="parametername">fieldConfiguration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td><p>The HTML for the field's validation messages</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetValidationHtml_ChameleonForms_Component_Config_IReadonlyFieldConfiguration_.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetValidationHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L88">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetValidationHtml_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetValidationHtml*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetValidationHtml_ChameleonForms_Component_Config_IReadonlyFieldConfiguration_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetValidationHtml(ChameleonForms.Component.Config.IReadonlyFieldConfiguration)">GetValidationHtml(IReadonlyFieldConfiguration)</h4>
+  <div class="markdown level1 summary"><p>Creates the HTML for the field's validation messages</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IHtmlContent GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.html">IReadonlyFieldConfiguration</a></td>
+        <td><span class="parametername">fieldConfiguration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td><p>The HTML for the field's validation messages</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetValue.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.GetValue%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L153">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetValue_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetValue*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_GetValue" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.GetValue">GetValue()</h4>
+  <div class="markdown level1 summary"><p>Returns the current value of the field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T GetValue()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>The current field value</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_PrepareFieldConfiguration_ChameleonForms_Component_Config_IFieldConfiguration_ChameleonForms_Component_FieldParent_.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602.PrepareFieldConfiguration(ChameleonForms.Component.Config.IFieldConfiguration%2CChameleonForms.Component.FieldParent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L112">View Source</a>
+  </span>
+  <a id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_PrepareFieldConfiguration_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.PrepareFieldConfiguration*"></a>
+  <h4 id="ChameleonForms_FieldGenerators_DefaultFieldGenerator_2_PrepareFieldConfiguration_ChameleonForms_Component_Config_IFieldConfiguration_ChameleonForms_Component_FieldParent_" data-uid="ChameleonForms.FieldGenerators.DefaultFieldGenerator`2.PrepareFieldConfiguration(ChameleonForms.Component.Config.IFieldConfiguration,ChameleonForms.Component.FieldParent)">PrepareFieldConfiguration(IFieldConfiguration, FieldParent)</h4>
+  <div class="markdown level1 summary"><p>Turns the given <a class="xref" href="ChameleonForms.Component.Config.IFieldConfiguration.html">IFieldConfiguration</a> into a <a class="xref" href="ChameleonForms.Component.Config.FieldConfiguration.html">FieldConfiguration</a> ready to use for generating the form field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadonlyFieldConfiguration PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration, FieldParent fieldParent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.Config.IFieldConfiguration.html">IFieldConfiguration</a></td>
+        <td><span class="parametername">fieldConfiguration</span></td>
+        <td><p>The field configuration to modify</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.FieldParent.html">FieldParent</a></td>
+        <td><span class="parametername">fieldParent</span></td>
+        <td><p>The parent component of the field</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.Config.IReadonlyFieldConfiguration.html">IReadonlyFieldConfiguration</a></td>
+        <td><p>The readonly field configuration; ready for generating the form field</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.IFieldGenerator-2.html">IFieldGenerator&lt;TModel, T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.IFieldGenerator.html">IFieldGenerator</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="ChameleonForms.HtmlAttributesExtensions.html#ChameleonForms_HtmlAttributesExtensions_ToHtmlAttributes_System_Object_">HtmlAttributesExtensions.ToHtmlAttributes(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.FieldGeneratorExtensions.html#ChameleonForms_FieldGenerators_FieldGeneratorExtensions_HasMultipleValues__2_ChameleonForms_FieldGenerators_IFieldGenerator___0___1__">FieldGeneratorExtensions.HasMultipleValues&lt;TModel, T&gt;(IFieldGenerator&lt;TModel, T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.FieldGeneratorExtensions.html#ChameleonForms_FieldGenerators_FieldGeneratorExtensions_HasMultipleEnumValues__2_ChameleonForms_FieldGenerators_IFieldGenerator___0___1__">FieldGeneratorExtensions.HasMultipleEnumValues&lt;TModel, T&gt;(IFieldGenerator&lt;TModel, T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.FieldGeneratorExtensions.html#ChameleonForms_FieldGenerators_FieldGeneratorExtensions_HasEnumerableValues__2_ChameleonForms_FieldGenerators_IFieldGenerator___0___1__">FieldGeneratorExtensions.HasEnumerableValues&lt;TModel, T&gt;(IFieldGenerator&lt;TModel, T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.FieldGeneratorExtensions.html#ChameleonForms_FieldGenerators_FieldGeneratorExtensions_GetEnumerableValues__2_ChameleonForms_FieldGenerators_IFieldGenerator___0___1__">FieldGeneratorExtensions.GetEnumerableValues&lt;TModel, T&gt;(IFieldGenerator&lt;TModel, T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.FieldGeneratorExtensions.html#ChameleonForms_FieldGenerators_FieldGeneratorExtensions_IsSelected__2_ChameleonForms_FieldGenerators_IFieldGenerator___0___1__System_Object_">FieldGeneratorExtensions.IsSelected&lt;TModel, T&gt;(IFieldGenerator&lt;TModel, T&gt;, Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.FieldGeneratorExtensions.html#ChameleonForms_FieldGenerators_FieldGeneratorExtensions_GetUnderlyingType__2_ChameleonForms_FieldGenerators_IFieldGenerator___0___1__">FieldGeneratorExtensions.GetUnderlyingType&lt;TModel, T&gt;(IFieldGenerator&lt;TModel, T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.FieldGeneratorExtensions.html#ChameleonForms_FieldGenerators_FieldGeneratorExtensions_IsNumeric__2_ChameleonForms_FieldGenerators_IFieldGenerator___0___1__">FieldGeneratorExtensions.IsNumeric&lt;TModel, T&gt;(IFieldGenerator&lt;TModel, T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.FieldGeneratorExtensions.html#ChameleonForms_FieldGenerators_FieldGeneratorExtensions_IsIntegralNumber__2_ChameleonForms_FieldGenerators_IFieldGenerator___0___1__">FieldGeneratorExtensions.IsIntegralNumber&lt;TModel, T&gt;(IFieldGenerator&lt;TModel, T&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="ChameleonForms.FieldGenerators.FieldGeneratorExtensions.html#ChameleonForms_FieldGenerators_FieldGeneratorExtensions_IsFloatingNumber__2_ChameleonForms_FieldGenerators_IFieldGenerator___0___1__">FieldGeneratorExtensions.IsFloatingNumber&lt;TModel, T&gt;(IFieldGenerator&lt;TModel, T&gt;)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_FieldGenerators_DefaultFieldGenerator_2.md&amp;value=---%0Auid%3A%20ChameleonForms.FieldGenerators.DefaultFieldGenerator%602%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs/#L23" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

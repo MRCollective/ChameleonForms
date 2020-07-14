@@ -1,0 +1,463 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ChameleonForms | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="ChameleonForms | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="docs/favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+
+<p><img src="https://raw.githubusercontent.com/MRCollective/ChameleonForms/master/logo.png" alt="Chameleon Forms logo"></p>
+<h1 id="chameleonforms">ChameleonForms</h1>
+<p><a href="https://ci.appveyor.com/project/MRCollective/chameleonforms"><img src="https://ci.appveyor.com/api/projects/status/0pnpmjpkybb99ac3?svg=true" alt="Build status"></a>
+<a href="https://www.nuget.org/packages/ChameleonForms"><img src="https://img.shields.io/nuget/vpre/ChameleonForms.svg" alt="NuGet version"></a></p>
+<p>ChameleonForms takes away the pain and repetition of building forms with ASP.NET Core MVC by following a philosophy of:</p>
+<ul>
+<li><strong>Model-driven</strong> defaults (e.g. enum is drop-down or radio list, collection/array of enums is a multi-select drop-down or checkbox list, <code>[DataType(DataType.Password)]</code> is password textbox, int is number textbox with a step of 1, etc.)</li>
+<li><strong>Extend the best of ASP.NET Core MVC</strong> - makes use of HTML generation, client validation and model binding, but makes them work the way you'd expect in more scenarios so you spend more time pumping out business value and less time fighting and patching gaps in MVC</li>
+<li><strong>DRY</strong> up your forms - your forms will be quicker to write and easier to maintain and you won't get stuck writing the same form boilerplate markup form after form after form</li>
+<li><strong>Consistent</strong> - consistency of the API and form structure within your forms and consistency across all forms in your site via templating</li>
+<li><strong>Declarative</strong> syntax - specify how the form is structured rather than worrying about the boilerplate HTML markup of the form</li>
+<li><strong>Beautiful, terse, fluent APIs</strong> - it's a pleasure to read and write the code</li>
+<li><strong>Extensible and flexible</strong> core - you can extend or completely change anything you want at any layer of ChameleonForms and you can drop out to plain HTML at any point in your form for those moments where pre-prepared field types and templates just don't cut it</li>
+</ul>
+<p>It's ideally suited for situations where you want to <strong>quickly</strong> build forms that are highly consistent and maintainable. If you are trying to build highly specialised forms that are individually, painstakingly crafted then that's not what this library is for. That's where it makes sense to break out your JavaScript library of choice.</p>
+<p><a href="http://chameleonforms.readthedocs.org/en/latest/why/">Find out more</a> about why we created ChameleonForms and the advantages it gives you or check out the <a href="http://chameleonforms.readthedocs.org/en/latest/">documentation</a>.</p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#support">Support</a></li>
+<li><a href="#roadmap">Roadmap</a></li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>This library works against netcoreapp3.1. If you are using a different version of .NET Core or are running ASP.NET Core against Full Framework then feel free to <a href="https://github.com/MRCollective/ChameleonForms/issues">raise an issue</a> to discuss opening up broader support. If you are using ASP.NET MVC 5 then check out v3.0.3 of the <a href="https://www.nuget.org/packages/ChameleonForms/3.0.3">NuGet package</a> and <a href="https://chameleonforms.readthedocs.io/en/3.0.3/">documentation</a>.</p>
+<p>This library works against ASP.NET Core MVC - if you want to use it for Blazor or Razor Pages then feel free to <a href="https://github.com/MRCollective/ChameleonForms/issues">raise an issue</a> to discuss.</p>
+<h3 id="getting-it-running">Getting it running</h3>
+<ol>
+<li><p>Install the NuGet package <code>Install-Package ChameleonForms -pre</code> (v4 is currently marked beta so you need to include pre-release versions)</p>
+</li>
+<li><p>Register ChameleonForms in your <code>Startup.cs</code> file:</p>
+<pre><code class="lang-csharp">public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddMvc(...);
+    ...
+    services.AddChameleonForms();
+}
+</code></pre>
+<p>Note: you can alter the configuration from the default, <a href="https://chameleonforms.readthedocs.io/en/latest/configuration/">see the docs</a>.</p>
+</li>
+<li><p>Add the following to your <code>_ViewImports.cshtml</code>:</p>
+<pre><code class="lang-cshtml">@using ChameleonForms;
+@using ChameleonForms.Enums;
+@using ChameleonForms.Component;
+</code></pre>
+</li>
+<li><p>Create your first form, e.g.:</p>
+<p><code>~/Controllers/MyFormController.cs</code>:</p>
+<pre><code class="lang-cs">using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+
+namespace MyWebApp.Controllers
+{
+    public class MyFormViewModel
+    {
+        [Required]
+        public string Name { get; set; }
+
+        public int FavouriteNumber { get; set; }
+
+        [DisplayFormat(DataFormatString = &quot;{0:d/M/yyyy}&quot;, ApplyFormatInEditMode = true)]
+        public DateTime DateOfBirth { get; set; }
+    }
+    public class MyFormController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Index(MyFormViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                // Do stuff
+                return RedirectToAction(&quot;Index&quot;);
+            }
+            return View(vm);
+        }
+    }
+}
+</code></pre>
+<p><code>~/Views/MyForm/Index.cshtml</code>:</p>
+<pre><code class="lang-cshtml">@model MyWebApp.Controllers.ViewModel
+@{
+    ViewData[&quot;Title&quot;] = &quot;My Form&quot;;
+}
+
+@using (var f = Html.BeginChameleonForm())
+{
+    using (var s = f.BeginSection(&quot;About you!?&quot;))
+    {
+        @s.FieldFor(m =&gt; m.Name)
+        @s.FieldFor(m =&gt; m.FavouriteNumber)
+        @s.FieldFor(m =&gt; m.DateOfBirth)
+    }
+    using (var n = f.BeginNavigation())
+    {
+        @n.Submit(&quot;Submit&quot;)
+    }
+}
+
+@section Scripts
+{
+    &lt;partial name=&quot;_ValidationScriptsPartial&quot; /&gt;
+    @* ... or relevant equivalent *@
+}
+
+</code></pre>
+</li>
+<li><p>Run it!</p>
+</li>
+<li><p><em>(Optional)</em> If you want to add the additional client-side validation support in ChameleonForms (which supports both <a href="">jquery validate unobtrusive validation</a> and <a href="">aspnet-validation</a>) then add the following to your <code>_ValidationScriptsPartial.cshtml</code> or equivalent file:</p>
+<pre><code class="lang-html">&lt;script src=&quot;~/lib/chameleonforms/unobtrusive-date-validation.chameleonforms.js&quot; asp-append-version=&quot;true&quot;&gt;&lt;/script&gt;
+</code></pre>
+</li>
+<li><p><em>(Optional)</em> If you are using Twitter Bootstrap 3 then add the following to your <code>_ValidationScriptsPartial.cshtml</code> (which only supports jquery validate unobtrusive validation for now):</p>
+<pre><code class="lang-html">&lt;script src=&quot;~/lib/chameleonforms/unobtrusive-twitterbootstrap3-validation.chameleonforms.js&quot; asp-append-version=&quot;true&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>And add the following to your <code>_Layout.cshtml</code> or equivalent file:</p>
+<pre><code class="lang-html">&lt;link href=&quot;~/lib/chameleonforms/chameleonforms-twitterbootstrap3.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; asp-append-version=&quot;true&quot; /&gt;
+</code></pre>
+</li>
+</ol>
+<h2 id="example">Example</h2>
+<p>So, what does a ChameleonForms form look like? Check out the basic signup form example below.</p>
+<h3 id="view-model-class">View model class</h3>
+<pre><code class="lang-csharp">public class SignupViewModel
+{
+    [Required]
+    public string FirstName { get; set; }
+    [Required]
+    public string LastName { get; set; }
+    [DisplayFormat(DataFormatString = &quot;{0:d/M/yyyy}&quot;, ApplyFormatInEditMode = true)]
+    public DateTime DateOfBirth { get; set; }
+
+    [Required]
+    [EmailAddress]
+    public string EmailAddress { get; set; }
+    [Required]
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
+    public MembershipType MembershipType { get; set; }
+
+    [Url]
+    public Uri Homepage { get; set; }
+    [DataType(DataType.MultilineText)]
+    public string Bio { get; set; }
+
+    [Required]
+    public bool TermsAndConditions { get; set; }
+}
+public enum MembershipType
+{
+    Standard,
+    Bonze,
+    Silver,
+    Gold,
+    Platinum
+}
+</code></pre>
+<h3 id="razor-view">Razor view</h3>
+<pre><code class="lang-csharp">@model SignupViewModel
+&lt;h1&gt;Account signup&lt;/h1&gt;
+@using (var f = Html.BeginChameleonForm(htmlAttributes: Html.Attrs().Id(&quot;signup-form&quot;)))
+{
+    using (var m = f.BeginMessage(MessageType.Information, &quot;Signup for an account&quot;))
+    {
+        @m.Paragraph(&quot;Please fill in your information below to signup for an account.&quot;)
+    }
+
+    using (var s = f.BeginSection(&quot;Your details&quot;))
+    {
+        @s.FieldFor(m =&gt; m.FirstName)
+        @s.FieldFor(m =&gt; m.LastName)
+        @s.FieldFor(m =&gt; m.DateOfBirth).WithHint(&quot;DD/MM/YYYY&quot;)
+    }
+
+    using (var s = f.BeginSection(&quot;Account details&quot;))
+    {
+        @s.FieldFor(m =&gt; m.EmailAddress).WithHint(&quot;An email will be sent to this address to confirm you own it&quot;)
+        @s.FieldFor(m =&gt; m.Password)
+        @s.FieldFor(m =&gt; m.MembershipType)
+    }
+
+    using (var s = f.BeginSection(&quot;Additional details&quot;))
+    {
+        @s.FieldFor(m =&gt; m.Bio).Rows(2).Cols(60)
+        @s.FieldFor(m =&gt; m.Homepage).Placeholder(&quot;https://&quot;)
+    }
+
+    using (var m = f.BeginMessage(MessageType.Action, &quot;Confirm the Terms &amp; Conditions&quot;))
+    {
+        @m.Paragraph(@&lt;text&gt;Please &lt;a href=&quot;/terms&quot;&gt;read the terms and conditions&lt;/a&gt;&lt;/text&gt;)
+        @f.FieldElementFor(mm =&gt; mm.TermsAndConditions).InlineLabel(&quot;I agree to the terms and conditions&quot;)
+    }
+
+    using (var n = f.BeginNavigation())
+    {
+        @n.Submit(&quot;Signup&quot;)
+    }
+}
+</code></pre>
+<h3 id="rendered-result">Rendered result</h3>
+<p>Here's what the rendered form looks like (using the default form template with some <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/wwwroot/css/styles.css">light CSS applied</a>):</p>
+<p><img src="docs/account-signup-render.png" alt="Rendered result"></p>
+<p>Here's what the HTML looks like (using the default form template, which you can change):</p>
+<pre><code class="lang-html">&lt;h1&gt;ChameleonForms example&lt;/h1&gt;
+&lt;form action=&quot;&quot; id=&quot;signup-form&quot; method=&quot;post&quot; novalidate=&quot;novalidate&quot;&gt;      &lt;div class=&quot;information_message&quot;&gt;
+          &lt;h3&gt;Signup for an account&lt;/h3&gt;
+          &lt;div class=&quot;message&quot;&gt;
+
+&lt;p&gt;
+    Please fill in your information below to signup for an account.
+&lt;/p&gt;          &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Your details&lt;/legend&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;&lt;label for=&quot;FirstName&quot;&gt;First name&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;
+                &lt;input data-val=&quot;true&quot; data-val-required=&quot;The First name field is required.&quot; id=&quot;FirstName&quot; name=&quot;FirstName&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;FirstName&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;/dd&gt;
+            &lt;dt&gt;&lt;label for=&quot;LastName&quot;&gt;Last name&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;
+                &lt;input data-val=&quot;true&quot; data-val-required=&quot;The Last name field is required.&quot; id=&quot;LastName&quot; name=&quot;LastName&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;LastName&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;/dd&gt;
+            &lt;dt&gt;&lt;label for=&quot;DateOfBirth&quot;&gt;Date of birth&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;
+                &lt;input aria-describedby=&quot;DateOfBirth--Hint&quot; data-val=&quot;true&quot; data-val-date=&quot;The field Date of birth must be a date with format d/M/yyyy.&quot; data-val-format=&quot;d/M/yyyy&quot; data-val-required=&quot;The Date of birth field is required.&quot; id=&quot;DateOfBirth&quot; name=&quot;DateOfBirth&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt;&lt;div class=&quot;hint&quot; id=&quot;DateOfBirth--Hint&quot;&gt;DD/MM/YYYY&lt;/div&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;DateOfBirth&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/fieldset&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Account details&lt;/legend&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;&lt;label for=&quot;EmailAddress&quot;&gt;Email address&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;
+                &lt;input aria-describedby=&quot;EmailAddress--Hint&quot; data-val=&quot;true&quot; data-val-required=&quot;The Email address field is required.&quot; id=&quot;EmailAddress&quot; name=&quot;EmailAddress&quot; required=&quot;required&quot; type=&quot;email&quot; value=&quot;&quot; /&gt;&lt;div class=&quot;hint&quot; id=&quot;EmailAddress--Hint&quot;&gt;An email will be sent to this address to confirm you own it&lt;/div&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;EmailAddress&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;/dd&gt;
+            &lt;dt&gt;&lt;label for=&quot;Password&quot;&gt;Password&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;
+                &lt;input data-val=&quot;true&quot; data-val-required=&quot;The Password field is required.&quot; id=&quot;Password&quot; name=&quot;Password&quot; required=&quot;required&quot; type=&quot;password&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;Password&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;/dd&gt;
+            &lt;dt&gt;&lt;label for=&quot;MembershipType&quot;&gt;Membership type&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;
+                &lt;select data-val=&quot;true&quot; data-val-required=&quot;The Membership type field is required.&quot; id=&quot;MembershipType&quot; name=&quot;MembershipType&quot; required=&quot;required&quot;&gt;&lt;option selected=&quot;selected&quot; value=&quot;Standard&quot;&gt;Standard&lt;/option&gt;
+&lt;option value=&quot;Bonze&quot;&gt;Bonze&lt;/option&gt;
+&lt;option value=&quot;Silver&quot;&gt;Silver&lt;/option&gt;
+&lt;option value=&quot;Gold&quot;&gt;Gold&lt;/option&gt;
+&lt;option value=&quot;Platinum&quot;&gt;Platinum&lt;/option&gt;
+&lt;/select&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;MembershipType&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/fieldset&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Additional details&lt;/legend&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;&lt;label for=&quot;Bio&quot;&gt;Bio&lt;/label&gt;&lt;/dt&gt;
+            &lt;dd&gt;
+                &lt;textarea cols=&quot;60&quot; id=&quot;Bio&quot; name=&quot;Bio&quot; rows=&quot;2&quot;&gt;
+&lt;/textarea&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;Bio&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;/dd&gt;
+            &lt;dt&gt;&lt;label for=&quot;Homepage&quot;&gt;Homepage&lt;/label&gt;&lt;/dt&gt;
+            &lt;dd&gt;
+                &lt;input id=&quot;Homepage&quot; name=&quot;Homepage&quot; placeholder=&quot;http://&quot; type=&quot;url&quot; value=&quot;&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;Homepage&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+            &lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/fieldset&gt;
+      &lt;div class=&quot;action_message&quot;&gt;
+          &lt;h3&gt;Confirm the Terms &amp; Conditions&lt;/h3&gt;
+          &lt;div class=&quot;message&quot;&gt;
+
+&lt;p&gt;
+    Please &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;
+&lt;/p&gt;&lt;input data-val=&quot;true&quot; data-val-required=&quot;The Terms and conditions field is required.&quot; id=&quot;TermsAndConditions&quot; name=&quot;TermsAndConditions&quot; required=&quot;required&quot; type=&quot;checkbox&quot; value=&quot;true&quot; /&gt; &lt;label for=&quot;TermsAndConditions&quot;&gt;I agree to the terms and conditions&lt;/label&gt;          &lt;/div&gt;
+      &lt;/div&gt;
+        &lt;div class=&quot;form_navigation&quot;&gt;
+&lt;button type=&quot;submit&quot;&gt;Signup&lt;/button&gt;        &lt;/div&gt;
+    &lt;/form&gt;
+</code></pre>
+<h3 id="summary">Summary</h3>
+<p>Key things to note that ChameleonForms has automatically done (with default configuration):</p>
+<ul>
+<li>HTML5 validation turned off (instead unobtrusive validation provides a better exerience)</li>
+<li>The form performs a POST to the current URL (i.e. self-submitting form)</li>
+<li>Fields are grouped into sections with fieldsets</li>
+<li>All boilerplate HTML surrounding a field, its label (with correct <code>for</code>), its hint (if any) and its validation message is added for you just by specifying the view model property - this means:
+<ul>
+<li>You can switch a form template once globally and all forms will automatically change</li>
+<li>You can be confident all fields have labels, validation HTML etc. that are correctly hooked up and you haven't misspelt any IDs etc.</li>
+<li>Similarly, you can be sure that all fields will definitely bind to the view model when posted back to the server</li>
+<li>The form is much quicker to write and read since it's way terser</li>
+</ul>
+</li>
+<li>The correct field types have automatically been inferred, including HTML5 field types where they are useful (e.g. not for dates since you have no control over date format):
+<ul>
+<li><code>string</code> -&gt; <code>&lt;input type=&quot;text&quot;&gt;</code></li>
+<li><code>[EmailAddress]</code> -&gt; <code>&lt;input type=&quot;email&quot;&gt;</code></li>
+<li><code>[DataType(DataType.Password)]</code> -&gt; <code>&lt;input type=&quot;password&quot;&gt;</code></li>
+<li><code>MembershipType</code> (enum) -&gt; <code>&lt;select&gt;</code> (Can easily be made a radio list with <code>.AsRadioList()</code>)</li>
+<li><code>[Url]</code> -&gt; <code>&lt;input type=&quot;url&quot;&gt;</code></li>
+<li><code>[DataType(DataType.MultilineText)]</code> -&gt; <code>&lt;textarea&gt;</code></li>
+<li><code>bool</code> -&gt; <code>&lt;input type=&quot;checkbox&quot;&gt;</code></li>
+</ul>
+</li>
+<li>Required fields (either with <code>[Required]</code> or via a non-nullable value type) automatically have <code>data-val-required</code>, <code>required=&quot;required&quot;</code> and visual required designators added to them</li>
+<li>Labels are automatically human readable e.g. <code>public string FirstName { get; set; }</code> became <code>First name</code> without us having to specify that</li>
+<li>Client-side validation and server-side validation has been added for the <code>DateTime</code> that is Format-aware (based on <code>[DisplayFormat(DataFormatString = &quot;{0:d/M/yyyy}&quot;, ApplyFormatInEditMode = true)]</code>)</li>
+<li>Hints are automatically attached to their field for screen readers via the <code>aria-describedby</code> attribute</li>
+</ul>
+<h2 id="contributors">Contributors</h2>
+<h3 id="core-team">Core Team</h3>
+<ul>
+<li><a href="http://github.com/robdmoore">robdmoore</a></li>
+<li><a href="https://github.com/mattdavies">mdaviesnet</a></li>
+</ul>
+<h3 id="other-contributors">Other contributors</h3>
+<p>The core team would like to thank everyone that has contributed code to this project! Check out the <a href="https://github.com/MRCollective/ChameleonForms/graphs/contributors">contributors graph</a> to see them :). Thanks to <a href="https://twitter.com/robertsjason">Jason Roberts</a> for the logo.</p>
+<h3 id="contributing">Contributing</h3>
+<p>If you would like to contribute to this project then feel free to communicate with us via Twitter <a href="http://twitter.com/robdmoore">@robdmoore</a> / <a href="http://twitter.com/mdaviesnet">@mdaviesnet</a> or alternatively send a pull request / issue to this GitHub project.</p>
+<h3 id="continuous-integration">Continuous Integration</h3>
+<p>We have a <a href="https://ci.appveyor.com/project/MRCollective/chameleonforms">continuous integration build</a> in AppVeyor that automatically builds and runs tests when we push/merge to master as well as all pull requests and generates the NuGet packages that we can publish to NuGet.org at the click of a button. This is implemented using the <a href="https://github.com/MRCollective/AppVeyorConfig">MRCollective AppVeyor yml</a>.</p>
+<h3 id="code-coverage">Code coverage</h3>
+<p>To see code coverage, ensure you have <a href="https://github.com/danielpalme/ReportGenerator">ReportGenerator</a> installed:</p>
+<pre><code>&gt; dotnet tool install -g dotnet-reportgenerator-globaltool
+</code></pre>
+<p>And then run:</p>
+<pre><code>rmdir ChameleonForms.Tests/TestResults -Force
+dotnet test --collect:&quot;XPlat Code Coverage&quot; --settings ChameleonForms.Tests/coverlet.runsettings ChameleonForms.Tests/ChameleonForms.Tests.csproj
+reportgenerator &quot;-reports:ChameleonForms.Tests/TestResults/**/coverage.cobertura.xml&quot; &quot;-targetdir:ChameleonForms.Tests/TestResults/report&quot;
+</code></pre>
+<p>If you are using VSCode, then the first command can be achieved using the <code>test with coverage</code> task.</p>
+<h2 id="support">Support</h2>
+<p>If you need to raise an issue or check for an existing issue, see <a href="https://github.com/MRCollective/ChameleonForms/issues">https://github.com/MRCollective/ChameleonForms/issues</a>.</p>
+<h2 id="roadmap">Roadmap</h2>
+<p>Some ideas for the library in the future are:</p>
+<ul>
+<li>Ability to opt-in to switch on HTML5 validation and switch off client validation</li>
+<li>Bootstrap 4 and Material UI support</li>
+<li>Tag helpers</li>
+<li>Blazor, Razor Pages and Carter support</li>
+<li>Support <code>IList&lt;nullable&lt;value type&gt;&gt;</code> (doesn't bind well in ASP.NET Core MVC - needs to be patched)</li>
+<li>Support localisation</li>
+<li>Improve configurability</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/README.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>

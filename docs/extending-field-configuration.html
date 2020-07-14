@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Extending Field Configuration | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Extending Field Configuration | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="extending-field-configuration">Extending Field Configuration</h1>
+
+<p>The <code>Bag</code> property, which is <code>dynamic</code> provides a way to store arbitrary data. The <a href="field-configuration.html"><code>FieldConfiguration</code></a> class, which is the default implementation of <code>IFieldConfiguration</code>, instantiates this property as an <code>ExpandoObject</code>.</p>
+<p>To extend the Field Configuration you can create an extension method against <code>IFieldConfiguration</code>, which adds data to the <code>Bag</code> property (or alternatively, you can modify the <code>Attributes</code> property if you want your extension method to simply add HTML attributes).</p>
+<p>If you are using the <code>Bag</code> property then you will likely need to create your own <a href="custom-template.html">custom template</a> to then pull that data out of the <code>Bag</code> property on the <code>IReadonlyFieldConfiguration</code> (which will be copied from the <code>IFieldConfiguration</code> when <code>.ToReadonly()</code> is called before passing it to the <a href="form-templates.html">form template</a> for rendering).</p>
+<h2 id="example">Example</h2>
+<p>For an example of this in action see the extension we added to the <a href="bootstrap-template.html">Twitter Bootstrap 3 template</a> to allow you to <a href="field.html#input-groups">specify an input group</a>.</p>
+<p>Firstly, the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/TwitterBootstrap3/FieldConfigurationExtensions.cs">definition of the extension method</a> is:</p>
+<pre><code class="lang-csharp">        /// &lt;summary&gt;
+        /// Outputs the field in an input group using prepended and appended HTML.
+        /// &lt;/summary&gt;
+        /// &lt;example&gt;
+        /// @n.Field(labelHtml, elementHtml, validationHtml, metadata, new FieldConfiguration().Prepend(beforeHtml).Append(afterHtml).AsInputGroup(), false)
+        /// &lt;/example&gt;
+        /// &lt;param name=&quot;fc&quot;&gt;The configuration for a field&lt;/param&gt;
+        /// &lt;returns&gt;The field configuration object to allow for method chaining&lt;/returns&gt;
+        public static IFieldConfiguration AsInputGroup(this IFieldConfiguration fc)
+        {
+            fc.Bag.DisplayAsInputGroup = true;
+            return fc;
+        }
+</code></pre>
+<p>Then the corresponding code in the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/ChameleonFormsTwitterBootstrap3Template/Field.cshtml#L10">template</a> that gets the value as a local variable to switch on is:</p>
+<pre><code class="lang-csharp">var isInputGroup = canBeInputGroup &amp;&amp; (isRequired || Model.FieldConfiguration.GetBagData&lt;bool&gt;(&quot;DisplayAsInputGroup&quot;));
+</code></pre>
+<p>Note in particular the <code>Model.FieldConfiguration.GetBagData&lt;bool&gt;(&quot;DisplayAsInputGroup&quot;)</code>.</p>
+<h2 id="namespaces">Namespaces</h2>
+<p>In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to the namespace that contains your extension method for each view that you instead add the namespace to your <code>_ViewImports.cshtml</code> file.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/docs/extending-field-configuration.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
