@@ -363,6 +363,28 @@ If you would like to contribute to this project then feel free to communicate wi
 
 We have a [continuous integration build](https://ci.appveyor.com/project/MRCollective/chameleonforms) in AppVeyor that automatically builds and runs tests when we push/merge to master as well as all pull requests and generates the NuGet packages that we can publish to NuGet.org at the click of a button. This is implemented using the [MRCollective AppVeyor yml](https://github.com/MRCollective/AppVeyorConfig).
 
+### Documentation
+
+We are using [DocFX](https://dotnet.github.io/docfx/) to generate the documentation. The documentation consists of three parts:
+
+1. The shiny homepage
+2. The main documentation area, which is generated off a bunch of Markdown files
+3. The API documentation, which is auto-generated from the xmldoc comments in the source code
+
+To see the documentation:
+
+1. `choco install docfx` (Windows); `brew install docfx` (Mac); [Other](https://dotnet.github.io/docfx/tutorial/docfx_getting_started.html#2-use-docfx-as-a-command-line-tool)
+2. `> docfx docfx.json`
+3. The documentation site will be running at <http://localhost:8080/>
+
+The key files to look for to modify the documentation are:
+
+1. `docfx.json` - DocFX config
+2. `toc.yml` - Table of contents
+3. `index.md` - Homepage
+4. `docs/templates/chameleonforms/*.*` - Template
+5. `docs/*.*` - Documentation files
+
 ### Code coverage
 
 To see code coverage, ensure you have [ReportGenerator](https://github.com/danielpalme/ReportGenerator) installed:
