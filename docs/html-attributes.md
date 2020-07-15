@@ -140,7 +140,7 @@ The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namesp
 
 The xmldoc comments above should give a pretty good indication of how each of those methods are meant to be used.
 
-The [Field Configuration](field-configuration) wraps a HTML Attributes object and a lot of these methods also appear on that interface. The HTML Attributes can also be passed into the [Form](the-form) and the [Section](the-section) and can be chained from [Navigation Buttons](the-navigation).
+The [Field Configuration](field-configuration.md) wraps a HTML Attributes object and a lot of these methods also appear on that interface. The HTML Attributes can also be passed into the [Form](the-form.md) and the [Section](the-section.md) and can be chained from [Navigation Buttons](the-navigation.md).
 
 ## Default Usage
 
@@ -150,8 +150,8 @@ There are a number of choices when using HTML Attributes.
 
 If you are interacting with a method that returns a HTML Attributes object then you can simply chain method calls, e.g.:
 
-```csharp
-using (var n = f.BeginNavigation()) {
+```cshtml
+@using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").Attr("data-something", "value").AddClass("a-class").Id("buttonId")
 }
 ```
@@ -164,7 +164,7 @@ You can new up an instance and use one of the four constructors (empty construct
 
 You can new up an instance and then chain methods off that instance, e.g.:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes().AddClass("form").Id("someForm")) {
     @* ... *@
 }
@@ -172,7 +172,7 @@ You can new up an instance and then chain methods off that instance, e.g.:
 
 ### Instantiation with lambda expressions
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes(@class => "form", id => "someForm")) {
     @* ... *@
 }
@@ -188,7 +188,7 @@ new HtmlAttributes(data_something => "value")
 
 You can convert an anonymous object to a HTML Attributes object, e.g.:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(htmlAttributes: new { @class="form", id="someForm" }.ToHtmlAttributes())) {
     @* ... *@
 }
@@ -204,7 +204,7 @@ new {data_something => "value"}.ToHtmlAttributes()
 
 You can convert a dictionary to a HTML Attributes object, e.g.:
 
-```csharp
+```cshtml
 @using (var f = Html.BeginChameleonForm(htmlAttributes: new Dictionary<string, object>{ {"class", "form"}, {"id", "someForm"} }.ToHtmlAttributes())) {
     @* ... *@
 }
@@ -228,7 +228,7 @@ t.MergeAttributes(h.Attributes);
 
 You may notice that the `HTMLAttributes` definition above extends `IHtmlContent`. As you might expect, this means you can directly output it to the page, e.g.
 
-```html
+```cshtml
 @{
     var h = new HtmlAttributes().Id("id");
 }
@@ -272,8 +272,8 @@ public static HtmlAttributesExtensions
 
 Then you could do something like this:
 
-```csharp
-using (var n = f.BeginNavigation()) {
+```cshtml
+@using (var n = f.BeginNavigation()) {
     @n.Button(Model.Coordinate1.ToString()).Coordinate(Model.Coordinate1)
     @n.Button(Model.Coordinate2.ToString()).Coordinate(Model.Coordinate2)
     @n.Button(Model.Coordinate3.ToString()).Coordinate(Model.Coordinate2)
@@ -282,7 +282,7 @@ using (var n = f.BeginNavigation()) {
 
 ### Extending Navigation Buttons specifically
 
-[Navigation Buttons](the-navigation) return a sub-class of `HtmlAttributes` called `ButtonHtmlAttributes`. This allows you to target extension methods specifically for buttons, which must then be invoked first before any of the methods targeting the more general `HtmlAttributes`. As an example consider the following extension method in the Twitter Bootstrap 3 template to add a size to the button:
+[Navigation Buttons](the-navigation.md) return a sub-class of `HtmlAttributes` called `ButtonHtmlAttributes`. This allows you to target extension methods specifically for buttons, which must then be invoked first before any of the methods targeting the more general `HtmlAttributes`. As an example consider the following extension method in the Twitter Bootstrap 3 template to add a size to the button:
 
 ```csharp
         /// <summary>
@@ -304,7 +304,7 @@ using (var n = f.BeginNavigation()) {
 
 ## Create methods that chain HTML Attributes
 
-Returning a HTML Attributes object from a method so that the user can chain attribute methods off it before outputting it in a view (like the [Navigation Buttons](the-navigation)) can be tricky by default, so ChameleonForms provides a special way to handle this situation.
+Returning a HTML Attributes object from a method so that the user can chain attribute methods off it before outputting it in a view (like the [Navigation Buttons](the-navigation.md)) can be tricky by default, so ChameleonForms provides a special way to handle this situation.
 
 If the HTML that you are outputting relies on the HTML Attributes to be defined, then you don't want to generate it until after the final chaining call is made. Luckily, you know when the final call is made because MVC will call the `ToHtmlString` method for you (since HtmlAttributes overrides the `IHtmlContent` interface).
 
@@ -337,7 +337,7 @@ In this example, the lambda expression passed into the constructor is called whe
 
 In this case, if you put the following in your razor view:
 
-```csharp
+```cshtml
 @Html.Paragraph("Display some text").Id("paragraphId").AddClass("a-class").Attr(data_some_data => "{mydata:true}")
 ```
 

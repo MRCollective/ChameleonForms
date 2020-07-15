@@ -1,0 +1,92 @@
+- name: Home
+  href: index.md
+- name: Philosophy
+  items:
+    - name: Why is ChameleonForms needed?
+      href: why.md
+- name: Basic usage
+  items:
+    - name: Getting started
+      href: getting-started.md
+    - name: Configuring ChameleonForms
+      href: configuration.md
+    - name: Comparison
+      href: comparison.md
+    - name: Bootstrap Template
+      href: bootstrap-template.md
+    - name: Control field labels
+      href: labels.md
+    - name: Field Configuration
+      href: field-configuration.md
+    - name: HTML Attributes
+      href: html-attributes.md
+    - name: Change the model type for HTML Helper for portions of your page
+      href: html-helper-context.md
+    - name: Create a form against a model type different from the page model
+      href: different-form-models.md
+    - name: Use partial views for repeated or abstracted form areas
+      href: partials.md
+- name: Form structure
+  items:
+    - name: Form
+      href: the-form.md
+    - name: Message
+      href: the-message.md
+    - name: Section
+      href: the-section.md
+    - name: Navigation
+      href: the-navigation.md
+    - name: Field
+      href: field.md
+    - name: Field Element
+      href: field-element.md
+    - name: Field Label
+      href: field-label.md
+    - name: Field Validation HTML
+      href: field-validation-html.md
+- name: Field types
+  items:
+    - name: Boolean fields
+      href: boolean.md
+    - name: DateTime fields
+      href: datetime.md
+    - name: Client-side validation of DateTime fields
+      href: datetime-client-side-validation.md
+    - name: Enum fields
+      href: enum.md
+    - name: Flags enum fields
+      href: flags-enum.md
+    - name: Multiple-select enum fields
+      href: multiple-enum.md
+    - name: List fields
+      href: list.md
+    - name: Multiple-select list fields
+      href: multiple-list.md
+    - name: Textarea fields
+      href: textarea.md
+    - name: File upload fields
+      href: file-upload.md
+    - name: Password fields
+      href: password.md
+    - name: Number fields
+      href: number.md
+    - name: Email fields
+      href: email.md
+    - name: URI fields
+      href: uri.md
+    - name: Default fields
+      href: default-fields.md
+- name: Advanced usage
+  items:
+    - name: Using different form templates
+      href: form-templates.md
+    - name: Creating custom form templates
+      href: custom-template.md
+    - name: Extending the field configuration
+      href: extending-field-configuration.md
+    - name: Extending the form components
+      href: extending-form-components.md
+    - name: Creating and using a custom field generator
+      href: custom-field-generator.md
+    - name: Creating and using custom field generator handlers
+      href: custom-field-generator-handlers.md

@@ -1,0 +1,16 @@
+    <div id="home">
+        <div class="container-width">
+        <div class="logo-container">
+            <div class="logo"><img src="docs/logo-small.png" alt="ChameleonForms logo" /> ChameleonForms</div>
+        </div>
+        <nav class="menu">
+            <div class="menu-item"><a href="docs/">Documentation</a></div>
+            <div class="menu-item"><a href="apidocs/ChameleonForms.html">API Documentation</a></div>
+            <div class="menu-item"><a href="https://github.com/MRCollective/ChameleonForms">GitHub</a></div>
+        </nav>
+        <div class="clearfix"></div>
+        <div class="lead-title">Shape-shifting your forms experience in ASP.NET Core.</div>
+        <div class="sub-lead-title">ChameleonForms makes building consistent, correct forms that work well client-side and server-side easy and quick by using model-driven defaults, conventions, templates and terse, declarative, type-safe syntax.</div>
+            <a class="lead-btn" href="docs/getting-started.html">Dive in</a>
+        </div>
+    </div>

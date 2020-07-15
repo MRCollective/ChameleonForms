@@ -1,14 +1,14 @@
 # Extending Field Configuration
 
-The `Bag` property, which is `dynamic` provides a way to store arbitrary data. The [`FieldConfiguration`](field-configuration) class, which is the default implementation of `IFieldConfiguration`, instantiates this property as an `ExpandoObject`.
+The `Bag` property, which is `dynamic` provides a way to store arbitrary data. The [`FieldConfiguration`](field-configuration.md) class, which is the default implementation of `IFieldConfiguration`, instantiates this property as an `ExpandoObject`.
 
 To extend the Field Configuration you can create an extension method against `IFieldConfiguration`, which adds data to the `Bag` property (or alternatively, you can modify the `Attributes` property if you want your extension method to simply add HTML attributes).
 
-If you are using the `Bag` property then you will likely need to create your own [custom template](custom-template) to then pull that data out of the `Bag` property on the `IReadonlyFieldConfiguration` (which will be copied from the `IFieldConfiguration` when `.ToReadonly()` is called before passing it to the [form template](form-templates.md) for rendering).
+If you are using the `Bag` property then you will likely need to create your own [custom template](custom-template.md) to then pull that data out of the `Bag` property on the `IReadonlyFieldConfiguration` (which will be copied from the `IFieldConfiguration` when `.ToReadonly()` is called before passing it to the [form template](form-templates.md) for rendering).
 
 ## Example
 
-For an example of this in action see the extension we added to the [Twitter Bootstrap 3 template](bootstrap-template.md) to allow you to [specify an input group](field#input-groups).
+For an example of this in action see the extension we added to the [Twitter Bootstrap 3 template](bootstrap-template.md) to allow you to [specify an input group](field.md#input-groups).
 
 Firstly, the [definition of the extension method](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/TwitterBootstrap3/FieldConfigurationExtensions.cs) is:
 

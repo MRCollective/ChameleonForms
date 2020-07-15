@@ -32,10 +32,10 @@ The HTML for a Field is generated via the `Field` method in the [form template](
 
 A Field consists of 8 sub-components:
 
-* [Field Element](field-element) - The HTML that makes up the control(s) to accept data from the user
-* [Field Label](field-label) - Text that describes a Field Element to a user (and is linked to that Field Element)
-* [Field Validation HTML](field-validation-html) - Markup that acts as a placeholder to display any validation messages for a particular Field Element
-* [Field Configuration](field-configuration) - The configuration for a particular Field, Field Element and/or Field Label
+* [Field Element](field-element.md) - The HTML that makes up the control(s) to accept data from the user
+* [Field Label](field-label.md) - Text that describes a Field Element to a user (and is linked to that Field Element)
+* [Field Validation HTML](field-validation-html.md) - Markup that acts as a placeholder to display any validation messages for a particular Field Element
+* [Field Configuration](field-configuration.md) - The configuration for a particular Field, Field Element and/or Field Label
 * [Hint](#hint) - Any hint text that is specified against the field
 * [Required designator](#required-designator) - A visual designator to indicate that the field is required
 * Prepended and appended HTML - Any prepended or appended HTML specified against the field to be added before / after the Field Element
@@ -50,7 +50,7 @@ The [form template](form-templates.md) determines how to lay out these sub-compo
 If you want to define your own HTML for the Field Element, Field Label and Field Validation HTML then you can do so by using the `Field` method on the Section, e.g.:
 
 ```cshtml
-using (var s = f.BeginSection("Title")) {
+@using (var s = f.BeginSection("Title")) {
     @s.Field(new HtmlString("label"), new HtmlString("element")).ChainFieldConfigurationMethodsHere()
     @* Or, if you want to specify all the possible values: *@
     @s.Field(new HtmlString("label"), new HtmlString("element"), new HtmlString("validation"), new ModelMetadata(...), isValid: false).ChainFieldConfigurationMethodsHere()
@@ -76,8 +76,8 @@ The `Field` method on the Section looks like this:
 
 If you would like ChameleonForms to use a Field Generator to generate the HTML for the Field Element, Field Label and Field Validation HTML from a field on the model then you can use the `FieldFor` extension method on the Section, e.g.:
 
-```csharp
-using (var s = f.BeginSection("Title")) {
+```cshtml
+@using (var s = f.BeginSection("Title")) {
     @s.FieldFor(m => m.FieldOnTheModel).ChainFieldConfigurationMethodsHere()
 }
 ```
@@ -108,8 +108,8 @@ The `FieldFor` extension method looks like this:
 
 If you want to use a Field Generator and want to nest child Fields under a Field then you can use the `BeginFieldFor` extension method on the Section (optionally with a Field Configuration), e.g.:
 
-```csharp
-using (var s = f.BeginSection("Title")) {
+```cshtml
+@using (var s = f.BeginSection("Title")) {
     using (var ff = s.BeginFieldFor(m => m.FieldOnTheModel, Field.Configure().ChainFieldConfigurationMethodsHere())) {
         @* Child Fields *@
     }
@@ -143,8 +143,8 @@ The `BeginFieldFor` extension method looks like this:
 
 If you want to use a Field Generator to create nested Fields under a parent Field then you can use the `BeginFieldFor` extension method on the Field (with an optional Field Configuration), e.g.:
 
-```csharp
-using (var ff = s.BeginFieldFor(m => m.FieldOnTheModel)) {
+```cshtml
+@using (var ff = s.BeginFieldFor(m => m.FieldOnTheModel)) {
     @ff.FieldFor(m => m.ChildField).ChainFieldConfigurationMethodsHere()
 }
 ```
@@ -192,7 +192,7 @@ The `%requiredDesignator%` is shown if the field is required:
 <em class="required">*</em>
 ```
 
-If you want to override the required designator look at [Creating custom form templates > Field](custom-template.md#Field).
+If you want to override the required designator look at [Creating custom form templates > Field](custom-template.md#field).
 
 ### Hint
 
@@ -321,7 +321,7 @@ In all other situations you will manually need to add wrapping HTML with the rel
 
 As an example of what you can do with the input group consider the following:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.Dollars).AsInputGroup().Append(".00").Prepend("$")
 ```
 

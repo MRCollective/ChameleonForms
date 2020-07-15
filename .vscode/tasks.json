@@ -18,6 +18,16 @@
             }
         },
         {
+            "label": "docs",
+            "command": "docfx",
+            "type": "process",
+            "args": [
+                "${workspaceFolder}/docfx.json",
+                "--serve"
+            ],
+            "problemMatcher": []
+        },
+        {
             "label": "test",
             "command": "dotnet",
             "type": "process",

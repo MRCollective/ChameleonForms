@@ -69,7 +69,7 @@ Default HTML
 
 ### Non-nullable list id (drop-down with no empty option)
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a non-nullable list id will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) for a non-nullable list id will be:
 
 ```html
 <select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required">
@@ -92,7 +92,7 @@ So in the above example when outputting the Field Element HTML for the `ListId` 
 
 ### Nullable list id (drop-down with empty option)
 
-When using the Default Field Generator then the default HTML of the [Field Element](field-element) for a nullable list id will be:
+When using the Default Field Generator then the default HTML of the [Field Element](field-element.md) for a nullable list id will be:
 
 ```html
 <select %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%">
@@ -175,7 +175,7 @@ For example:
 
 You can force a list field to display as a list of radio buttons rather than a drop-down using the `AsRadioList` method on the Field Configuration, e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.ListId).AsRadioList()
 @s.FieldFor(m => m.NullableListId).AsRadioList()
 ```
@@ -205,7 +205,7 @@ And it will change the default HTML for the non-Required nullable list id field 
 
 When you display a nullable list id field as a drop-down or a non-Required nullable list id field as a list of radio buttons you can change the text that is used to display the `none` value to the user. By default the text used is an empty string for the drop-down and `None` for the radio button. To change the text simply use the `WithNoneAs` method, e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.NullableListId).WithNoneAs("No value")
 ```
 
@@ -221,7 +221,7 @@ This will change the default HTML for the nullable list id field as shown above 
 ### Hide empty item
 If you have a nullable list id field as a drop-down or a non-Required nullable list id field as a list of radio buttons then it will show the empty item and this item will be selected by default if the field value is null. If for some reason you want one of these fields, but you would also like to hide the empty item you can do so with the `HideEmptyItem` method in the Field Configuration, e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.NullableListId).HideEmptyItem()
 ```
 

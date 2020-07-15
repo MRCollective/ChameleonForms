@@ -68,8 +68,8 @@ The start and end HTML of the Message are generated via the `BeginMessage` and `
 
 In order to get an instance of a `Message<TModel>` you can use the `BeginMessage` extension method on the [Form](the-form.md), e.g.:
 
-```csharp
-using (var m = form.BeginMessage(MessageType.Information, "Message title")) {
+```cshtml
+@using (var m = form.BeginMessage(MessageType.Information, "Message title")) {
     @* Message content *@
 }
 ```
@@ -171,8 +171,8 @@ The `MessageType` enum is defined like this and appears in the `ChameleonForms.E
 
 If you want to add paragraphs using the template you can do that by using one of the `Paragraph` methods as defined above and of course you can use normal HTML or any valid Razor code as well:
 
-```csharp
-using (var m = f.BeginMessage(MessageType.Information, "Message title")) {
+```cshtml
+@using (var m = f.BeginMessage(MessageType.Information, "Message title")) {
     @m.Paragraph("Here is the first part of the message")
     <img src="/path/to/img" alt="alt text" />
     @m.Paragraph(new HtmlString("Here is a <strong>styled</strong> message"))

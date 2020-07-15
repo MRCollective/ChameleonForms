@@ -1,6 +1,6 @@
 # Twitter Bootstrap 3 Template
 
-ChameleonForms has a built-in Twitter Bootstrap 3 template that you can switch to as part of [global configuration](configuration.md) or on a [per-form basis](form-template.md). This will allow you to rapidly develop forms for your Twitter Bootstrap 3 powered site (useful for quick prototyping), but give you the flexibility to easily change the template in the future if your quick prototype makes it big and warrants a custom redesign.
+ChameleonForms has a built-in Twitter Bootstrap 3 template that you can switch to as part of [global configuration](configuration.md) or on a [per-form basis](form-templates.md). This will allow you to rapidly develop forms for your Twitter Bootstrap 3 powered site (useful for quick prototyping), but give you the flexibility to easily change the template in the future if your quick prototype makes it big and warrants a custom redesign.
 
 Support for Bootstrap 4 and other commonly used templates like Material will be added in the future. If you'd like to add support feel free to issue a [pull request](https://github.com/MRCollective/ChameleonForms/pulls).
 
@@ -10,13 +10,13 @@ The easiest way to get up and running with Twitter Bootstrap is to specify it as
 
 1. In `Startup.cs` simply change your `AddChameleonForms` call to reference the `TwitterBootstrap3FormTemplate`:
 
-```cs
-public void ConfigureServices(IServiceCollection services)
-{
-    ...
-    services.AddChameleonForms<TwitterBootstrap3FormTemplate>(...);
-}
-```
+    ```cs
+    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddChameleonForms<TwitterBootstrap3FormTemplate>(...);
+    }
+    ```
 
 2. If you already have Twitter Bootstrap referenced in your layout then [add the extra CSS and JavaScript files to get validation highlighting looking great](#chameleonforms-custom-css-and-javascript-to-complement-bootstrap)
 3. [Create a ChameleonForm](getting-started.md) using the `BeginChameleonForm` extension method and you are good to go
@@ -54,4 +54,4 @@ The template doesn't currently support [horizontal](https://getbootstrap.com/doc
 
 ## Modifications
 
-If you think that the changes you want to make to the template are specific to your needs then you can [easily extend the template to change the bits you want](custom-template#applying-a-global-template-change) (just extend the `TwitterBootstrap3FormTemplate` class), while still using the work we have done (and subscribing to updates when you update the ChameleonForms NuGet package).
+If you think that the changes you want to make to the template are specific to your needs then you can [easily extend the template to change the bits you want](custom-template.md#applying-a-global-template-change) (just extend the `TwitterBootstrap3FormTemplate` class), while still using the work we have done (and subscribing to updates when you update the ChameleonForms NuGet package).

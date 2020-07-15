@@ -4,7 +4,7 @@
 
 The `DefaultFormTemplate` outputs a sensible default that looks good without any / with minimal CSS and is a nice way to semantically describe a form. It makes use of definition lists to do this.
 
-See [Configuring the Default Form Template](the-form#configuring-the-form-template) / [Default global config](configuration.md#default-global-config).
+See [Configuring the Default Form Template](the-form.md#configuring-the-form-template) / [Default global config](configuration.md#default-global-config).
 
 To see examples of the HTML this template outputs check out:
 

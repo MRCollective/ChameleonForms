@@ -22,7 +22,7 @@ public decimal DecimalField { get; set; }
 
 ### Integral types
 
-For integral types (`byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, or `ulong`), when using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
+For integral types (`byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, or `ulong`), when using the Default Field Generator then the default HTML of the [Field Element](field-element.md) will be:
 
 ```html
 <input type="number" step="1" %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required" value="%value%" />
@@ -30,7 +30,7 @@ For integral types (`byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, o
 
 ### Floating-point types
 
-For floating-point types (`float`, `double`, or `decimal`), when using the Default Field Generator then the default HTML of the [Field Element](field-element) will be:
+For floating-point types (`float`, `double`, or `decimal`), when using the Default Field Generator then the default HTML of the [Field Element](field-element.md) will be:
 
 ```html
 <input type="number" step="any" %validationAttrs% %htmlAttributes% id="%propertyName%" name="%propertyName%" required="required" value="%value%" />
@@ -60,9 +60,9 @@ public decimal DecimalField { get; set; }
 
 ### Specify step
 
-You can easily specify the `step` HTML attribute by using the `Step` method on the [Field Configuration](field-configuration), e.g.:
+You can easily specify the `step` HTML attribute by using the `Step` method on the [Field Configuration](field-configuration.md), e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.IntField).Step(2)
 ```
 
@@ -70,9 +70,9 @@ If you specify this, it will override any default step value.
 
 ### Specify min and max
 
-You can easily specify the `min` and `max` HTML attributes by using the `Min` and `Max` methods on the [Field Configuration](field-configuration), e.g.:
+You can easily specify the `min` and `max` HTML attributes by using the `Min` and `Max` methods on the [Field Configuration](field-configuration.md), e.g.:
 
-```csharp
+```cshtml
 @s.FieldFor(m => m.IntField).Min(5).Max(60)
 @s.FieldFor(m => m.DecimalField).Min(1.1).Max(1.9)
 ```

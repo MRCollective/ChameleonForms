@@ -58,8 +58,8 @@ The start and end HTML of the Section are generated via the `BeginSection` and `
 
 In order to get an instance of a `Section<TModel>` you can use the `BeginSection` method on the Form, e.g.
 
-```csharp
-using (var s = f.BeginSection("Heading")) {
+```cshtml
+@using (var s = f.BeginSection("Heading")) {
     @* Section fields go here *@
 }
 ```
@@ -144,10 +144,10 @@ The `BeginSection` extension methods look like this:
         }
 ```
 
-From within a Section you can create [Fields](the-field) and you can also create nested sections using the `BeginSection` extension method off the Section:
+From within a Section you can create [Fields](field.md) and you can also create nested sections using the `BeginSection` extension method off the Section:
 
-```csharp
-using (var s = f.BeginSection("Heading")) {
+```cshtml
+@using (var s = f.BeginSection("Heading")) {
     @* Fields... *@
     using (var ss = s.BeginSection("Inner Heading")) {
         @* Fields... *@
