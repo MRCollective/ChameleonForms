@@ -75,6 +75,36 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
     ```
 
     `~/Views/MyForm/Index.cshtml`:
+    
+    # [Tag Helpers variant](#tab/getting-started-view-th)
+
+    ```cshtml
+    @model MyWebApp.Controllers.ViewModel
+    @{
+        ViewData["Title"] = "My Form";
+    }
+
+    <chameleon-form>
+        <form-section heading="About you!?">
+            <field for="Name" />
+            <field for="FavouriteNumber" />
+            <field for="DateOfBirth" />
+        </form-section>
+        <form-navigation>
+            <submit-button label="Submit" />
+        </form-navigation>
+    </chameleon-form>
+
+    @section Scripts
+    {
+        <partial name="_ValidationScriptsPartial" />
+        @* ... or relevant equivalent *@
+    }
+
+    ```
+
+    # [HTML Helpers variant](#tab/getting-started-view-hh)
+
     ```cshtml
     @model MyWebApp.Controllers.ViewModel
     @{
@@ -102,6 +132,11 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
     }
 
     ```
+
+
+
+    ***
+
 
 5. Run it!
 6. *(Optional)* If you want to add the additional client-side validation support in ChameleonForms (which supports both [jquery validate unobtrusive validation]() and [aspnet-validation]()) then add the following to your `_ValidationScriptsPartial.cshtml` or equivalent file:
@@ -141,6 +176,29 @@ Say you had the following view model:
 
 And assuming for a moment you used definition lists to wrap your HTML fields then you might end up with something like this in your Razor view:
 
+# [Tag Helpers variant](#tab/ootb-mvc-th)
+
+```html
+<form action="" method="post">
+    <fieldset>
+        <legend>A form</legend>
+        <dl>
+            <dt><label asp-for="RequiredString">Some string</label></dt>
+            <dd><input asp-for="RequiredString" /> <span asp-validation-for="RequiredString"></span></dd>
+            <dt><label asp-for="SomeEnum"></label></dt>
+            <dd><select asp-for="SomeEnum" asp-items="Html.GetEnumSelectList<SomeEnum>()"></select> <span asp-validation-for="SomeEnum"></span></dd>
+            <dt><label asp-for="SomeCheckbox"></label></dt>
+            <dd><label><input asp-for="SomeCheckbox" /> Are you sure?</label> <span asp-validation-for="SomeCheckbox"></span></dd>
+        </dl>
+    </fieldset>
+    <div class="form_navigation">
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+```
+
+# [HTML Helpers variant](#tab/ootb-mvc-hh)
+
 ```html
 @using (Html.BeginForm())
 {
@@ -161,7 +219,26 @@ And assuming for a moment you used definition lists to wrap your HTML fields the
 }
 ```
 
+***
+
 The equivalent of this form with out-of-the-box ChameleonForms functionality is:
+
+# [Tag Helpers variant](#tab/ootb-chameleon-th)
+
+```cshtml
+<chameleon-form>
+    <form-section heading="A form">
+        <field for="RequiredString" label="Some string" />
+        <field for="SomeEnum" />
+        <field for="SomeCheckbox" inline-label="Are you sure?" />
+    </form-section>
+    <form-navigation>
+        <submit-button label="Submit" />
+    </form-navigation>
+</chameleon-form>
+```
+
+# [HTML Helpers variant](#tab/ootb-chameleon-hh)
 
 ```cshtml
 @using (var f = Html.BeginChameleonForm()) {
@@ -175,6 +252,8 @@ The equivalent of this form with out-of-the-box ChameleonForms functionality is:
     }
 }
 ```
+
+***
 
 ## What does ChameleonForms do for me?
 
