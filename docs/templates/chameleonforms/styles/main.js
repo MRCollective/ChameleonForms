@@ -1,6 +1,7 @@
 $(function() {
     var tagHelperVariants = $("a[data-tab$='-th']");
     tagHelperVariants.click(function() {
+        Cookies.set('chameleon-cshtml-preference', 'TH');
         instigator = this;
         tagHelperVariants.each(function() {
             var $tab = $(this);
@@ -12,6 +13,7 @@ $(function() {
 
     var htmlHelperVariants = $("a[data-tab$='-hh']");
     htmlHelperVariants.click(function() {
+        Cookies.set('chameleon-cshtml-preference', 'HH');
         instigator = this;
         htmlHelperVariants.each(function() {
             var $tab = $(this);
@@ -20,6 +22,15 @@ $(function() {
             }
         });
     });
+
+    var existingPreference = Cookies.get('chameleon-cshtml-preference');
+    if (existingPreference) {
+        if (existingPreference === 'TH') {
+            tagHelperVariants.get(0).click();
+        } else if (existingPreference === 'HH') {
+            htmlHelperVariants.get(0).click();
+        }
+    }
 
     var copyToClipboard = function(text) {
         // Create a textblock and assign the text and add to document
