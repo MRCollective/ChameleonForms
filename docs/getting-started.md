@@ -23,7 +23,7 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
     }
     ```
 
-    Note: you can alter the configuration from the default, [see the docs](https://chameleonforms.readthedocs.io/en/latest/configuration/).
+    Note: you can alter the configuration from the default, [see the docs](https://mrcollective.github.io/ChameleonForms/docs/configuration.html).
 
 3. Add the following to your `_ViewImports.cshtml`:
 
@@ -31,6 +31,11 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
     @using ChameleonForms;
     @using ChameleonForms.Enums;
     @using ChameleonForms.Component;
+
+    @addTagHelper ChameleonForms.TagHelpers.*, ChameleonForms
+    
+    @* optional: *@
+    @addTagHelper ChameleonForms.Templates.TwitterBootstrap3.*, ChameleonForms
     ```
 
 4. Create your first form, e.g.:
@@ -75,6 +80,8 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
     ```
 
     `~/Views/MyForm/Index.cshtml`:
+
+    You have two options for your view - [tag helper syntax](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro?view=aspnetcore-3.1) or the more traditional [HTML helper syntax](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro?view=aspnetcore-3.1#tag-helpers-compared-to-html-helpers).
     
     # [Tag Helpers variant](#tab/getting-started-view-th)
 
