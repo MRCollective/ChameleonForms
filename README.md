@@ -23,7 +23,6 @@ It's ideally suited for situations where you want to **quickly** build forms tha
 ## Contents
 
 * [Getting started](#getting-started)
-* [Example](#example)
 * [Contributors](#contributors)
 * [Support](#support)
 * [Roadmap](#roadmap)

@@ -12,7 +12,10 @@ namespace ChameleonForms.Validators
     /// </summary>
     public class IntegralNumericClientModelValidatorProvider : IClientModelValidatorProvider
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when validators need to be created from this validator provider.
+        /// </summary>
+        /// <param name="context">The context within which validators need to be provided</param>
         public void CreateValidators(ClientValidatorProviderContext context)
         {
             if (context == null)

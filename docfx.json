@@ -28,7 +28,7 @@
           "docs/*.md",
           "docs/*.yml",
           "toc.yml",
-          "*.md"
+          "index.md"
         ]
       }
     ],

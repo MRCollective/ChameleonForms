@@ -11,7 +11,9 @@ namespace ChameleonForms.TagHelpers
     public abstract class ModelAwareTagHelper : TagHelper
     {
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Order in which this tag helper gets executed. Set higher than default so there is opportunity to extend this functionality.
+        /// </summary>
         public override int Order => 10;
 
         /// <summary>
@@ -21,7 +23,11 @@ namespace ChameleonForms.TagHelpers
         [ViewContext]
         public ViewContext ViewContext { get; set; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when the tag helper is being processed.
+        /// </summary>
+        /// <param name="context">The context within which the tag helper is processed</param>
+        /// <param name="output">The output from the tag helper</param>
         public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             // ReSharper disable once PossibleNullReferenceException
@@ -31,7 +37,7 @@ namespace ChameleonForms.TagHelpers
 
         /// <summary>
         /// Asynchronously executes the <see cref="TagHelper"/> with the given <paramref name="context"/> and
-        /// <paramref name="output"/> against a page model type (<see cref="TModel"/>).
+        /// <paramref name="output"/> against a page model type.
         /// </summary>
         /// <param name="context">Contains information associated with the current HTML tag.</param>
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>

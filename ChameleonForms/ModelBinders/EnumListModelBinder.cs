@@ -14,7 +14,10 @@ namespace ChameleonForms.ModelBinders
     /// </summary>
     public class EnumListModelBinder<T> : ArrayModelBinder<T>
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when binding a model using this model binder.
+        /// </summary>
+        /// <param name="bindingContext">The context within which binding occurs</param>
         public override async Task BindModelAsync(ModelBindingContext bindingContext)
         {
             await base.BindModelAsync(bindingContext);

@@ -6,7 +6,6 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ChameleonForms.Component
 {
@@ -116,7 +115,9 @@ namespace ChameleonForms.Component
             return new PartialViewSection<TModel>(Form.CreatePartialForm(partialHelper));
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when form section is created within a `using` block: writes the end tag(s) of the section.
+        /// </summary>
         public override void Dispose()
         {
             base.Dispose();

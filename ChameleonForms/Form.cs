@@ -104,7 +104,9 @@ namespace ChameleonForms
             return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property, Template);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when form is created within a `using` block: writes the end tag of the form.
+        /// </summary>
         public void Dispose()
         {
             Write(Template.EndForm());
