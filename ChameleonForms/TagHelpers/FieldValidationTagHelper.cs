@@ -12,6 +12,7 @@ namespace ChameleonForms.TagHelpers
     /// </summary>
     public class FieldValidationTagHelper : ModelPropertyTagHelper
     {
+        /// <inheritdoc />
         public override Task ProcessUsingModelPropertyAsync<TModel, TProperty>(TagHelperContext context, TagHelperOutput output,
             Expression<Func<TModel, TProperty>> modelProperty)
         {

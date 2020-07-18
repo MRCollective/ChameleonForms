@@ -17,6 +17,7 @@ namespace ChameleonForms.TagHelpers
         /// </summary>
         public string Label { get; set; }
 
+        /// <inheritdoc />
         public Func<ButtonHtmlAttributes, ButtonHtmlAttributes> FluentAttrs { get; set; }
 
         /// <inheritdoc />

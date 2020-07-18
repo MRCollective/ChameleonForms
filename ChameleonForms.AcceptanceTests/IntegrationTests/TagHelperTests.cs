@@ -7,7 +7,6 @@ using ApprovalTests.Reporters;
 using ChameleonForms.AcceptanceTests.Helpers;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace ChameleonForms.AcceptanceTests.IntegrationTests
 {
@@ -17,8 +16,6 @@ namespace ChameleonForms.AcceptanceTests.IntegrationTests
         private readonly HttpClient _client;
         private readonly WebApplicationFactory<Example.Startup>
             _factory;
-
-        private readonly ITestOutputHelper _outputHelper;
 
         public TagHelperTests(WebApplicationFactory<Example.Startup> factory)
         {

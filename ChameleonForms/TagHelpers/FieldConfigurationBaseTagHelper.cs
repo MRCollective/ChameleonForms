@@ -19,6 +19,11 @@ namespace ChameleonForms.TagHelpers
         /// </summary>
         public Func<IFieldConfiguration, IFieldConfiguration> FluentConfig { get; set; }
 
+        /// <summary>
+        /// Called when the tag helper is being processed.
+        /// </summary>
+        /// <param name="context">The context within which the tag helper is processed</param>
+        /// <param name="output">The output from the tag helper</param>
         public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             var fc = context.GetFieldConfiguration();

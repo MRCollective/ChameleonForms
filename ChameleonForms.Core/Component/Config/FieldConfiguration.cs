@@ -905,7 +905,12 @@ namespace ChameleonForms.Component.Config
             _field = field;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when form component outputted to the page; writes the form content HTML to the given writer.
+        /// </summary>
+        /// <param name="writer">The writer to write to</param>
+        /// <param name="encoder">The HTML encoder to use when writing</param>
+
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             var field = _field();

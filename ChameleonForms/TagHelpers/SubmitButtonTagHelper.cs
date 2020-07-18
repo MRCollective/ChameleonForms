@@ -27,6 +27,9 @@ namespace ChameleonForms.TagHelpers
         /// </summary>
         public string Label { get; set; }
 
+        /// <summary>
+        /// Allows you to specify button attributes fluently. Be sure to use single quotes when defining this so you can use double quotes for string parameters.
+        /// </summary>
         public Func<ButtonHtmlAttributes, ButtonHtmlAttributes> FluentAttrs { get; set; }
 
         /// <inheritdoc />
