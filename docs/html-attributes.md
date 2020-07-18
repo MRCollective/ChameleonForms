@@ -4,7 +4,7 @@ HTML Attributes in ChameleonForms provides the ability to specify a set of HTML 
 
 The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Represents a set of HTML attributes.
     /// </summary>
@@ -180,7 +180,7 @@ You can new up an instance and then chain methods off that instance, e.g.:
 
 If you want to output a HTML Attribute that has a `-` in the name then use a `_` in the variable name, e.g.:
 
-```csharp
+```cs
 new HtmlAttributes(data_something => "value")
 ```
 
@@ -196,7 +196,7 @@ You can convert an anonymous object to a HTML Attributes object, e.g.:
 
 If you want to output a HTML Attribute that has a `-` in the name then use a `_` in the property name, e.g.:
 
-```csharp
+```cs
 new {data_something => "value"}.ToHtmlAttributes()
 ```
 
@@ -218,7 +218,7 @@ There are a number of options when using a HTML Attributes object.
 
 You can use the HTML Attributes object with the `TagBuilder` class in MVC, e.g.:
 
-```csharp
+```cs
 var h = new HtmlAttributes().Id("id");
 var t = new TagBuilder("p");
 t.MergeAttributes(h.Attributes);
@@ -241,7 +241,7 @@ It will automatically handle encoding attribute values to prevent HTML injection
 
 When you need ultimate flexibility then you can get the attributes out as a dictionary, e.g.:
 
-```csharp
+```cs
 var h = new HtmlAttributes().Id("id");
 var d1 = h.Attributes; // Dictionary<string, string>
 var d2 = h.ToDictionary(); // Dictionary<string, object>, many MVC methods take this type
@@ -251,7 +251,7 @@ var d2 = h.ToDictionary(); // Dictionary<string, object>, many MVC methods take 
 
 If you need to retrive the attribute values as a string (already encoded), then you can use the `.ToHtmlString()` extension method.
 
-```csharp
+```cs
 var h = new HtmlAttributes().Id("id&1");
 string s = h.ToHtmlString(); // "id=\"id&amp;1\""
 ```
@@ -260,7 +260,7 @@ string s = h.ToHtmlString(); // "id=\"id&amp;1\""
 
 You can easily create your own methods on HTML Attributes by creating an extension method, e.g.:
 
-```csharp
+```cs
 public static HtmlAttributesExtensions 
 {
     public static HtmlAttributes Coordinate(this HtmlAttributes attrs, Coordinate c)
@@ -284,7 +284,7 @@ Then you could do something like this:
 
 [Navigation Buttons](the-navigation.md) return a sub-class of `HtmlAttributes` called `ButtonHtmlAttributes`. This allows you to target extension methods specifically for buttons, which must then be invoked first before any of the methods targeting the more general `HtmlAttributes`. As an example consider the following extension method in the Twitter Bootstrap 3 template to add a size to the button:
 
-```csharp
+```cs
         /// <summary>
         /// Changes the button to use the given size.
         /// </summary>
@@ -316,7 +316,7 @@ The class you need to use in this case is `LazyHtmlAttributes`, which is in the 
 
 If you created the following extension method on the HTML Helper:
 
-```csharp
+```cs
     public static class HtmlExtensions
     {
         public static HtmlAttributes Paragraph(this HtmlHelper h, string paragraphText)

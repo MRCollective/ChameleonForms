@@ -2,7 +2,7 @@
 
 If you need to collect emails then that will automatically be handled for you with a HTML5 `<input type="email">` field if you annotate your model field correctly:
 
-```csharp
+```cs
 [DataType(DataType.EmailAddress)]
 public string Email { get; set; }
 [EmailAddress]

@@ -17,7 +17,7 @@ To use a Field Generator to output the HTML for a standalone Field Validation HT
 
 The `ValidationMessageFor` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a standalone validation message to be output in a form for a field.
         /// </summary>

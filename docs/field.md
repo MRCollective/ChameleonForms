@@ -6,7 +6,7 @@ You can also create a parent field that can have [child fields](#use-a-field-gen
 
 The `Field<TModel>` class is defined as follows in the `ChameleonForms.Component` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Wraps the output of a single form field.
     /// </summary>
@@ -59,7 +59,7 @@ If you want to define your own HTML for the Field Element, Field Label and Field
 
 The `Field` method on the Section looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Outputs a field with passed in HTML.
         /// </summary>
@@ -84,7 +84,7 @@ If you would like ChameleonForms to use a Field Generator to generate the HTML f
 
 The `FieldFor` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a single form field as a child of a form section.
         /// </summary>
@@ -118,7 +118,7 @@ If you want to use a Field Generator and want to nest child Fields under a Field
 
 The `BeginFieldFor` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a single form field as a child of a form section that can have other form fields nested within it.
         /// </summary>
@@ -151,7 +151,7 @@ If you want to use a Field Generator to create nested Fields under a parent Fiel
 
 The `FieldFor` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a single form field as a child of another form field.
         /// </summary>

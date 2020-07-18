@@ -2,7 +2,7 @@
 
 If you need to collect uploaded file data then you can use ASP.NET Core MVC's `IFormFile` type for your model property, e.g.:
 
-```csharp
+```cs
 public IFormFile FileUpload { get; set; }
 ```
 

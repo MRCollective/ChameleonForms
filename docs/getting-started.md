@@ -13,7 +13,7 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
 1. Install the NuGet package `Install-Package ChameleonForms -pre` (v4 is currently marked beta so you need to include pre-release versions)
 2. Register ChameleonForms in your `Startup.cs` file:
 
-    ```csharp
+    ```cs
     public void ConfigureServices(IServiceCollection services)
     {
         ...
@@ -169,7 +169,7 @@ This library works against ASP.NET Core MVC - if you want to use it for Blazor o
 
 Say you had the following view model:
 
-```csharp
+```cs
     public class BasicViewModel
     {
         [Required]

@@ -2,7 +2,7 @@
 
 If you want the user to specify an item from an arbitrary list of objects you can use the `[ExistsIn]` attribute against a model property. The property just needs to be the same type as the property of the list element type that represents the "value" of the object, e.g.:
 
-```csharp
+```cs
 
 public class MyObject
 {
@@ -33,7 +33,7 @@ public class MyViewModel
 
 The `ExistsIn` attribute looks like this:
 
-```csharp
+```cs
     /// <summary>
     /// Indicates that the attributed property value should exist within the list property referenced by the attribute.
     /// </summary>
@@ -120,11 +120,11 @@ If you want to provide server-side validation protection of the value the user s
 If you don't want to perform server-side validation then you can either:
 
 * Turn off Exists In validation globally by setting the appropriate setting in your `Application_Start` function (or a method it calls) within `Global.asax.cs`:
-```csharp
+```cs
 ExistsInAttribute.EnableValidation = false;
 ```
 * Turn off validation on a per-usage basis by setting `false` to the `enableValidation` value when adding the attribute, e.g.:
-```csharp
+```cs
     [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name), enableValidation: false)]
     public int ListId { get; set; }
 ```
@@ -140,7 +140,7 @@ If you want to take advantage of the server-side validation then the list needs 
 
 For example:
 
-```csharp
+```cs
     [ModelBinder(BinderType = typeof(InvoiceSelectionViewModelBinder))]
     public class InvoiceSelectionViewModel
     {

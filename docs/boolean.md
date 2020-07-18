@@ -2,7 +2,7 @@
 
 If you need to collect Boolean data you can use a `bool` or `bool?` model property, e.g.:
 
-```csharp
+```cs
     public bool BooleanField { get; set; }
     public bool? NullableBooleanField { get; set; }
 ```

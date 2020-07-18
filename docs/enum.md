@@ -2,7 +2,7 @@
 
 If you want the user to specify a value from an enum you can use that enum type (or a nullable instance of it) against a model property, e.g.:
 
-```csharp
+```cs
 public enum MyEnum  { ... }
 ...
 public MyEnum EnumField { get; set; } // automatically required since it's non-nullable
@@ -48,7 +48,7 @@ If the field is marked `[Required]` there will also be a `required="required"` a
 
 As an example, if you had the following enum:
 
-```csharp
+```cs
 public enum AnEnum
 {
     Singleword,
@@ -60,7 +60,7 @@ public enum AnEnum
 
 And you had a property on your model like:
 
-```csharp
+```cs
 public AnEnum EnumValue { get; set; }
 ```
 

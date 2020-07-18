@@ -17,7 +17,7 @@ To use a Field Generator to output the HTML for a standalone Field Element you c
 
 The `FieldElementFor` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a standalone form field to be output in a form.
         /// </summary>

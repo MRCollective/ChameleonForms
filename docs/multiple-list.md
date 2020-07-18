@@ -2,7 +2,7 @@
 
 If you want the user to specify multiple values from items in an arbitrary list of objects you can use the `[ExistsIn]` attribute against a model property that enumerates the type of the value property, e.g.:
 
-```csharp
+```cs
 
 public class MyObject
 {

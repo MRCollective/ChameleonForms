@@ -30,7 +30,7 @@ See [Creating custom form templates](custom-template.md).
 
 If you would like to change the template being used across one or more forms, or would like a method name that is more meaningful to your application than `BeginChameleonForm`, you can simply define you own extension method instead, e.g.:
 
-```csharp
+```cs
     public static class FormHelpers
     {
         public static IForm<TModel> BeginMyApplicationNameForm<TModel>(this HtmlHelper<TModel> htmlhelper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)

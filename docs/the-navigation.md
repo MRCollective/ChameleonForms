@@ -4,7 +4,7 @@ The Navigation is a grouping of a set of navigation elements; you create a Navig
 
 The `Navigation<TModel>` class looks like this and is in the `ChameleonForms.Component` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Wraps the output of the navigation area of a form.
     /// For example the area with submit buttons.
@@ -126,7 +126,7 @@ In order to get an instance of a `Navigation<TModel>` you can use the `BeginNavi
 
 The `BeginNavigation` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a navigation section.
         /// </summary>
@@ -235,7 +235,7 @@ The HTML is the same as the default except a class of `btn` will always be added
 
 There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that allows you to add an emphasis style to the buttons:
 
-```csharp
+```cs
         /// <summary>
         /// Adds the given emphasis to the button.
         /// </summary>
@@ -254,7 +254,7 @@ There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3`
 
 The `EmphasisStyle` enum is as follows:
 
-```csharp
+```cs
     /// <summary>
     /// Twitter Bootstrap alert/emphasis colors: http://getbootstrap.com/css/#type-emphasis
     /// </summary>
@@ -309,7 +309,7 @@ In order to be able to swap out the extension method usage across your applicati
 
 There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that allows you to change the size of your buttons:
 
-```csharp
+```cs
         /// <summary>
         /// Changes the button to use the given size.
         /// </summary>
@@ -329,7 +329,7 @@ There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3`
 
 The `ButtonSize` enum is as follows:
 
-```csharp
+```cs
     /// <summary>
     /// Twitter Bootstrap button sizes: http://getbootstrap.com/css/#buttons-sizes
     /// </summary>
@@ -379,7 +379,7 @@ In order to be able to swap out the extension method usage across your applicati
 
 There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that allows you to add icons to your buttons:
 
-```csharp
+```cs
         /// <summary>
         /// Adds the given icon to the start of a navigation button.
         /// </summary>

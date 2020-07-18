@@ -2,7 +2,7 @@
 
 If you need to collect DateTime data you can use a `DateTime` or `DateTime?` model property, e.g.:
 
-```csharp
+```cs
 public DateTime DateTimeField { get; set; }
 public DateTime? NullableDateTimeField { get; set; }
 [DisplayFormat(DataFormatString = "{0:d/M/yyyy}", ApplyFormatInEditMode = true)]

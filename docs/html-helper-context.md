@@ -46,7 +46,7 @@ There are two problems here - firstly, the `.InputModel.` is very repetitive and
 
 ChameleonForms gives you two extension methods on the `HtmlHelper<TModel>` class that allow you to solve the above problems in a clean way:
 
-```csharp
+```cs
 /// <summary>
 /// Creates a HTML helper from a parent model to use a sub-property as it's model.
 /// </summary>

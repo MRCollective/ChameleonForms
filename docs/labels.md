@@ -9,7 +9,7 @@ This is great when you have property names like `Email` and `Name`, but doesn't 
 
 Of course, MVC provides the ability to override the label for each model using attributes, e.g.:
 
-```csharp
+```cs
     [DisplayName("Email address")]
     public string EmailAddress { get; set; }
     

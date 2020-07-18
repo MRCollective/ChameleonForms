@@ -2,7 +2,7 @@
 
 If you need to collect a password then you can use the `[DataType]` attribute in `System.ComponentModel.DataAnnotations` to annotate that a string model property is in fact a password, e.g.:
 
-```csharp
+```cs
 [DataType(DataType.Password)]
 public string PasswordField { get; set; }
 ```

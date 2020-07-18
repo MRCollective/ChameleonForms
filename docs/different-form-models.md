@@ -4,7 +4,7 @@ Similar to the examples and reasoning discussed [in the documentation for changi
 
 This can be achieved using the default form template by using these overloads to the `BeginChameleonForms` [extension method](the-form.md):
 
-```csharp
+```cs
 /// <summary>
         /// Constructs a <see cref="Form{TModel}"/> object with the default ChameleonForms template renderer using a sub-property of the current model as the model.
         /// Values will bind back to the model type of the sub-property as if that was the model all along.

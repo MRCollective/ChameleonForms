@@ -4,7 +4,7 @@ If you need to collect numeric data then that will automatically be handled for 
 
 Any one of the following model types will trigger one of these fields:
 
-```csharp
+```cs
 public byte ByteField { get; set; }
 public sbyte SbyteField { get; set; }
 public short ShortField { get; set; }
@@ -53,7 +53,7 @@ The `min` and `max` attributes will automatically be set in the following instan
 
 You can specify your property as a currency value, which will automatically set the `step` attribute for you to `0.01`:
 
-```csharp
+```cs
 [DataType(DataType.Currency)]
 public decimal DecimalField { get; set; }
 ```

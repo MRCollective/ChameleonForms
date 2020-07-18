@@ -4,7 +4,7 @@ The Form is the root element of a ChameleonForms form; you create a Form by inst
 
 The `IForm<TModel>` interface looks like this and is in the `ChameleonForms` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Interface for a Chameleon Form.
     /// </summary>
@@ -47,7 +47,7 @@ In order to get an instance of an `IForm<TModel>` using the [default form templa
 
 The `BeginChameleonForm` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Constructs a <see cref="Form{TModel}"/> object with the default ChameleonForms template renderer.
         /// </summary>

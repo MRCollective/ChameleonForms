@@ -11,7 +11,7 @@ One of the easiest ways to understand ChameleonForms is to see an equivalent sam
 
 The example in question is an arbitrary signup form against the `SignupViewModel` in the [`ComparisonController`](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Controllers/ComparisonController.cs):
 
-```csharp
+```cs
         public class SignupViewModel
         {
             [Required]

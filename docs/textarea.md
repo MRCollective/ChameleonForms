@@ -2,7 +2,7 @@
 
 If you need to collect multi-line text data using a textarea then you can use the `[DataType]` attribute in `System.ComponentModel.DataAnnotations` to annotate that a string model property is in fact multi-line text, e.g.:
 
-```csharp
+```cs
 [DataType(DataType.MultilineText)]
 public string TextareaField { get; set; }
 ```

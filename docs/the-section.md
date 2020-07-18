@@ -4,7 +4,7 @@ The Section is a grouping of a set of fields; you create a Section by instantiat
 
 The `Section<TModel>` class looks like this and is in the `ChameleonForms.Component` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Wraps the output of a form section.
     /// </summary>
@@ -66,7 +66,7 @@ In order to get an instance of a `Section<TModel>` you can use the `BeginSection
 
 The `BeginSection` extension methods look like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a top-level form section.
         /// </summary>
@@ -158,7 +158,7 @@ From within a Section you can create [Fields](field.md) and you can also create 
 
 The `BeginSection` extension methods on Section look like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a nested form section.
         /// </summary>

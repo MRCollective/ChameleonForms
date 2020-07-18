@@ -2,7 +2,7 @@
 
 If you want the user to specify multiple values from an enum you can either use a [flags enum](flags-enum.md) (separate page) or use a non-flags enum against any property with a type convertible to `IEnumerable<%enumType%>` (this page), e.g.:
 
-```csharp
+```cs
 public enum MyEnum  { ... }
 ...
 public IEnumerable<MyEnum> EnumEnumerableField { get; set; }

@@ -19,7 +19,7 @@ So, what does a ChameleonForms form look like? Check out the basic signup form e
 
 # [View model](#tab/example-vm)
 
-```csharp
+```cs
 public class SignupViewModel
 {
     [Required]

@@ -4,7 +4,7 @@ The Message is a container to show a message to the user; you create a Message b
 
 The `Message<TModel>` class looks like this and is in the `ChameleonForms.Component` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Wraps the output of a message to display to a user.
     /// </summary>
@@ -76,7 +76,7 @@ In order to get an instance of a `Message<TModel>` you can use the `BeginMessage
 
 The `BeginMessage` extension methods look like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a message.
         /// </summary>
@@ -134,7 +134,7 @@ The `BeginMessage` extension methods look like this:
 
 The `MessageType` enum is defined like this and appears in the `ChameleonForms.Enums` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Types of messages that can be displayed to the user
     /// </summary>
