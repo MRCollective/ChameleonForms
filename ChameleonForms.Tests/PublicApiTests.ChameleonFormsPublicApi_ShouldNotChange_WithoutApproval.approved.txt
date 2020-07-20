@@ -372,9 +372,9 @@ namespace ChameleonForms
 {
     public static class ChameleonFormExtensions
     {
-        public static ChameleonForms.IForm<TModel> BeginChameleonForm<TModel>(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TModel> helper, string action = "", Microsoft.AspNetCore.Mvc.Rendering.FormMethod method = 1, ChameleonForms.HtmlAttributes htmlAttributes = null, ChameleonForms.Enums.EncType? enctype = default) { }
-        public static ChameleonForms.IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", Microsoft.AspNetCore.Mvc.Rendering.FormMethod method = 1, ChameleonForms.HtmlAttributes htmlAttributes = null, ChameleonForms.Enums.EncType? enctype = default) { }
-        public static ChameleonForms.IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TParentModel> helper, System.Linq.Expressions.Expression<System.Func<TParentModel, TChildModel>> formFor, string action = "", Microsoft.AspNetCore.Mvc.Rendering.FormMethod method = 1, ChameleonForms.HtmlAttributes htmlAttributes = null, ChameleonForms.Enums.EncType? enctype = default) { }
+        public static ChameleonForms.IForm<TModel> BeginChameleonForm<TModel>(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TModel> helper, string action = "", Microsoft.AspNetCore.Mvc.Rendering.FormMethod method = 1, ChameleonForms.HtmlAttributes htmlAttributes = null, ChameleonForms.Enums.EncType? enctype = default, bool? outputAntiforgeryToken = default) { }
+        public static ChameleonForms.IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", Microsoft.AspNetCore.Mvc.Rendering.FormMethod method = 1, ChameleonForms.HtmlAttributes htmlAttributes = null, ChameleonForms.Enums.EncType? enctype = default, bool? outputAntiforgeryToken = default) { }
+        public static ChameleonForms.IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TParentModel> helper, System.Linq.Expressions.Expression<System.Func<TParentModel, TChildModel>> formFor, string action = "", Microsoft.AspNetCore.Mvc.Rendering.FormMethod method = 1, ChameleonForms.HtmlAttributes htmlAttributes = null, ChameleonForms.Enums.EncType? enctype = default, bool? outputAntiforgeryToken = default) { }
         public static System.Threading.Tasks.Task<Microsoft.AspNetCore.Html.IHtmlContent> PartialForAsync<TModel, TPartialModel>(this ChameleonForms.IForm<TModel> form, System.Linq.Expressions.Expression<System.Func<TModel, TPartialModel>> partialModelProperty, string partialViewName) { }
     }
     public static class Constants
@@ -387,7 +387,7 @@ namespace ChameleonForms
     }
     public class Form<TModel> : ChameleonForms.IForm, ChameleonForms.IForm<TModel>, System.IDisposable
     {
-        public Form(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TModel> helper, ChameleonForms.Templates.IFormTemplate template, string action, Microsoft.AspNetCore.Mvc.Rendering.FormMethod method, ChameleonForms.HtmlAttributes htmlAttributes, ChameleonForms.Enums.EncType? enctype) { }
+        public Form(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TModel> helper, ChameleonForms.Templates.IFormTemplate template, string action, Microsoft.AspNetCore.Mvc.Rendering.FormMethod method, ChameleonForms.HtmlAttributes htmlAttributes, ChameleonForms.Enums.EncType? enctype, bool? outputAntiforgeryToken) { }
         public Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TModel> HtmlHelper { get; }
         public ChameleonForms.Templates.IFormTemplate Template { get; }
         public ChameleonForms.IForm<TModel> CreatePartialForm(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TModel> partialViewHelper) { }
@@ -729,6 +729,7 @@ namespace ChameleonForms.TagHelpers
         public System.Collections.Generic.IDictionary<string, string> Attrs { get; set; }
         public ChameleonForms.Enums.EncType Enctype { get; set; }
         public ChameleonForms.TagHelpers.ChameleonFormTagHelper.FormMethod Method { get; set; }
+        public bool? OutputAntiforgeryToken { get; set; }
         public override System.Threading.Tasks.Task ProcessWhileAwareOfModelTypeAsync<TModel>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
         public enum FormMethod
         {

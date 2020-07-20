@@ -1,6 +1,7 @@
-﻿@{
+﻿@using ChameleonForms.Example.Views.Comparison.EditorTemplates
+@{
     Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml";
-    var attrs = ViewData["attrs"] as Dictionary<string, object> ?? new Dictionary<string, object>();
+    var attrs = ViewData.SetupFieldAttrs();
     attrs["class"] = "text-box single-line";
     attrs["type"] = ViewData["type"];
     if (ViewData["placeholder"] != null)

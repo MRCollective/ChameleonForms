@@ -1,3 +1,7 @@
 ﻿@using Humanizer
-@{ Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml"; }
-@Html.DropDownList("", Enum.GetValues(typeof(ComparisonController.MembershipType)).Cast<ComparisonController.MembershipType>().Select(x => new SelectListItem{Text = x.Humanize(), Value = x.ToString()}))
+@using ChameleonForms.Example.Views.Comparison.EditorTemplates
+@{
+    Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml";
+    var attrs = ViewData.SetupFieldAttrs();
+}
+@Html.DropDownList("", Enum.GetValues(typeof(ComparisonController.MembershipType)).Cast<ComparisonController.MembershipType>().Select(x => new SelectListItem{Text = x.Humanize(), Value = x.ToString()}), attrs)

@@ -1,10 +1,20 @@
-﻿@{ Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml"; }
+﻿@using ChameleonForms.Example.Views.Comparison.EditorTemplates
+@{ Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml"; }
  
 @{
     bool? value = null;
     if (ViewData.Model != null)
     {
         value = Convert.ToBoolean(ViewData.Model, System.Globalization.CultureInfo.InvariantCulture);
+    }
+    var attrs = ViewData.SetupFieldAttrs();
+    if (ViewData.ModelMetadata.IsNullableValueType)
+    {
+        attrs["class"] = "list-box tri-state";
+    }
+    else
+    {
+        attrs["class"] = "check-box";
     }
 }
 
@@ -16,9 +26,9 @@
         new SelectListItem {Text = "True", Value = "true", Selected = value.HasValue && value.Value},
         new SelectListItem {Text = "False", Value = "false", Selected = value.HasValue && !value.Value},
     };
-    @Html.DropDownList("", triStateValues, new {@class = "list-box tri-state"})
+    @Html.DropDownList("", triStateValues, attrs)
 }
 else
 {
-    @Html.CheckBox("", value ?? false, new {@class = "check-box"})
+    @Html.CheckBox("", value ?? false, attrs)
 }

@@ -32,7 +32,7 @@
     using (var s = f.BeginSection("Additional details"))
     {
         @s.FieldFor(m => m.Bio)
-        @s.FieldFor(m => m.Homepage).Placeholder("http://")
+        @s.FieldFor(m => m.Homepage).Placeholder("https://")
     }
 
     using (var m = f.BeginMessage(MessageType.Action, "Confirm the Terms & Conditions"))

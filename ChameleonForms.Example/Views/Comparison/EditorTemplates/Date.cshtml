@@ -1,10 +1,10 @@
-﻿@{
+﻿@using ChameleonForms.Example.Views.Comparison.EditorTemplates
+@{
     ViewData["type"] = "date";
-    var attrs = new Dictionary<string, object>();
+    var attrs = ViewData.GetFieldAttrs();
     if (!string.IsNullOrEmpty(ViewData.ModelMetadata.EditFormatString))
     {
         attrs["data-val-format"] = ViewData.ModelMetadata.EditFormatString.Replace("{0:", "").Replace("}", "");
     }
-    ViewData["attrs"] = attrs;
 }
 @await Html.PartialAsync("~/Views/Comparison/EditorTemplates/HtmlInput.cshtml")

@@ -50,6 +50,18 @@ namespace ChameleonForms.Example.Controllers
             return View(vm);
         }
 
+
+        public ActionResult TagHelpers()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult TagHelpers(SignupViewModel vm)
+        {
+            return View(vm);
+        }
+
         public class SignupViewModel
         {
             [Required]

@@ -1,0 +1,63 @@
+﻿@using Humanizer
+@model ComparisonController.SignupViewModel
+
+@{
+    ViewBag.Title = "Tag Helpers Example";
+}
+
+<h1>Tag Helpers example</h1>
+
+<form asp-action="TagHelpers" asp-controller="Comparison" method="post" id="signup-form" novalidate="novalidate">
+    <div class="information_message">
+        <h3>Signup for an account</h3>
+        <div class="message">
+            <p>Please fill in your information below to signup for an account.</p>
+        </div>
+    </div>
+    
+    <fieldset>
+        <legend>Your details</legend>
+        <dl>
+            <dt><label asp-for="FirstName"></label> <em class="required">*</em></dt>
+            <dd><input asp-for="FirstName" required="required" /> <span asp-validation-for="FirstName"></span></dd>
+            <dt><label asp-for="LastName"></label> <em class="required">*</em></dt>
+            <dd><input asp-for="LastName" required="required" /> <span asp-validation-for="LastName"></span></dd>
+            <dt><label asp-for="DateOfBirth"></label> <em class="required">*</em></dt>
+            <dd><input asp-for="DateOfBirth" required="required" type="text" data-val-format="d/M/yyyy" aria-describedby="DateOfBirth--Hint" /><div class="hint" id="DateOfBirth--Hint">DD/MM/YYYY</div> <span asp-validation-for="DateOfBirth"></span></dd>
+        </dl>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Account details</legend>
+        <dl>
+            <dt><label asp-for="EmailAddress"></label> <em class="required">*</em></dt>
+            <dd><input asp-for="EmailAddress" required="required" aria-describedby="EmailAddress--Hint" /><div class="hint" id="EmailAddress--Hint">An email will be sent to this address to confirm you own it</div> <span asp-validation-for="EmailAddress"></span></dd>
+            <dt><label asp-for="Password"></label> <em class="required">*</em></dt>
+            <dd><input asp-for="Password" required="required" /> <span asp-validation-for="Password"></span></dd>
+            <dt><label asp-for="MembershipType"></label> <em class="required">*</em></dt>
+            <dd><select asp-for="MembershipType" required="required" asp-items="Html.GetEnumSelectList<ComparisonController.MembershipType>()"></select> <span asp-validation-for="MembershipType"></span></dd>
+        </dl>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Additional details</legend>
+        <dl>
+            <dt><label asp-for="Bio"></label></dt>
+            <dd><textarea asp-for="Bio" cols="20" rows="2"></textarea> <span asp-validation-for="Bio"></span></dd>
+            <dt><label asp-for="Homepage"></label></dt>
+            <dd><input asp-for="Homepage" placeholder="https://" /> <span asp-validation-for="Homepage"></span></dd>
+        </dl>
+    </fieldset>
+    
+    <div class="action_message">
+        <h3>Confirm the Terms &amp; Conditions</h3>
+        <div class="message">
+            <p>Please <a href="#">read the terms and conditions</a>.</p>
+            <input asp-for="TermsAndConditions" /> <label asp-for="TermsAndConditions">I agree to the terms and conditions</label>
+        </div>
+    </div>
+    
+    <div class="form_navigation">
+        <button type="submit" class="btn btn-primary">Signup</button>
+    </div>
+</form>

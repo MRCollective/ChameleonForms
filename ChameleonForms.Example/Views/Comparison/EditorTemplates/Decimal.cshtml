@@ -1,4 +1,5 @@
-﻿@{ Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml"; }
+﻿@using ChameleonForms.Example.Views.Comparison.EditorTemplates
+@{ Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml"; }
 @{
     object formattedValue;
     if (ViewData.TemplateInfo.FormattedModelValue == ViewData.Model)
@@ -9,5 +10,7 @@
     {
         formattedValue = ViewData.TemplateInfo.FormattedModelValue;
     }
+    var attrs = ViewData.GetFieldAttrs();
+    attrs["class"] = "text-box single-line";
 }
-@Html.TextBox("", formattedValue, new { @class = "text-box single-line" })
+@Html.TextBox("", formattedValue, attrs)
