@@ -24,7 +24,7 @@ $(function() {
     });
 
     var existingPreference = Cookies.get('chameleon-cshtml-preference');
-    if (existingPreference) {
+    if (existingPreference && tagHelperVariants.length > 0 && htmlHelperVariants.length > 0) {
         if (existingPreference === 'TH') {
             tagHelperVariants.get(0).click();
         } else if (existingPreference === 'HH') {
