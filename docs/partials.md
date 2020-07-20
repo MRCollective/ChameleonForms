@@ -11,3 +11,7 @@ When inside a partial view you can use the following methods off of `this`:
 * `this.IsInFormSection()` - returns whether you are currently inside of a Section
 
 The best way to see how this works is by looking at the output of the [partials acceptance test](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.AcceptanceTests/IntegrationTests/PartialForTests.Should_render_correctly_when_used_via_form_or_section_and_when_used_for_top_level_property_or_sub_property.approved.html).
+
+```cshtml
+todo
+```

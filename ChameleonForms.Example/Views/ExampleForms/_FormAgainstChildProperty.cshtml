@@ -1,0 +1,11 @@
+﻿@model ChildViewModel
+
+<chameleon-form action="@Url.Action("PostChildViewModel")">
+    <form-section>
+        <field for="ChildField" />
+        <field for="SomeEnum" />
+    </form-section>
+    <form-navigation>
+        <submit-button add-class="child-model" label="Submit" />
+    </form-navigation>
+</chameleon-form>

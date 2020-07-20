@@ -1,5 +1,7 @@
 # Change the model type for HTML Helper for portions of your page
 
+*Note: This documentation only applies to HTML Helpers syntax and not Tag Helpers. Tag Helpers don't allow you to change a model within a page, instead you need to use `<partial model="model" name="_PartialName" />` or `<partial for="ChildProperty" name="_PartialName" />` to change the model type in a view. See [Partials](partials.md) for more information.*
+
 Sometimes it's useful to include multiple forms in a page or use other HTML Helper functionality against a different model type than the parent model of the page. This different model type might be a completely arbitrary model unrelated to the page model type or it may be a sub-property of the parent model.
 
 Consider this example:
