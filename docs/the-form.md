@@ -62,10 +62,11 @@ The `BeginChameleonForm` extension method looks like this:
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <param name="outputAntiforgeryToken">Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TModel> BeginChameleonForm<TModel>(this IHtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TModel> BeginChameleonForm<TModel>(this IHtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
         {
-            return new Form<TModel>(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
+            return new Form<TModel>(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype, outputAntiforgeryToken);
         }
 ```
 
