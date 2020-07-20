@@ -34,20 +34,25 @@ namespace ChameleonForms.TagHelpers
         }
 
         /// <summary>
-        /// The encoding type to use for the form submission.
+        /// The encoding type to use for the form submission. URL encoded by default.
         /// </summary>
         // ReSharper disable once IdentifierTypo
         public EncType Enctype { get; set; }
 
         /// <summary>
-        /// the HTTP method to use for the form submission.
+        /// The HTTP method to use for the form submission. POST by default.
         /// </summary>
         public FormMethod Method { get; set; }
 
         /// <summary>
-        /// The action URL to post to for the form submission.
+        /// The action URL to post to for the form submission. Leave as default value for a self-submitting form.
         /// </summary>
         public string Action { get; set; }
+
+        /// <summary>
+        /// Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET.
+        /// </summary>
+        public bool? OutputAntiforgeryToken { get; set; }
 
         /// <summary>
         /// HTML attributes to apply to the form. You can either pass them in as a dictionary (attrs="@dictionary"), or
@@ -63,7 +68,7 @@ namespace ChameleonForms.TagHelpers
             var method = Method == FormMethod.Get
                 ? Microsoft.AspNetCore.Mvc.Rendering.FormMethod.Get
                 : Microsoft.AspNetCore.Mvc.Rendering.FormMethod.Post;
-            using (helper.BeginChameleonForm(Action ?? "", method, new HtmlAttributes(Attrs), Enctype))
+            using (helper.BeginChameleonForm(Action ?? "", method, new HtmlAttributes(Attrs), Enctype, OutputAntiforgeryToken))
             {
                 var childContent = await output.GetChildContentAsync();
                 childContent.WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);

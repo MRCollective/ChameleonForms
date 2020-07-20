@@ -47,9 +47,9 @@ namespace ChameleonForms.Example.Forms.Components
 
     public static class RandomComponentExtensions
     {
-        public static Form<TModel> BeginRandomForm<TModel>(this IHtmlHelper<TModel> helper, string action, FormMethod method, object htmlAttributes = null, EncType? enctype = null)
+        public static Form<TModel> BeginRandomForm<TModel>(this IHtmlHelper<TModel> helper, string action, FormMethod method, object htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
         {
-            return new Form<TModel>(helper, new RandomFormTemplate(), action, method, htmlAttributes.ToHtmlAttributes(), enctype);
+            return new Form<TModel>(helper, new RandomFormTemplate(), action, method, htmlAttributes.ToHtmlAttributes(), enctype, outputAntiforgeryToken);
         }
 
         public static RandomComponent<TModel> RandomComponent<TModel>(this Form<TModel> form)

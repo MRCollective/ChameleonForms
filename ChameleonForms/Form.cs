@@ -66,6 +66,8 @@ namespace ChameleonForms
     /// </summary>
     public class Form<TModel> : IForm<TModel>
     {
+        private readonly bool _outputAntiforgeryToken;
+
         /// <inheritdoc />
         public IHtmlHelper<TModel> HtmlHelper { get; private set; }
         /// <inheritdoc />
@@ -81,8 +83,10 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use expressed as an anonymous object</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
-        public Form(IHtmlHelper<TModel> helper, IFormTemplate template, string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        /// <param name="outputAntiforgeryToken">Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET</param>
+        public Form(IHtmlHelper<TModel> helper, IFormTemplate template, string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype, bool? outputAntiforgeryToken)
         {
+            _outputAntiforgeryToken = outputAntiforgeryToken ?? method != FormMethod.Get;
             helper.ViewData[Constants.ViewDataFormKey] = this;
             HtmlHelper = helper;
             Template = template;
@@ -109,6 +113,9 @@ namespace ChameleonForms
         /// </summary>
         public void Dispose()
         {
+            if (_outputAntiforgeryToken)
+                Write(HtmlHelper.AntiForgeryToken());
+            Write(new HtmlString("\r\n"));
             Write(Template.EndForm());
             HtmlHelper.ViewData.Remove(Constants.ViewDataFormKey);
         }
@@ -153,10 +160,11 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <param name="outputAntiforgeryToken">Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TModel> BeginChameleonForm<TModel>(this IHtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TModel> BeginChameleonForm<TModel>(this IHtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
         {
-            return new Form<TModel>(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
+            return new Form<TModel>(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype, outputAntiforgeryToken);
         }
 
         /// <summary>
@@ -199,11 +207,12 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <param name="outputAntiforgeryToken">Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this IHtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this IHtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
         {
             var childHelper = helper.For(formFor, bindFieldsToParent: false);
-            return new Form<TChildModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
+            return new Form<TChildModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype, outputAntiforgeryToken);
         }
 
         /// <summary>
@@ -232,11 +241,12 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <param name="outputAntiforgeryToken">Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this IHtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this IHtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
         {
             var childHelper = helper.For(model);
-            return new Form<TNewModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
+            return new Form<TNewModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype, outputAntiforgeryToken);
         }
     }
 }
