@@ -1,6 +1,6 @@
 ﻿@model ChildViewModel
 
-<chameleon-form action="@Url.Action("PostChildViewModel")">
+<chameleon-form action="@Url.Action("PostChildViewModel")?tagHelpers=true">
     <form-section>
         <field for="ChildField" />
         <field for="SomeEnum" />

@@ -190,7 +190,7 @@ Tag Helpers are explicitly tied to the model of the page so it's not possible to
 @model SomeViewModel
 
 <h1>Creating new xyz against @Model.ReadonlyProperty</h1>
-<partial name="_SomeViewModelInputForm" for="InputModel" />
+<partial name="_SomeViewModelInputForm" model="Model?.InputModel" />
 ```
 
 *_SomeViewModelInputForm.cshtml*
@@ -272,4 +272,4 @@ This is still easily possible, but it's just a little more verbose since it's li
 
 ## Try working examples
 
-See also the working examples in the [source code](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/ExampleForms/ChangingContext.cshtml), which can be run so you can see how it works.
+See also the working examples in the [source](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/ExampleForms/ChangingContextTH.cshtml) [code](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/ExampleForms/ChangingContext.cshtml), which can be run so you can see how it works.

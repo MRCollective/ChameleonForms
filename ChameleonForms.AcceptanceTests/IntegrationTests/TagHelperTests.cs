@@ -2,15 +2,13 @@
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using ApprovalTests.Html;
-using ApprovalTests.Reporters;
 using ChameleonForms.AcceptanceTests.Helpers;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Shouldly;
 using Xunit;
 
 namespace ChameleonForms.AcceptanceTests.IntegrationTests
 {
-    [UseReporter(typeof(DiffReporter))]
     public class TagHelperTests : IClassFixture<WebApplicationFactory<Example.Startup>>
     {
         private readonly HttpClient _client;
@@ -30,7 +28,9 @@ namespace ChameleonForms.AcceptanceTests.IntegrationTests
         public async Task Should_render_correctly()
         {
             var renderedSource = await GetRenderedSourceAsync("/Comparison/ChameleonFormsTH");
-            HtmlApprovals.VerifyHtml($"ChameleonFormsTH.cshtml\r\n\r\n{GetViewContents("Comparison/ChameleonFormsTH")}\r\n=====\r\n\r\nRendered Source\r\n\r\n{renderedSource}");
+            var received = $"ChameleonFormsTH.cshtml\r\n\r\n{GetViewContents("Comparison/ChameleonFormsTH")}\r\n=====\r\n\r\nRendered Source\r\n\r\n{renderedSource}";
+            received = received.SanitiseRequestVerificationToken();
+            received.ShouldMatchApproved(b => b.WithFileExtension(".html"));
         }
 
         private async Task<string> GetRenderedSourceAsync(string url)

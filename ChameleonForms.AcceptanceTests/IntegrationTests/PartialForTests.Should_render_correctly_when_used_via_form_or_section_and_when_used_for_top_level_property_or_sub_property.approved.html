@@ -10,7 +10,7 @@
 
 @using (var f = Html.BeginChameleonForm())
 {
-    @Html.Partial("_ParentPartial")
+    @await Html.PartialAsync("_ParentPartial")
     @(await Html.PartialAsync("_BaseParentPartial"))
     @(await f.PartialForAsync(m => m.Child, "_ChildPartial"))
     @(await f.PartialForAsync(m => m.BaseChild, "_BaseChildPartial"))
@@ -209,4 +209,5 @@ Rendered Source
     </fieldset>
         <div class="form_navigation">
 <button type="submit">Submit</button>        </div>
+<input name="__RequestVerificationToken" type="hidden" value="...">
     </form>

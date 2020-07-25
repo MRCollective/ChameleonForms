@@ -5,7 +5,9 @@
     var differentViewModel = new BasicViewModel { RequiredString = "Initial value" };
 }
 
-<h1>Changing the context of HTML helper</h1>
+<h1>Changing the context of HTML helper - HTML Helpers</h1>
+
+<p><a asp-action="ChangingContextTH">Tag Helpers</a>.</p>
 
 <p>There are three separate forms tied to three different post actions. Turn off JavaScript, clear all the text fields and hit each of the three submit buttons and also play with putting in values and submitting the values to see how they are bound back.</p>
 
@@ -23,13 +25,7 @@
     </ul>
 }
 
-<h2>Completely different model - Tag Helpers</h2>
-
-<p><code>&lt;partial name="_FormAgainstDifferentModel" model="differentViewModel" /&gt;</code></p>
-
-<partial name="_FormAgainstDifferentModel" model="differentViewModel" />
-
-<h2>Completely different model - HTML Helpers</h2>
+<h2>Completely different model</h2>
 
 <p><code>@@using (var f = Html.BeginChameleonFormFor(new BasicViewModel { RequiredString = "Initial value" }, Url.Action("PostDifferentModel")))</code></p>
 
@@ -46,13 +42,7 @@
     }
 }
 
-<h2>Sub model (binding to itself) - Tag Helpers</h2>
-
-<p><code>&lt;partial name="_FormAgainstChildProperty" for="Child" /&gt;</code></p>
-
-<partial name="_FormAgainstChildProperty" for="Child" />
-
-<h2>Sub model (binding to itself) - HTML Helpers</h2>
+<h2>Sub model (binding to itself)</h2>
 
 <p><code>@@using (var f = Html.BeginChameleonFormFor(m => m.Child, Url.Action("PostChildViewModel")))</code></p>
 
@@ -69,22 +59,7 @@
     }
 }
 
-
-<h2>Sub model (binding to parent) - Tag Helpers</h2>
-
-<p><code>&lt;form-partial name="_FormPartialAgainstChildProperty" for="Child" /&gt;</code></p>
-
-<chameleon-form action="@Url.Action("PostParentViewModel")">
-
-    <form-partial name="_FormPartialAgainstChildProperty" for="Child" />
-
-    <form-navigation>
-        <submit-button label="Submit" add-class="parent-model" />
-    </form-navigation>
-
-</chameleon-form>
-
-<h2>Sub model (binding to parent) - HTML Helpers</h2>
+<h2>Sub model (binding to parent)</h2>
 
 <p><code>@@using (var f = Html.For(m => m.Child, bindFieldsToParent: true).BeginChameleonForm(Url.Action("PostParentViewModel")))</code></p>
 
