@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq.Expressions;
+using System.Text.Encodings.Web;
 using ChameleonForms.Component.Config;
 using ChameleonForms.FieldGenerators;
 using Microsoft.AspNetCore.Html;
@@ -42,7 +44,8 @@ namespace ChameleonForms.Component
         public Field(IForm<TModel> form, bool isParent, IFieldGenerator fieldGenerator, IFieldConfiguration config)
             : base(form, !isParent)
         {
-            form.HtmlHelper.ViewData[Constants.ViewDataFieldKey] = this;
+            if (isParent)
+                form.HtmlHelper.ViewData[Constants.ViewDataFieldKey] = this;
 
             _fieldGenerator = fieldGenerator;
             _config = config;

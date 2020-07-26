@@ -26,6 +26,22 @@ namespace ChameleonForms.TagHelpers
         /// </summary>
         public IHtmlContent AppendHtmlContent { get; set; }
 
+
+        /// <summary>
+        /// Prepended HTML as a <see cref="String"/>.
+        /// </summary>
+        public string Prepend { get; set; }
+
+        /// <summary>
+        /// Prepended HTML as templated razor delegate.
+        /// </summary>
+        public Func<dynamic, IHtmlContent> PrependHtml { get; set; }
+
+        /// <summary>
+        /// Prepended HTML as a <see cref="IHtmlContent"/>.
+        /// </summary>
+        public IHtmlContent PrependHtmlContent { get; set; }
+
         /// <summary>
         /// Hint as a <see cref="String"/>.
         /// </summary>
@@ -86,6 +102,15 @@ namespace ChameleonForms.TagHelpers
 
             if (AppendHtmlContent != null)
                 fc.Append(AppendHtmlContent);
+
+            if (Prepend != null)
+                fc.Prepend(Prepend.ToHtml());
+
+            if (PrependHtml != null)
+                fc.Prepend(PrependHtml);
+
+            if (PrependHtmlContent != null)
+                fc.Prepend(PrependHtmlContent);
 
             if (Hint != null)
                 fc.WithHint(Hint);

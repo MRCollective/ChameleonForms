@@ -9,6 +9,21 @@ The Field Validation HTML is markup that acts as both a placeholder to display a
 
 ## Outputting directly from the Form
 
+# [Tag Helpers variant](#tab/output-th)
+
+To use a Field Generator to output the HTML for a standalone Field Validation HTML you can use the `<field-validation />` tag, e.g.:
+
+```cshtml
+<field-validation for="SomeField" />
+<field-validation for="SomeField" fluent-config='c => c.ChainFieldConfigurationMethodsHere()' />
+<field-validation for="SomeField" add-validation-class="validation" />
+```
+
+To see the different configuration options check out [field configuration](field-configuration.md#tag-helper-mappings).
+
+
+# [HTML Helpers variant](#tab/output-hh)
+
 To use a Field Generator to output the HTML for a standalone Field Validation HTML you can use the `ValidationMessageFor` extension method on the Form, e.g.:
 
 ```cshtml
@@ -38,6 +53,8 @@ The `ValidationMessageFor` extension method looks like this:
             return config;
         }
 ```
+
+***
 
 ## Default HTML
 

@@ -38,6 +38,10 @@ namespace ChameleonForms.TagHelpers
         /// <param name="output">The output from the tag helper</param>
         public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
+            // Something has modified the content already, likely something that has replaced the functionality so returning early.
+            if (output.IsContentModified)
+                return Task.CompletedTask;
+
             if (For == null)
                 throw new ArgumentNullException(nameof(For), $"No `for` specified on <{context.TagName} />");
 

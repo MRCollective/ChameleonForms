@@ -21,7 +21,7 @@ namespace ChameleonForms
     // Update all dependencies to latest versions
     // Tidy up cshtml files
     // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation
-    // blog posts: razorgenerator, mvctestcontext, modelbindertestbase, ilmerge, client validation in aspnetcore, end-to-end test in-memory, disposablehtmlhelper, testing metadatadetailsprovider
+    // blog posts: razorgenerator, mvctestcontext, modelbindertestbase, ilmerge, client validation in aspnetcore, end-to-end test in-memory, disposablehtmlhelper, testing metadatadetailsprovider, docfx, tag helpers including nested children
     // Generate nuget from .csproj rather than nuspec like https://github.com/LazZiya/ExpressLocalization/blob/master/LazZiya.ExpressLocalization/LazZiya.ExpressLocalization.csproj
     // [Range] client validation support
     // Add support for non jquery unobtrusive validation

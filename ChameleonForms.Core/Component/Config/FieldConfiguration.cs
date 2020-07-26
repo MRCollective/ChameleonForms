@@ -918,6 +918,8 @@ namespace ChameleonForms.Component.Config
             if (field != null)
             {
                 field.WriteTo(writer, encoder);
+                if (field is IDisposable disposable)
+                    disposable.Dispose();
             }
         }
 

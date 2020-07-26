@@ -9,6 +9,20 @@ The Field Element is the HTML that makes up the control(s) to accept data from t
 
 ## Outputting directly from the Form
 
+# [Tag Helpers variant](#tab/output-th)
+
+To use a Field Generator to output the HTML for a standalone Field Element you can use the `<field-element />` tag, e.g.:
+
+```cshtml
+<field-element for="SomeField" />
+<field-element for="SomeField" fluent-config='c => c.ChainFieldConfigurationMethodsHere()' />
+<field-element for="SomeField" placeholder="Placeholder text..." />
+```
+
+To see the different configuration options check out [field configuration](field-configuration.md#tag-helper-mappings).
+
+# [HTML Helpers variant](#tab/output-hh)
+
 To use a Field Generator to output the HTML for a standalone Field Element you can use the `FieldElementFor` extension method on the Form (with optional Field Configuration), e.g.:
 
 ```cshtml
@@ -38,6 +52,8 @@ The `FieldElementFor` extension method looks like this:
             return config;
         }
 ```
+
+***
 
 ## Default HTML
 

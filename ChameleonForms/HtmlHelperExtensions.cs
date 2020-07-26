@@ -246,7 +246,7 @@ namespace ChameleonForms
             if (field is Field<TModel> castedField)
                 return castedField;
 
-            throw new InvalidOperationException($"Attempted to retrieve a ChameleonForms form field instance as Field<{typeof(TModel).Name}>, but instead found a {field.GetType().Name}.");
+            throw new InvalidOperationException($"Attempted to retrieve a ChameleonForms form field instance as Field<{typeof(TModel).Name}>, but instead found a {field.GetType().FullName}.");
         }
 
         /// <summary>

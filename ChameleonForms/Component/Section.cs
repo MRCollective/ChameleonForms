@@ -20,6 +20,19 @@ namespace ChameleonForms.Component
         /// <typeparam name="TPartialModel">The model type of the partial view</typeparam>
         /// <returns>A section with the same characteristics as the current section, but using the given partial form</returns>
         ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm);
+
+        /// <summary>
+        /// Outputs a field with passed in HTML.
+        /// </summary>
+        /// <param name="labelHtml">The HTML for the label part of the field</param>
+        /// <param name="elementHtml">The HTML for the field element part of the field</param>
+        /// <param name="validationHtml">The HTML for the validation markup part of the field</param>
+        /// <param name="metadata">Any field metadata</param>
+        /// <param name="isValid">Whether or not the field is valid</param>
+        /// <param name="fieldConfiguration">Optional field configuration</param>
+        /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
+        IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null,
+            ModelMetadata metadata = null, bool isValid = true, IFieldConfiguration fieldConfiguration = null);
     }
 
     /// <summary>
@@ -41,6 +54,19 @@ namespace ChameleonForms.Component
         /// <param name="partialHelper">The HTML helper from the partial view</param>
         /// <returns>A section with the same characteristics as the current section, but using the given partial form</returns>
         ISection<TModel> CreatePartialSection(IHtmlHelper<TModel> partialHelper);
+
+        /// <summary>
+        /// Outputs a field with passed in HTML.
+        /// </summary>
+        /// <param name="labelHtml">The HTML for the label part of the field</param>
+        /// <param name="elementHtml">The HTML for the field element part of the field</param>
+        /// <param name="validationHtml">The HTML for the validation markup part of the field</param>
+        /// <param name="metadata">Any field metadata</param>
+        /// <param name="isValid">Whether or not the field is valid</param>
+        /// <param name="fieldConfiguration">Optional field configuration</param>
+        /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
+        IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null,
+            ModelMetadata metadata = null, bool isValid = true, IFieldConfiguration fieldConfiguration = null);
     }
 
     /// <summary>
@@ -75,18 +101,10 @@ namespace ChameleonForms.Component
             Initialise();
         }
 
-        /// <summary>
-        /// Outputs a field with passed in HTML.
-        /// </summary>
-        /// <param name="labelHtml">The HTML for the label part of the field</param>
-        /// <param name="elementHtml">The HTML for the field element part of the field</param>
-        /// <param name="validationHtml">The HTML for the validation markup part of the field</param>
-        /// <param name="metadata">Any field metadata</param>
-        /// <param name="isValid">Whether or not the field is valid</param>
-        /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
-        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true)
+        /// <inheritdoc />
+        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true, IFieldConfiguration fieldConfiguration = null)
         {
-            var fc = new FieldConfiguration();
+            var fc = fieldConfiguration ?? new FieldConfiguration();
             fc.SetField(() => Form.Template.Field(labelHtml, elementHtml, validationHtml, metadata, fc, isValid));
             return fc;
         }

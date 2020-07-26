@@ -1,4 +1,6 @@
 ﻿@using ChameleonForms.Templates.TwitterBootstrap3
+@using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
+@inject ICompositeMetadataDetailsProvider MetadataDetailsProvider
 @model ViewModelExample
 
 @{
@@ -15,33 +17,41 @@
     @* Various incarnations of nested sections and fields and partials mixed in *@
     <form-section heading="Wassup" leading-html="InstructionalText" add-class="xyz" id="aaaaa" attr-style="border-top:red;" fluent-config='h => h.Attr(data_x => "y")'>
         <p>Yo</p>
+
         <field for="ListId" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup" append="aaa" as="RadioList" />
+
+        <field manual model-metadata="new DefaultModelMetadataProvider(MetadataDetailsProvider).GetMetadataForType(typeof(int))" is-valid="true" append="After Element" prepend="Before Element">
+            <manual-element><strong>Element</strong></manual-element>
+            <manual-label><strong>Label</strong></manual-label>
+            <manual-validation><strong>validation</strong></manual-validation>
+        </field>
+
         <field for="SomeEnum" exclude="new Enum[]{SomeEnum.SomeOtherValue}" />
         <field for="Decimal" label="asdf" append="asdffff" step="1.2m">
-            <field for="NullableInt"/>
-            <partial name="_Child"/>
+            <field for="NullableInt" />
+            <partial name="_Child" />
         </field>
         <form-section heading-html="InstructionalText">
             <field for="TextAreaField" />
-            <field for="Child.ChildField"/>
-            <partial name="_Child"/>
+            <field for="Child.ChildField" />
+            <partial name="_Child" />
         </form-section>
-        <partial name="_Child"/>
-        <form-partial name="_Child2" for="Child"/>
+        <partial name="_Child" />
+        <form-partial name="_Child2" for="Child" />
     </form-section>
     <form-message heading="Heading" type="Action">
         <field-label for="UrlAsString" label="Overridden" />
         <field-element for="UrlAsString" add-class="addedclass" />
         <field-validation for="UrlAsString" fluent-config='fc  => fc.AddValidationClass("asdf")' />
     </form-message>
-    <form-partial name="_Child2" for="Child"/>
+    <form-partial name="_Child2" for="Child" />
     @* Mix and match helper syntax with tag helpers and vice versa *@
     @Html.GetChameleonForm().FieldElementFor(m => m.ListId)
-    <field-element for="Boolean"/>
+    <field-element for="Boolean" />
     @using (var s = Html.GetChameleonForm().BeginSection("Section from helper syntax"))
     {
         @s.FieldFor(m => m.SomeEnum)
-        <field for="Boolean"/>
+        <field for="Boolean" />
     }
     @* Navigation *@
     <form-navigation>

@@ -570,7 +570,7 @@ When using tag helpers there are two ways of specifying field configuration:
 
 ### Fluent configuration
 
-Note: We recommend that you make use of single quotes (`'`) rather than double quotes (`"`) so that you can use the double quotes in any field configuration methods that need a string.
+Note: We recommend that you make use of single quotes (`'`) rather than double quotes (`"`) so that you can use the double quotes in any field configuration methods that need a string. Alternatively, you can keep double quotes and wrap the whole thing in `@()` e.g. `fluent-config="@(c => c.AddClass("a-class"))"`.
 
 ```cshtml
 <field for="..." fluent-config='c => c.AddClass("a-class").Append("after")...' />
@@ -583,8 +583,8 @@ Note: We recommend that you make use of single quotes (`'`) rather than double q
 
 Any attributes that take string values can have a variable or other C# expression added by prepending with a `@` per usual Razor syntax. Most field configuration methods map to a tag helper attribute by convention - `UpperCamelCase` to `upper-camel-case` (i.e. kebab case), but a few are slightly different for clarity or terseness.
 
-| Field Configuration Method                                                 | Equivalent Tag Helper attribute                       | Available On                       |
-|----------------------------------------------------------------------------|-------------------------------------------------------|------------------------------------|
+| Field Configuration Method                            | Equivalent Tag Helper attribute                       | Available On                       |
+|-------------------------------------------------------|-------------------------------------------------------|------------------------------------|
 | `Id(string id)`                                       | `id="{id}"`                                           | `<field>` and `<field-element>`    |
 | `AddClass(string @class)`                             | `add-class="{class}"`                                 | `<field>` and `<field-element>`    |
 | `AddFieldContainerClass(string @class)`               | `add-container-class="{class}"`                       | `<field>`                          |

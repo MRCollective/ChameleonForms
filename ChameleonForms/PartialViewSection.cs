@@ -1,9 +1,13 @@
-﻿using ChameleonForms.Component;
+﻿using System;
+using ChameleonForms.Component;
+using ChameleonForms.Component.Config;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ChameleonForms
 {
-    internal class PartialViewSection<TPartialModel> : ISection<TPartialModel>
+    internal class PartialViewSection<TPartialModel> : ISection, ISection<TPartialModel>
     {
         private readonly object _parentSection;
 
@@ -26,6 +30,12 @@ namespace ChameleonForms
             return partialHelper == Form.HtmlHelper
                 ? this
                 : new PartialViewSection<TPartialModel>(Form.CreatePartialForm(partialHelper));
+        }
+
+        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null,
+            ModelMetadata metadata = null, bool isValid = true, IFieldConfiguration fieldConfiguration = null)
+        {
+            return (_parentSection as ISection)?.Field(labelHtml, elementHtml, validationHtml, metadata, isValid, fieldConfiguration);
         }
 
         public void Dispose()

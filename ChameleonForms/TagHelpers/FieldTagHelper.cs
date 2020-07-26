@@ -19,7 +19,14 @@ namespace ChameleonForms.TagHelpers
         {
             var helper = ViewContext.GetHtmlHelper<TModel>();
 
-            if (helper.IsInChameleonFormsSection())
+            if (helper.IsInChameleonFormsField())
+            {
+                var ff = helper.GetChameleonFormsField();
+                output.TagMode = TagMode.StartTagAndEndTag;
+                output.TagName = null;
+                output.Content.SetHtmlContent(ff.FieldFor(modelProperty, context.GetFieldConfiguration()));
+            }
+            else if (helper.IsInChameleonFormsSection())
             {
                 var s = helper.GetChameleonFormsSection();
                 if (output.TagMode == TagMode.SelfClosing)
@@ -42,10 +49,7 @@ namespace ChameleonForms.TagHelpers
             }
             else
             {
-                var ff = helper.GetChameleonFormsField();
-                output.TagMode = TagMode.StartTagAndEndTag;
-                output.TagName = null;
-                output.Content.SetHtmlContent(ff.FieldFor(modelProperty, context.GetFieldConfiguration()));
+                throw new NotSupportedException("Attempt to specify a <field> outside of a <form-section>.");
             }
         }
     }

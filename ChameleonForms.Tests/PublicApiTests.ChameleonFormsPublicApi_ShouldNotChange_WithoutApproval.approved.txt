@@ -480,11 +480,13 @@ namespace ChameleonForms.Component
     public interface ISection
     {
         ChameleonForms.Component.ISection<TPartialModel> CreatePartialSection<TPartialModel>(ChameleonForms.IForm<TPartialModel> partialModelForm);
+        ChameleonForms.Component.Config.IFieldConfiguration Field(Microsoft.AspNetCore.Html.IHtmlContent labelHtml, Microsoft.AspNetCore.Html.IHtmlContent elementHtml, Microsoft.AspNetCore.Html.IHtmlContent validationHtml = null, Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata metadata = null, bool isValid = true, ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration = null);
     }
     public interface ISection<TModel> : ChameleonForms.Component.IFormComponent<TModel>, System.IDisposable
     {
         ChameleonForms.Component.ISection<TModel> CreatePartialSection(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<TModel> partialHelper);
         ChameleonForms.Component.ISection<TPartialModel> CreatePartialSection<TPartialModel>(ChameleonForms.IForm<TPartialModel> partialModelForm);
+        ChameleonForms.Component.Config.IFieldConfiguration Field(Microsoft.AspNetCore.Html.IHtmlContent labelHtml, Microsoft.AspNetCore.Html.IHtmlContent elementHtml, Microsoft.AspNetCore.Html.IHtmlContent validationHtml = null, Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata metadata = null, bool isValid = true, ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration = null);
     }
     public static class MessageExtensions
     {
@@ -545,7 +547,7 @@ namespace ChameleonForms.Component
         public ChameleonForms.Component.ISection<TPartialModel> CreatePartialSection<TPartialModel>(ChameleonForms.IForm<TPartialModel> partialModelForm) { }
         public override void Dispose() { }
         public override Microsoft.AspNetCore.Html.IHtmlContent End() { }
-        public ChameleonForms.Component.Config.IFieldConfiguration Field(Microsoft.AspNetCore.Html.IHtmlContent labelHtml, Microsoft.AspNetCore.Html.IHtmlContent elementHtml, Microsoft.AspNetCore.Html.IHtmlContent validationHtml = null, Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata metadata = null, bool isValid = true) { }
+        public ChameleonForms.Component.Config.IFieldConfiguration Field(Microsoft.AspNetCore.Html.IHtmlContent labelHtml, Microsoft.AspNetCore.Html.IHtmlContent elementHtml, Microsoft.AspNetCore.Html.IHtmlContent validationHtml = null, Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata metadata = null, bool isValid = true, ChameleonForms.Component.Config.IFieldConfiguration fieldConfiguration = null) { }
     }
 }
 namespace ChameleonForms.Config
@@ -773,6 +775,13 @@ namespace ChameleonForms.TagHelpers
                 false})]
         public System.Func<object, Microsoft.AspNetCore.Html.IHtmlContent> OverrideFieldHtml { get; set; }
         public Microsoft.AspNetCore.Html.IHtmlContent OverrideFieldHtmlContent { get; set; }
+        public string Prepend { get; set; }
+        [System.Runtime.CompilerServices.Dynamic(new bool[] {
+                false,
+                true,
+                false})]
+        public System.Func<object, Microsoft.AspNetCore.Html.IHtmlContent> PrependHtml { get; set; }
+        public Microsoft.AspNetCore.Html.IHtmlContent PrependHtmlContent { get; set; }
         public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
     [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("field")]
@@ -919,6 +928,43 @@ namespace ChameleonForms.TagHelpers
         public bool? Disabled { get; set; }
         public System.Func<ChameleonForms.HtmlAttributes, ChameleonForms.HtmlAttributes> FluentConfig { get; set; }
         public string Id { get; set; }
+        public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
+    }
+    public class ManualFieldContext
+    {
+        public ManualFieldContext() { }
+        public Microsoft.AspNetCore.Html.IHtmlContent Element { get; set; }
+        public ChameleonForms.Component.Config.IFieldConfiguration FieldConfiguration { get; set; }
+        public bool? IsValid { get; set; }
+        public Microsoft.AspNetCore.Html.IHtmlContent Label { get; set; }
+        public Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata ModelMetadata { get; set; }
+        public Microsoft.AspNetCore.Html.IHtmlContent Validation { get; set; }
+    }
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("manual-element", ParentTag="field")]
+    public class ManualFieldElementTagHelper : Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+    {
+        public ManualFieldElementTagHelper() { }
+        public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
+    }
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("manual-label", ParentTag="field")]
+    public class ManualFieldLabelTagHelper : Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+    {
+        public ManualFieldLabelTagHelper() { }
+        public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
+    }
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("field", Attributes="manual")]
+    public class ManualFieldTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
+    {
+        public ManualFieldTagHelper() { }
+        public bool? IsValid { get; set; }
+        public Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata ModelMetadata { get; set; }
+        public override int Order { get; }
+        public override System.Threading.Tasks.Task ProcessWhileAwareOfModelTypeAsync<TModel>(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
+    }
+    [Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElement("manual-validation", ParentTag="field")]
+    public class ManualFieldValidationTagHelper : Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+    {
+        public ManualFieldValidationTagHelper() { }
         public override System.Threading.Tasks.Task ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext context, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput output) { }
     }
     public class MessageParagraphTagHelper : ChameleonForms.TagHelpers.ModelAwareTagHelper
