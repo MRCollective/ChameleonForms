@@ -8,11 +8,23 @@ public IFormFile FileUpload { get; set; }
 
 In order for file uploads to work you will need to set the encoding type on the form to `multipart/form-data` ([as opposed to the default](http://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean)), e.g.:
 
+# [Tag Helpers variant](#tab/enctype-th)
+
+```cshtml
+<chameleon-form enctype="Multipart">
+    @* ... *@
+</chameleon-form>
+```
+
+# [HTML Helpers variant](#tab/enctype-hh)
+
 ```cshtml
 @using (var f = Html.BeginChameleonForm(encType: EncType.Multipart)) {
     @* ... *@
 }
 ```
+
+***
 
 To then use the file upload in your controller action you use the [documented approaches](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1) to handle the uploaded file(s). If you want the field to be Required you can annotate with `[Required]`.
 

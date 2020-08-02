@@ -290,7 +290,17 @@ The Form Components that come with ChameleonForms out of the box are:
 * Section
 * Navigation
 
-To create a Form simply use the `BeginChameleonForms` extension method off of the Html helper:
+To create a Form simply use the `<chameleon-form>` tag helper or the `BeginChameleonForms` extension method off of the Html helper:
+
+# [Tag Helpers variant](#tab/form-th)
+
+```cshtml
+<chameleon-form>
+    @* The form ... *@
+</chameleon-form>
+```
+
+# [HTML Helpers variant](#tab/form-hh)
 
 ```cshtml
 @using (var f = Html.BeginChameleonForm()) {
@@ -298,11 +308,127 @@ To create a Form simply use the `BeginChameleonForms` extension method off of th
 }
 ```
 
-Random Field Elements, Field Labels and Field Validation HTML that don't fit in to a Section (see below) can be output from the Form object anywhere within your form like so:
+***
+
+See the [Form](./the-form.md) documentation to understand how to configure the Form.
+
+
+Individual Field Elements, Field Labels and Field Validation HTML that don't fit in to a standard templated Section (see below) can be output from anywhere within your form like so:
+
+# [Tag Helpers variant](#tab/individual-th)
+
+```cshtml
+<p><field-label for="SomeCheckbox" label="Hello!" /> <field-element for="SomeCheckbox" /> <field-validation for="SomeCheckbox" /></p>
+```
+
+# [HTML Helpers variant](#tab/individual-hh)
 
 ```cshtml
 <p>@f.LabelFor(m => m.SomeCheckbox).Label("Hello!") @f.FieldFor(m => m.SomeCheckbox) @f.ValidationMessageFor(m => m.SomeCheckbox)</p>
 ```
+
+***
+
+See the [Field Element](./field-element.md), [Field Label](./field-label.md) and [Field Validation](./field-validation-html.md) documentation to understand how to configure these components.
+
+### Section
+
+A Section component holds a set of Fields (see below for definition of Field) or nested sections (to no more than one level deep). A Section will start with a Heading. The default form template that comes with Chameleon Forms defines a top-level section as a `fieldset`.
+
+![Section components have a Heading followed by any number of Fields or single level deep nested Sections](section.png)
+
+To create a Section simply use the `<form-section>` tag helper or the `BeginSection` extension method off of the Form object (or off of the Section object to create a nested one):
+
+# [Tag Helpers variant](#tab/section-th)
+
+```cshtml
+<form-section heading="Basic information">
+    <form-section heading="Nested section">
+        @* Fields... *@
+    </form-section>
+    @* Fields... *@
+</form-section>
+```
+
+
+# [HTML Helpers variant](#tab/section-hh)
+
+```cshtml
+@using (var s = f.BeginSection("Basic information")) {
+    using (var ss = s.BeginSection("Nested section")) {
+        @* Fields... *@
+    }
+    @* Fields... *@
+}
+```
+
+***
+
+See the [Section](./the-section.md) documentation to understand how to configure the Section.
+
+
+### Field
+
+A Field is a single data collection unit within a Section and comprises of an Element, a Label, Validation HTML and a Field Configuration.
+
+Fields can have other Fields nested within them (to one level deep).
+
+To create a Field simply use a self-closing `<field />` tag helper or the `FieldFor` extension method off of the Section object. To create a parent Field that has nested fields within it then use the `<field>...</field>` tag helper or the `BeginFieldFor` extension method off of the Section object to start a Field with nested Fields:
+
+# [Tag Helpers variant](#tab/field-th)
+
+```cshtml
+<field for="SomeField" />
+<field for="AnotherField">
+    <field for="ChildField" />
+</field>
+```
+
+# [HTML Helpers variant](#tab/field-hh)
+
+```cshtml
+@s.FieldFor(m => m.SomeField).FieldConfigurationMethodsCanBeChainedOffOfTheEnd()
+@using (var ff = s.BeginFieldFor(m => m.AnotherField, Field.Configure().FieldConfigurationMethodsCanBeChainedHere()) {
+    @ff.FieldFor(m => m.ChildField)
+}
+```
+
+***
+
+See the [Section](./the-section.md) documentation to understand how to configure the Field.
+
+### Navigation
+
+A Navigation component will usually be placed at the end of the form (although there is nothing stopping you placing it elsewhere or even multiple times on the form - e.g. top and bottom). The Navigation component allows you to easily create Submit buttons, Reset buttons and normal Buttons.
+
+![Navigation components can have Submit buttons, Reset buttons and normal Buttons](navigation.png)
+
+To create a Navigation simply use the `<form-navigation>` tag helper or the `BeginNavigation` extension method off of the Form object:
+
+# [Tag Helpers variant](#tab/navigation-th)
+
+```cshtml
+<form-navigation>
+    <submit-button label="Submit" />
+    <reset-button label="Reset" />
+    <form-button label="A button" />
+</form-navigation>
+```
+
+# [HTML Helpers variant](#tab/navigation-hh)
+
+```cshtml
+@using (var n = f.BeginNavigation()) {
+    @n.Submit("Submit").ChainHtmlAttributesOffOfTheEnd()
+    @n.Reset("Reset").ChainHtmlAttributesOffOfTheEnd()
+    @n.Button("A button").ChainHtmlAttributesOffOfTheEnd()
+}
+```
+
+***
+
+See the [Navigation](./the-navigation.md) documentation to understand how to configure the Navigation.
+
 
 ### Message
 
@@ -320,7 +446,18 @@ The message types available are:
 
 You can output different HTML in your form template depending on the type of message (e.g. different class or completely different HTML structure).
 
-To create a Message simply use the `BeginMessage` extension method off of the Form object:
+To create a Message simply use the `<form-message>` tag helper or the `BeginMessage` extension method off of the Form object:
+
+# [Tag Helpers variant](#tab/message-th)
+
+```cshtml
+<form-message type="Success" heading="Submission successful">
+    <message-paragraph>Some sort of success message</message-paragraph>
+    @* Other Paragraph's or any HTML at all really ... *@
+</form-message>
+```
+
+# [HTML Helpers variant](#tab/message-hh)
 
 ```cshtml
 @using (var m = f.BeginMessage(MessageType.Success, "Submission successful")) {
@@ -329,53 +466,9 @@ To create a Message simply use the `BeginMessage` extension method off of the Fo
 }
 ```
 
-### Section
+***
 
-A Section component holds a set of Fields (see below for definition of Field) or nested sections (to no more than one level deep). A Section will start with a Heading. The default form template that comes with Chameleon Forms defines a top-level section as a `fieldset`.
-
-![Section components have a Heading followed by any number of Fields or single level deep nested Sections](section.png)
-
-To create a Section simply use the `BeginSection` extension method off of the Form object (or off of the Section object to create a nested one):
-
-```cshtml
-@using (var s = f.BeginSection("Basic information")) {
-    using (var ss = s.BeginSection("Nested section")) {
-        @* Fields... *@
-    }
-    @* Fields... *@
-}
-```
-
-### Field
-
-A Field is a single data collection unit within a Section and comprises of an Element, a Label, Validation HTML and a Field Configuration.
-
-Fields can have other Fields nested within them (to one level deep).
-
-To create a Field simply use the `FieldFor` extension method off of the Section object or the `BeginFieldFor` extension method off of the Section object to start a Field with nested Fields:
-
-```cshtml
-@s.FieldFor(m => m.SomeField).FieldConfigurationMethodsCanBeChainedOffOfTheEnd()
-@using (var ff = s.BeginFieldFor(m => m.AnotherField, Field.Configure().FieldConfigurationMethodsCanBeChainedHere()) {
-    @ff.FieldFor(m => m.ChildField)
-}
-```
-
-### Navigation
-
-A Navigation component will usually be placed at the end of the form (although there is nothing stopping you placing it elsewhere or even multiple times on the form - e.g. top and bottom). The Navigation component allows you to easily create Submit buttons, Reset buttons and normal Buttons.
-
-![Navigation components can have Submit buttons, Reset buttons and normal Buttons](navigation.png)
-
-To create a Navigation simply use the `BeginNavigation` extension method off of the Form object:
-
-```cshtml
-@using (var n = f.BeginNavigation()) {
-    @n.Submit("Submit").ChainHtmlAttributesOffOfTheEnd()
-    @n.Reset("Reset").ChainHtmlAttributesOffOfTheEnd()
-    @n.Button("A button").ChainHtmlAttributesOffOfTheEnd()
-}
-```
+See the [Message](./the-message.md) documentation to understand how to configure the Message.
 
 ## What terminology is used in ChameleonForms?
 

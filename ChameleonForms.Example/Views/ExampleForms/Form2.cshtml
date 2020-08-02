@@ -13,7 +13,7 @@
 
 <h1>Tag Helpers kitchen sink</h1>
 
-<chameleon-form>
+<chameleon-form fluent-config='c => c.Id("form2")' attr-data-whatever="some value">
     @* Various incarnations of nested sections and fields and partials mixed in *@
     <form-section heading="Wassup" leading-html="InstructionalText" add-class="xyz" id="aaaaa" attr-style="border-top:red;" fluent-config='h => h.Attr(data_x => "y")'>
         <p>Yo</p>

@@ -1,6 +1,6 @@
 # HTML Attributes
 
-HTML Attributes in ChameleonForms provides the ability to specify a set of HTML attributes in a fluent, expressive way. Specifying HTML Attributes is done by chaining calls to the methods on the `HtmlAttributes` class.
+HTML Attributes in ChameleonForms provides the ability to specify a set of HTML attributes in a fluent, expressive way. Specifying HTML Attributes is done by chaining calls to the methods on the `HtmlAttributes` class or by [adding equivalent attributes to one of the supported tag helpers](#tag-helper-attributes).
 
 The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namespace:
 
@@ -146,15 +146,51 @@ The [Field Configuration](field-configuration.md) wraps a HTML Attributes object
 
 There are a number of choices when using HTML Attributes.
 
+### Tag Helper attributes
+
+Most `HTMLAttributes` methods map to a tag helper attribute by convention - `UpperCamelCase` to `upper-camel-case` (i.e. kebab case). They are all available on the tag helpers that [support HTML Attributes](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/HtmlAttributesTagHelper.cs#L10):
+
+* `chameleon-form`
+* `form-section`
+* `form-button`
+* `submit-button`
+* `reset-button`
+
+| HTML Attributes Method                                | Equivalent Tag Helper attribute                       |
+|-------------------------------------------------------|-------------------------------------------------------|
+| `Id(string id)`                                       | `id="{id}"`                                           |
+| `AddClass(string @class)`                             | `add-class="{class}"`                                 |
+| `Attr(string key, object value)`                      | `attr-{key}="{value}"`                                |
+| `Attr(Func<object, object> attribute)`                | *No equivalent*                                       |
+| `Attrs(params Func<object, object>[] attributes)`     | *No equivalent*                                       |
+| `Attrs(IDictionary<string, object> attributes)`       | `attrs="{attributes}"`                                |
+| `Attrs(object attributes)`                            | *No equivalent*                                       |
+| `Disabled(bool disabled = true)`                      | `disabled="{disabled}"`                               |
+| `Readonly(bool @readonly = true)`                     | *No equivalent*                                       |
+| `Required(bool required = true)`                      | *No equivalent*                                       |
+
 ### Chaining
 
 If you are interacting with a method that returns a HTML Attributes object then you can simply chain method calls, e.g.:
+
+# [Tag Helpers variant](#tab/chaining-th)
+
+```cshtml
+<form-navigation>
+    <submit-button fluent-config='c => c.Attr("data-something", "value").AddClass("a-class").Id("buttonId")'>
+</form-navigation>
+```
+
+# [HTML Helpers variant](#tab/chaining-hh)
 
 ```cshtml
 @using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").Attr("data-something", "value").AddClass("a-class").Id("buttonId")
 }
 ```
+
+***
+
 
 ### Instantiation
 
@@ -301,6 +337,11 @@ Then you could do something like this:
             return attrs;
         }
 ```
+
+If you want to consume these extension methods on a button based tag helper you have two options:
+
+1. Use the `fluent-attrs` attribute e.g. `<submit-button label="Submit" fluent-attrs='a => a.WithSize(ButtonSize.Large).WithStyle(EmphasisStyle.Info).WithIcon("calendar")' />`
+2. Use a tag helper that adds the attributes before the main tag helper gets processed, such as the [Bootstrap 3 `ButtonTagHelper`](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Templates/TwitterBootstrap3/ButtonTagHelper.cs) e.g. `<submit-button label="Submit" size="Large" emphasis-style="Info" icon="calendar" />`
 
 ## Create methods that chain HTML Attributes
 

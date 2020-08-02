@@ -585,7 +585,6 @@ Any attributes that take string values can have a variable or other C# expressio
 
 | Field Configuration Method                            | Equivalent Tag Helper attribute                       | Available On                       |
 |-------------------------------------------------------|-------------------------------------------------------|------------------------------------|
-| `Id(string id)`                                       | `id="{id}"`                                           | `<field>` and `<field-element>`    |
 | `AddClass(string @class)`                             | `add-class="{class}"`                                 | `<field>` and `<field-element>`    |
 | `AddFieldContainerClass(string @class)`               | `add-container-class="{class}"`                       | `<field>`                          |
 | `AddLabelClass(string @class)`                        | `add-label-class="{class}"`                           | `<field>` and `<field-label>`      |
@@ -604,6 +603,7 @@ Any attributes that take string values can have a variable or other C# expressio
 | `Cols(int numCols)`                                   | `cols="{numCols}"`                                    | `<field>` and `<field-element>`    |
 | `Disabled(bool disabled = true)`                      | `disabled="{disabled}"`                               | `<field>` and `<field-element>`    |
 | `Exclude(params Enum[] enumValues)`                   | `exclude="new Enum[] {enumValues...}"`                | `<field>` and `<field-element>`    |
+| `Id(string id)`                                       | `id="{id}"`                                           | `<field>` and `<field-element>`    |
 | `InlineLabel(string labelText)`                       | `inline-label="{labelText}"`                          | `<field>` and `<field-element>`    |
 | `InlineLabel(IHtmlContent labelHtml)`                 | `inline-label-html-content="{labelHtml}"`             | `<field>` and `<field-element>`    |
 | `InlineLabel(Func<dynamic, IHtmlContent> labelHtml)`  | `inline-label-html="{labelHtml}"`                     | `<field>` and `<field-element>`    |

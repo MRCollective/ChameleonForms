@@ -727,8 +727,6 @@ namespace ChameleonForms.TagHelpers
     {
         public ChameleonFormTagHelper() { }
         public string Action { get; set; }
-        [Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeName("attrs", DictionaryAttributePrefix="attr-")]
-        public System.Collections.Generic.IDictionary<string, string> Attrs { get; set; }
         public ChameleonForms.Enums.EncType Enctype { get; set; }
         public ChameleonForms.TagHelpers.ChameleonFormTagHelper.FormMethod Method { get; set; }
         public bool? OutputAntiforgeryToken { get; set; }

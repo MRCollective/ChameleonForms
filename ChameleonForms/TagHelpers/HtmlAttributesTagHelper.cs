@@ -8,6 +8,7 @@ namespace ChameleonForms.TagHelpers
     /// <summary>
     /// Tag helper that accepts HTML attributes for a <form-section />, <form-button />, <submit-button /> and <reset-button />.
     /// </summary>
+    [HtmlTargetElement("chameleon-form")]
     [HtmlTargetElement("form-section")]
     [HtmlTargetElement("form-button")]
     [HtmlTargetElement("submit-button")]

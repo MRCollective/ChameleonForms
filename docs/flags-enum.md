@@ -22,9 +22,9 @@ public MyFlagsEnum? NonRequiredAndNullAsUnselectedValue { get; set; }
 
 Flags enums have a few rough edges on them if you aren't careful so it's a good idea to read the [guidance](https://msdn.microsoft.com/en-us/library/ms229062(v=vs.100).aspx) [for](https://msdn.microsoft.com/en-us/library/system.flagsattribute.aspx) how to use them. In particular, make sure that none of your values have a value of 0 and you explicitly assign integer values to all enum values in multiples of 2.
 
-The out-of-the-box ASP.NET Core MVC support for flags enums leave sa lot to be desired, but ChameleonForms provides first-class model binding and validation support for flags enums [by default](configuration.md#default-global-config) to patch the default MVC behaviour.
+The out-of-the-box ASP.NET Core MVC support for flags enums leaves a lot to be desired, but ChameleonForms provides first-class model binding and validation support for flags enums [by default](configuration.md#default-global-config) to patch the default MVC behaviour.
 
-If you want the user to specify a single value from an enum then you can [use the enum type directly](enum.md).
+If you want the user to specify a single value from a non-Flags enum then you can [use the enum type directly](enum.md).
 
 ## Required validation
 
@@ -67,9 +67,22 @@ Please see the explanation an example on the [Enum Field](enum.md#explanation-an
 
 You can force a list of enums field to display as a list of checkboxes rather than a multi-select drop-down using the `AsCheckboxList` method on the Field Configuration, e.g.:
 
+# [Tag Helpers variant](#tab/checkboxes-th)
+
+The `AsCheckboxList` method is mapped to `as="CheckboxList"`.
+
+```cshtml
+<field for="FlagsEnum" as="CheckboxList" />
+```
+
+# [HTML Helpers variant](#tab/checkboxes-hh)
+
 ```cshtml
 @s.FieldFor(m => m.FlagsEnum).AsCheckboxList()
 ```
+
+***
+
 
 This will change the default HTML for a both Required and non-Required list of enums (both nullable and non-nullable) fields as shown above to:
 
@@ -85,9 +98,22 @@ This will change the default HTML for a both Required and non-Required list of e
 
 When you display a non-Required list of enums field as a drop-down you can change the text that is used to display the `none` value to the user. By default the text used is `None`. To change the text simply use the `WithNoneAs` method, e.g.:
 
+# [Tag Helpers variant](#tab/none-th)
+
+The `WithNoneAs` method is mapped to `none-label="{label}"`.
+
+```cshtml
+<field for="NonRequiredNullableFlagsEnum" none-label="No value" />
+```
+
+# [HTML Helpers variant](#tab/none-hh)
+
 ```cshtml
 @s.FieldFor(m => m.NonRequiredNullableFlagsEnum).WithNoneAs("No value")
 ```
+
+***
+
 
 This will change the default HTML for the non-Required drop-down list of enum field as shown above to:
 
@@ -101,9 +127,19 @@ This will change the default HTML for the non-Required drop-down list of enum fi
 ### Hide empty item
 If you have a non-Required list of enums field then it will show the empty item and this item will be selected by default if no values are selected. If for some reason you want a non-Required list of enums field, but you would also like to hide the empty item you can do so with the `HideEmptyItem` method in the Field Configuration, e.g.:
 
+# [Tag Helpers variant](#tab/hide-empty-th)
+
+```cshtml
+<field for="NullableEnumListField" hide-empty-item="true" />
+```
+
+# [HTML Helpers variant](#tab/hide-empty-hh)
+
 ```cshtml
 @s.FieldFor(m => m.NullableEnumListField).HideEmptyItem()
 ```
+
+***
 
 This will change the default HTML for the non-Required drop-down list of enum field as shown above to:
 

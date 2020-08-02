@@ -54,13 +54,6 @@ namespace ChameleonForms.TagHelpers
         /// </summary>
         public bool? OutputAntiforgeryToken { get; set; }
 
-        /// <summary>
-        /// HTML attributes to apply to the form. You can either pass them in as a dictionary (attrs="@dictionary"), or
-        /// you can pass them in as individual attributes via attr-attribute-name="attributevalue" ...
-        /// </summary>
-        [HtmlAttributeName("attrs", DictionaryAttributePrefix = "attr-")]
-        public IDictionary<string, string> Attrs { get; set; } = new Dictionary<string, string>();
-
         /// <inheritdoc />
         public override async Task ProcessWhileAwareOfModelTypeAsync<TModel>(TagHelperContext context, TagHelperOutput output)
         {
@@ -68,7 +61,7 @@ namespace ChameleonForms.TagHelpers
             var method = Method == FormMethod.Get
                 ? Microsoft.AspNetCore.Mvc.Rendering.FormMethod.Get
                 : Microsoft.AspNetCore.Mvc.Rendering.FormMethod.Post;
-            using (helper.BeginChameleonForm(Action ?? "", method, new HtmlAttributes(Attrs), Enctype, OutputAntiforgeryToken))
+            using (helper.BeginChameleonForm(Action ?? "", method, context.GetHtmlAttributes(), Enctype, OutputAntiforgeryToken))
             {
                 var childContent = await output.GetChildContentAsync();
                 childContent.WriteTo(helper.ViewContext.Writer, HtmlEncoder.Default);
