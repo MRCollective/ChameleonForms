@@ -69,7 +69,7 @@ You can force a list of enums field to display as a list of checkboxes rather th
 
 # [Tag Helpers variant](#tab/checkboxes-th)
 
-The `AsCheckboxList` method is mapped to `as="CheckboxList"`.
+The `AsCheckboxList` method is [mapped](./field-configuration.md#mapped-attributes) to `as="CheckboxList"`.
 
 ```cshtml
 <field for="FlagsEnum" as="CheckboxList" />
@@ -100,7 +100,7 @@ When you display a non-Required list of enums field as a drop-down you can chang
 
 # [Tag Helpers variant](#tab/none-th)
 
-The `WithNoneAs` method is mapped to `none-label="{label}"`.
+The `WithNoneAs` method is [mapped](./field-configuration.md#mapped-attributes) to `none-label="{label}"`.
 
 ```cshtml
 <field for="NonRequiredNullableFlagsEnum" none-label="No value" />

@@ -65,7 +65,7 @@ You can force a Boolean field to display as a drop-down box rather than a checkb
 
 # [Tag Helpers variant](#tab/dropdown-th)
 
-The `AsDropDown` method is mapped to `as="Dropdown"`.
+The `AsDropDown` method is [mapped](./field-configuration.md#mapped-attributes) to `as="Dropdown"`.
 
 ```cshtml
 <field for="BooleanField" as="Dropdown" />
@@ -94,7 +94,7 @@ You can force a Boolean field to display as a list of radio buttons rather than 
 
 # [Tag Helpers variant](#tab/radiolist-th)
 
-The `AsRadioList` method is mapped to `as="RadioList"`.
+The `AsRadioList` method is [mapped](./field-configuration.md#mapped-attributes) to `as="RadioList"`.
 
 ```cshtml
 <field for="BooleanField" as="RadioList" />
@@ -136,7 +136,7 @@ When you display a Boolean field as a drop-down or a list of radio buttons you c
 
 # [Tag Helpers variant](#tab/true-false-none-th)
 
-The `WithTrueAs` / `WithFalseAs` / `WithNoneAs` methods are mapped to `true-label="{label}"` / `false-label="{label}"` / `none-label="{label}"`.
+The `WithTrueAs` / `WithFalseAs` / `WithNoneAs` methods are [mapped](./field-configuration.md#mapped-attributes) to `true-label="{label}"` / `false-label="{label}"` / `none-label="{label}"`.
 
 ```cshtml
 <field for="NullableBooleanField" true-label="OK" false-label="Not OK" none-label="No comment" />

@@ -200,18 +200,14 @@ You can new up an instance and use one of the four constructors (empty construct
 
 You can new up an instance and then chain methods off that instance, e.g.:
 
-```cshtml
-@using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes().AddClass("form").Id("someForm")) {
-    @* ... *@
-}
+```cs
+new HtmlAttributes().AddClass("form").Id("someForm")
 ```
 
 ### Instantiation with lambda expressions
 
-```cshtml
-@using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes(@class => "form", id => "someForm")) {
-    @* ... *@
-}
+```cs
+new HtmlAttributes(@class => "form", id => "someForm")
 ```
 
 If you want to output a HTML Attribute that has a `-` in the name then use a `_` in the variable name, e.g.:
@@ -224,10 +220,8 @@ new HtmlAttributes(data_something => "value")
 
 You can convert an anonymous object to a HTML Attributes object, e.g.:
 
-```cshtml
-@using (var f = Html.BeginChameleonForm(htmlAttributes: new { @class="form", id="someForm" }.ToHtmlAttributes())) {
-    @* ... *@
-}
+```cs
+new { @class="form", id="someForm" }.ToHtmlAttributes()
 ```
 
 If you want to output a HTML Attribute that has a `-` in the name then use a `_` in the property name, e.g.:
@@ -240,10 +234,8 @@ new {data_something => "value"}.ToHtmlAttributes()
 
 You can convert a dictionary to a HTML Attributes object, e.g.:
 
-```cshtml
-@using (var f = Html.BeginChameleonForm(htmlAttributes: new Dictionary<string, object>{ {"class", "form"}, {"id", "someForm"} }.ToHtmlAttributes())) {
-    @* ... *@
-}
+```cs
+new Dictionary<string, object>{ {"class", "form"}, {"id", "someForm"} }.ToHtmlAttributes()
 ```
 
 ## Outputting HTML Attributes
@@ -367,7 +359,7 @@ If you created the following extension method on the HTML Helper:
                     var t = new TagBuilder("p");
                     t.SetInnerText(paragraphText);
                     t.MergeAttributes(a.Attributes);
-                    return new HtmlString(t.ToString());
+                    return t;
                 }
             );
         }

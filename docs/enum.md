@@ -82,7 +82,7 @@ You can force an enum field to display as a list of radio buttons rather than a 
 
 # [Tag Helpers variant](#tab/radiolist-th)
 
-The `AsRadioList` method is mapped to `as="RadioList"`.
+The `AsRadioList` method is [mapped](./field-configuration.md#mapped-attributes) to `as="RadioList"`.
 
 ```cshtml
 <field for="EnumField" as="RadioList" />
@@ -125,7 +125,7 @@ When you display a nullable enum field as a drop-down or a non-Required nullable
 
 # [Tag Helpers variant](#tab/none-th)
 
-The `WithNoneAs` method is mapped to `none-label="{label}"`.
+The `WithNoneAs` method is [mapped](./field-configuration.md#mapped-attributes) to `none-label="{label}"`.
 
 ```cshtml
 <field for="NullableEnumField" none-label="No value" />
@@ -176,7 +176,7 @@ This will change the default HTML for the nullable enum field as shown above to:
 ### Exclude specific enum values
 If there are some enum values you want to exclude from showing up as options then you can do so with the `Exclude` method in the Field Configuration, e.g.:
 
-# [Tag Helpers variant](#tab/xxx-th)
+# [Tag Helpers variant](#tab/exclude-th)
 
 Unfortunately, you can't have generic typing in the tag helper, so you need to cast the array of enums to `Enum[]`.
 
@@ -184,7 +184,7 @@ Unfortunately, you can't have generic typing in the tag helper, so you need to c
 <field for="EnumField"  exclude="new Enum[]{MyEnum.Value1, MyEnum.Value3}" />
 ```
 
-# [HTML Helpers variant](#tab/xxx-hh)
+# [HTML Helpers variant](#tab/exclude-hh)
 
 ```cshtml
 @s.FieldFor(m => m.EnumField).Exclude(MyEnum.Value1, MyEnum.Value3)

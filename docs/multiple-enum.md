@@ -53,9 +53,22 @@ Please see the explanation an example on the [Enum Field](enum.md#explanation-an
 
 You can force a list of enums field to display as a list of checkboxes rather than a multi-select drop-down using the `AsCheckboxList` method on the Field Configuration, e.g.:
 
+# [Tag Helpers variant](#tab/checkbox-list-th)
+
+The `AsCheckboxList` method is [mapped](./field-configuration.md#mapped-attributes) to `as="CheckboxList"`.
+
+```cshtml
+<field for="EnumListField" as="CheckboxList" />
+```
+
+# [HTML Helpers variant](#tab/checkbox-list-hh)
+
 ```cshtml
 @s.FieldFor(m => m.EnumListField).AsCheckboxList()
 ```
+
+***
+
 
 This will change the default HTML for a both Required and non-Required list of enums (both nullable and non-nullable) fields as shown above to:
 
@@ -71,9 +84,21 @@ This will change the default HTML for a both Required and non-Required list of e
 
 When you display a non-Required list of enums field (nullable or non-nulable) as a drop-down you can change the text that is used to display the `none` value to the user. By default the text used is `None`. To change the text simply use the `WithNoneAs` method, e.g.:
 
+# [Tag Helpers variant](#tab/none-label-th)
+
+The `WithNoneAs` method is [mapped](./field-configuration.md#mapped-attributes) to `none-label="{label}"`.
+
+```cshtml
+<field for="NullableEnumListField" none-label="No value" />
+```
+
+# [HTML Helpers variant](#tab/none-label-hh)
+
 ```cshtml
 @s.FieldFor(m => m.NullableEnumListField).WithNoneAs("No value")
 ```
+
+***
 
 This will change the default HTML for the non-Required drop-down list of enum field as shown above to:
 
@@ -87,9 +112,22 @@ This will change the default HTML for the non-Required drop-down list of enum fi
 ### Hide empty item
 If you have a non-Required list of enums field then it will show the empty item and this item will be selected by default if no values are selected. If for some reason you want a non-Required list of enums field, but you would also like to hide the empty item you can do so with the `HideEmptyItem` method in the Field Configuration, e.g.:
 
+# [Tag Helpers variant](#tab/xxx-th)
+
+The `HideEmptyItem` method is [mapped](./field-configuration.md#mapped-attributes) to `hide-empty-item="true"`.
+
+```cshtml
+<field for="NullableEnumListField" hide-empty-item="true" />
+```
+
+# [HTML Helpers variant](#tab/xxx-hh)
+
 ```cshtml
 @s.FieldFor(m => m.NullableEnumListField).HideEmptyItem()
 ```
+
+***
+
 
 This will change the default HTML for the non-Required drop-down list of enum field as shown above to:
 
