@@ -1,5 +1,7 @@
 # Using different form templates
 
+Form Templates are the concept in Chameleon Forms that allows you to abstract the HTML that makes up the form itself as well as the components within it like messages, sections, fields and navigation.
+
 ## Default form template
 
 The `DefaultFormTemplate` outputs a sensible default that looks good without any / with minimal CSS and is a nice way to semantically describe a form. It makes use of definition lists to do this.
