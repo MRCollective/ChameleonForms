@@ -56,5 +56,41 @@ namespace ChameleonForms.AcceptanceTests.IntegrationTests
             IsSame.ViewModelAs(enteredViewModel, page.ReadParentModel());
             page.HasValidationErrors().ShouldBeFalse();
         }
+
+        [Fact]
+        public async Task Post_different_view_model_and_bind_on_postback_taghelpers()
+        {
+            var enteredViewModel = ObjectMother.ChangingContextViewModels.DifferentViewModel;
+
+            var page = await _client.GetPageAsync<ChangingContextPage>("/ExampleForms/ChangingContextTH");
+            page = await page.PostDifferentModelAsync(enteredViewModel); ;
+
+            IsSame.ViewModelAs(enteredViewModel, page.ReadDifferentModel());
+            page.HasValidationErrors().ShouldBeFalse();
+        }
+
+        [Fact]
+        public async Task Post_child_view_model_and_bind_on_postback_taghelpers()
+        {
+            var enteredViewModel = ObjectMother.ChangingContextViewModels.ChildViewModel;
+
+            var page = await _client.GetPageAsync<ChangingContextPage>("/ExampleForms/ChangingContextTH");
+            page = await page.PostChildModelAsync(enteredViewModel);
+
+            IsSame.ViewModelAs(enteredViewModel, page.ReadChildModel());
+            page.HasValidationErrors().ShouldBeFalse();
+        }
+
+        [Fact]
+        public async Task Post_child_view_model_and_bind_to_parent_on_postback_taghelpers()
+        {
+            var enteredViewModel = ObjectMother.ChangingContextViewModels.ParentViewModel;
+
+            var page = await _client.GetPageAsync<ChangingContextPage>("/ExampleForms/ChangingContextTH");
+            page = await page.PostParentModelAsync(enteredViewModel);
+
+            IsSame.ViewModelAs(enteredViewModel, page.ReadParentModel());
+            page.HasValidationErrors().ShouldBeFalse();
+        }
     }
 }

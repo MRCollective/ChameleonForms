@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Razor
+@using ChameleonForms.Templates.TwitterBootstrap3
 @model ComparisonController.SignupViewModel
 
 @{
@@ -31,7 +32,7 @@
     using (var s = f.BeginSection("Additional details"))
     {
         @s.FieldFor(m => m.Bio)
-        @s.FieldFor(m => m.Homepage).Placeholder("http://")
+        @s.FieldFor(m => m.Homepage).Placeholder("https://")
     }
 
     using (var m = f.BeginMessage(MessageType.Action, "Confirm the Terms & Conditions"))
@@ -42,6 +43,6 @@
 
     using (var n = f.BeginNavigation())
     {
-        @n.Submit("Signup")
+        @n.Submit("Signup").WithStyle(EmphasisStyle.Primary)
     }
 }

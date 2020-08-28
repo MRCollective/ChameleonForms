@@ -1,12 +1,12 @@
-# Fields
+# Field
 
-The Field is a single data collection unit; you create a Field by either calling the `Field` method on a [Section](the-section.md) or otherwise instantiating and outputting to the page a `Field<TModel>`.
+The Field is a single data collection unit; you create a Field by using the `<field>` tag helper, calling the `Field` method on a [Section](the-section.md) or otherwise instantiating and outputting to the page a `Field<TModel>`.
 
-You can also create a parent field that can have [child fields](#use-a-field-generator-to-output-a-single-field-in-a-parent-field) nested [within it](#use-a-field-generator-to-output-a-parent-field-in-a-section) by instantiating a `Field<TModel>` within a `using` block (the start and end of the `using` block will output the start and end HTML for the Field and the contents of the `using` block will output the child Fields).
+You can also create a parent field that can have [child fields](#use-a-field-generator-to-output-a-single-field-in-a-parent-field) nested [within it](#use-a-field-generator-to-output-a-parent-field-in-a-section) by instantiating nesting things within a non-self-closing `<field>` tag helper or creating a `Field<TModel>` within a `using` block (the start and end of the `using` block will output the start and end HTML for the Field and the contents of the `using` block will output the child Fields).
 
 The `Field<TModel>` class is defined as follows in the `ChameleonForms.Component` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Wraps the output of a single form field.
     /// </summary>
@@ -47,6 +47,37 @@ The [form template](form-templates.md) determines how to lay out these sub-compo
 
 ### Manually specify HTML
 
+# [Tag Helpers variant](#tab/manual-html-th)
+
+If you want to define your own HTML for the Field Element, Field Label and Field Validation HTML then you can do so by using the `manual` attribute on the `<field>` tag helper and nest `<manual-element>`, `<manual-label>` and `<manual-validation>` elements to specify the Field Element, Field Label and Field Validation HTML, e.g.:
+
+```cshtml
+<form-section heading="Title">
+    <field manual>
+        <manual-element><strong>Element</strong></manual-element>
+        <manual-label><strong>Label</strong></manual-label>
+        <manual-validation><strong>validation</strong></manual-validation>
+    </field>
+```
+
+Or, if you want to specify the optional model metadata, valid state and field configuration:
+
+```cshtml
+@inject ICompositeMetadataDetailsProvider MetadataDetailsProvider
+...
+<form-section heading="Title">
+    <field manual model-metadata="new DefaultModelMetadataProvider(MetadataDetailsProvider).GetMetadataForType(typeof(int))" is-valid="true" append="After Element" prepend="Before Element">
+        <manual-element><strong>Element</strong></manual-element>
+        <manual-label><strong>Label</strong></manual-label>
+        <manual-validation><strong>validation</strong></manual-validation>
+    </field>
+</form-section>
+```
+
+Note: the way that the manual field is implemented allows for quite a bit of extensibility by defining custom tag helpers that define the various parts of your field. See the implementations for `<manual-element>` etc. for an idea of how to do that.
+
+# [HTML Helpers variant](#tab/manual-html-hh)
+
 If you want to define your own HTML for the Field Element, Field Label and Field Validation HTML then you can do so by using the `Field` method on the Section, e.g.:
 
 ```cshtml
@@ -59,7 +90,7 @@ If you want to define your own HTML for the Field Element, Field Label and Field
 
 The `Field` method on the Section looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Outputs a field with passed in HTML.
         /// </summary>
@@ -68,11 +99,30 @@ The `Field` method on the Section looks like this:
         /// <param name="validationHtml">The HTML for the validation markup part of the field</param>
         /// <param name="metadata">Any field metadata</param>
         /// <param name="isValid">Whether or not the field is valid</param>
+        /// <param name="fieldConfiguration">Optional field configuration</param>
         /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
-        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true) {...}
+        IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null,
+            ModelMetadata metadata = null, bool isValid = true, IFieldConfiguration fieldConfiguration = null);
 ```
 
+***
+
 ### Use a Field Generator to output a single field in a Section
+
+# [Tag Helpers variant](#tab/section-field-th)
+
+If you would like ChameleonForms to use a Field Generator to generate the HTML for the Field Element, Field Label and Field Validation HTML from a field on the model then you can use the `<field>` tag helper, e.g.:
+
+```cshtml
+<form-section heading="Title">
+    <field for="FieldOnTheModel" />
+    @* and you can add field configuration: *@
+    <field for="FieldOnTheModel" placeholder="Placeholder text" ... />
+    <field for="FieldOnTheModel" fluent-config='c => c.ChainFieldConfigurationMethodsHere()' />
+</form-section>
+```
+
+# [HTML Helpers variant](#tab/section-field-hh)
 
 If you would like ChameleonForms to use a Field Generator to generate the HTML for the Field Element, Field Label and Field Validation HTML from a field on the model then you can use the `FieldFor` extension method on the Section, e.g.:
 
@@ -84,7 +134,7 @@ If you would like ChameleonForms to use a Field Generator to generate the HTML f
 
 The `FieldFor` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a single form field as a child of a form section.
         /// </summary>
@@ -104,7 +154,25 @@ The `FieldFor` extension method looks like this:
         }
 ```
 
+***
+
+
 ### Use a Field Generator to output a parent field in a Section
+
+# [Tag Helpers variant](#tab/parent-field-th)
+
+If you want to use a Field Generator and want to nest child Fields under a Field then you can use a non self-closing `<field>` tag helper, e.g.:
+
+```cshtml
+<form-section heading="Title">
+    <field for="FieldOnTheModel">
+        @* Child Fields *@
+    </field>
+</form-section>
+```
+
+
+# [HTML Helpers variant](#tab/parent-field-hh)
 
 If you want to use a Field Generator and want to nest child Fields under a Field then you can use the `BeginFieldFor` extension method on the Section (optionally with a Field Configuration), e.g.:
 
@@ -118,7 +186,7 @@ If you want to use a Field Generator and want to nest child Fields under a Field
 
 The `BeginFieldFor` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a single form field as a child of a form section that can have other form fields nested within it.
         /// </summary>
@@ -139,7 +207,21 @@ The `BeginFieldFor` extension method looks like this:
         }
 ```
 
+***
+
 ### Use a Field Generator to output a single field in a parent Field
+
+# [Tag Helpers variant](#tab/child-field-th)
+
+If you want to use a Field Generator to create nested Fields under a parent Field then you can nest `<field>` tag helpers within the parent `<field>`, e.g.:
+
+```cshtml
+<field for="FieldOnTheModel">
+    <field for="ChildField" />
+</field>
+```
+
+# [HTML Helpers variant](#tab/child-field-hh)
 
 If you want to use a Field Generator to create nested Fields under a parent Field then you can use the `BeginFieldFor` extension method on the Field (with an optional Field Configuration), e.g.:
 
@@ -151,7 +233,7 @@ If you want to use a Field Generator to create nested Fields under a parent Fiel
 
 The `FieldFor` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a single form field as a child of another form field.
         /// </summary>
@@ -172,6 +254,9 @@ The `FieldFor` extension method looks like this:
             return config;
         }
 ```
+
+***
+
 
 ## Default HTML
 
@@ -199,10 +284,10 @@ If you want to override the required designator look at [Creating custom form te
 The `%hint%` is shown if a hint is specified in the [Field Configuration](field-configuration.md):
 
 ```html
-<div class="hint" id="%fieldId%--hint">%hint%</div>
+<div class="hint" id="%fieldId%--Hint">%hint%</div>
 ```
 
-If a hint is added then an `aria-describedby="%fieldId%--hint"` attribute value will automatically be added to the field element to [improve accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/forms/Basic_form_hints#Describing_with_ARIA).
+If a hint is added then an `aria-describedby="%fieldId%--Hint"` attribute value will automatically be added to the field element to [improve accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/forms/Basic_form_hints#Describing_with_ARIA).
 
 ### Begin HTML (parent)
 
@@ -300,7 +385,7 @@ The `%requiredDesignator%` is shown if the field is required:
 The `%hint%` is shown if a [hint](#hint) is specified in the Field Configuration:
 
 ```html
-<div class="help-block form-hint" id="%fieldId%--hint">%hint</div>
+<div class="help-block form-hint" id="%fieldId%--Hint">%hint</div>
 ```
 
 ### Input Groups
@@ -321,9 +406,19 @@ In all other situations you will manually need to add wrapping HTML with the rel
 
 As an example of what you can do with the input group consider the following:
 
+# [Tag Helpers variant](#tab/input-group-th)
+
 ```cshtml
-@s.FieldFor(m => m.Dollars).AsInputGroup().Append(".00").Prepend("$")
+<field for="Dollars" fluent-config='c => c.AsInputGroup()' prepend="$" append=".00" />
 ```
+
+# [HTML Helpers variant](#tab/input-group-hh)
+
+```cshtml
+@s.FieldFor(m => m.Dollars).AsInputGroup().Prepend("$").Append(".00")
+```
+
+***
 
 This will render like this:
 

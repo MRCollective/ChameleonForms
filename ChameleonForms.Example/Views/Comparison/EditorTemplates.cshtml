@@ -8,11 +8,13 @@
 
 <h1>Editor Templates example</h1>
 
-@using (Html.BeginForm("EditorTemplates", "Comparison", FormMethod.Post, new {id = "signup-form"}))
+@using (Html.BeginForm("EditorTemplates", "Comparison", FormMethod.Post, new {id = "signup-form", novalidate = "novalidate"}))
 {
     <div class="information_message">
         <h3>Signup for an account</h3>
-        <p>Please fill in your information below to signup for an account.</p>
+        <div class="message">
+            <p>Please fill in your information below to signup for an account.</p>
+        </div>
     </div>
     
     using (Html.BeginSection("Your details"))
@@ -32,16 +34,18 @@
     using (Html.BeginSection("Additional details"))
     {
         @Html.EditorFor(m => m.Bio)
-        @Html.EditorFor(m => m.Homepage, new {placeholder = "http://"})
+        @Html.EditorFor(m => m.Homepage, new {placeholder = "https://"})
     }
     
     <div class="action_message">
         <h3>Confirm the Terms &amp; Conditions</h3>
-        <p>Please <a href="#">read the terms and conditions</a>.</p>
-        @Html.CheckBoxFor(m => m.TermsAndConditions) @Html.LabelFor(m => m.TermsAndConditions, "I agree to the terms and conditions")
+        <div class="message">
+            <p>Please <a href="#">read the terms and conditions</a>.</p>
+            @Html.CheckBoxFor(m => m.TermsAndConditions) @Html.LabelFor(m => m.TermsAndConditions, "I agree to the terms and conditions")
+        </div>
     </div>
     
     <div class="form_navigation">
-        <button type="submit">Signup</button>
+        <button type="submit" class="btn btn-primary">Signup</button>
     </div>
 }

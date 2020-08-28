@@ -1,10 +1,10 @@
 # Section
 
-The Section is a grouping of a set of fields; you create a Section by instantiating a `Section<TModel>` within a `using` block. The start and end of the `using` block will output the start and end HTML for the Section and the inside of the `using` block will contain the Section fields.
+The Section is a grouping of a set of fields; you create a Section by using the `<form-section>` tag helper or instantiating a `Section<TModel>` within a `using` block. The start and end of the `using` block will output the start and end HTML for the Section and the inside of the `using` block will contain the Section fields.
 
 The `Section<TModel>` class looks like this and is in the `ChameleonForms.Component` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Wraps the output of a form section.
     /// </summary>
@@ -56,6 +56,19 @@ The start and end HTML of the Section are generated via the `BeginSection` and `
 
 ## Default usage
 
+# [Tag Helpers variant](#tab/default-section-th)
+
+In order to output a default instance of a Section you can use the `<form-section>` tag helper within a `<chameleon-form>`, e.g.:
+
+```cshtml
+<form-section heading="Heading">
+    @* Section fields go here *@
+</form-section>
+```
+
+
+# [HTML Helpers variant](#tab/default-section-hh)
+
 In order to get an instance of a `Section<TModel>` you can use the `BeginSection` method on the Form, e.g.
 
 ```cshtml
@@ -66,7 +79,7 @@ In order to get an instance of a `Section<TModel>` you can use the `BeginSection
 
 The `BeginSection` extension methods look like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a top-level form section.
         /// </summary>
@@ -144,7 +157,29 @@ The `BeginSection` extension methods look like this:
         }
 ```
 
-From within a Section you can create [Fields](field.md) and you can also create nested sections using the `BeginSection` extension method off the Section:
+
+***
+
+You can extend the Section by adding [HTML attributes](html-attributes.md) to it.
+
+From within a Section you can create [Fields](field.md) and you can also create nested sections:
+
+# [Tag Helpers variant](#tab/nested-section-th)
+
+Using a nested `<form-section>` tag helper:
+
+```cshtml
+<form-section heading="Heading">
+    @* Fields... *@
+    <form-section heading="Inner Heading">
+    </form-section>
+    @* Fields... *@
+</form-section>
+```
+
+# [HTML Helpers variant](#tab/nested-section-hh)
+
+ Using the `BeginSection` extension method off the Section:
 
 ```cshtml
 @using (var s = f.BeginSection("Heading")) {
@@ -158,7 +193,7 @@ From within a Section you can create [Fields](field.md) and you can also create 
 
 The `BeginSection` extension methods on Section look like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a nested form section.
         /// </summary>
@@ -243,6 +278,8 @@ The `BeginSection` extension methods on Section look like this:
             return new Section<TModel>(section.Form, heading(null), true, leadingHtml(null), htmlAttributes);
         }
 ```
+
+***
 
 ## Default HTML
 

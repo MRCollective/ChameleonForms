@@ -66,6 +66,13 @@ namespace ChameleonForms.Component.Config
         IFieldConfiguration Attrs(IDictionary<string, object> attributes);
 
         /// <summary>
+        /// Adds or updates a set of HTML attributes using a dictionary to express the attributes.
+        /// </summary>
+        /// <param name="attributes">A dictionary of attributes</param>
+        /// <returns>The <see cref="IFieldConfiguration"/> to allow for method chaining</returns>
+        IFieldConfiguration Attrs(IDictionary<string, string> attributes);
+
+        /// <summary>
         /// Adds or updates a set of HTML attributes using anonymous objects to express the attributes.
         /// </summary>
         /// <param name="attributes">An anonymous object of attributes</param>
@@ -522,6 +529,13 @@ namespace ChameleonForms.Component.Config
         }
 
         /// <inheritdoc />
+        public IFieldConfiguration Attrs(IDictionary<string, string> attributes)
+        {
+            Attributes.Attrs(attributes);
+            return this;
+        }
+
+        /// <inheritdoc />
         public IFieldConfiguration Attrs(object attributes)
         {
             Attributes.Attrs(attributes);
@@ -891,7 +905,12 @@ namespace ChameleonForms.Component.Config
             _field = field;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when form component outputted to the page; writes the form content HTML to the given writer.
+        /// </summary>
+        /// <param name="writer">The writer to write to</param>
+        /// <param name="encoder">The HTML encoder to use when writing</param>
+
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             var field = _field();
@@ -899,6 +918,8 @@ namespace ChameleonForms.Component.Config
             if (field != null)
             {
                 field.WriteTo(writer, encoder);
+                if (field is IDisposable disposable)
+                    disposable.Dispose();
             }
         }
 

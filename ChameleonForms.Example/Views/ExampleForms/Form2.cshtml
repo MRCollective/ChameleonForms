@@ -1,0 +1,72 @@
+﻿@using ChameleonForms.Templates.TwitterBootstrap3
+@using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
+@inject ICompositeMetadataDetailsProvider MetadataDetailsProvider
+@model ViewModelExample
+
+@{
+    ViewBag.Title = "Example Form 2";
+}
+
+@{
+    Func<dynamic, IHtmlContent> InstructionalText = @<p>Leading instructional text.</p>;
+}
+
+<h1>Tag Helpers kitchen sink</h1>
+
+<chameleon-form fluent-config='c => c.Id("form2")' attr-data-whatever="some value">
+    @* Various incarnations of nested sections and fields and partials mixed in *@
+    <form-section heading="Wassup" leading-html="InstructionalText" add-class="xyz" id="aaaaa" attr-style="border-top:red;" fluent-config='h => h.Attr(data_x => "y")'>
+        <p>Yo</p>
+
+        <field for="ListId" add-class="asdf asf ew" label="awefawefEWAF #$%&" attr-data-test="wassup" append="aaa" as="RadioList" />
+
+        <field manual model-metadata="new DefaultModelMetadataProvider(MetadataDetailsProvider).GetMetadataForType(typeof(int))" is-valid="true" append="After Element" prepend="Before Element">
+            <manual-element><strong>Element</strong></manual-element>
+            <manual-label><strong>Label</strong></manual-label>
+            <manual-validation><strong>validation</strong></manual-validation>
+        </field>
+
+        <field for="SomeEnum" exclude="new Enum[]{SomeEnum.SomeOtherValue}" />
+        <field for="Decimal" label="asdf" append="asdffff" step="1.2m">
+            <field for="NullableInt" />
+            <partial name="_Child" />
+        </field>
+        <form-section heading-html="InstructionalText">
+            <field for="TextAreaField" />
+            <field for="Child.ChildField" />
+            <partial name="_Child" />
+        </form-section>
+        <partial name="_Child" />
+        <form-partial name="_Child2" for="Child" />
+    </form-section>
+    <form-message heading="Heading" type="Action">
+        <field-label for="UrlAsString" label="Overridden" />
+        <field-element for="UrlAsString" add-class="addedclass" />
+        <field-validation for="UrlAsString" fluent-config='fc  => fc.AddValidationClass("asdf")' />
+        <message-paragraph>asdf</message-paragraph>
+    </form-message>
+    <form-partial name="_Child2" for="Child" />
+    @* Mix and match helper syntax with tag helpers and vice versa *@
+    @Html.GetChameleonForm().FieldElementFor(m => m.ListId)
+    <field-element for="Boolean" />
+    @using (var s = Html.GetChameleonForm().BeginSection("Section from helper syntax"))
+    {
+        @s.FieldFor(m => m.SomeEnum)
+        <field for="Boolean" />
+    }
+    @* Navigation *@
+    <form-navigation>
+        <submit-button label="Submit" size="Large" emphasis-style="Info" icon="calendar" />
+        <form-button label="Button" fluent-attrs='b => b.WithStyle(EmphasisStyle.Primary)' />
+        <reset-button size="ExtraSmall" icon="person" disabled="true"><strong>Hello</strong> World! Reset</reset-button>
+    </form-navigation>
+</chameleon-form>
+
+@* Not possible - compile error, model has to be the page model with tag helpers
+    <chameleon-form enctype="EncType.UrlEncoded" action="@Url.Action("ChameleonForms", "Comparison")" method="Post" model="new SignupViewModel()">
+        <section heading="asdf">
+            <field for="FirstName" />
+        </section>
+    </chameleon-form>*@
+
+<partial name="_OtherForm" model="new ComparisonController.SignupViewModel()" />

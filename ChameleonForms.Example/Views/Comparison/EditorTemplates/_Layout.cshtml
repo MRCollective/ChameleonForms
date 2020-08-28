@@ -10,4 +10,4 @@ elements
 
 *@
 <dt>@Html.Label("")@if (@ViewData.ModelMetadata.IsRequired){ <em class="required">*</em>}</dt>
-<dd>@RenderBody()@if(ViewData["hint"] != null){<div class="hint">@ViewData["hint"]</div>}@Html.ValidationMessage("")</dd>
+<dd>@RenderBody()@if(ViewData["hint"] != null){<div class="hint" id="@(ViewData.ModelMetadata.Name)--Hint">@ViewData["hint"]</div>}@Html.ValidationMessage("")</dd>

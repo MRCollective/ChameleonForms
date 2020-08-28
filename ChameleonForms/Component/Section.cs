@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using ChameleonForms.Component.Config;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ChameleonForms.Component
 {
@@ -20,12 +20,54 @@ namespace ChameleonForms.Component
         /// <typeparam name="TPartialModel">The model type of the partial view</typeparam>
         /// <returns>A section with the same characteristics as the current section, but using the given partial form</returns>
         ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm);
+
+        /// <summary>
+        /// Outputs a field with passed in HTML.
+        /// </summary>
+        /// <param name="labelHtml">The HTML for the label part of the field</param>
+        /// <param name="elementHtml">The HTML for the field element part of the field</param>
+        /// <param name="validationHtml">The HTML for the validation markup part of the field</param>
+        /// <param name="metadata">Any field metadata</param>
+        /// <param name="isValid">Whether or not the field is valid</param>
+        /// <param name="fieldConfiguration">Optional field configuration</param>
+        /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
+        IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null,
+            ModelMetadata metadata = null, bool isValid = true, IFieldConfiguration fieldConfiguration = null);
     }
 
     /// <summary>
     /// Tagging interface for a ChameleonForms Section with a model type.
     /// </summary>
-    public interface ISection<TModel> : IFormComponent<TModel> {}
+    public interface ISection<TModel> : IFormComponent<TModel>, IDisposable
+    {
+        /// <summary>
+        /// Returns a section with the same characteristics as the current section, but using the given partial form.
+        /// </summary>
+        /// <typeparam name="TPartialModel">The model type of the partial view</typeparam>
+        /// <param name="partialModelForm">The <see cref="Form{TModel}"/> from the partial view</param>
+        /// <returns>A section with the same characteristics as the current section, but using the given partial form</returns>
+        ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm);
+
+        /// <summary>
+        /// Returns a section with the same characteristics as the current section, but using the given partial form.
+        /// </summary>
+        /// <param name="partialHelper">The HTML helper from the partial view</param>
+        /// <returns>A section with the same characteristics as the current section, but using the given partial form</returns>
+        ISection<TModel> CreatePartialSection(IHtmlHelper<TModel> partialHelper);
+
+        /// <summary>
+        /// Outputs a field with passed in HTML.
+        /// </summary>
+        /// <param name="labelHtml">The HTML for the label part of the field</param>
+        /// <param name="elementHtml">The HTML for the field element part of the field</param>
+        /// <param name="validationHtml">The HTML for the validation markup part of the field</param>
+        /// <param name="metadata">Any field metadata</param>
+        /// <param name="isValid">Whether or not the field is valid</param>
+        /// <param name="fieldConfiguration">Optional field configuration</param>
+        /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
+        IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null,
+            ModelMetadata metadata = null, bool isValid = true, IFieldConfiguration fieldConfiguration = null);
+    }
 
     /// <summary>
     /// Wraps the output of a form section.
@@ -35,6 +77,7 @@ namespace ChameleonForms.Component
     {
         private readonly IHtmlContent _heading;
         private readonly bool _nested;
+        private readonly object _parentSection;
         private readonly IHtmlContent _leadingHtml;
         private readonly HtmlAttributes _htmlAttributes;
 
@@ -48,6 +91,9 @@ namespace ChameleonForms.Component
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         public Section(IForm<TModel> form, IHtmlContent heading, bool nested, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null) : base(form, false)
         {
+            if (nested)
+                _parentSection = form.HtmlHelper.ViewData[Constants.ViewDataSectionKey];
+            form.HtmlHelper.ViewData[Constants.ViewDataSectionKey] = this;
             _heading = heading;
             _nested = nested;
             _leadingHtml = leadingHtml;
@@ -55,18 +101,10 @@ namespace ChameleonForms.Component
             Initialise();
         }
 
-        /// <summary>
-        /// Outputs a field with passed in HTML.
-        /// </summary>
-        /// <param name="labelHtml">The HTML for the label part of the field</param>
-        /// <param name="elementHtml">The HTML for the field element part of the field</param>
-        /// <param name="validationHtml">The HTML for the validation markup part of the field</param>
-        /// <param name="metadata">Any field metadata</param>
-        /// <param name="isValid">Whether or not the field is valid</param>
-        /// <returns>A field configuration that can be used to output the field as well as configure it fluently</returns>
-        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true)
+        /// <inheritdoc />
+        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true, IFieldConfiguration fieldConfiguration = null)
         {
-            var fc = new FieldConfiguration();
+            var fc = fieldConfiguration ?? new FieldConfiguration();
             fc.SetField(() => Form.Template.Field(labelHtml, elementHtml, validationHtml, metadata, fc, isValid));
             return fc;
         }
@@ -87,6 +125,24 @@ namespace ChameleonForms.Component
         public ISection<TPartialModel> CreatePartialSection<TPartialModel>(IForm<TPartialModel> partialModelForm)
         {
             return new PartialViewSection<TPartialModel>(partialModelForm);
+        }
+
+        /// <inheritdoc />
+        public ISection<TModel> CreatePartialSection(IHtmlHelper<TModel> partialHelper)
+        {
+            return new PartialViewSection<TModel>(Form.CreatePartialForm(partialHelper));
+        }
+
+        /// <summary>
+        /// Called when form section is created within a `using` block: writes the end tag(s) of the section.
+        /// </summary>
+        public override void Dispose()
+        {
+            base.Dispose();
+            if (_nested && _parentSection != null)
+                Form.HtmlHelper.ViewData[Constants.ViewDataSectionKey] = _parentSection;
+            else
+                Form.HtmlHelper.ViewData.Remove(Constants.ViewDataSectionKey);
         }
     }
 
@@ -187,7 +243,7 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public static Section<TModel> BeginSection<TModel>(this ISection<TModel> section, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml, htmlAttributes);
         }
@@ -208,7 +264,7 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section as a templated razor delegate</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, string heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
+        public static Section<TModel> BeginSection<TModel>(this ISection<TModel> section, string heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading.ToHtml(), true, leadingHtml(null), htmlAttributes);
         }
@@ -229,7 +285,7 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
+        public static Section<TModel> BeginSection<TModel>(this ISection<TModel> section, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading, true, leadingHtml, htmlAttributes);
         }
@@ -250,21 +306,9 @@ namespace ChameleonForms.Component
         /// <param name="leadingHtml">Any HTML to output at the start of the section</param>
         /// <param name="htmlAttributes">Any HTML attributes to apply to the section container</param>
         /// <returns>The nested form section</returns>
-        public static Section<TModel> BeginSection<TModel>(this Section<TModel> section, Func<dynamic, IHtmlContent> heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
+        public static Section<TModel> BeginSection<TModel>(this ISection<TModel> section, Func<dynamic, IHtmlContent> heading, Func<dynamic, IHtmlContent> leadingHtml, HtmlAttributes htmlAttributes = null)
         {
             return new Section<TModel>(section.Form, heading(null), true, leadingHtml(null), htmlAttributes);
-        }
-
-        /// <summary>
-        /// Renders the given partial in the context of the parent model.
-        /// </summary>
-        /// <typeparam name="TModel">The form model type</typeparam>
-        /// <param name="section">The current section</param>
-        /// <param name="partialViewName">The name of the partial view to render</param>
-        /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlContent Partial<TModel>(this ISection<TModel> section, [AspMvcPartialView] string partialViewName)
-        {
-            return PartialFor(section, m => m, partialViewName);
         }
 
         /// <summary>
@@ -277,16 +321,20 @@ namespace ChameleonForms.Component
         /// <param name="partialModelProperty">The property to use for the partial model</param>
         /// <param name="partialViewName">The name of the partial view to render</param>
         /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlContent PartialFor<TModel, TPartialModel>(this ISection<TModel> section, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
+        public static Task<IHtmlContent> PartialForAsync<TModel, TPartialModel>(this ISection<TModel> section, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
         {
             var formModel = section.Form.HtmlHelper.ViewData.Model;
 
-            var viewData = new ViewDataDictionary(section.Form.HtmlHelper.ViewData);
-            viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
-            viewData[WebViewPageExtensions.CurrentFormViewDataKey] = section.Form;
-            viewData[WebViewPageExtensions.CurrentFormSectionViewDataKey] = section;
-            viewData.TemplateInfo.HtmlFieldPrefix = section.Form.HtmlHelper.GetFullHtmlFieldName(partialModelProperty);
-            return section.Form.HtmlHelper.Partial(partialViewName, partialModelProperty.Compile().Invoke(formModel), viewData);
+            using (var h = section.Form.HtmlHelper.For(partialModelProperty, bindFieldsToParent: true))
+            {
+                using (var f = section.Form.CreatePartialForm(partialModelProperty, h))
+                {
+                    using (section.CreatePartialSection(f))
+                    {
+                        return h.PartialAsync(partialViewName, partialModelProperty.Compile().Invoke(formModel), h.ViewData);
+                    }
+                }
+            }
         }
     }
 }

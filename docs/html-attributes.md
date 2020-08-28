@@ -1,10 +1,10 @@
 # HTML Attributes
 
-HTML Attributes in ChameleonForms provides the ability to specify a set of HTML attributes in a fluent, expressive way. Specifying HTML Attributes is done by chaining calls to the methods on the `HtmlAttributes` class.
+HTML Attributes in ChameleonForms provides the ability to specify a set of HTML attributes in a fluent, expressive way. Specifying HTML Attributes is done by chaining calls to the methods on the `HtmlAttributes` class or by [adding equivalent attributes to one of the supported tag helpers](#tag-helper-attributes).
 
 The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Represents a set of HTML attributes.
     /// </summary>
@@ -146,15 +146,51 @@ The [Field Configuration](field-configuration.md) wraps a HTML Attributes object
 
 There are a number of choices when using HTML Attributes.
 
+### Tag Helper attributes
+
+Most `HTMLAttributes` methods map to a tag helper attribute by convention - `UpperCamelCase` to `upper-camel-case` (i.e. kebab case). They are all available on the tag helpers that [support HTML Attributes](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/HtmlAttributesTagHelper.cs#L10):
+
+* `chameleon-form`
+* `form-section`
+* `form-button`
+* `submit-button`
+* `reset-button`
+
+| HTML Attributes Method                                | Equivalent Tag Helper attribute                       |
+|-------------------------------------------------------|-------------------------------------------------------|
+| `Id(string id)`                                       | `id="{id}"`                                           |
+| `AddClass(string @class)`                             | `add-class="{class}"`                                 |
+| `Attr(string key, object value)`                      | `attr-{key}="{value}"`                                |
+| `Attr(Func<object, object> attribute)`                | *No equivalent*                                       |
+| `Attrs(params Func<object, object>[] attributes)`     | *No equivalent*                                       |
+| `Attrs(IDictionary<string, object> attributes)`       | `attrs="{attributes}"`                                |
+| `Attrs(object attributes)`                            | *No equivalent*                                       |
+| `Disabled(bool disabled = true)`                      | `disabled="{disabled}"`                               |
+| `Readonly(bool @readonly = true)`                     | *No equivalent*                                       |
+| `Required(bool required = true)`                      | *No equivalent*                                       |
+
 ### Chaining
 
 If you are interacting with a method that returns a HTML Attributes object then you can simply chain method calls, e.g.:
+
+# [Tag Helpers variant](#tab/chaining-th)
+
+```cshtml
+<form-navigation>
+    <submit-button fluent-config='c => c.Attr("data-something", "value").AddClass("a-class").Id("buttonId")'>
+</form-navigation>
+```
+
+# [HTML Helpers variant](#tab/chaining-hh)
 
 ```cshtml
 @using (var n = f.BeginNavigation()) {
     @n.Submit("Submit").Attr("data-something", "value").AddClass("a-class").Id("buttonId")
 }
 ```
+
+***
+
 
 ### Instantiation
 
@@ -164,23 +200,19 @@ You can new up an instance and use one of the four constructors (empty construct
 
 You can new up an instance and then chain methods off that instance, e.g.:
 
-```cshtml
-@using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes().AddClass("form").Id("someForm")) {
-    @* ... *@
-}
+```cs
+new HtmlAttributes().AddClass("form").Id("someForm")
 ```
 
 ### Instantiation with lambda expressions
 
-```cshtml
-@using (var f = Html.BeginChameleonForm(htmlAttributes: new HtmlAttributes(@class => "form", id => "someForm")) {
-    @* ... *@
-}
+```cs
+new HtmlAttributes(@class => "form", id => "someForm")
 ```
 
 If you want to output a HTML Attribute that has a `-` in the name then use a `_` in the variable name, e.g.:
 
-```csharp
+```cs
 new HtmlAttributes(data_something => "value")
 ```
 
@@ -188,15 +220,13 @@ new HtmlAttributes(data_something => "value")
 
 You can convert an anonymous object to a HTML Attributes object, e.g.:
 
-```cshtml
-@using (var f = Html.BeginChameleonForm(htmlAttributes: new { @class="form", id="someForm" }.ToHtmlAttributes())) {
-    @* ... *@
-}
+```cs
+new { @class="form", id="someForm" }.ToHtmlAttributes()
 ```
 
 If you want to output a HTML Attribute that has a `-` in the name then use a `_` in the property name, e.g.:
 
-```csharp
+```cs
 new {data_something => "value"}.ToHtmlAttributes()
 ```
 
@@ -204,10 +234,8 @@ new {data_something => "value"}.ToHtmlAttributes()
 
 You can convert a dictionary to a HTML Attributes object, e.g.:
 
-```cshtml
-@using (var f = Html.BeginChameleonForm(htmlAttributes: new Dictionary<string, object>{ {"class", "form"}, {"id", "someForm"} }.ToHtmlAttributes())) {
-    @* ... *@
-}
+```cs
+new Dictionary<string, object>{ {"class", "form"}, {"id", "someForm"} }.ToHtmlAttributes()
 ```
 
 ## Outputting HTML Attributes
@@ -218,7 +246,7 @@ There are a number of options when using a HTML Attributes object.
 
 You can use the HTML Attributes object with the `TagBuilder` class in MVC, e.g.:
 
-```csharp
+```cs
 var h = new HtmlAttributes().Id("id");
 var t = new TagBuilder("p");
 t.MergeAttributes(h.Attributes);
@@ -241,7 +269,7 @@ It will automatically handle encoding attribute values to prevent HTML injection
 
 When you need ultimate flexibility then you can get the attributes out as a dictionary, e.g.:
 
-```csharp
+```cs
 var h = new HtmlAttributes().Id("id");
 var d1 = h.Attributes; // Dictionary<string, string>
 var d2 = h.ToDictionary(); // Dictionary<string, object>, many MVC methods take this type
@@ -251,7 +279,7 @@ var d2 = h.ToDictionary(); // Dictionary<string, object>, many MVC methods take 
 
 If you need to retrive the attribute values as a string (already encoded), then you can use the `.ToHtmlString()` extension method.
 
-```csharp
+```cs
 var h = new HtmlAttributes().Id("id&1");
 string s = h.ToHtmlString(); // "id=\"id&amp;1\""
 ```
@@ -260,7 +288,7 @@ string s = h.ToHtmlString(); // "id=\"id&amp;1\""
 
 You can easily create your own methods on HTML Attributes by creating an extension method, e.g.:
 
-```csharp
+```cs
 public static HtmlAttributesExtensions 
 {
     public static HtmlAttributes Coordinate(this HtmlAttributes attrs, Coordinate c)
@@ -284,7 +312,7 @@ Then you could do something like this:
 
 [Navigation Buttons](the-navigation.md) return a sub-class of `HtmlAttributes` called `ButtonHtmlAttributes`. This allows you to target extension methods specifically for buttons, which must then be invoked first before any of the methods targeting the more general `HtmlAttributes`. As an example consider the following extension method in the Twitter Bootstrap 3 template to add a size to the button:
 
-```csharp
+```cs
         /// <summary>
         /// Changes the button to use the given size.
         /// </summary>
@@ -302,6 +330,11 @@ Then you could do something like this:
         }
 ```
 
+If you want to consume these extension methods on a button based tag helper you have two options:
+
+1. Use the `fluent-attrs` attribute e.g. `<submit-button label="Submit" fluent-attrs='a => a.WithSize(ButtonSize.Large).WithStyle(EmphasisStyle.Info).WithIcon("calendar")' />`
+2. Use a tag helper that adds the attributes before the main tag helper gets processed, such as the [Bootstrap 3 `ButtonTagHelper`](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Templates/TwitterBootstrap3/ButtonTagHelper.cs) e.g. `<submit-button label="Submit" size="Large" emphasis-style="Info" icon="calendar" />`
+
 ## Create methods that chain HTML Attributes
 
 Returning a HTML Attributes object from a method so that the user can chain attribute methods off it before outputting it in a view (like the [Navigation Buttons](the-navigation.md)) can be tricky by default, so ChameleonForms provides a special way to handle this situation.
@@ -316,7 +349,7 @@ The class you need to use in this case is `LazyHtmlAttributes`, which is in the 
 
 If you created the following extension method on the HTML Helper:
 
-```csharp
+```cs
     public static class HtmlExtensions
     {
         public static HtmlAttributes Paragraph(this HtmlHelper h, string paragraphText)
@@ -326,7 +359,7 @@ If you created the following extension method on the HTML Helper:
                     var t = new TagBuilder("p");
                     t.SetInnerText(paragraphText);
                     t.MergeAttributes(a.Attributes);
-                    return new HtmlString(t.ToString());
+                    return t;
                 }
             );
         }

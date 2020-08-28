@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.Templates;
@@ -23,7 +24,7 @@ namespace ChameleonForms
         /// <param name="partialModelExpression">The expression that identifies the partial model</param>
         /// <param name="partialViewHelper">The HTML Helper from the partial view</param>
         /// <returns>The PartialViewForm wrapping the original form</returns>
-        IForm<TPartialModel> CreatePartialForm<TPartialModel>(LambdaExpression partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper);
+        IForm<TPartialModel> CreatePartialForm<TPartialModel>(LambdaExpression partialModelExpression, IHtmlHelper<TPartialModel> partialViewHelper);
     }
 
     /// <summary>
@@ -51,6 +52,13 @@ namespace ChameleonForms
         /// </summary>
         /// <param name="property">The property to return the field generator for</param>
         IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property);
+
+        /// <summary>
+        /// Returns a wrapped <see cref="PartialViewForm{TModel}"/> for the given partial view helper.
+        /// </summary>
+        /// <param name="partialViewHelper">The HTML Helper from the partial view</param>
+        /// <returns>The PartialViewForm wrapping the original form</returns>
+        IForm<TModel> CreatePartialForm(IHtmlHelper<TModel> partialViewHelper);
     }
 
     /// <summary>
@@ -58,6 +66,8 @@ namespace ChameleonForms
     /// </summary>
     public class Form<TModel> : IForm<TModel>
     {
+        private readonly bool _outputAntiforgeryToken;
+
         /// <inheritdoc />
         public IHtmlHelper<TModel> HtmlHelper { get; private set; }
         /// <inheritdoc />
@@ -73,8 +83,11 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use expressed as an anonymous object</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
-        public Form(IHtmlHelper<TModel> helper, IFormTemplate template, string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        /// <param name="outputAntiforgeryToken">Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET</param>
+        public Form(IHtmlHelper<TModel> helper, IFormTemplate template, string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype, bool? outputAntiforgeryToken)
         {
+            _outputAntiforgeryToken = outputAntiforgeryToken ?? method != FormMethod.Get;
+            helper.ViewData[Constants.ViewDataFormKey] = this;
             HtmlHelper = helper;
             Template = template;
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
@@ -95,14 +108,20 @@ namespace ChameleonForms
             return new DefaultFieldGenerator<TModel, T>(HtmlHelper, property, Template);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when form is created within a `using` block: writes the end tag of the form.
+        /// </summary>
         public void Dispose()
         {
+            if (_outputAntiforgeryToken)
+                Write(HtmlHelper.AntiForgeryToken());
+            Write(new HtmlString("\r\n"));
             Write(Template.EndForm());
+            HtmlHelper.ViewData.Remove(Constants.ViewDataFormKey);
         }
 
         /// <inheritdoc />
-        public IForm<TPartialModel> CreatePartialForm<TPartialModel>(LambdaExpression partialModelExpression, HtmlHelper<TPartialModel> partialViewHelper)
+        public IForm<TPartialModel> CreatePartialForm<TPartialModel>(LambdaExpression partialModelExpression, IHtmlHelper<TPartialModel> partialViewHelper)
         {
             var partialModelAsExpression = partialModelExpression as Expression<Func<TModel, TPartialModel>>;
             if (partialModelAsExpression == null
@@ -113,6 +132,12 @@ namespace ChameleonForms
                 partialModelAsExpression = partialModelAsUnboxedExpression.AddCast<TModel, TPartialModel>();
             }
             return new PartialViewForm<TModel, TPartialModel>(this, partialViewHelper, partialModelAsExpression);
+        }
+
+        /// <inheritdoc />
+        public IForm<TModel> CreatePartialForm(IHtmlHelper<TModel> partialViewHelper)
+        {
+            return new PartialViewForm<TModel>(this, partialViewHelper);
         }
     }
 
@@ -135,22 +160,11 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <param name="outputAntiforgeryToken">Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TModel> BeginChameleonForm<TModel>(this IHtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TModel> BeginChameleonForm<TModel>(this IHtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
         {
-            return new Form<TModel>(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
-        }
-
-        /// <summary>
-        /// Renders the given partial in the context of the parent model.
-        /// </summary>
-        /// <typeparam name="TModel">The form model type</typeparam>
-        /// <param name="form">The form</param>
-        /// <param name="partialViewName">The name of the partial view to render</param>
-        /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlContent Partial<TModel>(this IForm<TModel> form, [AspMvcPartialView] string partialViewName)
-        {
-            return PartialFor(form, m => m, partialViewName);
+            return new Form<TModel>(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype, outputAntiforgeryToken);
         }
 
         /// <summary>
@@ -163,14 +177,17 @@ namespace ChameleonForms
         /// <param name="partialModelProperty">The property to use for the partial model</param>
         /// <param name="partialViewName">The name of the partial view to render</param>
         /// <returns>The HTML for the rendered partial</returns>
-        public static IHtmlContent PartialFor<TModel, TPartialModel>(this IForm<TModel> form, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
+        public static Task<IHtmlContent> PartialForAsync<TModel, TPartialModel>(this IForm<TModel> form, Expression<Func<TModel, TPartialModel>> partialModelProperty, [AspMvcPartialView] string partialViewName)
         {
-            var formModel = (TModel) form.HtmlHelper.ViewData.Model;
-            var viewData = new ViewDataDictionary(form.HtmlHelper.ViewData);
-            viewData[WebViewPageExtensions.PartialViewModelExpressionViewDataKey] = partialModelProperty;
-            viewData[WebViewPageExtensions.CurrentFormViewDataKey] = form;
-            viewData.TemplateInfo.HtmlFieldPrefix = form.HtmlHelper.GetFullHtmlFieldName(partialModelProperty);
-            return form.HtmlHelper.Partial(partialViewName, partialModelProperty.Compile().Invoke(formModel), viewData);
+            var formModel = form.HtmlHelper.ViewData.Model;
+
+            using (var h = form.HtmlHelper.For(partialModelProperty, bindFieldsToParent: true))
+            {
+                using (form.CreatePartialForm(partialModelProperty, h))
+                {
+                    return h.PartialAsync(partialViewName, partialModelProperty.Compile().Invoke(formModel), h.ViewData);
+                }
+            }
         }
 
         /// <summary>
@@ -190,11 +207,12 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <param name="outputAntiforgeryToken">Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this IHtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TChildModel> BeginChameleonFormFor<TParentModel, TChildModel>(this IHtmlHelper<TParentModel> helper, Expression<Func<TParentModel, TChildModel>> formFor, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
         {
             var childHelper = helper.For(formFor, bindFieldsToParent: false);
-            return new Form<TChildModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
+            return new Form<TChildModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype, outputAntiforgeryToken);
         }
 
         /// <summary>
@@ -223,11 +241,12 @@ namespace ChameleonForms
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <param name="outputAntiforgeryToken">Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this IHtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TNewModel> BeginChameleonFormFor<TOriginalModel, TNewModel>(this IHtmlHelper<TOriginalModel> helper, TNewModel model, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
         {
             var childHelper = helper.For(model);
-            return new Form<TNewModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
+            return new Form<TNewModel>(childHelper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype, outputAntiforgeryToken);
         }
     }
 }

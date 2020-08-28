@@ -3,7 +3,7 @@ Default (Text) Fields
 
 The default field will output a field when no other field type worked. It allows the user to enter a simple string input for the value of that field.
 
-```csharp
+```cs
 public string StringField { get; set; }
 ```
 

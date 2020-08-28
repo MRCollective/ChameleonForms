@@ -64,7 +64,11 @@ namespace ChameleonForms.Component
         /// <returns>The ending HTML for the form component</returns>
         public abstract IHtmlContent End();
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when form component outputted to the page; writes the form content HTML to the given writer.
+        /// </summary>
+        /// <param name="writer">The writer to write to</param>
+        /// <param name="encoder">The HTML encoder to use when writing</param>
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             if (!IsSelfClosing)
@@ -74,8 +78,10 @@ namespace ChameleonForms.Component
             End().WriteTo(writer, encoder);
         }
 
-        /// <inheritdoc />
-        public void Dispose()
+        /// <summary>
+        /// Called when form component is created within a `using` block: writes the end tag(s) of the component.
+        /// </summary>
+        public virtual void Dispose()
         {
             if (!IsSelfClosing)
                 Form.Write(End());

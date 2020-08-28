@@ -1,10 +1,10 @@
 # Message
 
-The Message is a container to show a message to the user; you create a Message by instantiating a `Message<TModel>` within a `using` block. The start and end of the `using` block will output the start and end HTML for the Message and the inside of the `using` block will contain the Message content.
+The Message is a container to show a message to the user. You could do this using HTML without using the Message component, but the benefit of using the Message component is it delegates the HTML to the form template so you ensure conssitency across all forms. You can create a Message by using the `<form-message>` tag helper or instantiating a `Message<TModel>` within a `using` block.
 
 The `Message<TModel>` class looks like this and is in the `ChameleonForms.Component` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Wraps the output of a message to display to a user.
     /// </summary>
@@ -62,9 +62,19 @@ The `Message<TModel>` class looks like this and is in the `ChameleonForms.Compon
         public virtual IHtmlContent Paragraph(Func<dynamic, IHtmlContent> paragraph);
 ```
 
-The start and end HTML of the Message are generated via the `BeginMessage` and `EndMessage` methods in the template and the paragraph is generated via the `MessageParagraph` method in the template.
+The start and end HTML of the Message are generated via the `BeginMessage` and `EndMessage` methods in the [form template](form-templates.md) and the paragraph is generated via the `MessageParagraph` method in the template.
 
 ## Default usage
+
+# [Tag Helpers variant](#tab/default-message-th)
+
+```cshtml
+<form-message type="Information" heading="Message title">
+    @* Message content *@
+</form-message>
+```
+
+# [HTML Helpers variant](#tab/default-message-hh)
 
 In order to get an instance of a `Message<TModel>` you can use the `BeginMessage` extension method on the [Form](the-form.md), e.g.:
 
@@ -76,7 +86,7 @@ In order to get an instance of a `Message<TModel>` you can use the `BeginMessage
 
 The `BeginMessage` extension methods look like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a message.
         /// </summary>
@@ -132,9 +142,11 @@ The `BeginMessage` extension methods look like this:
         }
 ```
 
+***
+
 The `MessageType` enum is defined like this and appears in the `ChameleonForms.Enums` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Types of messages that can be displayed to the user
     /// </summary>
@@ -167,7 +179,27 @@ The `MessageType` enum is defined like this and appears in the `ChameleonForms.E
     }
 ```
 
+When setting the `type` attribute in the `<form-message>` tag helper you can reference any of these `MessageType` values.
+
 ## Message content
+
+# [Tag Helpers variant](#tab/message-para-th)
+
+
+If you want to add paragraphs using the template you can do that by using the `<message-paragraph>` tag helper and of course you can use normal HTML or any valid Razor code as well:
+
+```cshtml
+<form-message type="Information" heading="Message title">
+    <message-paragraph>Here is the first part of the message</message-paragraph>
+    <img src="/path/to/img" alt="alt text" />
+    <message-paragraph>Here is a <strong>styled</strong> message</message-paragraph>
+    @SomeRazorFunctionDefinedOnThisPage()
+    <partial name="_WooWeCanGetReallyCrazyAndAddPartialsToo_OMG"></partial>
+</form-message>
+```
+
+# [HTML Helpers variant](#tab/message-para-hh)
+
 
 If you want to add paragraphs using the template you can do that by using one of the `Paragraph` methods as defined above and of course you can use normal HTML or any valid Razor code as well:
 
@@ -181,6 +213,9 @@ If you want to add paragraphs using the template you can do that by using one of
     @m.Paragraph(@<strong>Message content</strong>)
 }
 ```
+
+***
+
 
 ## Default HTML
 

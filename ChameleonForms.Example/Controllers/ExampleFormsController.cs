@@ -23,6 +23,17 @@ namespace ChameleonForms.Example.Controllers
             return View(vm);
         }
 
+        public ActionResult Form2()
+        {
+            return View(new ViewModelExample());
+        }
+
+        [HttpPost]
+        public ActionResult Form2(ViewModelExample vm)
+        {
+            return View(vm);
+        }
+
         public ActionResult BasicExample()
         {
             return View(new BasicViewModel());
@@ -84,9 +95,19 @@ namespace ChameleonForms.Example.Controllers
             return View();
         }
 
+        public ActionResult ButtonsTH()
+        {
+            return View();
+        }
+
         public ActionResult Partials()
         {
             return View(new ViewModelExample{TextAreaField = "Initial value"});
+        }
+
+        public ActionResult PartialsTH()
+        {
+            return View(new ViewModelExample { TextAreaField = "Initial value" });
         }
 
         [HttpPost]
@@ -100,34 +121,39 @@ namespace ChameleonForms.Example.Controllers
             return View(new ParentViewModel{Child = new ChildViewModel { ChildField = "Initial value from controller"}});
         }
 
+        public ActionResult ChangingContextTH()
+        {
+            return View(new ParentViewModel { Child = new ChildViewModel { ChildField = "Initial value from controller" } });
+        }
+
         [HttpPost]
-        public ActionResult PostDifferentModel(BasicViewModel vm)
+        public ActionResult PostDifferentModel(BasicViewModel vm, bool tagHelpers)
         {
             ViewBag.Action = "PostDifferentModel";
             ViewBag.ModelType = vm.GetType().Name;
             ViewBag.BoundModelData = JsonSerializer.Serialize(vm, new JsonSerializerOptions{WriteIndented = true});
             ViewBag.BoundModel = vm;
-            return View("ChangingContext");
+            return View(tagHelpers ? "ChangingContextTH" : "ChangingContext");
         }
 
         [HttpPost]
-        public ActionResult PostChildViewModel(ChildViewModel vm)
+        public ActionResult PostChildViewModel(ChildViewModel vm, bool tagHelpers)
         {
             ViewBag.Action = "PostChildViewModel";
             ViewBag.ModelType = vm.GetType().Name;
             ViewBag.BoundModelData = JsonSerializer.Serialize(vm, new JsonSerializerOptions { WriteIndented = true });
             ViewBag.BoundModel = vm;
-            return View("ChangingContext");
+            return View(tagHelpers ? "ChangingContextTH" : "ChangingContext");
         }
 
         [HttpPost]
-        public ActionResult PostParentViewModel(ParentViewModel vm)
+        public ActionResult PostParentViewModel(ParentViewModel vm, bool tagHelpers)
         {
             ViewBag.Action = "PostParentViewModel";
             ViewBag.ModelType = vm.GetType().Name;
             ViewBag.BoundModelData = JsonSerializer.Serialize(vm, new JsonSerializerOptions { WriteIndented = true });
             ViewBag.BoundModel = vm;
-            return View("ChangingContext");
+            return View(tagHelpers ? "ChangingContextTH" : "ChangingContext");
         }
     }
 

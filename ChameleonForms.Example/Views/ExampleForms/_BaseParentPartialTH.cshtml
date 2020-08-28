@@ -1,0 +1,12 @@
+﻿@model ViewModelExampleBase
+
+@if (Html.IsInChameleonFormsSection())
+{
+    <field for="BaseField" append="from partial against top-level model casted to base class" />
+}
+else
+{
+    <form-section heading="This is from a form-level partial against the top-level model casted to base class">
+        <field for="BaseField2" />
+    </form-section>
+}

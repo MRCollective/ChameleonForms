@@ -16,6 +16,10 @@ namespace ChameleonForms
     {
         private readonly IStringTransformer _to;
 
+        /// <summary>
+        /// Creates <see cref="HumanizedLabelsDisplayMetadataProvider"/>.
+        /// </summary>
+        /// <param name="to">The string transformer to use when creating display labels</param>
         public HumanizedLabelsDisplayMetadataProvider(IStringTransformer to = null)
         {
             _to = to ?? To.SentenceCase;

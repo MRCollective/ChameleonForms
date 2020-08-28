@@ -14,12 +14,14 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace ChameleonForms
 {
     // todo: 4.0 non-beta release
+    // Doco: antiforgery, HtmlAttrs Dictionary<string, string>, TagHelpers for everything, partials - new syntax, can use them natively, need special one when changing model, Html.GetChameleonFormsSection etc. extensions
+    // Breaking changes: Removed non-async partial and non `For` partial - can just use partials directly, removed WebViewPage.Form / .FormSection / .IsInFormSection / .PartialModelExpression, merge attributes now adds class
     // Build-in DI support e.g. fieldgeneratorrouter
     // Review the datetime "g" and current culture things - remove? client side validation for non / separators?
     // Update all dependencies to latest versions
     // Tidy up cshtml files
     // Add ability to switch unobtrusive validation on/off and html5 validation on/off (<form novalidate="novalidate">) - global default with per-form override? reference ValidationHtmlAttributeProvider in documentation
-    // blog posts: razorgenerator, mvctestcontext, modelbindertestbase, ilmerge, client validation in aspnetcore, end-to-end test in-memory, disposablehtmlhelper, testing metadatadetailsprovider
+    // blog posts: razorgenerator, mvctestcontext, modelbindertestbase, ilmerge, client validation in aspnetcore, end-to-end test in-memory, disposablehtmlhelper, testing metadatadetailsprovider, docfx, tag helpers including nested children
     // Generate nuget from .csproj rather than nuspec like https://github.com/LazZiya/ExpressLocalization/blob/master/LazZiya.ExpressLocalization/LazZiya.ExpressLocalization.csproj
     // [Range] client validation support
     // Add support for non jquery unobtrusive validation
@@ -31,6 +33,7 @@ namespace ChameleonForms
     // Support Blazor, razor pages and carter
     // Remove ExistsInAttribute.EnableValidation as a static
     // Investigate better documentation using the .net doc generator along with something like https://github.com/koumoul-dev/gh-pages-multi to support multiple versions, just check linking between .md files works and how to support menu hierarchy
+    // Recreate FormMethod enum
 
     /// <summary>
     /// Extension methods for <see cref="IServiceCollection"/>.

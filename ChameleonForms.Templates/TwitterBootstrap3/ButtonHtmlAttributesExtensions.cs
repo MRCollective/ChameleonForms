@@ -36,7 +36,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
         public static ButtonHtmlAttributes WithStyle(this ButtonHtmlAttributes attrs, EmphasisStyle style)
         {
-            attrs.AddClass(string.Format("btn-{0}", style.ToString().ToLower()));
+            attrs.AddClass($"btn-{style.ToString().ToLower()}");
             return attrs;
         }
 
@@ -51,8 +51,8 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         /// <returns>The Html Attribute object so other methods can be chained off of it</returns>
         public static ButtonHtmlAttributes WithSize(this ButtonHtmlAttributes attrs, ButtonSize size)
         {
-            if (size != ButtonSize.Default)
-                attrs.AddClass(string.Format("btn-{0}", size.Humanize()));
+            if (size != ButtonSize.Default && size != ButtonSize.NoneSpecified)
+                attrs.AddClass($"btn-{size.Humanize()}");
             return attrs;
         }
     }

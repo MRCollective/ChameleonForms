@@ -10,7 +10,10 @@ namespace ChameleonForms.ModelBinders
     /// </summary>
     public class FlagsEnumModelBinder : IModelBinder
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when binding a model using this model binder.
+        /// </summary>
+        /// <param name="bindingContext">The context within which binding occurs</param>
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
             var nullable = bindingContext.ModelMetadata.IsNullableValueType;

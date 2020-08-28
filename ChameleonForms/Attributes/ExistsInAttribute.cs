@@ -79,7 +79,12 @@ namespace ChameleonForms.Attributes
             metadata.DisplayMetadata.AdditionalValues[NameKey] = _nameProperty;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when validation is performed using the attribute.
+        /// </summary>
+        /// <param name="value">The object to validate</param>
+        /// <param name="context">The context within which validation occurs</param>
+        /// <returns>The result of validation</returns>
         protected override ValidationResult IsValid(object value, ValidationContext context)
         {
             var enableValidation = _enableValidation.HasValue

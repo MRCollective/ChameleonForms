@@ -4,7 +4,7 @@ If you need to collect URI/URL data then that will automatically be handled for 
 
 Any one of the following model types will trigger one of these fields:
 
-```csharp
+```cs
 public Uri Uri { get; set; }
 
 [DataType(DataType.Url)]
@@ -28,7 +28,7 @@ With the [default global configuration](configuration.md), using a `Uri` will al
 
 You can specify your property as a URL value, which will automatically validate server-side for a valid HTTP or HTTPS URL on the server-side (if using `Uri` with a `[DataType(DataType.Url)]` attribute) or starting with ftp://, http:// or https:// (if using `string` with `[Url]`):
 
-```csharp
+```cs
 [DataType(DataType.Url)]
 public Uri Url { get; set; }
 

@@ -1,2 +1,7 @@
-﻿@{ Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml"; }
-@Html.TextArea("", ViewData.TemplateInfo.FormattedModelValue.ToString(), 0, 0, new { @class = "text-box single-line" } )
+﻿@using ChameleonForms.Example.Views.Comparison.EditorTemplates
+@{
+    Layout = "~/Views/Comparison/EditorTemplates/_Layout.cshtml";
+    var attrs = ViewData.SetupFieldAttrs();
+    attrs["class"] = "text-box single-line";
+}
+@Html.TextArea("", ViewData.TemplateInfo.FormattedModelValue.ToString(), 0, 0, attrs )

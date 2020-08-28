@@ -17,6 +17,17 @@ namespace ChameleonForms.Example.Controllers
             return View(vm);
         }
 
+        public ActionResult ChameleonFormsTH()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChameleonFormsTH(SignupViewModel vm)
+        {
+            return View(vm);
+        }
+
         public ActionResult EditorTemplates()
         {
             return View();
@@ -35,6 +46,18 @@ namespace ChameleonForms.Example.Controllers
 
         [HttpPost]
         public ActionResult HtmlHelpers(SignupViewModel vm)
+        {
+            return View(vm);
+        }
+
+
+        public ActionResult TagHelpers()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult TagHelpers(SignupViewModel vm)
         {
             return View(vm);
         }

@@ -1,0 +1,11 @@
+﻿@model BasicViewModel
+
+<chameleon-form action="@Url.Action("PostDifferentModel")?tagHelpers=true">
+    <form-section>
+        <field for="RequiredString"/>
+        <field for="SomeCheckbox"/>
+    </form-section>
+    <form-navigation>
+        <submit-button add-class="different-model" label="Submit"/>
+    </form-navigation>
+</chameleon-form>

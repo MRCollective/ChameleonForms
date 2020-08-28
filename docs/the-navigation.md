@@ -1,10 +1,10 @@
 # Navigation
 
-The Navigation is a grouping of a set of navigation elements; you create a Navigation by instantiating a `Navigation<TModel>` within a `using` block. The start and end of the `using` block will output the start and end HTML for the Navigation and the inside of the `using` block will contain the Navigation elements.
+The Navigation is a grouping of a set of navigation elements; you create a Navigation by using a `<form-navigation>` tag helper or instantiating a `Navigation<TModel>` within a `using` block. The start and end of the `using` block will output the start and end HTML for the Navigation and the inside of the `using` block will contain the Navigation elements.
 
 The `Navigation<TModel>` class looks like this and is in the `ChameleonForms.Component` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Wraps the output of the navigation area of a form.
     /// For example the area with submit buttons.
@@ -116,6 +116,18 @@ The start and end HTML of the Navigation are generated via the `BeginNavigation`
 
 ## Default usage
 
+# [Tag Helpers variant](#tab/navigation-th)
+
+In order to get a navigation you can use the `<form-navigation>` tag helper, e.g.:
+
+```cshtml
+<form-navigation>
+    @* Navigation elements go here *@
+</form-navigation>
+```
+
+# [HTML Helpers variant](#tab/navigation-hh)
+
 In order to get an instance of a `Navigation<TModel>` you can use the `BeginNavigation` method on the Form, e.g.:
 
 ```cshtml
@@ -126,7 +138,7 @@ In order to get an instance of a `Navigation<TModel>` you can use the `BeginNavi
 
 The `BeginNavigation` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a navigation section.
         /// </summary>
@@ -146,7 +158,32 @@ The `BeginNavigation` extension method looks like this:
         }
 ```
 
-From within a section you can create Navigation Submit, Reset and normal Buttons and you can chain [HTML Attributes](html-attributes.md) specifiers off the end of them, e.g.:
+
+***
+
+## Buttons
+
+From within a section you can create Navigation Submit, Reset and normal Buttons.
+
+# [Tag Helpers variant](#tab/buttons-th)
+
+You can create buttons by using the `<form-button>`, `<reset-button>` and `<submit-button>` tag helpers within a `<form-navigation>` tag helper.
+
+```cshtml
+<form-navigation>
+    <form-button add-class="button" id="button1" label="text button" />
+    <form-button add-class="button" id="button2"><strong>html button</strong></form-button>
+    <reset-button add-class="button" id="button3" label="text reset" />
+    <reset-button add-class="button" id="button4"><strong>html reset</strong></reset-button>
+    <submit-button add-class="button" id="button5" label="text reset" />
+    <submit-button add-class="button" id="button6"><strong>html reset</strong></reset-button>
+    <submit-button name="name" value="value" add-class="button" id="button7"><strong>html submit with value</strong></submit-button>
+</form-navigation>
+```
+
+# [HTML Helpers variant](#tab/buttons-hh)
+
+You can create buttons by using the methods on the `Navigation<T>` object. You can chain [HTML Attributes](html-attributes.md) specifiers off the end of the buttons you create, e.g.:
 
 ```cshtml
 @using (var n = f.BeginNavigation()) {
@@ -163,6 +200,8 @@ From within a section you can create Navigation Submit, Reset and normal Buttons
     @n.Submit(@<strong>html submit</strong>)
 }
 ```
+
+***
 
 ## Extending Navigation Buttons
 
@@ -235,7 +274,7 @@ The HTML is the same as the default except a class of `btn` will always be added
 
 There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that allows you to add an emphasis style to the buttons:
 
-```csharp
+```cs
         /// <summary>
         /// Adds the given emphasis to the button.
         /// </summary>
@@ -254,7 +293,7 @@ There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3`
 
 The `EmphasisStyle` enum is as follows:
 
-```csharp
+```cs
     /// <summary>
     /// Twitter Bootstrap alert/emphasis colors: http://getbootstrap.com/css/#type-emphasis
     /// </summary>
@@ -287,6 +326,29 @@ The `EmphasisStyle` enum is as follows:
     }
 ```
 
+
+# [Tag Helpers variant](#tab/emphasis-style-th)
+
+There is a tag helper in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that adds an `emphasis-style` property to the `<form-button>`, `<reset-button>` and `<submit-button>` tag helpers. Or, you can make use of the `fluent-attrs` property on those tag helpers.
+
+To use the custom tag helper you need to import the tag helper within your `_ViewImports.cshtml` or equivalent file:
+
+```cshtml
+@addTagHelper ChameleonForms.Templates.TwitterBootstrap3.*, ChameleonForms
+```
+
+Here is an example of its use:
+
+```cshtml
+<form-navigation>
+    <submit-button label="Submit" emphasis-style="Primary" />
+    @* or *@
+    <submit-button label="Submit" fluent-attrs='c => c.WithStyle(EmphasisStyle.Primary)' />
+</form-navigation>
+```
+
+# [HTML Helpers variant](#tab/emphasis-style-hh)
+
 You can use the extension method like this:
 
 ```cshtml
@@ -294,6 +356,11 @@ You can use the extension method like this:
     @n.Submit("Submit").WithStyle(EmphasisStyle.Primary)
 }
 ```
+
+In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you instead add the namespace to your `_ViewImports.cshtml` or equivalent file.
+
+***
+
 
 Which would result in:
 
@@ -303,13 +370,11 @@ Which would result in:
 </div>
 ```
 
-In order to be able to swap out the extension method usage across your application easily (for example, if you change your form template) we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view using the extension method you instead add the namespace to your `_ViewImports.cshtml` file.
-
 ### Change button size
 
 There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that allows you to change the size of your buttons:
 
-```csharp
+```cs
         /// <summary>
         /// Changes the button to use the given size.
         /// </summary>
@@ -329,7 +394,7 @@ There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3`
 
 The `ButtonSize` enum is as follows:
 
-```csharp
+```cs
     /// <summary>
     /// Twitter Bootstrap button sizes: http://getbootstrap.com/css/#buttons-sizes
     /// </summary>
@@ -357,6 +422,28 @@ The `ButtonSize` enum is as follows:
     }
 ```
 
+# [Tag Helpers variant](#tab/button-size-th)
+
+There is a tag helper in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that adds an `size` property to the `<form-button>`, `<reset-button>` and `<submit-button>` tag helpers. Or, you can make use of the `fluent-attrs` property on those tag helpers.
+
+To use the custom tag helper you need to import the tag helper within your `_ViewImports.cshtml` or equivalent file:
+
+```cshtml
+@addTagHelper ChameleonForms.Templates.TwitterBootstrap3.*, ChameleonForms
+```
+
+Here is an example of its use:
+
+```cshtml
+<form-navigation>
+    <submit-button label="Submit" size="Large" />
+    @* or *@
+    <submit-button label="Submit" fluent-attrs='c => c.WithSize(ButtonSize.Large)' />
+</form-navigation>
+```
+
+# [HTML Helpers variant](#tab/button-size-hh)
+
 You can use the extension method like this:
 
 ```cshtml
@@ -364,6 +451,10 @@ You can use the extension method like this:
     @n.Submit("Submit").WithSize(ButtonSize.Large)
 }
 ```
+
+In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you instead add the namespace to your `_ViewImports.cshtml` or equivalent file.
+
+***
 
 Which would result in:
 
@@ -373,13 +464,11 @@ Which would result in:
 </div>
 ```
 
-In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you instead add the namespace to your `_ViewImports.cshtml` file.
-
 ### Add icon to button
 
 There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that allows you to add icons to your buttons:
 
-```csharp
+```cs
         /// <summary>
         /// Adds the given icon to the start of a navigation button.
         /// </summary>
@@ -400,6 +489,28 @@ There is an extension method in the `ChameleonForms.Templates.TwitterBootstrap3`
 
 You can see the list of possible icon names to choose from on the [Twitter Bootstrap documentation site](https://getbootstrap.com/docs/3.3/components/#glyphicons) (drop the `glyphicon-` from the icon names on this page e.g. use `adjust` instead of `glyphicon-adjust`).
 
+# [Tag Helpers variant](#tab/button-icon-th)
+
+There is a tag helper in the `ChameleonForms.Templates.TwitterBootstrap3` namespace that adds an `icon` property to the `<form-button>`, `<reset-button>` and `<submit-button>` tag helpers. Or, you can make use of the `fluent-attrs` property on those tag helpers.
+
+To use the custom tag helper you need to import the tag helper within your `_ViewImports.cshtml` or equivalent file:
+
+```cshtml
+@addTagHelper ChameleonForms.Templates.TwitterBootstrap3.*, ChameleonForms
+```
+
+Here is an example of its use:
+
+```cshtml
+<form-navigation>
+    <submit-button label="Submit" icon="adjust" />
+    @* or *@
+    <submit-button label="Submit" fluent-attrs='c => c.WithIcon("adjust")' />
+</form-navigation>
+```
+
+# [HTML Helpers variant](#tab/button-icon-hh)
+
 You can use the extension method like this:
 
 ```cshtml
@@ -407,6 +518,10 @@ You can use the extension method like this:
     @n.Submit("Submit").WithIcon("adjust")
 }
 ```
+
+In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you instead add the namespace to your `_ViewImports.cshtml` or equivalent file.
+
+***
 
 Which would result in:
 
@@ -416,8 +531,6 @@ Which would result in:
 </div>
 ```
 
-In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to `ChameleonForms.Templates.TwitterBootstrap3` for each view that has a form using the extension method you add the namespace to your `_ViewImports.cshtml_` file.
-
 ### Example
 
 Here is an example from the example project of what the buttons can look like:
@@ -426,34 +539,69 @@ Here is an example from the example project of what the buttons can look like:
 
 Here is the code that generated the above screenshot:
 
+# [Tag Helpers variant](#tab/example-th)
+
 ```cshtml
-    @using (var n = f.BeginNavigation())
-    {
-        @n.Button("text button").WithStyle(EmphasisStyle.Primary).WithSize(ButtonSize.Default)
-        @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("random-class")
-        @n.Reset("text reset").WithIcon("refresh")
-        @n.Reset(new HtmlString("<strong>html reset</strong>"))
-        @n.Submit(new HtmlString("<strong>html submit</strong>"))
-        @n.Submit("text submit").WithStyle(EmphasisStyle.Danger)
-        @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>"))
-        @n.Submit("name", "value").WithIcon("star").WithStyle(EmphasisStyle.Success)
-    }
-    
-    @using (var n = f.BeginNavigation())
-    {
-        @n.Button("Small button 1").WithSize(ButtonSize.Small)
-        @n.Button("Small button 2").WithSize(ButtonSize.Small)
-    }
-    
-    @using (var n = f.BeginNavigation())
-    {
-        @n.Button("Extra small button 1").WithSize(ButtonSize.ExtraSmall)
-        @n.Button("Extra small button 2").WithSize(ButtonSize.ExtraSmall)
-    }
-    
-    @using (var n = f.BeginNavigation())
-    {
-        @n.Button("Large button 1").WithSize(ButtonSize.Large)
-        @n.Button("Large button 2").WithSize(ButtonSize.Large)
-    }
+<form-navigation>
+    <form-button label="text button" emphasis-style="Primary" size="Default" />
+    <form-button add-class="random-class"><strong>html button</strong></form-button>
+    <reset-button label="text reset" icon="refresh" />
+    <reset-button><strong>html reset</strong></reset-button>
+    <submit-button><strong>html submit</strong></submit-button>
+    <submit-button label="text submit" emphasis-style="Danger" />
+    <submit-button name="name" value="value"><strong>html submit with value</strong></submit-button>
+    <submit-button name="name" value="value" label="value" icon="star" emphasis-style="Success" />
+</form-navigation>
+
+<form-navigation>
+    <form-button label="Small button 1" size="Small" />
+    <form-button label="Small button 2" fluent-attrs='c => c.WithSize(ButtonSize.Small)' />
+</form-navigation>
+
+<form-navigation>
+    <form-button label="Extra small button 1" size="ExtraSmall" />
+    <form-button label="Extra small button 2" fluent-attrs='c => c.WithSize(ButtonSize.ExtraSmall)' />
+</form-navigation>
+
+<form-navigation>
+    <form-button label="Large button 1" size="Large" />
+    <form-button label="Large button 2" fluent-attrs='c => c.WithSize(ButtonSize.Large)' />
+</form-navigation>
 ```
+
+
+# [HTML Helpers variant](#tab/example-hh)
+
+```cshtml
+@using (var n = f.BeginNavigation())
+{
+    @n.Button("text button").WithStyle(EmphasisStyle.Primary).WithSize(ButtonSize.Default)
+    @n.Button(new HtmlString("<strong>html button</strong>")).AddClass("random-class")
+    @n.Reset("text reset").WithIcon("refresh")
+    @n.Reset(new HtmlString("<strong>html reset</strong>"))
+    @n.Submit(new HtmlString("<strong>html submit</strong>"))
+    @n.Submit("text submit").WithStyle(EmphasisStyle.Danger)
+    @n.Submit("name", "value", new HtmlString("<strong>html submit with value</strong>"))
+    @n.Submit("name", "value").WithIcon("star").WithStyle(EmphasisStyle.Success)
+}
+
+@using (var n = f.BeginNavigation())
+{
+    @n.Button("Small button 1").WithSize(ButtonSize.Small)
+    @n.Button("Small button 2").WithSize(ButtonSize.Small)
+}
+
+@using (var n = f.BeginNavigation())
+{
+    @n.Button("Extra small button 1").WithSize(ButtonSize.ExtraSmall)
+    @n.Button("Extra small button 2").WithSize(ButtonSize.ExtraSmall)
+}
+
+@using (var n = f.BeginNavigation())
+{
+    @n.Button("Large button 1").WithSize(ButtonSize.Large)
+    @n.Button("Large button 2").WithSize(ButtonSize.Large)
+}
+```
+
+***

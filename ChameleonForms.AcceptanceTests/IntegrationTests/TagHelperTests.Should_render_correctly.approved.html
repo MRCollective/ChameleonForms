@@ -1,0 +1,148 @@
+﻿ChameleonFormsTH.cshtml
+
+@model ComparisonController.SignupViewModel
+
+@{
+    ViewBag.Title = "ChameleonForms Example";
+}
+
+<h1>ChameleonForms TagHelpers example</h1>
+
+<chameleon-form attr-id="signup-form">
+    <form-message type="Information" heading="Signup for an account">
+        <message-paragraph>Please fill in your information below to signup for an account.</message-paragraph>
+    </form-message>
+
+    <form-section heading="Your details">
+        <field for="FirstName" />
+        <field for="LastName" />
+        <field for="DateOfBirth" hint="DD/MM/YYYY" />
+    </form-section>
+
+    <form-section heading="Account details">
+        <field for="EmailAddress" hint="An email will be sent to this address to confirm you own it" />
+        <field for="Password" />
+        <field for="MembershipType" />
+    </form-section>
+
+    <form-section heading="Additional details">
+        <field for="Bio" />
+        <field for="Homepage" placeholder="https://" />
+    </form-section>
+
+    <form-message type="Action" heading="Confirm the Terms & Conditions">
+        <message-paragraph>Please <a href="#">read the terms and conditions</a></message-paragraph>
+        <field-element for="TermsAndConditions" inline-label="I agree to the terms and conditions" />
+    </form-message>
+
+    <form-navigation>
+        <submit-button label="Signup" emphasis-style="Primary" />
+    </form-navigation>
+</chameleon-form>
+
+=====
+
+Rendered Source
+
+<form action="" enctype="application/x-www-form-urlencoded" id="signup-form" method="post" novalidate="novalidate">
+          <div class="information_message">
+          <h3>Signup for an account</h3>
+          <div class="message">
+
+        
+<p>
+    Please fill in your information below to signup for an account.
+</p>
+              </div>
+      </div>
+
+
+        <fieldset>
+        <legend>Your details</legend>
+        <dl>
+
+                    <dt><label for="FirstName">First name</label> <em class="required">*</em></dt>
+            <dd>
+                <input data-val="true" data-val-required="The First name field is required." id="FirstName" name="FirstName" required="required" type="text" value=""> <span class="field-validation-valid" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
+            </dd>
+
+                    <dt><label for="LastName">Last name</label> <em class="required">*</em></dt>
+            <dd>
+                <input data-val="true" data-val-required="The Last name field is required." id="LastName" name="LastName" required="required" type="text" value=""> <span class="field-validation-valid" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
+            </dd>
+
+                    <dt><label for="DateOfBirth">Date of birth</label> <em class="required">*</em></dt>
+            <dd>
+                <input aria-describedby="DateOfBirth--Hint" data-val="true" data-val-date="The field Date of birth must be a date with format d/M/yyyy." data-val-format="d/M/yyyy" data-val-required="The Date of birth field is required." id="DateOfBirth" name="DateOfBirth" required="required" type="text" value=""><div class="hint" id="DateOfBirth--Hint">DD/MM/YYYY</div> <span class="field-validation-valid" data-valmsg-for="DateOfBirth" data-valmsg-replace="true"></span>
+            </dd>
+
+            </dl>
+    </fieldset>
+
+
+        <fieldset>
+        <legend>Account details</legend>
+        <dl>
+
+                    <dt><label for="EmailAddress">Email address</label> <em class="required">*</em></dt>
+            <dd>
+                <input aria-describedby="EmailAddress--Hint" data-val="true" data-val-email="The Email address field is not a valid e-mail address." data-val-required="The Email address field is required." id="EmailAddress" name="EmailAddress" required="required" type="email" value=""><div class="hint" id="EmailAddress--Hint">An email will be sent to this address to confirm you own it</div> <span class="field-validation-valid" data-valmsg-for="EmailAddress" data-valmsg-replace="true"></span>
+            </dd>
+
+                    <dt><label for="Password">Password</label> <em class="required">*</em></dt>
+            <dd>
+                <input data-val="true" data-val-required="The Password field is required." id="Password" name="Password" required="required" type="password"> <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+            </dd>
+
+                    <dt><label for="MembershipType">Membership type</label> <em class="required">*</em></dt>
+            <dd>
+                <select data-val="true" data-val-required="The Membership type field is required." id="MembershipType" name="MembershipType" required="required"><option selected="selected" value="Standard">Standard</option>
+<option value="Bonze">Bonze</option>
+<option value="Silver">Silver</option>
+<option value="Gold">Gold</option>
+<option value="Platinum">Platinum</option>
+</select> <span class="field-validation-valid" data-valmsg-for="MembershipType" data-valmsg-replace="true"></span>
+            </dd>
+
+            </dl>
+    </fieldset>
+
+
+        <fieldset>
+        <legend>Additional details</legend>
+        <dl>
+
+                    <dt><label for="Bio">Bio</label></dt>
+            <dd>
+                <textarea cols="20" id="Bio" name="Bio" rows="2"></textarea> <span class="field-validation-valid" data-valmsg-for="Bio" data-valmsg-replace="true"></span>
+            </dd>
+
+                    <dt><label for="Homepage">Homepage</label></dt>
+            <dd>
+                <input id="Homepage" name="Homepage" placeholder="https://" type="url" value=""> <span class="field-validation-valid" data-valmsg-for="Homepage" data-valmsg-replace="true"></span>
+            </dd>
+
+            </dl>
+    </fieldset>
+
+
+          <div class="action_message">
+          <h3>Confirm the Terms &amp; Conditions</h3>
+          <div class="message">
+
+        
+<p>
+    Please <a href="#">read the terms and conditions</a>
+</p>
+        <input data-val="true" data-val-required="The Terms and conditions field is required." id="TermsAndConditions" name="TermsAndConditions" required="required" type="checkbox" value="true"> <label for="TermsAndConditions">I agree to the terms and conditions</label>
+              </div>
+      </div>
+
+
+            <div class="form_navigation">
+
+        <button class="btn-primary" type="submit">Signup</button>
+            </div>
+
+<input name="__RequestVerificationToken" type="hidden" value="...">
+    </form>

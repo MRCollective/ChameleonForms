@@ -1,12 +1,12 @@
 # Field Configuration
 
-Field Configuration provides the ability to configure a [Field](field.md) (and its sub-components) on both an ad-hoc basis within a particular form and a convention basis across all forms. Specifying a Field Configuration is done by chaining calls to the methods on the `IFieldConfiguration` interface.
+Field Configuration provides the ability to configure a [Field](field.md) (and its sub-components) on both an ad-hoc basis within a particular form and a convention basis across all forms. Specifying a Field Configuration is done by chaining calls to the methods on the `IFieldConfiguration` interface and/or calling the mapped field configuration attributes when using tag helpers.
 
 The `IFieldConfiguration` interface is translated to an `IReadonlyFieldConfiguration` just before it's passed to the template to make sure that modifications can't be made to it after it's processed by the template.
 
 The `IFieldConfiguration` interface looks like this and is in the `ChameleonForms.Component.Config` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Holds configuration data for a form field.
     /// </summary>
@@ -429,7 +429,7 @@ The `IFieldConfiguration` interface looks like this and is in the `ChameleonForm
 
 The `IReadonlyFieldConfiguration` interface can be created by calling the `ToReadonly()` method on the `IFieldConfiguration`; it is in the `ChameleonForms.Component.Config` namespace and looks like this:
 
-```csharp
+```cs
     /// <summary>
     /// Immutable field configuration for use when generating a field's HTML.
     /// </summary>
@@ -561,9 +561,88 @@ The xmldoc comments above should give a pretty good indication of how each of th
 * [Field Label](field-label.md)
 * [Field Types](index.md#field-types)
 
-## How does the IFieldConfiguration output the Field HTML?
+## Tag Helper mappings
 
-The astute viewer will notice that the various `FieldFor`, `FieldElementFor`, `LabelFor` and `ValidationMessageFor` extension methods all return an `IFieldConfiguration` as opposed to a `string` or `IHtmlContent`, yet when prefixed  with `@` in a razor view (with or without chaining any Field Configuration methods) will always output the correct HTML.
+When using tag helpers there are two ways of specifying field configuration:
+
+1. Use the `fluent-config` attribute and chain the field configuration method calls
+2. Use individual attributes that are mapped to individual field configuration methods
+
+### Fluent configuration
+
+Note: We recommend that you make use of single quotes (`'`) rather than double quotes (`"`) so that you can use the double quotes in any field configuration methods that need a string. Alternatively, you can keep double quotes and wrap the whole thing in `@()` e.g. `fluent-config="@(c => c.AddClass("a-class"))"`.
+
+```cshtml
+<field for="..." fluent-config='c => c.AddClass("a-class").Append("after")...' />
+<field-element for="..." fluent-config='c => c.AddClass("a-class").Min(2)...' />
+<field-label for="..." fluent-config='c => c.Label("a-class").WithoutLabelElement()...' />
+<field-validation for="..." fluent-config='c => c.AddValidationClass("a-class")...' />
+```
+
+### Mapped attributes
+
+Any attributes that take string values can have a variable or other C# expression added by prepending with a `@` per usual Razor syntax. Most field configuration methods map to a tag helper attribute by convention - `UpperCamelCase` to `upper-camel-case` (i.e. kebab case), but a few are slightly different for clarity or terseness.
+
+| Field Configuration Method                            | Equivalent Tag Helper attribute                       | Available On                       |
+|-------------------------------------------------------|-------------------------------------------------------|------------------------------------|
+| `AddClass(string @class)`                             | `add-class="{class}"`                                 | `<field>` and `<field-element>`    |
+| `AddFieldContainerClass(string @class)`               | `add-container-class="{class}"`                       | `<field>`                          |
+| `AddLabelClass(string @class)`                        | `add-label-class="{class}"`                           | `<field>` and `<field-label>`      |
+| `AddValidationClass(string @class)`                   | `add-validation-class="{class}"`                      | `<field>` and `<field-validation>` |
+| `AsRadioList()`                                       | `as="RadioList"`                                      | `<field>` and `<field-element>`    |
+| `AsCheckboxList()`                                    | `as="CheckboxList"`                                   | `<field>` and `<field-element>`    |
+| `AsDropDown()`                                        | `as="DropDown"`                                       | `<field>` and `<field-element>`    |
+| `Append(IHtmlContent html)`                           | `append-html-content="{html}"`                        | `<field>`                          |
+| `Append(Func<dynamic, IHtmlContent> html)`            | `append-html="{html}"`                                | `<field>`                          |
+| `Append(string str)`                                  | `append="{str}"`                                      | `<field>`                          |
+| `Attr(string key, object value)`                      | `attr-{key}="{value}"`                                | `<field>` and `<field-element>`    |
+| `Attr(Func<object, object> attribute)`                | *No equivalent*                                       | N/A                                |
+| `Attrs(params Func<object, object>[] attributes)`     | *No equivalent*                                       | N/A                                |
+| `Attrs(IDictionary<string, object> attributes)`       | `attrs="{attributes}"`                                | `<field>` and `<field-element>`    |
+| `Attrs(object attributes)`                            | *No equivalent*                                       | N/A                                |
+| `Cols(int numCols)`                                   | `cols="{numCols}"`                                    | `<field>` and `<field-element>`    |
+| `Disabled(bool disabled = true)`                      | `disabled="{disabled}"`                               | `<field>` and `<field-element>`    |
+| `Exclude(params Enum[] enumValues)`                   | `exclude="new Enum[] {enumValues...}"`                | `<field>` and `<field-element>`    |
+| `Id(string id)`                                       | `id="{id}"`                                           | `<field>` and `<field-element>`    |
+| `InlineLabel(string labelText)`                       | `inline-label="{labelText}"`                          | `<field>` and `<field-element>`    |
+| `InlineLabel(IHtmlContent labelHtml)`                 | `inline-label-html-content="{labelHtml}"`             | `<field>` and `<field-element>`    |
+| `InlineLabel(Func<dynamic, IHtmlContent> labelHtml)`  | `inline-label-html="{labelHtml}"`                     | `<field>` and `<field-element>`    |
+| `InlineLabelWrapsElement(bool wrapElement = true)`    | `inline-label-wraps-element="{wrapElement}"`          | `<field>` and `<field-element>`    |
+| `Label(string labelText)`                             | `label="{labelText}"`                                 | `<field>` and `<field-label>`      |
+| `Label(IHtmlContent labelHtml)`                       | `label-html-content="{labelHtml}"`                    | `<field>` and `<field-label>`      |
+| `Label(Func<dynamic, IHtmlContent> labelHtml)`        | `label-html="{labelHtml}"`                            | `<field>` and `<field-label>`      |
+| `Min(decimal min)`                                    | `min="@min.ToString()"`                               | `<field>` and `<field-element>`    |
+| `Min(long min)`                                       | `min="@min.ToString()"`                               | `<field>` and `<field-element>`    |
+| `Min(string min)`                                     | `min="{min}"`                                         | `<field>` and `<field-element>`    |
+| `Max(decimal max)`                                    | `max="@max.ToString()"`                               | `<field>` and `<field-element>`    |
+| `Max(long max)`                                       | `max="@max.ToString()"`                               | `<field>` and `<field-element>`    |
+| `Max(string max)`                                     | `max="{max}"`                                         | `<field>` and `<field-element>`    |
+| `OverrideFieldHtml(IHtmlContent html)`                | `override-field-html-content="{html}"`                | `<field>`                          |
+| `OverrideFieldHtml(Func<dynamic, IHtmlContent> html)` | `override-field-html="{html}"`                        | `<field>`                          |
+| `Placeholder(string placeholderText)`                 | `placeholder="{placeholderText}"`                     | `<field>` and `<field-element>`    |
+| `Prepend(IHtmlContent html)`                          | `prepend-html-content="{html}"`                       | `<field>`                          |
+| `Prepend(Func<dynamic, IHtmlContent> html)`           | `prepend-html="{html}"`                               | `<field>`                          |
+| `Prepend(string str)`                                 | `prepend="{str}"`                                     | `<field>`                          |
+| `Readonly(bool @readonly = true)`                     | `readonly="{readonly}"`                               | `<field>` and `<field-element>`    |
+| `Required(bool required = true)`                      | `required="{required}"`                               | `<field>` and `<field-element>`    |
+| `Rows(int numRows)`                                   | `rows="{numRows}"`                                    | `<field>` and `<field-element>`    |
+| `Step(decimal step)`                                  | `step="{step}"` (inline) or `step="@step.ToString()"` | `<field>` and `<field-element>`    |
+| `Step(long step)`                                     | `step="{step}"` (inline) or `step="@step.ToString()"` | `<field>` and `<field-element>`    |
+| `HideEmptyItem()`                                     | `hide-empty-item="true"`                              | `<field>` and `<field-element>`    |
+| `WithFalseAs(string falseString)`                     | `false-label="{falseString}"`                         | `<field>` and `<field-element>`    |
+| `WithFormatString(string formatString)`               | `format-string="{formatString}"`                      | `<field>` and `<field-element>`    |
+| `WithHint(string hint)`                               | `hint="{hint}"`                                       | `<field>`                          |
+| `WithHint(IHtmlContent hint)`                         | `hint-html-content="{hint}"`                          | `<field>`                          |
+| `WithHint(Func<dynamic, IHtmlContent> hint)`          | `hint-html="{hint}"`                                  | `<field>`                          |
+| `WithHintId(string hintId)`                           | `hint-id="{hintId}"`                                  | `<field>`                          |
+| `WithNoneAs(string noneString)`                       | `none-label="{noneString}"`                           | `<field>` and `<field-element>`    |
+| `WithoutInlineLabel()`                                | `without-inline-label="true"`                         | `<field>` and `<field-element>`    |
+| `WithoutLabelElement()`                               | `without-label-element="true"`                        | `<field>` and `<field-label>`      |
+| `WithTrueAs(string trueString)`                       | `true-label="{trueString}"`                           | `<field>` and `<field-element>`    |
+
+## How does the IFieldConfiguration output the Field HTML for HTML Helper extension methods?
+
+The astute viewer will notice that the various `FieldFor`, `FieldElementFor`, `LabelFor` and `ValidationMessageFor` HTML Helper extension methods all return an `IFieldConfiguration` as opposed to a `string` or `IHtmlContent`, yet when prefixed  with `@` in a razor view (with or without chaining any Field Configuration methods) will always output the correct HTML.
 
 This works because:
 
@@ -579,14 +658,36 @@ For all the field configuration methods that take an `IHtmlContent` you have a f
 * Pass the HTML as a string e.g. `.Label(new HtmlString("<strong>My label</strong>"))`
 * Pass the HTML by calling any method that returns an `IHtmlContent`
 * Use the override that takes a [templated razor delegate](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-3.1#directive-attributes), e.g.:
-```cshtml
-    @{
-        Func<dynamic, IHtmlContent> myLabel = @<strong>My label</strong>;
-    }
+
+
+    # [Tag Helpers variant](#tab/templated-razor-delegate-example-th)
+
+    Unfortunately, tag helpers don't support inline templated razor delegates so you have to pass it in via a variable.
+
+    ```cshtml
+        @{
+            Func<dynamic, IHtmlContent> myLabel = @<strong>My label</strong>;
+        }
+        
+        ...
+        <field for="MyField" label="myLabel" />
+        ...
+    ```
+
+    # [HTML Helpers variant](#tab/templated-razor-delegate-example-hh)
     
-    ...
-    @s.FieldFor(m => m.MyField).Label(myLabel)
-    @s.FieldFor(m => m.MyOtherField).Label(@<strong>Inline templated razor delegate with single parent element</strong>)
-    @s.FieldFor(m => m.MyOtherField).Label(@<text><strong>Inline</strong> templated razor delegate with no single parent element</text>)
-    ...
-```
+    ```cshtml
+        @{
+            Func<dynamic, IHtmlContent> myLabel = @<strong>My label</strong>;
+        }
+        
+        ...
+        @s.FieldFor(m => m.MyField).Label(myLabel)
+        @s.FieldFor(m => m.MyOtherField).Label(@<strong>Inline templated razor delegate with single parent element</strong>)
+        @s.FieldFor(m => m.MyOtherField).Label(@<text><strong>Inline</strong> templated razor delegate with no single parent element</text>)
+        ...
+    ```
+
+    ***
+
+The Tag Helper attributes have a convention where the version that takes a `IHtmlContent` will be appended with `-html-content` and the version that takes a templated razor delegate will be appended with `-html`.

@@ -47,6 +47,18 @@ namespace ChameleonForms
         }
 
         /// <summary>
+        /// Constructs a <see cref="HtmlAttributes"/> object using a dictionary to express the attributes.
+        /// </summary>
+        /// <example>
+        /// var h = new HtmlAttributes(new Dictionary&lt;string, string&gt; {{"style", "width: 100%;"}, {"cellpadding", "0"}, {"class", "class1 class2"}, {"src", "http://url/"}, {"data-somedata", "\"rubbi&amp;h\""}});
+        /// </example>
+        /// <param name="attributes">A dictionary of attributes</param>
+        public HtmlAttributes(IDictionary<string, string> attributes)
+        {
+            Attrs(attributes);
+        }
+
+        /// <summary>
         /// Constructs a <see cref="HtmlAttributes"/> object using an anonymous object to express the attributes.
         /// </summary>
         /// <example>
@@ -148,9 +160,14 @@ namespace ChameleonForms
         public HtmlAttributes Attr(Func<object, object> attribute)
         {
             var item = attribute(null);
-            _tagBuilder.MergeAttribute(attribute.Method.GetParameters()[0].Name.Replace("_", "-").ToLower(), item == null ? string.Empty : item.ToString(), true);
+            _tagBuilder.MergeAttribute(GetAttributeName(attribute), item == null ? string.Empty : item.ToString(), true);
 
             return this;
+        }
+
+        private string GetAttributeName(Func<object, object> attribute)
+        {
+            return attribute.Method.GetParameters()[0].Name.Replace("_", "-").ToLower();
         }
 
         /// <summary>
@@ -161,7 +178,12 @@ namespace ChameleonForms
         public HtmlAttributes Attrs(params Func<object, object>[] attributes)
         {
             foreach (var func in attributes)
-                Attr(func);
+            {
+                if (GetAttributeName(func) == "class")
+                    AddClass(func(null) as string);
+                else
+                    Attr(func);
+            }
 
             return this;
         }
@@ -173,9 +195,33 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attrs(IDictionary<string, object> attributes)
         {
-            attributes = attributes.ToDictionary(d => d.Key.ToLower(), d => d.Value);
+            var attributesToMerge = attributes
+                .Where(x => x.Key != "class")
+                .ToDictionary(d => d.Key.ToLower(), d => d.Value);
 
-            _tagBuilder.MergeAttributes(attributes, true);
+            _tagBuilder.MergeAttributes(attributesToMerge, true);
+
+            if (attributes.ContainsKey("class"))
+                AddClass(attributes["class"] as string);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds or updates a set of HTML attributes using a dictionary to express the attributes.
+        /// </summary>
+        /// <param name="attributes">A dictionary of attributes</param>
+        /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
+        public HtmlAttributes Attrs(IDictionary<string, string> attributes)
+        {
+            var attributesToMerge = attributes
+                .Where(k => k.Key != "class")
+                .ToDictionary(x => x.Key.ToLower(), x => x.Value);
+
+            _tagBuilder.MergeAttributes(attributesToMerge, true);
+
+            if (attributes.ContainsKey("class"))
+                AddClass(attributes["class"]);
 
             return this;
         }
@@ -187,9 +233,15 @@ namespace ChameleonForms
         /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
         public HtmlAttributes Attrs(object attributes)
         {
-            var attrs = HtmlHelper.AnonymousObjectToHtmlAttributes(attributes)
+            var attrs = HtmlHelper.AnonymousObjectToHtmlAttributes(attributes);
+
+            var attrsToMerge = attrs
+                .Where(x => x.Key != "class")
                 .ToDictionary(d => d.Key.ToLower(), d => d.Value);
-            _tagBuilder.MergeAttributes(attrs, true);
+            _tagBuilder.MergeAttributes(attrsToMerge, true);
+
+            if (attrs.ContainsKey("class"))
+                AddClass(attrs["class"] as string);
 
             return this;
         }
@@ -204,7 +256,22 @@ namespace ChameleonForms
             return new HtmlAttributes(attributes);
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Implicitly convert from a dictionary to a new <see cref="HtmlAttributes"/> object.
+        /// </summary>
+        /// <param name="attributes">The dictionary of HTML attributes</param>
+        /// <returns>The new <see cref="HtmlAttributes"/> object</returns>
+        public static implicit operator HtmlAttributes(Dictionary<string, string> attributes)
+        {
+            return new HtmlAttributes(attributes);
+        }
+
+        /// <summary>
+        /// Called when form component outputted to the page; writes the form content HTML to the given writer.
+        /// </summary>
+        /// <param name="writer">The writer to write to</param>
+        /// <param name="encoder">The HTML encoder to use when writing</param>
+
         public virtual void WriteTo(TextWriter writer, HtmlEncoder encoder)
         {
             foreach (var attr in _tagBuilder.Attributes)

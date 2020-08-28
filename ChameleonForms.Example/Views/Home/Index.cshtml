@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using ChameleonForms.Utils
+@model ViewModelExample
 
 @{
     ViewBag.Title = "ChameleonForms";
@@ -16,9 +17,11 @@
 
 <h2>ChameleonForms vs ASP.NET MVC <abbr title="out-of-the-box">OOTB</abbr></h2>
 <ul>
-    <li>@Html.ActionLink("ChameleonForms", "ChameleonForms", "Comparison")</li>
+    <li>@Html.ActionLink("ChameleonForms - HTML Helpers", "ChameleonForms", "Comparison")</li>
+    <li>@Html.ActionLink("ChameleonForms - Tag Helpers", "ChameleonFormsTH", "Comparison")</li>
     <li>@Html.ActionLink("Editor Templates", "EditorTemplates", "Comparison")</li>
     <li>@Html.ActionLink("HTML Helpers", "HtmlHelpers", "Comparison")</li>
+    <li>@Html.ActionLink("Tag Helpers", "TagHelpers", "Comparison")</li>
 </ul>
 
 <h2>Smoke testing examples</h2>
@@ -28,14 +31,16 @@
     <li>@Html.ActionLink("Null model", "NullModel", "ExampleForms")</li>
     <li>@Html.ActionLink("Null model with list", "NullModelWithList", "ExampleForms")</li>
     <li>@Html.ActionLink("Null list", "NullList", "ExampleForms")</li>
-    <li>@Html.ActionLink("Buttons", "Buttons", "ExampleForms")</li>
-    <li>@Html.ActionLink("Partials", "Partials", "ExampleForms")</li>
-    <li>@Html.ActionLink("Changing HTML Helper context", "ChangingContext", "ExampleForms")</li>
+    <li>@Html.ActionLink("Buttons", "Buttons", "ExampleForms") | @Html.ActionLink("Buttons - Tag Helpers", "ButtonsTH", "ExampleForms")</li>
+    <li>@Html.ActionLink("Partials", "Partials", "ExampleForms") | @Html.ActionLink("Partials - Tag Helpers", "PartialsTH", "ExampleForms")</li>
+    <li>@Html.ActionLink("Changing model context - HTML Helpers", "ChangingContext", "ExampleForms")</li>
+    <li>@Html.ActionLink("Changing model context - Tag Helpers", "ChangingContextTH", "ExampleForms")</li>
 </ul>
 
 <h2>Random forms and UI tests</h2>
 <ul>
-    <li>@Html.ActionLink("Complex form and test-bed", "Form1", "ExampleForms")</li>
+    <li>@Html.ActionLink("HTML Helpers kitchen sink", "Form1", "ExampleForms")</li>
+    <li>@Html.ActionLink("Tag Helpers kitchen sink", "Form2", "ExampleForms")</li>
     <li>@Html.ActionLink("Model Binding Example", "ModelBindingExample", "ExampleForms")</li>
     <li>@Html.ActionLink("Model Binding Example with lists", "ModelBindingExample2", "ExampleForms")</li>
 </ul>

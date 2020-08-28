@@ -1,10 +1,10 @@
 # Form
 
-The Form is the root element of a ChameleonForms form; you create a Form by instantiating an `IForm<TModel>` within a `using` block. The start and end of the `using` block will output the start and end HTML for the form and the inside of the `using` block will contain the Form content.
+The Form is the root element of a ChameleonForms form; you create a Form by either using the `<chameleon-form>` tag helper, or instantiating an `IForm<TModel>` within a `using` block.
 
 The `IForm<TModel>` interface looks like this and is in the `ChameleonForms` namespace:
 
-```csharp
+```cs
     /// <summary>
     /// Interface for a Chameleon Form.
     /// </summary>
@@ -30,14 +30,35 @@ The `IForm<TModel>` interface looks like this and is in the `ChameleonForms` nam
         /// </summary>
         /// <param name="property">The property to return the field generator for</param>
         IFieldGenerator GetFieldGenerator<T>(Expression<Func<TModel, T>> property);
+
+        /// <summary>
+        /// Returns a wrapped <see cref="PartialViewForm{TModel}"/> for the given partial view helper.
+        /// </summary>
+        /// <param name="partialViewHelper">The HTML Helper from the partial view</param>
+        /// <returns>The PartialViewForm wrapping the original form</returns>
+        IForm<TModel> CreatePartialForm(IHtmlHelper<TModel> partialViewHelper);
     }
 ```
 
-ChameleonForms comes with a standard implementation of the `IForm<TModel>` interface that uses the `BeginForm` and `EndForm` methods in the given [form template](form-templates.md) and returns an instance of the `DefaultFieldGenerator` class when asked for a Field Generator.
+ChameleonForms comes with a standard implementation of the `IForm<TModel>` interface that uses the `BeginForm` and `EndForm` methods in the currently configured [form template](form-templates.md) and returns an instance of the `DefaultFieldGenerator` class when asked for a [Field Generator](custom-field-generator.md).
 
 ## Default usage
 
-In order to get an instance of an `IForm<TModel>` using the [default form template](configuration.md#default-global-config) (see below if [you want to adjust it on a per-form basis](#configuring-the-form-template)) you can use the `BeginChameleonForm` extension method on the `HtmlHelper` that appears in MVC views, e.g.:
+In order to create a self-submitting form using the [default form template](configuration.md#default-global-config) (see below if [you want to adjust it on a per-form basis](#configuring-the-form-template)):
+
+# [Tag Helpers variant](#tab/default-form-th)
+
+Use the `<chameleon-form>` tag helper:
+
+```cshtml
+<chameleon-form>
+    @* Form content goes here *@
+</chameleon-form>
+```
+
+# [HTML Helpers variant](#tab/default-form-hh)
+
+Use the `BeginChameleonForm` extension method on the `HtmlHelper` that appears in MVC views, e.g.:
 
 ```cshtml
 @using (var f = Html.BeginChameleonForm()) {
@@ -47,7 +68,7 @@ In order to get an instance of an `IForm<TModel>` using the [default form templa
 
 The `BeginChameleonForm` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Constructs a <see cref="Form{TModel}"/> object with the default ChameleonForms template renderer.
         /// </summary>
@@ -62,20 +83,41 @@ The `BeginChameleonForm` extension method looks like this:
         /// <param name="method">The HTTP method the form submission should use</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use</param>
         /// <param name="enctype">The encoding type the form submission should use</param>
+        /// <param name="outputAntiforgeryToken">Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET</param>
         /// <returns>A <see cref="Form{TModel}"/> object with an instance of the default form template renderer.</returns>
-        public static IForm<TModel> BeginChameleonForm<TModel>(this IHtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm<TModel> BeginChameleonForm<TModel>(this IHtmlHelper<TModel> helper, string action = "", FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
         {
-            return new Form<TModel>(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
+            return new Form<TModel>(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype, outputAntiforgeryToken);
         }
 ```
 
-By default a self-submitting form that performs a HTTP post with the browser's default `enctype` (usually `application/x-www-form-urlencoded`) is outputted, but you can change the submit location, HTTP verb, `enctype` and add any [HTML attributes you like](html-attributes.md) using the appropriate parameters.
+***
+
+By default a self-submitting form, against the page model type, that performs a HTTP post with the browser's default `enctype` (usually `application/x-www-form-urlencoded`) is outputted, but you can change the submit location, HTTP verb, `enctype` and add any [HTML attributes you like](html-attributes.md) using the appropriate parameters, e.g.:
+
+# [Tag Helpers variant](#tab/configure-form-th)
+
+```cshtml
+<chameleon-form action="@Url.Action("SomeAction")" method="Post" enctype="Multipart" id="my-form" disabled="false" add-class="a-class" fluent-config='c => c.Attr("data-a", "b")' attr-data-whatever="some value" output-antiforgery-token="false">
+    @* Form content goes here *@
+</chameleon-form>
+```
+
+# [HTML Helpers variant](#tab/configure-form-hh)
+
+```cshtml
+@using (var f = Html.BeginChameleonForm(action: Url.Action("SomeAction"), method: FormMethod.Post, enctype: EncType.Multipart, htmlAttributes: new HtmlAttributes().Id("my-form").Disabled(false).AddClass("a-class").Attr("data-a", "b").Attr("data-whatever", "some value"), outputAntiforgeryToken: false)) {
+    @* Form content goes here *@
+}
+```
+
+***
 
 You can also [create a form against a model type different from the page model](different-form-models.md).
 
 ## Configuring the form template
 
-As you can see above, when using the `BeginChameleonForm` extension method it uses `helper.GetDefaultFormTemplate()` to determine what form template to use. [By default](configuration.md#default-global-config) this is set to an instance of the `DefaultFormTemplate` class from the `ChameleonForms.Templates.Default` namespace.
+As you can see above, when using the `BeginChameleonForm` extension method (which is also what the `<chameleon-form>` tag helper uses under the hood) it uses `helper.GetDefaultFormTemplate()` to determine what form template to use. [By default](configuration.md#default-global-config) this is set to an instance of the `DefaultFormTemplate` class from the `ChameleonForms.Templates.Default` namespace.
 
 The way this works is the [global configuration](configuration.md) will register an implementation of `IFormTemplate` with the service collection within your ASP.NET Core web application. The `helper.GetDefaultFormTemplate()` extension will then resolve that default template implementation from the request services:
 
@@ -106,7 +148,7 @@ services.AddChameleonForms(b => b.WithoutTemplateTypeRegistration());
 services.AddSingleton<IFormTemplate>(new MyFormTemplate(/* constructor parameters */));
 ```
 
-If you want to use multiple Form Templates across your application you can [create your own extension methods](custom-template.md) to allow for different form templates to be specified on a per-form basis.
+If you want to use multiple Form Templates across your application you can [create your own extension methods](custom-template.md) or create your own tag helper [based on the `<chameleon-form>` one](https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/ChameleonFormTagHelper.cs) to allow for different form templates to be specified on a per-form basis.
 
 ## HTML5 validation
 

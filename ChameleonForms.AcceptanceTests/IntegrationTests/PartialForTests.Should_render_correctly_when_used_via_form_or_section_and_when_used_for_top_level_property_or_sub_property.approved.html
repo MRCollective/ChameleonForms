@@ -10,25 +10,25 @@
 
 @using (var f = Html.BeginChameleonForm())
 {
-    @f.Partial("_ParentPartial")
-    @f.Partial("_BaseParentPartial")
-    @f.PartialFor(m => m.Child, "_ChildPartial")
-    @f.PartialFor(m => m.BaseChild, "_BaseChildPartial")
+    @await Html.PartialAsync("_ParentPartial")
+    @(await Html.PartialAsync("_BaseParentPartial"))
+    @(await f.PartialForAsync(m => m.Child, "_ChildPartial"))
+    @(await f.PartialForAsync(m => m.BaseChild, "_BaseChildPartial"))
 
     using (var s = f.BeginSection("This is in the parent view"))
     {
         @s.FieldFor(m => m.Decimal).Append("in parent view")
-        @s.Partial("_ParentPartial")
-        @s.Partial("_BaseParentPartial")
+        @(await Html.PartialAsync("_ParentPartial"))
+        @(await Html.PartialAsync("_BaseParentPartial"))
         @s.FieldFor(m => m.ListId).Append("in parent view")
-        @s.PartialFor(m => m.Child, "_ChildPartial")
-        @s.PartialFor(m => m.BaseChild, "_BaseChildPartial")
+        @(await s.PartialForAsync(m => m.Child, "_ChildPartial"))
+        @(await s.PartialForAsync(m => m.BaseChild, "_BaseChildPartial"))
         @s.FieldFor(m => m.SomeCheckbox).Append(" in parent view")
     }
 
     using (var n = f.BeginNavigation())
     {
-         @n.Submit("Submit")
+        @n.Submit("Submit")
     }
 }
 
@@ -38,13 +38,16 @@ _ParentPartial.cshtml
 
 @model ViewModelExample
 
-@if (this.IsInFormSection())
+@if (Html.IsInChameleonFormsSection())
 {
-    @:@this.FormSection().FieldFor(m => m.TextAreaField).Append("from partial against top-level model")
+    @Html.GetChameleonFormsSection().FieldFor(m => m.TextAreaField).Append("from partial against top-level model")
 }
 else
 {
-    using (var s = this.Form().BeginSection("This is from a form-level partial against the top-level model")) {
+    <form-section heading="This is from a form-level partial against the top-level model">
+        <field for="Int" />
+    </form-section>
+    using (var s = Html.GetChameleonForm().BeginSection("This is from a form-level partial against the top-level model")) {
         @s.FieldFor(m => m.Int)
     }
 }
@@ -57,13 +60,13 @@ _ChildPartial.cshtml
 
 <p>This should show the ID of the child field including the parent path: @Html.IdFor(m => m.ChildField)</p>
 
-@if (this.IsInFormSection())
+@if (Html.IsInChameleonFormsSection())
 {
-    @:@this.FormSection().FieldFor(m => m.ChildField).Append("From partial against child model")
+    @Html.GetChameleonFormsSection().FieldFor(m => m.ChildField).Append("From partial against child model")
 }
 else
 {
-    using (var s = this.Form().BeginSection("This is from a form-level partial against a child model")) {
+    using (var s = Html.GetChameleonForm().BeginSection("This is from a form-level partial against a child model")) {
         @s.FieldFor(m => m.SomeEnum)
     }
 }
@@ -74,13 +77,13 @@ _BaseParentPartial.cshtml
 
 @model ViewModelExampleBase
 
-@if (this.IsInFormSection())
+@if (Html.IsInChameleonFormsSection())
 {
-    @:@this.FormSection().FieldFor(m => m.BaseField).Append("from partial against top-level model casted to base class")
+    @Html.GetChameleonFormsSection().FieldFor(m => m.BaseField).Append("from partial against top-level model casted to base class")
 }
 else
 {
-    using (var s = this.Form().BeginSection("This is from a form-level partial against the top-level model casted to base class")) {
+    using (var s = Html.GetChameleonForm().BeginSection("This is from a form-level partial against the top-level model casted to base class")) {
         @s.FieldFor(m => m.BaseField2)
     }
 }
@@ -91,13 +94,13 @@ _BaseChildPartial.cshtml
 
 @model ViewModelExampleBaseChild
 
-@if (this.IsInFormSection())
+@if (Html.IsInChameleonFormsSection())
 {
-    @:@this.FormSection().FieldFor(m => m.BaseChildField).Append("From partial against child model in the base class")
+    @Html.GetChameleonFormsSection().FieldFor(m => m.BaseChildField).Append("From partial against child model in the base class")
 }
 else
 {
-    using (var s = this.Form().BeginSection("This is from a form-level partial against a child model in the base class")) {
+    using (var s = Html.GetChameleonForm().BeginSection("This is from a form-level partial against a child model in the base class")) {
         @s.FieldFor(m => m.BaseChildField2)
     }
 }
@@ -107,12 +110,24 @@ else
 Rendered Source
 
 <form action="" method="post" novalidate="novalidate">
+        <fieldset>
+        <legend>This is from a form-level partial against the top-level model</legend>
+        <dl>
+
+                    <dt><label for="Int">Int</label> <em class="required">*</em></dt>
+            <dd>
+                <input data-val="true" data-val-number="The field Int must be a number." data-val-required="The Int field is required." id="Int" name="Int" required="required" step="1" type="number" value="0"> <span class="field-validation-valid" data-valmsg-for="Int" data-valmsg-replace="true"></span>
+            </dd>
+
+            </dl>
+    </fieldset>
+
     <fieldset>
         <legend>This is from a form-level partial against the top-level model</legend>
         <dl>
             <dt><label for="Int">Int</label> <em class="required">*</em></dt>
             <dd>
-                <input data-val="true" data-val-number="The field Int must be a number." data-val-required="The Int field is required." id="Int" name="Int" required="required" step="1" type="number" value="0"> <span class="field-validation-valid" data-valmsg-for="Int" data-valmsg-replace="true"></span>
+                <input id="Int" name="Int" required="required" step="1" type="number" value="0"> <span class="field-validation-valid" data-valmsg-for="Int" data-valmsg-replace="true"></span>
             </dd>
         </dl>
     </fieldset>
@@ -159,17 +174,15 @@ Rendered Source
                 <input data-val="true" data-val-number="The field Decimal must be a number." data-val-required="The Decimal field is required." id="Decimal" name="Decimal" required="required" step="any" type="number" value="1.2300">in parent view <span class="field-validation-valid" data-valmsg-for="Decimal" data-valmsg-replace="true"></span>
             </dd>
 
-                <dt><label for="TextAreaField">Text area field</label></dt>
+            <dt><label for="TextAreaField">Text area field</label></dt>
             <dd>
                 <textarea cols="20" id="TextAreaField" name="TextAreaField" rows="2">Initial value</textarea>from partial against top-level model <span class="field-validation-valid" data-valmsg-for="TextAreaField" data-valmsg-replace="true"></span>
             </dd>
 
-
-                <dt><label for="BaseField">Base field</label></dt>
+            <dt><label for="BaseField">Base field</label></dt>
             <dd>
                 <input id="BaseField" name="BaseField" type="text" value="">from partial against top-level model casted to base class <span class="field-validation-valid" data-valmsg-for="BaseField" data-valmsg-replace="true"></span>
             </dd>
-
             <dt><label for="ListId">List id</label> <em class="required">*</em></dt>
             <dd>
                 <select data-val="true" data-val-number="The field List id must be a number." data-val-required="The List id field is required." id="ListId" name="ListId" required="required"><option value="1">A</option>
@@ -179,17 +192,15 @@ Rendered Source
 
 <p>This should show the ID of the child field including the parent path: Child_ChildField</p>
 
-                <dt><label for="Child_ChildField">Child field</label> <em class="required">*</em></dt>
+            <dt><label for="Child_ChildField">Child field</label> <em class="required">*</em></dt>
             <dd>
                 <input data-val="true" data-val-required="The Child field field is required." id="Child_ChildField" name="Child.ChildField" required="required" type="text" value="">From partial against child model <span class="field-validation-valid" data-valmsg-for="Child.ChildField" data-valmsg-replace="true"></span>
             </dd>
 
-
-                <dt><label for="BaseChild_BaseChildField">Base child field</label></dt>
+            <dt><label for="BaseChild_BaseChildField">Base child field</label></dt>
             <dd>
                 <input id="BaseChild_BaseChildField" name="BaseChild.BaseChildField" type="text" value="">From partial against child model in the base class <span class="field-validation-valid" data-valmsg-for="BaseChild.BaseChildField" data-valmsg-replace="true"></span>
             </dd>
-
             <dt><label for="SomeCheckbox">Some checkbox</label> <em class="required">*</em></dt>
             <dd>
                 <input data-val="true" data-val-required="The Some checkbox field is required." id="SomeCheckbox" name="SomeCheckbox" required="required" type="checkbox" value="true"> <label for="SomeCheckbox">Some checkbox</label> in parent view <span class="field-validation-valid" data-valmsg-for="SomeCheckbox" data-valmsg-replace="true"></span>
@@ -198,4 +209,5 @@ Rendered Source
     </fieldset>
         <div class="form_navigation">
 <button type="submit">Submit</button>        </div>
+<input name="__RequestVerificationToken" type="hidden" value="...">
     </form>

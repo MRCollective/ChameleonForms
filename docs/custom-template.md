@@ -2,7 +2,7 @@
 
 To create a custom form template you need to have a class that derives from the `IFormTemplate` interface:
 
-```csharp
+```cs
     /// <summary>
         /// Allows the template the modify the field configuration for a particular field.
         /// </summary>

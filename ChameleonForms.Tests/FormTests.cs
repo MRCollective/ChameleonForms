@@ -154,7 +154,7 @@ namespace ChameleonForms.Tests
 
         private Form<TestFieldViewModel> CreateForm()
         {
-            return new Form<TestFieldViewModel>(_h, _t, Action, Method, _htmlAttributes, Enctype);
+            return new Form<TestFieldViewModel>(_h, _t, Action, Method, _htmlAttributes, Enctype, null);
         }
 
         [TearDown]

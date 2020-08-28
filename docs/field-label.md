@@ -9,6 +9,20 @@ The Field Label is the HTML that makes up a label for a single Field. This Field
 
 ## Outputting directly from the Form
 
+# [Tag Helpers variant](#tab/output-th)
+
+To use a Field Generator to output the HTML for a standalone Field Label you can use the `<field-label />` tag, e.g.:
+
+```cshtml
+<field-label for="SomeField" />
+<field-label for="SomeField" fluent-config='c => c.ChainFieldConfigurationMethodsHere()' />
+<field-label for="SomeField" label="Label text..." />
+```
+
+To see the different configuration options check out [field configuration](field-configuration.md#tag-helper-mappings).
+
+# [HTML Helpers variant](#tab/output-hh)
+
 To use a Field Generator to output the HTML for a standalone Field Label you can use the `LabelFor` extension method on the Form, e.g.:
 
 ```cshtml
@@ -17,7 +31,7 @@ To use a Field Generator to output the HTML for a standalone Field Label you can
 
 The `LabelFor` extension method looks like this:
 
-```csharp
+```cs
         /// <summary>
         /// Creates a standalone label to be output in a form for a field.
         /// </summary>
@@ -39,6 +53,9 @@ The `LabelFor` extension method looks like this:
         }
 ```
 
+***
+
+
 ## Default HTML
 
 The HTML for the Field Label will be determined depending on the metadata of the model property being specified and the options in the [Field Configuration](field-configuration.md). The HTML of the Field Label will by default be:
@@ -49,9 +66,9 @@ The HTML for the Field Label will be determined depending on the metadata of the
 
 The `%id%` will be determined by using the built-in ASP.NET Core MVC methods for generating field ids, unless the `.Id("overriddenId")` method is called on the Field Configuration to override the id.
 
-To add classes to the label then use the `AddLabelClass` method on the Field Configuration.
+To add classes to the label then use the `AddLabelClass` method on the [Field Configuration](field-configuration.md).
 
-If the `WithoutLabelElement()` method is called on the Field Configuration then the HTML of the Field Label will be:
+If the `WithoutLabelElement()` method is called on the [Field Configuration](field-configuration.md) then the HTML of the Field Label will be:
 
 ```html
 %labelText%

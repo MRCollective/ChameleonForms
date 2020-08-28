@@ -2,7 +2,7 @@
 
 If you want the user to specify a value from an enum you can use that enum type (or a nullable instance of it) against a model property, e.g.:
 
-```csharp
+```cs
 public enum MyEnum  { ... }
 ...
 public MyEnum EnumField { get; set; } // automatically required since it's non-nullable
@@ -48,7 +48,7 @@ If the field is marked `[Required]` there will also be a `required="required"` a
 
 As an example, if you had the following enum:
 
-```csharp
+```cs
 public enum AnEnum
 {
     Singleword,
@@ -60,7 +60,7 @@ public enum AnEnum
 
 And you had a property on your model like:
 
-```csharp
+```cs
 public AnEnum EnumValue { get; set; }
 ```
 
@@ -80,10 +80,23 @@ Then by default the Field Element HTML would be (if labels are [automatically se
 
 You can force an enum field to display as a list of radio buttons rather than a drop-down using the `AsRadioList` method on the Field Configuration, e.g.:
 
+# [Tag Helpers variant](#tab/radiolist-th)
+
+The `AsRadioList` method is [mapped](./field-configuration.md#mapped-attributes) to `as="RadioList"`.
+
+```cshtml
+<field for="EnumField" as="RadioList" />
+<field for="NullableEnumField" as="RadioList" />
+```
+
+# [HTML Helpers variant](#tab/radiolist-hh)
+
 ```cshtml
 @s.FieldFor(m => m.EnumField).AsRadioList()
 @s.FieldFor(m => m.NullableEnumField).AsRadioList()
 ```
+
+***
 
 This will change the default HTML for the non-nullable enum field and the Required nullable enum field as shown above to:
 
@@ -110,9 +123,21 @@ And it will change the default HTML for the non-Required nullable enum field as 
 
 When you display a nullable enum field as a drop-down or a non-Required nullable enum field as a list of radio buttons you can change the text that is used to display the `none` value to the user. By default the text used is an empty string for the drop-down and `None` for the radio button. To change the text simply use the `WithNoneAs` method, e.g.:
 
+# [Tag Helpers variant](#tab/none-th)
+
+The `WithNoneAs` method is [mapped](./field-configuration.md#mapped-attributes) to `none-label="{label}"`.
+
+```cshtml
+<field for="NullableEnumField" none-label="No value" />
+```
+
+# [HTML Helpers variant](#tab/none-hh)
+
 ```cshtml
 @s.FieldFor(m => m.NullableEnumField).WithNoneAs("No value")
 ```
+
+***
 
 This will change the default HTML for the nullable enum field as shown above to:
 
@@ -126,9 +151,19 @@ This will change the default HTML for the nullable enum field as shown above to:
 ### Hide empty item
 If you have a nullable enum field then it will show the empty item and this item will be selected by default if the field value is null. If for some reason you want a nullable enum, but you would also like to hide the empty item you can do so with the `HideEmptyItem` method in the Field Configuration, e.g.:
 
+# [Tag Helpers variant](#tab/hide-empty-th)
+
+```cshtml
+<field for="NullableEnumField" hide-empty-item="true" />
+```
+
+# [HTML Helpers variant](#tab/hide-empty-hh)
+
 ```cshtml
 @s.FieldFor(m => m.NullableEnumField).HideEmptyItem()
 ```
+
+***
 
 This will change the default HTML for the nullable enum field as shown above to:
 
@@ -141,6 +176,18 @@ This will change the default HTML for the nullable enum field as shown above to:
 ### Exclude specific enum values
 If there are some enum values you want to exclude from showing up as options then you can do so with the `Exclude` method in the Field Configuration, e.g.:
 
+# [Tag Helpers variant](#tab/exclude-th)
+
+Unfortunately, you can't have generic typing in the tag helper, so you need to cast the array of enums to `Enum[]`.
+
+```cshtml
+<field for="EnumField"  exclude="new Enum[]{MyEnum.Value1, MyEnum.Value3}" />
+```
+
+# [HTML Helpers variant](#tab/exclude-hh)
+
 ```cshtml
 @s.FieldFor(m => m.EnumField).Exclude(MyEnum.Value1, MyEnum.Value3)
 ```
+
+***

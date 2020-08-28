@@ -11,7 +11,10 @@ namespace ChameleonForms.ModelBinders
     /// </summary>
     public class UriModelBinder : IModelBinder
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Called when binding a model using this model binder.
+        /// </summary>
+        /// <param name="bindingContext">The context within which binding occurs</param>
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
             var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
