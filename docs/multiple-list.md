@@ -117,7 +117,7 @@ This will change the default HTML for both Required and non-Required fields with
 
 When you display a non-Required list of list values field as a drop-down you can change the text that is used to display the `none` value to the user. By default the text used is `None`. To change the text simply use the `WithNoneAs` method, e.g.:
 
-# [Tag Helpers variant](#tab/xxx-th)
+# [Tag Helpers variant](#tab/none-label-th)
 
 The `WithNoneAs` method is [mapped](./field-configuration.md#mapped-attributes) to `none-label="{label}"`.
 
@@ -125,7 +125,7 @@ The `WithNoneAs` method is [mapped](./field-configuration.md#mapped-attributes) 
 <label for="EnumerableListId" none-label="No value" />
 ```
 
-# [HTML Helpers variant](#tab/xxx-hh)
+# [HTML Helpers variant](#tab/none-label-hh)
 
 ```cshtml
 @s.FieldFor(m => m.EnumerableListId).WithNoneAs("No value")

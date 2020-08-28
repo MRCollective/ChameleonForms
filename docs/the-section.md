@@ -1,6 +1,6 @@
 # Section
 
-The Section is a grouping of a set of fields; you create a Section by instantiating a `Section<TModel>` within a `using` block. The start and end of the `using` block will output the start and end HTML for the Section and the inside of the `using` block will contain the Section fields.
+The Section is a grouping of a set of fields; you create a Section by using the `<form-section>` tag helper or instantiating a `Section<TModel>` within a `using` block. The start and end of the `using` block will output the start and end HTML for the Section and the inside of the `using` block will contain the Section fields.
 
 The `Section<TModel>` class looks like this and is in the `ChameleonForms.Component` namespace:
 

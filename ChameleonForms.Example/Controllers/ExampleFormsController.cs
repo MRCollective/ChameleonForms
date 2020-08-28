@@ -95,6 +95,11 @@ namespace ChameleonForms.Example.Controllers
             return View();
         }
 
+        public ActionResult ButtonsTH()
+        {
+            return View();
+        }
+
         public ActionResult Partials()
         {
             return View(new ViewModelExample{TextAreaField = "Initial value"});

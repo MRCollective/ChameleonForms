@@ -1,0 +1,42 @@
+﻿@using ChameleonForms.Templates.TwitterBootstrap3
+@model dynamic
+
+@{
+    ViewBag.Title = "Buttons";
+}
+
+<h1>Buttons</h1>
+
+<chameleon-form>
+    <form-navigation>
+        <form-button label="text button" emphasis-style="Primary" size="Default" />
+        <form-button add-class="random-class"><strong>html button</strong></form-button>
+        <reset-button label="text reset" icon="refresh" />
+        <reset-button><strong>html reset</strong></reset-button>
+        <submit-button><strong>html submit</strong></submit-button>
+        <submit-button label="text submit" emphasis-style="Danger" />
+        <submit-button name="name" value="value"><strong>html submit with value</strong></submit-button>
+        <submit-button name="name" value="value" label="value" icon="star" emphasis-style="Success" />
+    </form-navigation>
+
+    <p></p>
+
+    <form-navigation>
+        <form-button label="Small button 1" size="Small" />
+        <form-button label="Small button 2" fluent-attrs='c => c.WithSize(ButtonSize.Small)' />
+    </form-navigation>
+
+    <p></p>
+
+    <form-navigation>
+        <form-button label="Extra small button 1" size="ExtraSmall" />
+        <form-button label="Extra small button 2" fluent-attrs='c => c.WithSize(ButtonSize.ExtraSmall)' />
+    </form-navigation>
+
+    <p></p>
+
+    <form-navigation>
+        <form-button label="Large button 1" size="Large" />
+        <form-button label="Large button 2" fluent-attrs='c => c.WithSize(ButtonSize.Large)' />
+    </form-navigation>
+</chameleon-form>
