@@ -1,0 +1,17 @@
+﻿@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsBootstrap4Template.Params.LabelParams>
+@{
+    var wrapLabel = !Model.HasLabel && !Model.IsCheckboxControl;
+    if (wrapLabel)
+    {
+        @:<span class="control-label">
+    }
+    @Model.Label
+    if (Model.DisplayDesignator && Model.IsRequired)
+    {
+        @Model.RequiredDesignator
+    }
+    if (wrapLabel)
+    {
+        @:</span>
+    }
+}

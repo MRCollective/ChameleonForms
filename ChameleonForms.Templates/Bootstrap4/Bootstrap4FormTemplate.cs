@@ -1,33 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using ChameleonForms.Component;
 using ChameleonForms.Component.Config;
 using ChameleonForms.Enums;
 using ChameleonForms.FieldGenerators;
 using ChameleonForms.FieldGenerators.Handlers;
-using ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template;
-using ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params;
+using ChameleonForms.Templates.ChameleonFormsBootstrap4Template;
+using ChameleonForms.Templates.ChameleonFormsBootstrap4Template.Params;
+using Humanizer;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RazorRenderer;
 
-namespace ChameleonForms.Templates.TwitterBootstrap3
+namespace ChameleonForms.Templates.Bootstrap4
 {
     /// <summary>
     /// The default Chameleon Forms form template renderer.
     /// </summary>
-    public class TwitterBootstrap3FormTemplate : Default.DefaultFormTemplate
+    public class Bootstrap4FormTemplate : Default.DefaultFormTemplate
     {
-        /// <summary>
-        /// The attribute name to use for adding an icon class to a Html Attributes object.
-        /// </summary>
-        public const string IconAttrKey = "data-chameleonforms-twbs-icon";
-
-        private static readonly IEnumerable<string> StyledButtonClasses = Enum.GetNames(typeof(EmphasisStyle))
-            .Select(x => string.Format("btn-{0}", x.ToLower()))
+        private static readonly IEnumerable<string> StyledButtonClasses = Enum.GetNames(typeof(ButtonStyle))
+            .Select(x => x.Humanize())
             .ToArray();
 
         private static readonly FieldDisplayType[] NormalFieldTypes = new[] { FieldDisplayType.DropDown, FieldDisplayType.SingleLineText, FieldDisplayType.MultiLineText };
@@ -40,13 +35,13 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
 
             fieldConfiguration.InlineLabelWrapsElement();
 
-            fieldConfiguration.AddValidationClass("help-block");
+            fieldConfiguration.AddValidationClass("invalid-feedback");
 
             var displayType = fieldGeneratorHandler.GetDisplayType(fieldConfiguration);
             if (NormalFieldTypes.Contains(displayType))
             {
                 fieldConfiguration.Bag.CanBeInputGroup = true;
-                fieldConfiguration.AddClass("form-control").AddLabelClass("control-label");
+                fieldConfiguration.AddClass("form-control");
             }
 
             if (displayType == FieldDisplayType.Checkbox)
@@ -63,6 +58,8 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         /// <inheritdoc />
         public override IHtmlContent BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype, bool formSubmitted)
         {
+            if (formSubmitted)
+                htmlAttributes.AddClass("was-validated");
             return HtmlCreator.BuildFormTag(action, method, htmlAttributes, enctype);
         }
 
@@ -138,13 +135,33 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
         /// <inheritdoc />
         public override IHtmlContent BeginMessage(MessageType messageType, IHtmlContent heading)
         {
-            return new BeginMessage().Render(new MessageParams {MessageType = messageType.ToTwitterEmphasisStyle(), Heading = heading });
+            string alertType;
+            switch (messageType)
+            {
+                case MessageType.Warning:
+                    alertType = "warning";
+                    break;
+                case MessageType.Action:
+                    alertType = "primary";
+                    break;
+                case MessageType.Failure:
+                    alertType = "danger";
+                    break;
+                case MessageType.Success:
+                    alertType = "success";
+                    break;
+                default:
+                    alertType = "info";
+                    break;
+            }
+
+            return new BeginAlert().Render(new AlertParams {AlertType = alertType, Heading = heading });
         }
 
         /// <inheritdoc />
         public override IHtmlContent EndMessage()
         {
-            return new EndMessage().Render();
+            return new EndAlert().Render();
         }
 
         /// <inheritdoc />
@@ -165,26 +182,7 @@ namespace ChameleonForms.Templates.TwitterBootstrap3
             htmlAttributes = htmlAttributes ?? new HtmlAttributes();
             htmlAttributes.AddClass("btn");
             if (!StyledButtonClasses.Any(c => htmlAttributes.Attributes["class"].Contains(c)))
-                htmlAttributes.AddClass("btn-default");
-
-            if (htmlAttributes.Attributes.ContainsKey(IconAttrKey))
-            {
-                var icon = htmlAttributes.Attributes[IconAttrKey];
-                var iconHtml = string.Format("<span class=\"glyphicon glyphicon-{0}\"></span> ", icon);
-                if(content == null)
-                {
-                    content = new HtmlString(iconHtml + value.ToHtml());
-                }
-                else
-                {
-                    var bld = new HtmlContentBuilder();
-                    bld.AppendHtml(iconHtml)
-                        .AppendHtml(content);
-                    content = bld;
-                }
-
-                htmlAttributes.Attributes.Remove(IconAttrKey);
-            }
+                htmlAttributes.AddClass("btn-light");
 
             return base.Button(content, type, id, value, htmlAttributes);
         }

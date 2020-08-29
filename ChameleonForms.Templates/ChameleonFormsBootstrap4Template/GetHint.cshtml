@@ -1,0 +1,3 @@
+﻿@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsBootstrap4Template.Params.FieldConfigurationParams>
+@if (Model.FieldConfiguration.Hint != null)
+{<small class="form-text text-muted" id="@Model.FieldConfiguration.HintId">@Model.FieldConfiguration.Hint</small>}

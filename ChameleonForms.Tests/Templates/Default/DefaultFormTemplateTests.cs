@@ -19,7 +19,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginForm("/", FormMethod.Post, new HtmlAttributes(data_attr => "value"), EncType.Multipart);
+            var result = t.BeginForm("/", FormMethod.Post, new HtmlAttributes(data_attr => "value"), EncType.Multipart, false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }
@@ -29,7 +29,7 @@ namespace ChameleonForms.Tests.Templates
         {
             var t = new DefaultFormTemplate();
 
-            var result = t.BeginForm("/", FormMethod.Post, null, null);
+            var result = t.BeginForm("/", FormMethod.Post, null, null, false);
 
             HtmlApprovals.VerifyHtml(result.ToHtmlString());
         }

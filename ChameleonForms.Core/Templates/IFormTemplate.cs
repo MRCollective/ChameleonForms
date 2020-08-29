@@ -33,8 +33,9 @@ namespace ChameleonForms.Templates
         /// <param name="method">The form method</param>
         /// <param name="htmlAttributes">Any HTML attributes the form should use; specified as an anonymous object</param>
         /// <param name="enctype">The encoding type for the form</param>
+        /// <param name="formSubmitted">Whether or not the form has been submitted i.e. it's a post back request</param>
         /// <returns>The starting HTML for a form</returns>
-        IHtmlContent BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype);
+        IHtmlContent BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype, bool formSubmitted);
 
         /// <summary>
         /// Creates the ending HTML for a form.

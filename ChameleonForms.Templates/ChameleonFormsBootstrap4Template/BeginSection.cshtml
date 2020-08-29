@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Html;
+@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsBootstrap4Template.Params.BeginSectionParams>
+@{
+@:        <fieldset@(Model.HtmlAttributes)>
+if (Model.Heading != null && !string.IsNullOrWhiteSpace(Model.Heading.ToHtmlString()))
+{
+@:        <legend>@Model.Heading</legend>
+}
+if (Model.LeadingHtml != null && !string.IsNullOrWhiteSpace(Model.LeadingHtml.ToHtmlString()))
+{
+@:        @Model.LeadingHtml
+}
+}

@@ -7,6 +7,7 @@ using ChameleonForms.Templates;
 using ChameleonForms.Utils;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
@@ -92,7 +93,7 @@ namespace ChameleonForms
             Template = template;
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
             // Write method is virtual to allow it to be mocked for testing
-            Write(Template.BeginForm(action, method, htmlAttributes, enctype));
+            Write(Template.BeginForm(action, method, htmlAttributes, enctype, helper.ViewContext.HttpContext.Request.HasFormContentType));
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
 

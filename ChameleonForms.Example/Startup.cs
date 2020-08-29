@@ -1,5 +1,6 @@
 ﻿using ChameleonForms.Example.Controllers.Filters;
 using ChameleonForms.Templates;
+using ChameleonForms.Templates.Bootstrap4;
 using ChameleonForms.Templates.Default;
 using ChameleonForms.Templates.TwitterBootstrap3;
 using Microsoft.AspNetCore.Builder;
@@ -37,6 +38,9 @@ namespace ChameleonForms.Example
                 var template = accessor.HttpContext.Request.Cookies["template"] ?? "default";
                 if (template.StartsWith("default"))
                     return new DefaultFormTemplate();
+
+                if (template == "bootstrap4")
+                    return new Bootstrap4FormTemplate();
 
                 return new TwitterBootstrap3FormTemplate();
             });

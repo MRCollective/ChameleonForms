@@ -1,0 +1,7 @@
+﻿@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsBootstrap4Template.Params.ListParams>
+@{
+    foreach (var item in Model.Items)
+    {
+        <div class="@(Model.IsCheckbox ? "checkbox" : "radio")">@item</div>
+    }
+}

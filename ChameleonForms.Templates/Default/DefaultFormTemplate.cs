@@ -26,7 +26,7 @@ namespace ChameleonForms.Templates.Default
         {}
 
         /// <inheritdoc />
-        public virtual IHtmlContent BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype)
+        public virtual IHtmlContent BeginForm(string action, FormMethod method, HtmlAttributes htmlAttributes, EncType? enctype, bool formSubmitted)
         {
             return HtmlCreator.BuildFormTag(action, method, htmlAttributes, enctype);
         }
