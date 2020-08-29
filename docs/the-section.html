@@ -79,9 +79,9 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="section">Section</h1>
 
-<p>The Section is a grouping of a set of fields; you create a Section by instantiating a <code>Section&lt;TModel&gt;</code> within a <code>using</code> block. The start and end of the <code>using</code> block will output the start and end HTML for the Section and the inside of the <code>using</code> block will contain the Section fields.</p>
+<p>The Section is a grouping of a set of fields; you create a Section by using the <code>&lt;form-section&gt;</code> tag helper or instantiating a <code>Section&lt;TModel&gt;</code> within a <code>using</code> block. The start and end of the <code>using</code> block will output the start and end HTML for the Section and the inside of the <code>using</code> block will contain the Section fields.</p>
 <p>The <code>Section&lt;TModel&gt;</code> class looks like this and is in the <code>ChameleonForms.Component</code> namespace:</p>
-<pre><code class="lang-csharp">    /// &lt;summary&gt;
+<pre><code class="lang-cs">    /// &lt;summary&gt;
     /// Wraps the output of a form section.
     /// &lt;/summary&gt;
     /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;
@@ -129,13 +129,32 @@
 </code></pre>
 <p>The start and end HTML of the Section are generated via the <code>BeginSection</code> and <code>EndSection</code> methods in the <a href="form-templates.html">form template</a> (or <code>BeginNestedSection</code> and <code>EndNestedSection</code> if the Section is a child of another Section). The field HTML is generated via the <code>Field</code> method in the template.</p>
 <h2 id="default-usage">Default usage</h2>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_default-section-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_default-section-th" data-tab="default-section-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_default-section-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_default-section-hh" data-tab="default-section-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_default-section-th" role="tabpanel" data-tab="default-section-th">
+
+<p>In order to output a default instance of a Section you can use the <code>&lt;form-section&gt;</code> tag helper within a <code>&lt;chameleon-form&gt;</code>, e.g.:</p>
+<pre><code class="lang-cshtml">&lt;form-section heading=&quot;Heading&quot;&gt;
+    @* Section fields go here *@
+&lt;/form-section&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_default-section-hh" role="tabpanel" data-tab="default-section-hh" aria-hidden="true" hidden="hidden">
+
 <p>In order to get an instance of a <code>Section&lt;TModel&gt;</code> you can use the <code>BeginSection</code> method on the Form, e.g.</p>
 <pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Heading&quot;)) {
     @* Section fields go here *@
 }
 </code></pre>
 <p>The <code>BeginSection</code> extension methods look like this:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Creates a top-level form section.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -211,7 +230,34 @@
             return new Section&lt;TModel&gt;(form, heading(null), false, leadingHtml(null), htmlAttributes);
         }
 </code></pre>
-<p>From within a Section you can create <a href="field.html">Fields</a> and you can also create nested sections using the <code>BeginSection</code> extension method off the Section:</p>
+</section>
+</div>
+
+<p>You can extend the Section by adding <a href="html-attributes.html">HTML attributes</a> to it.</p>
+<p>From within a Section you can create <a href="field.html">Fields</a> and you can also create nested sections:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_nested-section-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_nested-section-th" data-tab="nested-section-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_nested-section-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_nested-section-hh" data-tab="nested-section-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_nested-section-th" role="tabpanel" data-tab="nested-section-th">
+
+<p>Using a nested <code>&lt;form-section&gt;</code> tag helper:</p>
+<pre><code class="lang-cshtml">&lt;form-section heading=&quot;Heading&quot;&gt;
+    @* Fields... *@
+    &lt;form-section heading=&quot;Inner Heading&quot;&gt;
+    &lt;/form-section&gt;
+    @* Fields... *@
+&lt;/form-section&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_nested-section-hh" role="tabpanel" data-tab="nested-section-hh" aria-hidden="true" hidden="hidden">
+
+<p>Using the <code>BeginSection</code> extension method off the Section:</p>
 <pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Heading&quot;)) {
     @* Fields... *@
     using (var ss = s.BeginSection(&quot;Inner Heading&quot;)) {
@@ -221,7 +267,7 @@
 }
 </code></pre>
 <p>The <code>BeginSection</code> extension methods on Section look like this:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Creates a nested form section.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -305,6 +351,8 @@
             return new Section&lt;TModel&gt;(section.Form, heading(null), true, leadingHtml(null), htmlAttributes);
         }
 </code></pre>
+</section>
+</div>
 <h2 id="default-html">Default HTML</h2>
 <h3 id="begin-html">Begin HTML</h3>
 <pre><code class="lang-html">    &lt;fieldset %htmlAttributes%&gt;
@@ -378,6 +426,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

@@ -79,9 +79,9 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="form">Form</h1>
 
-<p>The Form is the root element of a ChameleonForms form; you create a Form by instantiating an <code>IForm&lt;TModel&gt;</code> within a <code>using</code> block. The start and end of the <code>using</code> block will output the start and end HTML for the form and the inside of the <code>using</code> block will contain the Form content.</p>
+<p>The Form is the root element of a ChameleonForms form; you create a Form by either using the <code>&lt;chameleon-form&gt;</code> tag helper, or instantiating an <code>IForm&lt;TModel&gt;</code> within a <code>using</code> block.</p>
 <p>The <code>IForm&lt;TModel&gt;</code> interface looks like this and is in the <code>ChameleonForms</code> namespace:</p>
-<pre><code class="lang-csharp">    /// &lt;summary&gt;
+<pre><code class="lang-cs">    /// &lt;summary&gt;
     /// Interface for a Chameleon Form.
     /// &lt;/summary&gt;
     /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;    
@@ -106,17 +106,44 @@
         /// &lt;/summary&gt;
         /// &lt;param name=&quot;property&quot;&gt;The property to return the field generator for&lt;/param&gt;
         IFieldGenerator GetFieldGenerator&lt;T&gt;(Expression&lt;Func&lt;TModel, T&gt;&gt; property);
+
+        /// &lt;summary&gt;
+        /// Returns a wrapped &lt;see cref=&quot;PartialViewForm{TModel}&quot;/&gt; for the given partial view helper.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;partialViewHelper&quot;&gt;The HTML Helper from the partial view&lt;/param&gt;
+        /// &lt;returns&gt;The PartialViewForm wrapping the original form&lt;/returns&gt;
+        IForm&lt;TModel&gt; CreatePartialForm(IHtmlHelper&lt;TModel&gt; partialViewHelper);
     }
 </code></pre>
-<p>ChameleonForms comes with a standard implementation of the <code>IForm&lt;TModel&gt;</code> interface that uses the <code>BeginForm</code> and <code>EndForm</code> methods in the given <a href="form-templates.html">form template</a> and returns an instance of the <code>DefaultFieldGenerator</code> class when asked for a Field Generator.</p>
+<p>ChameleonForms comes with a standard implementation of the <code>IForm&lt;TModel&gt;</code> interface that uses the <code>BeginForm</code> and <code>EndForm</code> methods in the currently configured <a href="form-templates.html">form template</a> and returns an instance of the <code>DefaultFieldGenerator</code> class when asked for a <a href="custom-field-generator.html">Field Generator</a>.</p>
 <h2 id="default-usage">Default usage</h2>
-<p>In order to get an instance of an <code>IForm&lt;TModel&gt;</code> using the <a href="configuration.html#default-global-config">default form template</a> (see below if <a href="#configuring-the-form-template">you want to adjust it on a per-form basis</a>) you can use the <code>BeginChameleonForm</code> extension method on the <code>HtmlHelper</code> that appears in MVC views, e.g.:</p>
+<p>In order to create a self-submitting form using the <a href="configuration.html#default-global-config">default form template</a> (see below if <a href="#configuring-the-form-template">you want to adjust it on a per-form basis</a>):</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_default-form-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_default-form-th" data-tab="default-form-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_default-form-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_default-form-hh" data-tab="default-form-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_default-form-th" role="tabpanel" data-tab="default-form-th">
+
+<p>Use the <code>&lt;chameleon-form&gt;</code> tag helper:</p>
+<pre><code class="lang-cshtml">&lt;chameleon-form&gt;
+    @* Form content goes here *@
+&lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_default-form-hh" role="tabpanel" data-tab="default-form-hh" aria-hidden="true" hidden="hidden">
+
+<p>Use the <code>BeginChameleonForm</code> extension method on the <code>HtmlHelper</code> that appears in MVC views, e.g.:</p>
 <pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm()) {
     @* Form content goes here *@
 }
 </code></pre>
 <p>The <code>BeginChameleonForm</code> extension method looks like this:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Constructs a &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with the default ChameleonForms template renderer.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -130,16 +157,45 @@
         /// &lt;param name=&quot;method&quot;&gt;The HTTP method the form submission should use&lt;/param&gt;
         /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes the form should use&lt;/param&gt;
         /// &lt;param name=&quot;enctype&quot;&gt;The encoding type the form submission should use&lt;/param&gt;
+        /// &lt;param name=&quot;outputAntiforgeryToken&quot;&gt;Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET&lt;/param&gt;
         /// &lt;returns&gt;A &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with an instance of the default form template renderer.&lt;/returns&gt;
-        public static IForm&lt;TModel&gt; BeginChameleonForm&lt;TModel&gt;(this IHtmlHelper&lt;TModel&gt; helper, string action = &quot;&quot;, FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm&lt;TModel&gt; BeginChameleonForm&lt;TModel&gt;(this IHtmlHelper&lt;TModel&gt; helper, string action = &quot;&quot;, FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
         {
-            return new Form&lt;TModel&gt;(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype);
+            return new Form&lt;TModel&gt;(helper, helper.GetDefaultFormTemplate(), action, method, htmlAttributes, enctype, outputAntiforgeryToken);
         }
 </code></pre>
-<p>By default a self-submitting form that performs a HTTP post with the browser's default <code>enctype</code> (usually <code>application/x-www-form-urlencoded</code>) is outputted, but you can change the submit location, HTTP verb, <code>enctype</code> and add any <a href="html-attributes.html">HTML attributes you like</a> using the appropriate parameters.</p>
+</section>
+</div>
+
+<p>By default a self-submitting form, against the page model type, that performs a HTTP post with the browser's default <code>enctype</code> (usually <code>application/x-www-form-urlencoded</code>) is outputted, but you can change the submit location, HTTP verb, <code>enctype</code>, presence of anti forgery token and add any <a href="html-attributes.html">HTML attributes you like</a> using the appropriate parameters, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_configure-form-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_configure-form-th" data-tab="configure-form-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_configure-form-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_configure-form-hh" data-tab="configure-form-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_configure-form-th" role="tabpanel" data-tab="configure-form-th">
+
+<pre><code class="lang-cshtml">&lt;chameleon-form action=&quot;@Url.Action(&quot;SomeAction&quot;)&quot; method=&quot;Post&quot; enctype=&quot;Multipart&quot; id=&quot;my-form&quot; disabled=&quot;false&quot; add-class=&quot;a-class&quot; fluent-config='c =&gt; c.Attr(&quot;data-a&quot;, &quot;b&quot;)' attr-data-whatever=&quot;some value&quot; output-antiforgery-token=&quot;false&quot;&gt;
+    @* Form content goes here *@
+&lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_configure-form-hh" role="tabpanel" data-tab="configure-form-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm(action: Url.Action(&quot;SomeAction&quot;), method: FormMethod.Post, enctype: EncType.Multipart, htmlAttributes: new HtmlAttributes().Id(&quot;my-form&quot;).Disabled(false).AddClass(&quot;a-class&quot;).Attr(&quot;data-a&quot;, &quot;b&quot;).Attr(&quot;data-whatever&quot;, &quot;some value&quot;), outputAntiforgeryToken: false)) {
+    @* Form content goes here *@
+}
+</code></pre>
+</section>
+</div>
+
 <p>You can also <a href="different-form-models.html">create a form against a model type different from the page model</a>.</p>
 <h2 id="configuring-the-form-template">Configuring the form template</h2>
-<p>As you can see above, when using the <code>BeginChameleonForm</code> extension method it uses <code>helper.GetDefaultFormTemplate()</code> to determine what form template to use. <a href="configuration.html#default-global-config">By default</a> this is set to an instance of the <code>DefaultFormTemplate</code> class from the <code>ChameleonForms.Templates.Default</code> namespace.</p>
+<p>As you can see above, when using the <code>BeginChameleonForm</code> extension method (which is also what the <code>&lt;chameleon-form&gt;</code> tag helper uses under the hood) it uses <code>helper.GetDefaultFormTemplate()</code> to determine what form template to use. <a href="configuration.html#default-global-config">By default</a> this is set to an instance of the <code>DefaultFormTemplate</code> class from the <code>ChameleonForms.Templates.Default</code> namespace.</p>
 <p>The way this works is the <a href="configuration.html">global configuration</a> will register an implementation of <code>IFormTemplate</code> with the service collection within your ASP.NET Core web application. The <code>helper.GetDefaultFormTemplate()</code> extension will then resolve that default template implementation from the request services:</p>
 <pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Gets the registered default form template from RequestServices.
@@ -159,13 +215,14 @@
 <pre><code class="lang-cs">services.AddChameleonForms(b =&gt; b.WithoutTemplateTypeRegistration());
 services.AddSingleton&lt;IFormTemplate&gt;(new MyFormTemplate(/* constructor parameters */));
 </code></pre>
-<p>If you want to use multiple Form Templates across your application you can <a href="custom-template.html">create your own extension methods</a> to allow for different form templates to be specified on a per-form basis.</p>
+<p>If you want to use multiple Form Templates across your application you can <a href="custom-template.html">create your own extension methods</a> or create your own tag helper <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/ChameleonFormTagHelper.cs">based on the <code>&lt;chameleon-form&gt;</code> one</a> to allow for different form templates to be specified on a per-form basis.</p>
 <h2 id="html5-validation">HTML5 validation</h2>
 <p>By default, ChameleonForms opts out of HTML5 validation for you via the <code>novalidate=&quot;novalidate&quot;</code> attribute on the <code>&lt;form&gt;</code>. It does this so that you can retain control of client-side validation (e.g. through unobtrusive validation), which is typically able to yield a better user experience than HTML5 validation.</p>
 <p>If you want to override this behaviour you can configure your own form template.</p>
 <h2 id="default-html">Default HTML</h2>
 <h3 id="begin-html">Begin HTML</h3>
 <pre><code class="lang-html">&lt;form action=&quot;%action%&quot; method=&quot;%method%&quot; (enctype=&quot;%enctype%&quot;) (%htmlAttributes%) novalidate=&quot;novalidate&quot;&gt;
+    (%antiforgery token%)
 </code></pre>
 <h3 id="end-html">End HTML</h3>
 <pre><code class="lang-html">&lt;/form&gt;
@@ -205,6 +262,7 @@ services.AddSingleton&lt;IFormTemplate&gt;(new MyFormTemplate(/* constructor par
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

@@ -85,7 +85,7 @@
 <h2 id="example">Example</h2>
 <p>For an example of this in action see the extension we added to the <a href="bootstrap-template.html">Twitter Bootstrap 3 template</a> to allow you to <a href="field.html#input-groups">specify an input group</a>.</p>
 <p>Firstly, the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/TwitterBootstrap3/FieldConfigurationExtensions.cs">definition of the extension method</a> is:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Outputs the field in an input group using prepended and appended HTML.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -100,7 +100,7 @@
         }
 </code></pre>
 <p>Then the corresponding code in the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Templates/ChameleonFormsTwitterBootstrap3Template/Field.cshtml#L10">template</a> that gets the value as a local variable to switch on is:</p>
-<pre><code class="lang-csharp">var isInputGroup = canBeInputGroup &amp;&amp; (isRequired || Model.FieldConfiguration.GetBagData&lt;bool&gt;(&quot;DisplayAsInputGroup&quot;));
+<pre><code class="lang-cs">var isInputGroup = canBeInputGroup &amp;&amp; (isRequired || Model.FieldConfiguration.GetBagData&lt;bool&gt;(&quot;DisplayAsInputGroup&quot;));
 </code></pre>
 <p>Note in particular the <code>Model.FieldConfiguration.GetBagData&lt;bool&gt;(&quot;DisplayAsInputGroup&quot;)</code>.</p>
 <h2 id="namespaces">Namespaces</h2>
@@ -138,6 +138,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

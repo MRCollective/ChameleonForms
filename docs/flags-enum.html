@@ -80,7 +80,7 @@
 <h1 id="flags-enum-fields">Flags Enum Fields</h1>
 
 <p>If you want the user to specify multiple values from an enum you can either use a <a href="multiple-enum.html">non-flags enum against any property with a type convertible to <code>IEnumerable&lt;%enumType%&gt;</code></a> (separate page) or use a flags enum (this page), e.g.:</p>
-<pre><code class="lang-csharp">[Flags]
+<pre><code class="lang-cs">[Flags]
 public enum MyFlagsEnum
 {
     ValueOne = 1 &lt;&lt; 0,
@@ -97,8 +97,8 @@ public MyFlagsEnum? RequiredWithNullAsUnselectedValue { get; set; }
 public MyFlagsEnum? NonRequiredAndNullAsUnselectedValue { get; set; }
 </code></pre>
 <p>Flags enums have a few rough edges on them if you aren't careful so it's a good idea to read the <a href="https://msdn.microsoft.com/en-us/library/ms229062(v=vs.100).aspx">guidance</a> <a href="https://msdn.microsoft.com/en-us/library/system.flagsattribute.aspx">for</a> how to use them. In particular, make sure that none of your values have a value of 0 and you explicitly assign integer values to all enum values in multiples of 2.</p>
-<p>The out-of-the-box ASP.NET Core MVC support for flags enums leave sa lot to be desired, but ChameleonForms provides first-class model binding and validation support for flags enums <a href="configuration.html#default-global-config">by default</a> to patch the default MVC behaviour.</p>
-<p>If you want the user to specify a single value from an enum then you can <a href="enum.html">use the enum type directly</a>.</p>
+<p>The out-of-the-box ASP.NET Core MVC support for flags enums leaves a lot to be desired, but ChameleonForms provides first-class model binding and validation support for flags enums <a href="configuration.html#default-global-config">by default</a> to patch the default MVC behaviour.</p>
+<p>If you want the user to specify a single value from a non-Flags enum then you can <a href="enum.html">use the enum type directly</a>.</p>
 <h2 id="required-validation">Required validation</h2>
 <p>ASP.NET MVC's default validation doesn't pick up <code>0</code> for a flags enum as the field not being specified, thus you need to alter the validation for requires flags enums. ChameleonForms patches this problem <a href="configuration.html#default-global-config">by default</a>. It will correctly flag an error for both a non-nullable flags enum field or a flags enum field with <code>[Required]</code> specified.</p>
 <h2 id="model-binding">Model binding</h2>
@@ -124,8 +124,28 @@ public MyFlagsEnum? NonRequiredAndNullAsUnselectedValue { get; set; }
 <h2 id="configurability">Configurability</h2>
 <h3 id="display-as-list-of-checkboxes">Display as list of checkboxes</h3>
 <p>You can force a list of enums field to display as a list of checkboxes rather than a multi-select drop-down using the <code>AsCheckboxList</code> method on the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_checkboxes-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_checkboxes-th" data-tab="checkboxes-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_checkboxes-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_checkboxes-hh" data-tab="checkboxes-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_checkboxes-th" role="tabpanel" data-tab="checkboxes-th">
+
+<p>The <code>AsCheckboxList</code> method is <a href="field-configuration.html#mapped-attributes">mapped</a> to <code>as=&quot;CheckboxList&quot;</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;FlagsEnum&quot; as=&quot;CheckboxList&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_checkboxes-hh" role="tabpanel" data-tab="checkboxes-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.FlagsEnum).AsCheckboxList()
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for a both Required and non-Required list of enums (both nullable and non-nullable) fields as shown above to:</p>
 <pre><code class="lang-html">&lt;ul&gt;
 %foreach enum value x with increment i %
@@ -135,8 +155,28 @@ public MyFlagsEnum? NonRequiredAndNullAsUnselectedValue { get; set; }
 </code></pre>
 <h3 id="change-the-text-description-of-none">Change the text description of none</h3>
 <p>When you display a non-Required list of enums field as a drop-down you can change the text that is used to display the <code>none</code> value to the user. By default the text used is <code>None</code>. To change the text simply use the <code>WithNoneAs</code> method, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_none-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_none-th" data-tab="none-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_none-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_none-hh" data-tab="none-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_none-th" role="tabpanel" data-tab="none-th">
+
+<p>The <code>WithNoneAs</code> method is <a href="field-configuration.html#mapped-attributes">mapped</a> to <code>none-label=&quot;{label}&quot;</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;NonRequiredNullableFlagsEnum&quot; none-label=&quot;No value&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_none-hh" role="tabpanel" data-tab="none-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NonRequiredNullableFlagsEnum).WithNoneAs(&quot;No value&quot;)
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the non-Required drop-down list of enum field as shown above to:</p>
 <pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% multiple=&quot;multiple&quot; id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
     &lt;option selected=&quot;selected&quot; value=&quot;&quot;&gt;No value&lt;/option&gt;
@@ -145,8 +185,27 @@ public MyFlagsEnum? NonRequiredAndNullAsUnselectedValue { get; set; }
 </code></pre>
 <h3 id="hide-empty-item">Hide empty item</h3>
 <p>If you have a non-Required list of enums field then it will show the empty item and this item will be selected by default if no values are selected. If for some reason you want a non-Required list of enums field, but you would also like to hide the empty item you can do so with the <code>HideEmptyItem</code> method in the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_hide-empty-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_hide-empty-th" data-tab="hide-empty-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_hide-empty-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_hide-empty-hh" data-tab="hide-empty-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_hide-empty-th" role="tabpanel" data-tab="hide-empty-th">
+
+<pre><code class="lang-cshtml">&lt;field for=&quot;NullableEnumListField&quot; hide-empty-item=&quot;true&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-2_hide-empty-hh" role="tabpanel" data-tab="hide-empty-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NullableEnumListField).HideEmptyItem()
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the non-Required drop-down list of enum field as shown above to:</p>
 <pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% multiple=&quot;multiple&quot; id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
     @* Enum values as &lt;options&gt;... *@
@@ -185,6 +244,7 @@ public MyFlagsEnum? NonRequiredAndNullAsUnselectedValue { get; set; }
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

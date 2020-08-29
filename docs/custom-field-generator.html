@@ -79,8 +79,116 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="custom-field-generator">Custom Field Generator</h1>
 
-<p>If the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs">Default Field Generator</a> doesn't cut it for you then feel free to create your own field generator and use it instead by creating your own <a href="the-form.html">Form</a> class and overriding the <code>GetFieldGenerator</code> method.</p>
-<p>You will need to create your <a href="form-templates.html#custom-extension-method">own extension method in place of <code>BeginChameleonForm</code></a> to new up your custom <code>Form</code> class.</p>
+<p>Part of the core of ChameleonForms is the concept of a Field Generator. A Field Generator is responsible for generating the HTML for the various parts of a <a href="field.html">Field</a>. A Field Generator will implement the <code>IFieldGenerator&lt;TModel, T&gt;</code> interface, the definition for which is shown below:</p>
+<pre><code class="lang-cs">    /// &lt;summary&gt;
+    /// Generates the HTML for a single form field.
+    /// &lt;/summary&gt;
+    public interface IFieldGenerator&lt;TModel, T&gt; : IFieldGenerator
+    {
+        /// &lt;summary&gt;
+        /// A HTML helper for the model.
+        /// &lt;/summary&gt;
+        IHtmlHelper&lt;TModel&gt; HtmlHelper { get; }
+
+        /// &lt;summary&gt;
+        /// The expression that identifies the property in the model being output.
+        /// &lt;/summary&gt;
+        Expression&lt;Func&lt;TModel, T&gt;&gt; FieldProperty { get; }
+
+        /// &lt;summary&gt;
+        /// Returns the current value of the field.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The current field value&lt;/returns&gt;
+        T GetValue();
+
+        /// &lt;summary&gt;
+        /// Returns a model with the current values for the form.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The current model&lt;/returns&gt;
+        TModel GetModel();
+
+        /// &lt;summary&gt;
+        /// Returns the displayable name of the field being generated.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The id&lt;/returns&gt;
+        string GetFieldDisplayName();
+
+        /// &lt;summary&gt;
+        /// Returns any custom attributes against the field being generated.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The attributes&lt;/returns&gt;
+        IEnumerable&lt;Attribute&gt; GetCustomAttributes();
+    }
+
+    /// &lt;summary&gt;
+    /// Generates the HTML for a single form field.
+    /// &lt;/summary&gt;
+    public interface IFieldGenerator
+    {
+        /// &lt;summary&gt;
+        /// The metadata for the form field.
+        /// &lt;/summary&gt;
+        ModelMetadata Metadata { get; }
+
+        /// &lt;summary&gt;
+        /// The form template that will be used to render the form.
+        /// &lt;/summary&gt;
+        IFormTemplate Template { get; }
+
+        /// &lt;summary&gt;
+        /// Turns the given &lt;see cref=&quot;IFieldConfiguration&quot;/&gt; into a &lt;see cref=&quot;FieldConfiguration&quot;/&gt; ready to use for generating the form field.
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;fieldConfiguration&quot;&gt;The field configuration to modify&lt;/param&gt;
+        /// &lt;param name=&quot;fieldParent&quot;&gt;The parent component of the field&lt;/param&gt;
+        /// &lt;returns&gt;The readonly field configuration; ready for generating the form field&lt;/returns&gt;
+        IReadonlyFieldConfiguration PrepareFieldConfiguration(IFieldConfiguration fieldConfiguration, FieldParent fieldParent);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for the field control.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The HTML for the field control&lt;/returns&gt;
+        IHtmlContent GetFieldHtml(IReadonlyFieldConfiguration fieldConfiguration);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for the field label.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The HTML for the field label&lt;/returns&gt;
+        IHtmlContent GetLabelHtml(IReadonlyFieldConfiguration fieldConfiguration);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for the field's validation messages
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The HTML for the field's validation messages&lt;/returns&gt;
+        IHtmlContent GetValidationHtml(IReadonlyFieldConfiguration fieldConfiguration);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for the field control after preparing the given field configuration.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The HTML for the field control&lt;/returns&gt;
+        IHtmlContent GetFieldHtml(IFieldConfiguration fieldConfiguration);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for the field label after preparing the given field configuration.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The HTML for the field label&lt;/returns&gt;
+        IHtmlContent GetLabelHtml(IFieldConfiguration fieldConfiguration);
+
+        /// &lt;summary&gt;
+        /// Creates the HTML for the field's validation messages after preparing the given field configuration.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The HTML for the field's validation messages&lt;/returns&gt;
+        IHtmlContent GetValidationHtml(IFieldConfiguration fieldConfiguration);
+
+        /// &lt;summary&gt;
+        /// Returns the id of the field being generated.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;The id&lt;/returns&gt;
+        string GetFieldId();
+    }
+</code></pre>
+<p>This is implemented by the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/FieldGenerators/DefaultFieldGenerator.cs">Default Field Generator</a> by default. This includesstandard rules for preparing a field configuration such as setting up format strings, setting readonly fields, setting <code>aria-describedby</code> attribute for hints, etc. as well as determining the HTML to display for the field parts such as the label and field element.</p>
+<p>If the Default Field Generator doesn't cut it for you then feel free to create your own field generator and use it instead by creating your own <a href="the-form.html">Form</a> class and overriding the <code>GetFieldGenerator</code> method.</p>
+<p>You will need to create your <a href="form-templates.html#custom-extension-method">own extension method in place of <code>BeginChameleonForm</code></a> and/or your <a href="the-form.html">own tag helper in place of <code>&lt;chameleon-form&gt;</code></a> to new up your custom <code>Form</code> class.</p>
 </article>
           </div>
           
@@ -114,6 +222,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

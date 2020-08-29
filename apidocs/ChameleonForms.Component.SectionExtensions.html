@@ -125,19 +125,19 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.Component.Section%7B%60%600%7D%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.Component.ISection%7B%60%600%7D%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L232">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L288">View Source</a>
   </span>
   <a id="ChameleonForms_Component_SectionExtensions_BeginSection_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection*"></a>
-  <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.Component.Section{``0},Microsoft.AspNetCore.Html.IHtmlContent,Microsoft.AspNetCore.Html.IHtmlContent,ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(Section&lt;TModel&gt;, IHtmlContent, IHtmlContent, HtmlAttributes)</h4>
+  <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.Component.ISection{``0},Microsoft.AspNetCore.Html.IHtmlContent,Microsoft.AspNetCore.Html.IHtmlContent,ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(ISection&lt;TModel&gt;, IHtmlContent, IHtmlContent, HtmlAttributes)</h4>
   <div class="markdown level1 summary"><p>Creates a nested form section.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this Section&lt;TModel&gt; section, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this ISection&lt;TModel&gt; section, IHtmlContent heading, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -150,7 +150,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="ChameleonForms.Component.Section-1.html">Section</a>&lt;TModel&gt;</td>
+        <td><a class="xref" href="ChameleonForms.Component.ISection-1.html">ISection</a>&lt;TModel&gt;</td>
         <td><span class="parametername">section</span></td>
         <td><p>The section the section is being created under</p>
 </td>
@@ -207,7 +207,7 @@
       </tr>
     </tbody>
   </table>
-  <h5 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes__examples">Examples</h5>
+  <h5 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes__examples">Examples</h5>
   <p>@using (var s = f.BeginSection(&quot;Section heading&quot;)) {
 using (var ss = s.BeginSection(new HtmlString(&quot;&lt;strong&gt;Nested section heading&lt;/strong&gt;&quot;))) {
 @ss.FieldFor(m =&gt; m.FirstName)
@@ -216,19 +216,19 @@ using (var ss = s.BeginSection(new HtmlString(&quot;&lt;strong&gt;Nested section
 
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.Component.Section%7B%60%600%7D%2CSystem.Func%7BSystem.Object%2CMicrosoft.AspNetCore.Html.IHtmlContent%7D%2CSystem.Func%7BSystem.Object%2CMicrosoft.AspNetCore.Html.IHtmlContent%7D%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.Component.ISection%7B%60%600%7D%2CSystem.Func%7BSystem.Object%2CMicrosoft.AspNetCore.Html.IHtmlContent%7D%2CSystem.Func%7BSystem.Object%2CMicrosoft.AspNetCore.Html.IHtmlContent%7D%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L253">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L309">View Source</a>
   </span>
   <a id="ChameleonForms_Component_SectionExtensions_BeginSection_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection*"></a>
-  <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.Component.Section{``0},System.Func{System.Object,Microsoft.AspNetCore.Html.IHtmlContent},System.Func{System.Object,Microsoft.AspNetCore.Html.IHtmlContent},ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(Section&lt;TModel&gt;, Func&lt;Object, IHtmlContent&gt;, Func&lt;Object, IHtmlContent&gt;, HtmlAttributes)</h4>
+  <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.Component.ISection{``0},System.Func{System.Object,Microsoft.AspNetCore.Html.IHtmlContent},System.Func{System.Object,Microsoft.AspNetCore.Html.IHtmlContent},ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(ISection&lt;TModel&gt;, Func&lt;Object, IHtmlContent&gt;, Func&lt;Object, IHtmlContent&gt;, HtmlAttributes)</h4>
   <div class="markdown level1 summary"><p>Creates a nested form section.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this Section&lt;TModel&gt; section, Func&lt;dynamic, IHtmlContent&gt; heading, Func&lt;dynamic, IHtmlContent&gt; leadingHtml, HtmlAttributes htmlAttributes = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this ISection&lt;TModel&gt; section, Func&lt;dynamic, IHtmlContent&gt; heading, Func&lt;dynamic, IHtmlContent&gt; leadingHtml, HtmlAttributes htmlAttributes = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -241,7 +241,7 @@ using (var ss = s.BeginSection(new HtmlString(&quot;&lt;strong&gt;Nested section
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="ChameleonForms.Component.Section-1.html">Section</a>&lt;TModel&gt;</td>
+        <td><a class="xref" href="ChameleonForms.Component.ISection-1.html">ISection</a>&lt;TModel&gt;</td>
         <td><span class="parametername">section</span></td>
         <td><p>The section the section is being created under</p>
 </td>
@@ -298,7 +298,7 @@ using (var ss = s.BeginSection(new HtmlString(&quot;&lt;strong&gt;Nested section
       </tr>
     </tbody>
   </table>
-  <h5 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes__examples">Examples</h5>
+  <h5 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes__examples">Examples</h5>
   <p>@using (var s = f.BeginSection(&quot;Section heading&quot;)) {
 using (var ss = s.BeginSection(@&lt;strong&gt;Nested section heading&lt;/strong&gt;, leadingHtml: &lt;p&gt;Leading html...&lt;/p&gt;)) {
 @ss.FieldFor(m =&gt; m.FirstName)
@@ -307,19 +307,19 @@ using (var ss = s.BeginSection(@&lt;strong&gt;Nested section heading&lt;/strong&
 
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_String_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.Component.Section%7B%60%600%7D%2CSystem.String%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_String_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.Component.ISection%7B%60%600%7D%2CSystem.String%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L190">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L246">View Source</a>
   </span>
   <a id="ChameleonForms_Component_SectionExtensions_BeginSection_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection*"></a>
-  <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_String_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.Component.Section{``0},System.String,Microsoft.AspNetCore.Html.IHtmlContent,ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(Section&lt;TModel&gt;, String, IHtmlContent, HtmlAttributes)</h4>
+  <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_String_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.Component.ISection{``0},System.String,Microsoft.AspNetCore.Html.IHtmlContent,ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(ISection&lt;TModel&gt;, String, IHtmlContent, HtmlAttributes)</h4>
   <div class="markdown level1 summary"><p>Creates a nested form section.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this Section&lt;TModel&gt; section, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this ISection&lt;TModel&gt; section, string heading = null, IHtmlContent leadingHtml = null, HtmlAttributes htmlAttributes = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -332,7 +332,7 @@ using (var ss = s.BeginSection(@&lt;strong&gt;Nested section heading&lt;/strong&
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="ChameleonForms.Component.Section-1.html">Section</a>&lt;TModel&gt;</td>
+        <td><a class="xref" href="ChameleonForms.Component.ISection-1.html">ISection</a>&lt;TModel&gt;</td>
         <td><span class="parametername">section</span></td>
         <td><p>The section the section is being created under</p>
 </td>
@@ -389,7 +389,7 @@ using (var ss = s.BeginSection(@&lt;strong&gt;Nested section heading&lt;/strong&
       </tr>
     </tbody>
   </table>
-  <h5 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_String_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes__examples">Examples</h5>
+  <h5 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_String_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes__examples">Examples</h5>
   <p>@using (var s = f.BeginSection(&quot;Section heading&quot;)) {
 using (var ss = s.BeginSection(&quot;Nested section heading&quot;)) {
 @ss.FieldFor(m =&gt; m.FirstName)
@@ -398,19 +398,19 @@ using (var ss = s.BeginSection(&quot;Nested section heading&quot;)) {
 
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_String_System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.Component.Section%7B%60%600%7D%2CSystem.String%2CSystem.Func%7BSystem.Object%2CMicrosoft.AspNetCore.Html.IHtmlContent%7D%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_String_System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.Component.ISection%7B%60%600%7D%2CSystem.String%2CSystem.Func%7BSystem.Object%2CMicrosoft.AspNetCore.Html.IHtmlContent%7D%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L211">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L267">View Source</a>
   </span>
   <a id="ChameleonForms_Component_SectionExtensions_BeginSection_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection*"></a>
-  <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_String_System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.Component.Section{``0},System.String,System.Func{System.Object,Microsoft.AspNetCore.Html.IHtmlContent},ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(Section&lt;TModel&gt;, String, Func&lt;Object, IHtmlContent&gt;, HtmlAttributes)</h4>
+  <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_String_System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.Component.ISection{``0},System.String,System.Func{System.Object,Microsoft.AspNetCore.Html.IHtmlContent},ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(ISection&lt;TModel&gt;, String, Func&lt;Object, IHtmlContent&gt;, HtmlAttributes)</h4>
   <div class="markdown level1 summary"><p>Creates a nested form section.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this Section&lt;TModel&gt; section, string heading, Func&lt;dynamic, IHtmlContent&gt; leadingHtml, HtmlAttributes htmlAttributes = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Section&lt;TModel&gt; BeginSection&lt;TModel&gt;(this ISection&lt;TModel&gt; section, string heading, Func&lt;dynamic, IHtmlContent&gt; leadingHtml, HtmlAttributes htmlAttributes = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -423,7 +423,7 @@ using (var ss = s.BeginSection(&quot;Nested section heading&quot;)) {
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="ChameleonForms.Component.Section-1.html">Section</a>&lt;TModel&gt;</td>
+        <td><a class="xref" href="ChameleonForms.Component.ISection-1.html">ISection</a>&lt;TModel&gt;</td>
         <td><span class="parametername">section</span></td>
         <td><p>The section the section is being created under</p>
 </td>
@@ -480,7 +480,7 @@ using (var ss = s.BeginSection(&quot;Nested section heading&quot;)) {
       </tr>
     </tbody>
   </table>
-  <h5 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_String_System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes__examples">Examples</h5>
+  <h5 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_String_System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes__examples">Examples</h5>
   <p>@using (var s = f.BeginSection(&quot;Section heading&quot;)) {
 using (var ss = s.BeginSection(&quot;Nested section heading&quot;, leadingHtml: @&lt;p&gt;Leading html...&lt;/p&gt;)) {
 @ss.FieldFor(m =&gt; m.FirstName)
@@ -492,7 +492,7 @@ using (var ss = s.BeginSection(&quot;Nested section heading&quot;, leadingHtml: 
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_IForm___0__Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.IForm%7B%60%600%7D%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L150">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L206">View Source</a>
   </span>
   <a id="ChameleonForms_Component_SectionExtensions_BeginSection_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection*"></a>
   <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_IForm___0__Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.IForm{``0},Microsoft.AspNetCore.Html.IHtmlContent,Microsoft.AspNetCore.Html.IHtmlContent,ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(IForm&lt;TModel&gt;, IHtmlContent, IHtmlContent, HtmlAttributes)</h4>
@@ -581,7 +581,7 @@ using (var ss = s.BeginSection(&quot;Nested section heading&quot;, leadingHtml: 
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_IForm___0__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.IForm%7B%60%600%7D%2CSystem.Func%7BSystem.Object%2CMicrosoft.AspNetCore.Html.IHtmlContent%7D%2CSystem.Func%7BSystem.Object%2CMicrosoft.AspNetCore.Html.IHtmlContent%7D%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L169">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L225">View Source</a>
   </span>
   <a id="ChameleonForms_Component_SectionExtensions_BeginSection_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection*"></a>
   <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_IForm___0__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.IForm{``0},System.Func{System.Object,Microsoft.AspNetCore.Html.IHtmlContent},System.Func{System.Object,Microsoft.AspNetCore.Html.IHtmlContent},ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(IForm&lt;TModel&gt;, Func&lt;Object, IHtmlContent&gt;, Func&lt;Object, IHtmlContent&gt;, HtmlAttributes)</h4>
@@ -670,7 +670,7 @@ using (var ss = s.BeginSection(&quot;Nested section heading&quot;, leadingHtml: 
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_IForm___0__System_String_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.IForm%7B%60%600%7D%2CSystem.String%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L112">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L168">View Source</a>
   </span>
   <a id="ChameleonForms_Component_SectionExtensions_BeginSection_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection*"></a>
   <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_IForm___0__System_String_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.IForm{``0},System.String,Microsoft.AspNetCore.Html.IHtmlContent,ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(IForm&lt;TModel&gt;, String, IHtmlContent, HtmlAttributes)</h4>
@@ -759,7 +759,7 @@ using (var ss = s.BeginSection(&quot;Nested section heading&quot;, leadingHtml: 
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_IForm___0__System_String_System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.BeginSection%60%601(ChameleonForms.IForm%7B%60%600%7D%2CSystem.String%2CSystem.Func%7BSystem.Object%2CMicrosoft.AspNetCore.Html.IHtmlContent%7D%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L131">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L187">View Source</a>
   </span>
   <a id="ChameleonForms_Component_SectionExtensions_BeginSection_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection*"></a>
   <h4 id="ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_IForm___0__System_String_System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.SectionExtensions.BeginSection``1(ChameleonForms.IForm{``0},System.String,System.Func{System.Object,Microsoft.AspNetCore.Html.IHtmlContent},ChameleonForms.HtmlAttributes)">BeginSection&lt;TModel&gt;(IForm&lt;TModel&gt;, String, Func&lt;Object, IHtmlContent&gt;, HtmlAttributes)</h4>
@@ -845,92 +845,20 @@ using (var ss = s.BeginSection(&quot;Nested section heading&quot;, leadingHtml: 
 
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_Partial__1_ChameleonForms_Component_ISection___0__System_String_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.Partial%60%601(ChameleonForms.Component.ISection%7B%60%600%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_PartialForAsync__2_ChameleonForms_Component_ISection___0__System_Linq_Expressions_Expression_System_Func___0___1___System_String_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.PartialForAsync%60%602(ChameleonForms.Component.ISection%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%7D%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L265">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L324">View Source</a>
   </span>
-  <a id="ChameleonForms_Component_SectionExtensions_Partial_" data-uid="ChameleonForms.Component.SectionExtensions.Partial*"></a>
-  <h4 id="ChameleonForms_Component_SectionExtensions_Partial__1_ChameleonForms_Component_ISection___0__System_String_" data-uid="ChameleonForms.Component.SectionExtensions.Partial``1(ChameleonForms.Component.ISection{``0},System.String)">Partial&lt;TModel&gt;(ISection&lt;TModel&gt;, String)</h4>
-  <div class="markdown level1 summary"><p>Renders the given partial in the context of the parent model.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IHtmlContent Partial&lt;TModel&gt;(this ISection&lt;TModel&gt; section, string partialViewName)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="ChameleonForms.Component.ISection-1.html">ISection</a>&lt;TModel&gt;</td>
-        <td><span class="parametername">section</span></td>
-        <td><p>The current section</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">partialViewName</span></td>
-        <td><p>The name of the partial view to render</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
-        <td><p>The HTML for the rendered partial</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">TModel</span></td>
-        <td><p>The form model type</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions_PartialFor__2_ChameleonForms_Component_ISection___0__System_Linq_Expressions_Expression_System_Func___0___1___System_String_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions.PartialFor%60%602(ChameleonForms.Component.ISection%7B%60%600%7D%2CSystem.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%7D%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L280">View Source</a>
-  </span>
-  <a id="ChameleonForms_Component_SectionExtensions_PartialFor_" data-uid="ChameleonForms.Component.SectionExtensions.PartialFor*"></a>
-  <h4 id="ChameleonForms_Component_SectionExtensions_PartialFor__2_ChameleonForms_Component_ISection___0__System_Linq_Expressions_Expression_System_Func___0___1___System_String_" data-uid="ChameleonForms.Component.SectionExtensions.PartialFor``2(ChameleonForms.Component.ISection{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String)">PartialFor&lt;TModel, TPartialModel&gt;(ISection&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TPartialModel&gt;&gt;, String)</h4>
+  <a id="ChameleonForms_Component_SectionExtensions_PartialForAsync_" data-uid="ChameleonForms.Component.SectionExtensions.PartialForAsync*"></a>
+  <h4 id="ChameleonForms_Component_SectionExtensions_PartialForAsync__2_ChameleonForms_Component_ISection___0__System_Linq_Expressions_Expression_System_Func___0___1___System_String_" data-uid="ChameleonForms.Component.SectionExtensions.PartialForAsync``2(ChameleonForms.Component.ISection{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String)">PartialForAsync&lt;TModel, TPartialModel&gt;(ISection&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TPartialModel&gt;&gt;, String)</h4>
   <div class="markdown level1 summary"><p>Renders the given partial in the context of the given property.
 Use PartialFor(m =&gt; m) to render a partial for the model itself rather than a child property.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IHtmlContent PartialFor&lt;TModel, TPartialModel&gt;(this ISection&lt;TModel&gt; section, Expression&lt;Func&lt;TModel, TPartialModel&gt;&gt; partialModelProperty, string partialViewName)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;IHtmlContent&gt; PartialForAsync&lt;TModel, TPartialModel&gt;(this ISection&lt;TModel&gt; section, Expression&lt;Func&lt;TModel, TPartialModel&gt;&gt; partialModelProperty, string partialViewName)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -972,7 +900,7 @@ Use PartialFor(m =&gt; m) to render a partial for the model itself rather than a
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span>&gt;</td>
         <td><p>The HTML for the rendered partial</p>
 </td>
       </tr>
@@ -1010,7 +938,7 @@ Use PartialFor(m =&gt; m) to render a partial for the model itself rather than a
                     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_SectionExtensions.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.SectionExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L96" class="contribution-link">View Source</a>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L152" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
@@ -1035,6 +963,7 @@ Use PartialFor(m =&gt; m) to render a partial for the model itself rather than a
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

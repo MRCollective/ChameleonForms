@@ -79,9 +79,9 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="message">Message</h1>
 
-<p>The Message is a container to show a message to the user; you create a Message by instantiating a <code>Message&lt;TModel&gt;</code> within a <code>using</code> block. The start and end of the <code>using</code> block will output the start and end HTML for the Message and the inside of the <code>using</code> block will contain the Message content.</p>
+<p>The Message is a container to show a message to the user. You could do this using HTML without using the Message component, but the benefit of using the Message component is it delegates the HTML to the form template so you ensure conssitency across all forms. You can create a Message by using the <code>&lt;form-message&gt;</code> tag helper or instantiating a <code>Message&lt;TModel&gt;</code> within a <code>using</code> block.</p>
 <p>The <code>Message&lt;TModel&gt;</code> class looks like this and is in the <code>ChameleonForms.Component</code> namespace:</p>
-<pre><code class="lang-csharp">    /// &lt;summary&gt;
+<pre><code class="lang-cs">    /// &lt;summary&gt;
     /// Wraps the output of a message to display to a user.
     /// &lt;/summary&gt;
     /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;
@@ -137,15 +137,33 @@
         /// &lt;returns&gt;The HTML for the paragraph&lt;/returns&gt;
         public virtual IHtmlContent Paragraph(Func&lt;dynamic, IHtmlContent&gt; paragraph);
 </code></pre>
-<p>The start and end HTML of the Message are generated via the <code>BeginMessage</code> and <code>EndMessage</code> methods in the template and the paragraph is generated via the <code>MessageParagraph</code> method in the template.</p>
+<p>The start and end HTML of the Message are generated via the <code>BeginMessage</code> and <code>EndMessage</code> methods in the <a href="form-templates.html">form template</a> and the paragraph is generated via the <code>MessageParagraph</code> method in the template.</p>
 <h2 id="default-usage">Default usage</h2>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_default-message-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_default-message-th" data-tab="default-message-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_default-message-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_default-message-hh" data-tab="default-message-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_default-message-th" role="tabpanel" data-tab="default-message-th">
+
+<pre><code class="lang-cshtml">&lt;form-message type=&quot;Information&quot; heading=&quot;Message title&quot;&gt;
+    @* Message content *@
+&lt;/form-message&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_default-message-hh" role="tabpanel" data-tab="default-message-hh" aria-hidden="true" hidden="hidden">
+
 <p>In order to get an instance of a <code>Message&lt;TModel&gt;</code> you can use the <code>BeginMessage</code> extension method on the <a href="the-form.html">Form</a>, e.g.:</p>
 <pre><code class="lang-cshtml">@using (var m = form.BeginMessage(MessageType.Information, &quot;Message title&quot;)) {
     @* Message content *@
 }
 </code></pre>
 <p>The <code>BeginMessage</code> extension methods look like this:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Creates a message.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -199,8 +217,11 @@
             return new Message&lt;TModel&gt;(form, messageType, heading(null));
         }
 </code></pre>
+</section>
+</div>
+
 <p>The <code>MessageType</code> enum is defined like this and appears in the <code>ChameleonForms.Enums</code> namespace:</p>
-<pre><code class="lang-csharp">    /// &lt;summary&gt;
+<pre><code class="lang-cs">    /// &lt;summary&gt;
     /// Types of messages that can be displayed to the user
     /// &lt;/summary&gt;
     public enum MessageType
@@ -231,7 +252,31 @@
         Warning
     }
 </code></pre>
+<p>When setting the <code>type</code> attribute in the <code>&lt;form-message&gt;</code> tag helper you can reference any of these <code>MessageType</code> values.</p>
 <h2 id="message-content">Message content</h2>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_message-para-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_message-para-th" data-tab="message-para-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_message-para-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_message-para-hh" data-tab="message-para-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_message-para-th" role="tabpanel" data-tab="message-para-th">
+
+<p>If you want to add paragraphs using the template you can do that by using the <code>&lt;message-paragraph&gt;</code> tag helper and of course you can use normal HTML or any valid Razor code as well:</p>
+<pre><code class="lang-cshtml">&lt;form-message type=&quot;Information&quot; heading=&quot;Message title&quot;&gt;
+    &lt;message-paragraph&gt;Here is the first part of the message&lt;/message-paragraph&gt;
+    &lt;img src=&quot;/path/to/img&quot; alt=&quot;alt text&quot; /&gt;
+    &lt;message-paragraph&gt;Here is a &lt;strong&gt;styled&lt;/strong&gt; message&lt;/message-paragraph&gt;
+    @SomeRazorFunctionDefinedOnThisPage()
+    &lt;partial name=&quot;_WooWeCanGetReallyCrazyAndAddPartialsToo_OMG&quot;&gt;&lt;/partial&gt;
+&lt;/form-message&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_message-para-hh" role="tabpanel" data-tab="message-para-hh" aria-hidden="true" hidden="hidden">
+
 <p>If you want to add paragraphs using the template you can do that by using one of the <code>Paragraph</code> methods as defined above and of course you can use normal HTML or any valid Razor code as well:</p>
 <pre><code class="lang-cshtml">@using (var m = f.BeginMessage(MessageType.Information, &quot;Message title&quot;)) {
     @m.Paragraph(&quot;Here is the first part of the message&quot;)
@@ -242,6 +287,8 @@
     @m.Paragraph(@&lt;strong&gt;Message content&lt;/strong&gt;)
 }
 </code></pre>
+</section>
+</div>
 <h2 id="default-html">Default HTML</h2>
 <h3 id="begin-html">Begin HTML</h3>
 <pre><code class="lang-html">      &lt;div class=&quot;%messagetype%_message&quot;&gt;
@@ -309,6 +356,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

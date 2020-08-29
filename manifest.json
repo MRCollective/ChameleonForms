@@ -13,48 +13,12 @@
       "is_incremental": false
     },
     {
-      "type": "Conceptual",
-      "source_relative_path": "BREAKING_CHANGES.md",
-      "output": {
-        ".html": {
-          "relative_path": "BREAKING_CHANGES.html",
-          "hash": "CqUvwrZjbWZvxThPBEQmVw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "CONTRIBUTING.md",
-      "output": {
-        ".html": {
-          "relative_path": "CONTRIBUTING.html",
-          "hash": "JZk6ApgYbGuCUvMAtyTW0Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "README.md",
-      "output": {
-        ".html": {
-          "relative_path": "README.html",
-          "hash": "ruK4bwybT2Jy5rvauhVoEQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
       "type": "ManagedReference",
       "source_relative_path": "apidocs/ChameleonForms.Attributes.ExistsInAttribute.yml",
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Attributes.ExistsInAttribute.html",
-          "hash": "coWwLqLN0P1DolhwG8h3UA=="
+          "hash": "85dBeVkw5XSMCqh416IwrQ=="
         }
       },
       "is_incremental": false,
@@ -66,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Attributes.html",
-          "hash": "zzdSyZ8NfymrPY2nsaOIQA=="
+          "hash": "uhJL1wklM/SMCqj0xRAVZA=="
         }
       },
       "is_incremental": false,
@@ -78,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.ChameleonFormExtensions.html",
-          "hash": "bHvttYulQWq4EdD4/CWEoA=="
+          "hash": "autCksuxy095aqUi48XJdQ=="
         }
       },
       "is_incremental": false,
@@ -90,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.ButtonHtmlAttributes.html",
-          "hash": "+H0E8HJ6ZAElqyTnvekZIQ=="
+          "hash": "b1myQx5WJPLSMVGf59ijMQ=="
         }
       },
       "is_incremental": false,
@@ -102,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.Config.FieldConfiguration.html",
-          "hash": "Vrl2qCoKSpzk6INk1+GrWg=="
+          "hash": "hxR0Ki1DVlZvjELBRk4WKA=="
         }
       },
       "is_incremental": false,
@@ -114,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.Config.FieldConfigurationExtensions.html",
-          "hash": "OyW+piUbxEfasyozHQUwAw=="
+          "hash": "KUg8v3WsGT0ovTFKs8KqXg=="
         }
       },
       "is_incremental": false,
@@ -126,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.Config.IFieldConfiguration.html",
-          "hash": "0W1iqjL+eEFLh9OtldO9vw=="
+          "hash": "ZShbuPzid3RsieC8ddlfeg=="
         }
       },
       "is_incremental": false,
@@ -138,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.Config.IReadonlyFieldConfiguration.html",
-          "hash": "7syz29BHRP/D79QwPpzvlw=="
+          "hash": "EqoSUo3ZyohXZM92Ccj2dg=="
         }
       },
       "is_incremental": false,
@@ -150,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.Config.html",
-          "hash": "sH0qe5SgXFzja450zoyCRg=="
+          "hash": "BLOg6AhiP/ovE9Mr1GUOJg=="
         }
       },
       "is_incremental": false,
@@ -162,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.Field-1.html",
-          "hash": "MtwQ74TSSwMAOSWYh0yHuQ=="
+          "hash": "u6cPwU8iNjao1Iqb9hrfCQ=="
         }
       },
       "is_incremental": false,
@@ -174,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.Field.html",
-          "hash": "JZjeAbgSI1EfMSFqL2clTQ=="
+          "hash": "d/nPwyZkpCO2iUBgkFIE4Q=="
         }
       },
       "is_incremental": false,
@@ -186,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.FieldExtensions.html",
-          "hash": "iwCkLeJs4VrRnQt9aJ+Ufg=="
+          "hash": "Zgl9oV7oyagiuV716qZFwA=="
         }
       },
       "is_incremental": false,
@@ -198,7 +162,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.FieldParent.html",
-          "hash": "pcfvqkCvCE7YLZnGy6lLxg=="
+          "hash": "ghsCoFocp+UHTqJdk4tguA=="
         }
       },
       "is_incremental": false,
@@ -210,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.FormComponent-1.html",
-          "hash": "vWQtqQNDxktuLUlAgSqHEQ=="
+          "hash": "o7doVRLZ/cZIoV+lrVZNUQ=="
         }
       },
       "is_incremental": false,
@@ -222,7 +186,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.IFormComponent-1.html",
-          "hash": "Y9VFE5DUERkwGRoeYgzwFA=="
+          "hash": "5P5kupOF//LCVD3JLe8frg=="
         }
       },
       "is_incremental": false,
@@ -234,7 +198,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.ISection-1.html",
-          "hash": "YiuLPW8F4fkWyDITedxDfQ=="
+          "hash": "MeKd4TMWADMPVZ73mSNpew=="
         }
       },
       "is_incremental": false,
@@ -246,7 +210,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.ISection.html",
-          "hash": "e6ZwaKXaZsdAgaI76NqPIA=="
+          "hash": "HwlyWXeh4rA8QkdMtGTwQw=="
         }
       },
       "is_incremental": false,
@@ -258,7 +222,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.Message-1.html",
-          "hash": "hLVhjGqJYSaihPceD5SFeA=="
+          "hash": "7DeiJxItUuXTbdkBxysZHg=="
         }
       },
       "is_incremental": false,
@@ -270,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.MessageExtensions.html",
-          "hash": "+CRoxZK8Kq4FhMH3JMcsiQ=="
+          "hash": "aYO1j9yMK3phsXPeSlnvaA=="
         }
       },
       "is_incremental": false,
@@ -282,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.Navigation-1.html",
-          "hash": "N094u47JwJ86ESTlRxC2Nw=="
+          "hash": "SvyYMKROEH0N38OmUaU9aQ=="
         }
       },
       "is_incremental": false,
@@ -294,7 +258,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.NavigationExtensions.html",
-          "hash": "7Eez7slR8r5icULIymM7YA=="
+          "hash": "28PRrzraZBZycMSaIeD7Hg=="
         }
       },
       "is_incremental": false,
@@ -306,7 +270,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.Section-1.html",
-          "hash": "LZfYJyvJEhvR2L7DeQca0A=="
+          "hash": "hJ4lF4opH5EQU0Eh9gTpgw=="
         }
       },
       "is_incremental": false,
@@ -318,7 +282,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.SectionExtensions.html",
-          "hash": "A4uSX7QPKy+gzWDhTGfzNA=="
+          "hash": "EPwMAai2Y2XiJ2WGhWhEJg=="
         }
       },
       "is_incremental": false,
@@ -330,7 +294,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Component.html",
-          "hash": "xxLW9F0NREwycLchF1M0Xw=="
+          "hash": "KVoPNym8mN8DOm79bzmxPg=="
         }
       },
       "is_incremental": false,
@@ -342,7 +306,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Config.ChameleonFormsConfigBuilder-1.html",
-          "hash": "xTi/kXp1hXQs8Rvtgwpe7A=="
+          "hash": "5z8SBNtWJ8sVtXlJd8qA2w=="
         }
       },
       "is_incremental": false,
@@ -354,7 +318,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Config.html",
-          "hash": "nNhpAtiY1upHxWBBMr10vw=="
+          "hash": "S45Hw+fPcIqg0y7HVkD8jw=="
         }
       },
       "is_incremental": false,
@@ -362,11 +326,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "apidocs/ChameleonForms.DisposableHtmlHelper-1.yml",
+      "source_relative_path": "apidocs/ChameleonForms.Constants.yml",
       "output": {
         ".html": {
-          "relative_path": "apidocs/ChameleonForms.DisposableHtmlHelper-1.html",
-          "hash": "CrHU2nZouBJLMnbl0K/DDQ=="
+          "relative_path": "apidocs/ChameleonForms.Constants.html",
+          "hash": "XPUovO3vCaZ5xq9dwOmO7w=="
         }
       },
       "is_incremental": false,
@@ -378,7 +342,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Enums.EncType.html",
-          "hash": "5MWjykB4xCKIgkHimPrBPg=="
+          "hash": "h7NY6235zlxtT15fcdmRxg=="
         }
       },
       "is_incremental": false,
@@ -390,7 +354,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Enums.FieldDisplayType.html",
-          "hash": "HOMZc2m9941KEEssM7rHng=="
+          "hash": "M/WIAf0suhXIoxp5SwF6UA=="
         }
       },
       "is_incremental": false,
@@ -402,7 +366,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Enums.MessageType.html",
-          "hash": "LB3vaLAcQZj8VKh3JxUNCQ=="
+          "hash": "cm/1vyZSm9qPgks5+3Zmpg=="
         }
       },
       "is_incremental": false,
@@ -414,7 +378,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Enums.TextInputType.html",
-          "hash": "rvIg/XbJ/bqVA1MJisgMyQ=="
+          "hash": "Eg0yUN0NPxWS+95cGBzxkA=="
         }
       },
       "is_incremental": false,
@@ -426,7 +390,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Enums.html",
-          "hash": "UCwHasdjETEDZMg48AQKPQ=="
+          "hash": "obcARI6NjMDFFZboXAC+zQ=="
         }
       },
       "is_incremental": false,
@@ -438,7 +402,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Extensions.html",
-          "hash": "pphdaY7TiU3QXowd5UmB7Q=="
+          "hash": "ByNnWAQs1tj0kzSn4gO3OQ=="
         }
       },
       "is_incremental": false,
@@ -450,7 +414,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.DefaultFieldGenerator-2.html",
-          "hash": "VTnv2UOfYaOlkqBPwm3wvQ=="
+          "hash": "P/dMRQLVPkm7CZsIfUVh8Q=="
         }
       },
       "is_incremental": false,
@@ -462,7 +426,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.FieldGeneratorExtensions.html",
-          "hash": "iI6jkTjGcCTmRYTehjH5bg=="
+          "hash": "Sy9INrWnOZv11InV10CsbA=="
         }
       },
       "is_incremental": false,
@@ -474,7 +438,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.BooleanHandler-2.html",
-          "hash": "2C/PYBRK07LwQN9FIQDLvw=="
+          "hash": "0kh9G3bxcQpZCjM8jUyRxQ=="
         }
       },
       "is_incremental": false,
@@ -486,7 +450,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.DateTimeHandler-2.html",
-          "hash": "Oko+qOYr+ZAoK8GtYAzX+A=="
+          "hash": "HPS1lsXcv3RPkJtqCnMO6A=="
         }
       },
       "is_incremental": false,
@@ -498,7 +462,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.DefaultHandler-2.html",
-          "hash": "1+X6iWF12gC84QSB4uBY9A=="
+          "hash": "5Zl161f9KLl0mtmoOn7OWQ=="
         }
       },
       "is_incremental": false,
@@ -510,7 +474,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.EnumListHandler-2.html",
-          "hash": "D+ffrfZvsLur41iU0PB0Qw=="
+          "hash": "2KQ1W4lOXkZJDGKUrjqv6A=="
         }
       },
       "is_incremental": false,
@@ -522,7 +486,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.FieldGeneratorHandler-2.html",
-          "hash": "6dnzDfDpEGM2SKzHXc90gw=="
+          "hash": "rMYD4OtjOWp17v+Bc+hynA=="
         }
       },
       "is_incremental": false,
@@ -534,7 +498,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.FileHandler-2.html",
-          "hash": "lgy96Rt3WNHwQ9NOKcL8uA=="
+          "hash": "BHKo51tm0gAA8fgkSMr97g=="
         }
       },
       "is_incremental": false,
@@ -546,7 +510,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.IFieldGeneratorHandler-2.html",
-          "hash": "SdQFycYKk6kG8L46iB43kg=="
+          "hash": "qzNQbOiz/jIMXGzeFybdsQ=="
         }
       },
       "is_incremental": false,
@@ -558,7 +522,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.ListHandler-2.html",
-          "hash": "P3AMBDFhWszhwvhq5NmSMA=="
+          "hash": "iZqGVhWhPwltpMBjXzrJzg=="
         }
       },
       "is_incremental": false,
@@ -570,7 +534,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.ListPropertyNullException.html",
-          "hash": "MYLujlenUjDVGjnZeJEW6g=="
+          "hash": "iDoBWWJMVQjaWEk8qVHIQQ=="
         }
       },
       "is_incremental": false,
@@ -582,7 +546,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.ModelNullException.html",
-          "hash": "y+JgfwNUZ8MCbnaPAalPCg=="
+          "hash": "BkbFhB0V2NW+HKYvGjfonQ=="
         }
       },
       "is_incremental": false,
@@ -594,7 +558,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.NumberHandler-2.html",
-          "hash": "9byV6DQV/WeRCOphwQMEjg=="
+          "hash": "97z09efiE+zzMtr1Xa32pA=="
         }
       },
       "is_incremental": false,
@@ -606,7 +570,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.PasswordHandler-2.html",
-          "hash": "HZcXRNtpRh/M9bMYThkYUA=="
+          "hash": "RITLj5xDU50BoZBXZheZIQ=="
         }
       },
       "is_incremental": false,
@@ -618,7 +582,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.TextAreaHandler-2.html",
-          "hash": "PYH7ZExEjUf1yJ8Ck5T8qQ=="
+          "hash": "LNmcEhf6ZS5RUHibUanl+Q=="
         }
       },
       "is_incremental": false,
@@ -630,7 +594,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.Handlers.html",
-          "hash": "3COgt/1qxT6VHcsoXkas8A=="
+          "hash": "svC2DPT9sKlrvsVgRIdDMQ=="
         }
       },
       "is_incremental": false,
@@ -642,7 +606,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.IFieldGenerator-2.html",
-          "hash": "aZ0hcJgyS5DW4zdqnm7xVA=="
+          "hash": "6/673a7zhsH9yaI060Kq8w=="
         }
       },
       "is_incremental": false,
@@ -654,7 +618,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.IFieldGenerator.html",
-          "hash": "9sTBL5CepNTxPBPsBkrkEg=="
+          "hash": "FNZHCHO4XNnO9ahrFnd2Kg=="
         }
       },
       "is_incremental": false,
@@ -666,7 +630,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.FieldGenerators.html",
-          "hash": "Yf26l3+bNWS9t4ZVfmDFyQ=="
+          "hash": "9CNK3hhiOqlM9EwrHAT5Vw=="
         }
       },
       "is_incremental": false,
@@ -678,7 +642,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Form-1.html",
-          "hash": "ZOwRCZEChLcYKzUn9aYQYA=="
+          "hash": "3m34crIjE6ETPwo/8qpGtA=="
         }
       },
       "is_incremental": false,
@@ -690,7 +654,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.HtmlAttributes.html",
-          "hash": "uJzGeM9CyDIt5y8SNlzsZQ=="
+          "hash": "qGeqQ9t7PqV5E2YQzyj68Q=="
         }
       },
       "is_incremental": false,
@@ -702,7 +666,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.HtmlAttributesExtensions.html",
-          "hash": "ImI9leGe0RXTzaLW7bw4UA=="
+          "hash": "vw42IoacmPehvHuae3d1Dw=="
         }
       },
       "is_incremental": false,
@@ -714,7 +678,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.HtmlHelperExtensions.html",
-          "hash": "M4qQFOkMgEs4m3mElfG4CQ=="
+          "hash": "Sl7NxX32rlO8VKJYPUxIXw=="
         }
       },
       "is_incremental": false,
@@ -726,7 +690,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.HumanizedLabelsDisplayMetadataProvider.html",
-          "hash": "Mz0OC+GM5uerLPY6hzEYwg=="
+          "hash": "kd1u0YnKCFXho3/Ermjn4w=="
         }
       },
       "is_incremental": false,
@@ -738,7 +702,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.IForm-1.html",
-          "hash": "jysBJPAYwaDVVftXluSZKQ=="
+          "hash": "eonIgubsxRJ7D7+T8kzbCg=="
         }
       },
       "is_incremental": false,
@@ -750,7 +714,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.IForm.html",
-          "hash": "9efpdB9lICngFjdruV2n3g=="
+          "hash": "JGW7rd1yw0J/VJpjSwhrVg=="
         }
       },
       "is_incremental": false,
@@ -762,7 +726,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.LazyHtmlAttributes.html",
-          "hash": "kKN71CCweO2gLokPVHnDsg=="
+          "hash": "28iqr7WxZR1Nkj7vTwiMiw=="
         }
       },
       "is_incremental": false,
@@ -774,7 +738,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.ModelBinders.DateTimeModelBinder.html",
-          "hash": "LBkkjXDyGN6CpmhleylWBQ=="
+          "hash": "IyB85/pZCtxaIucOVmUgfA=="
         }
       },
       "is_incremental": false,
@@ -786,7 +750,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.ModelBinders.EnumListModelBinder-1.html",
-          "hash": "z81jJBij4ZecW18m/mh3gQ=="
+          "hash": "CtWvy43MfEUJaWD50l0Yhg=="
         }
       },
       "is_incremental": false,
@@ -798,7 +762,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.ModelBinders.FlagsEnumModelBinder.html",
-          "hash": "PeM1YITL4+V36jzU+LQKQg=="
+          "hash": "bO4UnjE4IybMpTrOty1xzQ=="
         }
       },
       "is_incremental": false,
@@ -810,7 +774,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.ModelBinders.UriModelBinder.html",
-          "hash": "IIrV06f8F4wPn7/Grt2/ag=="
+          "hash": "uSXP28gXDz3kv94wQUeEEA=="
         }
       },
       "is_incremental": false,
@@ -822,7 +786,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.ModelBinders.html",
-          "hash": "46ZzCQqu3Krd23aXLN9hiA=="
+          "hash": "Or2VRfDCVDZZhvDSNnspnw=="
         }
       },
       "is_incremental": false,
@@ -834,7 +798,367 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.ServiceCollectionExtensions.html",
-          "hash": "Zax3/8walUkM0ixTNAQC4A=="
+          "hash": "05OCLlRvPHE8XlkIdSxRjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.ChameleonFormTagHelper.FormMethod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.ChameleonFormTagHelper.FormMethod.html",
+          "hash": "URAfagQBqWnQTHXMsSa3bg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.ChameleonFormTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.ChameleonFormTagHelper.html",
+          "hash": "dEXuUU7bv6xiGEulVMakBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FieldConfigurationBaseTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FieldConfigurationBaseTagHelper.html",
+          "hash": "ksaT4E2JKKjoJ+ZjHh5pIQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FieldConfigurationTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FieldConfigurationTagHelper.html",
+          "hash": "QhrQrc+VOdyN/FS9yg87cw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.html",
+          "hash": "90CwKO8M6Onp2iIgxSgRQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FieldElementTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FieldElementTagHelper.html",
+          "hash": "Mv0YG0033uZuGJsy2N3w4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FieldLabelConfigurationTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FieldLabelConfigurationTagHelper.html",
+          "hash": "0mNZ/2nrtC6SssI/WDT6eg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FieldLabelTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FieldLabelTagHelper.html",
+          "hash": "dmRAaaBRwWPxrlWcatR/2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FieldTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FieldTagHelper.html",
+          "hash": "EKS+d3GCb5iI5i80rbXHKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FieldValidationConfigurationTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FieldValidationConfigurationTagHelper.html",
+          "hash": "j1eBv65nD1hwcexHGmXJlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FieldValidationTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FieldValidationTagHelper.html",
+          "hash": "YahdQt4mzmsR25IOxjludQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FormButtonTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FormButtonTagHelper.html",
+          "hash": "LjdM8AtA4GeBu0DuAGp8rA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FormMessageTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FormMessageTagHelper.html",
+          "hash": "NamnGEwu0hBnLK6WDABYuA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FormNavigationTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FormNavigationTagHelper.html",
+          "hash": "zGOepj2Ut20MC/S14h20PA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FormPartialTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FormPartialTagHelper.html",
+          "hash": "1DuaX8Jcl3hvc4Y8AM0aNw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.FormSectionTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.FormSectionTagHelper.html",
+          "hash": "QeiFTdnLftYJX2Qh8VBnGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.HtmlAttributesTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.HtmlAttributesTagHelper.html",
+          "hash": "ODOaVgxuo1QD1DH7xP+PTw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.ManualFieldContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.ManualFieldContext.html",
+          "hash": "dCuWl2WPmvzcgXVn/+sbyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.ManualFieldElementTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.ManualFieldElementTagHelper.html",
+          "hash": "Rs2KegISnhvd4+6wXUtmEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.ManualFieldLabelTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.ManualFieldLabelTagHelper.html",
+          "hash": "Iheqn/2qKsXyDWzWB5ggDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.ManualFieldTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.ManualFieldTagHelper.html",
+          "hash": "qBKkkd6PgcLuWbdGFQdyyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.ManualFieldValidationTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.ManualFieldValidationTagHelper.html",
+          "hash": "yS6ZWxmeTda6iIACM65amw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.MessageParagraphTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.MessageParagraphTagHelper.html",
+          "hash": "GaZpATw4nhu4DghTXf1+8Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.ModelAwareTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.ModelAwareTagHelper.html",
+          "hash": "98lsks5n/21uee12IWLnkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.ModelPropertyTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.ModelPropertyTagHelper.html",
+          "hash": "1SDJYGwhrYs1VpxsW0py6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.RenderAs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.RenderAs.html",
+          "hash": "XGhBZubPp1PJwQeXCJLxzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.ResetButtonTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.ResetButtonTagHelper.html",
+          "hash": "kPmOw1i5AlEUnvblH/az2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.SubmitButtonTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.SubmitButtonTagHelper.html",
+          "hash": "EqMDaf6T/40X96eeWyE9+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.TagHelperContextExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.TagHelperContextExtensions.html",
+          "hash": "JAoLUihigPuILrilBwDkFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.TagHelpers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.TagHelpers.html",
+          "hash": "zOHmCNVEPCp7ijJXBYbeaA=="
         }
       },
       "is_incremental": false,
@@ -846,7 +1170,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.BeginSectionParams.html",
-          "hash": "rbRrR3Gp6WVc8B3rxfVdnA=="
+          "hash": "6j+eHFaCwqTNdCBbuJFR9Q=="
         }
       },
       "is_incremental": false,
@@ -858,7 +1182,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.FieldConfigurationParams.html",
-          "hash": "2OiCpNbJW0cIuk9j1FOEqg=="
+          "hash": "noEfSkyEHJ3gUi59KC0cBg=="
         }
       },
       "is_incremental": false,
@@ -870,7 +1194,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.FieldParams.html",
-          "hash": "MEoybcn8HfbJL+ybaE1BdA=="
+          "hash": "VeZtOxOYfQ1571Z8RyuDig=="
         }
       },
       "is_incremental": false,
@@ -882,7 +1206,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.FieldRenderMode.html",
-          "hash": "ep5oAPfZVrYQHmP8FJZlQg=="
+          "hash": "ZH974uEWMbRQV1BgZBcbsg=="
         }
       },
       "is_incremental": false,
@@ -894,7 +1218,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.ListParams.html",
-          "hash": "Db6pPR/RJ11J+jmJeKfD6g=="
+          "hash": "iYfbbAQR69shOxWN3g2hVQ=="
         }
       },
       "is_incremental": false,
@@ -906,7 +1230,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.MessageParagraphParams.html",
-          "hash": "u/RtFtnuHim2841uA4qnPw=="
+          "hash": "T2oYrZRzRhueQ7vANpOJgQ=="
         }
       },
       "is_incremental": false,
@@ -918,7 +1242,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.MessageParams.html",
-          "hash": "LaXoDOjlMZGrTpSgG/DSbg=="
+          "hash": "RZ9ejtGsTyWswSTo4tu2eA=="
         }
       },
       "is_incremental": false,
@@ -930,7 +1254,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsDefaultTemplate.Params.html",
-          "hash": "rAynQilCyhfKyNzmracYxw=="
+          "hash": "FLQM4BL5Ef9PfRjNBtuY1A=="
         }
       },
       "is_incremental": false,
@@ -942,7 +1266,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params.BeginSectionParams.html",
-          "hash": "ftLaSjL17XuTA+Q0EpITbg=="
+          "hash": "Ufu9Jk1wjve93qV0LI0XmA=="
         }
       },
       "is_incremental": false,
@@ -954,7 +1278,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params.FieldConfigurationParams.html",
-          "hash": "Kl0fu/8qJW6UV39OWE6QOA=="
+          "hash": "Op6Zh9uYpiFMo/CLtSzDIw=="
         }
       },
       "is_incremental": false,
@@ -966,7 +1290,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params.FieldParams.html",
-          "hash": "w2t95Ke9ATIgRVr5gPZ8sw=="
+          "hash": "/WRAVEroddbEKxwCroZa2Q=="
         }
       },
       "is_incremental": false,
@@ -978,7 +1302,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params.FieldRenderMode.html",
-          "hash": "3h0IOm74TU8bieB909485Q=="
+          "hash": "SK8kYrrFQoSXFviCZ6bt7w=="
         }
       },
       "is_incremental": false,
@@ -990,7 +1314,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params.LabelParams.html",
-          "hash": "mfB0sN2heL/chimy1IOTLg=="
+          "hash": "zGURvRTshFMXVBHa5Pbvbw=="
         }
       },
       "is_incremental": false,
@@ -1002,7 +1326,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params.ListParams.html",
-          "hash": "L615HHRp8/EQFP/gdgORaw=="
+          "hash": "gw9HJgq6jmVt23zmc4ypNQ=="
         }
       },
       "is_incremental": false,
@@ -1014,7 +1338,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params.MessageParagraphParams.html",
-          "hash": "td1a/5xUrWYbtVuGxe5wZw=="
+          "hash": "vsS9gYEUjCNcgUyYOtOOtw=="
         }
       },
       "is_incremental": false,
@@ -1026,7 +1350,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params.MessageParams.html",
-          "hash": "nYF84JaO1Q4udY6u3qP6Dw=="
+          "hash": "Oa7/iKLnendoHbk5c8+gFQ=="
         }
       },
       "is_incremental": false,
@@ -1038,7 +1362,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.ChameleonFormsTwitterBootstrap3Template.Params.html",
-          "hash": "da4oxJpyrguusIN9ZFE0qg=="
+          "hash": "BNe0nxLzZPfI2RVQc/+Fug=="
         }
       },
       "is_incremental": false,
@@ -1050,7 +1374,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.Default.DefaultFormTemplate.html",
-          "hash": "EIEhUeXT1Mid+DRZf2xgkw=="
+          "hash": "Fzn0hNBD3+RtFUfPxCKyUQ=="
         }
       },
       "is_incremental": false,
@@ -1062,7 +1386,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.Default.html",
-          "hash": "5RsAqEzQO+MGoL5U/gLxhA=="
+          "hash": "VaYWd7AjuiVkDZhBlmMDNg=="
         }
       },
       "is_incremental": false,
@@ -1074,7 +1398,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.HtmlCreator.html",
-          "hash": "/91VvbaZzhpuuuCw7efCZw=="
+          "hash": "oUPJfVG1Ce/8ebz5CNgcYQ=="
         }
       },
       "is_incremental": false,
@@ -1086,7 +1410,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.IFormTemplate.html",
-          "hash": "kZxX0eatk749VkxPBBYlSA=="
+          "hash": "u1fDld/099s7M++QLULATw=="
         }
       },
       "is_incremental": false,
@@ -1098,7 +1422,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.TwitterBootstrap3.ButtonHtmlAttributesExtensions.html",
-          "hash": "W8kh0uO0R36FW8ii3TmcuQ=="
+          "hash": "TGBlTo8TUKOUJv+HVLYB6A=="
         }
       },
       "is_incremental": false,
@@ -1110,7 +1434,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.TwitterBootstrap3.ButtonSize.html",
-          "hash": "hv58mJmjdfRXveBJyzMLZw=="
+          "hash": "NLEoVl+2i81Cu0oM+CHa0Q=="
         }
       },
       "is_incremental": false,
@@ -1122,7 +1446,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.TwitterBootstrap3.EmphasisStyle.html",
-          "hash": "OhPwKPxZkdJOXU0FEbkbrQ=="
+          "hash": "XBhaAJHbRhsZXGdIRjFvwA=="
         }
       },
       "is_incremental": false,
@@ -1134,7 +1458,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.TwitterBootstrap3.FieldConfigurationExtensions.html",
-          "hash": "o6SWmOFhbBhFzPj6zJRw/Q=="
+          "hash": "d7NqgvmDo0YHEA29MsyrMg=="
         }
       },
       "is_incremental": false,
@@ -1146,7 +1470,19 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.TwitterBootstrap3.TwitterBootstrap3FormTemplate.html",
-          "hash": "tygYLa/BEPWBRtQ8zzDkJw=="
+          "hash": "6fBDqJba9qRqbGNDxwXdKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.Templates.TwitterBootstrap3.TwitterBootstrap3SubmitButtonTagHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.Templates.TwitterBootstrap3.TwitterBootstrap3SubmitButtonTagHelper.html",
+          "hash": "VQqoXYPybFQ7ngKSr62JAQ=="
         }
       },
       "is_incremental": false,
@@ -1158,7 +1494,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.TwitterBootstrap3.html",
-          "hash": "oFhblqScTNOtX7wBKxvYlA=="
+          "hash": "GEDLSma3iLYdVe8IL+gkdQ=="
         }
       },
       "is_incremental": false,
@@ -1170,7 +1506,55 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Templates.html",
-          "hash": "6ZdPpo4cD6wBXOyDtE7/PA=="
+          "hash": "1EZpw2zIZcOD36MaMjJsOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.Utils.DisposableHtmlHelper-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.Utils.DisposableHtmlHelper-1.html",
+          "hash": "5N6wa6cTm5YMCcFZG0PlUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.Utils.ExpressionBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.Utils.ExpressionBuilder.html",
+          "hash": "DdVej9Oqo8V4gdm4HDjA8Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.Utils.ViewContextExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.Utils.ViewContextExtensions.html",
+          "hash": "v3d7PwzDQ4lHYTM9xnALRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "apidocs/ChameleonForms.Utils.yml",
+      "output": {
+        ".html": {
+          "relative_path": "apidocs/ChameleonForms.Utils.html",
+          "hash": "ZT2o+1//Tg0xLP3xGGRhkQ=="
         }
       },
       "is_incremental": false,
@@ -1182,7 +1566,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Validators.DateTimeClientModelValidatorProvider.html",
-          "hash": "RG6Moj/EhVgtITtPOmnqdA=="
+          "hash": "2cSE9YsH5XhK+oUhsV+BEw=="
         }
       },
       "is_incremental": false,
@@ -1194,7 +1578,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Validators.IntegralNumericClientModelValidatorProvider.html",
-          "hash": "hxQYfm9O0CnYhJPktL7njw=="
+          "hash": "qO8opntjZ6b32MW1wpHP7w=="
         }
       },
       "is_incremental": false,
@@ -1206,19 +1590,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.Validators.html",
-          "hash": "28RzNTHFbm4Yj8efDorfNQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "apidocs/ChameleonForms.WebViewPageExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "apidocs/ChameleonForms.WebViewPageExtensions.html",
-          "hash": "M17snrrkdMgmVAC3zJhV0g=="
+          "hash": "usp+4QkyqdKv5hXiPFr0Kw=="
         }
       },
       "is_incremental": false,
@@ -1230,7 +1602,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/ChameleonForms.html",
-          "hash": "FJiAINs3zAGU2OCbVbZwjg=="
+          "hash": "ARndgBosFwZrHbwwSotzwQ=="
         }
       },
       "is_incremental": false,
@@ -1242,7 +1614,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/Microsoft.AspNetCore.Html.HtmlContentExtensions.html",
-          "hash": "lix6SOqNTzUTwRCmDXDFmQ=="
+          "hash": "3lMRxHJPEYITWc/zT+pjBw=="
         }
       },
       "is_incremental": false,
@@ -1254,7 +1626,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/Microsoft.AspNetCore.Html.html",
-          "hash": "NKIe7k5JmjBeJbqFyzKEbw=="
+          "hash": "Gbs8yJYHlhkqH1PnGlJUpA=="
         }
       },
       "is_incremental": false,
@@ -1266,7 +1638,7 @@
       "output": {
         ".html": {
           "relative_path": "apidocs/toc.html",
-          "hash": "IEwXIeyaiqXqTvJXg1YOsA=="
+          "hash": "tnU77ZNmlM3y5EEEKSkXrA=="
         }
       },
       "is_incremental": false,
@@ -1300,7 +1672,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/boolean.html",
-          "hash": "d2XFqM5fSm5LFe8TT3fdHQ=="
+          "hash": "02j1oIOd/UZcCY5RO4wIvg=="
         }
       },
       "is_incremental": false,
@@ -1334,7 +1706,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/bootstrap-template.html",
-          "hash": "dB9L3ezhKEUriVFSbeRwoA=="
+          "hash": "pbQ6HN17fP59cOo9tg60rA=="
         }
       },
       "is_incremental": false,
@@ -1357,7 +1729,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/comparison.html",
-          "hash": "+/rP4cJDhdCxwYp1ZYOnAg=="
+          "hash": "bH7qCIq2t8XIBDpMK4ORxA=="
         }
       },
       "is_incremental": false,
@@ -1369,7 +1741,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/configuration.html",
-          "hash": "ERSllhNwSSvWumn8aNX6YQ=="
+          "hash": "h/OyVy5tEWM5o3eWToEECA=="
         }
       },
       "is_incremental": false,
@@ -1381,7 +1753,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/custom-field-generator-handlers.html",
-          "hash": "jtdZpaF5WIpMROKN30dPww=="
+          "hash": "3rFI5dLD6OSQj3A2UZjHZQ=="
         }
       },
       "is_incremental": false,
@@ -1393,7 +1765,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/custom-field-generator.html",
-          "hash": "dCL+CUIER3/ro88Weubjug=="
+          "hash": "H3IXQ4nzLYAVfGttCCyunQ=="
         }
       },
       "is_incremental": false,
@@ -1405,7 +1777,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/custom-template.html",
-          "hash": "Jfn7iTMYn0k1SYQEBUURUA=="
+          "hash": "/EVE8TiSOgFStjXSpGBppA=="
         }
       },
       "is_incremental": false,
@@ -1417,7 +1789,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/datetime-client-side-validation.html",
-          "hash": "8G0IhRL44lwIulNVfxprkw=="
+          "hash": "WwPYNUXST4jScsVnS3ByYQ=="
         }
       },
       "is_incremental": false,
@@ -1429,7 +1801,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/datetime.html",
-          "hash": "Ffy41jgXWanEqDw5DRKDtw=="
+          "hash": "R7BRYj1R/25BfliImv4xOA=="
         }
       },
       "is_incremental": false,
@@ -1441,7 +1813,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/default-fields.html",
-          "hash": "onIOM1WqUYjWC7IG4XrCSA=="
+          "hash": "MFrHhCvNYok1ya2lNkHr4w=="
         }
       },
       "is_incremental": false,
@@ -1453,7 +1825,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/different-form-models.html",
-          "hash": "WBjiyQsWSqDTcW4mHy+Ofg=="
+          "hash": "lMU4i3YQdjo+XOvnZVfFVw=="
         }
       },
       "is_incremental": false,
@@ -1465,7 +1837,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/email.html",
-          "hash": "1MRWMeRhA7tV6TBGm6DMOg=="
+          "hash": "2huj0N9smXjlR7y9NAAw/Q=="
         }
       },
       "is_incremental": false,
@@ -1477,7 +1849,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/enum.html",
-          "hash": "blW/fvK20bsoqIZA0QfZqw=="
+          "hash": "A/HXT6/7NUjMbYbzT9IjdA=="
         }
       },
       "is_incremental": false,
@@ -1489,7 +1861,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/extending-field-configuration.html",
-          "hash": "X+0oqxyfAf0ijEaCVLCKRw=="
+          "hash": "1VNZyi6RaM+nQe53TKyPNQ=="
         }
       },
       "is_incremental": false,
@@ -1501,7 +1873,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/extending-form-components.html",
-          "hash": "1SYu7F2nsRjsfkvp0cjSWA=="
+          "hash": "onkCvm0Zp2x4f9MRnv2N5Q=="
         }
       },
       "is_incremental": false,
@@ -1524,7 +1896,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/field-configuration.html",
-          "hash": "A7W+P5hshacTQXF0aldIqQ=="
+          "hash": "NLIqVlbMJ8J0zrmzJkZPOA=="
         }
       },
       "is_incremental": false,
@@ -1536,7 +1908,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/field-element.html",
-          "hash": "qhwj1hgsBQKTXAR34s5aHQ=="
+          "hash": "EDBed8stsphxtq80xc+vkw=="
         }
       },
       "is_incremental": false,
@@ -1548,7 +1920,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/field-label.html",
-          "hash": "tvfd+IhtAe0FCd7ykxseog=="
+          "hash": "4Biitkefad11d3rNZ4MJSA=="
         }
       },
       "is_incremental": false,
@@ -1560,7 +1932,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/field-validation-html.html",
-          "hash": "MTjKXUJtZmenDOgDq4rGqA=="
+          "hash": "EEy91sLIM8Gwp7FE/iN/0g=="
         }
       },
       "is_incremental": false,
@@ -1572,7 +1944,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/field.html",
-          "hash": "HHvyZP1U224DZahTIjjl4g=="
+          "hash": "5yagtVEfj0sEwBY6c8LElA=="
         }
       },
       "is_incremental": false,
@@ -1584,7 +1956,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/file-upload.html",
-          "hash": "KBn7N4Xmd0vHPv/2AtGOvg=="
+          "hash": "EgvjNjHLbbIF/TiFGfA4Eg=="
         }
       },
       "is_incremental": false,
@@ -1596,7 +1968,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/flags-enum.html",
-          "hash": "RDnUFI/I3dbO9bLu/ikElQ=="
+          "hash": "aDtsGOn0STYYZz+hGMfRgQ=="
         }
       },
       "is_incremental": false,
@@ -1608,7 +1980,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/form-templates.html",
-          "hash": "2alVfC87gJLHzB60A5TsrQ=="
+          "hash": "tKaYfi7CFHkakKAf+IVzWQ=="
         }
       },
       "is_incremental": false,
@@ -1631,7 +2003,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/getting-started.html",
-          "hash": "Cx8YN06D2PCqIRQoA+Fafw=="
+          "hash": "e9sUbkRmRxYk1U8nqX/n/Q=="
         }
       },
       "is_incremental": false,
@@ -1643,7 +2015,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/html-attributes.html",
-          "hash": "m0uU91HyODJSLBIqf0Z6RA=="
+          "hash": "mkL2676C3jX09HmS+b5rzA=="
         }
       },
       "is_incremental": false,
@@ -1655,7 +2027,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/html-helper-context.html",
-          "hash": "957QUdIO7pXJGLTBFa6n2w=="
+          "hash": "cQJcqiP1f+m6EtEdfzVemA=="
         }
       },
       "is_incremental": false,
@@ -1667,7 +2039,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/index.html",
-          "hash": "G+sGWWgG9eR09LWOVg0+5A=="
+          "hash": "DhEyW9MaWwOsVcqdJP0rMA=="
         }
       },
       "is_incremental": false,
@@ -1690,7 +2062,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/labels.html",
-          "hash": "X25Z/lo9Hc9JFjKixvj0Wg=="
+          "hash": "SxA7uT2GPIcyKQFBLfiusg=="
         }
       },
       "is_incremental": false,
@@ -1702,7 +2074,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/list.html",
-          "hash": "CSkQ6r0FIhU1pyox5xJtVA=="
+          "hash": "yUL0+epZOV1hVM5YV+cHCw=="
         }
       },
       "is_incremental": false,
@@ -1736,7 +2108,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/multiple-enum.html",
-          "hash": "OkgJ2sG39conJVZ4qEoPWw=="
+          "hash": "2dT0N8BLe3UNlWIKV0/CTQ=="
         }
       },
       "is_incremental": false,
@@ -1748,7 +2120,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/multiple-list.html",
-          "hash": "qLsKXhZjFU55+mpNW8m+5g=="
+          "hash": "sKgw1zT1+PIZx/v95pSxRQ=="
         }
       },
       "is_incremental": false,
@@ -1771,7 +2143,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/number.html",
-          "hash": "NxyfuC1Lmv599AYv8VzlBg=="
+          "hash": "m3S3+7yIZJlBNfU6IYx5Qg=="
         }
       },
       "is_incremental": false,
@@ -1783,7 +2155,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/partials.html",
-          "hash": "oyEWcBVrEaVkv9ZZE/gsOw=="
+          "hash": "qRV2SgbFw/SlnVdy9WW15g=="
         }
       },
       "is_incremental": false,
@@ -1795,7 +2167,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/password.html",
-          "hash": "VNsG/6tyIMtUV671Mr3Mgw=="
+          "hash": "nhxeVH0CswbAjgusoKOL8A=="
         }
       },
       "is_incremental": false,
@@ -1829,7 +2201,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/textarea.html",
-          "hash": "UHtxGFD4ZcIyiq2PkDu+WQ=="
+          "hash": "TE+I2YuYm6bBMEG6qpjKzQ=="
         }
       },
       "is_incremental": false,
@@ -1841,7 +2213,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/the-form.html",
-          "hash": "Ju9Mo+Q+F+10rD8NDzVsKA=="
+          "hash": "LsDHIQrL6/eGDLnelrBbsg=="
         }
       },
       "is_incremental": false,
@@ -1853,7 +2225,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/the-message.html",
-          "hash": "fRolrewo9K7Lq3Kra41voQ=="
+          "hash": "/G9CKunqAFuEkgn7de/d5Q=="
         }
       },
       "is_incremental": false,
@@ -1865,7 +2237,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/the-navigation.html",
-          "hash": "0rwOuQDSQoY3tMgeKTtcRQ=="
+          "hash": "bBJ8Ocnv++k+ojKA1CNUuA=="
         }
       },
       "is_incremental": false,
@@ -1877,7 +2249,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/the-section.html",
-          "hash": "3e8azkRqB+1LElKMC0XY6Q=="
+          "hash": "H+F1eEfyDLUpsVX2KoJLqA=="
         }
       },
       "is_incremental": false,
@@ -1901,7 +2273,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/uri.html",
-          "hash": "VThjGqv8Y94zqYFylfJCpA=="
+          "hash": "gu1wuKysgmzB0EZrr8Db2Q=="
         }
       },
       "is_incremental": false,
@@ -1913,7 +2285,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/why.html",
-          "hash": "/EbfiejPNg+mUBfrz9ZGGw=="
+          "hash": "dbg1hXvI9kXtf1kGHgDnmQ=="
         }
       },
       "is_incremental": false,
@@ -1925,7 +2297,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "oTnUMuJzTlAMj7pXSSACow=="
+          "hash": "/nJiUVStRBdO6dOJxTi5Vg=="
         }
       },
       "is_incremental": false,
@@ -1958,13 +2330,13 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 45,
+          "total_file_count": 42,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 101,
+          "total_file_count": 135,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

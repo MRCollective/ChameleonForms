@@ -80,7 +80,7 @@
 <h1 id="boolean-fields">Boolean Fields</h1>
 
 <p>If you need to collect Boolean data you can use a <code>bool</code> or <code>bool?</code> model property, e.g.:</p>
-<pre><code class="lang-csharp">    public bool BooleanField { get; set; }
+<pre><code class="lang-cs">    public bool BooleanField { get; set; }
     public bool? NullableBooleanField { get; set; }
 </code></pre>
 <h2 id="default-html">Default HTML</h2>
@@ -99,14 +99,59 @@
 </code></pre>
 <h2 id="configurability">Configurability</h2>
 <h3 id="inline-label">Inline label</h3>
-<p>If you are outputting a non-nullable Boolean then a label will show next to the field as part of the Field Element in addition to the Field Label that shows up as part of outputting the full field. If you want to override just the label text for this label (and not the Field Label as well) then you can do so using the <code>InlineLabel</code> method in the Field Configuration, e.g.:</p>
+<p>If you are outputting a non-nullable Boolean then a label will show next to the field as part of the Field Element in addition to the Field Label that shows up as part of outputting the full field. If you want to override just the label text for this label (and not the Field Label as well) then you can do so using the <code>InlineLabel</code> methods in the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_inline-label-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_inline-label-th" data-tab="inline-label-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_inline-label-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_inline-label-hh" data-tab="inline-label-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_inline-label-th" role="tabpanel" data-tab="inline-label-th">
+
+<pre><code class="lang-cshtml">@{
+    var htmlContent = new HtmlString(&quot;&lt;strong&gt;override&lt;/strong&gt;&quot;);
+    Func&lt;dynamic, IHtmlContent&gt; templatedRazorDelegate = @&lt;strong&gt;override&lt;/strong&gt;;
+}
+&lt;field for=&quot;BooleanField&quot; inline-label=&quot;override&quot; /&gt;
+&lt;field for=&quot;BooleanField&quot; inline-label-html=&quot;templatedRazorDelegate&quot; /&gt;
+&lt;field for=&quot;BooleanField&quot; inline-label-html-content=&quot;htmlContent&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_inline-label-hh" role="tabpanel" data-tab="inline-label-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.BooleanField).InlineLabel(&quot;override&quot;)
+@s.FieldFor(m =&gt; m.BooleanField).InlineLabel(new HtmlString(&quot;&lt;strong&gt;override&lt;/strong&gt;&quot;))
 @s.FieldFor(m =&gt; m.BooleanField).InlineLabel(@&lt;strong&gt;overriden label&lt;/strong&gt;)
 </code></pre>
+</section>
+</div>
 <h3 id="display-as-drop-down">Display as drop-down</h3>
 <p>You can force a Boolean field to display as a drop-down box rather than a checkbox using the <code>AsDropDown</code> method on the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_dropdown-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_dropdown-th" data-tab="dropdown-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_dropdown-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_dropdown-hh" data-tab="dropdown-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_dropdown-th" role="tabpanel" data-tab="dropdown-th">
+
+<p>The <code>AsDropDown</code> method is <a href="field-configuration.html#mapped-attributes">mapped</a> to <code>as=&quot;Dropdown&quot;</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;BooleanField&quot; as=&quot;Dropdown&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_dropdown-hh" role="tabpanel" data-tab="dropdown-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.BooleanField).AsDropDown()
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the non-nullable Boolean field as shown above to:</p>
 <pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot; required=&quot;required&quot;&gt;
     &lt;option value=&quot;true&quot;&gt;Yes&lt;/option&gt;
@@ -115,9 +160,30 @@
 </code></pre>
 <h3 id="display-as-list-of-radio-buttons">Display as list of radio buttons</h3>
 <p>You can force a Boolean field to display as a list of radio buttons rather than a checkbox using the <code>AsRadioList</code> method on the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_radiolist-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_radiolist-th" data-tab="radiolist-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_radiolist-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_radiolist-hh" data-tab="radiolist-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_radiolist-th" role="tabpanel" data-tab="radiolist-th">
+
+<p>The <code>AsRadioList</code> method is <a href="field-configuration.html#mapped-attributes">mapped</a> to <code>as=&quot;RadioList&quot;</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;BooleanField&quot; as=&quot;RadioList&quot; /&gt;
+&lt;field for=&quot;NullableBooleanField&quot; as=&quot;RadioList&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-2_radiolist-hh" role="tabpanel" data-tab="radiolist-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.BooleanField).AsRadioList()
 @s.FieldFor(m =&gt; m.NullableBooleanField).AsRadioList()
 </code></pre>
+</section>
+</div>
+
 <p>And it will change the default HTML for the non-nullable Boolean field and the Required nullable Boolean field as shown above to:</p>
 <pre><code class="lang-html">&lt;ul&gt;
     &lt;li&gt;&lt;input %validationAttrs% %htmlAttributes% id=&quot;%propertyName%_1&quot; name=&quot;%propertyName&quot; required=&quot;required&quot; type=&quot;radio&quot; value=&quot;true&quot; /&gt; &lt;label for=&quot;%propertyName%_1&quot;&gt;%trueDescription%&lt;/label&gt;&lt;/li&gt;
@@ -133,8 +199,28 @@
 </code></pre>
 <h3 id="change-the-text-descriptions-of-true-false-and-none">Change the text descriptions of true, false and none</h3>
 <p>When you display a Boolean field as a drop-down or a list of radio buttons you can change the text that is used to display the <code>true</code>, <code>false</code> and <code>none</code> values to the user. By default the text used is <code>Yes</code>, <code>No</code> and <code>None</code> (except for drop-downs, which have an empty string instead of <code>None</code>) respectively. To change the text simply use the <code>WithTrueAs</code>, <code>WithFalseAs</code> and <code>WithNoneAs</code> methods respectively, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_true-false-none-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_true-false-none-th" data-tab="true-false-none-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_true-false-none-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_true-false-none-hh" data-tab="true-false-none-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-3_true-false-none-th" role="tabpanel" data-tab="true-false-none-th">
+
+<p>The <code>WithTrueAs</code> / <code>WithFalseAs</code> / <code>WithNoneAs</code> methods are <a href="field-configuration.html#mapped-attributes">mapped</a> to <code>true-label=&quot;{label}&quot;</code> / <code>false-label=&quot;{label}&quot;</code> / <code>none-label=&quot;{label}&quot;</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;NullableBooleanField&quot; true-label=&quot;OK&quot; false-label=&quot;Not OK&quot; none-label=&quot;No comment&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-3_true-false-none-hh" role="tabpanel" data-tab="true-false-none-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NullableBooleanField).WithTrueAs(&quot;OK&quot;).WithFalseAs(&quot;Not OK&quot;).WithNoneAs(&quot;No comment&quot;)
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the nullable Boolean field as shown above to:</p>
 <pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
     &lt;option selected=&quot;selected&quot; value=&quot;&quot;&gt;No comment&lt;/option&gt;
@@ -144,8 +230,27 @@
 </code></pre>
 <h3 id="hide-empty-item">Hide empty item</h3>
 <p>If you have a nullable Boolean field then it will show the empty item and this item will be selected by default if the field value is null. If for some reason you want a nullable boolean, but you would also like to hide the empty item you can do so with the <code>HideEmptyItem</code> method in the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-4">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-4_hide-empty-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-4_hide-empty-th" data-tab="hide-empty-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-4_hide-empty-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-4_hide-empty-hh" data-tab="hide-empty-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-4_hide-empty-th" role="tabpanel" data-tab="hide-empty-th">
+
+<pre><code class="lang-cshtml">&lt;field for=&quot;NullableBooleanField&quot; hide-empty-item=&quot;true&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-4_hide-empty-hh" role="tabpanel" data-tab="hide-empty-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NullableBooleanField).HideEmptyItem()
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the nullable Boolean field as shown above to:</p>
 <pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
     &lt;option value=&quot;true&quot;&gt;Yes&lt;/option&gt;
@@ -154,15 +259,53 @@
 </code></pre>
 <h3 id="hide-inline-label">Hide inline label</h3>
 <p>If you would like to output just a checkbox for a non-nullable boolean field without an inline label next to it you can do so with the <code>WithoutInlineLabel</code> method in the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-5">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-5_without-inline-label-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-5_without-inline-label-th" data-tab="without-inline-label-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-5_without-inline-label-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-5_without-inline-label-hh" data-tab="without-inline-label-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-5_without-inline-label-th" role="tabpanel" data-tab="without-inline-label-th">
+
+<pre><code class="lang-cshtml">&lt;field for=&quot;BooleanField&quot; without-inline-label=&quot;true&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-5_without-inline-label-hh" role="tabpanel" data-tab="without-inline-label-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.BooleanField).WithoutInlineLabel()
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the non-nullable Boolean field as shown above to:</p>
 <pre><code class="lang-html">&lt;input %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot; required=&quot;required&quot; type=&quot;checkbox&quot; value=&quot;true&quot; /&gt;
 </code></pre>
 <h3 id="wrap-input-with-label">Wrap input with label</h3>
 <p>If you would like to wrap the checkbox with the inline label you can do so with the <code>InlineLabelWrapsElement</code> method in the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-6">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-6_inline-label-wrap-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-6_inline-label-wrap-th" data-tab="inline-label-wrap-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-6_inline-label-wrap-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-6_inline-label-wrap-hh" data-tab="inline-label-wrap-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-6_inline-label-wrap-th" role="tabpanel" data-tab="inline-label-wrap-th">
+
+<pre><code class="lang-cshtml">&lt;field for=&quot;BooleanField&quot; inline-label-wraps-element=&quot;true&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-6_inline-label-wrap-hh" role="tabpanel" data-tab="inline-label-wrap-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.BooleanField).InlineLabelWrapsElement()
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the field as shown above to:</p>
 <pre><code class="lang-html">&lt;label&gt;&lt;input %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot; required=&quot;required&quot; type=&quot;checkbox&quot; value=&quot;true&quot; /&gt; %inlineLabel%&lt;/label&gt;
 </code></pre>
@@ -199,6 +342,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

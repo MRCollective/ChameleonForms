@@ -80,13 +80,34 @@
 <h1 id="file-upload-fields">File Upload Fields</h1>
 
 <p>If you need to collect uploaded file data then you can use ASP.NET Core MVC's <code>IFormFile</code> type for your model property, e.g.:</p>
-<pre><code class="lang-csharp">public IFormFile FileUpload { get; set; }
+<pre><code class="lang-cs">public IFormFile FileUpload { get; set; }
 </code></pre>
 <p>In order for file uploads to work you will need to set the encoding type on the form to <code>multipart/form-data</code> (<a href="http://stackoverflow.com/questions/4526273/what-does-enctype-multipart-form-data-mean">as opposed to the default</a>), e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_enctype-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_enctype-th" data-tab="enctype-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_enctype-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_enctype-hh" data-tab="enctype-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_enctype-th" role="tabpanel" data-tab="enctype-th">
+
+<pre><code class="lang-cshtml">&lt;chameleon-form enctype=&quot;Multipart&quot;&gt;
+    @* ... *@
+&lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_enctype-hh" role="tabpanel" data-tab="enctype-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm(encType: EncType.Multipart)) {
     @* ... *@
 }
 </code></pre>
+</section>
+</div>
+
 <p>To then use the file upload in your controller action you use the <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-3.1">documented approaches</a> to handle the uploaded file(s). If you want the field to be Required you can annotate with <code>[Required]</code>.</p>
 <p>ChameleonForms doesn't currently support generating the correct HTML to handle multiple file uploads, but feel free to submit an <a href="https://github.com/MRCollective/ChameleonForms/issues">issue</a> or <a href="https://github.com/MRCollective/ChameleonForms/pulls">pull request</a> to discuss adding that feature.</p>
 <h2 id="default-html">Default HTML</h2>
@@ -127,6 +148,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

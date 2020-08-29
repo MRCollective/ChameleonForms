@@ -79,6 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="using-different-form-templates">Using different form templates</h1>
 
+<p>Form Templates are the concept in Chameleon Forms that allows you to abstract the HTML that makes up the form itself as well as the components within it like messages, sections, fields and navigation.</p>
 <h2 id="default-form-template">Default form template</h2>
 <p>The <code>DefaultFormTemplate</code> outputs a sensible default that looks good without any / with minimal CSS and is a nice way to semantically describe a form. It makes use of definition lists to do this.</p>
 <p>See <a href="the-form.html#configuring-the-form-template">Configuring the Default Form Template</a> / <a href="configuration.html#default-global-config">Default global config</a>.</p>
@@ -103,7 +104,7 @@
 <p>See <a href="custom-template.html">Creating custom form templates</a>.</p>
 <h2 id="custom-extension-method">Custom extension method</h2>
 <p>If you would like to change the template being used across one or more forms, or would like a method name that is more meaningful to your application than <code>BeginChameleonForm</code>, you can simply define you own extension method instead, e.g.:</p>
-<pre><code class="lang-csharp">    public static class FormHelpers
+<pre><code class="lang-cs">    public static class FormHelpers
     {
         public static IForm&lt;TModel&gt; BeginMyApplicationNameForm&lt;TModel&gt;(this HtmlHelper&lt;TModel&gt; htmlhelper, string action = &quot;&quot;, FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
         {
@@ -150,6 +151,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

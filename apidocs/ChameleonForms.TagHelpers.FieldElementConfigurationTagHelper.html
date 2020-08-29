@@ -1,0 +1,1000 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class FieldElementConfigurationTagHelper
+   | ChameleonForms </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class FieldElementConfigurationTagHelper
+   | ChameleonForms ">
+    <meta name="generator" content="docfx 2.56.1.0">
+    
+    <link rel="shortcut icon" href="../docs/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../docs/logo-small.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper">
+  
+  
+  <h1 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper" class="text-break">Class FieldElementConfigurationTagHelper
+  </h1>
+  <div class="markdown level0 summary"><p>Tag helper that accepts field configuration attributes for a <field></field> or <field-element></field-element>.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.TagHelper</span></div>
+    <div class="level2"><span class="xref">FieldElementConfigurationTagHelper</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper</span></div>
+    <div><span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.ITagHelperComponent</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)</span>
+    </div>
+    <div>
+      <span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Order</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="ChameleonForms.TagHelpers.html">ChameleonForms.TagHelpers</a></h6>
+  <h6><strong>Assembly</strong>: ChameleonForms.dll</h6>
+  <h5 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HtmlTargetElement(&quot;field&quot;)]
+[HtmlTargetElement(&quot;field-element&quot;)]
+public class FieldElementConfigurationTagHelper : TagHelper, ITagHelper, ITagHelperComponent</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_AddClass.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.AddClass%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L45">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_AddClass_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.AddClass*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_AddClass" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.AddClass">AddClass</h4>
+  <div class="markdown level1 summary"><p>Class(es) to add to the field element.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string AddClass { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_As.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.As%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L115">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_As_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.As*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_As" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.As">As</h4>
+  <div class="markdown level1 summary"><p>Override the render type of the field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RenderAs As { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.TagHelpers.RenderAs.html">RenderAs</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Attrs.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Attrs%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L160">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Attrs_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Attrs*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Attrs" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Attrs">Attrs</h4>
+  <div class="markdown level1 summary"><p>Arbitrary attributes to add to the field element. Add as a dictionary (attrs=&quot;@attrsDictionary&amp;quot;) or as individual attributes (attr-id=&quot;id&quot; attr-data-xyz=&quot;asdf&quot;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[HtmlAttributeName(&quot;attrs&quot;, DictionaryAttributePrefix = &quot;attr-&quot;)]
+public IDictionary&lt;string, string&gt; Attrs { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Cols.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Cols%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L80">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Cols_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Cols*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Cols" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Cols">Cols</h4>
+  <div class="markdown level1 summary"><p>Sets the number of cols for a textarea to use.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Cols { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Disabled.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Disabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L100">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Disabled_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Disabled*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Disabled" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Disabled">Disabled</h4>
+  <div class="markdown level1 summary"><p>Whether the field is disabled (value not submitted, can not click).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Disabled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Exclude.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Exclude%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L145">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Exclude_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Exclude*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Exclude" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Exclude">Exclude</h4>
+  <div class="markdown level1 summary"><p>Excludes one or more Enum values from the generated field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Enum[] Exclude { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Enum</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_FalseLabel.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.FalseLabel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L125">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_FalseLabel_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.FalseLabel*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_FalseLabel" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.FalseLabel">FalseLabel</h4>
+  <div class="markdown level1 summary"><p>Change the label that represents false.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string FalseLabel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_FormatString.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.FormatString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L135">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_FormatString_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.FormatString*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_FormatString" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.FormatString">FormatString</h4>
+  <div class="markdown level1 summary"><p>Uses the given format string when outputting the field value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string FormatString { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_HideEmptyItem.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.HideEmptyItem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L140">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_HideEmptyItem_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.HideEmptyItem*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_HideEmptyItem" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.HideEmptyItem">HideEmptyItem</h4>
+  <div class="markdown level1 summary"><p>Hide the empty item that would normally display for the field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HideEmptyItem { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Id.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L50">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Id_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Id*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Id" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Id">Id</h4>
+  <div class="markdown level1 summary"><p>Field element id.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Id { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabel.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L55">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabel_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabel*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabel" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabel">InlineLabel</h4>
+  <div class="markdown level1 summary"><p>Inline label text override</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string InlineLabel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabelHtml.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabelHtml%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L60">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabelHtml_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabelHtml*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabelHtml" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabelHtml">InlineLabelHtml</h4>
+  <div class="markdown level1 summary"><p>Inline label as templated razor delegate.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;dynamic, IHtmlContent&gt; InlineLabelHtml { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Object</span>, <span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabelHtmlContent.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabelHtmlContent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L65">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabelHtmlContent_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabelHtmlContent*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabelHtmlContent" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabelHtmlContent">InlineLabelHtmlContent</h4>
+  <div class="markdown level1 summary"><p>Inline label as a <span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IHtmlContent InlineLabelHtmlContent { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabelWrapsElement.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabelWrapsElement%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L155">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabelWrapsElement_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabelWrapsElement*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_InlineLabelWrapsElement" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.InlineLabelWrapsElement">InlineLabelWrapsElement</h4>
+  <div class="markdown level1 summary"><p>Specify that inline labels should wrap their input element.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? InlineLabelWrapsElement { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Max.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Max%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L90">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Max_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Max*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Max" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Max">Max</h4>
+  <div class="markdown level1 summary"><p>Sets the maximum value to accept for numeric text controls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Max { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Min.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Min%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L85">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Min_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Min*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Min" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Min">Min</h4>
+  <div class="markdown level1 summary"><p>Sets the minimum value to accept for numeric text controls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Min { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_NoneLabel.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.NoneLabel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L130">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_NoneLabel_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.NoneLabel*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_NoneLabel" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.NoneLabel">NoneLabel</h4>
+  <div class="markdown level1 summary"><p>Change the label that represents none.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string NoneLabel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Placeholder.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Placeholder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L70">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Placeholder_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Placeholder*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Placeholder" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Placeholder">Placeholder</h4>
+  <div class="markdown level1 summary"><p>Placeholder text for the field.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Placeholder { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Readonly.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Readonly%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L105">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Readonly_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Readonly*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Readonly" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Readonly">Readonly</h4>
+  <div class="markdown level1 summary"><p>Whether the field is readonly (value vannot be modified).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Readonly { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Required.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Required%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L110">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Required_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Required*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Required" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Required">Required</h4>
+  <div class="markdown level1 summary"><p>Whether the field is required.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool? Required { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Boolean</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Rows.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Rows%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L75">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Rows_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Rows*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Rows" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Rows">Rows</h4>
+  <div class="markdown level1 summary"><p>Sets the number of rows for a textarea to use.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int? Rows { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Step.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Step%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L95">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Step_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Step*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_Step" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.Step">Step</h4>
+  <div class="markdown level1 summary"><p>Sets the stepping interval to use for numeric text controls.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public decimal? Step { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Decimal</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_TrueLabel.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.TrueLabel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L120">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_TrueLabel_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.TrueLabel*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_TrueLabel" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.TrueLabel">TrueLabel</h4>
+  <div class="markdown level1 summary"><p>Change the label that represents true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string TrueLabel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_WithoutInlineLabel.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.WithoutInlineLabel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L150">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_WithoutInlineLabel_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.WithoutInlineLabel*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_WithoutInlineLabel" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.WithoutInlineLabel">WithoutInlineLabel</h4>
+  <div class="markdown level1 summary"><p>Specify that no inline label should be generated.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool WithoutInlineLabel { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_ProcessAsync_Microsoft_AspNetCore_Razor_TagHelpers_TagHelperContext_Microsoft_AspNetCore_Razor_TagHelpers_TagHelperOutput_.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext%2CMicrosoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L168">View Source</a>
+  </span>
+  <a id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_ProcessAsync_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.ProcessAsync*"></a>
+  <h4 id="ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper_ProcessAsync_Microsoft_AspNetCore_Razor_TagHelpers_TagHelperContext_Microsoft_AspNetCore_Razor_TagHelpers_TagHelperOutput_" data-uid="ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)">ProcessAsync(TagHelperContext, TagHelperOutput)</h4>
+  <div class="markdown level1 summary"><p>Called when the tag helper is being processed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext</span></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context within which the tag helper is processed</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput</span></td>
+        <td><span class="parametername">output</span></td>
+        <td><p>The output from the tag helper</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)</span></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper</span>
+  </div>
+  <div>
+      <span class="xref">Microsoft.AspNetCore.Razor.TagHelpers.ITagHelperComponent</span>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="ChameleonForms.HtmlAttributesExtensions.html#ChameleonForms_HtmlAttributesExtensions_ToHtmlAttributes_System_Object_">HtmlAttributesExtensions.ToHtmlAttributes(Object)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_TagHelpers_FieldElementConfigurationTagHelper.md&amp;value=---%0Auid%3A%20ChameleonForms.TagHelpers.FieldElementConfigurationTagHelper%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/TagHelpers/FieldElementConfigurationTagHelper.cs/#L38" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            © Copyright 2012-2020 MRCollective, Rob Moore, Matt Davies and the contributors to ChameleonForms.
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

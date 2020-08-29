@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Fields | ChameleonForms </title>
+    <title>Field | ChameleonForms </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Fields | ChameleonForms ">
+    <meta name="title" content="Field | ChameleonForms ">
     <meta name="generator" content="docfx 2.56.1.0">
     
     <link rel="shortcut icon" href="../docs/favicon.ico">
@@ -77,12 +77,12 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="fields">Fields</h1>
+<h1 id="field">Field</h1>
 
-<p>The Field is a single data collection unit; you create a Field by either calling the <code>Field</code> method on a <a href="the-section.html">Section</a> or otherwise instantiating and outputting to the page a <code>Field&lt;TModel&gt;</code>.</p>
-<p>You can also create a parent field that can have <a href="#use-a-field-generator-to-output-a-single-field-in-a-parent-field">child fields</a> nested <a href="#use-a-field-generator-to-output-a-parent-field-in-a-section">within it</a> by instantiating a <code>Field&lt;TModel&gt;</code> within a <code>using</code> block (the start and end of the <code>using</code> block will output the start and end HTML for the Field and the contents of the <code>using</code> block will output the child Fields).</p>
+<p>The Field is a single data collection unit; you create a Field by using the <code>&lt;field&gt;</code> tag helper, calling the <code>Field</code> method on a <a href="the-section.html">Section</a> or otherwise instantiating and outputting to the page a <code>Field&lt;TModel&gt;</code>.</p>
+<p>You can also create a parent field that can have <a href="#use-a-field-generator-to-output-a-single-field-in-a-parent-field">child fields</a> nested <a href="#use-a-field-generator-to-output-a-parent-field-in-a-section">within it</a> by instantiating nesting things within a non-self-closing <code>&lt;field&gt;</code> tag helper or creating a <code>Field&lt;TModel&gt;</code> within a <code>using</code> block (the start and end of the <code>using</code> block will output the start and end HTML for the Field and the contents of the <code>using</code> block will output the child Fields).</p>
 <p>The <code>Field&lt;TModel&gt;</code> class is defined as follows in the <code>ChameleonForms.Component</code> namespace:</p>
-<pre><code class="lang-csharp">    /// &lt;summary&gt;
+<pre><code class="lang-cs">    /// &lt;summary&gt;
     /// Wraps the output of a single form field.
     /// &lt;/summary&gt;
     /// &lt;typeparam name=&quot;TModel&quot;&gt;The view model type for the current view&lt;/typeparam&gt;
@@ -117,6 +117,40 @@
 <p>The <a href="form-templates.html">form template</a> determines how to lay out these sub-components.</p>
 <h2 id="default-usage">Default usage</h2>
 <h3 id="manually-specify-html">Manually specify HTML</h3>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_manual-html-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_manual-html-th" data-tab="manual-html-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_manual-html-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_manual-html-hh" data-tab="manual-html-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_manual-html-th" role="tabpanel" data-tab="manual-html-th">
+
+<p>If you want to define your own HTML for the Field Element, Field Label and Field Validation HTML then you can do so by using the <code>manual</code> attribute on the <code>&lt;field&gt;</code> tag helper and nest <code>&lt;manual-element&gt;</code>, <code>&lt;manual-label&gt;</code> and <code>&lt;manual-validation&gt;</code> elements to specify the Field Element, Field Label and Field Validation HTML, e.g.:</p>
+<pre><code class="lang-cshtml">&lt;form-section heading=&quot;Title&quot;&gt;
+    &lt;field manual&gt;
+        &lt;manual-element&gt;&lt;strong&gt;Element&lt;/strong&gt;&lt;/manual-element&gt;
+        &lt;manual-label&gt;&lt;strong&gt;Label&lt;/strong&gt;&lt;/manual-label&gt;
+        &lt;manual-validation&gt;&lt;strong&gt;validation&lt;/strong&gt;&lt;/manual-validation&gt;
+    &lt;/field&gt;
+</code></pre>
+<p>Or, if you want to specify the optional model metadata, valid state and field configuration:</p>
+<pre><code class="lang-cshtml">@inject ICompositeMetadataDetailsProvider MetadataDetailsProvider
+...
+&lt;form-section heading=&quot;Title&quot;&gt;
+    &lt;field manual model-metadata=&quot;new DefaultModelMetadataProvider(MetadataDetailsProvider).GetMetadataForType(typeof(int))&quot; is-valid=&quot;true&quot; append=&quot;After Element&quot; prepend=&quot;Before Element&quot;&gt;
+        &lt;manual-element&gt;&lt;strong&gt;Element&lt;/strong&gt;&lt;/manual-element&gt;
+        &lt;manual-label&gt;&lt;strong&gt;Label&lt;/strong&gt;&lt;/manual-label&gt;
+        &lt;manual-validation&gt;&lt;strong&gt;validation&lt;/strong&gt;&lt;/manual-validation&gt;
+    &lt;/field&gt;
+&lt;/form-section&gt;
+</code></pre>
+<p>Note: the way that the manual field is implemented allows for quite a bit of extensibility by defining custom tag helpers that define the various parts of your field. See the implementations for <code>&lt;manual-element&gt;</code> etc. for an idea of how to do that.</p>
+</section>
+<section id="tabpanel_CeZOj-G++Q_manual-html-hh" role="tabpanel" data-tab="manual-html-hh" aria-hidden="true" hidden="hidden">
+
 <p>If you want to define your own HTML for the Field Element, Field Label and Field Validation HTML then you can do so by using the <code>Field</code> method on the Section, e.g.:</p>
 <pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Title&quot;)) {
     @s.Field(new HtmlString(&quot;label&quot;), new HtmlString(&quot;element&quot;)).ChainFieldConfigurationMethodsHere()
@@ -125,7 +159,7 @@
 }
 </code></pre>
 <p>The <code>Field</code> method on the Section looks like this:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Outputs a field with passed in HTML.
         /// &lt;/summary&gt;
         /// &lt;param name=&quot;labelHtml&quot;&gt;The HTML for the label part of the field&lt;/param&gt;
@@ -133,17 +167,43 @@
         /// &lt;param name=&quot;validationHtml&quot;&gt;The HTML for the validation markup part of the field&lt;/param&gt;
         /// &lt;param name=&quot;metadata&quot;&gt;Any field metadata&lt;/param&gt;
         /// &lt;param name=&quot;isValid&quot;&gt;Whether or not the field is valid&lt;/param&gt;
+        /// &lt;param name=&quot;fieldConfiguration&quot;&gt;Optional field configuration&lt;/param&gt;
         /// &lt;returns&gt;A field configuration that can be used to output the field as well as configure it fluently&lt;/returns&gt;
-        public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true) {...}
+        IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null,
+            ModelMetadata metadata = null, bool isValid = true, IFieldConfiguration fieldConfiguration = null);
 </code></pre>
+</section>
+</div>
 <h3 id="use-a-field-generator-to-output-a-single-field-in-a-section">Use a Field Generator to output a single field in a Section</h3>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_section-field-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_section-field-th" data-tab="section-field-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_section-field-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_section-field-hh" data-tab="section-field-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_section-field-th" role="tabpanel" data-tab="section-field-th">
+
+<p>If you would like ChameleonForms to use a Field Generator to generate the HTML for the Field Element, Field Label and Field Validation HTML from a field on the model then you can use the <code>&lt;field&gt;</code> tag helper, e.g.:</p>
+<pre><code class="lang-cshtml">&lt;form-section heading=&quot;Title&quot;&gt;
+    &lt;field for=&quot;FieldOnTheModel&quot; /&gt;
+    @* and you can add field configuration: *@
+    &lt;field for=&quot;FieldOnTheModel&quot; placeholder=&quot;Placeholder text&quot; ... /&gt;
+    &lt;field for=&quot;FieldOnTheModel&quot; fluent-config='c =&gt; c.ChainFieldConfigurationMethodsHere()' /&gt;
+&lt;/form-section&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_section-field-hh" role="tabpanel" data-tab="section-field-hh" aria-hidden="true" hidden="hidden">
+
 <p>If you would like ChameleonForms to use a Field Generator to generate the HTML for the Field Element, Field Label and Field Validation HTML from a field on the model then you can use the <code>FieldFor</code> extension method on the Section, e.g.:</p>
 <pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Title&quot;)) {
     @s.FieldFor(m =&gt; m.FieldOnTheModel).ChainFieldConfigurationMethodsHere()
 }
 </code></pre>
 <p>The <code>FieldFor</code> extension method looks like this:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Creates a single form field as a child of a form section.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -161,7 +221,30 @@
             return fc;
         }
 </code></pre>
+</section>
+</div>
 <h3 id="use-a-field-generator-to-output-a-parent-field-in-a-section">Use a Field Generator to output a parent field in a Section</h3>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_parent-field-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_parent-field-th" data-tab="parent-field-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_parent-field-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_parent-field-hh" data-tab="parent-field-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_parent-field-th" role="tabpanel" data-tab="parent-field-th">
+
+<p>If you want to use a Field Generator and want to nest child Fields under a Field then you can use a non self-closing <code>&lt;field&gt;</code> tag helper, e.g.:</p>
+<pre><code class="lang-cshtml">&lt;form-section heading=&quot;Title&quot;&gt;
+    &lt;field for=&quot;FieldOnTheModel&quot;&gt;
+        @* Child Fields *@
+    &lt;/field&gt;
+&lt;/form-section&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-2_parent-field-hh" role="tabpanel" data-tab="parent-field-hh" aria-hidden="true" hidden="hidden">
+
 <p>If you want to use a Field Generator and want to nest child Fields under a Field then you can use the <code>BeginFieldFor</code> extension method on the Section (optionally with a Field Configuration), e.g.:</p>
 <pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Title&quot;)) {
     using (var ff = s.BeginFieldFor(m =&gt; m.FieldOnTheModel, Field.Configure().ChainFieldConfigurationMethodsHere())) {
@@ -170,7 +253,7 @@
 }
 </code></pre>
 <p>The <code>BeginFieldFor</code> extension method looks like this:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Creates a single form field as a child of a form section that can have other form fields nested within it.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -189,14 +272,35 @@
             return new Field&lt;TModel&gt;(section.Form, true, section.Form.GetFieldGenerator(property), config);
         }
 </code></pre>
+</section>
+</div>
 <h3 id="use-a-field-generator-to-output-a-single-field-in-a-parent-field">Use a Field Generator to output a single field in a parent Field</h3>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_child-field-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_child-field-th" data-tab="child-field-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_child-field-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_child-field-hh" data-tab="child-field-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-3_child-field-th" role="tabpanel" data-tab="child-field-th">
+
+<p>If you want to use a Field Generator to create nested Fields under a parent Field then you can nest <code>&lt;field&gt;</code> tag helpers within the parent <code>&lt;field&gt;</code>, e.g.:</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;FieldOnTheModel&quot;&gt;
+    &lt;field for=&quot;ChildField&quot; /&gt;
+&lt;/field&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-3_child-field-hh" role="tabpanel" data-tab="child-field-hh" aria-hidden="true" hidden="hidden">
+
 <p>If you want to use a Field Generator to create nested Fields under a parent Field then you can use the <code>BeginFieldFor</code> extension method on the Field (with an optional Field Configuration), e.g.:</p>
 <pre><code class="lang-cshtml">@using (var ff = s.BeginFieldFor(m =&gt; m.FieldOnTheModel)) {
     @ff.FieldFor(m =&gt; m.ChildField).ChainFieldConfigurationMethodsHere()
 }
 </code></pre>
 <p>The <code>FieldFor</code> extension method looks like this:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Creates a single form field as a child of another form field.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -216,8 +320,10 @@
             return config;
         }
 </code></pre>
+</section>
+</div>
 <h2 id="default-html">Default HTML</h2>
-<h3 id="field">Field</h3>
+<h3 id="field-1">Field</h3>
 <pre><code class="lang-html">            &lt;dt&gt;%labelHtml% %requiredDesignator%&lt;/dt&gt;
             &lt;dd class=&quot;%fieldContainerClasses%&quot;&gt;
                 %prependedHtml% %fieldElement% %appendedHtml% %hint% %validationHtml%
@@ -230,9 +336,9 @@
 <p>If you want to override the required designator look at <a href="custom-template.html#field">Creating custom form templates &gt; Field</a>.</p>
 <h3 id="hint">Hint</h3>
 <p>The <code>%hint%</code> is shown if a hint is specified in the <a href="field-configuration.html">Field Configuration</a>:</p>
-<pre><code class="lang-html">&lt;div class=&quot;hint&quot; id=&quot;%fieldId%--hint&quot;&gt;%hint%&lt;/div&gt;
+<pre><code class="lang-html">&lt;div class=&quot;hint&quot; id=&quot;%fieldId%--Hint&quot;&gt;%hint%&lt;/div&gt;
 </code></pre>
-<p>If a hint is added then an <code>aria-describedby=&quot;%fieldId%--hint&quot;</code> attribute value will automatically be added to the field element to <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/forms/Basic_form_hints#Describing_with_ARIA">improve accessibility</a>.</p>
+<p>If a hint is added then an <code>aria-describedby=&quot;%fieldId%--Hint&quot;</code> attribute value will automatically be added to the field element to <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/forms/Basic_form_hints#Describing_with_ARIA">improve accessibility</a>.</p>
 <h3 id="begin-html-parent">Begin HTML (parent)</h3>
 <pre><code class="lang-html">            &lt;dt&gt;%labelHtml% %requiredDesignator%&lt;/dt&gt;
             &lt;dd class=&quot;%fieldContainerClasses%&quot;&gt;
@@ -304,7 +410,7 @@
 <pre><code class="lang-html">&lt;em class=&quot;required&quot; title=&quot;Required&quot;&gt;&amp;lowast;&lt;/em&gt;
 </code></pre>
 <p>The <code>%hint%</code> is shown if a <a href="#hint">hint</a> is specified in the Field Configuration:</p>
-<pre><code class="lang-html">&lt;div class=&quot;help-block form-hint&quot; id=&quot;%fieldId%--hint&quot;&gt;%hint&lt;/div&gt;
+<pre><code class="lang-html">&lt;div class=&quot;help-block form-hint&quot; id=&quot;%fieldId%--Hint&quot;&gt;%hint&lt;/div&gt;
 </code></pre>
 <h3 id="input-groups">Input Groups</h3>
 <p>If the Field Element is within an <a href="http://getbootstrap.com/components/#input-groups">input group</a> then the prepended and appended HTML will be wrapped in the following:</p>
@@ -321,8 +427,27 @@
 </ul>
 <p>In all other situations you will manually need to add wrapping HTML with the relevant classes (e.g. using <code>Append</code> and <code>Prepend</code> on the <a href="field-configuration.html">Field Configuration</a>).</p>
 <p>As an example of what you can do with the input group consider the following:</p>
-<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.Dollars).AsInputGroup().Append(&quot;.00&quot;).Prepend(&quot;$&quot;)
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-4">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-4_input-group-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-4_input-group-th" data-tab="input-group-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-4_input-group-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-4_input-group-hh" data-tab="input-group-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-4_input-group-th" role="tabpanel" data-tab="input-group-th">
+
+<pre><code class="lang-cshtml">&lt;field for=&quot;Dollars&quot; fluent-config='c =&gt; c.AsInputGroup()' prepend=&quot;$&quot; append=&quot;.00&quot; /&gt;
 </code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-4_input-group-hh" role="tabpanel" data-tab="input-group-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.Dollars).AsInputGroup().Prepend(&quot;$&quot;).Append(&quot;.00&quot;)
+</code></pre>
+</section>
+</div>
+
 <p>This will render like this:</p>
 <p><img src="int-field-with-bootstrap-input-group.png" alt="Example of int field with input group"></p>
 <p>In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view that has a form using the extension method you instead add the namespace to your <code>_ViewImports.cshtml</code> file.</p>
@@ -371,6 +496,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

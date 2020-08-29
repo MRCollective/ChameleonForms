@@ -80,7 +80,7 @@
 <h1 id="enum-fields">Enum Fields</h1>
 
 <p>If you want the user to specify a value from an enum you can use that enum type (or a nullable instance of it) against a model property, e.g.:</p>
-<pre><code class="lang-csharp">public enum MyEnum  { ... }
+<pre><code class="lang-cs">public enum MyEnum  { ... }
 ...
 public MyEnum EnumField { get; set; } // automatically required since it's non-nullable
 [Required]
@@ -110,7 +110,7 @@ public MyEnum? NullableEnumField { get; set; } // Not required
 <h3 id="explanation-and-example">Explanation and example</h3>
 <p><code>x.ToString</code> means the string representation of the enum value and <code>x.Humanize()</code> means converting the enum value to a human-readable string using the awesome <a href="https://github.com/MehdiK/Humanizer#humanize-enums">Humanizer</a> library. This will automatically convert camel-cased enum values to sentence case and pick up any usage of <code>[Description]</code>, <code>[Display]</code>, etc.. Read the <a href="https://github.com/MehdiK/Humanizer#humanize-enums">Humanizer documentation</a> for more information including how to perform localisation.</p>
 <p>As an example, if you had the following enum:</p>
-<pre><code class="lang-csharp">public enum AnEnum
+<pre><code class="lang-cs">public enum AnEnum
 {
     Singleword,
     MultipleWords,
@@ -119,7 +119,7 @@ public MyEnum? NullableEnumField { get; set; } // Not required
 }
 </code></pre>
 <p>And you had a property on your model like:</p>
-<pre><code class="lang-csharp">public AnEnum EnumValue { get; set; }
+<pre><code class="lang-cs">public AnEnum EnumValue { get; set; }
 </code></pre>
 <p>Then by default the Field Element HTML would be (if labels are <a href="labels.html">automatically sentence cased</a> and you don't specify any extra <a href="html-attributes.html">HTML attributes</a>):</p>
 <pre><code class="lang-html">&lt;select data-val=&quot;true&quot; data-val-required=&quot;The Enum value field is required.&quot; id=&quot;EnumValue&quot; name=&quot;EnumValue&quot; required=&quot;required&quot;&gt;
@@ -131,9 +131,30 @@ public MyEnum? NullableEnumField { get; set; } // Not required
 <h2 id="configurability">Configurability</h2>
 <h3 id="display-as-list-of-radio-buttons">Display as list of radio buttons</h3>
 <p>You can force an enum field to display as a list of radio buttons rather than a drop-down using the <code>AsRadioList</code> method on the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_radiolist-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_radiolist-th" data-tab="radiolist-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_radiolist-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_radiolist-hh" data-tab="radiolist-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_radiolist-th" role="tabpanel" data-tab="radiolist-th">
+
+<p>The <code>AsRadioList</code> method is <a href="field-configuration.html#mapped-attributes">mapped</a> to <code>as=&quot;RadioList&quot;</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;EnumField&quot; as=&quot;RadioList&quot; /&gt;
+&lt;field for=&quot;NullableEnumField&quot; as=&quot;RadioList&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_radiolist-hh" role="tabpanel" data-tab="radiolist-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.EnumField).AsRadioList()
 @s.FieldFor(m =&gt; m.NullableEnumField).AsRadioList()
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the non-nullable enum field and the Required nullable enum field as shown above to:</p>
 <pre><code class="lang-html">&lt;ul&gt;
 %foreach enum value x with increment i %
@@ -151,8 +172,28 @@ public MyEnum? NullableEnumField { get; set; } // Not required
 </code></pre>
 <h3 id="change-the-text-description-of-none">Change the text description of none</h3>
 <p>When you display a nullable enum field as a drop-down or a non-Required nullable enum field as a list of radio buttons you can change the text that is used to display the <code>none</code> value to the user. By default the text used is an empty string for the drop-down and <code>None</code> for the radio button. To change the text simply use the <code>WithNoneAs</code> method, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_none-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_none-th" data-tab="none-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_none-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_none-hh" data-tab="none-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_none-th" role="tabpanel" data-tab="none-th">
+
+<p>The <code>WithNoneAs</code> method is <a href="field-configuration.html#mapped-attributes">mapped</a> to <code>none-label=&quot;{label}&quot;</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;NullableEnumField&quot; none-label=&quot;No value&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_none-hh" role="tabpanel" data-tab="none-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NullableEnumField).WithNoneAs(&quot;No value&quot;)
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the nullable enum field as shown above to:</p>
 <pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
     &lt;option selected=&quot;selected&quot; value=&quot;&quot;&gt;No value&lt;/option&gt;
@@ -161,8 +202,27 @@ public MyEnum? NullableEnumField { get; set; } // Not required
 </code></pre>
 <h3 id="hide-empty-item">Hide empty item</h3>
 <p>If you have a nullable enum field then it will show the empty item and this item will be selected by default if the field value is null. If for some reason you want a nullable enum, but you would also like to hide the empty item you can do so with the <code>HideEmptyItem</code> method in the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_hide-empty-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_hide-empty-th" data-tab="hide-empty-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_hide-empty-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_hide-empty-hh" data-tab="hide-empty-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_hide-empty-th" role="tabpanel" data-tab="hide-empty-th">
+
+<pre><code class="lang-cshtml">&lt;field for=&quot;NullableEnumField&quot; hide-empty-item=&quot;true&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-2_hide-empty-hh" role="tabpanel" data-tab="hide-empty-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NullableEnumField).HideEmptyItem()
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the nullable enum field as shown above to:</p>
 <pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
     @* Enum values as &lt;options&gt;... *@
@@ -170,8 +230,27 @@ public MyEnum? NullableEnumField { get; set; } // Not required
 </code></pre>
 <h3 id="exclude-specific-enum-values">Exclude specific enum values</h3>
 <p>If there are some enum values you want to exclude from showing up as options then you can do so with the <code>Exclude</code> method in the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_exclude-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_exclude-th" data-tab="exclude-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_exclude-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_exclude-hh" data-tab="exclude-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-3_exclude-th" role="tabpanel" data-tab="exclude-th">
+
+<p>Unfortunately, you can't have generic typing in the tag helper, so you need to cast the array of enums to <code>Enum[]</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;EnumField&quot;  exclude=&quot;new Enum[]{MyEnum.Value1, MyEnum.Value3}&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-3_exclude-hh" role="tabpanel" data-tab="exclude-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.EnumField).Exclude(MyEnum.Value1, MyEnum.Value3)
 </code></pre>
+</section>
+</div>
 </article>
           </div>
           
@@ -205,6 +284,7 @@ public MyEnum? NullableEnumField { get; set; } // Not required
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

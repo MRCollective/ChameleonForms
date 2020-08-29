@@ -80,7 +80,7 @@
 <h1 id="list-fields">List Fields</h1>
 
 <p>If you want the user to specify an item from an arbitrary list of objects you can use the <code>[ExistsIn]</code> attribute against a model property. The property just needs to be the same type as the property of the list element type that represents the &quot;value&quot; of the object, e.g.:</p>
-<pre><code class="lang-csharp">
+<pre><code class="lang-cs">
 public class MyObject
 {
     public string Name { get; set; }
@@ -104,11 +104,11 @@ public class MyViewModel
     public int ListId { get; set; } // Same type as Id
 
     [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name))]
-    public int? NullableListId { get; set; } // You can specify the same type with the Nullable modifier
+    public int? NullableListId { get; set; } // You can specify the same type with the Nullable modifier to indicate it's optional
 }
 </code></pre>
 <p>The <code>ExistsIn</code> attribute looks like this:</p>
-<pre><code class="lang-csharp">    /// &lt;summary&gt;
+<pre><code class="lang-cs">    /// &lt;summary&gt;
     /// Indicates that the attributed property value should exist within the list property referenced by the attribute.
     /// &lt;/summary&gt;
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
@@ -173,61 +173,115 @@ public class MyViewModel
 <p>If you want to provide server-side validation protection of the value the user submitted then the <code>[ExistsIn]</code> attribute will automatically take care of this for you by default.</p>
 <p>If you don't want to perform server-side validation then you can either:</p>
 <ul>
-<li>Turn off Exists In validation globally by setting the appropriate setting in your <code>Application_Start</code> function (or a method it calls) within <code>Global.asax.cs</code>:</li>
-</ul>
-<pre><code class="lang-csharp">ExistsInAttribute.EnableValidation = false;
+<li><p>Turn off Exists In validation globally by setting the appropriate setting in your <code>Application_Start</code> function (or a method it calls) within <code>Global.asax.cs</code>:</p>
+<pre><code class="lang-cs">ExistsInAttribute.EnableValidation = false;
 </code></pre>
-<ul>
-<li>Turn off validation on a per-usage basis by setting <code>false</code> to the <code>enableValidation</code> value when adding the attribute, e.g.:</li>
-</ul>
-<pre><code class="lang-csharp">    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name), enableValidation: false)]
+</li>
+<li><p>Turn off validation on a per-usage basis by setting <code>false</code> to the <code>enableValidation</code> value when adding the attribute, e.g.:</p>
+<pre><code class="lang-cs">    [ExistsIn(nameof(ListValues), nameof(MyObject.Id), nameof(MyObject.Name), enableValidation: false)]
     public int ListId { get; set; }
 </code></pre>
+</li>
+</ul>
 <p>If you turn off validation globally, but want to enable it for a specific usage then you can pass <code>true</code> to the <code>enableValidation</code> attribute - any value specified for it will override the global default.</p>
 <p>If you want to take advantage of the server-side validation then the list needs to be populated when the <code>DefaultModelBinder</code> binds the property with the <code>[ExistsIn]</code> attribute specified. If the list is null at that point and validation is enabled then an exception will be thrown. If you want to specify the list at the right time then you have two options:</p>
 <ol>
 <li>Define the list in the model constructor (like the above example)</li>
 <li>Create a custom model binder for your model type that creates the list first
 <ul>
-<li>This allows you to populate the list using the database by dependency injecting your database access component into the model binder</li>
+<li>This allows you to populate the list using a database by dependency injecting your database access component into the model binder</li>
 <li>This also allows you to <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Tests/ModelBinders/">easily unit test the model binder</a></li>
 </ul>
 </li>
 </ol>
 <p>For example:</p>
-<pre><code class="lang-csharp">    [ModelBinder(BinderType = typeof(InvoiceSelectionViewModelBinder))]
-    public class InvoiceSelectionViewModel
+<pre><code class="lang-cs">    public class InvoiceSelectionViewModel
+    {
+        [ReadOnly(true)]
+        public IList&lt;Invoice&gt; Invoices { get; set; }
+
+        [ExistsIn(nameof(Invoices), nameof(Invoices.Id), nameof(Invoices.InvoiceNumber))]
+        public int InvoiceId { get; set; }
+    }
+
+    public class Startup
     {
         ...
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            ...
+            services.AddMvc(options =&gt; {
+                ...
+                options.ModelBinderProviders.Insert(0, new InvoiceSelectionViewModelBinderProvider());
+            });
+        }
     }
-    ...
-    public class InvoiceSelectionViewModelBinder : DefaultModelBinder
+    
+    public class InvoiceSelectionViewModelBinderProvider : IModelBinderProvider
+    {
+        public IModelBinder GetBinder(ModelBinderProviderContext context)
+        {
+            if (context.Metadata.ModelType == typeof(InvoiceSelectionViewModel))
+            {
+                return new BinderTypeModelBinder(typeof(InvoiceSelectionViewModelBinder));
+            }
+
+            return null;
+        }
+    }
+
+    public class InvoiceSelectionViewModelBinder : ComplexTypeModelBinder
     {
         private readonly IQueryExecutor _queryExecutor;
 
-        public InvoiceSelectionViewModelBinder(IQueryExecutor queryExecutor)
+        public InvoiceSelectionViewModelBinder(IDictionary&lt;ModelMetadata, IModelBinder&gt; propertyBinders, ILoggerFactory loggerFactory, IQueryExecutor queryExecutor)
+            : base(propertyBinders, loggerFactory)
         {
             _queryExecutor = queryExecutor;
         }
 
-        public Task BindModelAsync(ModelBindingContext bindingContext)
+        protected override async Task BindProperty(ModelBindingContext bindingContext)
         {
-            var model = new InvoiceSelectionViewModel
+            if (bindingContext.ModelType == nameof(InvoiceSelectionViewModel.Invoices))
             {
-                Invoices = _queryExecutor.Execute(new GetInvoices(bindingContext.HttpContext.User.Identity))
-            };
-
-            bindingContext.Model = model;
-            return base.BindModelAsync(bindingContext);
+                var invoices = await _queryExecutor.ExecuteAsync(new GetInvoicesQuery(bindingContext.HttpContext.User.Identity));
+                bindingContext.Result = ModelBindingResult.Success(invoices);
+            }
+            else
+            {
+                await base.BindProperty(bindingContext);
+            }
         }
     }
 </code></pre>
 <h2 id="configurability">Configurability</h2>
 <h3 id="display-as-list-of-radio-buttons">Display as list of radio buttons</h3>
 <p>You can force a list field to display as a list of radio buttons rather than a drop-down using the <code>AsRadioList</code> method on the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_radiolist-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_radiolist-th" data-tab="radiolist-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_radiolist-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_radiolist-hh" data-tab="radiolist-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_radiolist-th" role="tabpanel" data-tab="radiolist-th">
+
+<p>The <code>AsRadioList</code> method is <a href="field-configuration.html#mapped-attributes">mapped</a> to <code>as=&quot;RadioList&quot;</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;ListId&quot; as=&quot;RadioList&quot; /&gt;
+&lt;field for=&quot;NullableListId&quot; as=&quot;RadioList&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_radiolist-hh" role="tabpanel" data-tab="radiolist-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.ListId).AsRadioList()
 @s.FieldFor(m =&gt; m.NullableListId).AsRadioList()
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the non-nullable list id field and the Required nullable list id field as shown above to:</p>
 <pre><code class="lang-html">&lt;ul&gt;
 %foreach item x in Model.{ListProperty} with increment i%
@@ -245,8 +299,28 @@ public class MyViewModel
 </code></pre>
 <h3 id="change-the-text-description-of-none">Change the text description of none</h3>
 <p>When you display a nullable list id field as a drop-down or a non-Required nullable list id field as a list of radio buttons you can change the text that is used to display the <code>none</code> value to the user. By default the text used is an empty string for the drop-down and <code>None</code> for the radio button. To change the text simply use the <code>WithNoneAs</code> method, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_none-label-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_none-label-th" data-tab="none-label-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_none-label-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_none-label-hh" data-tab="none-label-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_none-label-th" role="tabpanel" data-tab="none-label-th">
+
+<p>The <code>WithNoneAs</code> method is <a href="field-configuration.html#mapped-attributes">mapped</a> to <code>none-label=&quot;{label}&quot;</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;NullableListId&quot; none-label=&quot;No value&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_none-label-hh" role="tabpanel" data-tab="none-label-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NullableListId).WithNoneAs(&quot;No value&quot;)
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the nullable list id field as shown above to:</p>
 <pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
     &lt;option selected=&quot;selected&quot; value=&quot;&quot;&gt;No value&lt;/option&gt;
@@ -255,8 +329,28 @@ public class MyViewModel
 </code></pre>
 <h3 id="hide-empty-item">Hide empty item</h3>
 <p>If you have a nullable list id field as a drop-down or a non-Required nullable list id field as a list of radio buttons then it will show the empty item and this item will be selected by default if the field value is null. If for some reason you want one of these fields, but you would also like to hide the empty item you can do so with the <code>HideEmptyItem</code> method in the Field Configuration, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_hide-empty-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_hide-empty-th" data-tab="hide-empty-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_hide-empty-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_hide-empty-hh" data-tab="hide-empty-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_hide-empty-th" role="tabpanel" data-tab="hide-empty-th">
+
+<p>The <code>HideEmptyItem</code> method is <a href="field-configuration.html#mapped-attributes">mapped</a> to <code>hide-empty-item=&quot;true&quot;</code>.</p>
+<pre><code class="lang-cshtml">&lt;field for=&quot;NullableListId&quot; hide-empty-item=&quot;true&quot;&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-2_hide-empty-hh" role="tabpanel" data-tab="hide-empty-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.NullableListId).HideEmptyItem()
 </code></pre>
+</section>
+</div>
+
 <p>This will change the default HTML for the nullable list id field as shown above to:</p>
 <pre><code class="lang-html">&lt;select %validationAttrs% %htmlAttributes% id=&quot;%propertyName%&quot; name=&quot;%propertyName%&quot;&gt;
     @* List item values as &lt;options&gt;... *@
@@ -295,6 +389,7 @@ public class MyViewModel
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

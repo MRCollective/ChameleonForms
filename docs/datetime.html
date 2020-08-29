@@ -80,7 +80,7 @@
 <h1 id="datetime-fields">Datetime Fields</h1>
 
 <p>If you need to collect DateTime data you can use a <code>DateTime</code> or <code>DateTime?</code> model property, e.g.:</p>
-<pre><code class="lang-csharp">public DateTime DateTimeField { get; set; }
+<pre><code class="lang-cs">public DateTime DateTimeField { get; set; }
 public DateTime? NullableDateTimeField { get; set; }
 [DisplayFormat(DataFormatString = &quot;{0:d/M/yyyy}&quot;, ApplyFormatInEditMode = true)]
 public DateTime DateTimeFieldWithFormat { get; set;
@@ -170,6 +170,7 @@ public DateTime DateTimeFieldWithFormat { get; set;
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

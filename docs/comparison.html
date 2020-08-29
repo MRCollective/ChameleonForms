@@ -81,14 +81,15 @@
 
 <p>One of the easiest ways to understand ChameleonForms is to see an equivalent sample of something you are already familiar with (e.g. out-of-the-box ASP.NET MVC) alongside the equivalent with ChameleonForms. With this in mind we have created an example comparison in the <a href="https://github.com/MRCollective/ChameleonForms/tree/master/ChameleonForms.Example">Example project</a> that you can run and inspect to illustrate how to implement an example form using:</p>
 <ul>
-<li><em>(Coming soon)</em> Tag Helpers</li>
-<li><a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/Comparison/HtmlHelpers.cshtml">Standard HTML helpers and HTML</a></li>
+<li><a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/Comparison/TagHelpers.cshtml">Built-in Tag helpers</a></li>
+<li><a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/Comparison/HtmlHelpers.cshtml">Built-in HTML helpers</a></li>
 <li><a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/Comparison/EditorTemplates.cshtml">Abstracted and templated Editor Templates</a></li>
-<li><a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/Comparison/ChameleonForms.cshtml">ChameleonForms</a></li>
+<li><a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/Comparison/ChameleonFormsTH.cshtml">ChameleonForms - Tag Helpers</a></li>
+<li><a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/Comparison/ChameleonForms.cshtml">ChameleonForms - HTML Helpers</a></li>
 </ul>
 <h2 id="example-form">Example Form</h2>
 <p>The example in question is an arbitrary signup form against the <code>SignupViewModel</code> in the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Controllers/ComparisonController.cs"><code>ComparisonController</code></a>:</p>
-<pre><code class="lang-csharp">        public class SignupViewModel
+<pre><code class="lang-cs">        public class SignupViewModel
         {
             [Required]
             public string FirstName { get; set; }
@@ -163,25 +164,104 @@
 </ul>
 </li>
 </ul>
-<h2 id="in-depth-comparison-of-details-form-section">In-depth comparison of details Form Section</h2>
-<p>In the case where we use the Form Section to ask the user to enter account details, here is a comparison of the different implementations:</p>
-<h3 id="html-helpers">HTML Helpers</h3>
-<pre><code class="lang-html">@using (Html.BeginForm(&quot;HtmlHelpers&quot;, &quot;Comparison&quot;, FormMethod.Post, new {id = &quot;signup-form&quot;}))
+<h2 id="in-depth-comparison">In-depth comparison</h2>
+<p>Here is a comparison of the different implementations of the same form:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_tag-helpers" role="tab" aria-controls="tabpanel_CeZOj-G++Q_tag-helpers" data-tab="tag-helpers" tabindex="0" aria-selected="true">Tag Helpers</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_html-helpers" role="tab" aria-controls="tabpanel_CeZOj-G++Q_html-helpers" data-tab="html-helpers" tabindex="-1">HTML Helpers</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_editor-templates" role="tab" aria-controls="tabpanel_CeZOj-G++Q_editor-templates" data-tab="editor-templates" tabindex="-1">Editor Templates</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_cf-tag-helpers" role="tab" aria-controls="tabpanel_CeZOj-G++Q_cf-tag-helpers" data-tab="cf-tag-helpers" tabindex="-1">ChameleonForms Tag Helpers</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_cf-html-helpers" role="tab" aria-controls="tabpanel_CeZOj-G++Q_cf-html-helpers" data-tab="cf-html-helpers" tabindex="-1">ChameleonForms HTML Helpers</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_tag-helpers" role="tabpanel" data-tab="tag-helpers">
+
+<pre><code class="lang-cshtml">&lt;form asp-action=&quot;TagHelpers&quot; asp-controller=&quot;Comparison&quot; method=&quot;post&quot; id=&quot;signup-form&quot; novalidate=&quot;novalidate&quot;&gt;
+    &lt;div class=&quot;information_message&quot;&gt;
+        &lt;h3&gt;Signup for an account&lt;/h3&gt;
+        &lt;div class=&quot;message&quot;&gt;
+            &lt;p&gt;Please fill in your information below to signup for an account.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;fieldset&gt;
+        &lt;legend&gt;Your details&lt;/legend&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;FirstName&quot;&gt;&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;input asp-for=&quot;FirstName&quot; required=&quot;required&quot; /&gt; &lt;span asp-validation-for=&quot;FirstName&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;LastName&quot;&gt;&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;input asp-for=&quot;LastName&quot; required=&quot;required&quot; /&gt; &lt;span asp-validation-for=&quot;LastName&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;DateOfBirth&quot;&gt;&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;input asp-for=&quot;DateOfBirth&quot; required=&quot;required&quot; type=&quot;text&quot; data-val-format=&quot;d/M/yyyy&quot; aria-describedby=&quot;DateOfBirth--Hint&quot; /&gt;&lt;div class=&quot;hint&quot; id=&quot;DateOfBirth--Hint&quot;&gt;DD/MM/YYYY&lt;/div&gt; &lt;span asp-validation-for=&quot;DateOfBirth&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/fieldset&gt;
+    
+    &lt;fieldset&gt;
+        &lt;legend&gt;Account details&lt;/legend&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;EmailAddress&quot;&gt;&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;input asp-for=&quot;EmailAddress&quot; required=&quot;required&quot; aria-describedby=&quot;EmailAddress--Hint&quot; /&gt;&lt;div class=&quot;hint&quot; id=&quot;EmailAddress--Hint&quot;&gt;An email will be sent to this address to confirm you own it&lt;/div&gt; &lt;span asp-validation-for=&quot;EmailAddress&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;Password&quot;&gt;&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;input asp-for=&quot;Password&quot; required=&quot;required&quot; /&gt; &lt;span asp-validation-for=&quot;Password&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;MembershipType&quot;&gt;&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;select asp-for=&quot;MembershipType&quot; required=&quot;required&quot; asp-items=&quot;Html.GetEnumSelectList&lt;ComparisonController.MembershipType&gt;()&quot;&gt;&lt;/select&gt; &lt;span asp-validation-for=&quot;MembershipType&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/fieldset&gt;
+    
+    &lt;fieldset&gt;
+        &lt;legend&gt;Additional details&lt;/legend&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;Bio&quot;&gt;&lt;/label&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;textarea asp-for=&quot;Bio&quot; cols=&quot;20&quot; rows=&quot;2&quot;&gt;&lt;/textarea&gt; &lt;span asp-validation-for=&quot;Bio&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;Homepage&quot;&gt;&lt;/label&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;input asp-for=&quot;Homepage&quot; placeholder=&quot;https://&quot; /&gt; &lt;span asp-validation-for=&quot;Homepage&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/fieldset&gt;
+    
+    &lt;div class=&quot;action_message&quot;&gt;
+        &lt;h3&gt;Confirm the Terms &amp;amp; Conditions&lt;/h3&gt;
+        &lt;div class=&quot;message&quot;&gt;
+            &lt;p&gt;Please &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;.&lt;/p&gt;
+            &lt;input asp-for=&quot;TermsAndConditions&quot; /&gt; &lt;label asp-for=&quot;TermsAndConditions&quot;&gt;I agree to the terms and conditions&lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class=&quot;form_navigation&quot;&gt;
+        &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;Signup&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_html-helpers" role="tabpanel" data-tab="html-helpers" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">@using (Html.BeginForm(&quot;HtmlHelpers&quot;, &quot;Comparison&quot;, FormMethod.Post, new {id = &quot;signup-form&quot;, novalidate = &quot;novalidate&quot;}))
 {
     &lt;div class=&quot;information_message&quot;&gt;
         &lt;h3&gt;Signup for an account&lt;/h3&gt;
-        &lt;p&gt;Please fill in your information below to signup for an account.&lt;/p&gt;
+        &lt;div class=&quot;message&quot;&gt;
+            &lt;p&gt;Please fill in your information below to signup for an account.&lt;/p&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
     
     &lt;fieldset&gt;
         &lt;legend&gt;Your details&lt;/legend&gt;
         &lt;dl&gt;
             &lt;dt&gt;@Html.LabelFor(m =&gt; m.FirstName) &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.FirstName) @Html.ValidationMessageFor(m =&gt; m.FirstName)&lt;/dd&gt;
+            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.FirstName, new { required = &quot;required&quot; }) @Html.ValidationMessageFor(m =&gt; m.FirstName)&lt;/dd&gt;
             &lt;dt&gt;@Html.LabelFor(m =&gt; m.LastName) &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.LastName) @Html.ValidationMessageFor(m =&gt; m.LastName)&lt;/dd&gt;
+            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.LastName, new { required = &quot;required&quot; }) @Html.ValidationMessageFor(m =&gt; m.LastName)&lt;/dd&gt;
             &lt;dt&gt;@Html.LabelFor(m =&gt; m.DateOfBirth) &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.DateOfBirth, new{data_val_format = &quot;d/M/yyyy&quot;})&lt;div class=&quot;hint&quot;&gt;DD/MM/YYYY&lt;/div&gt; @Html.ValidationMessageFor(m =&gt; m.DateOfBirth)&lt;/dd&gt;
+            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.DateOfBirth, new{data_val_format = &quot;d/M/yyyy&quot;, aria_describedby = &quot;DateOfBirth--Hint&quot;, required = &quot;required&quot;})&lt;div class=&quot;hint&quot; id=&quot;DateOfBirth--Hint&quot;&gt;DD/MM/YYYY&lt;/div&gt; @Html.ValidationMessageFor(m =&gt; m.DateOfBirth)&lt;/dd&gt;
         &lt;/dl&gt;
     &lt;/fieldset&gt;
     
@@ -189,14 +269,14 @@
         &lt;legend&gt;Account details&lt;/legend&gt;
         &lt;dl&gt;
             &lt;dt&gt;@Html.LabelFor(m =&gt; m.EmailAddress) &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.EmailAddress)&lt;div class=&quot;hint&quot;&gt;An email will be sent to this address to confirm you own it&lt;/div&gt; @Html.ValidationMessageFor(m =&gt; m.EmailAddress)&lt;/dd&gt;
+            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.EmailAddress, new{aria_describedby = &quot;EmailAddress--Hint&quot;, required = &quot;required&quot;})&lt;div class=&quot;hint&quot; id=&quot;EmailAddress--Hint&quot;&gt;An email will be sent to this address to confirm you own it&lt;/div&gt; @Html.ValidationMessageFor(m =&gt; m.EmailAddress)&lt;/dd&gt;
             &lt;dt&gt;@Html.LabelFor(m =&gt; m.Password) &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;@Html.PasswordFor(m =&gt; m.Password) @Html.ValidationMessageFor(m =&gt; m.Password)&lt;/dd&gt;
+            &lt;dd&gt;@Html.PasswordFor(m =&gt; m.Password, new { required = &quot;required&quot; }) @Html.ValidationMessageFor(m =&gt; m.Password)&lt;/dd&gt;
             &lt;dt&gt;@Html.LabelFor(m =&gt; m.MembershipType) &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
             &lt;dd&gt;@Html.DropDownListFor(m =&gt; m.MembershipType,
                     Enum.GetValues(typeof(ComparisonController.MembershipType))
                         .Cast&lt;ComparisonController.MembershipType&gt;()
-                        .Select(m =&gt; new SelectListItem{Text = m.Humanize(), Value = m.ToString()})
+                        .Select(m =&gt; new SelectListItem{Text = m.Humanize(), Value = m.ToString()}), new { required = &quot;required&quot; }
                 ) @Html.ValidationMessageFor(m =&gt; m.MembershipType)
             &lt;/dd&gt;
         &lt;/dl&gt;
@@ -208,28 +288,34 @@
             &lt;dt&gt;@Html.LabelFor(m =&gt; m.Bio)&lt;/dt&gt;
             &lt;dd&gt;@Html.TextAreaFor(m =&gt; m.Bio) @Html.ValidationMessageFor(m =&gt; m.Bio)&lt;/dd&gt;
             &lt;dt&gt;@Html.LabelFor(m =&gt; m.Homepage)&lt;/dt&gt;
-            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.Homepage, new{placeholder = &quot;http://&quot;}) @Html.ValidationMessageFor(m =&gt; m.Homepage)&lt;/dd&gt;
+            &lt;dd&gt;@Html.TextBoxFor(m =&gt; m.Homepage, new{placeholder = &quot;https://&quot;, type = &quot;url&quot;}) @Html.ValidationMessageFor(m =&gt; m.Homepage)&lt;/dd&gt;
         &lt;/dl&gt;
     &lt;/fieldset&gt;
     
     &lt;div class=&quot;action_message&quot;&gt;
         &lt;h3&gt;Confirm the Terms &amp;amp; Conditions&lt;/h3&gt;
-        &lt;p&gt;Please &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;.&lt;/p&gt;
-        @Html.EditorFor(m =&gt; m.TermsAndConditions) @Html.LabelFor(m =&gt; m.TermsAndConditions, &quot;I agree to the terms and conditions&quot;)
+        &lt;div class=&quot;message&quot;&gt;
+            &lt;p&gt;Please &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;.&lt;/p&gt;
+            @Html.CheckBoxFor(m =&gt; m.TermsAndConditions) @Html.LabelFor(m =&gt; m.TermsAndConditions, &quot;I agree to the terms and conditions&quot;)
+        &lt;/div&gt;
     &lt;/div&gt;
     
     &lt;div class=&quot;form_navigation&quot;&gt;
-        &lt;button type=&quot;submit&quot;&gt;Signup&lt;/button&gt;
+        &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;Signup&lt;/button&gt;
     &lt;/div&gt;
 }
 </code></pre>
-<h3 id="editor-templates">Editor Templates</h3>
+</section>
+<section id="tabpanel_CeZOj-G++Q_editor-templates" role="tabpanel" data-tab="editor-templates" aria-hidden="true" hidden="hidden">
+
 <p>Note: for this to work there are <a href="https://github.com/MRCollective/ChameleonForms/tree/master/ChameleonForms.Example/Views/Comparison/EditorTemplates">a lot of extra files you need to implement</a>.</p>
-<pre><code class="lang-cshtml">@using (Html.BeginForm(&quot;EditorTemplates&quot;, &quot;Comparison&quot;, FormMethod.Post, new {id = &quot;signup-form&quot;}))
+<pre><code class="lang-cshtml">@using (Html.BeginForm(&quot;EditorTemplates&quot;, &quot;Comparison&quot;, FormMethod.Post, new {id = &quot;signup-form&quot;, novalidate = &quot;novalidate&quot;}))
 {
     &lt;div class=&quot;information_message&quot;&gt;
         &lt;h3&gt;Signup for an account&lt;/h3&gt;
-        &lt;p&gt;Please fill in your information below to signup for an account.&lt;/p&gt;
+        &lt;div class=&quot;message&quot;&gt;
+            &lt;p&gt;Please fill in your information below to signup for an account.&lt;/p&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
     
     using (Html.BeginSection(&quot;Your details&quot;))
@@ -249,22 +335,60 @@
     using (Html.BeginSection(&quot;Additional details&quot;))
     {
         @Html.EditorFor(m =&gt; m.Bio)
-        @Html.EditorFor(m =&gt; m.Homepage, new {placeholder = &quot;http://&quot;})
+        @Html.EditorFor(m =&gt; m.Homepage, new {placeholder = &quot;https://&quot;})
     }
     
     &lt;div class=&quot;action_message&quot;&gt;
         &lt;h3&gt;Confirm the Terms &amp;amp; Conditions&lt;/h3&gt;
-        &lt;p&gt;Please &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;.&lt;/p&gt;
-        @Html.CheckBoxFor(m =&gt; m.TermsAndConditions) @Html.LabelFor(m =&gt; m.TermsAndConditions, &quot;I agree to the terms and conditions&quot;)
+        &lt;div class=&quot;message&quot;&gt;
+            &lt;p&gt;Please &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;.&lt;/p&gt;
+            @Html.CheckBoxFor(m =&gt; m.TermsAndConditions) @Html.LabelFor(m =&gt; m.TermsAndConditions, &quot;I agree to the terms and conditions&quot;)
+        &lt;/div&gt;
     &lt;/div&gt;
     
     &lt;div class=&quot;form_navigation&quot;&gt;
-        &lt;button type=&quot;submit&quot;&gt;Signup&lt;/button&gt;
+        &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;Signup&lt;/button&gt;
     &lt;/div&gt;
 }
-
 </code></pre>
-<h3 id="chameleonforms">ChameleonForms</h3>
+</section>
+<section id="tabpanel_CeZOj-G++Q_cf-tag-helpers" role="tabpanel" data-tab="cf-tag-helpers" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">&lt;chameleon-form attr-id=&quot;signup-form&quot;&gt;
+    &lt;form-message type=&quot;Information&quot; heading=&quot;Signup for an account&quot;&gt;
+        &lt;message-paragraph&gt;Please fill in your information below to signup for an account.&lt;/message-paragraph&gt;
+    &lt;/form-message&gt;
+
+    &lt;form-section heading=&quot;Your details&quot;&gt;
+        &lt;field for=&quot;FirstName&quot; /&gt;
+        &lt;field for=&quot;LastName&quot; /&gt;
+        &lt;field for=&quot;DateOfBirth&quot; hint=&quot;DD/MM/YYYY&quot; /&gt;
+    &lt;/form-section&gt;
+
+    &lt;form-section heading=&quot;Account details&quot;&gt;
+        &lt;field for=&quot;EmailAddress&quot; hint=&quot;An email will be sent to this address to confirm you own it&quot; /&gt;
+        &lt;field for=&quot;Password&quot; /&gt;
+        &lt;field for=&quot;MembershipType&quot; /&gt;
+    &lt;/form-section&gt;
+
+    &lt;form-section heading=&quot;Additional details&quot;&gt;
+        &lt;field for=&quot;Bio&quot; /&gt;
+        &lt;field for=&quot;Homepage&quot; placeholder=&quot;http://&quot; /&gt;
+    &lt;/form-section&gt;
+
+    &lt;form-message type=&quot;Action&quot; heading=&quot;Confirm the Terms &amp; Conditions&quot;&gt;
+        &lt;message-paragraph&gt;Please &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;&lt;/message-paragraph&gt;
+        &lt;field-element for=&quot;TermsAndConditions&quot; inline-label=&quot;I agree to the terms and conditions&quot; /&gt;
+    &lt;/form-message&gt;
+
+    &lt;form-navigation&gt;
+        &lt;submit-button label=&quot;Signup&quot; emphasis-style=&quot;Primary&quot; /&gt;
+    &lt;/form-navigation&gt;
+&lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_cf-html-helpers" role="tabpanel" data-tab="cf-html-helpers" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm(htmlAttributes: Html.Attrs().Id(&quot;signup-form&quot;)))
 {
     using (var m = f.BeginMessage(MessageType.Information, &quot;Signup for an account&quot;))
@@ -304,120 +428,141 @@
     }
 }
 </code></pre>
+</section>
+</div>
 <h3 id="html-output">HTML output</h3>
-<pre><code class="lang-html">&lt;form action=&quot;&quot; id=&quot;signup-form&quot; method=&quot;post&quot; novalidate=&quot;novalidate&quot;&gt;      &lt;div class=&quot;information_message&quot;&gt;
-          &lt;h3&gt;Signup for an account&lt;/h3&gt;
-          &lt;div class=&quot;message&quot;&gt;
-
-&lt;p&gt;
-    Please fill in your information below to signup for an account.
-&lt;/p&gt;          &lt;/div&gt;
+<p><em>All of the above items will have HTML output that is similar to this. There will be a few small differences between each of the implementations based on the functionality they support e.g. built-in tag helpers outputs enum <code>&lt;option&gt;</code>'s as integer values rather than strings and attribute order will render differently etc. This specific HTML output was taken from the ChameleonForms - tag helpers implementation.</em></p>
+<pre><code class="lang-html">&lt;form action=&quot;&quot; enctype=&quot;application/x-www-form-urlencoded&quot; id=&quot;signup-form&quot; method=&quot;post&quot; novalidate=&quot;novalidate&quot;&gt;
+   &lt;div class=&quot;information_message&quot;&gt;
+      &lt;h3&gt;Signup for an account&lt;/h3&gt;
+      &lt;div class=&quot;message&quot;&gt;
+         &lt;p&gt;
+            Please fill in your information below to signup for an account.
+         &lt;/p&gt;
       &lt;/div&gt;
-    &lt;fieldset&gt;
-        &lt;legend&gt;Your details&lt;/legend&gt;
-        &lt;dl&gt;
-            &lt;dt&gt;&lt;label for=&quot;FirstName&quot;&gt;First name&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;
-                &lt;input data-val=&quot;true&quot; data-val-required=&quot;The First name field is required.&quot; id=&quot;FirstName&quot; name=&quot;FirstName&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;FirstName&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
-            &lt;/dd&gt;
-            &lt;dt&gt;&lt;label for=&quot;LastName&quot;&gt;Last name&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;
-                &lt;input data-val=&quot;true&quot; data-val-required=&quot;The Last name field is required.&quot; id=&quot;LastName&quot; name=&quot;LastName&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;LastName&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
-            &lt;/dd&gt;
-            &lt;dt&gt;&lt;label for=&quot;DateOfBirth&quot;&gt;Date of birth&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;
-                &lt;input aria-describedby=&quot;DateOfBirth--Hint&quot; data-val=&quot;true&quot; data-val-date=&quot;The field Date of birth must be a date with format d/M/yyyy.&quot; data-val-format=&quot;d/M/yyyy&quot; data-val-required=&quot;The Date of birth field is required.&quot; id=&quot;DateOfBirth&quot; name=&quot;DateOfBirth&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt;&lt;div class=&quot;hint&quot; id=&quot;DateOfBirth--Hint&quot;&gt;DD/MM/YYYY&lt;/div&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;DateOfBirth&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
-            &lt;/dd&gt;
-        &lt;/dl&gt;
-    &lt;/fieldset&gt;
-    &lt;fieldset&gt;
-        &lt;legend&gt;Account details&lt;/legend&gt;
-        &lt;dl&gt;
-            &lt;dt&gt;&lt;label for=&quot;EmailAddress&quot;&gt;Email address&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;
-                &lt;input aria-describedby=&quot;EmailAddress--Hint&quot; data-val=&quot;true&quot; data-val-email=&quot;The Email address field is not a valid e-mail address.&quot; data-val-required=&quot;The Email address field is required.&quot; id=&quot;EmailAddress&quot; name=&quot;EmailAddress&quot; required=&quot;required&quot; type=&quot;email&quot; value=&quot;&quot; /&gt;&lt;div class=&quot;hint&quot; id=&quot;EmailAddress--Hint&quot;&gt;An email will be sent to this address to confirm you own it&lt;/div&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;EmailAddress&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
-            &lt;/dd&gt;
-            &lt;dt&gt;&lt;label for=&quot;Password&quot;&gt;Password&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;
-                &lt;input data-val=&quot;true&quot; data-val-required=&quot;The Password field is required.&quot; id=&quot;Password&quot; name=&quot;Password&quot; required=&quot;required&quot; type=&quot;password&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;Password&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
-            &lt;/dd&gt;
-            &lt;dt&gt;&lt;label for=&quot;MembershipType&quot;&gt;Membership type&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
-            &lt;dd&gt;
-                &lt;select data-val=&quot;true&quot; data-val-required=&quot;The Membership type field is required.&quot; id=&quot;MembershipType&quot; name=&quot;MembershipType&quot; required=&quot;required&quot;&gt;&lt;option selected=&quot;selected&quot; value=&quot;Standard&quot;&gt;Standard&lt;/option&gt;
-&lt;option value=&quot;Bonze&quot;&gt;Bonze&lt;/option&gt;
-&lt;option value=&quot;Silver&quot;&gt;Silver&lt;/option&gt;
-&lt;option value=&quot;Gold&quot;&gt;Gold&lt;/option&gt;
-&lt;option value=&quot;Platinum&quot;&gt;Platinum&lt;/option&gt;
-&lt;/select&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;MembershipType&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
-            &lt;/dd&gt;
-        &lt;/dl&gt;
-    &lt;/fieldset&gt;
-    &lt;fieldset&gt;
-        &lt;legend&gt;Additional details&lt;/legend&gt;
-        &lt;dl&gt;
-            &lt;dt&gt;&lt;label for=&quot;Bio&quot;&gt;Bio&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;
-                &lt;textarea cols=&quot;20&quot; id=&quot;Bio&quot; name=&quot;Bio&quot; rows=&quot;2&quot;&gt;
-&lt;/textarea&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;Bio&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
-            &lt;/dd&gt;
-            &lt;dt&gt;&lt;label for=&quot;Homepage&quot;&gt;Homepage&lt;/label&gt;&lt;/dt&gt;
-            &lt;dd&gt;
-                &lt;input id=&quot;Homepage&quot; name=&quot;Homepage&quot; placeholder=&quot;http://&quot; type=&quot;url&quot; value=&quot;&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;Homepage&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
-            &lt;/dd&gt;
-        &lt;/dl&gt;
-    &lt;/fieldset&gt;
-      &lt;div class=&quot;action_message&quot;&gt;
-          &lt;h3&gt;Confirm the Terms &amp; Conditions&lt;/h3&gt;
-          &lt;div class=&quot;message&quot;&gt;
-
-&lt;p&gt;
-    Please &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;
-&lt;/p&gt;&lt;input data-val=&quot;true&quot; data-val-required=&quot;The Terms and conditions field is required.&quot; id=&quot;TermsAndConditions&quot; name=&quot;TermsAndConditions&quot; required=&quot;required&quot; type=&quot;checkbox&quot; value=&quot;true&quot; /&gt; &lt;label for=&quot;TermsAndConditions&quot;&gt;I agree to the terms and conditions&lt;/label&gt;          &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;fieldset&gt;
+      &lt;legend&gt;Your details&lt;/legend&gt;
+      &lt;dl&gt;
+         &lt;dt&gt;&lt;label for=&quot;FirstName&quot;&gt;First name&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+         &lt;dd&gt;
+            &lt;input data-val=&quot;true&quot; data-val-required=&quot;The First name field is required.&quot; id=&quot;FirstName&quot; name=&quot;FirstName&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;FirstName&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+         &lt;/dd&gt;
+         &lt;dt&gt;&lt;label for=&quot;LastName&quot;&gt;Last name&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+         &lt;dd&gt;
+            &lt;input data-val=&quot;true&quot; data-val-required=&quot;The Last name field is required.&quot; id=&quot;LastName&quot; name=&quot;LastName&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;LastName&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+         &lt;/dd&gt;
+         &lt;dt&gt;&lt;label for=&quot;DateOfBirth&quot;&gt;Date of birth&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+         &lt;dd&gt;
+            &lt;input aria-describedby=&quot;DateOfBirth--Hint&quot; data-val=&quot;true&quot; data-val-date=&quot;The field Date of birth must be a date with format d/M/yyyy.&quot; data-val-format=&quot;d/M/yyyy&quot; data-val-required=&quot;The Date of birth field is required.&quot; id=&quot;DateOfBirth&quot; name=&quot;DateOfBirth&quot; required=&quot;required&quot; type=&quot;text&quot; value=&quot;&quot; /&gt;
+            &lt;div class=&quot;hint&quot; id=&quot;DateOfBirth--Hint&quot;&gt;DD/MM/YYYY&lt;/div&gt;
+            &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;DateOfBirth&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+         &lt;/dd&gt;
+      &lt;/dl&gt;
+   &lt;/fieldset&gt;
+   &lt;fieldset&gt;
+      &lt;legend&gt;Account details&lt;/legend&gt;
+      &lt;dl&gt;
+         &lt;dt&gt;&lt;label for=&quot;EmailAddress&quot;&gt;Email address&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+         &lt;dd&gt;
+            &lt;input aria-describedby=&quot;EmailAddress--Hint&quot; data-val=&quot;true&quot; data-val-email=&quot;The Email address field is not a valid e-mail address.&quot; data-val-required=&quot;The Email address field is required.&quot; id=&quot;EmailAddress&quot; name=&quot;EmailAddress&quot; required=&quot;required&quot; type=&quot;email&quot; value=&quot;&quot; /&gt;
+            &lt;div class=&quot;hint&quot; id=&quot;EmailAddress--Hint&quot;&gt;An email will be sent to this address to confirm you own it&lt;/div&gt;
+            &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;EmailAddress&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+         &lt;/dd&gt;
+         &lt;dt&gt;&lt;label for=&quot;Password&quot;&gt;Password&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+         &lt;dd&gt;
+            &lt;input data-val=&quot;true&quot; data-val-required=&quot;The Password field is required.&quot; id=&quot;Password&quot; name=&quot;Password&quot; required=&quot;required&quot; type=&quot;password&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;Password&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+         &lt;/dd&gt;
+         &lt;dt&gt;&lt;label for=&quot;MembershipType&quot;&gt;Membership type&lt;/label&gt; &lt;em class=&quot;required&quot;&gt;*&lt;/em&gt;&lt;/dt&gt;
+         &lt;dd&gt;
+            &lt;select data-val=&quot;true&quot; data-val-required=&quot;The Membership type field is required.&quot; id=&quot;MembershipType&quot; name=&quot;MembershipType&quot; required=&quot;required&quot;&gt;
+               &lt;option selected=&quot;selected&quot; value=&quot;Standard&quot;&gt;Standard&lt;/option&gt;
+               &lt;option value=&quot;Bonze&quot;&gt;Bonze&lt;/option&gt;
+               &lt;option value=&quot;Silver&quot;&gt;Silver&lt;/option&gt;
+               &lt;option value=&quot;Gold&quot;&gt;Gold&lt;/option&gt;
+               &lt;option value=&quot;Platinum&quot;&gt;Platinum&lt;/option&gt;
+            &lt;/select&gt;
+            &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;MembershipType&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+         &lt;/dd&gt;
+      &lt;/dl&gt;
+   &lt;/fieldset&gt;
+   &lt;fieldset&gt;
+      &lt;legend&gt;Additional details&lt;/legend&gt;
+      &lt;dl&gt;
+         &lt;dt&gt;&lt;label for=&quot;Bio&quot;&gt;Bio&lt;/label&gt;&lt;/dt&gt;
+         &lt;dd&gt;
+            &lt;textarea cols=&quot;20&quot; id=&quot;Bio&quot; name=&quot;Bio&quot; rows=&quot;2&quot;&gt;
+            &lt;/textarea&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;Bio&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+         &lt;/dd&gt;
+         &lt;dt&gt;&lt;label for=&quot;Homepage&quot;&gt;Homepage&lt;/label&gt;&lt;/dt&gt;
+         &lt;dd&gt;
+            &lt;input id=&quot;Homepage&quot; name=&quot;Homepage&quot; placeholder=&quot;https://&quot; type=&quot;url&quot; value=&quot;&quot; /&gt; &lt;span class=&quot;field-validation-valid&quot; data-valmsg-for=&quot;Homepage&quot; data-valmsg-replace=&quot;true&quot;&gt;&lt;/span&gt;
+         &lt;/dd&gt;
+      &lt;/dl&gt;
+   &lt;/fieldset&gt;
+   &lt;div class=&quot;action_message&quot;&gt;
+      &lt;h3&gt;Confirm the Terms &amp;amp; Conditions&lt;/h3&gt;
+      &lt;div class=&quot;message&quot;&gt;
+         &lt;p&gt;
+            Please &lt;a href=&quot;#&quot;&gt;read the terms and conditions&lt;/a&gt;
+         &lt;/p&gt;
+         &lt;input data-val=&quot;true&quot; data-val-required=&quot;The Terms and conditions field is required.&quot; id=&quot;TermsAndConditions&quot; name=&quot;TermsAndConditions&quot; required=&quot;required&quot; type=&quot;checkbox&quot; value=&quot;true&quot; /&gt; &lt;label for=&quot;TermsAndConditions&quot;&gt;I agree to the terms and conditions&lt;/label&gt;
       &lt;/div&gt;
-        &lt;div class=&quot;form_navigation&quot;&gt;
-&lt;button type=&quot;submit&quot;&gt;Signup&lt;/button&gt;        &lt;/div&gt;
-    &lt;/form&gt;
+   &lt;/div&gt;
+   &lt;div class=&quot;form_navigation&quot;&gt;
+      &lt;button class=&quot;btn-primary&quot; type=&quot;submit&quot;&gt;Signup&lt;/button&gt;
+   &lt;/div&gt;
+&lt;/form&gt;
 </code></pre>
 <h2 id="commentary">Commentary</h2>
-<p>There is an immediately discernible difference between the Html Helpers example as compared to Editor Templates / ChameleonForms, as well as some more subtle differences between the latter two.</p>
+<p>There is an immediately discernible difference between the Tag Helpers and Html Helpers examples as compared to Editor Templates and the ChameleonForms examples, as well as some more subtle differences between the Editor Templates and ChameleonForms.</p>
 <h3 id="html-helpers-1">Html Helpers</h3>
-<p>When you are writing forms with this approach you need to think about the HTML output of the form since you have to write so much of it; in contrast to the other two examples where you are instead concentrating on the structure of the form. If you have consistent HTML for the forms in your site then we think this shift in mindset is an advantage and will lead to better designed forms that are easier to change. This also means that when you need to change the HTML structure of your forms you have a big job ahead of you rewriting large portions of your application (and testing every page thoroughly since it's so easy to make a mistake).</p>
+<p>When you are writing forms with this approach you need to think about the HTML output of the form since you have to write so much of it; in contrast to ChameleonForms and Editor Templates where you are instead concentrating on the structure of the form. If you have consistent HTML for the forms in your site then we think this shift in mindset is an advantage and will lead to better designed forms that are easier to change. This also means that when you need to change the HTML structure of your forms you have a big job ahead of you rewriting large portions of your application (and testing every page thoroughly since it's so easy to make a mistake).</p>
 <p>In addition to the above, you can't easily add conventions across your forms based on the type of field or data:</p>
 <ul>
-<li>You have to explicitly specify the type of field you want (e.g. <code>Html.TextBoxFor</code> vs <code>Html.PasswordFor</code> vs <code>Html.TextAreaFor</code> etc.)</li>
-<li>You have to manually add the required indicator</li>
-<li>You have to manually specify the select list items for each drop-down</li>
+<li>You have to explicitly specify the type of field you want (e.g. <code>Html.TextBoxFor</code> vs <code>Html.PasswordFor</code> vs <code>Html.TextAreaFor</code> etc.).</li>
+<li>You have to manually add the required indicator and aria attributes.</li>
+<li>You have to manually specify the select list items for each drop-down.</li>
 </ul>
 <p>You have to also specify the label, field and validation HTML separately and in the right order. It's easy to make copy/paste errors and not remember to update one of the lambda expressions.</p>
 <p>Overall, the form is harder to read / more cluttered, harder to maintain, slower to develop and easier to get wrong.</p>
 <h3 id="editor-templates-1">Editor Templates</h3>
 <p>On first glance the syntax of the Editor Templates example and the ChameleonForms example are very similar. There are a number of differences, however:</p>
 <ul>
-<li>The additional ad-hoc per-field configurations (e.g. adding a hint, adding a placeholder, etc.) are added via magic strings (adding them to an anonymous object is still a magic string in our books), which isn't type-safe and you don't get intellisense
+<li>The additional ad-hoc per-field configurations (e.g. adding a hint, adding a placeholder, etc.) are added via magic strings (adding them to an anonymous object is still a magic string in our books), which isn't type-safe and you don't get intellisense.
 <ul>
-<li>e.g. <code>@Html.EditorFor(m =&gt; m.SomeField, new { hint = &quot;hint...&quot; })</code> vs <code>@s.FieldFor(m =&gt; m.SomeField).Hint(&quot;hint...&quot;)</code></li>
+<li>e.g. <code>@Html.EditorFor(m =&gt; m.SomeField, new { hint = &quot;hint...&quot; })</code> vs <code>&lt;field for=&quot;SomeField&quot; hint=&quot;hint...&quot; /&gt;</code> or <code>@s.FieldFor(m =&gt; m.SomeField).Hint(&quot;hint...&quot;)</code>.</li>
 </ul>
 </li>
-<li>Furthermore, the additional configurations aren't able to be chained fluently, which we feel makes them much quicker / easier to write and discover
+<li>Furthermore, the additional configurations aren't able to be chained fluently / intellisensed, which we feel makes them much quicker / easier to write and discover.
 <ul>
-<li>e.g. <code>@s.FieldFor(m =&gt; m.SomeField).Hint(&quot;A hint...&quot;).Placeholder(&quot;http://&quot;).AddClass(&quot;urlfield&quot;)</code></li>
+<li>e.g. <code>&lt;field for=&quot;SomeField&quot; hint=&quot;A hint...&quot; placeholder=&quot;http://&quot; add-class=&quot;urlfield&quot; /&gt;</code> or <code>@s.FieldFor(m =&gt; m.SomeField).Hint(&quot;A hint...&quot;).Placeholder(&quot;http://&quot;).AddClass(&quot;urlfield&quot;)</code>.</li>
 </ul>
 </li>
-<li>If you want an enum to show up as a drop-down you have to create an editor template for every enum in your application
+<li>If you want an enum to show up as a drop-down you have to create an editor template for every enum in your application.
 <ul>
-<li>ChameleonForms automatically outputs an enum field as a dropdown</li>
+<li>ChameleonForms automatically outputs an enum field as a dropdown.</li>
 </ul>
 </li>
-<li>If you want to change from a drop-down to a list of radio buttons for a particular field then you will need to do it inline every time or add extra code to every editor template that you want to do it for (or provide some sort of parent editor template that all of them use)
+<li>If you want to change from a drop-down to a list of radio buttons for a particular field then you will need to do it inline every time or add extra code to every editor template that you want to do it for (or provide some sort of parent editor template that all of them use).
 <ul>
-<li>You can use <code>.AsRadioList()</code> to specify that the field should be a list of radio buttons instead, e.g. <code>@s.FieldFor(m =&gt; m.EnumField).AsRadioList()</code></li>
+<li>You can use <code>.AsRadioList()</code> to specify that the field should be a list of radio buttons instead, e.g. <code>@s.FieldFor(m =&gt; m.EnumField).AsRadioList()</code>.</li>
 </ul>
 </li>
-<li>In order to get it working that way we had to add 27 files with a total of 227 lines of code (big thanks to <a href="http://www.danmalcolm.com/2013/06/using-razor-to-customise-templates-used.html">Dan Malcolm</a> for <a href="https://github.com/danmalcolm/mvc-razor-display-and-editor-templates">converting the standard Editor Templates to Razor</a>) - if you wanted to provide test coverage of the form output then you would have even more files and lines of code
+<li>In order to get it working with similar functionality to ChameleonForms for the elements required in this form we had to add <strong>27 files with a total of 252 lines of code</strong> (big thanks to <a href="http://www.danmalcolm.com/2013/06/using-razor-to-customise-templates-used.html">Dan Malcolm</a> for <a href="https://github.com/danmalcolm/mvc-razor-display-and-editor-templates">converting the standard Editor Templates to Razor</a>, which formed the basis of the code we implemented) - if you wanted to provide test coverage of the form output then you would have even more files and lines of code.
 <ul>
-<li>With ChameleonForms you simply <code>Install-Package ChameleonForms</code> using NuGet Package Manager Console and you are good to go</li>
+<li>With ChameleonForms you simply <code>Install-Package ChameleonForms</code> using NuGet Package Manager Console and you are good to go with much more functionality.</li>
 </ul>
 </li>
+</ul>
+<h3 id="tag-helpers-1">Tag Helpers</h3>
+<p>The tag helper syntax is immensely more clean and less cluttered than the HTML Helpers syntax and it's nice that you have familiar HTML for the whole form - it's very clear what the output will be at a glance. However, it has it's own issues compared to ChameleonForms:</p>
+<ul>
+<li>You have to specify the different control elements (e.g. <code>&lt;input&gt;</code> vs <code>&lt;select&gt;</code> vs <code>&lt;textarea&gt;</code>) and you need to know if each of them is self-closing or not.</li>
+<li>You have the same problem as HTML Helpers where you have to manually add the required indicator and hint and the required and aria attributes etc. and make sure to use the same <code>asp-for</code> value across multiple controls (label vs control vs validation), which is easy to get wrong while copy/pasting.</li>
+<li>You have to override the <code>type</code> field on the <code>DateTime</code> to stop the built-in browser behaviour from the <code>datetime-local</code> default type that tag the in-built tag helpers add, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input/datetime-local#Using_datetime-local_inputs">which doesn't really work</a>.</li>
+<li>You have to also specify the label, field and validation HTML separately and in the right order. It's easy to make copy/paste errors.</li>
+<li>You have to specify the boilerplate template structure around each of your form fields, which means you are baking in yourthe current template structure and it's a big job to make a wholesale change in your app.</li>
 </ul>
 </article>
           </div>
@@ -452,6 +597,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

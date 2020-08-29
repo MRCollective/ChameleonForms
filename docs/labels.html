@@ -85,7 +85,7 @@
 </code></pre>
 <p>This is great when you have property names like <code>Email</code> and <code>Name</code>, but doesn't work so great when you have multiple word property names like <code>EmailAddress</code> and <code>FirstName</code>.</p>
 <p>Of course, MVC provides the ability to override the label for each model using attributes, e.g.:</p>
-<pre><code class="lang-csharp">    [DisplayName(&quot;Email address&quot;)]
+<pre><code class="lang-cs">    [DisplayName(&quot;Email address&quot;)]
     public string EmailAddress { get; set; }
     
     [Display(Name = &quot;First name&quot;)]
@@ -139,6 +139,7 @@ services.AddChameleonForms(b =&gt; b.WithHumanizedLabelTransformer(/* Custom cla
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

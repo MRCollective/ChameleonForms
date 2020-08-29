@@ -95,10 +95,10 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span></div>
-    <div><span class="xref">System.IDisposable</span></div>
     <div><a class="xref" href="ChameleonForms.Component.ISection.html">ISection</a></div>
     <div><a class="xref" href="ChameleonForms.Component.ISection-1.html">ISection</a>&lt;TModel&gt;</div>
     <div><a class="xref" href="ChameleonForms.Component.IFormComponent-1.html">IFormComponent</a>&lt;TModel&gt;</div>
+    <div><span class="xref">System.IDisposable</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -113,9 +113,6 @@
     </div>
     <div>
       <a class="xref" href="ChameleonForms.Component.FormComponent-1.html#ChameleonForms_Component_FormComponent_1_WriteTo_System_IO_TextWriter_System_Text_Encodings_Web_HtmlEncoder_">FormComponent&lt;TModel&gt;.WriteTo(TextWriter, HtmlEncoder)</a>
-    </div>
-    <div>
-      <a class="xref" href="ChameleonForms.Component.FormComponent-1.html#ChameleonForms_Component_FormComponent_1_Dispose">FormComponent&lt;TModel&gt;.Dispose()</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -143,7 +140,7 @@
   <h6><strong>Assembly</strong>: ChameleonForms.dll</h6>
   <h5 id="ChameleonForms_Component_Section_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Section&lt;TModel&gt; : FormComponent&lt;TModel&gt;, IHtmlContent, IDisposable, ISection, ISection&lt;TModel&gt;, IFormComponent&lt;TModel&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class Section&lt;TModel&gt; : FormComponent&lt;TModel&gt;, IHtmlContent, ISection, ISection&lt;TModel&gt;, IFormComponent&lt;TModel&gt;, IDisposable</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -168,7 +165,7 @@
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Section_1__ctor_ChameleonForms_IForm__0__Microsoft_AspNetCore_Html_IHtmlContent_System_Boolean_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Section%601.%23ctor(ChameleonForms.IForm%7B%600%7D%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CSystem.Boolean%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CChameleonForms.HtmlAttributes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L49">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L92">View Source</a>
   </span>
   <a id="ChameleonForms_Component_Section_1__ctor_" data-uid="ChameleonForms.Component.Section`1.#ctor*"></a>
   <h4 id="ChameleonForms_Component_Section_1__ctor_ChameleonForms_IForm__0__Microsoft_AspNetCore_Html_IHtmlContent_System_Boolean_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_" data-uid="ChameleonForms.Component.Section`1.#ctor(ChameleonForms.IForm{`0},Microsoft.AspNetCore.Html.IHtmlContent,System.Boolean,Microsoft.AspNetCore.Html.IHtmlContent,ChameleonForms.HtmlAttributes)">Section(IForm&lt;TModel&gt;, IHtmlContent, Boolean, IHtmlContent, HtmlAttributes)</h4>
@@ -228,7 +225,7 @@
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Section_1_Begin.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Section%601.Begin%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L75">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L113">View Source</a>
   </span>
   <a id="ChameleonForms_Component_Section_1_Begin_" data-uid="ChameleonForms.Component.Section`1.Begin*"></a>
   <h4 id="ChameleonForms_Component_Section_1_Begin" data-uid="ChameleonForms.Component.Section`1.Begin">Begin()</h4>
@@ -259,10 +256,60 @@
   <div><span class="xref">ChameleonForms.Component.FormComponent&lt;TModel&gt;.Begin()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Section_1_CreatePartialSection_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper__0__.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Section%601.CreatePartialSection(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L131">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Section_1_CreatePartialSection_" data-uid="ChameleonForms.Component.Section`1.CreatePartialSection*"></a>
+  <h4 id="ChameleonForms_Component_Section_1_CreatePartialSection_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper__0__" data-uid="ChameleonForms.Component.Section`1.CreatePartialSection(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{`0})">CreatePartialSection(IHtmlHelper&lt;TModel&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns a section with the same characteristics as the current section, but using the given partial form.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ISection&lt;TModel&gt; CreatePartialSection(IHtmlHelper&lt;TModel&gt; partialHelper)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper</span>&lt;TModel&gt;</td>
+        <td><span class="parametername">partialHelper</span></td>
+        <td><p>The HTML helper from the partial view</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.ISection-1.html">ISection</a>&lt;TModel&gt;</td>
+        <td><p>A section with the same characteristics as the current section, but using the given partial form</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Section_1_CreatePartialSection__1_ChameleonForms_IForm___0__.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Section%601.CreatePartialSection%60%601(ChameleonForms.IForm%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L87">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L125">View Source</a>
   </span>
   <a id="ChameleonForms_Component_Section_1_CreatePartialSection_" data-uid="ChameleonForms.Component.Section`1.CreatePartialSection*"></a>
   <h4 id="ChameleonForms_Component_Section_1_CreatePartialSection__1_ChameleonForms_IForm___0__" data-uid="ChameleonForms.Component.Section`1.CreatePartialSection``1(ChameleonForms.IForm{``0})">CreatePartialSection&lt;TPartialModel&gt;(IForm&lt;TPartialModel&gt;)</h4>
@@ -286,7 +333,8 @@
       <tr>
         <td><a class="xref" href="ChameleonForms.IForm-1.html">IForm</a>&lt;TPartialModel&gt;</td>
         <td><span class="parametername">partialModelForm</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="ChameleonForms.Form-1.html">Form&lt;TModel&gt;</a> from the partial view</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -324,10 +372,28 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Section_1_Dispose.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Section%601.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L139">View Source</a>
+  </span>
+  <a id="ChameleonForms_Component_Section_1_Dispose_" data-uid="ChameleonForms.Component.Section`1.Dispose*"></a>
+  <h4 id="ChameleonForms_Component_Section_1_Dispose" data-uid="ChameleonForms.Component.Section`1.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Called when form section is created within a <code>using</code> block: writes the end tag(s) of the section.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Dispose()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">ChameleonForms.Component.FormComponent&lt;TModel&gt;.Dispose()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Section_1_End.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Section%601.End%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L81">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L119">View Source</a>
   </span>
   <a id="ChameleonForms_Component_Section_1_End_" data-uid="ChameleonForms.Component.Section`1.End*"></a>
   <h4 id="ChameleonForms_Component_Section_1_End" data-uid="ChameleonForms.Component.Section`1.End">End()</h4>
@@ -358,19 +424,19 @@
   <div><span class="xref">ChameleonForms.Component.FormComponent&lt;TModel&gt;.End()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Section_1_Field_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Mvc_ModelBinding_ModelMetadata_System_Boolean_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Section%601.Field(Microsoft.AspNetCore.Html.IHtmlContent%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CMicrosoft.AspNetCore.Mvc.ModelBinding.ModelMetadata%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Section_1_Field_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Mvc_ModelBinding_ModelMetadata_System_Boolean_ChameleonForms_Component_Config_IFieldConfiguration_.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Section%601.Field(Microsoft.AspNetCore.Html.IHtmlContent%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CMicrosoft.AspNetCore.Html.IHtmlContent%2CMicrosoft.AspNetCore.Mvc.ModelBinding.ModelMetadata%2CSystem.Boolean%2CChameleonForms.Component.Config.IFieldConfiguration)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L67">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L105">View Source</a>
   </span>
   <a id="ChameleonForms_Component_Section_1_Field_" data-uid="ChameleonForms.Component.Section`1.Field*"></a>
-  <h4 id="ChameleonForms_Component_Section_1_Field_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Mvc_ModelBinding_ModelMetadata_System_Boolean_" data-uid="ChameleonForms.Component.Section`1.Field(Microsoft.AspNetCore.Html.IHtmlContent,Microsoft.AspNetCore.Html.IHtmlContent,Microsoft.AspNetCore.Html.IHtmlContent,Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Boolean)">Field(IHtmlContent, IHtmlContent, IHtmlContent, ModelMetadata, Boolean)</h4>
+  <h4 id="ChameleonForms_Component_Section_1_Field_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Mvc_ModelBinding_ModelMetadata_System_Boolean_ChameleonForms_Component_Config_IFieldConfiguration_" data-uid="ChameleonForms.Component.Section`1.Field(Microsoft.AspNetCore.Html.IHtmlContent,Microsoft.AspNetCore.Html.IHtmlContent,Microsoft.AspNetCore.Html.IHtmlContent,Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Boolean,ChameleonForms.Component.Config.IFieldConfiguration)">Field(IHtmlContent, IHtmlContent, IHtmlContent, ModelMetadata, Boolean, IFieldConfiguration)</h4>
   <div class="markdown level1 summary"><p>Outputs a field with passed in HTML.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public IFieldConfiguration Field(IHtmlContent labelHtml, IHtmlContent elementHtml, IHtmlContent validationHtml = null, ModelMetadata metadata = null, bool isValid = true, IFieldConfiguration fieldConfiguration = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -412,6 +478,12 @@
         <td><p>Whether or not the field is valid</p>
 </td>
       </tr>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.Component.Config.IFieldConfiguration.html">IFieldConfiguration</a></td>
+        <td><span class="parametername">fieldConfiguration</span></td>
+        <td><p>Optional field configuration</p>
+</td>
+      </tr>
     </tbody>
   </table>
   <h5 class="returns">Returns</h5>
@@ -435,9 +507,6 @@
       <span class="xref">Microsoft.AspNetCore.Html.IHtmlContent</span>
   </div>
   <div>
-      <span class="xref">System.IDisposable</span>
-  </div>
-  <div>
       <a class="xref" href="ChameleonForms.Component.ISection.html">ISection</a>
   </div>
   <div>
@@ -445,6 +514,9 @@
   </div>
   <div>
       <a class="xref" href="ChameleonForms.Component.IFormComponent-1.html">IFormComponent&lt;TModel&gt;</a>
+  </div>
+  <div>
+      <span class="xref">System.IDisposable</span>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
@@ -454,28 +526,25 @@
       <a class="xref" href="Microsoft.AspNetCore.Html.HtmlContentExtensions.html#Microsoft_AspNetCore_Html_HtmlContentExtensions_ToHtmlString_Microsoft_AspNetCore_Html_IHtmlContent_">HtmlContentExtensions.ToHtmlString(IHtmlContent)</a>
   </div>
   <div>
-      <a class="xref" href="ChameleonForms.Component.FieldExtensions.html#ChameleonForms_Component_FieldExtensions_FieldFor__2_ChameleonForms_Component_ISection___0__System_Linq_Expressions_Expression_System_Func___0___1___">FieldExtensions.FieldFor&lt;TModel, T&gt;(ISection&lt;TModel&gt;, Expression&lt;Func&lt;TModel, T&gt;&gt;)</a>
+      <a class="xref" href="ChameleonForms.Component.FieldExtensions.html#ChameleonForms_Component_FieldExtensions_FieldFor__2_ChameleonForms_Component_ISection___0__System_Linq_Expressions_Expression_System_Func___0___1___ChameleonForms_Component_Config_IFieldConfiguration_">FieldExtensions.FieldFor&lt;TModel, T&gt;(ISection&lt;TModel&gt;, Expression&lt;Func&lt;TModel, T&gt;&gt;, IFieldConfiguration)</a>
   </div>
   <div>
       <a class="xref" href="ChameleonForms.Component.FieldExtensions.html#ChameleonForms_Component_FieldExtensions_BeginFieldFor__2_ChameleonForms_Component_ISection___0__System_Linq_Expressions_Expression_System_Func___0___1___ChameleonForms_Component_Config_IFieldConfiguration_">FieldExtensions.BeginFieldFor&lt;TModel, T&gt;(ISection&lt;TModel&gt;, Expression&lt;Func&lt;TModel, T&gt;&gt;, IFieldConfiguration)</a>
   </div>
   <div>
-      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_String_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_">SectionExtensions.BeginSection&lt;TModel&gt;(Section&lt;TModel&gt;, String, IHtmlContent, HtmlAttributes)</a>
+      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_String_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_">SectionExtensions.BeginSection&lt;TModel&gt;(ISection&lt;TModel&gt;, String, IHtmlContent, HtmlAttributes)</a>
   </div>
   <div>
-      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_String_System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_">SectionExtensions.BeginSection&lt;TModel&gt;(Section&lt;TModel&gt;, String, Func&lt;Object, IHtmlContent&gt;, HtmlAttributes)</a>
+      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_String_System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_">SectionExtensions.BeginSection&lt;TModel&gt;(ISection&lt;TModel&gt;, String, Func&lt;Object, IHtmlContent&gt;, HtmlAttributes)</a>
   </div>
   <div>
-      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_">SectionExtensions.BeginSection&lt;TModel&gt;(Section&lt;TModel&gt;, IHtmlContent, IHtmlContent, HtmlAttributes)</a>
+      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__Microsoft_AspNetCore_Html_IHtmlContent_Microsoft_AspNetCore_Html_IHtmlContent_ChameleonForms_HtmlAttributes_">SectionExtensions.BeginSection&lt;TModel&gt;(ISection&lt;TModel&gt;, IHtmlContent, IHtmlContent, HtmlAttributes)</a>
   </div>
   <div>
-      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_Section___0__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_">SectionExtensions.BeginSection&lt;TModel&gt;(Section&lt;TModel&gt;, Func&lt;Object, IHtmlContent&gt;, Func&lt;Object, IHtmlContent&gt;, HtmlAttributes)</a>
+      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_BeginSection__1_ChameleonForms_Component_ISection___0__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__System_Func_System_Object_Microsoft_AspNetCore_Html_IHtmlContent__ChameleonForms_HtmlAttributes_">SectionExtensions.BeginSection&lt;TModel&gt;(ISection&lt;TModel&gt;, Func&lt;Object, IHtmlContent&gt;, Func&lt;Object, IHtmlContent&gt;, HtmlAttributes)</a>
   </div>
   <div>
-      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_Partial__1_ChameleonForms_Component_ISection___0__System_String_">SectionExtensions.Partial&lt;TModel&gt;(ISection&lt;TModel&gt;, String)</a>
-  </div>
-  <div>
-      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_PartialFor__2_ChameleonForms_Component_ISection___0__System_Linq_Expressions_Expression_System_Func___0___1___System_String_">SectionExtensions.PartialFor&lt;TModel, TPartialModel&gt;(ISection&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TPartialModel&gt;&gt;, String)</a>
+      <a class="xref" href="ChameleonForms.Component.SectionExtensions.html#ChameleonForms_Component_SectionExtensions_PartialForAsync__2_ChameleonForms_Component_ISection___0__System_Linq_Expressions_Expression_System_Func___0___1___System_String_">SectionExtensions.PartialForAsync&lt;TModel, TPartialModel&gt;(ISection&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TPartialModel&gt;&gt;, String)</a>
   </div>
 </article>
           </div>
@@ -488,7 +557,7 @@
                     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_Component_Section_1.md&amp;value=---%0Auid%3A%20ChameleonForms.Component.Section%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L34" class="contribution-link">View Source</a>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Component/Section.cs/#L76" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
@@ -513,6 +582,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

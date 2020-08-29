@@ -79,6 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="change-the-model-type-for-html-helper-for-portions-of-your-page">Change the model type for HTML Helper for portions of your page</h1>
 
+<p><em>Note: This documentation only applies to HTML Helpers syntax and not Tag Helpers. Tag Helpers don't allow you to change a model within a page, instead you need to use <code>&lt;partial model=&quot;model&quot; name=&quot;_PartialName&quot; /&gt;</code> or <code>&lt;partial for=&quot;ChildProperty&quot; name=&quot;_PartialName&quot; /&gt;</code> to change the model type in a view. See <a href="partials.html">Partials</a> for more information.</em></p>
 <p>Sometimes it's useful to include multiple forms in a page or use other HTML Helper functionality against a different model type than the parent model of the page. This different model type might be a completely arbitrary model unrelated to the page model type or it may be a sub-property of the parent model.</p>
 <p>Consider this example:</p>
 <pre><code class="lang-html">@model LoginViewModel
@@ -114,7 +115,7 @@
 <p>There are two problems here - firstly, the <code>.InputModel.</code> is very repetitive and adds a lot of noise and secondly, the post action forces you to bind to the <code>SomeViewModel</code> model type, which means technically, you need to remember to mark <code>Title</code> and other read-only values with the <code>[ReadOnly(true)]</code> attribute to prevent an <a href="https://en.wikipedia.org/wiki/Mass_assignment_vulnerability">over-posting / mass-assignment vulnerability</a>. It would be much simpler if you could specify that the form is against the <code>InputModel</code> sub-property of the main form and bind just the <code>InputModel</code> on the round-trip back to the server.</p>
 <h2 id="htmlhelperfor-extensions">HtmlHelper<tmodel>.For extensions</tmodel></h2>
 <p>ChameleonForms gives you two extension methods on the <code>HtmlHelper&lt;TModel&gt;</code> class that allow you to solve the above problems in a clean way:</p>
-<pre><code class="lang-csharp">/// &lt;summary&gt;
+<pre><code class="lang-cs">/// &lt;summary&gt;
 /// Creates a HTML helper from a parent model to use a sub-property as it's model.
 /// &lt;/summary&gt;
 /// &lt;typeparam name=&quot;TParentModel&quot;&gt;The model of the parent type&lt;/typeparam&gt;
@@ -217,6 +218,7 @@ public static DisposableHtmlHelper&lt;TModel&gt; For&lt;TModel&gt;(this HtmlHelp
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

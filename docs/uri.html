@@ -81,7 +81,7 @@
 
 <p>If you need to collect URI/URL data then that will automatically be handled for you with a HTML5 <code>&lt;input type=&quot;url&quot;&gt;</code> field.</p>
 <p>Any one of the following model types will trigger one of these fields:</p>
-<pre><code class="lang-csharp">public Uri Uri { get; set; }
+<pre><code class="lang-cs">public Uri Uri { get; set; }
 
 [DataType(DataType.Url)]
 public string Url { get; set; }
@@ -96,7 +96,7 @@ public string Url { get; set; }
 <h2 id="configurability">Configurability</h2>
 <h3 id="specify-url">Specify URL</h3>
 <p>You can specify your property as a URL value, which will automatically validate server-side for a valid HTTP or HTTPS URL on the server-side (if using <code>Uri</code> with a <code>[DataType(DataType.Url)]</code> attribute) or starting with ftp://, http:// or https:// (if using <code>string</code> with <code>[Url]</code>):</p>
-<pre><code class="lang-csharp">[DataType(DataType.Url)]
+<pre><code class="lang-cs">[DataType(DataType.Url)]
 public Uri Url { get; set; }
 
 [Url]
@@ -136,6 +136,7 @@ public string Url { get; set; }
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

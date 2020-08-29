@@ -80,7 +80,7 @@
 <h1 id="default-text-fields">Default (Text) Fields</h1>
 
 <p>The default field will output a field when no other field type worked. It allows the user to enter a simple string input for the value of that field.</p>
-<pre><code class="lang-csharp">public string StringField { get; set; }
+<pre><code class="lang-cs">public string StringField { get; set; }
 </code></pre>
 <p>A non-nullable type will always be Required and a nullable type can be made to be Required by annotating with the <code>[Required]</code> attribute (but allows you to start off with a blank value when using <code>null</code> so you don't bias the user's input).</p>
 <h2 id="default-html">Default HTML</h2>
@@ -123,6 +123,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

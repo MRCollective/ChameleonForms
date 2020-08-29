@@ -79,15 +79,145 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="use-partial-views-for-repeated-or-abstracted-form-areas">Use partial views for repeated or abstracted form areas</h1>
 
-<p>You can use partial views to abstract a complex part of your form or to reuse common parts of your form. You can do this by calling the <code>Partial</code> or <code>PartialFor</code> methods on the Form or Section.</p>
-<p>The <code>PartialFor</code> method allows you to specify a sub-property of your model to pass in as the model of the partial. ChameleonForms will automatically set the correct name of any fields that are input to ensure they bind back to the parent model on postback.</p>
+<p>You can use partial views to abstract a complex part of your form, reuse common parts of your form or to <a href="different-form-models.html#tag-helpers">change the model type when using tag helpers</a>.</p>
+<p>Given ChameleonForms is type-safe against the view's model type, when including a partial and changing the model type some care needes to be taken to ensure the correct ChameleonForms classes are being used. There are a lot of smarts built into ChameleonForms to auto-detect this where possible. The different scenarios and how to invoke them are listed below.</p>
+<p>Tag Helpers don't allow you to change a model within a page so for any situation where you want to change the model type (temporarily or for the whole form) you need to use partials. See below for examples.</p>
+<p>The best way to see how this works is by looking at the output of the partials acceptance tests (<a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.AcceptanceTests/IntegrationTests/PartialForTests.Should_render_correctly_when_used_via_form_or_section_and_when_used_for_top_level_property_or_sub_property_via_tag_helpers.approved.html">tag helpers</a>, <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.AcceptanceTests/IntegrationTests/PartialForTests.Should_render_correctly_when_used_via_form_or_section_and_when_used_for_top_level_property_or_sub_property.approved.html">HTML helpers</a>) or by looking at the changing context example page for <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/ExampleForms/ChangingContextTH.cshtml">tag helpers</a>.</p>
+<h2 id="partial-with-same-model-as-the-parent">Partial with same model as the parent</h2>
+<p>You can include the partial view using built-in ASP.NET MVC functionality:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_same-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_same-th" data-tab="same-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_same-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_same-hh" data-tab="same-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_same-th" role="tabpanel" data-tab="same-th">
+
+<pre><code class="lang-cshtml">    &lt;chameleon-form ...&gt;
+        ...
+        &lt;partial name=&quot;_PartialWithSameModelAsParent&quot; /&gt;
+        ...
+    &lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_same-hh" role="tabpanel" data-tab="same-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">    @using (var f = Html.BeginChameleonForm(...))
+    {
+        ...
+        @await Html.PartialAsync(&quot;_PartialWithSameModelAsParent&quot;)
+        ...
+    }
+</code></pre>
+</section>
+</div>
+<h2 id="partial-has-child-property-as-model-but-binds-against-parent">Partial has child property as model, but binds against parent</h2>
+<p>You need to ensure that the ChameleonForms types get explicitly converted to the child model within the partial, while still binding against the parent.</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_child-in-parent-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_child-in-parent-th" data-tab="child-in-parent-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_child-in-parent-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_child-in-parent-hh" data-tab="child-in-parent-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_child-in-parent-th" role="tabpanel" data-tab="child-in-parent-th">
+
+<p>When using tag helpers you can use the provided <code>&lt;form-partial /&gt;</code> tag helper:</p>
+<pre><code class="lang-cshtml">    &lt;chameleon-form ...&gt;
+        ...
+        &lt;form-partial for=&quot;ChildProperty&quot; name=&quot;_PartialWithChildModelBindingToParent&quot; /&gt;
+        ...
+    &lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_child-in-parent-hh" role="tabpanel" data-tab="child-in-parent-hh" aria-hidden="true" hidden="hidden">
+
+<p>When using HTML helpers you can use the <code>PartialForAsync</code> extension method on either the <code>Form</code> or <code>Section</code> (whichever is in context):</p>
+<pre><code class="lang-cshtml">    @using (var f = Html.BeginChameleonForm(...))
+    {
+        ...
+        @* When not in a form section: *@
+        @(await f.PartialForAsync(m =&gt; m.ChildProperty, &quot;_PartialWithChildModelBindingToParent&quot;))
+        ...
+        using (var s = f.BeginSection(...))
+        {
+            ...
+            @* When in a form section: *@
+            @(await s.PartialForAsync(m =&gt; m.ChildProperty, &quot;_PartialWithChildModelBindingToParent&quot;))
+            ...
+        }
+        ...
+    }
+</code></pre>
+<p>When using HTML helpers, you can also do this <a href="different-form-models.html#creating-a-form-for-a-child-property-that-binds-back-to-the-parent-view-model">without using partials</a>.</p>
+</section>
+</div>
+<h2 id="partial-has-child-property-as-model-and-binds-against-it">Partial has child property as model and binds against it</h2>
+<p>In this case you can simply invoke a partial using built-in ASP.NET MVC Core functionality passing in the child property as the model of the partial.</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_child-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_child-th" data-tab="child-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_child-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_child-hh" data-tab="child-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_child-th" role="tabpanel" data-tab="child-th">
+
+<pre><code class="lang-cshtml">    &lt;partial name=&quot;_PartialWithChildAsModel&quot; model=&quot;Model?.ChildProperty&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-2_child-hh" role="tabpanel" data-tab="child-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">    @await Html.PartialAsync(&quot;_PartialWithChildAsModel&quot;, Model?.ChildProperty)
+</code></pre>
+<p>When using HTML helpers, you can also do this <a href="different-form-models.html#binding-against-a-child-property">without using partials</a>.</p>
+</section>
+</div>
+<h2 id="partial-has-a-different-model-entirely-from-the-parent">Partial has a different model entirely from the parent</h2>
+<p>In this case you can simply invoke a partial using built-in ASP.NET MVC Core functionality passing in the other model as the model of the partial.</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_other-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_other-th" data-tab="other-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_other-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_other-hh" data-tab="other-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-3_other-th" role="tabpanel" data-tab="other-th">
+
+<pre><code class="lang-cshtml">    &lt;partial name=&quot;_PartialWithOtherModel&quot; model=&quot;new OtherModel()&quot; /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-3_other-hh" role="tabpanel" data-tab="other-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">    @await Html.PartialAsync(&quot;_PartialWithOtherModel&quot;, new OtherModel())
+</code></pre>
+<p>When using HTML helpers, you can also do this <a href="different-form-models.html#using-a-different-view-model">without using partials</a>.</p>
+</section>
+</div>
+<h2 id="accessing-the-current-form--form-section--form-field-in-a-partial">Accessing the current form / form section / form field in a partial</h2>
 <p>When inside a partial view you can use the following methods off of <code>this</code>:</p>
 <ul>
-<li><code>this.Form()</code> - returns the current Form instance</li>
-<li><code>this.FormSection()</code> - returns the current Section instance if there is one, otherwise it throws an Exception</li>
-<li><code>this.IsInFormSection()</code> - returns whether you are currently inside of a Section</li>
+<li><code>Html.IsInChameleonForm()</code> - returns whether you are currently inside of a ChameleonForms form.</li>
+<li><code>Html.GetChameleonForm()</code> - returns the current ChameleonForms form, otherwise it throws an Exception.</li>
+<li><code>Html.IsInChameleonFormsSection()</code> - returns whether you are currently inside of a ChameleonForms Section.</li>
+<li><code>Html.GetChameleonFormsSection()</code> - returns the current ChameleonForms Section instance if there is one, otherwise it throws an Exception.</li>
+<li><code>Html.IsInChameleonFormsField()</code> - returns whether you are currently inside of a ChameleonForms Field.</li>
+<li><code>Html.GetChameleonFormsField()</code> - returns the current ChameleonForms Field instance if there is one, otherwise it throws an Exception.</li>
+<li><code>Html.IsInChameleonFormsMessage()</code> - returns whether you are currently inside of a ChameleonForms Message.</li>
+<li><code>Html.GetChameleonFormsMessage()</code> - returns the current ChameleonForms Message instance if there is one, otherwise it throws an Exception.</li>
+<li><code>Html.IsInChameleonFormsNavigation()</code> - returns whether you are currently inside of a ChameleonForms Navigation.</li>
+<li><code>Html.GetChameleonFormsNavigation()</code> - returns the current ChameleonForms Navigation instance if there is one, otherwise it throws an Exception.</li>
 </ul>
-<p>The best way to see how this works is by looking at the output of the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.AcceptanceTests/IntegrationTests/PartialForTests.Should_render_correctly_when_used_via_form_or_section_and_when_used_for_top_level_property_or_sub_property.approved.html">partials acceptance test</a>.</p>
+<p>This also works in the parent view so this functionality actually also lets you switch between tag helper syntax and HTML helper syntax on the fly. You can also switch from HTML helper syntax to tag helper syntax by including the tag helpers - they will automatically pick up the ambient context for you.</p>
 </article>
           </div>
           
@@ -121,6 +251,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

@@ -79,9 +79,9 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="navigation">Navigation</h1>
 
-<p>The Navigation is a grouping of a set of navigation elements; you create a Navigation by instantiating a <code>Navigation&lt;TModel&gt;</code> within a <code>using</code> block. The start and end of the <code>using</code> block will output the start and end HTML for the Navigation and the inside of the <code>using</code> block will contain the Navigation elements.</p>
+<p>The Navigation is a grouping of a set of navigation elements; you create a Navigation by using a <code>&lt;form-navigation&gt;</code> tag helper or instantiating a <code>Navigation&lt;TModel&gt;</code> within a <code>using</code> block. The start and end of the <code>using</code> block will output the start and end HTML for the Navigation and the inside of the <code>using</code> block will contain the Navigation elements.</p>
 <p>The <code>Navigation&lt;TModel&gt;</code> class looks like this and is in the <code>ChameleonForms.Component</code> namespace:</p>
-<pre><code class="lang-csharp">    /// &lt;summary&gt;
+<pre><code class="lang-cs">    /// &lt;summary&gt;
     /// Wraps the output of the navigation area of a form.
     /// For example the area with submit buttons.
     /// &lt;/summary&gt;
@@ -190,13 +190,32 @@
 </code></pre>
 <p>The start and end HTML of the Navigation are generated via the <code>BeginNavigation</code> and <code>EndNavigation</code> methods in the <a href="form-templates.html">form template</a>. The HTML for the various types of buttons are all generated via the <code>Button</code> method in the template.</p>
 <h2 id="default-usage">Default usage</h2>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_navigation-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_navigation-th" data-tab="navigation-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_navigation-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_navigation-hh" data-tab="navigation-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_navigation-th" role="tabpanel" data-tab="navigation-th">
+
+<p>In order to get a navigation you can use the <code>&lt;form-navigation&gt;</code> tag helper, e.g.:</p>
+<pre><code class="lang-cshtml">&lt;form-navigation&gt;
+    @* Navigation elements go here *@
+&lt;/form-navigation&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_navigation-hh" role="tabpanel" data-tab="navigation-hh" aria-hidden="true" hidden="hidden">
+
 <p>In order to get an instance of a <code>Navigation&lt;TModel&gt;</code> you can use the <code>BeginNavigation</code> method on the Form, e.g.:</p>
 <pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
     @* Navigation elements go here *@
 }
 </code></pre>
 <p>The <code>BeginNavigation</code> extension method looks like this:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Creates a navigation section.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -214,7 +233,36 @@
             return new Navigation&lt;TModel&gt;(form);
         }
 </code></pre>
-<p>From within a section you can create Navigation Submit, Reset and normal Buttons and you can chain <a href="html-attributes.html">HTML Attributes</a> specifiers off the end of them, e.g.:</p>
+</section>
+</div>
+<h2 id="buttons">Buttons</h2>
+<p>From within a section you can create Navigation Submit, Reset and normal Buttons.</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_buttons-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_buttons-th" data-tab="buttons-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_buttons-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_buttons-hh" data-tab="buttons-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_buttons-th" role="tabpanel" data-tab="buttons-th">
+
+<p>You can create buttons by using the <code>&lt;form-button&gt;</code>, <code>&lt;reset-button&gt;</code> and <code>&lt;submit-button&gt;</code> tag helpers within a <code>&lt;form-navigation&gt;</code> tag helper.</p>
+<pre><code class="lang-cshtml">&lt;form-navigation&gt;
+    &lt;form-button add-class=&quot;button&quot; id=&quot;button1&quot; label=&quot;text button&quot; /&gt;
+    &lt;form-button add-class=&quot;button&quot; id=&quot;button2&quot;&gt;&lt;strong&gt;html button&lt;/strong&gt;&lt;/form-button&gt;
+    &lt;reset-button add-class=&quot;button&quot; id=&quot;button3&quot; label=&quot;text reset&quot; /&gt;
+    &lt;reset-button add-class=&quot;button&quot; id=&quot;button4&quot;&gt;&lt;strong&gt;html reset&lt;/strong&gt;&lt;/reset-button&gt;
+    &lt;submit-button add-class=&quot;button&quot; id=&quot;button5&quot; label=&quot;text reset&quot; /&gt;
+    &lt;submit-button add-class=&quot;button&quot; id=&quot;button6&quot;&gt;&lt;strong&gt;html reset&lt;/strong&gt;&lt;/reset-button&gt;
+    &lt;submit-button name=&quot;name&quot; value=&quot;value&quot; add-class=&quot;button&quot; id=&quot;button7&quot;&gt;&lt;strong&gt;html submit with value&lt;/strong&gt;&lt;/submit-button&gt;
+&lt;/form-navigation&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_buttons-hh" role="tabpanel" data-tab="buttons-hh" aria-hidden="true" hidden="hidden">
+
+<p>You can create buttons by using the methods on the <code>Navigation&lt;T&gt;</code> object. You can chain <a href="html-attributes.html">HTML Attributes</a> specifiers off the end of the buttons you create, e.g.:</p>
 <pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
     @n.Button(&quot;text button&quot;).AddClass(&quot;button&quot;).Id(&quot;button1&quot;)
     @n.Button(new HtmlString(&quot;&lt;strong&gt;html button&lt;/strong&gt;&quot;)).AddClass(&quot;button&quot;).Id(&quot;button2&quot;)
@@ -229,6 +277,8 @@
     @n.Submit(@&lt;strong&gt;html submit&lt;/strong&gt;)
 }
 </code></pre>
+</section>
+</div>
 <h2 id="extending-navigation-buttons">Extending Navigation Buttons</h2>
 <p>See <a href="html-attributes.html#extending-navigation-buttons-specifically">the HTML Attributes documentation</a> for more information.</p>
 <h2 id="default-html">Default HTML</h2>
@@ -264,7 +314,7 @@
 <p>The HTML is the same as the default except a class of <code>btn</code> will always be added and if no emphasis classes are added (see below) then a class of <code>btn-default</code> will be added.</p>
 <h3 id="add-emphasis-style">Add emphasis style</h3>
 <p>There is an extension method in the <code>ChameleonForms.Templates.TwitterBootstrap3</code> namespace that allows you to add an emphasis style to the buttons:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Adds the given emphasis to the button.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -280,7 +330,7 @@
         }
 </code></pre>
 <p>The <code>EmphasisStyle</code> enum is as follows:</p>
-<pre><code class="lang-csharp">    /// &lt;summary&gt;
+<pre><code class="lang-cs">    /// &lt;summary&gt;
     /// Twitter Bootstrap alert/emphasis colors: http://getbootstrap.com/css/#type-emphasis
     /// &lt;/summary&gt;
     public enum EmphasisStyle
@@ -311,20 +361,48 @@
         Danger
     }
 </code></pre>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_emphasis-style-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_emphasis-style-th" data-tab="emphasis-style-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_emphasis-style-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_emphasis-style-hh" data-tab="emphasis-style-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_emphasis-style-th" role="tabpanel" data-tab="emphasis-style-th">
+
+<p>There is a tag helper in the <code>ChameleonForms.Templates.TwitterBootstrap3</code> namespace that adds an <code>emphasis-style</code> property to the <code>&lt;form-button&gt;</code>, <code>&lt;reset-button&gt;</code> and <code>&lt;submit-button&gt;</code> tag helpers. Or, you can make use of the <code>fluent-attrs</code> property on those tag helpers.</p>
+<p>To use the custom tag helper you need to import the tag helper within your <code>_ViewImports.cshtml</code> or equivalent file:</p>
+<pre><code class="lang-cshtml">@addTagHelper ChameleonForms.Templates.TwitterBootstrap3.*, ChameleonForms
+</code></pre>
+<p>Here is an example of its use:</p>
+<pre><code class="lang-cshtml">&lt;form-navigation&gt;
+    &lt;submit-button label=&quot;Submit&quot; emphasis-style=&quot;Primary&quot; /&gt;
+    @* or *@
+    &lt;submit-button label=&quot;Submit&quot; fluent-attrs='c =&gt; c.WithStyle(EmphasisStyle.Primary)' /&gt;
+&lt;/form-navigation&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-2_emphasis-style-hh" role="tabpanel" data-tab="emphasis-style-hh" aria-hidden="true" hidden="hidden">
+
 <p>You can use the extension method like this:</p>
 <pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
     @n.Submit(&quot;Submit&quot;).WithStyle(EmphasisStyle.Primary)
 }
 </code></pre>
+<p>In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view that has a form using the extension method you instead add the namespace to your <code>_ViewImports.cshtml</code> or equivalent file.</p>
+</section>
+</div>
+
 <p>Which would result in:</p>
 <pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
     &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;Submit&lt;/button&gt;
 &lt;/div&gt;
 </code></pre>
-<p>In order to be able to swap out the extension method usage across your application easily (for example, if you change your form template) we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view using the extension method you instead add the namespace to your <code>_ViewImports.cshtml</code> file.</p>
 <h3 id="change-button-size">Change button size</h3>
 <p>There is an extension method in the <code>ChameleonForms.Templates.TwitterBootstrap3</code> namespace that allows you to change the size of your buttons:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Changes the button to use the given size.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -341,7 +419,7 @@
         }
 </code></pre>
 <p>The <code>ButtonSize</code> enum is as follows:</p>
-<pre><code class="lang-csharp">    /// &lt;summary&gt;
+<pre><code class="lang-cs">    /// &lt;summary&gt;
     /// Twitter Bootstrap button sizes: http://getbootstrap.com/css/#buttons-sizes
     /// &lt;/summary&gt;
     public enum ButtonSize
@@ -367,20 +445,48 @@
         Large
     }
 </code></pre>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_button-size-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_button-size-th" data-tab="button-size-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_button-size-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_button-size-hh" data-tab="button-size-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-3_button-size-th" role="tabpanel" data-tab="button-size-th">
+
+<p>There is a tag helper in the <code>ChameleonForms.Templates.TwitterBootstrap3</code> namespace that adds an <code>size</code> property to the <code>&lt;form-button&gt;</code>, <code>&lt;reset-button&gt;</code> and <code>&lt;submit-button&gt;</code> tag helpers. Or, you can make use of the <code>fluent-attrs</code> property on those tag helpers.</p>
+<p>To use the custom tag helper you need to import the tag helper within your <code>_ViewImports.cshtml</code> or equivalent file:</p>
+<pre><code class="lang-cshtml">@addTagHelper ChameleonForms.Templates.TwitterBootstrap3.*, ChameleonForms
+</code></pre>
+<p>Here is an example of its use:</p>
+<pre><code class="lang-cshtml">&lt;form-navigation&gt;
+    &lt;submit-button label=&quot;Submit&quot; size=&quot;Large&quot; /&gt;
+    @* or *@
+    &lt;submit-button label=&quot;Submit&quot; fluent-attrs='c =&gt; c.WithSize(ButtonSize.Large)' /&gt;
+&lt;/form-navigation&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-3_button-size-hh" role="tabpanel" data-tab="button-size-hh" aria-hidden="true" hidden="hidden">
+
 <p>You can use the extension method like this:</p>
 <pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
     @n.Submit(&quot;Submit&quot;).WithSize(ButtonSize.Large)
 }
 </code></pre>
+<p>In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view that has a form using the extension method you instead add the namespace to your <code>_ViewImports.cshtml</code> or equivalent file.</p>
+</section>
+</div>
+
 <p>Which would result in:</p>
 <pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
     &lt;button type=&quot;submit&quot; class=&quot;btn btn-default btn-lg&quot;&gt;Submit&lt;/button&gt;
 &lt;/div&gt;
 </code></pre>
-<p>In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view that has a form using the extension method you instead add the namespace to your <code>_ViewImports.cshtml</code> file.</p>
 <h3 id="add-icon-to-button">Add icon to button</h3>
 <p>There is an extension method in the <code>ChameleonForms.Templates.TwitterBootstrap3</code> namespace that allows you to add icons to your buttons:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Adds the given icon to the start of a navigation button.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -398,51 +504,121 @@
         }
 </code></pre>
 <p>You can see the list of possible icon names to choose from on the <a href="https://getbootstrap.com/docs/3.3/components/#glyphicons">Twitter Bootstrap documentation site</a> (drop the <code>glyphicon-</code> from the icon names on this page e.g. use <code>adjust</code> instead of <code>glyphicon-adjust</code>).</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-4">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-4_button-icon-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-4_button-icon-th" data-tab="button-icon-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-4_button-icon-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-4_button-icon-hh" data-tab="button-icon-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-4_button-icon-th" role="tabpanel" data-tab="button-icon-th">
+
+<p>There is a tag helper in the <code>ChameleonForms.Templates.TwitterBootstrap3</code> namespace that adds an <code>icon</code> property to the <code>&lt;form-button&gt;</code>, <code>&lt;reset-button&gt;</code> and <code>&lt;submit-button&gt;</code> tag helpers. Or, you can make use of the <code>fluent-attrs</code> property on those tag helpers.</p>
+<p>To use the custom tag helper you need to import the tag helper within your <code>_ViewImports.cshtml</code> or equivalent file:</p>
+<pre><code class="lang-cshtml">@addTagHelper ChameleonForms.Templates.TwitterBootstrap3.*, ChameleonForms
+</code></pre>
+<p>Here is an example of its use:</p>
+<pre><code class="lang-cshtml">&lt;form-navigation&gt;
+    &lt;submit-button label=&quot;Submit&quot; icon=&quot;adjust&quot; /&gt;
+    @* or *@
+    &lt;submit-button label=&quot;Submit&quot; fluent-attrs='c =&gt; c.WithIcon(&quot;adjust&quot;)' /&gt;
+&lt;/form-navigation&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-4_button-icon-hh" role="tabpanel" data-tab="button-icon-hh" aria-hidden="true" hidden="hidden">
+
 <p>You can use the extension method like this:</p>
 <pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
     @n.Submit(&quot;Submit&quot;).WithIcon(&quot;adjust&quot;)
 }
 </code></pre>
+<p>In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view that has a form using the extension method you instead add the namespace to your <code>_ViewImports.cshtml</code> or equivalent file.</p>
+</section>
+</div>
+
 <p>Which would result in:</p>
 <pre><code class="lang-html">&lt;div class=&quot;btn-group&quot;&gt;
     &lt;button type=&quot;submit&quot; class=&quot;btn btn-default&quot;&gt;&lt;span class=&quot;glyphicon glyphicon-adjust&quot;&gt;&lt;/span&gt; Submit&lt;/button&gt;
 &lt;/div&gt;
 </code></pre>
-<p>In order to be able to swap out the extension method usage across your application easily if you change your form template we recommend that rather than adding a using statement to <code>ChameleonForms.Templates.TwitterBootstrap3</code> for each view that has a form using the extension method you add the namespace to your <code>_ViewImports.cshtml_</code> file.</p>
 <h3 id="example">Example</h3>
 <p>Here is an example from the example project of what the buttons can look like:</p>
 <p><img src="bootstrap-buttons.png" alt="Screenshot of buttons generated using Twitter Bootstrap 3 template"></p>
 <p>Here is the code that generated the above screenshot:</p>
-<pre><code class="lang-cshtml">    @using (var n = f.BeginNavigation())
-    {
-        @n.Button(&quot;text button&quot;).WithStyle(EmphasisStyle.Primary).WithSize(ButtonSize.Default)
-        @n.Button(new HtmlString(&quot;&lt;strong&gt;html button&lt;/strong&gt;&quot;)).AddClass(&quot;random-class&quot;)
-        @n.Reset(&quot;text reset&quot;).WithIcon(&quot;refresh&quot;)
-        @n.Reset(new HtmlString(&quot;&lt;strong&gt;html reset&lt;/strong&gt;&quot;))
-        @n.Submit(new HtmlString(&quot;&lt;strong&gt;html submit&lt;/strong&gt;&quot;))
-        @n.Submit(&quot;text submit&quot;).WithStyle(EmphasisStyle.Danger)
-        @n.Submit(&quot;name&quot;, &quot;value&quot;, new HtmlString(&quot;&lt;strong&gt;html submit with value&lt;/strong&gt;&quot;))
-        @n.Submit(&quot;name&quot;, &quot;value&quot;).WithIcon(&quot;star&quot;).WithStyle(EmphasisStyle.Success)
-    }
-    
-    @using (var n = f.BeginNavigation())
-    {
-        @n.Button(&quot;Small button 1&quot;).WithSize(ButtonSize.Small)
-        @n.Button(&quot;Small button 2&quot;).WithSize(ButtonSize.Small)
-    }
-    
-    @using (var n = f.BeginNavigation())
-    {
-        @n.Button(&quot;Extra small button 1&quot;).WithSize(ButtonSize.ExtraSmall)
-        @n.Button(&quot;Extra small button 2&quot;).WithSize(ButtonSize.ExtraSmall)
-    }
-    
-    @using (var n = f.BeginNavigation())
-    {
-        @n.Button(&quot;Large button 1&quot;).WithSize(ButtonSize.Large)
-        @n.Button(&quot;Large button 2&quot;).WithSize(ButtonSize.Large)
-    }
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-5">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-5_example-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-5_example-th" data-tab="example-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-5_example-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-5_example-hh" data-tab="example-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-5_example-th" role="tabpanel" data-tab="example-th">
+
+<pre><code class="lang-cshtml">&lt;form-navigation&gt;
+    &lt;form-button label=&quot;text button&quot; emphasis-style=&quot;Primary&quot; size=&quot;Default&quot; /&gt;
+    &lt;form-button add-class=&quot;random-class&quot;&gt;&lt;strong&gt;html button&lt;/strong&gt;&lt;/form-button&gt;
+    &lt;reset-button label=&quot;text reset&quot; icon=&quot;refresh&quot; /&gt;
+    &lt;reset-button&gt;&lt;strong&gt;html reset&lt;/strong&gt;&lt;/reset-button&gt;
+    &lt;submit-button&gt;&lt;strong&gt;html submit&lt;/strong&gt;&lt;/submit-button&gt;
+    &lt;submit-button label=&quot;text submit&quot; emphasis-style=&quot;Danger&quot; /&gt;
+    &lt;submit-button name=&quot;name&quot; value=&quot;value&quot;&gt;&lt;strong&gt;html submit with value&lt;/strong&gt;&lt;/submit-button&gt;
+    &lt;submit-button name=&quot;name&quot; value=&quot;value&quot; label=&quot;value&quot; icon=&quot;star&quot; emphasis-style=&quot;Success&quot; /&gt;
+&lt;/form-navigation&gt;
+
+&lt;form-navigation&gt;
+    &lt;form-button label=&quot;Small button 1&quot; size=&quot;Small&quot; /&gt;
+    &lt;form-button label=&quot;Small button 2&quot; fluent-attrs='c =&gt; c.WithSize(ButtonSize.Small)' /&gt;
+&lt;/form-navigation&gt;
+
+&lt;form-navigation&gt;
+    &lt;form-button label=&quot;Extra small button 1&quot; size=&quot;ExtraSmall&quot; /&gt;
+    &lt;form-button label=&quot;Extra small button 2&quot; fluent-attrs='c =&gt; c.WithSize(ButtonSize.ExtraSmall)' /&gt;
+&lt;/form-navigation&gt;
+
+&lt;form-navigation&gt;
+    &lt;form-button label=&quot;Large button 1&quot; size=&quot;Large&quot; /&gt;
+    &lt;form-button label=&quot;Large button 2&quot; fluent-attrs='c =&gt; c.WithSize(ButtonSize.Large)' /&gt;
+&lt;/form-navigation&gt;
 </code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-5_example-hh" role="tabpanel" data-tab="example-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation())
+{
+    @n.Button(&quot;text button&quot;).WithStyle(EmphasisStyle.Primary).WithSize(ButtonSize.Default)
+    @n.Button(new HtmlString(&quot;&lt;strong&gt;html button&lt;/strong&gt;&quot;)).AddClass(&quot;random-class&quot;)
+    @n.Reset(&quot;text reset&quot;).WithIcon(&quot;refresh&quot;)
+    @n.Reset(new HtmlString(&quot;&lt;strong&gt;html reset&lt;/strong&gt;&quot;))
+    @n.Submit(new HtmlString(&quot;&lt;strong&gt;html submit&lt;/strong&gt;&quot;))
+    @n.Submit(&quot;text submit&quot;).WithStyle(EmphasisStyle.Danger)
+    @n.Submit(&quot;name&quot;, &quot;value&quot;, new HtmlString(&quot;&lt;strong&gt;html submit with value&lt;/strong&gt;&quot;))
+    @n.Submit(&quot;name&quot;, &quot;value&quot;).WithIcon(&quot;star&quot;).WithStyle(EmphasisStyle.Success)
+}
+
+@using (var n = f.BeginNavigation())
+{
+    @n.Button(&quot;Small button 1&quot;).WithSize(ButtonSize.Small)
+    @n.Button(&quot;Small button 2&quot;).WithSize(ButtonSize.Small)
+}
+
+@using (var n = f.BeginNavigation())
+{
+    @n.Button(&quot;Extra small button 1&quot;).WithSize(ButtonSize.ExtraSmall)
+    @n.Button(&quot;Extra small button 2&quot;).WithSize(ButtonSize.ExtraSmall)
+}
+
+@using (var n = f.BeginNavigation())
+{
+    @n.Button(&quot;Large button 1&quot;).WithSize(ButtonSize.Large)
+    @n.Button(&quot;Large button 2&quot;).WithSize(ButtonSize.Large)
+}
+</code></pre>
+</section>
+</div>
 </article>
           </div>
           
@@ -476,6 +652,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

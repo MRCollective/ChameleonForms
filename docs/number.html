@@ -81,7 +81,7 @@
 
 <p>If you need to collect numeric data then that will automatically be handled for you with a HTML5 <code>&lt;input type=&quot;number&quot;&gt;</code> field.</p>
 <p>Any one of the following model types will trigger one of these fields:</p>
-<pre><code class="lang-csharp">public byte ByteField { get; set; }
+<pre><code class="lang-cs">public byte ByteField { get; set; }
 public sbyte SbyteField { get; set; }
 public short ShortField { get; set; }
 public ushort UshortField { get; set; }
@@ -115,19 +115,63 @@ public decimal DecimalField { get; set; }
 <h2 id="configurability">Configurability</h2>
 <h3 id="specify-currency-step">Specify currency step</h3>
 <p>You can specify your property as a currency value, which will automatically set the <code>step</code> attribute for you to <code>0.01</code>:</p>
-<pre><code class="lang-csharp">[DataType(DataType.Currency)]
+<pre><code class="lang-cs">[DataType(DataType.Currency)]
 public decimal DecimalField { get; set; }
 </code></pre>
 <h3 id="specify-step">Specify step</h3>
 <p>You can easily specify the <code>step</code> HTML attribute by using the <code>Step</code> method on the <a href="field-configuration.html">Field Configuration</a>, e.g.:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_step-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_step-th" data-tab="step-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_step-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_step-hh" data-tab="step-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_step-th" role="tabpanel" data-tab="step-th">
+
+<pre><code class="lang-cshtml">&lt;field for=&quot;IntField&quot; step=&quot;2&quot; /&gt;
+@* or *@
+&lt;field for=&quot;IntField&quot; fluent-config='c =&gt; c.Step(2)' /&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_step-hh" role="tabpanel" data-tab="step-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.IntField).Step(2)
 </code></pre>
+</section>
+</div>
+
 <p>If you specify this, it will override any default step value.</p>
 <h3 id="specify-min-and-max">Specify min and max</h3>
 <p>You can easily specify the <code>min</code> and <code>max</code> HTML attributes by using the <code>Min</code> and <code>Max</code> methods on the <a href="field-configuration.html">Field Configuration</a>, e.g.:</p>
-<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.IntField).Min(5).Max(60)
-@s.FieldFor(m =&gt; m.DecimalField).Min(1.1).Max(1.9)
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_min-max-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_min-max-th" data-tab="min-max-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_min-max-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_min-max-hh" data-tab="min-max-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_min-max-th" role="tabpanel" data-tab="min-max-th">
+
+<pre><code class="lang-cshtml">&lt;field for=&quot;IntField&quot; min=&quot;2&quot; max=&quot;60&quot; /&gt;
+&lt;field for=&quot;DecimalField&quot; min=&quot;1.1&quot; max=&quot;1.9&quot; /&gt;
+@* or *@
+&lt;field for=&quot;IntField&quot; fluent-config='c =&gt; c.Min(2).Max(60)' /&gt;
+&lt;field for=&quot;DecimalField&quot; fluent-config='c =&gt; c.Min(1.1m).Max(1.9m)' /&gt;
 </code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_min-max-hh" role="tabpanel" data-tab="min-max-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.IntField).Min(5).Max(60)
+@s.FieldFor(m =&gt; m.DecimalField).Min(1.1m).Max(1.9m)
+</code></pre>
+</section>
+</div>
+
 <p>If you specify these, it will override any default min/max values.</p>
 </article>
           </div>
@@ -162,6 +206,7 @@ public decimal DecimalField { get; set; }
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

@@ -88,7 +88,7 @@
 <li><p>Install the NuGet package <code>Install-Package ChameleonForms -pre</code> (v4 is currently marked beta so you need to include pre-release versions)</p>
 </li>
 <li><p>Register ChameleonForms in your <code>Startup.cs</code> file:</p>
-<pre><code class="lang-csharp">public void ConfigureServices(IServiceCollection services)
+<pre><code class="lang-cs">public void ConfigureServices(IServiceCollection services)
 {
     ...
     services.AddMvc(...);
@@ -96,12 +96,17 @@
     services.AddChameleonForms();
 }
 </code></pre>
-<p>Note: you can alter the configuration from the default, <a href="https://chameleonforms.readthedocs.io/en/latest/configuration/">see the docs</a>.</p>
+<p>Note: you can alter the configuration from the default, <a href="https://mrcollective.github.io/ChameleonForms/docs/configuration.html">see the docs</a>.</p>
 </li>
 <li><p>Add the following to your <code>_ViewImports.cshtml</code>:</p>
 <pre><code class="lang-cshtml">@using ChameleonForms;
 @using ChameleonForms.Enums;
 @using ChameleonForms.Component;
+
+@addTagHelper ChameleonForms.TagHelpers.*, ChameleonForms
+
+@* optional: *@
+@addTagHelper ChameleonForms.Templates.TwitterBootstrap3.*, ChameleonForms
 </code></pre>
 </li>
 <li><p>Create your first form, e.g.:</p>
@@ -143,6 +148,44 @@ namespace MyWebApp.Controllers
 }
 </code></pre>
 <p><code>~/Views/MyForm/Index.cshtml</code>:</p>
+<p>You have two options for your view - <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro?view=aspnetcore-3.1">tag helper syntax</a> or the more traditional <a href="https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro?view=aspnetcore-3.1#tag-helpers-compared-to-html-helpers">HTML helper syntax</a>.</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_getting-started-view-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_getting-started-view-th" data-tab="getting-started-view-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_getting-started-view-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_getting-started-view-hh" data-tab="getting-started-view-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_getting-started-view-th" role="tabpanel" data-tab="getting-started-view-th">
+
+<pre><code class="lang-cshtml">@model MyWebApp.Controllers.ViewModel
+@{
+    ViewData[&quot;Title&quot;] = &quot;My Form&quot;;
+}
+
+&lt;chameleon-form&gt;
+    &lt;form-section heading=&quot;About you!?&quot;&gt;
+        &lt;field for=&quot;Name&quot; /&gt;
+        &lt;field for=&quot;FavouriteNumber&quot; /&gt;
+        &lt;field for=&quot;DateOfBirth&quot; /&gt;
+    &lt;/form-section&gt;
+    &lt;form-navigation&gt;
+        &lt;submit-button label=&quot;Submit&quot; /&gt;
+    &lt;/form-navigation&gt;
+&lt;/chameleon-form&gt;
+
+@section Scripts
+{
+    &lt;partial name=&quot;_ValidationScriptsPartial&quot; /&gt;
+    @* ... or relevant equivalent *@
+}
+
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_getting-started-view-hh" role="tabpanel" data-tab="getting-started-view-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@model MyWebApp.Controllers.ViewModel
 @{
     ViewData[&quot;Title&quot;] = &quot;My Form&quot;;
@@ -169,6 +212,8 @@ namespace MyWebApp.Controllers
 }
 
 </code></pre>
+</section>
+</div>
 </li>
 <li><p>Run it!</p>
 </li>
@@ -186,7 +231,7 @@ namespace MyWebApp.Controllers
 </ol>
 <h2 id="show-me-a-basic-chameleonforms-example-next-to-its-aspnet-core-mvc-counterpart">Show me a basic ChameleonForms example next to its ASP.NET Core MVC counterpart!</h2>
 <p>Say you had the following view model:</p>
-<pre><code class="lang-csharp">    public class BasicViewModel
+<pre><code class="lang-cs">    public class BasicViewModel
     {
         [Required]
         public string RequiredString { get; set; }
@@ -197,6 +242,37 @@ namespace MyWebApp.Controllers
     }
 </code></pre>
 <p>And assuming for a moment you used definition lists to wrap your HTML fields then you might end up with something like this in your Razor view:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_ootb-mvc-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_ootb-mvc-th" data-tab="ootb-mvc-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_ootb-mvc-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_ootb-mvc-hh" data-tab="ootb-mvc-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_ootb-mvc-th" role="tabpanel" data-tab="ootb-mvc-th">
+
+<pre><code class="lang-html">&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;A form&lt;/legend&gt;
+        &lt;dl&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;RequiredString&quot;&gt;Some string&lt;/label&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;input asp-for=&quot;RequiredString&quot; /&gt; &lt;span asp-validation-for=&quot;RequiredString&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;SomeEnum&quot;&gt;&lt;/label&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;select asp-for=&quot;SomeEnum&quot; asp-items=&quot;Html.GetEnumSelectList&lt;SomeEnum&gt;()&quot;&gt;&lt;/select&gt; &lt;span asp-validation-for=&quot;SomeEnum&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+            &lt;dt&gt;&lt;label asp-for=&quot;SomeCheckbox&quot;&gt;&lt;/label&gt;&lt;/dt&gt;
+            &lt;dd&gt;&lt;label&gt;&lt;input asp-for=&quot;SomeCheckbox&quot; /&gt; Are you sure?&lt;/label&gt; &lt;span asp-validation-for=&quot;SomeCheckbox&quot;&gt;&lt;/span&gt;&lt;/dd&gt;
+        &lt;/dl&gt;
+    &lt;/fieldset&gt;
+    &lt;div class=&quot;form_navigation&quot;&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;Submit&quot; /&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_ootb-mvc-hh" role="tabpanel" data-tab="ootb-mvc-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-html">@using (Html.BeginForm())
 {
     &lt;fieldset&gt;
@@ -215,7 +291,35 @@ namespace MyWebApp.Controllers
     &lt;/div&gt;
 }
 </code></pre>
+</section>
+</div>
+
 <p>The equivalent of this form with out-of-the-box ChameleonForms functionality is:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_ootb-chameleon-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_ootb-chameleon-th" data-tab="ootb-chameleon-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_ootb-chameleon-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_ootb-chameleon-hh" data-tab="ootb-chameleon-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_ootb-chameleon-th" role="tabpanel" data-tab="ootb-chameleon-th">
+
+<pre><code class="lang-cshtml">&lt;chameleon-form&gt;
+    &lt;form-section heading=&quot;A form&quot;&gt;
+        &lt;field for=&quot;RequiredString&quot; label=&quot;Some string&quot; /&gt;
+        &lt;field for=&quot;SomeEnum&quot; /&gt;
+        &lt;field for=&quot;SomeCheckbox&quot; inline-label=&quot;Are you sure?&quot; /&gt;
+    &lt;/form-section&gt;
+    &lt;form-navigation&gt;
+        &lt;submit-button label=&quot;Submit&quot; /&gt;
+    &lt;/form-navigation&gt;
+&lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-2_ootb-chameleon-hh" role="tabpanel" data-tab="ootb-chameleon-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm()) {
     using (var s = f.BeginSection(&quot;A form&quot;)) {
         @s.FieldFor(m =&gt; m.RequiredString).Label(&quot;Some string&quot;)
@@ -227,6 +331,8 @@ namespace MyWebApp.Controllers
     }
 }
 </code></pre>
+</section>
+</div>
 <h2 id="what-does-chameleonforms-do-for-me">What does ChameleonForms do for me?</h2>
 <p>Chameleon Forms provides an object hierarchy that allows you to declaratively specify the structure of your form. From there:</p>
 <ul>
@@ -248,14 +354,158 @@ namespace MyWebApp.Controllers
 <li>Section</li>
 <li>Navigation</li>
 </ul>
-<p>To create a Form simply use the <code>BeginChameleonForms</code> extension method off of the Html helper:</p>
+<p>To create a Form simply use the <code>&lt;chameleon-form&gt;</code> tag helper or the <code>BeginChameleonForms</code> extension method off of the Html helper:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-3">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_form-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_form-th" data-tab="form-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-3_form-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-3_form-hh" data-tab="form-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-3_form-th" role="tabpanel" data-tab="form-th">
+
+<pre><code class="lang-cshtml">&lt;chameleon-form&gt;
+    @* The form ... *@
+&lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-3_form-hh" role="tabpanel" data-tab="form-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@using (var f = Html.BeginChameleonForm()) {
     @* The form ... *@
 }
 </code></pre>
-<p>Random Field Elements, Field Labels and Field Validation HTML that don't fit in to a Section (see below) can be output from the Form object anywhere within your form like so:</p>
+</section>
+</div>
+
+<p>See the <a href="the-form.html">Form</a> documentation to understand how to configure the Form.</p>
+<p>Individual Field Elements, Field Labels and Field Validation HTML that don't fit in to a standard templated Section (see below) can be output from anywhere within your form like so:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-4">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-4_individual-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-4_individual-th" data-tab="individual-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-4_individual-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-4_individual-hh" data-tab="individual-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-4_individual-th" role="tabpanel" data-tab="individual-th">
+
+<pre><code class="lang-cshtml">&lt;p&gt;&lt;field-label for=&quot;SomeCheckbox&quot; label=&quot;Hello!&quot; /&gt; &lt;field-element for=&quot;SomeCheckbox&quot; /&gt; &lt;field-validation for=&quot;SomeCheckbox&quot; /&gt;&lt;/p&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-4_individual-hh" role="tabpanel" data-tab="individual-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">&lt;p&gt;@f.LabelFor(m =&gt; m.SomeCheckbox).Label(&quot;Hello!&quot;) @f.FieldFor(m =&gt; m.SomeCheckbox) @f.ValidationMessageFor(m =&gt; m.SomeCheckbox)&lt;/p&gt;
 </code></pre>
+</section>
+</div>
+
+<p>See the <a href="field-element.html">Field Element</a>, <a href="field-label.html">Field Label</a> and <a href="field-validation-html.html">Field Validation</a> documentation to understand how to configure these components.</p>
+<h3 id="section">Section</h3>
+<p>A Section component holds a set of Fields (see below for definition of Field) or nested sections (to no more than one level deep). A Section will start with a Heading. The default form template that comes with Chameleon Forms defines a top-level section as a <code>fieldset</code>.</p>
+<p><img src="section.png" alt="Section components have a Heading followed by any number of Fields or single level deep nested Sections"></p>
+<p>To create a Section simply use the <code>&lt;form-section&gt;</code> tag helper or the <code>BeginSection</code> extension method off of the Form object (or off of the Section object to create a nested one):</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-5">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-5_section-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-5_section-th" data-tab="section-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-5_section-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-5_section-hh" data-tab="section-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-5_section-th" role="tabpanel" data-tab="section-th">
+
+<pre><code class="lang-cshtml">&lt;form-section heading=&quot;Basic information&quot;&gt;
+    &lt;form-section heading=&quot;Nested section&quot;&gt;
+        @* Fields... *@
+    &lt;/form-section&gt;
+    @* Fields... *@
+&lt;/form-section&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-5_section-hh" role="tabpanel" data-tab="section-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Basic information&quot;)) {
+    using (var ss = s.BeginSection(&quot;Nested section&quot;)) {
+        @* Fields... *@
+    }
+    @* Fields... *@
+}
+</code></pre>
+</section>
+</div>
+
+<p>See the <a href="the-section.html">Section</a> documentation to understand how to configure the Section.</p>
+<h3 id="field">Field</h3>
+<p>A Field is a single data collection unit within a Section and comprises of an Element, a Label, Validation HTML and a Field Configuration.</p>
+<p>Fields can have other Fields nested within them (to one level deep).</p>
+<p>To create a Field simply use a self-closing <code>&lt;field /&gt;</code> tag helper or the <code>FieldFor</code> extension method off of the Section object. To create a parent Field that has nested fields within it then use the <code>&lt;field&gt;...&lt;/field&gt;</code> tag helper or the <code>BeginFieldFor</code> extension method off of the Section object to start a Field with nested Fields:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-6">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-6_field-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-6_field-th" data-tab="field-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-6_field-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-6_field-hh" data-tab="field-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-6_field-th" role="tabpanel" data-tab="field-th">
+
+<pre><code class="lang-cshtml">&lt;field for=&quot;SomeField&quot; /&gt;
+&lt;field for=&quot;AnotherField&quot;&gt;
+    &lt;field for=&quot;ChildField&quot; /&gt;
+&lt;/field&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-6_field-hh" role="tabpanel" data-tab="field-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.SomeField).FieldConfigurationMethodsCanBeChainedOffOfTheEnd()
+@using (var ff = s.BeginFieldFor(m =&gt; m.AnotherField, Field.Configure().FieldConfigurationMethodsCanBeChainedHere()) {
+    @ff.FieldFor(m =&gt; m.ChildField)
+}
+</code></pre>
+</section>
+</div>
+
+<p>See the <a href="the-section.html">Section</a> documentation to understand how to configure the Field.</p>
+<h3 id="navigation">Navigation</h3>
+<p>A Navigation component will usually be placed at the end of the form (although there is nothing stopping you placing it elsewhere or even multiple times on the form - e.g. top and bottom). The Navigation component allows you to easily create Submit buttons, Reset buttons and normal Buttons.</p>
+<p><img src="navigation.png" alt="Navigation components can have Submit buttons, Reset buttons and normal Buttons"></p>
+<p>To create a Navigation simply use the <code>&lt;form-navigation&gt;</code> tag helper or the <code>BeginNavigation</code> extension method off of the Form object:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-7">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-7_navigation-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-7_navigation-th" data-tab="navigation-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-7_navigation-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-7_navigation-hh" data-tab="navigation-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-7_navigation-th" role="tabpanel" data-tab="navigation-th">
+
+<pre><code class="lang-cshtml">&lt;form-navigation&gt;
+    &lt;submit-button label=&quot;Submit&quot; /&gt;
+    &lt;reset-button label=&quot;Reset&quot; /&gt;
+    &lt;form-button label=&quot;A button&quot; /&gt;
+&lt;/form-navigation&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-7_navigation-hh" role="tabpanel" data-tab="navigation-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
+    @n.Submit(&quot;Submit&quot;).ChainHtmlAttributesOffOfTheEnd()
+    @n.Reset(&quot;Reset&quot;).ChainHtmlAttributesOffOfTheEnd()
+    @n.Button(&quot;A button&quot;).ChainHtmlAttributesOffOfTheEnd()
+}
+</code></pre>
+</section>
+</div>
+
+<p>See the <a href="the-navigation.html">Navigation</a> documentation to understand how to configure the Navigation.</p>
 <h3 id="message">Message</h3>
 <p>At any point in the form you can create a Message component - a Message always has a type as well as a Heading and inside of the message you can add any content you like, but ChameleonForms gives you the option of easily specifying Message Paragraph's - the HTML for which is defined in your form template.</p>
 <p><img src="message.png" alt="Message components have a Heading and any number of Paragraphs"></p>
@@ -268,42 +518,35 @@ namespace MyWebApp.Controllers
 <li>Warning - Warning message</li>
 </ul>
 <p>You can output different HTML in your form template depending on the type of message (e.g. different class or completely different HTML structure).</p>
-<p>To create a Message simply use the <code>BeginMessage</code> extension method off of the Form object:</p>
+<p>To create a Message simply use the <code>&lt;form-message&gt;</code> tag helper or the <code>BeginMessage</code> extension method off of the Form object:</p>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-8">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-8_message-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-8_message-th" data-tab="message-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-8_message-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-8_message-hh" data-tab="message-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-8_message-th" role="tabpanel" data-tab="message-th">
+
+<pre><code class="lang-cshtml">&lt;form-message type=&quot;Success&quot; heading=&quot;Submission successful&quot;&gt;
+    &lt;message-paragraph&gt;Some sort of success message&lt;/message-paragraph&gt;
+    @* Other Paragraph's or any HTML at all really ... *@
+&lt;/form-message&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-8_message-hh" role="tabpanel" data-tab="message-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@using (var m = f.BeginMessage(MessageType.Success, &quot;Submission successful&quot;)) {
     @m.Paragraph(&quot;Some sort of success message&quot;)
     @* Other Paragraph's or any HTML at all really ... *@
 }
 </code></pre>
-<h3 id="section">Section</h3>
-<p>A Section component holds a set of Fields (see below for definition of Field) or nested sections (to no more than one level deep). A Section will start with a Heading. The default form template that comes with Chameleon Forms defines a top-level section as a <code>fieldset</code>.</p>
-<p><img src="section.png" alt="Section components have a Heading followed by any number of Fields or single level deep nested Sections"></p>
-<p>To create a Section simply use the <code>BeginSection</code> extension method off of the Form object (or off of the Section object to create a nested one):</p>
-<pre><code class="lang-cshtml">@using (var s = f.BeginSection(&quot;Basic information&quot;)) {
-    using (var ss = s.BeginSection(&quot;Nested section&quot;)) {
-        @* Fields... *@
-    }
-    @* Fields... *@
-}
-</code></pre>
-<h3 id="field">Field</h3>
-<p>A Field is a single data collection unit within a Section and comprises of an Element, a Label, Validation HTML and a Field Configuration.</p>
-<p>Fields can have other Fields nested within them (to one level deep).</p>
-<p>To create a Field simply use the <code>FieldFor</code> extension method off of the Section object or the <code>BeginFieldFor</code> extension method off of the Section object to start a Field with nested Fields:</p>
-<pre><code class="lang-cshtml">@s.FieldFor(m =&gt; m.SomeField).FieldConfigurationMethodsCanBeChainedOffOfTheEnd()
-@using (var ff = s.BeginFieldFor(m =&gt; m.AnotherField, Field.Configure().FieldConfigurationMethodsCanBeChainedHere()) {
-    @ff.FieldFor(m =&gt; m.ChildField)
-}
-</code></pre>
-<h3 id="navigation">Navigation</h3>
-<p>A Navigation component will usually be placed at the end of the form (although there is nothing stopping you placing it elsewhere or even multiple times on the form - e.g. top and bottom). The Navigation component allows you to easily create Submit buttons, Reset buttons and normal Buttons.</p>
-<p><img src="navigation.png" alt="Navigation components can have Submit buttons, Reset buttons and normal Buttons"></p>
-<p>To create a Navigation simply use the <code>BeginNavigation</code> extension method off of the Form object:</p>
-<pre><code class="lang-cshtml">@using (var n = f.BeginNavigation()) {
-    @n.Submit(&quot;Submit&quot;).ChainHtmlAttributesOffOfTheEnd()
-    @n.Reset(&quot;Reset&quot;).ChainHtmlAttributesOffOfTheEnd()
-    @n.Button(&quot;A button&quot;).ChainHtmlAttributesOffOfTheEnd()
-}
-</code></pre>
+</section>
+</div>
+
+<p>See the <a href="the-message.html">Message</a> documentation to understand how to configure the Message.</p>
 <h2 id="what-terminology-is-used-in-chameleonforms">What terminology is used in ChameleonForms?</h2>
 <p>Some of the terminology around the structure of ChameleonForms forms are defined above, but following is a more comprehensive list of terms that the library uses:</p>
 <ul>
@@ -360,6 +603,7 @@ namespace MyWebApp.Controllers
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

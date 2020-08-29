@@ -80,8 +80,11 @@
 <h1 id="create-a-form-against-a-model-type-different-from-the-page-model">Create a form against a model type different from the page model</h1>
 
 <p>Similar to the examples and reasoning discussed <a href="html-helper-context.html">in the documentation for changing HTML helper model types</a> it's useful to be able to create forms against an arbitrary model unrelated to the page model or create a form against a subproperty of the parent model.</p>
+<h2 id="tag-helpers">Tag Helpers</h2>
+<p>Tag Helpers don't allow you to change a model within a page, instead you need to use <code>&lt;partial model=&quot;model&quot; name=&quot;_PartialName&quot; /&gt;</code> or <code>&lt;partial for=&quot;ChildProperty&quot; name=&quot;_PartialName&quot; /&gt;</code> to change the model type in a view. See <a href="partials.html">Partials</a> for more information or below for examples.</p>
+<h2 id="html-helpers">HTML Helpers</h2>
 <p>This can be achieved using the default form template by using these overloads to the <code>BeginChameleonForms</code> <a href="the-form.html">extension method</a>:</p>
-<pre><code class="lang-csharp">/// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Constructs a &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with the default ChameleonForms template renderer using a sub-property of the current model as the model.
         /// Values will bind back to the model type of the sub-property as if that was the model all along.
         /// &lt;/summary&gt;
@@ -98,8 +101,9 @@
         /// &lt;param name=&quot;method&quot;&gt;The HTTP method the form submission should use&lt;/param&gt;
         /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes the form should use&lt;/param&gt;
         /// &lt;param name=&quot;enctype&quot;&gt;The encoding type the form submission should use&lt;/param&gt;
+        /// &lt;param name=&quot;outputAntiforgeryToken&quot;&gt;Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET&lt;/param&gt;
         /// &lt;returns&gt;A &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with an instance of the default form template renderer.&lt;/returns&gt;
-        public static IForm&lt;TChildModel&gt; BeginChameleonFormFor&lt;TParentModel, TChildModel&gt;(this IHtmlHelper&lt;TParentModel&gt; helper, Expression&lt;Func&lt;TParentModel, TChildModel&gt;&gt; formFor, string action = &quot;&quot;, FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm&lt;TChildModel&gt; BeginChameleonFormFor&lt;TParentModel, TChildModel&gt;(this IHtmlHelper&lt;TParentModel&gt; helper, Expression&lt;Func&lt;TParentModel, TChildModel&gt;&gt; formFor, string action = &quot;&quot;, FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
 
         /// &lt;summary&gt;
         /// Constructs a &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with the default ChameleonForms template renderer using the given model type and instance.
@@ -127,11 +131,57 @@
         /// &lt;param name=&quot;method&quot;&gt;The HTTP method the form submission should use&lt;/param&gt;
         /// &lt;param name=&quot;htmlAttributes&quot;&gt;Any HTML attributes the form should use&lt;/param&gt;
         /// &lt;param name=&quot;enctype&quot;&gt;The encoding type the form submission should use&lt;/param&gt;
+        /// &lt;param name=&quot;outputAntiforgeryToken&quot;&gt;Whether or not to output an antiforgery token in the form; defaults to null which will output a token if the method isn't GET&lt;/param&gt;
         /// &lt;returns&gt;A &lt;see cref=&quot;Form{TModel}&quot;/&gt; object with an instance of the default form template renderer.&lt;/returns&gt;
-        public static IForm&lt;TNewModel&gt; BeginChameleonFormFor&lt;TOriginalModel, TNewModel&gt;(this IHtmlHelper&lt;TOriginalModel&gt; helper, TNewModel model, string action = &quot;&quot;, FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null)
+        public static IForm&lt;TNewModel&gt; BeginChameleonFormFor&lt;TOriginalModel, TNewModel&gt;(this IHtmlHelper&lt;TOriginalModel&gt; helper, TNewModel model, string action = &quot;&quot;, FormMethod method = FormMethod.Post, HtmlAttributes htmlAttributes = null, EncType? enctype = null, bool? outputAntiforgeryToken = null)
 </code></pre>
 <h2 id="examples">Examples</h2>
-<p>The examples on the <a href="html-helper-context.html">documentation for changing HTML helper model types</a> are restated below, but in terms of a ChameleonForm instead of using <code>Html</code> to output the form:</p>
+<p>The examples on the <a href="html-helper-context.html">documentation for changing HTML helper model types</a> are restated below, but using ChameleonForms instead of using <code>Html</code> to output the form.</p>
+<h3 id="using-a-different-view-model">Using a different view model</h3>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_example-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_example-th" data-tab="example-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_example-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_example-hh" data-tab="example-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_example-th" role="tabpanel" data-tab="example-th">
+
+<p>Tag Helpers are explicitly tied to the model of the page so it's not possible to have the different model inline. However, you can include another form with a different model by using a partial.</p>
+<pre><code class="lang-cshtml">@model LoginViewModel
+
+&lt;h1&gt;Login&lt;/h1&gt;
+&lt;chameleon-form&gt;
+    &lt;form-section&gt;
+        &lt;field for=&quot;Username&quot; /&gt;
+        &lt;field for=&quot;Password&quot; /&gt;
+    &lt;/form-section&gt;
+    &lt;form-navigation&gt;
+        &lt;submit-button label=&quot;Login&quot; /&gt;
+    &lt;/form-navigation&gt;
+&lt;/chameleon-form&gt;
+
+&lt;h2&gt;Don't have an account?&lt;/h2&gt;
+&lt;p&gt;You can easily create a new account in seconds - just start by selecting a username below.&lt;/p&gt;
+&lt;partial name=&quot;_SignupForm&quot; model=&quot;new SignupStep1ViewModel()&quot; /&gt;
+</code></pre>
+<p><em>_SignupForm.cshtml</em></p>
+<pre><code class="lang-cshtml">@model SignupStep1ViewModel
+
+&lt;chameleon-form action='@Url.Action(&quot;Step1&quot;, &quot;Signup&quot;)'&gt;
+    &lt;form-section&gt;
+        &lt;field for=&quot;Username&quot; placeholder=&quot;Enter your preferred username&quot;&gt;
+    &lt;/form-section&gt;
+    &lt;form-navigation&gt;
+        &lt;submit-button&gt;Begin signup - check if my username is available &amp;raquo;&lt;/submit-button&gt;
+    &lt;/form-navigation&gt;
+&lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q_example-hh" role="tabpanel" data-tab="example-hh" aria-hidden="true" hidden="hidden">
+
 <pre><code class="lang-cshtml">@model LoginViewModel
 
 &lt;h1&gt;Login&lt;/h1&gt;
@@ -156,10 +206,86 @@
     }
 }
 </code></pre>
-<p>and:</p>
+</section>
+</div>
+<h3 id="binding-against-a-child-property">Binding against a child property</h3>
+<p>This is useful when you want to have readonly properties that always get set in the controller before showing a view, but you want a clean view model to bind against in the postback controller action. This technique can make your controller action cleaner and make it less likely that you will forget to set the readonly properties for the view or forget to add <code>[ReadOnly(true)]</code> to those properties if they were on the view model being bound to the controller.</p>
+<p>As an example of this technique in action, let's say you have this view model and controller:</p>
+<pre><code class="lang-cs">public class SomeViewModel
+{
+    public SomeViewModel(string readonlyProperty, SomeViewModelInput input)
+    {
+        ReadonlyProperty = readonlyProperty;
+        InputModel = input;
+    }
+
+    public string ReadonlyProperty { get; set; }
+    public SomeViewModelInput InputModel { get; set; }
+}
+
+public class SomeViewModelInput
+{
+    public string Property1 { get; set; }
+    public string Property2 { get; set; }
+    public string Property3 { get; set; }
+    public string Property4 { get; set; }
+    public string Property5 { get; set; }
+}
+
+public class SomeController : Controller
+{
+    public ActionResult Index()
+    {
+        return new View(new SomeViewModel(&quot;Value from database or whatever&quot;, new SomeViewModelInput()));
+    }
+
+    [HttpPost]
+    public ActionResult Index(SomeViewModelInput model)
+    {
+        if (!ModelState.IsValid)
+            return new View(new SomeViewModel(&quot;Value from database or whatever&quot;, model));
+
+        // Do stuff with model...
+    }
+}
+</code></pre>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_example2-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_example2-th" data-tab="example2-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-1_example2-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-1_example2-hh" data-tab="example2-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-1_example2-th" role="tabpanel" data-tab="example2-th">
+
+<p>Tag Helpers are explicitly tied to the model of the page so it's not possible to have the different model inline. However, you can include another form with a different model by using a partial.</p>
 <pre><code class="lang-cshtml">@model SomeViewModel
 
-&lt;h1&gt;Creating new xyz against @Model.Title&lt;/h1&gt;
+&lt;h1&gt;Creating new xyz against @Model.ReadonlyProperty&lt;/h1&gt;
+&lt;partial name=&quot;_SomeViewModelInputForm&quot; model=&quot;Model?.InputModel&quot; /&gt;
+</code></pre>
+<p><em>_SomeViewModelInputForm.cshtml</em></p>
+<pre><code class="lang-cshtml">&lt;chameleon-form&gt;
+    &lt;form-section&gt;
+        &lt;field for=&quot;Property1&quot; /&gt;
+        &lt;field for=&quot;Property2&quot; /&gt;
+        &lt;field for=&quot;Property3&quot; /&gt;
+        &lt;field for=&quot;Property4&quot; /&gt;
+        &lt;field for=&quot;Property5&quot; /&gt;
+    &lt;/form-section&gt;
+    &lt;form-navigation&gt;
+        &lt;submit-button label=&quot;Submit&quot; /&gt;
+    &lt;/form-navigation&gt;
+&lt;/chameleon-form&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-1_example2-hh" role="tabpanel" data-tab="example2-hh" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cshtml">@model SomeViewModel
+
+&lt;h1&gt;Creating new xyz against @Model.ReadonlyProperty&lt;/h1&gt;
 @using (var f = Html.BeginChameleonFormFor(m =&gt; m.InputModel)) {
     using (var s = f.BeginSection()) {
         @s.FieldFor(m =&gt; m.Property1)
@@ -169,15 +295,53 @@
         @s.FieldFor(m =&gt; m.Property5)
     }
     using (var n = f.BeginNavigation()) {
-        @n.Submit()
+        @n.Submit(&quot;Submit&quot;)
     }
 }
 </code></pre>
-<p>See also the examples in the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/ExampleForms/ChangingContext.cshtml">source code</a>.</p>
-<h2 id="creating-a-form-for-a-sub-property-that-binds-back-to-the-parent">Creating a form for a sub-property that binds back to the parent</h2>
+</section>
+</div>
+<h3 id="creating-a-form-for-a-child-property-that-binds-back-to-the-parent-view-model">Creating a form for a child property that binds back to the parent view model</h3>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q-2">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_example3-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_example3-th" data-tab="example3-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q-2_example3-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q-2_example3-hh" data-tab="example3-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q-2_example3-th" role="tabpanel" data-tab="example3-th">
+
+<p>Tag Helpers are explicitly tied to the model of the page so it's not possible to have the different model inline. However, you can include a subset of the form with a different model by using the <code>&lt;form-partial /&gt;</code> Tag Helper. See <a href="partials.html">Partials</a> for more information about the other ways you can use partials within forms.</p>
+<pre><code class="lang-cshtml">&lt;chameleon-form action='@Url.Action(&quot;PostParentViewModel&quot;)'&gt;
+
+    &lt;form-partial name=&quot;_FormPartialAgainstChildProperty&quot; for=&quot;Child&quot; /&gt;
+
+    &lt;form-navigation&gt;
+        &lt;submit-button label=&quot;Submit&quot; add-class=&quot;parent-model&quot; /&gt;
+    &lt;/form-navigation&gt;
+
+&lt;/chameleon-form&gt;
+</code></pre>
+<p><em>_FormPartialAgainstChildProperty.cshtml</em></p>
+<pre><code>@model ChildViewModel
+
+&lt;form-section&gt;
+    &lt;field for=&quot;ChildField&quot; /&gt;
+    &lt;field for=&quot;SomeEnum&quot; /&gt;
+&lt;/form-section&gt;
+</code></pre>
+</section>
+<section id="tabpanel_CeZOj-G++Q-2_example3-hh" role="tabpanel" data-tab="example3-hh" aria-hidden="true" hidden="hidden">
+
 <p>This is still easily possible, but it's just a little more verbose since it's likely to be a less common use case:</p>
 <pre><code class="lang-cshtml">@using (var f = Html.For(m =&gt; m.Child, bindFieldsToParent: true).BeginChameleonForm(...)) { ... }
 </code></pre>
+</section>
+</div>
+<h2 id="try-working-examples">Try working examples</h2>
+<p>See also the working examples in the <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/ExampleForms/ChangingContextTH.cshtml">source</a> <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms.Example/Views/ExampleForms/ChangingContext.cshtml">code</a>, which can be run so you can see how it works.</p>
 </article>
           </div>
           
@@ -211,6 +375,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

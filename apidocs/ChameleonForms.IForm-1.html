@@ -89,7 +89,7 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="ChameleonForms.IForm.html#ChameleonForms_IForm_CreatePartialForm__1_System_Linq_Expressions_LambdaExpression_Microsoft_AspNetCore_Mvc_ViewFeatures_HtmlHelper___0__">IForm.CreatePartialForm&lt;TPartialModel&gt;(LambdaExpression, HtmlHelper&lt;TPartialModel&gt;)</a>
+      <a class="xref" href="ChameleonForms.IForm.html#ChameleonForms_IForm_CreatePartialForm__1_System_Linq_Expressions_LambdaExpression_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper___0__">IForm.CreatePartialForm&lt;TPartialModel&gt;(LambdaExpression, IHtmlHelper&lt;TPartialModel&gt;)</a>
     </div>
     <div>
       <span class="xref">System.IDisposable.Dispose()</span>
@@ -124,7 +124,7 @@
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_IForm_1_HtmlHelper.md&amp;value=---%0Auid%3A%20ChameleonForms.IForm%601.HtmlHelper%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L38">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L39">View Source</a>
   </span>
   <a id="ChameleonForms_IForm_1_HtmlHelper_" data-uid="ChameleonForms.IForm`1.HtmlHelper*"></a>
   <h4 id="ChameleonForms_IForm_1_HtmlHelper" data-uid="ChameleonForms.IForm`1.HtmlHelper">HtmlHelper</h4>
@@ -155,7 +155,7 @@
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_IForm_1_Template.md&amp;value=---%0Auid%3A%20ChameleonForms.IForm%601.Template%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L42">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L43">View Source</a>
   </span>
   <a id="ChameleonForms_IForm_1_Template_" data-uid="ChameleonForms.IForm`1.Template*"></a>
   <h4 id="ChameleonForms_IForm_1_Template" data-uid="ChameleonForms.IForm`1.Template">Template</h4>
@@ -185,10 +185,60 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_IForm_1_CreatePartialForm_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper__0__.md&amp;value=---%0Auid%3A%20ChameleonForms.IForm%601.CreatePartialForm(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L61">View Source</a>
+  </span>
+  <a id="ChameleonForms_IForm_1_CreatePartialForm_" data-uid="ChameleonForms.IForm`1.CreatePartialForm*"></a>
+  <h4 id="ChameleonForms_IForm_1_CreatePartialForm_Microsoft_AspNetCore_Mvc_Rendering_IHtmlHelper__0__" data-uid="ChameleonForms.IForm`1.CreatePartialForm(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{`0})">CreatePartialForm(IHtmlHelper&lt;TModel&gt;)</h4>
+  <div class="markdown level1 summary"><p>Returns a wrapped <span class="xref">ChameleonForms.PartialViewForm`1</span> for the given partial view helper.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IForm&lt;TModel&gt; CreatePartialForm(IHtmlHelper&lt;TModel&gt; partialViewHelper)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper</span>&lt;TModel&gt;</td>
+        <td><span class="parametername">partialViewHelper</span></td>
+        <td><p>The HTML Helper from the partial view</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ChameleonForms.IForm-1.html">IForm</a>&lt;TModel&gt;</td>
+        <td><p>The PartialViewForm wrapping the original form</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_IForm_1_GetFieldGenerator__1_System_Linq_Expressions_Expression_System_Func__0___0___.md&amp;value=---%0Auid%3A%20ChameleonForms.IForm%601.GetFieldGenerator%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%600%2C%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L53">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L54">View Source</a>
   </span>
   <a id="ChameleonForms_IForm_1_GetFieldGenerator_" data-uid="ChameleonForms.IForm`1.GetFieldGenerator*"></a>
   <h4 id="ChameleonForms_IForm_1_GetFieldGenerator__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="ChameleonForms.IForm`1.GetFieldGenerator``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">GetFieldGenerator&lt;T&gt;(Expression&lt;Func&lt;TModel, T&gt;&gt;)</h4>
@@ -252,7 +302,7 @@
     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_IForm_1_Write_Microsoft_AspNetCore_Html_IHtmlContent_.md&amp;value=---%0Auid%3A%20ChameleonForms.IForm%601.Write(Microsoft.AspNetCore.Html.IHtmlContent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L47">View Source</a>
+    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L48">View Source</a>
   </span>
   <a id="ChameleonForms_IForm_1_Write_" data-uid="ChameleonForms.IForm`1.Write*"></a>
   <h4 id="ChameleonForms_IForm_1_Write_Microsoft_AspNetCore_Html_IHtmlContent_" data-uid="ChameleonForms.IForm`1.Write(Microsoft.AspNetCore.Html.IHtmlContent)">Write(IHtmlContent)</h4>
@@ -286,19 +336,16 @@
       <a class="xref" href="ChameleonForms.HtmlAttributesExtensions.html#ChameleonForms_HtmlAttributesExtensions_ToHtmlAttributes_System_Object_">HtmlAttributesExtensions.ToHtmlAttributes(Object)</a>
   </div>
   <div>
-      <a class="xref" href="ChameleonForms.ChameleonFormExtensions.html#ChameleonForms_ChameleonFormExtensions_Partial__1_ChameleonForms_IForm___0__System_String_">ChameleonFormExtensions.Partial&lt;TModel&gt;(IForm&lt;TModel&gt;, String)</a>
+      <a class="xref" href="ChameleonForms.ChameleonFormExtensions.html#ChameleonForms_ChameleonFormExtensions_PartialForAsync__2_ChameleonForms_IForm___0__System_Linq_Expressions_Expression_System_Func___0___1___System_String_">ChameleonFormExtensions.PartialForAsync&lt;TModel, TPartialModel&gt;(IForm&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TPartialModel&gt;&gt;, String)</a>
   </div>
   <div>
-      <a class="xref" href="ChameleonForms.ChameleonFormExtensions.html#ChameleonForms_ChameleonFormExtensions_PartialFor__2_ChameleonForms_IForm___0__System_Linq_Expressions_Expression_System_Func___0___1___System_String_">ChameleonFormExtensions.PartialFor&lt;TModel, TPartialModel&gt;(IForm&lt;TModel&gt;, Expression&lt;Func&lt;TModel, TPartialModel&gt;&gt;, String)</a>
+      <a class="xref" href="ChameleonForms.Component.FieldExtensions.html#ChameleonForms_Component_FieldExtensions_FieldElementFor__2_ChameleonForms_IForm___0__System_Linq_Expressions_Expression_System_Func___0___1___ChameleonForms_Component_Config_IFieldConfiguration_">FieldExtensions.FieldElementFor&lt;TModel, T&gt;(IForm&lt;TModel&gt;, Expression&lt;Func&lt;TModel, T&gt;&gt;, IFieldConfiguration)</a>
   </div>
   <div>
-      <a class="xref" href="ChameleonForms.Component.FieldExtensions.html#ChameleonForms_Component_FieldExtensions_FieldElementFor__2_ChameleonForms_IForm___0__System_Linq_Expressions_Expression_System_Func___0___1___">FieldExtensions.FieldElementFor&lt;TModel, T&gt;(IForm&lt;TModel&gt;, Expression&lt;Func&lt;TModel, T&gt;&gt;)</a>
+      <a class="xref" href="ChameleonForms.Component.FieldExtensions.html#ChameleonForms_Component_FieldExtensions_LabelFor__2_ChameleonForms_IForm___0__System_Linq_Expressions_Expression_System_Func___0___1___ChameleonForms_Component_Config_IFieldConfiguration_">FieldExtensions.LabelFor&lt;TModel, T&gt;(IForm&lt;TModel&gt;, Expression&lt;Func&lt;TModel, T&gt;&gt;, IFieldConfiguration)</a>
   </div>
   <div>
-      <a class="xref" href="ChameleonForms.Component.FieldExtensions.html#ChameleonForms_Component_FieldExtensions_LabelFor__2_ChameleonForms_IForm___0__System_Linq_Expressions_Expression_System_Func___0___1___">FieldExtensions.LabelFor&lt;TModel, T&gt;(IForm&lt;TModel&gt;, Expression&lt;Func&lt;TModel, T&gt;&gt;)</a>
-  </div>
-  <div>
-      <a class="xref" href="ChameleonForms.Component.FieldExtensions.html#ChameleonForms_Component_FieldExtensions_ValidationMessageFor__2_ChameleonForms_IForm___0__System_Linq_Expressions_Expression_System_Func___0___1___">FieldExtensions.ValidationMessageFor&lt;TModel, T&gt;(IForm&lt;TModel&gt;, Expression&lt;Func&lt;TModel, T&gt;&gt;)</a>
+      <a class="xref" href="ChameleonForms.Component.FieldExtensions.html#ChameleonForms_Component_FieldExtensions_ValidationMessageFor__2_ChameleonForms_IForm___0__System_Linq_Expressions_Expression_System_Func___0___1___ChameleonForms_Component_Config_IFieldConfiguration_">FieldExtensions.ValidationMessageFor&lt;TModel, T&gt;(IForm&lt;TModel&gt;, Expression&lt;Func&lt;TModel, T&gt;&gt;, IFieldConfiguration)</a>
   </div>
   <div>
       <a class="xref" href="ChameleonForms.Component.MessageExtensions.html#ChameleonForms_Component_MessageExtensions_BeginMessage__1_ChameleonForms_IForm___0__ChameleonForms_Enums_MessageType_System_String_">MessageExtensions.BeginMessage&lt;TModel&gt;(IForm&lt;TModel&gt;, MessageType, String)</a>
@@ -335,7 +382,7 @@
                     <a href="https://github.com/MRCollective/ChameleonForms/new/master/apiSpec/new?filename=ChameleonForms_IForm_1.md&amp;value=---%0Auid%3A%20ChameleonForms.IForm%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L33" class="contribution-link">View Source</a>
+                    <a href="https://github.com/MRCollective/ChameleonForms/blob/master/ChameleonForms/Form.cs/#L34" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
@@ -360,6 +407,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>

@@ -90,11 +90,31 @@
 </li>
 </ul>
 <h2 id="outputting-directly-from-the-form">Outputting directly from the Form</h2>
+<div class="tabGroup" id="tabgroup_CeZOj-G++Q">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_output-th" role="tab" aria-controls="tabpanel_CeZOj-G++Q_output-th" data-tab="output-th" tabindex="0" aria-selected="true">Tag Helpers variant</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_CeZOj-G++Q_output-hh" role="tab" aria-controls="tabpanel_CeZOj-G++Q_output-hh" data-tab="output-hh" tabindex="-1">HTML Helpers variant</a>
+</li>
+</ul>
+<section id="tabpanel_CeZOj-G++Q_output-th" role="tabpanel" data-tab="output-th">
+
+<p>To use a Field Generator to output the HTML for a standalone Field Element you can use the <code>&lt;field-element /&gt;</code> tag, e.g.:</p>
+<pre><code class="lang-cshtml">&lt;field-element for=&quot;SomeField&quot; /&gt;
+&lt;field-element for=&quot;SomeField&quot; fluent-config='c =&gt; c.ChainFieldConfigurationMethodsHere()' /&gt;
+&lt;field-element for=&quot;SomeField&quot; placeholder=&quot;Placeholder text...&quot; /&gt;
+</code></pre>
+<p>To see the different configuration options check out <a href="field-configuration.html#tag-helper-mappings">field configuration</a>.</p>
+</section>
+<section id="tabpanel_CeZOj-G++Q_output-hh" role="tabpanel" data-tab="output-hh" aria-hidden="true" hidden="hidden">
+
 <p>To use a Field Generator to output the HTML for a standalone Field Element you can use the <code>FieldElementFor</code> extension method on the Form (with optional Field Configuration), e.g.:</p>
 <pre><code class="lang-cshtml">@f.FieldElementFor(m =&gt; m.SomeField).ChainFieldConfigurationMethodsHere()
 </code></pre>
 <p>The <code>FieldElementFor</code> extension method looks like this:</p>
-<pre><code class="lang-csharp">        /// &lt;summary&gt;
+<pre><code class="lang-cs">        /// &lt;summary&gt;
         /// Creates a standalone form field to be output in a form.
         /// &lt;/summary&gt;
         /// &lt;example&gt;
@@ -114,6 +134,8 @@
             return config;
         }
 </code></pre>
+</section>
+</div>
 <h2 id="default-html">Default HTML</h2>
 <p>The HTML for the Field Element will be determined depending on the <a href="index.html#field-types">metadata of the model property being specified</a> and the options in the <a href="field-configuration.html">Field Configuration</a>. The HTML of the Field Element will by default simply be:</p>
 <pre><code class="lang-html">%fieldElement%
@@ -151,6 +173,7 @@
         </div>
       </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
     
     <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
     <script type="text/javascript" src="../styles/docfx.js"></script>
