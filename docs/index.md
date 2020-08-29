@@ -1,4 +1,6 @@
-# ChameleonForms Documentation
+# ChameleonForms v3 (Legacy) Documentation
+
+This documentation is for the legacy v3 version of ChameleonForms. To see the documentation for the latest version of ChameleonForms see the [new documentation](https://mrcollective.github.io/ChameleonForms/).
 
 ## Overview
 ChameleonForms takes away the pain and repetition of building forms with ASP.NET MVC by following a philosophy of:
