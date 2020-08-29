@@ -34,6 +34,15 @@ The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namesp
         public HtmlAttributes(IDictionary<string, object> attributes);
 
         /// <summary>
+        /// Constructs a <see cref="HtmlAttributes"/> object using a dictionary to express the attributes.
+        /// </summary>
+        /// <example>
+        /// var h = new HtmlAttributes(new Dictionary&lt;string, string&gt; {{"style", "width: 100%;"}, {"cellpadding", "0"}, {"class", "class1 class2"}, {"src", "http://url/"}, {"data-somedata", "\"rubbi&amp;h\""}});
+        /// </example>
+        /// <param name="attributes">A dictionary of attributes</param>
+        public HtmlAttributes(IDictionary<string, string> attributes);
+
+        /// <summary>
         /// Constructs a <see cref="HtmlAttributes"/> object using an anonymous object to express the attributes.
         /// </summary>
         /// <example>
@@ -121,11 +130,25 @@ The `HtmlAttributes` class looks like this and is in the `ChameleonForms` namesp
         public HtmlAttributes Attrs(object attributes);
 
         /// <summary>
+        /// Adds or updates a set of HTML attributes using a dictionary to express the attributes.
+        /// </summary>
+        /// <param name="attributes">A dictionary of attributes</param>
+        /// <returns>The <see cref="HtmlAttributes"/> attribute to allow for method chaining</returns>
+        public HtmlAttributes Attrs(IDictionary<string, string> attributes);
+
+        /// <summary>
         /// Implicitly convert from a dictionary to a new <see cref="HtmlAttributes"/> object.
         /// </summary>
         /// <param name="attributes">The dictionary of HTML attributes</param>
         /// <returns>The new <see cref="HtmlAttributes"/> object</returns>
         public static implicit operator HtmlAttributes(Dictionary<string, object> attributes);
+
+        /// <summary>
+        /// Implicitly convert from a dictionary to a new <see cref="HtmlAttributes"/> object.
+        /// </summary>
+        /// <param name="attributes">The dictionary of HTML attributes</param>
+        /// <returns>The new <see cref="HtmlAttributes"/> object</returns>
+        public static implicit operator HtmlAttributes(Dictionary<string, string> attributes);
 
         /// <inheritdoc />
         public virtual void WriteTo(TextWriter writer, HtmlEncoder encoder);
@@ -163,7 +186,8 @@ Most `HTMLAttributes` methods map to a tag helper attribute by convention - `Upp
 | `Attr(string key, object value)`                      | `attr-{key}="{value}"`                                |
 | `Attr(Func<object, object> attribute)`                | *No equivalent*                                       |
 | `Attrs(params Func<object, object>[] attributes)`     | *No equivalent*                                       |
-| `Attrs(IDictionary<string, object> attributes)`       | `attrs="{attributes}"`                                |
+| `Attrs(IDictionary<string, object> attributes)`       | *No equivalent*                                       |
+| `Attrs(IDictionary<string, string> attributes)`       | `attrs="{attributes}"`                                |
 | `Attrs(object attributes)`                            | *No equivalent*                                       |
 | `Disabled(bool disabled = true)`                      | `disabled="{disabled}"`                               |
 | `Readonly(bool @readonly = true)`                     | *No equivalent*                                       |
@@ -236,6 +260,7 @@ You can convert a dictionary to a HTML Attributes object, e.g.:
 
 ```cs
 new Dictionary<string, object>{ {"class", "form"}, {"id", "someForm"} }.ToHtmlAttributes()
+new Dictionary<string, string>{ {"class", "form"}, {"id", "someForm"} }.ToHtmlAttributes()
 ```
 
 ## Outputting HTML Attributes

@@ -93,7 +93,7 @@ The `BeginChameleonForm` extension method looks like this:
 
 ***
 
-By default a self-submitting form, against the page model type, that performs a HTTP post with the browser's default `enctype` (usually `application/x-www-form-urlencoded`) is outputted, but you can change the submit location, HTTP verb, `enctype` and add any [HTML attributes you like](html-attributes.md) using the appropriate parameters, e.g.:
+By default a self-submitting form, against the page model type, that performs a HTTP post with the browser's default `enctype` (usually `application/x-www-form-urlencoded`) is outputted, but you can change the submit location, HTTP verb, `enctype`, presence of anti forgery token and add any [HTML attributes you like](html-attributes.md) using the appropriate parameters, e.g.:
 
 # [Tag Helpers variant](#tab/configure-form-th)
 
@@ -162,6 +162,7 @@ If you want to override this behaviour you can configure your own form template.
 
 ```html
 <form action="%action%" method="%method%" (enctype="%enctype%") (%htmlAttributes%) novalidate="novalidate">
+    (%antiforgery token%)
 ```
 
 ### End HTML

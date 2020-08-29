@@ -2,7 +2,94 @@
 
 This file has all breaking changes across ChameleonForms versions.
 
-# Version 4.0.0-beta
+# Version 4.0.0-beta0002
+
+## `HTMLAttributes.Attrs` now appends CSS classes rather than replacing them
+
+Previously the following would output `class="second"`, not it will output `class="first second"`:
+
+```cshtml
+    @(new HtmlAttributes().AddClass("first").Attrs(new Dictionary<string, string>{{"class", "second"}}))
+```
+
+### Reason
+
+Allowing CSS classes to be additive was an important need to implement tag helpers.
+
+### Workaround
+
+If you don't want this behaviour you can override the class using `Attr` instead of `Attrs` for the `class` attribute.
+
+
+## Removed `Partial` and non-async `PartialFor` from `Form` and `Section` and replaced `this.Form()`, `this.FormSection()` and `this.IsInFormSection()` in partial views and removed `this.PartialModelExpression()` from partial views
+
+In order to uplift the partial view capabilities of ChameleonForms and make them easier to use a number of changes have been made:
+
+* All non-async methods of invoking partial views have been removed to [prevent possible deadlocks](https://github.com/aspnet/Mvc/issues/7083)
+* Changes have been made as part of introducing tag helpers that means you don't need a special `Partial` method on forms and sections when you are keeping the form model the same; you can now just use the built-in ASP.NET Core partial functionality (i.e. `@Html.PartialAsync` or `<partial>`)
+* The ability to determine whether you are in a Form or Section has been expanded to include detection of whether you are within a Field, NAvigation or Message as well and has been implemented so it works anywhere, not just within a partial view. This facilitates tag helper syntax and also allows you to switch between tag helpers and HTML helper syntax if you want
+* `PartialModelExpression` is no longer needed with the new functionality
+
+See [the documentation](https://mrcollective.github.io/ChameleonForms/docs/partials.html) for more information.
+
+### Reason
+
+Per above.
+
+### Workaround
+
+* Invoking partial with same model as the parent (use built-in partial functionality)
+    ```cshtml
+        <partial name="_PartialWithSameModelAsParent" />
+
+        @* or *@
+
+        @await Html.PartialAsync("_PartialWithSameModelAsParent")
+    ```
+
+* Invoking partial with child property as model, but binding against parent model (use ChameleonForms partial functionality)
+    ```cshtml
+        <form-partial for="ChildProperty" name="_PartialWithChildModelBindingToParent" />
+
+        @* Or, when not in a form section *@
+        @(await f.PartialForAsync(m => m.ChildProperty, "_PartialWithChildModelBindingToParent"))
+
+        @* Or, when in a form section *@
+        @(await s.PartialForAsync(m => m.ChildProperty, "_PartialWithChildModelBindingToParent"))
+    ```
+
+* Invoking partial with child property as model and binding against that child model (use built-in partial functionality)
+    ```cshtml
+        <partial name="_PartialWithChildAsModel" model="Model?.ChildProperty" />
+
+        @* or *@
+
+        @await Html.PartialAsync("_PartialWithChildAsModel", Model?.ChildProperty)
+    ```
+
+* Invoking partial with a different model entirely from the parent (use built-in partial functionality)
+    ```cshtml
+        <partial name="_PartialWithOtherModel" model="new OtherModel()" />
+
+        @* or *@
+
+        @await Html.PartialAsync("_PartialWithOtherModel", new OtherModel())
+    ```
+
+* Accessing the current form
+    ```cs
+        Html.IsInChameleonForm()
+        Html.GetChameleonForm()
+    ```
+
+* Accessing the current form section
+    ```cs
+        Html.IsInChameleonFormsSection()
+        Html.GetChameleonFormsSection()
+    ```
+
+
+# Version 4.0.0-beta0001
 
 ## .NET Framework no longer supported
 
@@ -14,7 +101,7 @@ ChameleonForms has been upgraded to support ASP.NET Core MVC. It's much easier t
 
 ### Workaround
 
-If you want to support .NET Full Framework with MVC 5 then check out v3.0.3 of the [NuGet package](https://www.nuget.org/packages/ChameleonForms/3.0.3) and [documentation](https://chameleonforms.readthedocs.io/en/3.0.3/). If you want to use a different version of .NET Core then [raise an issue](https://github.com/MRCollective/ChameleonForms/issues) to discuss adding that support.
+If you want to support .NET Full Framework with MVC 5 then check out v3.0.3 of the [NuGet package](https://www.nuget.org/packages/ChameleonForms/3.0.3) and [documentation](hhttps://chameleonforms.readthedocs.io/). If you want to use a different version of .NET Core then [raise an issue](https://github.com/MRCollective/ChameleonForms/issues) to discuss adding that support.
 
 ## DisplayFormatString no longer used
 
