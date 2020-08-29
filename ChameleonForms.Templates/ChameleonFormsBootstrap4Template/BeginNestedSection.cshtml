@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Html;
+@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsBootstrap4Template.Params.BeginSectionParams>
+@{
+    Model.HtmlAttributes.AddClass("panel panel-default");
+}
+@{@:    <div@(Model.HtmlAttributes)>
+}
+@if (Model.Heading != null && !string.IsNullOrWhiteSpace(Model.Heading.ToHtmlString()))
+{
+@:        <div class="panel-heading">@Model.Heading</div>
+}
+@{@:        <div class="panel-body">
+}
+@if (Model.LeadingHtml != null && !string.IsNullOrWhiteSpace(Model.LeadingHtml.ToHtmlString()))
+{
+@Model.LeadingHtml
+}

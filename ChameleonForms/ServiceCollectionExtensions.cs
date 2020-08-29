@@ -2,7 +2,6 @@
 using ChameleonForms.Metadata;
 using ChameleonForms.ModelBinders;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using ChameleonForms.Config;
@@ -14,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace ChameleonForms
 {
     // todo: 4.0 non-beta release
+    // Bootstrap4: form-control-lg/sm, inline forms, form grids, horizontal forms
     // Build-in DI support e.g. fieldgeneratorrouter
     // Review the datetime "g" and current culture things - remove? client side validation for non / separators?
     // Update all dependencies to latest versions
@@ -22,15 +22,10 @@ namespace ChameleonForms
     // blog posts: razorgenerator, mvctestcontext, modelbindertestbase, ilmerge, client validation in aspnetcore, end-to-end test in-memory, disposablehtmlhelper, testing metadatadetailsprovider, docfx, tag helpers including nested children
     // Generate nuget from .csproj rather than nuspec like https://github.com/LazZiya/ExpressLocalization/blob/master/LazZiya.ExpressLocalization/LazZiya.ExpressLocalization.csproj
     // [Range] client validation support
-    // Add support for non jquery unobtrusive validation
-    // Add bootstrap4
-    // Add tag helper equivalent to the raw mvc comparison example
-    // Add tag helpers for chameleon forms
     // ExistsInAttribute.EnableValidation <- DI rather than static
     // support IList<nullable<value type>> similar to IList<nullable enum type> support
     // Support Blazor, razor pages and carter
     // Remove ExistsInAttribute.EnableValidation as a static
-    // Investigate better documentation using the .net doc generator along with something like https://github.com/koumoul-dev/gh-pages-multi to support multiple versions, just check linking between .md files works and how to support menu hierarchy
     // Recreate FormMethod enum
 
     /// <summary>

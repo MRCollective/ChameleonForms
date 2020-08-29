@@ -19,6 +19,10 @@
         {
             Layout = "~/Views/Shared/_Layout.cshtml";
         }
+        else if (ViewContext.HttpContext.Request.Cookies["template"] == "bootstrap4")
+        {
+            Layout = "~/Views/Shared/_Bootstrap4Layout.cshtml";
+        }
         else
         {
             Layout = "~/Views/Shared/_Bootstrap3Layout.cshtml";

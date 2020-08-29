@@ -1,0 +1,8 @@
+﻿@using Microsoft.AspNetCore.Html;
+@inherits RazorRenderer.BasePage<ChameleonForms.Templates.ChameleonFormsBootstrap4Template.Params.AlertParams>
+@{@:      <div class="alert alert-@Model.AlertType.ToLower()" role="alert">
+}
+@if (!string.IsNullOrEmpty(Model.Heading.ToHtmlString()))
+{
+          <h4 class="alert-heading">@Model.Heading</h4>
+}

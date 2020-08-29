@@ -59,7 +59,7 @@ namespace ChameleonForms.Tests
             var f2 = _h.BeginChameleonForm(Action, Method, new HtmlAttributes(), Enctype);
 
             Assert.That(f2, Is.Not.Null);
-            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlContent>(h => h.ToHtmlString() == t.BeginForm(Action, Method, _htmlAttributes, Enctype).ToHtmlString()));
+            _h.ViewContext.Writer.Received().Write(Arg.Is<IHtmlContent>(h => h.ToHtmlString() == t.BeginForm(Action, Method, _htmlAttributes, Enctype, false).ToHtmlString()));
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace ChameleonForms.Tests
             _h = viewContext.HtmlHelper;
 
             _t = Substitute.For<IFormTemplate>();
-            _t.BeginForm(Action, Method, _htmlAttributes, Enctype).Returns(_beginHtml);
+            _t.BeginForm(Action, Method, _htmlAttributes, Enctype, false).Returns(_beginHtml);
             _t.EndForm().Returns(_endHtml);
         }
 
