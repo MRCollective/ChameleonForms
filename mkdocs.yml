@@ -1,4 +1,4 @@
-site_name: ChameleonForms
+site_name: ChameleonForms (legacy v3 documentation)
 theme: readthedocs
 markdown_extensions: [fenced_code]
 pages:
